@@ -1,0 +1,155 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import Branding from "~/components/Branding.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import Heading from "~/components/Heading.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"Brand asset downloads, usage guidelines, and pitch templates to help you share the word about SquiggleConf.";
+
+const title = "Media Guide";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<CommonContent heading="Branding">
+		<BodyText>
+			When referring to us in announcements, social media posts, or other broad
+			communications, please use <em>"SquiggleConf"</em>. That's
+			<em>"Squiggle"</em> and <em>"Conf"</em>, no space. We are not
+			<em>"Squiggle Conf"</em>,
+			<em>"Squiggle Conference"</em>, or
+			<em>"SquiggleCon"</em>.
+			<br />
+			<br />
+			Please include alt text with any images [<a
+				href="https://www.linkedin.com/help/linkedin/answer/a519856/adding-alternative-text-to-images-for-accessibility?lang=en"
+				>LinkedIn alt text help</a
+			>] and follow platform accessibility guidelines. We can only share posts
+			that are inclusive to all potential recipients.
+			<br />
+			<br />
+			<Branding />
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="Pitches">
+		<BodyText>
+			Here are some starting pitch templates you can use to share SquiggleConf.
+			We of course recommend rewording to your own tone, but we've found these
+			can help resonate with our target audiences.
+		</BodyText>
+
+		<Heading class="sub-heading" level="h3">Social Media Sharing</Heading>
+
+		<ul class="sub-list">
+			<li>
+				<strong>&lt;120 characters:</strong>
+				I'm going to @SquiggleConf on September 18th & 19th! It's a web dev tooling
+				conference at the aquarium. Join me!
+			</li>
+			<li>
+				<strong>&lt;200 characters:</strong>
+				PSA: there's a Boston web dev conference! @SquiggleConf is happening on September
+				18th & 19th at the New England Aquarium (!) and covers a bunch of awesome
+				dev tooling topics. I'm going!
+			</li>
+			<li>
+				<strong>&lt;280 characters:</strong>
+				TIL 'squiggly' is the official term for the little helpers you get in editors.
+				And I'm going to learn a bunch more about them at @SquiggleConf, September
+				18th & 19th in the New England Aquarium. Join me to learn about the latest
+				& greatest in modern web dev tooling!
+			</li>
+		</ul>
+
+		<Heading class="sub-heading" level="h3">Ticket Sharing Groups</Heading>
+
+		<ul class="sub-list">
+			<li>
+				<strong>Message Sized:</strong>
+				Hey (group)! I'm interested in sending a few of our members to SquiggleConf:
+				a web dev conference at the aquarium on September 18th & 19th. It's focused
+				on dev tooling and covers a lot of useful info on development, as well a
+				lot of speakers & sponsors that would be great networking. We have 3 tickets
+				to distribute - let me know if you're interested!
+			</li>
+			<li>
+				<strong>Email Sized:</strong>
+				<br />
+				Hi (group), I'm interested in sending a few of our members to <a
+					href="https://squiggleconf.com">SquiggleConf 2025</a
+				>: a dev tooling conference at the aquarium on September 18th & 19th.
+				It's focused on web dev and covers a lot of useful info on development,
+				as well a lot of speakers & sponsors that would be great networking.
+				<br />
+				A few talks that look particularly useful for us are:
+				<br />
+				<ul>
+					<li>
+						<em>
+							<a
+								href="/2025/sessions#effect-type-safe-errors-and-dependency-injection"
+								>Effect: Type-Safe Errors and Dependency Injection</a
+							>
+						</em>: covers a lot of the architectural patterns we've been trying
+						to utilize in our TypeScript code.
+					</li>
+					<li>
+						<em>
+							<a
+								href="/2025/sessions#quality-code-samples-make-everything-better"
+								>Quality Code Samples Make Everything Better</a
+							>
+						</em>: which should really help us improve our customer-facing and
+						internal docs references -- some of them could really use a refresh.
+					</li>
+					<li>
+						<em>
+							<a
+								href="/2025/sessions#rolldown-how-vite-bundles-at-the-speed-of-rust"
+								>Rolldown: How Vite Bundles at the Speed of Rust</a
+							>
+						</em>: given how much time our builds take, I think looking at the
+						next generation faster build tools would absolutely be worth it.
+					</li>
+				</ul>
+
+				We have 3 tickets to distribute - let me know if you're interested!
+			</li>
+		</ul>
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 1.5rem;
+	}
+
+	.sub-heading {
+		font-size: var(--fontSizeMedium);
+		text-align: center;
+		margin: 3rem 0 1rem;
+	}
+
+	.sub-list {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		line-height: 1.35;
+		font-weight: var(--fontWeightMedium);
+		margin: 1rem 1.5rem;
+	}
+
+	.sub-list ul {
+		margin-left: 1rem;
+	}
+</style>

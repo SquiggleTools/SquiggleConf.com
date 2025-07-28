@@ -1,19 +1,19 @@
 import _ from "lodash";
 
-import bloombergBlack from "~/assets/2024/sponsors/bloomberg-black.svg";
-import bloombergWhite from "~/assets/2024/sponsors/bloomberg-white.svg";
-import datastaxBlack from "~/assets/2024/sponsors/datastax-black.svg";
-import datastaxWhite from "~/assets/2024/sponsors/datastax-white.svg";
-import igaliaBlack from "~/assets/2024/sponsors/igalia-black.svg";
-import igaliaWhite from "~/assets/2024/sponsors/igalia-white.svg";
-import inngestBlack from "~/assets/2024/sponsors/inngest-black.svg";
-import inngest from "~/assets/2024/sponsors/inngest.svg";
-import nxDarkBlue from "~/assets/2024/sponsors/nx-dark-blue.svg";
-import nxWhite from "~/assets/2024/sponsors/nx-white.svg";
-import openjsFoundationColor from "~/assets/2024/sponsors/openjs-foundation-color.svg";
-import openjsFoundationLight from "~/assets/2024/sponsors/openjs-foundation-light.svg";
-import prismaBlack from "~/assets/2024/sponsors/prisma-black.svg";
-import prismaWhite from "~/assets/2024/sponsors/prisma-white.svg";
+import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
+import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+import datastaxBlack from "~/assets/logos/datastax-black.svg";
+import datastaxWhite from "~/assets/logos/datastax-white.svg";
+import igaliaBlack from "~/assets/logos/igalia-black.svg";
+import igaliaWhite from "~/assets/logos/igalia-white.svg";
+import inngestBlack from "~/assets/logos/inngest-black.svg";
+import inngest from "~/assets/logos/inngest.svg";
+import nxDarkBlue from "~/assets/logos/nx-dark-blue.svg";
+import nxWhite from "~/assets/logos/nx-white.svg";
+import openjsFoundationColor from "~/assets/logos/openjs-foundation-color.svg";
+import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
+import prismaBlack from "~/assets/logos/prisma-black.svg";
+import prismaWhite from "~/assets/logos/prisma-white.svg";
 
 export const sponsorsBySlug = {
 	bloomberg: {

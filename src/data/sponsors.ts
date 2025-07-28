@@ -1,11 +1,13 @@
 import _ from "lodash";
 
-import bloombergBlack from "~/assets/2024/sponsors/bloomberg-black.svg";
-import bloombergWhite from "~/assets/2024/sponsors/bloomberg-white.svg";
-import mintlifyBlack from "~/assets/2024/sponsors/mintlify-black.svg";
-import mintlifyWhite from "~/assets/2024/sponsors/mintlify-white.svg";
+import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
+import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
 import elasticBlack from "~/assets/logos/elastic-black.svg";
 import elasticWhite from "~/assets/logos/elastic-white.svg";
+import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
+import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
+import progressGray from "~/assets/logos/progress-gray.svg";
+import progressWhite from "~/assets/logos/progress-white.svg";
 
 export const sponsorsBySlug = {
 	bloomberg: {
@@ -34,6 +36,15 @@ export const sponsorsBySlug = {
 		},
 		placement: "first",
 		title: "Mintlify",
+	},
+	progress: {
+		href: "https://progress.com?utm_source=squiggleconf",
+		logos: {
+			dark: progressWhite,
+			light: progressGray,
+		},
+		placement: "first",
+		title: "Progress",
 	},
 };
 
