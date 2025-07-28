@@ -21,7 +21,7 @@ const {
 
 <style>
 	.content-area {
-		padding: 0 2rem;
+		padding: 0 1rem;
 		max-width: 90vw;
 		margin: auto;
 	}
@@ -36,5 +36,11 @@ const {
 
 	.content-area-wide {
 		width: min(100vw, var(--sizeContentAreaWide));
+	}
+
+	@media (width >= 1117px) {
+		.content-area {
+			padding: 0 2rem;
+		}
 	}
 </style>
