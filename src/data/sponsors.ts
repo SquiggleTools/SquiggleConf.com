@@ -2,6 +2,8 @@ import _ from "lodash";
 
 import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
 import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+import igaliaBlack from "~/assets/logos/igalia-black.svg";
+import igaliaWhite from "~/assets/logos/igalia-white.svg";
 import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
 import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
 import progressGray from "~/assets/logos/progress-gray.svg";
@@ -16,6 +18,15 @@ export const sponsorsBySlug = {
 		},
 		placement: "first",
 		title: "Bloomberg",
+	},
+	igalia: {
+		href: "https://igalia.com?utm_source=squiggleconf",
+		logos: {
+			dark: igaliaWhite,
+			light: igaliaBlack,
+		},
+		placement: "second",
+		title: "Igalia",
 	},
 	mintlify: {
 		href: "https://mintlify.com?utm_source=squiggleconf",
