@@ -2,6 +2,8 @@ import _ from "lodash";
 
 import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
 import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+import elasticBlack from "~/assets/logos/elastic-black.svg";
+import elasticWhite from "~/assets/logos/elastic-white.svg";
 import igaliaBlack from "~/assets/logos/igalia-black.svg";
 import igaliaWhite from "~/assets/logos/igalia-white.svg";
 import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
@@ -20,6 +22,15 @@ export const sponsorsBySlug = {
 		},
 		placement: "first",
 		title: "Bloomberg",
+	},
+	elastic: {
+		href: "https://elastic.co?utm_source=squiggleconf",
+		logos: {
+			dark: elasticBlack,
+			light: elasticWhite,
+		},
+		placement: "first",
+		title: "Elastic",
 	},
 	igalia: {
 		href: "https://igalia.com?utm_source=squiggleconf",
