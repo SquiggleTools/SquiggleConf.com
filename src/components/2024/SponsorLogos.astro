@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 
 interface Props {
 	light?: boolean;
-	size?: "normal" | "small";
 	sponsorGroups: Record<string, SponsorLogoData[]>;
 }
 
@@ -14,22 +13,19 @@ export interface SponsorLogoData {
 		dark: ImageMetadata;
 		light: ImageMetadata;
 	};
-	placement: "first" | "second";
+	placement: number;
 	title: string;
 }
 
-const { light, size = "normal", sponsorGroups } = Astro.props;
+const { light, sponsorGroups } = Astro.props;
 ---
 
-<div
-	class:list={[
-		"sponsor-logos",
-		size === "small" ? "sponsor-logos-small" : "sponsor-logos-normal",
-	]}
->
+<div class="sponsor-logos">
+	todo: use the placement in CSS variables, instead of the existing
+	-normal/small
 	{
-		Object.values(sponsorGroups).map((sponsors) => (
-			<div class="sponsor-group">
+		Object.entries(sponsorGroups).map(([placement, sponsors]) => (
+			<div class:list={["sponsor-group", `sponsor-group-${placement}`]}>
 				{sponsors.map((sponsor) => (
 					<a
 						class="sponsor"
@@ -42,13 +38,13 @@ const { light, size = "normal", sponsorGroups } = Astro.props;
 							alt=""
 							class="sponsor-logo-dark"
 							src={sponsor.logos.dark}
-							height={size === "small" ? 96 : 128}
+							height={128}
 						/>
 						<Image
 							alt=""
 							class="sponsor-logo-light"
 							src={light ? sponsor.logos.dark : sponsor.logos.light}
-							height={size === "small" ? 96 : 128}
+							height={128}
 						/>
 					</a>
 				))}
@@ -61,6 +57,13 @@ const { light, size = "normal", sponsorGroups } = Astro.props;
 	.sponsor-logos {
 		margin: auto;
 		max-width: 70rem;
+		--sponsorSize0: 14rem;
+		--sponsorSize1: 7rem;
+		--sponsorSize2: 5.6rem;
+		--sponsorSpacing0: 5rem;
+		--sponsorSpacing1: 10rem;
+		--sponsorSpacing2: 12.5rem;
+		--sponsorSpacingVertical: 1.5rem;
 	}
 
 	.sponsors-blurb {
@@ -76,34 +79,19 @@ const { light, size = "normal", sponsorGroups } = Astro.props;
 		margin: auto;
 	}
 
-	.sponsor-logos-normal {
-		--sponsorSizeFirst: 14rem;
-		--sponsorSpacingFirst: 5rem;
-		--sponsorSizeSecond: 7rem;
-		--sponsorSpacingSecond: 10rem;
-		--sponsorSpacingVertical: 1.5rem;
+	.sponsor-group-0 {
+		--sponsorSize: var(--sponsorSize0);
+		--sponsorSpacing: var(--sponsorSpacing0);
 	}
 
-	.sponsor-logos-small {
-		--sponsorSizeFirst: 11rem;
-		--sponsorSpacingFirst: 2.5rem;
-		--sponsorSizeSecond: 5rem;
-		--sponsorSpacingSecond: 5rem;
-		--sponsorSpacingVertical: 0;
+	.sponsor-group-1 {
+		--sponsorSize: var(--sponsorSize1);
+		--sponsorSpacing: var(--sponsorSpacing1);
 	}
 
-	.sponsor-group:nth-of-type(1) {
-		--sponsorSize: var(--sponsorSizeFirst);
-		--sponsorSpacing: var(--sponsorSpacingFirst);
-	}
-
-	.sponsor-logos-normal .sponsor-group:nth-of-type(1) {
-		margin-top: 3rem;
-	}
-
-	.sponsor-group:nth-of-type(2) {
-		--sponsorSize: var(--sponsorSizeSecond);
-		--sponsorSpacing: var(--sponsorSpacingSecond);
+	.sponsor-group-2 {
+		--sponsorSize: var(--sponsorSize2);
+		--sponsorSpacing: var(--sponsorSpacing2);
 	}
 
 	.sponsor-group img {

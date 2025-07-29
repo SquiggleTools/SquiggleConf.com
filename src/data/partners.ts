@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import afhBlack from "~/assets/logos/afh-black.svg";
 import afhWhite from "~/assets/logos/afh-white.svg";
 import bostonTSClubDark from "~/assets/logos/boston-ts-club-full-dark.svg";
@@ -15,6 +17,7 @@ export const partnersBySlug = {
 			dark: afhWhite,
 			light: afhBlack,
 		},
+		placement: 2,
 		title: "Artists for Humanity",
 	},
 	bostonTsClub: {
@@ -23,6 +26,7 @@ export const partnersBySlug = {
 			dark: bostonTSClubDark,
 			light: bostonTSClubLight,
 		},
+		placement: 0,
 		title: "Boston TS Club",
 	},
 	jsheroes: {
@@ -31,6 +35,7 @@ export const partnersBySlug = {
 			dark: jsheroesDarkMode,
 			light: jsheroesLightMode,
 		},
+		placement: 1,
 		title: "JSHeroes",
 	},
 	magnoliaConf: {
@@ -39,6 +44,7 @@ export const partnersBySlug = {
 			dark: magnoliaConfWhite,
 			light: magnoliaConfColored,
 		},
+		placement: 1,
 		title: "Magnolia JS Conf",
 	},
 	michiganTypeScript: {
@@ -47,6 +53,16 @@ export const partnersBySlug = {
 			dark: michiganTypeScript,
 			light: michiganTypeScript,
 		},
+		placement: 0,
 		title: "Michigan TypeScript",
 	},
 };
+
+// TODO: use Object.groupBy once Vercel supports a newer Node.js version
+export const partnersByPlacement = _.groupBy(
+	Object.entries(partnersBySlug).map(([slug, partner]) => ({
+		slug,
+		...partner,
+	})),
+	(partner) => partner.placement,
+);

@@ -5,7 +5,7 @@ import BodyText from "./BodyText.astro";
 import Button from "./Button.astro";
 import LogoGroups from "./LogoGroups.astro";
 import ExplainerHeading from "./explainers/ExplainerHeading.astro";
-import { partnersBySlug } from "~/data/partners";
+import { partnersByPlacement } from "~/data/partners";
 ---
 
 <div class="sponsors-and-partners">
@@ -15,7 +15,10 @@ import { partnersBySlug } from "~/data/partners";
 			The support of our generous sponsors help make SquiggleConf possible. They
 			have our sincere appreciation and thanks.
 		</BodyText>
-		<LogoGroups groups={sponsorsByPlacement} />
+		<LogoGroups
+			class="sponsors-and-partners-groups"
+			groups={sponsorsByPlacement}
+		/>
 		<div class="sponsors-pitch-area">
 			<BodyText class="caption-text caption-text-bottom">
 				Interested in having your logo here and sponsoring SquiggleConf? We'd
@@ -40,21 +43,18 @@ import { partnersBySlug } from "~/data/partners";
 			Our partners are lovely friends in the industry who also work to better
 			the world around them.
 		</BodyText>
-		<LogoGroups groups={{ all: Object.values(partnersBySlug) }} />
+		<LogoGroups
+			class="sponsors-and-partners-groups"
+			groups={partnersByPlacement}
+		/>
 	</div>
 </div>
 
 <style>
 	.sponsors-and-partners {
 		--areaPaddingBottom: 3rem;
-		display: flex;
-		flex-direction: column;
+		display: grid;
 		text-align: center;
-	}
-
-	.sponsors {
-		display: flex;
-		flex-direction: column;
 	}
 
 	.partners {
@@ -68,6 +68,11 @@ import { partnersBySlug } from "~/data/partners";
 		margin: auto;
 	}
 
+	.sponsors-and-partners-groups {
+		padding-top: 2rem;
+		flex-grow: 1;
+	}
+
 	.sponsors-pitch-area {
 		margin: 1.5rem 0 var(--areaPaddingBottom);
 		display: flex;
@@ -77,14 +82,25 @@ import { partnersBySlug } from "~/data/partners";
 		width: 100%;
 	}
 
-	@media (width >= 1117px) {
-		.sponsors-and-partners {
-			flex-direction: row;
+	@media (width >= 819px) {
+		.sponsors {
+			grid-area: 1 / 1;
+		}
+
+		.partners {
+			grid-area: 1 / 2;
 		}
 
 		.sponsors,
 		.partners {
-			width: 50%;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.sponsors-and-partners-groups {
+			display: flex;
+			flex-direction: column;
 		}
 	}
 </style>

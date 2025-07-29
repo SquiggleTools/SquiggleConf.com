@@ -3,6 +3,7 @@ import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface Props {
+	class?: string;
 	groups: Record<string, LogoGroupData[]>;
 }
 
@@ -15,13 +16,13 @@ export interface LogoGroupData {
 	title: string;
 }
 
-const { groups: logoGroups } = Astro.props;
+const { class: className, groups: logoGroups, ...props } = Astro.props;
 ---
 
-<div class:list={["logo-groups", "logo-groups-normal"]}>
+<div class:list={["logo-groups", className]} {...props}>
 	{
-		Object.values(logoGroups).map((logos) => (
-			<div class="logo-group">
+		Object.values(logoGroups).map((logos, i) => (
+			<div class:list={["logo-group", `logo-group-${i}`]}>
 				{logos.map((logo) => (
 					<a
 						class="logo"
@@ -51,6 +52,7 @@ const { groups: logoGroups } = Astro.props;
 
 <style>
 	.logo-groups {
+		gap: 2rem;
 		margin: auto;
 		max-width: 70rem;
 		text-align: center;
@@ -66,28 +68,20 @@ const { groups: logoGroups } = Astro.props;
 		margin: auto;
 	}
 
-	.logo-groups-normal {
-		--logoSizeFirst: 11rem;
-		--logoSpacingFirst: 5rem;
-		--logoSizeSecond: 7rem;
-		--logoSpacingSecond: 10rem;
+	.logo-group-0 {
+		--logoSize: 14rem;
 	}
 
-	.logo-group:nth-of-type(1) {
-		--logoSize: var(--logoSizeFirst);
-		--logoSpacing: var(--logoSpacingFirst);
+	.logo-group-1 {
+		--logoSize: 11rem;
 	}
 
-	.logo-groups-normal .logo-group:nth-of-type(1) {
-		margin-top: 1.5rem;
-	}
-
-	.logo-group:nth-of-type(2) {
-		--logoSize: var(--logoSizeSecond);
-		--logoSpacing: var(--logoSpacingSecond);
+	.logo-group-2 {
+		--logoSize: 9rem;
 	}
 
 	.logo-group img {
+		max-height: var(--logoSize);
 		max-width: var(--logoSize);
 	}
 
@@ -99,13 +93,9 @@ const { groups: logoGroups } = Astro.props;
 	@media (min-width: 1117px) {
 		.logo-group {
 			flex-direction: row;
+			justify-content: space-evenly;
 			flex-wrap: wrap;
-			gap: 0;
-		}
-
-		.logo {
-			max-width: calc(49% - var(--logoSpacing));
-			width: 100%;
+			gap: 2rem;
 		}
 	}
 </style>

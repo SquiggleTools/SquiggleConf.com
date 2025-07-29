@@ -20,7 +20,7 @@ export const sponsorsBySlug = {
 			dark: bloombergWhite,
 			light: bloombergBlack,
 		},
-		placement: "first",
+		placement: 1,
 		title: "Bloomberg",
 	},
 	elastic: {
@@ -29,7 +29,7 @@ export const sponsorsBySlug = {
 			dark: elasticBlack,
 			light: elasticWhite,
 		},
-		placement: "first",
+		placement: 1,
 		title: "Elastic",
 	},
 	igalia: {
@@ -38,7 +38,7 @@ export const sponsorsBySlug = {
 			dark: igaliaWhite,
 			light: igaliaBlack,
 		},
-		placement: "second",
+		placement: 2,
 		title: "Igalia",
 	},
 	mintlify: {
@@ -47,7 +47,7 @@ export const sponsorsBySlug = {
 			dark: mintlifyWhite,
 			light: mintlifyBlack,
 		},
-		placement: "first",
+		placement: 0,
 		title: "Mintlify",
 	},
 	progress: {
@@ -56,7 +56,7 @@ export const sponsorsBySlug = {
 			dark: progressWhite,
 			light: progressGray,
 		},
-		placement: "first",
+		placement: 1,
 		title: "Progress",
 	},
 	voidZero: {
@@ -65,7 +65,7 @@ export const sponsorsBySlug = {
 			dark: voidZeroWhite,
 			light: voidZeroBlack,
 		},
-		placement: "second",
+		placement: 2,
 		title: "VoidZero",
 	},
 };
