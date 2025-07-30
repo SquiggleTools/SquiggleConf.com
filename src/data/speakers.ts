@@ -77,7 +77,7 @@ export const speakersBySlug = {
 	},
 	"anthony-fu": {
 		biography:
-			"I am a fanatical open sourceror passionated about DX, tooling, and the OSS ecosystem. I created Vitest, Slidev, VueUse, UnoCSS and built the ecosystem around them. I also made visual devtools like ESLint Config Inspector, Node Modules Inspector, Nuxt DevTools and so with care.",
+			"I am a fanatical open sourceror passionate about DX, tooling, and the OSS ecosystem. I created Vitest, Slidev, VueUse, UnoCSS and built the ecosystem around them. I also made visual devtools like ESLint Config Inspector, Node Modules Inspector, Nuxt DevTools and so with care.",
 		image: anthonyFu,
 		links: {
 			bluesky: "https://bsky.app/profile/antfu.me",
