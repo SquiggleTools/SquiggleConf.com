@@ -19,7 +19,7 @@ import { partnersByPlacement } from "~/data/partners";
 			class="sponsors-and-partners-groups"
 			groups={sponsorsByPlacement}
 		/>
-		<div class="sponsors-pitch-area">
+		<div class="pitch-area">
 			<BodyText class="caption-text caption-text-bottom">
 				Interested in having your logo here and sponsoring SquiggleConf? We'd
 				love to work with you.
@@ -47,6 +47,22 @@ import { partnersByPlacement } from "~/data/partners";
 			class="sponsors-and-partners-groups"
 			groups={partnersByPlacement}
 		/>
+		<div class="pitch-area">
+			<BodyText class="caption-text caption-text-bottom">
+				Are you a local company or organization to Boston and want to
+				cross-promote and partner with us? Let's get something going!
+				<br />
+			</BodyText>
+			<Button
+				as="a"
+				size="large"
+				variant="emphasized"
+				href={links.partner}
+				target="_blank"
+			>
+				Partnerships Prospectus
+			</Button>
+		</div>
 	</div>
 </div>
 
@@ -65,20 +81,24 @@ import { partnersByPlacement } from "~/data/partners";
 	.caption-text {
 		padding: 0 2rem;
 		max-width: 42rem;
-		margin: auto;
+		margin: 0 auto;
+	}
+
+	.caption-text-bottom {
+		margin-top: 1rem;
 	}
 
 	.sponsors-and-partners-groups {
 		padding-top: 2rem;
-		flex-grow: 1;
 	}
 
-	.sponsors-pitch-area {
-		margin: 1.5rem 0 var(--areaPaddingBottom);
+	.pitch-area {
+		flex-grow: 1;
+		align-items: center;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		gap: 2rem;
+		margin: 1.5rem 0 var(--areaPaddingBottom);
 		width: 100%;
 	}
 

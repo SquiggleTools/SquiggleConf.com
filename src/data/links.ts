@@ -7,6 +7,7 @@ export const links = {
 	discord: "https://discord.squiggleconf.com",
 	donate: "https://www.paypal.com/US/fundraiser/charity/5334863",
 	michiganTypeScript: "https://youtube.com/@MichiganTypeScript",
+	partner: "https://partner.squiggleconf.com",
 	shop: "https://shop.squiggle.tools",
 	sponsor: "https://sponsor.squiggleconf.com",
 	tickets: "https://buytickets.at/squiggleconf/1488622",
