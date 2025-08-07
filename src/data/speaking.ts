@@ -89,7 +89,7 @@ export const speakerSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Hotel Checkout",
 			},
 			{
-				at: "10:00am",
+				at: "9:00am",
 				badge,
 				description: [
 					"Speakers and organizers will go on a fun private Boston-themed event together.",
