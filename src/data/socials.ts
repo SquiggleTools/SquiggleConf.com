@@ -1,6 +1,7 @@
 import bluesky from "../assets/logos/bluesky.svg";
 import discord from "../assets/logos/discord.svg";
 import github from "../assets/logos/github.svg";
+import instagram from "../assets/logos/instagram.svg";
 import linkedin from "../assets/logos/linkedin.svg";
 import mastodon from "../assets/logos/mastodon.svg";
 import x from "../assets/logos/x.svg";
@@ -12,6 +13,11 @@ export const socials = [
 		alt: "Bluesky",
 		href: "https://bsky.app/profile/squiggleconf.com",
 		src: bluesky,
+	},
+	{
+		alt: "Instgram",
+		href: "https://www.instagram.com/squiggleconf",
+		src: instagram,
 	},
 	{
 		alt: "LinkedIn",
