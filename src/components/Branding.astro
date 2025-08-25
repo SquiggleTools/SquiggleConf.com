@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import LogomarkTransparent from "~/assets/2025/logomark-transparent.svg";
 import LogoWith2025 from "~/assets/2025/logo-with-2025.svg";
 import Logo from "~/assets/2025/logo.svg";
+import Poster from "~/assets/2025/poster.png";
 import LogomarkOnBackground from "~/assets/2025/logomark-on-background.svg";
 
 const assets = [
@@ -26,6 +27,11 @@ const assets = [
 		src: Logo,
 		alt: "SquiggleConf logo",
 	},
+	{
+		name: "Poster",
+		src: Poster,
+		alt: "Poster: SquiggleConf 2025; September 18-19 Boston MA; A conference for excellent web dev tooling; At the New England Aquarium; Tickets on sale now!",
+	},
 ];
 ---
 
@@ -33,7 +39,21 @@ const assets = [
 	{
 		assets.map(({ name, src, alt }) => (
 			<figure>
-				<Image class="asset-image" src={src} alt={alt} />
+				<Image
+					alt={alt}
+					class="asset-image"
+					src={src}
+					style={
+						src.height < src.width
+							? {
+									height: `${(src.height / src.width) * 15}rem`,
+									width: "15rem",
+								}
+							: {
+									maxWidth: "15rem",
+								}
+					}
+				/>
 				<figcaption>
 					<a href={src.src} target="_blank">
 						{name}
@@ -48,11 +68,8 @@ const assets = [
 	.branding {
 		display: flex;
 		flex-wrap: wrap;
+		gap: 2rem;
 		justify-content: center;
 		text-align: center;
-	}
-
-	.asset-image {
-		max-width: 15rem;
 	}
 </style>
