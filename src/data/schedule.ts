@@ -107,8 +107,8 @@ export const sharedSchedule: ScheduleDay[] = [
 					"Expect locally prepared hors d'œuvres and a craft lemonade stand.",
 				],
 				location: {
-					href: "https://www.howlatthemoon.com/boston",
-					text: "Howl at the Moon Boston",
+					href: "https://www.neddevinesboston.com",
+					text: "Ned Devine's Boston",
 				},
 				title: "Post-Conference Hangout",
 			},
