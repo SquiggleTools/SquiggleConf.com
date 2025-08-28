@@ -94,14 +94,14 @@ export const sharedSchedule: ScheduleDay[] = [
 				title: "Morning Fun Run",
 			},
 			{
-				at: "6:00pm",
+				at: "5:30pm",
 				description: [
 					"We'll arrange suggested dinner and casual social gathering locations for attendees.",
 				],
 				title: "Suggested Dinner Spots",
 			},
 			{
-				at: "7:30pm",
+				at: "6:30pm",
 				description: [
 					"After dinner, bring your badge for entry and hang out with the organizers, speakers, and fellow attendees in our mixer.",
 					"Expect locally prepared hors d'œuvres and a craft lemonade stand.",
