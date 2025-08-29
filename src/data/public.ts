@@ -88,7 +88,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				],
 			},
 			{
-				at: "3:15pm",
+				at: "3:20pm",
 				description: [
 					"What a day! Let's take a breather to have a snack and chat.",
 				],
@@ -237,7 +237,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				],
 			},
 			{
-				at: "3:15pm",
+				at: "3:20pm",
 				description: [
 					"What a day! Let's take a breather to have a snack and chat.",
 				],
