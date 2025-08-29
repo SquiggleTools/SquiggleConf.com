@@ -39,7 +39,6 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 						type: "session",
 					},
 					{
-						at: "11:15am",
 						title: "Short Break",
 						type: "between",
 					},
