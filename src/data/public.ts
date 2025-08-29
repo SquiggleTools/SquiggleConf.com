@@ -97,7 +97,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 					href: "https://www.neaq.org/visit/simons-theatre",
 					text: "Simons Theater",
 				},
-				title: "Afternoon Snack",
+				title: "Milk and Cookies Break",
 			},
 			{
 				at: "3:40pm",
