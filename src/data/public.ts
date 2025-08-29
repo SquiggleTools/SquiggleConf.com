@@ -142,7 +142,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 					"We'll provide a list of locations and a map to help you navigate at the end of the closing announcements.",
 					"Prizes will include SquiggleConf swag and free tickets to next year's conference.",
 				],
-				title: "Photo Challenge",
+				title: "Group Photo Challenge",
 			},
 		],
 		title: "Thursday, September 18th",
