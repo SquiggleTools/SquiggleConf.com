@@ -88,7 +88,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				],
 			},
 			{
-				at: "3:20pm",
+				at: "3:15pm",
 				description: [
 					"What a day! Let's take a breather to have a snack and chat.",
 				],
@@ -222,19 +222,19 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Talks",
 				within: [
 					{
-						at: "2:05pm",
+						at: "2:20pm",
 						session: "source-maps-how-does-the-magic-work",
 						type: "session",
 					},
 					{
-						at: "2:40pm",
+						at: "2:55pm",
 						session: "aot-compiling-typescript-to-wasm-and-native",
 						type: "session",
 					},
 				],
 			},
 			{
-				at: "3:00pm",
+				at: "3:15pm",
 				description: [
 					"What a day! Let's take a breather to have a snack and chat.",
 				],
@@ -245,7 +245,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Milk and Cookies Break",
 			},
 			{
-				at: "3:20pm",
+				at: "3:35pm",
 				description: ["Full- and medium-length talks from our speakers."],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -254,19 +254,19 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Talks",
 				within: [
 					{
-						at: "3:20pm",
+						at: "3:35pm",
 						session: "wasi-building-blocks-for-webassembly",
 						type: "session",
 					},
 					{
-						at: "3:40pm",
+						at: "3:55pm",
 						session: "tech-broke-my-heart",
 						type: "session",
 					},
 				],
 			},
 			{
-				at: "4:15pm",
+				at: "4:30pm",
 				description: [
 					"Final pieces of information on upcoming events, raffle giveaways, and appreciation notes to all of the lovely people who attended.",
 				],
