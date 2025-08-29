@@ -24,7 +24,7 @@ export interface ActivityDataWithinBase {
 }
 
 export interface ActivityLocation {
-	href: string;
+	href?: string;
 	text: string;
 }
 
