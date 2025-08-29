@@ -93,7 +93,7 @@ export const sharedSchedule: ScheduleDay[] = [
 				title: "Morning Fun Run",
 			},
 			{
-				at: "5:30pm",
+				at: "5:00pm",
 				description: [
 					"See `#food` on the [SquiggleConf Discord](https://discord.squiggleconf.com) to group up with other attendees and find suggested restaurants.",
 				],
