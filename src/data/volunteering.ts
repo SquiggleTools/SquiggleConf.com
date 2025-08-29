@@ -6,23 +6,18 @@ export const volunteeringSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 	{
 		activities: [
 			{
-				at: "5:00pm",
+				at: "8:00am",
 				badge,
 				description: [
 					"Meet the staff behind SquiggleConf and your fellow volunteers.",
 					"We'll go over the schedule, assorted roles, and answer any questions you have.",
 				],
 				location: {
-					href: "https://harborsideinnboston.com",
-					text: "TBD",
+					href: "https://www.neaq.org/visit/simons-theatre",
+					text: "Simons Theater",
 				},
 				title: "Volunteer Training",
 			},
-		],
-		title: "Wednesday, September 17th",
-	},
-	{
-		activities: [
 			{
 				at: "8:45am",
 				description: [
