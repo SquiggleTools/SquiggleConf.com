@@ -245,7 +245,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Milk and Cookies Break",
 			},
 			{
-				at: "3:35pm",
+				at: "3:40pm",
 				description: ["Full- and medium-length talks from our speakers."],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
