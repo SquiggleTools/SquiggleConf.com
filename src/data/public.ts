@@ -86,11 +86,28 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 						session: "catch-accessibility-issues-at-the-source-with-storybook",
 						type: "session",
 					},
-					{
-						at: "3:20pm",
-						title: "Short Break",
-						type: "between",
-					},
+				],
+			},
+			{
+				at: "3:20pm",
+				description: [
+					"What a day! Let's take a breather to have a snack and chat.",
+				],
+				location: {
+					href: "https://www.neaq.org/visit/simons-theatre",
+					text: "Simons Theater",
+				},
+				title: "Afternoon Snack",
+			},
+			{
+				at: "3:35pm",
+				description: ["Full- and medium-length talks from our speakers."],
+				location: {
+					href: "https://www.neaq.org/visit/simons-theatre",
+					text: "Simons Theater",
+				},
+				title: "Talks",
+				within: [
 					{
 						at: "3:35pm",
 						session: "jsr-designing-package-registry-module-resolution",
@@ -107,26 +124,6 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 						type: "session",
 					},
 				],
-			},
-			{
-				at: "3:45pm",
-				description: [
-					"What a day! Let's take a breather to have a snack and chat.",
-				],
-				location: {
-					href: "https://www.neaq.org/visit/simons-theatre",
-					text: "Simons Theater",
-				},
-				title: "Afternoon Snack",
-			},
-			{
-				at: "4:00pm",
-				description: ["Full- and medium-length talks from our speakers."],
-				location: {
-					href: "https://www.neaq.org/visit/simons-theatre",
-					text: "Simons Theater",
-				},
-				title: "Talks",
 			},
 			{
 				at: "4:45pm",
