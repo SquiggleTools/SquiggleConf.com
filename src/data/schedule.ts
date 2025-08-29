@@ -20,7 +20,7 @@ export interface ActivityData {
 export type ActivityDataWithin = ActivityBetweenData | ActivitySessionData;
 
 export interface ActivityDataWithinBase {
-	at: string;
+	at?: string;
 }
 
 export interface ActivityLocation {

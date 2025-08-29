@@ -100,7 +100,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				title: "Afternoon Snack",
 			},
 			{
-				at: "3:35pm",
+				at: "3:40pm",
 				description: ["Full- and medium-length talks from our speakers."],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -126,7 +126,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 				],
 			},
 			{
-				at: "4:45pm",
+				at: "4:50pm",
 				description: [
 					"Final pieces of information on upcoming events, raffle giveaways, and appreciation notes to all of the lovely people who attended.",
 				],
@@ -186,7 +186,6 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 						type: "session",
 					},
 					{
-						at: "11:05am",
 						title: "Short Break",
 						type: "between",
 					},

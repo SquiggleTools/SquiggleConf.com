@@ -58,7 +58,7 @@ const descriptionLines = await Promise.all(
 		)
 	}
 	<div class="activity-locators">
-		<div class="activity-time">{at ?? "Time TBA"}</div>
+		{at && <div class="activity-time">{at}</div>}
 		{
 			location && (
 				<a class="activity-location" href={location.href}>
