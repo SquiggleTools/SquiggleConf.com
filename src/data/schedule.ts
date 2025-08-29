@@ -69,12 +69,11 @@ export const sharedSchedule: ScheduleDay[] = [
 				title: "Morning Fun Run",
 			},
 			{
-				// todo: switch to string[] for less prominent &
-				at: "6:00pm & 7:00pm",
+				at: "6:00pm",
 				description: [
-					"We'll arrange suggested dinner and casual social gathering locations for attendees, speakers, and sponsors.",
+					"See `#food` on the [SquiggleConf Discord](https://discord.squiggleconf.com) to group up with other attendees and find suggested restaurants.",
 				],
-				title: "Suggested Dinner Locations",
+				title: "Choose Your Own Dinner",
 			},
 		],
 		title: "Thursday, September 18th",
@@ -96,9 +95,9 @@ export const sharedSchedule: ScheduleDay[] = [
 			{
 				at: "5:30pm",
 				description: [
-					"We'll arrange suggested dinner and casual social gathering locations for attendees.",
+					"See `#food` on the [SquiggleConf Discord](https://discord.squiggleconf.com) to group up with other attendees and find suggested restaurants.",
 				],
-				title: "Suggested Dinner Spots",
+				title: "Choose Your Own Dinner",
 			},
 			{
 				at: "6:30pm",
