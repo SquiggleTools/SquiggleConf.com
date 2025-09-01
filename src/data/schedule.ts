@@ -49,6 +49,10 @@ export const sharedSchedule: ScheduleDay[] = [
 					"We will arrange a community service event with a local non-profit the afternoon before the conference.",
 					`This event will free and open to any attendee who can code in at least HTML.`,
 				],
+				location: {
+					href: "https://www.afhboston.org",
+					text: "Artists for Humanity EpiCenter",
+				},
 				title: "Community Service Event",
 			},
 		],
