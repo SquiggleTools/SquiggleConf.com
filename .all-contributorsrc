@@ -83,6 +83,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "rwaskiewicz",
+      "name": "Ryan Waskiewicz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1930213?v=4",
+      "profile": "http://ducktyped.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
