@@ -1,0 +1,109 @@
+---
+import PageLayout from "~/layouts/PageLayout.astro";
+---
+
+<PageLayout description="Page not found - SquiggleConf" title="404">
+	<div class="error-container">
+		<div class="error-box">
+			<div class="error-title">404: NOT_FOUND</div>
+			<div class="error-code">Code: `NOT_FOUND`</div>
+			<div class="error-message">
+				You've drifted into uncharted waters. Navigate back to the surface?
+			</div>
+		</div>
+
+		<a href="/" class="home-link"> Home Page </a>
+	</div>
+</PageLayout>
+
+<style>
+	.error-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 60vh;
+		padding: 2rem;
+		height: 100vh;
+		background: var(--colorSandBackground);
+	}
+
+	.error-box {
+		background: var(--colorSandLight);
+		border: 1px solid var(--colorBorderLight);
+		border-radius: 8px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		text-align: left;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		max-width: 500px;
+		width: 100%;
+	}
+
+	.error-title {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarge);
+		font-weight: var(--fontWeightBold);
+		color: var(--colorBlackIsh);
+		margin-bottom: 0.5rem;
+	}
+
+	.error-code {
+		font-family: var(--fontFamilyBody);
+		font-size: var(--fontSizeSmall);
+		color: var(--colorBlackIsh);
+		margin-bottom: 1rem;
+	}
+
+	.error-message {
+		font-family: var(--fontFamilyBody);
+		font-size: var(--fontSizeSmall);
+		color: var(--colorBlackIsh);
+		line-height: 1.5;
+	}
+
+	.home-link {
+		background: var(--colorSandLight);
+		border: 1px solid var(--colorBlue3);
+		border-radius: 4px;
+		color: var(--colorBlue3);
+		text-decoration: none;
+		padding: 0.75rem 1.5rem;
+		font-family: var(--fontFamilyBody);
+		font-size: var(--fontSizeSmall);
+		text-align: center;
+		transition: all var(--transitionMedium);
+		display: inline-block;
+	}
+
+	.home-link:hover {
+		background: var(--colorBlue3);
+		color: var(--colorWhiteIsh);
+	}
+
+	:global(.dark) .error-container {
+		background: var(--colorSandLight);
+	}
+
+	:global(.dark) .error-box {
+		background: var(--colorSandBackground);
+		border-color: var(--colorBlueDull3);
+	}
+
+	:global(.dark) .error-title,
+	:global(.dark) .error-code,
+	:global(.dark) .error-message {
+		color: var(--colorSandForeground);
+	}
+
+	:global(.dark) .home-link {
+		background: var(--colorSandBackground);
+		border-color: var(--colorBlue2);
+		color: var(--colorWhiteIsh);
+	}
+
+	:global(.dark) .home-link:hover {
+		background: var(--colorBlue3);
+		color: var(--colorButtonColor);
+	}
+</style>
