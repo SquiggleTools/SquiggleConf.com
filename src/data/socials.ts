@@ -15,7 +15,7 @@ export const socials = [
 		src: bluesky,
 	},
 	{
-		alt: "Instgram",
+		alt: "Instagram",
 		href: "https://www.instagram.com/squiggleconf",
 		src: instagram,
 	},

@@ -1,0 +1,75 @@
+---
+import { renderSVG } from "uqr";
+import { generateWifiShareLink } from "wifi-share-link";
+import BodyList from "~/components/BodyList.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import Heading from "~/components/Heading.astro";
+import { links } from "~/data/links";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const ssid = "NETWORK NAME";
+const password = "NETWORK PASSWORD";
+
+const description = "Links for SquiggleConf 2025 attendees";
+const wifiLink = generateWifiShareLink({
+	encryption: "WPA",
+	ssid,
+	password,
+});
+const wifiImage = renderSVG(wifiLink);
+---
+
+<PageLayout description={description} title={description}>
+	<CommonContent width="normal">
+		<Heading class="h1" level="h1">Quick Badge Information</Heading>
+		<BodyList as="ul">
+			<li><a href="/schedule#thursday">Day 1 Schedule</a></li>
+			<li><a href="/schedule#friday">Day 2 Schedule</a></li>
+			<li><a href={links.discord}>Discord</a></li>
+			<li><a href={links.feedback}>Feedback form</a></li>
+			<li>
+				Social media:
+				<ul>
+					<li><a href={links.bluesky}>Bluesky</a></li>
+					<li><a href={links.instagram}>Instagram</a></li>
+					<li><a href={links.linkedin}>LinkedIn</a></li>
+					<li><a href={links.mastodon}>Mastodon</a></li>
+					<li><a href={links.x}>X</a></li>
+					<li><a href={links.youtube}>YouTube</a></li>
+				</ul>
+			</li>
+			<li>
+				Wifi:
+				<pre>{ssid}</pre> / <pre>{password}</pre>
+
+				<div class="wifi">
+					<Fragment set:html={wifiImage} />
+				</div>
+			</li>
+			<li>
+				Places to eat:
+				<ul>
+					<li>and a one</li>
+					<li>and a two</li>
+				</ul>
+			</li>
+		</BodyList>
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.h1 {
+		visibility: hidden;
+		height: 0;
+	}
+
+	pre {
+		display: inline;
+	}
+
+	.wifi {
+		height: 10rem;
+		margin-top: 0.5rem;
+		width: 10rem;
+	}
+</style>

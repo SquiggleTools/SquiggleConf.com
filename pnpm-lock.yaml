@@ -44,6 +44,12 @@ importers:
       temporal-polyfill:
         specifier: ^0.3.0
         version: 0.3.0
+      uqr:
+        specifier: ^0.1.2
+        version: 0.1.2
+      wifi-share-link:
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.5.0
@@ -3567,6 +3573,9 @@ packages:
       uploadthing:
         optional: true
 
+  uqr@0.1.2:
+    resolution: {integrity: sha512-MJu7ypHq6QasgF5YRTjqscSzQp/W11zoUk6kvmlH+fmWEs63Y0Eib13hYFwAzagRJcVY8WVnlV+eBDUGMJ5IbA==}
+
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -3771,6 +3780,10 @@ packages:
   widest-line@5.0.0:
     resolution: {integrity: sha512-c9bZp7b5YtRj2wOe6dlj32MK+Bx/M/d+9VB2SHM1OtsUHR0aV0tdP6DWh/iMt0kWi1t5g1Iudu6hQRNd1A4PVA==}
     engines: {node: '>=18'}
+
+  wifi-share-link@0.1.1:
+    resolution: {integrity: sha512-olagxtSm5jvkW1GAaLGtc2h41uzB85FTrL+NJ6DB2dFKsk45eUYVaUaQovk+LN6RnWuNBXlV5WNDKw1EeqgKXA==}
+    engines: {node: '>=20.19.0'}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -7840,6 +7853,8 @@ snapshots:
       ofetch: 1.4.1
       ufo: 1.6.1
 
+  uqr@0.1.2: {}
+
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
@@ -8019,6 +8034,8 @@ snapshots:
   widest-line@5.0.0:
     dependencies:
       string-width: 7.2.0
+
+  wifi-share-link@0.1.1: {}
 
   word-wrap@1.2.5: {}
 
