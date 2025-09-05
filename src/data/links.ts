@@ -1,4 +1,5 @@
 export const links = {
+	bluesky: "https://bsky.app/profile/squiggleconf.com",
 	bostonTSClub: "https://bostonts.club",
 	cfp: "https://cfp.squiggleconf.com",
 	cfpQuestionsDiscord:
@@ -6,10 +7,17 @@ export const links = {
 	cfpQuestionsEmail: "mailto:cfp@squiggleconf.com",
 	discord: "https://discord.squiggleconf.com",
 	donate: "https://www.paypal.com/US/fundraiser/charity/5334863",
+	feedback: "http://feedback.squiggleconf.com",
+	github: "https://www.github.com/SquiggleTools/SquiggleConf.com",
+	instagram: "https://www.instagram.com/squiggleconf",
+	linkedin: "https://www.linkedin.com/company/squiggleconf",
+	mastodon: "https://fosstodon.org/@SquiggleConf",
 	michiganTypeScript: "https://youtube.com/@MichiganTypeScript",
 	partner: "https://partner.squiggleconf.com",
 	shop: "https://shop.squiggle.tools",
 	sponsor: "https://sponsor.squiggleconf.com",
 	tickets: "https://buytickets.at/squiggleconf/1488622",
 	volunteer: "https://volunteer.squiggleconf.com",
+	x: "https://x.com/SquiggleConf",
+	youtube: "https://www.youtube.com/@SquiggleConf",
 };
