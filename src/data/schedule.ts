@@ -46,8 +46,9 @@ export const sharedSchedule: ScheduleDay[] = [
 			{
 				at: "4:00pm",
 				description: [
-					"We will arrange a community service event with a local non-profit the afternoon before the conference.",
-					`This event will free and open to any attendee who can code in at least HTML.`,
+					"We are co-hosting a community service event with Artists for Humanity, a local non-profit, the afternoon before the conference.",
+					"AFH will run joint icebreaker activities with the teens attending their design & development learn-to-code programs.",
+					"This event will free and open to any attendee who can code in at least HTML.",
 				],
 				location: {
 					href: "https://www.afhboston.org",
