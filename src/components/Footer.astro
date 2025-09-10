@@ -38,7 +38,7 @@ const yearPairs =
 					))
 				}
 			</div>
-			<Socials />
+			<Socials class="footer-socials" />
 		</div>
 	</ContentArea>
 </footer>
@@ -80,6 +80,18 @@ const yearPairs =
 
 	.footer-links a {
 		text-decoration: none;
+	}
+
+	.footer-socials {
+		margin-top: 2rem;
+		max-width: 15rem;
+	}
+
+	@media (width >= 490px) {
+		.footer-socials {
+			margin-top: 0;
+			max-width: none;
+		}
 	}
 
 	@media (width >= 819px) {

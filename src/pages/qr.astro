@@ -1,11 +1,12 @@
 ---
 import { renderSVG } from "uqr";
 import { generateWifiShareLink } from "wifi-share-link";
-import BodyList from "~/components/BodyList.astro";
-import CommonContent from "~/components/CommonContent.astro";
+
 import Heading from "~/components/Heading.astro";
+import LogoBold from "~/components/LogoBold.astro";
+import Socials from "~/components/Socials.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const ssid = "NETWORK NAME";
 const password = "NETWORK PASSWORD";
@@ -17,59 +18,117 @@ const wifiLink = generateWifiShareLink({
 	password,
 });
 const wifiImage = renderSVG(wifiLink);
+
+const theseAreLinks = {
+	first: [
+		["Conference Schedule", "/schedule"],
+		["Join the Discord", links.discord],
+	] as const,
+	second: [
+		["Feedback Form", links.feedback],
+		["Shop Merch", links.shop],
+		["Watch Last Year's Talks", links.youtube],
+		["Sign Up for the SquiggleConf Newsletter", "/#newsletter"],
+	] as const,
+};
 ---
 
-<PageLayout description={description} title={description}>
-	<CommonContent width="normal">
+<BaseLayout description={description}>
+	<main class="qr-main">
+		<LogoBold year={2025} />
 		<Heading class="h1" level="h1">Quick Badge Information</Heading>
-		<BodyList as="ul">
-			<li><a href="/schedule#thursday">Day 1 Schedule</a></li>
-			<li><a href="/schedule#friday">Day 2 Schedule</a></li>
-			<li><a href={links.discord}>Discord</a></li>
-			<li><a href={links.feedback}>Feedback form</a></li>
+		<Socials class="qr-socials" inverted padding="dense" size="small" />
+		<ul>
+			{
+				theseAreLinks.first.map(([children, href]) => (
+					<li>
+						<a href={href} target={href.startsWith("/") ? undefined : "_blank"}>
+							{children}
+						</a>
+					</li>
+				))
+			}
 			<li>
-				Social media:
-				<ul>
-					<li><a href={links.bluesky}>Bluesky</a></li>
-					<li><a href={links.instagram}>Instagram</a></li>
-					<li><a href={links.linkedin}>LinkedIn</a></li>
-					<li><a href={links.mastodon}>Mastodon</a></li>
-					<li><a href={links.x}>X</a></li>
-					<li><a href={links.youtube}>YouTube</a></li>
-				</ul>
-			</li>
-			<li>
-				Wifi:
-				<pre>{ssid}</pre> / <pre>{password}</pre>
+				<a class="wifi" href={wifiLink}>
+					WiFi
+					<div class="wifi-details">
+						<pre>{ssid}</pre>
+						<pre>{password}</pre>
+					</div>
 
-				<div class="wifi">
 					<Fragment set:html={wifiImage} />
-				</div>
+				</a>
 			</li>
-			<li>
-				Places to eat:
-				<ul>
-					<li>and a one</li>
-					<li>and a two</li>
-				</ul>
-			</li>
-		</BodyList>
-	</CommonContent>
-</PageLayout>
+			{
+				theseAreLinks.second.map(([children, href]) => (
+					<li>
+						<a href={href} target={href.startsWith("/") ? undefined : "_blank"}>
+							{children}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</BaseLayout>
 
 <style>
+	.qr-main {
+		align-items: center;
+		background: var(--colorBackgroundEmphasized);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 2rem;
+	}
+
 	.h1 {
 		visibility: hidden;
 		height: 0;
 	}
 
-	pre {
-		display: inline;
+	.qr-socials {
+		justify-content: center;
+		margin-bottom: 2rem;
 	}
 
-	.wifi {
-		height: 10rem;
-		margin-top: 0.5rem;
-		width: 10rem;
+	ul {
+		align-items: stretch;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: space-between;
+		text-align: center;
+		margin: auto;
+	}
+
+	li {
+		display: block;
+	}
+
+	a {
+		background: var(--colorForegroundAccent);
+		border-radius: 0.5rem;
+		color: var(--colorBackground);
+		display: block;
+		font-size: var(--fontSizeMedium);
+		padding: 2rem;
+		text-decoration: none;
+	}
+
+	.wifi-details {
+		align-items: center;
+		display: flex;
+		line-height: 0;
+		flex-direction: row;
+		padding: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.wifi :global(svg) {
+		width: min(70vw, 10rem);
+		height: min(70vw, 10rem);
 	}
 </style>
