@@ -5,6 +5,7 @@ import { generateWifiShareLink } from "wifi-share-link";
 import Heading from "~/components/Heading.astro";
 import LogoBold from "~/components/LogoBold.astro";
 import Socials from "~/components/Socials.astro";
+import ThemeToggle from "~/components/ThemeToggle.astro";
 import { links } from "~/data/links";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 
@@ -35,6 +36,7 @@ const theseAreLinks = {
 
 <BaseLayout description={description}>
 	<main class="qr-main">
+		<ThemeToggle />
 		<LogoBold year={2025} />
 		<Heading class="h1" level="h1">Quick Badge Information</Heading>
 		<Socials class="qr-socials" inverted padding="dense" size="small" />
