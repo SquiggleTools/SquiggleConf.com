@@ -36,7 +36,6 @@ const theseAreLinks = {
 
 <BaseLayout description={description}>
 	<main class="qr-main">
-		<ThemeToggle />
 		<LogoBold year={2025} />
 		<Heading class="h1" level="h1">Quick Badge Information</Heading>
 		<Socials class="qr-socials" inverted padding="dense" size="small" />
@@ -71,6 +70,9 @@ const theseAreLinks = {
 				))
 			}
 		</ul>
+		<div class="theme-toggle-area">
+			<ThemeToggle />
+		</div>
 	</main>
 </BaseLayout>
 
@@ -110,12 +112,12 @@ const theseAreLinks = {
 	}
 
 	a {
-		background: var(--colorForegroundAccent);
+		background: var(--colorSandLight);
 		border-radius: 0.5rem;
-		color: var(--colorBackground);
+		color: var(--colorBlackIsh);
 		display: block;
 		font-size: var(--fontSizeMedium);
-		padding: 2rem;
+		padding: 1rem;
 		text-decoration: none;
 	}
 
@@ -132,5 +134,12 @@ const theseAreLinks = {
 	.wifi :global(svg) {
 		width: min(70vw, 10rem);
 		height: min(70vw, 10rem);
+	}
+
+	.theme-toggle-area {
+		position: fixed;
+		bottom: 0.75rem;
+		height: 5rem;
+		right: -1rem;
 	}
 </style>
