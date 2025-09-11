@@ -4,6 +4,7 @@ import squigglyMedium from "~/assets/design/squiggly-medium.svg";
 import squigglyWide from "~/assets/design/squiggly-wide.svg";
 
 interface Props {
+	class?: string;
 	renderAs?: string;
 	width: "medium" | "wide";
 }
@@ -13,10 +14,13 @@ const images = {
 	wide: squigglyWide,
 };
 
-const { renderAs: As = "em", width } = Astro.props;
+const { class: className, renderAs: As = "em", width, ...props } = Astro.props;
 ---
 
-<As class:list={["text-squiggly", `text-squiggly-${width}`]}>
+<As
+	class:list={["text-squiggly", `text-squiggly-${width}`, className]}
+	{...props}
+>
 	<span class="text"><slot name="inside" /></span><Image
 		alt=""
 		class="squiggly"

@@ -1,0 +1,35 @@
+---
+import TextSquiggly from "./TextSquiggly.astro";
+
+interface Props {
+	class?: string;
+	year: number;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["logo-bold", className]} {...props}>
+	<TextSquiggly width="medium">
+		<Fragment slot="inside">Squiggle</Fragment>
+		<Fragment slot="after">Conf</Fragment>
+	</TextSquiggly>
+	{Astro.props.year && <span class="year">{Astro.props.year}</span>}
+</div>
+
+<style>
+	.logo-bold {
+		color: var(--colorWhiteIsh);
+		font-family: var(--fontFamilyLogo);
+		font-weight: var(--fontWeightLogo);
+		font-size: var(--fontSizeLogoLarge);
+		font-style: initial;
+		text-shadow: 0px 1.5px 1.5px rgba(0, 0, 0, 0.25);
+	}
+
+	.year {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightBold);
+	}
+</style>

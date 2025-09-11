@@ -41,7 +41,9 @@
 		"konami-emoji-blast": "^0.5.9",
 		"lodash": "^4.17.21",
 		"sharp": "^0.34.1",
-		"temporal-polyfill": "^0.3.0"
+		"temporal-polyfill": "^0.3.0",
+		"uqr": "^0.1.2",
+		"wifi-share-link": "^0.1.1"
 	},
 	"devDependencies": {
 		"@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
