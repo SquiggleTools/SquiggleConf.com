@@ -49,6 +49,7 @@ export const sharedSchedule: ScheduleDay[] = [
 					"We are co-hosting a community service event with Artists for Humanity, a local non-profit, the afternoon before the conference.",
 					"AFH will run joint icebreaker activities with the teens attending their design & development learn-to-code programs.",
 					"This event will free and open to any attendee who can code in at least HTML.",
+					"See `#community-service-event` on the [SquiggleConf Discord](https://discord.squiggleconf.com) for more information.",
 				],
 				location: {
 					href: "https://www.afhboston.org",
@@ -66,6 +67,7 @@ export const sharedSchedule: ScheduleDay[] = [
 				description: [
 					"Join organizers, volunteers, and attendees for a free joyful jog around the Boston harbor.",
 					"We'll meet at the New England Aquarium and run in a 5k loop at a comfortably light pace.",
+					"See `#fun-run` on the [SquiggleConf Discord](https://discord.squiggleconf.com) for more information.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit",
@@ -90,6 +92,7 @@ export const sharedSchedule: ScheduleDay[] = [
 				description: [
 					"Join organizers, volunteers, and attendees for a free joyful jog around the Boston harbor.",
 					"We'll meet at the New England Aquarium and run in a 5k loop at a comfortably light pace.",
+					"See `#fun-run` on the [SquiggleConf Discord](https://discord.squiggleconf.com) for more information.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit",
