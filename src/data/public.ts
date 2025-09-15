@@ -17,7 +17,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "9:30am",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -71,7 +71,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "2:15pm",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -105,7 +105,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "3:40pm",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -172,7 +172,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "9:30am",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -226,7 +226,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "2:15pm",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
@@ -260,7 +260,7 @@ export const publicSchedule: ScheduleDay[] = mergeScheduleWithPublic([
 			{
 				at: "3:40pm",
 				description: [
-					"A single track of full- and medium-length talks from our speakers, one after the other.",
+					"A single track of full- and medium-length talks from our speakers, one after the other in-person with the single IMAX screen at the Simons Theater.",
 				],
 				location: {
 					href: "https://www.neaq.org/visit/simons-theatre",
