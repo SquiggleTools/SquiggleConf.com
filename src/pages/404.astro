@@ -29,8 +29,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.error-box {
-		background: var(--colorSandLight);
-		border: 1px solid var(--colorBorderLight);
+		background: var(--colorSandBackground);
+		border: 1px solid var(--colorSandLight);
 		border-radius: 8px;
 		padding: 2rem;
 		margin-bottom: 2rem;
@@ -44,66 +44,40 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeLarge);
 		font-weight: var(--fontWeightBold);
-		color: var(--colorBlackIsh);
+		color: var(--colorSandForeground);
 		margin-bottom: 0.5rem;
 	}
 
 	.error-code {
 		font-family: var(--fontFamilyBody);
 		font-size: var(--fontSizeSmall);
-		color: var(--colorBlackIsh);
+		color: var(--colorSandForeground);
 		margin-bottom: 1rem;
 	}
 
 	.error-message {
 		font-family: var(--fontFamilyBody);
 		font-size: var(--fontSizeSmall);
-		color: var(--colorBlackIsh);
+		color: var(--colorSandForeground);
 		line-height: 1.5;
 	}
 
 	.home-link {
-		background: var(--colorSandLight);
-		border: 1px solid var(--colorBlue3);
+		background: var(--colorSandBackground);
+		border: 1px solid var(--colorSandForeground);
 		border-radius: 4px;
-		color: var(--colorBlue3);
+		color: var(--colorSandForeground);
 		text-decoration: none;
 		padding: 0.75rem 1.5rem;
 		font-family: var(--fontFamilyBody);
 		font-size: var(--fontSizeSmall);
 		text-align: center;
-		transition: all var(--transitionMedium);
+		transition: all var(--colorBlue3);
 		display: inline-block;
 	}
 
 	.home-link:hover {
 		background: var(--colorBlue3);
-		color: var(--colorWhiteIsh);
-	}
-
-	:global(.dark) .error-container {
-		background: var(--colorSandLight);
-	}
-
-	:global(.dark) .error-box {
-		background: var(--colorSandBackground);
-		border-color: var(--colorBlueDull3);
-	}
-
-	:global(.dark) .error-title,
-	:global(.dark) .error-code,
-	:global(.dark) .error-message {
-		color: var(--colorSandForeground);
-	}
-
-	:global(.dark) .home-link {
-		background: var(--colorSandBackground);
-		border-color: var(--colorBlue2);
-		color: var(--colorWhiteIsh);
-	}
-
-	:global(.dark) .home-link:hover {
-		background: var(--colorBlue3);
-		color: var(--colorButtonColor);
+		color: var(--colorForegroundAccent);
 	}
 </style>
