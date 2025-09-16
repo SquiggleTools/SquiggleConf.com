@@ -7,6 +7,7 @@ import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import ImagesAndTextTwoColumn from "~/components/ImagesAndTextTwoColumn.astro";
 import Registration from "~/components/Registration.astro";
+import { links } from "~/data/links";
 import PageLayout from "~/layouts/PageLayout.astro";
 
 const description =
@@ -111,9 +112,14 @@ const description =
 			<br />
 			<br />
 			Additional parking garages are within walking distance. For locations and pricing
-			details, visit the <a
+			details on aquarium parking, visit the <a
 				href="https://www.neaq.org/visit/directions-and-parking"
 				target="_blank">New England Aquarium’s parking information page</a
+			>.
+			<br />
+			<br />
+			For general Boston parking, see <a href={links.parking} target="_blank"
+				>SpotHero</a
 			>.
 		</BodyText>
 	</CommonContent>

@@ -46,6 +46,7 @@
 	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
 	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
+	--fontSizeLogoLarge: clamp(2.5rem, 5.25vw, 3rem);
 
 	--fontWeightLight: 200;
 	--fontWeightMedium: 300;

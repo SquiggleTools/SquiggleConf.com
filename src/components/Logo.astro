@@ -1,5 +1,4 @@
 ---
-import { ClassificationTypeNames } from "typescript";
 import TextSquiggly from "./TextSquiggly.astro";
 
 interface Props {
@@ -38,6 +37,7 @@ const { class: className, invert, year, ...props } = Astro.props;
 	.logo.regular {
 		--colorLogoText: var(--colorWhiteIsh);
 		--colorLogoYear: var(--colorBlue2);
+		text-shadow: 0px 1.5px 1.5px rgba(0, 0, 0, 0.25);
 	}
 
 	.year {
