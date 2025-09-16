@@ -10,7 +10,8 @@ import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
 import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
 import progressGray from "~/assets/logos/progress-gray.svg";
 import progressWhite from "~/assets/logos/progress-white.svg";
-import rushStack from "~/assets/logos/rush-stack.svg";
+import rushStackDark from "~/assets/logos/rushstack-dark.svg";
+import rushStackLite from "~/assets/logos/rushstack-lite.svg";
 import voidZeroBlack from "~/assets/logos/voidzero-black.svg";
 import voidZeroWhite from "~/assets/logos/voidzero-white.svg";
 
@@ -63,8 +64,8 @@ export const sponsorsBySlug = {
 	rushStack: {
 		href: "https://rushstack.io?utm_source=squiggleconf",
 		logos: {
-			dark: rushStack,
-			light: rushStack,
+			dark: rushStackDark,
+			light: rushStackLite,
 		},
 		placement: 1,
 		title: "Rush Stack",
