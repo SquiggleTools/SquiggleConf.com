@@ -1,9 +1,5 @@
 {
-	"dictionaries": [
-		"npm",
-		"node",
-		"typescript"
-	],
+	"dictionaries": ["npm", "node", "typescript"],
 	"ignorePaths": [
 		".all-contributorsrc",
 		".astro",
