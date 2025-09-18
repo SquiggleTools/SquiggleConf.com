@@ -1,0 +1,13 @@
+---
+import { ActivityBetweenData } from "~/data/2024/schedule";
+
+import ScheduledActivity from "./ScheduledActivity.astro";
+
+interface Props {
+	activity: ActivityBetweenData;
+}
+
+const { activity } = Astro.props;
+---
+
+<ScheduledActivity at={activity.at} level="h4" title={activity.title} />

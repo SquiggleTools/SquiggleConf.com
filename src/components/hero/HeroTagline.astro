@@ -1,0 +1,16 @@
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["hero-tagline", className]} {...props}>
+	<slot />
+</div>
+
+<style>
+	.hero-tagline {
+		color: var(--colorBackground);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarger);
+		font-weight: var(--fontWeightMedium);
+	}
+</style>

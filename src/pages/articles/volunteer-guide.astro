@@ -1,0 +1,102 @@
+---
+import BodyList from "~/components/BodyList.astro";
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import ScheduledActivities from "~/components/ScheduledActivities.astro";
+import { links } from "~/data/links";
+import { volunteeringSchedule } from "~/data/volunteering";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"All the information you'd need to know as a SquiggleConf 2025 volunteer.";
+
+const title = "Volunteer Guide";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea width="thin">
+		<BodyText class="body-text-top">
+			This page has the high-level information you need to know as a volunteer
+			at SquiggleConf 2025.
+		</BodyText>
+
+		<BodyText>That includes:</BodyText>
+
+		<BodyList as="ul">
+			<li>
+				<a href="#volunteer-expectations">Volunteer Expectations</a>: what we
+				need from you before and during
+			</li>
+			<li>
+				<a href="#volunteer-schedule">Volunteer Schedule</a>: the schedule of
+				activities common to all volunteers
+			</li>
+		</BodyList>
+	</ContentArea>
+
+	<CommonContent heading="Volunteer Expectations">
+		<BodyText>Volunteers are required to:</BodyText>
+
+		<BodyList as="ul">
+			<li>
+				Attend a volunteer training and orientation in-person Wednesday evening
+			</li>
+			<li>
+				Be available and responsive on the <a
+					href={links.discord}
+					target="_blank">SquiggleConf Discord</a
+				> for the duration of the two conference days
+			</li>
+		</BodyList>
+
+		<BodyText>
+			We generally assign an equal number of task hours to each volunteer,
+			roughly (number of hours of work) / (number of volunteers). Those tasks
+			will generally be in-person work such as operating the help desk, guiding
+			attendees to lunch spots, and helping set up and take down equipment.
+		</BodyText>
+
+		<br />
+
+		<BodyText>We'll also need the following information from you:</BodyText>
+
+		<BodyList as="ul">
+			<li>Preferred first and last name</li>
+			<li>Preferred time availabilities midday Wednesday through Friday</li>
+			<li>Photo: at least 512x512px</li>
+			<li>Specifics on any accessibility, dietary, or other needs</li>
+			<li>Which talks you most want to be free to attend</li>
+		</BodyList>
+
+		<br />
+
+		<BodyText
+			>Volunteers must be in-person for the duration of the conference.</BodyText
+		>
+	</CommonContent>
+
+	<CommonContent heading="Volunteer Schedule">
+		<BodyText>
+			Volunteers are invited to all public conference events listed on <a
+				href="/schedule">Schedule</a
+			>. This list also shows the private training we'll require you to attend.
+		</BodyText>
+
+		<ScheduledActivities days={volunteeringSchedule} />
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 1.5rem;
+	}
+</style>

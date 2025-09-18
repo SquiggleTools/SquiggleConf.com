@@ -1,0 +1,87 @@
+---
+import LinkOut from "~/assets/glyphs/link-out.svg";
+import squiggleFlankingFull from "~/assets/2024/squiggle-flanking-full.svg";
+import { currentYear } from "~/data/years";
+import { Image } from "astro:assets";
+
+import NewsletterForm from "./NewsletterForm.astro";
+import DeepBlueSea from "./DeepBlueSea.astro";
+---
+
+<DeepBlueSea>
+	<section class="next-year-notice">
+		<h2 class="primary-h2">
+			Thank you to everyone who made SquiggleConf 2024 wonderful!
+		</h2>
+
+		<p class="byline">
+			SquiggleConf 2024 was a blast.
+			<br />
+			We're looking forward to seeing you next year!
+			<br />
+			<br />
+			<strong class="next-year">
+				<a href="/">
+					SquiggleConf {currentYear}
+					<Image alt="" class="link-out" src={LinkOut} />
+				</a>
+			</strong>
+		</p>
+
+		<Image alt="" class="squiggle" src={squiggleFlankingFull} />
+
+		<NewsletterForm
+			class="newsletter-form"
+			label="Enter your email to be the first to know when video recordings are posted for free on YouTube."
+		/>
+	</section>
+</DeepBlueSea>
+
+<style>
+	.next-year-notice {
+		color: var(--colorWhiteIsh);
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 2rem;
+		padding: 5rem 1rem 3.5rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.primary-h2 {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH2);
+		padding: 0 var(--widthBodyPadding);
+		margin: auto;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.byline {
+		font-family: var(--fontFamilyBody);
+		font-weight: var(--fontWeightBody);
+		line-height: var(--lineHeightBody);
+	}
+
+	.next-year {
+		font-weight: 600;
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH2);
+	}
+
+	.newsletter-form {
+		color: var(--colorWhiteIsh);
+		padding-top: 3.5rem;
+	}
+
+	.squiggle {
+		margin-top: 3.5rem;
+		user-select: none;
+	}
+
+	html:not(.dark) .link-out {
+		filter: hue-rotate(180deg) invert(0.7);
+	}
+</style>

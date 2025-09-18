@@ -1,0 +1,127 @@
+---
+import { Image } from "astro:assets";
+
+import bluesky from "~/assets/logos/bluesky.svg";
+import github from "~/assets/logos/github.svg";
+import gitlab from "~/assets/logos/gitlab.svg";
+import linkedin from "~/assets/logos/linkedin.svg";
+import mastodon from "~/assets/logos/mastodon.svg";
+import medium from "~/assets/logos/medium.svg";
+import twitch from "~/assets/logos/twitch.svg";
+import x from "~/assets/logos/x.svg";
+import website from "~/assets/logos/website.svg";
+import youtube from "~/assets/logos/youtube.svg";
+
+interface Props {
+	class?: string;
+	links: BioLinksPlatforms;
+	name: string;
+	showText?: boolean;
+	size?: "normal" | "large";
+}
+
+export interface BioLinksPlatforms {
+	bluesky?: string | null;
+	github?: string | null;
+	gitlab?: string | null;
+	linkedin?: string | null;
+	mastodon?: string | null;
+	twitch?: string | null;
+	twitter?: string | null;
+	website?: string | null;
+	x?: string | null;
+	youtube?: string | null;
+	medium?: string | null;
+}
+
+const { class: className, links, name, size, showText, ...rest } = Astro.props;
+
+const aliases = [
+	["bluesky", "on bluesky", bluesky],
+	["github", "on GitHub", github],
+	["gitlab", "on GitLab", gitlab],
+	["linkedin", "on LinkedIn", linkedin],
+	["mastodon", "on Mastodon", mastodon],
+	["medium", "on Medium", medium],
+	["twitch", "on Twitch", twitch],
+	["x", "on X", x],
+	["youtube", "on YouTube", youtube],
+	["website", "'s website", website],
+] as const;
+---
+
+<div
+	class:list={[
+		"bio-links",
+		className,
+		size === "large" ? "bio-links-large" : "bio-links-normal",
+	]}
+	{...rest}
+>
+	{
+		aliases
+			.map(
+				([link, platform, src]) =>
+					links[link] && (
+						<a
+							class="bio-link"
+							href={links[link]}
+							target="_blank"
+							rel="noreferrer"
+						>
+							{showText ? (
+								<>
+									<Image alt="" class="link" src={src} />
+									<span class="link-text">{links[link].split("/").at(-1)}</span>
+								</>
+							) : (
+								<Image alt={`${name}${platform}`} class="link" src={src} />
+							)}
+						</a>
+					),
+			)
+			.filter(Boolean)
+	}
+</div>
+
+<style>
+	.bio-links {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 var(--bioLinkPadding);
+		margin-left: calc(-1 * var(--bioLinkPadding));
+		--bioLinkPadding: 0.25rem;
+	}
+
+	.bio-links-normal {
+		--bioLinkImageSize: 1.2rem;
+	}
+
+	.bio-links-large {
+		--bioLinkImageSize: 1.35rem;
+	}
+
+	.bio-link {
+		display: flex;
+		gap: var(--bioLinkPadding);
+		padding: var(--bioLinkPadding);
+		text-decoration: none;
+	}
+
+	.link {
+		height: var(--bioLinkImageSize);
+		filter: brightness(1.5);
+		width: var(--bioLinkImageSize);
+		user-select: none;
+	}
+
+	.link-text {
+		color: var(--colorBlueDarkDull);
+		margin-right: 1rem;
+	}
+
+	html:not(.dark) .link {
+		filter: hue-rotate(180deg) invert(0.7);
+	}
+</style>

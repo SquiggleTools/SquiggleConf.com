@@ -1,24 +1,22 @@
 ---
 import Heading from "~/components/Heading.astro";
 import Button from "~/components/Button.astro";
+import ExplainerHeading from "./ExplainerHeading.astro";
+
+const { class: className, heading, body, action, ...props } = Astro.props;
 ---
 
-<div class="explainer-area">
-	<Heading level="h2">{Astro.props.heading}</Heading>
+<div class:list={["explainer-area", className]} {...props}>
+	<ExplainerHeading heading={heading} />
 	<div class="explainer-images">
 		<slot />
 	</div>
-	<p class="explainer-body">{Astro.props.body}</p>
+	<p class="explainer-body">{body}</p>
 	{
-		Astro.props.action && (
+		action && (
 			<div class="explainer-action-area">
-				<Button
-					as="a"
-					href={Astro.props.action.href}
-					size="large"
-					variant="emphasized"
-				>
-					{Astro.props.action.text}
+				<Button as="a" href={action.href} size="large" variant="emphasized">
+					{action.text}
 				</Button>
 			</div>
 		)
@@ -30,17 +28,6 @@ import Button from "~/components/Button.astro";
 		color: var(--colorBackground);
 		margin: 0 2rem;
 		position: relative;
-	}
-
-	h2 {
-		font-family: var(--fontFamilyLogo);
-		font-size: var(--fontSizeLarger);
-		color: var(--colorForegroundEmphasized);
-		font-weight: var(--fontWeightSemibold);
-		padding: 5rem 2rem 3.5rem;
-		position: relative;
-		text-align: center;
-		z-index: 1;
 	}
 
 	.explainer-body {

@@ -1,4 +1,8 @@
-<div class="body-area">
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["body-area", className]} {...props}>
 	<slot />
 </div>
 

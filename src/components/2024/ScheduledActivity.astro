@@ -1,0 +1,179 @@
+---
+import { markdown } from "@astropub/md";
+
+import { ActivityLocation } from "~/data/2024/schedule";
+
+import Heading from "./Heading.astro";
+import Arrow from "./Arrow.astro";
+
+interface Props {
+	at?: string;
+	description?: string[];
+	href?: string;
+	id?: string;
+	location?: ActivityLocation;
+	class?: string;
+	level?: "h3" | "h4";
+	title: string;
+}
+
+const {
+	at,
+	class: className,
+	description = [],
+	id,
+	href,
+	location,
+	level = "h3",
+	title,
+	...rest
+} = Astro.props;
+
+const descriptionLines = await Promise.all(
+	description.map(async (p) => await markdown(p)),
+);
+---
+
+<div
+	class:list={[
+		"scheduled-activity",
+		level === "h3" ? "scheduled-activity-h3" : "scheduled-activity-h4",
+		className,
+	]}
+	id={id}
+	{...rest}
+>
+	{
+		href ? (
+			<a class="activity-title" href={href}>
+				<Heading level={level} class="activity-title-inner">
+					{title}
+				</Heading>
+				<Arrow class="activity-title-after" rotate={315} />
+			</a>
+		) : (
+			<Heading level={level} class="activity-title">
+				{title}
+			</Heading>
+		)
+	}
+	<div class="activity-locators">
+		{at && <div class="activity-time">{at}</div>}
+		{
+			location && (
+				<a class="activity-location" href={location.href}>
+					{location.text}
+				</a>
+			)
+		}
+	</div>
+	{
+		descriptionLines && (
+			<div class="activity-description">{descriptionLines}</div>
+		)
+	}
+</div>
+
+<style>
+	.scheduled-activity {
+		font-family: var(--fontFamilyBody);
+		margin: 0 var(--widthBodyPadding);
+		max-width: var(--widthBodyLean);
+		scroll-margin-top: 2rem;
+	}
+
+	.scheduled-activity-h3 {
+		--fontSizeTitle: var(--fontSizeH3);
+		margin-top: 3rem;
+	}
+
+	.scheduled-activity-h4 {
+		--fontSizeTitle: var(--fontSizeH4);
+		margin-top: 1.5rem;
+	}
+
+	.activity-title {
+		font-size: var(--fontSizeTitle);
+		text-decoration: none;
+	}
+
+	a.activity-title {
+		margin-top: -0.35rem;
+	}
+
+	a.activity-title .activity-title-after {
+		content: " 🔗";
+		display: inline;
+		opacity: 0;
+		transition: var(--transitionMedium) opacity;
+	}
+
+	a.activity-title:focus-within .activity-title-after,
+	a.activity-title:hover .activity-title-after {
+		opacity: 1;
+	}
+
+	.activity-title-inner {
+		display: inline;
+	}
+
+	.activity-locators {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: space-between;
+		margin: 0.5rem 0;
+	}
+
+	.activity-time {
+		font-size: var(--fontSizeTitle);
+		font-family: var(--fontFamilyHeading);
+	}
+
+	.activity-location {
+		font-size: var(--fontSizeBody);
+		text-align: right;
+	}
+
+	.activity-description {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		font-size: var(--fontSizeBody);
+		font-weight: 300;
+		width: 100%;
+	}
+
+	.activity-within {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	@media (min-width: 490px) {
+		.scheduled-activity {
+			display: grid;
+			grid-template-columns: clamp(5rem, 20vw, 10rem) auto;
+			grid-template-rows: auto auto auto;
+			gap: 0.75rem 1rem;
+		}
+
+		.activity-title {
+			grid-area: 1 / 2 / 2 / 3;
+		}
+
+		.activity-locators {
+			grid-area: 1 / 1 / 3 / 2;
+			flex-direction: column;
+			margin: 0;
+			justify-content: flex-start;
+			text-align: right;
+		}
+
+		.activity-description {
+			grid-area: 2 / 2 / 3 / 3;
+		}
+
+		.activity-within {
+			grid-area: 3 / 1 / 4 / 3;
+		}
+	}
+</style>

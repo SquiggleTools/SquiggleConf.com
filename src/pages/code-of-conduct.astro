@@ -9,7 +9,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	description="A Boston conference for excellent web dev tooling."
 	title="Code of Conduct"
 >
-	<ContentArea class="code-of-conduct-body-area" width="thin">
+	<ContentArea width="thin">
 		<Heading level="h1">Code of Conduct</Heading>
 
 		<BodyText class="code-of-conduct-body-text">
@@ -44,9 +44,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		<BodyText class="code-of-conduct-body-text">
 			If you are being harassed, notice that someone else is being harassed, or
 			have any other concerns, please act to intercede or ask for help from any
-			member of the SquiggleConf, Discord group admins, website admins, or
+			member of SquiggleConf, Discord group admins, website admins, or
 			organizers/representatives of any physical events put on under the
-			auspices of the SquiggleConf.
+			auspices of SquiggleConf.
 		</BodyText>
 
 		<BodyText class="code-of-conduct-body-text">—</BodyText>
@@ -70,13 +70,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 </PageLayout>
 
 <style>
-	.code-of-conduct-body-area {
-		padding: 3rem 0 2rem;
-	}
-
 	h1 {
 		font-size: var(--fontSizeLarge);
 		padding-bottom: 2rem;
+		padding: 3rem 0 2rem;
 	}
 
 	.code-of-conduct-body-text {

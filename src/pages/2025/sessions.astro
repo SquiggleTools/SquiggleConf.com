@@ -1,0 +1,107 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import HiddenTitleLink from "~/components/HiddenTitleLink.astro";
+import Registration from "~/components/Registration.astro";
+import Session from "~/components/Session.astro";
+import { sessionsBySlug } from "~/data/sessions";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description = "Every talk to be given in SquiggleConf 2025.";
+---
+
+<PageLayout description={description} title="Sessions">
+	<Hero>
+		<HeroContentsStandard heading="Sessions" squiggly="wide">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	{
+		(
+			[
+				[
+					"Full-Length Talks",
+					"full",
+					"25-30 minute talks plus live Q&A. These talks dive into their subject and show new ways of working with your tooling.",
+				],
+				[
+					"Medium-Length Talks",
+					"medium",
+					"15 minute talks plus Q&A that show off an area of technology with some of its interesting and useful facets.",
+				],
+			] as const
+		).map(([title, type, description]) => (
+			<CommonContent class="section" width="normal">
+				<HiddenTitleLink
+					as="h2"
+					id={type}
+					href={`#${type}`}
+					class="section-heading"
+				>
+					{title}
+				</HiddenTitleLink>
+				<BodyText class="section-description">{description}</BodyText>
+				<ul class="sessions">
+					{Object.values(sessionsBySlug)
+						.filter((session) => session.type === type)
+						.sort((a, b) =>
+							a.description === "_Coming soon!_"
+								? b.description === "_Coming soon!_"
+									? b.description.length - a.description.length
+									: 1
+								: b.description === "_Coming soon!_"
+									? -1
+									: a.slug.localeCompare(b.slug),
+						)
+						.map((session) => (
+							<Session session={session} class="session" />
+						))}
+				</ul>
+			</CommonContent>
+		))
+	}
+
+	<CommonContent>
+		<BodyText class="bottom">
+			You’ll emerge with the best techniques to supercharge your projects —
+			whether you’re already a tooling wizard or trying to become one.
+		</BodyText></CommonContent
+	>
+
+	<Registration />
+</PageLayout>
+
+<style>
+	.section {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.section-heading {
+		font-size: var(--fontSizeLarge);
+		font-family: var(--fontFamilyHeading);
+		scroll-margin-top: var(--sizeScrollMarginTop);
+		text-decoration: none;
+	}
+
+	.section-description {
+		margin: 1.5rem 0 3rem;
+	}
+
+	.sessions {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-left: 0;
+		text-align: left;
+	}
+
+	.bottom {
+		padding: 0 4rem;
+		text-align: center;
+	}
+</style>

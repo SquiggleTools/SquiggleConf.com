@@ -1,0 +1,130 @@
+---
+import BodyList from "~/components/BodyList.astro";
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import FAQSections from "~/components/FAQSections.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import ScheduledActivities from "~/components/ScheduledActivities.astro";
+import { links } from "~/data/links";
+import { sponsorSchedule } from "~/data/sponsoring.js";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"All the information you'd need to know as a SquiggleConf 2025 sponsor.";
+
+const title = "Sponsor Guide";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea width="thin">
+		<BodyText class="body-text-top">
+			This page has the high-level information you need to know as a sponsor at
+			SquiggleConf 2025.
+		</BodyText>
+
+		<BodyText>That includes:</BodyText>
+
+		<BodyList as="ul">
+			<li>
+				<a href="#sponsor-onboarding">Sponsor Onboarding</a>: what we'll work
+				with you on before the conference
+			</li>
+			<li>
+				<a href="#sponsor-schedule">Sponsor Schedule</a>: the schedule of
+				activities common to all sponsors
+			</li>
+			<li>
+				<a href="#faqs">FAQs</a>: all other common questions you might have
+			</li>
+		</BodyList>
+
+		<BodyText>
+			Every sponsor will be given access to a private channel in the
+			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
+			Please reach out to us there if you have any questions.
+		</BodyText>
+	</ContentArea>
+
+	<CommonContent heading="Sponsor Onboarding">
+		<BodyText>
+			Once an agreement is signed, we'll this is what we'll need from you as a
+			sponsor:
+		</BodyText>
+
+		<BodyList as="ul">
+			<li>
+				Your information:
+				<ul>
+					<li>Company name for announcements</li>
+					<li>Description: short (2-3 sentences) and full (1-2 paragraphs)</li>
+					<li>Logos: at least 512x512px, in light mode and dark mode</li>
+					<li>
+						Links on social media we share (Bluesky, Mastodon, LinkedIn, X,
+						YouTube, etc.)
+					</li>
+				</ul>
+			</li>
+			<li>
+				The names of any representatives you'll be sending to the conference
+			</li>
+			<li>
+				Joining the <a href={links.discord}>SquiggleConf Discord</a> and responding
+				to questions during the conference
+			</li>
+		</BodyList>
+	</CommonContent>
+
+	<CommonContent heading="Sponsor Schedule">
+		<BodyText>
+			Sponsors are invited to all public conference listed on <a
+				href="/schedule">Schedule</a
+			>. This list also shows the private events you have access to.
+		</BodyText>
+
+		<ScheduledActivities days={sponsorSchedule} />
+	</CommonContent>
+
+	<CommonContent heading="FAQs">
+		<BodyText>
+			These are the most common questions we get from sponsors. If you have any
+			other questions, please reach out to us in your private Discord channel.
+		</BodyText>
+
+		<FAQSections
+			sections={[
+				{
+					pairs: [
+						[
+							"Are you able to provide financial and legal paperwork such as a W-9?",
+							"Yes, please ask in your private Discord channel for whatever you need.",
+						],
+					],
+					title: "Paperwork",
+				},
+				{
+					pairs: [
+						[
+							"What should I do if I have any other question before, during, or after the conference?",
+							"You can ask any question in your private Discord channel.",
+						],
+					],
+					title: "Other",
+				},
+			]}
+		/>
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 1.5rem;
+	}
+</style>

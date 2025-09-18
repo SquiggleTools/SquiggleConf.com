@@ -1,6 +1,5 @@
 ---
 import stillAttendeesNetworking from "~/assets/stills/attendees-networking.png";
-import stillDanInngestPresenting from "~/assets/stills/dan-inngest-presenting.png";
 import stillJoshFromBack from "~/assets/stills/josh-from-back.png";
 import stillLorisSpeaking from "~/assets/stills/loris-speaking.png";
 import stillMariahSmiling from "~/assets/stills/mariah-smiling.png";
@@ -9,19 +8,16 @@ import stillPresentingInsideVenue from "~/assets/stills/presenting-inside-venue.
 import stillRobbySpeaking from "~/assets/stills/robby-speaking.png";
 import stillSignageOutsideVenue from "~/assets/stills/signage-outside-venue.png";
 import stillThomasSmilingInFrontOfMarquee from "~/assets/stills/thomas-smiling-in-front-of-marquee.png";
-import stillWorkshopAttendeesSittingFromBack from "~/assets/stills/workshop-attendees-sitting-from-back.png";
-import stillWorkshopAttendeesSittingFromFront from "~/assets/stills/workshop-attendees-sitting-from-front.png";
 
 import CoralReefDecoration from "./decorations/CoralReefDecoration.astro";
 import DolphinDecoration from "./decorations/DolphinDecoration.astro";
 import TurtleAndFishDecoration from "./decorations/TurtleAndFishDecoration.astro";
-import WhalesDecoration from "./decorations/WhalesDecoration.astro";
 import ExplainerImages from "./ExplainerImages.astro";
 import ExplainerArea from "./ExplainerArea.astro";
 
 const explainers = [
 	{
-		body: "Enjoy a dozen talks by tooling aficionados, dev experts, and new voices in the space. You’ll emerge with the best techniques to supercharge your projects.",
+		body: "Enjoy a dozen talks by tooling aficionados, dev experts, and new voices in the space. You’ll learn the best new techniques to supercharge your projects.",
 		decoration: DolphinDecoration,
 		direction: "up",
 		heading: "Talks",
@@ -38,28 +34,6 @@ const explainers = [
 				{
 					alt: "Robby Russell giving a conference talk",
 					src: stillRobbySpeaking,
-				},
-			],
-		},
-	},
-	{
-		body: "Attend workshops from our speakers and sponsors for hands on learning — whether you’re already a tooling wizard or trying to become one.",
-		decoration: WhalesDecoration,
-		direction: "down",
-		heading: "Workshops",
-		photos: {
-			primary: {
-				alt: "Back view of workshop attendees at Faneuil Hall Marketplace",
-				src: stillWorkshopAttendeesSittingFromFront,
-			},
-			secondary: [
-				{
-					alt: "Dan Farrelly from Inngest presenting a workshop at Faneuil Hall Marketplace",
-					src: stillDanInngestPresenting,
-				},
-				{
-					alt: "Back view of workshop attendees at Faneuil Hall Marketplace",
-					src: stillWorkshopAttendeesSittingFromBack,
 				},
 			],
 		},
@@ -87,10 +61,6 @@ const explainers = [
 		},
 	},
 	{
-		action: {
-			href: "https://cfp.squiggleconf.com",
-			text: "Apply to be a speaker! CFP now open!",
-		},
 		body: "Mingle with fellow backend, frontend, and full stack web developers at meetups and mixers before, during, and after the conference.",
 		decoration: CoralReefDecoration,
 		direction: "up",

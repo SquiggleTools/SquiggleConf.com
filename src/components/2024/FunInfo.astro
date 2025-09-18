@@ -1,0 +1,144 @@
+---
+import HeadingFlanked from "./HeadingFlanked.astro";
+import VenuePhotos from "./VenuePhotos.astro";
+
+const sections = [
+	[
+		"🎪",
+		"Engaging Events",
+		"Mingle with fellow developers at meetups and mixers before, during, and after the conference.",
+	],
+	[
+		"🏙️",
+		"Lovely Location",
+		"Right in the heart of downtown Boston’s historic district, next to Faneuil Hall Marketplace, sitting in the Boston harbor.",
+	],
+	[
+		"🗣️",
+		"Superb Speakers",
+		"Oct 3rd: Enjoy a dozen talks by tooling aficionados, dev experts, and new voices in the space.",
+	],
+	[
+		"🛠️",
+		"Wonderful Workshops",
+		"Oct 4th: Opt into a morning workshop of your choice from our speakers and sponsors.",
+	],
+];
+---
+
+<div class="funInfo">
+	<HeadingFlanked id="experience">Event Highlights</HeadingFlanked>
+
+	<ul class="secondary-info">
+		{
+			sections.map(([emoji, title, contents]) => (
+				<li class="item">
+					<h3 class="section">
+						<div class="emoji">{emoji}</div>
+						<div class="title">
+							{title.split(" ").map((word) => (
+								<div>{word}</div>
+							))}
+						</div>
+					</h3>
+					<div class="contents">{contents}</div>
+				</li>
+			))
+		}
+	</ul>
+
+	<VenuePhotos />
+</div>
+
+<style>
+	.funInfo {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.secondary-info {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		font-family: var(--fontFamilyHeading);
+		justify-content: space-between;
+		list-style: none;
+		margin-top: -2rem;
+		max-width: var(--widthBodyFull);
+		padding: 0 var(--widthBodyPadding);
+		row-gap: 2rem;
+		text-align: center;
+		width: 100%;
+	}
+
+	.section {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.emoji {
+		font-size: 3rem;
+		margin-right: 1rem;
+		user-select: none;
+	}
+
+	.title {
+		line-height: var(--lineHeightBody);
+		font-size: var(--fontSizeH4);
+	}
+
+	.contents {
+		color: var(--colorForegroundBody);
+		font-size: var(--fontSizeBody);
+		font-weight: var(--fontWeightLight);
+		margin-top: 0.75rem;
+		line-height: var(--lineHeightSecondary);
+	}
+
+	@media (min-width: 0) {
+		.secondary-info {
+			justify-content: center;
+		}
+
+		.item {
+			max-width: calc(80% - 1.5rem);
+			padding: 0 0.25rem;
+		}
+	}
+
+	@media (min-width: 700px) {
+		.secondary-info {
+			justify-content: center;
+		}
+
+		.item {
+			max-width: calc(40% - 1.5rem);
+			padding: 0 0.25rem;
+		}
+	}
+
+	@media (min-width: 1170px) {
+		.secondary-info {
+			padding: 0;
+			justify-content: space-between;
+		}
+
+		.item {
+			width: calc(24% - 0.25rem);
+			padding: 0 0.25rem;
+		}
+	}
+
+	@media (min-width: 1400px) {
+		.secondary-info {
+			width: calc(100% + 2rem);
+		}
+
+		.item {
+			padding: 0;
+		}
+	}
+</style>

@@ -1,0 +1,35 @@
+---
+interface Props {
+	id?: string;
+	class?: string;
+	href: string;
+}
+
+const { class: className, href, ...props } = Astro.props;
+---
+
+<a class="hidden-link" href={href} {...props}>
+	<slot />
+</a>
+
+<style>
+	.hidden-link::after {
+		color: var(--colorAccentMedium);
+		content: "#";
+		display: inline-block;
+		opacity: 0;
+		margin-left: 0.25rem;
+		transition: var(--transitionMedium) opacity;
+		width: 0;
+		position: absolute;
+	}
+
+	.hidden-link {
+		text-decoration: none;
+		overflow-wrap: break-word;
+	}
+
+	.hidden-link:is(:focus-within, :hover)::after {
+		opacity: 1;
+	}
+</style>

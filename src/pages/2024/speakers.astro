@@ -1,0 +1,77 @@
+---
+import HeroForPage from "~/components/2024/HeroForPage.astro";
+import { peopleBySlug, talksBySlug } from "~/data/2024/notion-data";
+import Speaker from "~/components/2024/Speaker.astro";
+import BodyText from "~/components/2024/BodyText.astro";
+import SafeMarkdown from "~/components/SafeMarkdown.astro";
+import PageLayout2024 from "~/layouts/2024/PageLayout2024.astro";
+import "~/styles/2024.css";
+---
+
+<PageLayout2024
+	description="Speakers at SquiggleConf: a Boston conference focused on excellent web dev tooling."
+	title="Speakers"
+>
+	<HeroForPage slot="hero">Speakers</HeroForPage>
+
+	<BodyText class="speakers-top" size="large" width="full">
+		See talk and workshop details on <a href="/2024/sessions">Sessions</a>.
+	</BodyText>
+
+	<ul class="speakers-list">
+		{
+			Object.values(peopleBySlug)
+				.sort((a, b) =>
+					!!a.bio === !!b.bio ? a.name.localeCompare(b.name) : a.bio ? -1 : 1,
+				)
+				.map((person) => (
+					<Speaker
+						speaker={person}
+						talks={Object.values(talksBySlug).filter((talk) =>
+							talk.people.includes(person),
+						)}
+					>
+						<div class="bio" slot="center">
+							<SafeMarkdown of={person.bio!} />
+						</div>
+					</Speaker>
+				))
+		}
+	</ul>
+
+	<BodyText class="speakers-bottom" size="large" width="full">
+		See talk and workshop details on <a href="/2024/sessions">Sessions</a>.
+	</BodyText>
+</PageLayout2024>
+
+<style>
+	.speakers-top {
+		margin-bottom: 2rem;
+	}
+
+	.speakers-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		flex-wrap: wrap;
+		list-style-type: none;
+		margin: 2rem;
+		padding: 0 var(--widthBodyPadding);
+	}
+
+	.bio {
+		line-height: 1.25;
+		padding-top: 0.5rem;
+		transition: var(--transitionMedium) line-height;
+	}
+
+	.speakers-bottom {
+		margin-top: 3.5rem;
+	}
+
+	@media (min-width: 1017px) {
+		.speakers-list {
+			width: var(--widthBodyLean);
+		}
+	}
+</style>

@@ -1,0 +1,86 @@
+---
+import BodyText from "./BodyText.astro";
+import Heading from "./Heading.astro";
+import SquiggleFlanked from "./SquiggleFlanked.astro";
+---
+
+<section class="primary-info">
+	<h2 class="primary-h2">A conference for excellent web dev tooling.</h2>
+
+	<BodyText class="byline" size="medium">
+		SquiggleConf brings together the admirers, contributors, and maintainers of
+		the latest and greatest in developer tools. Our talks and workshops showed
+		how to supercharge your code and the developers around you to be the most
+		productive they can be in writing backend, frontend, and full stack web
+		code.
+	</BodyText>
+
+	<SquiggleFlanked class="flanked" width="full">
+		<div class="flanked-contents">
+			<div class="date-cell">
+				<Heading class="heading" id="talks" level="h2" link="/2024/sessions#"
+					>Talks</Heading
+				>
+				<p class="date">Thursday <span class="together">Oct. 3rd</span></p>
+			</div>
+			<div class="date-cell">
+				<Heading
+					class="heading"
+					id="workshops"
+					level="h2"
+					link="/2024/sessions#workshops">Workshops</Heading
+				>
+				<p class="date">Friday <span class="together">Oct. 4th</span></p>
+			</div>
+		</div>
+	</SquiggleFlanked>
+</section>
+
+<style>
+	.flanked {
+		margin: 5rem 0 -2rem;
+	}
+
+	.flanked-contents {
+		display: flex;
+		gap: 1rem;
+		flex-direction: column;
+	}
+
+	.primary-h2 {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH2);
+		padding: 0 var(--widthBodyPadding);
+		margin: auto;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.byline {
+		margin: 2rem auto 0;
+	}
+
+	.date-cell {
+		text-align: center;
+	}
+
+	.heading {
+		font-size: var(--fontSizeH2);
+	}
+
+	.date {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH3);
+	}
+
+	.together {
+		display: inline-block;
+	}
+
+	@media (min-width: 490px) {
+		.flanked-contents {
+			flex-direction: row;
+		}
+	}
+</style>

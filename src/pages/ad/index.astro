@@ -1,0 +1,45 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroLocators from "~/components/hero/HeroLocators.astro";
+import HeroTagline from "~/components/hero/HeroTagline.astro";
+import Logo from "~/components/Logo.astro";
+import TextSquiggly from "~/components/TextSquiggly.astro";
+import { currentYear } from "~/data/years";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	description="A Boston conference for excellent web dev tooling."
+	title="Ad"
+>
+	<Hero>
+		<div class="ad">
+			<Logo invert year={currentYear} />
+
+			<HeroTagline class="ad-hero-tagline">
+				Insert text
+				<TextSquiggly width="medium">
+					<Fragment slot="inside">here</Fragment>
+					<Fragment slot="after">.</Fragment>
+				</TextSquiggly>
+			</HeroTagline>
+
+			<HeroLocators />
+		</div>
+	</Hero>
+</BaseLayout>
+
+<style>
+	.ad {
+		align-items: flex-start;
+		color: var(--colorAccentDark);
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+		height: calc(100vh - 15rem);
+		justify-content: center;
+		padding-bottom: 2.5rem;
+		width: 100%;
+	}
+</style>

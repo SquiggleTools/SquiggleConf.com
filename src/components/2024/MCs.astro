@@ -1,0 +1,51 @@
+---
+import { peopleBySlug } from "~/data/2024/notion-data";
+
+import CardsList from "./CardsList.astro";
+import FullSection from "./FullSection.astro";
+import HeadingFlanked from "./HeadingFlanked.astro";
+import SpeakerSmall from "./SpeakerSmall.astro";
+import SubtleCard from "./SubtleCard.astro";
+import BodyText from "./BodyText.astro";
+import BioLinks from "./BioLinks.astro";
+---
+
+<FullSection class="full-mcs">
+	<HeadingFlanked id="mcs">MCs</HeadingFlanked>
+
+	<BodyText as="p" size="large" width="lean">
+		Our MCs are friendly web dev tooling connoisseurs who'll introduce the
+		sessions and other conference activities.
+	</BodyText>
+
+	<CardsList>
+		{
+			(["nick-nisi", "fatima-sarah-khalid"] as const).map((person) => (
+				<SubtleCard class="mc-card" renderAs="li">
+					<SpeakerSmall
+						href={`/speakers#${peopleBySlug[person].slug}`}
+						person={peopleBySlug[person]}
+					>
+						<BioLinks
+							class="speaker-bio-links"
+							name={peopleBySlug[person].name}
+							links={peopleBySlug[person].links}
+						/>
+					</SpeakerSmall>
+				</SubtleCard>
+			))
+		}
+	</CardsList>
+</FullSection>
+
+<style>
+	.mc-card {
+		width: 100%;
+	}
+
+	@media (min-width: 1017px) {
+		.mc-card {
+			width: 45%;
+		}
+	}
+</style>

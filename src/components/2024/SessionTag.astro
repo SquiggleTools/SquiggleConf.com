@@ -1,0 +1,216 @@
+---
+import { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+import C from "~/assets/logos/c.png";
+import ChromeDevTools from "~/assets/logos/chrome-dev-tools.svg";
+import Cpp from "~/assets/logos/cpp.png";
+import DotNet from "~/assets/logos/dot-net.svg";
+import Elixir from "~/assets/logos/elixir.svg";
+import Go from "~/assets/logos/go.svg";
+import Haskell from "~/assets/logos/haskell.svg";
+import Java from "~/assets/logos/java.svg";
+import JavaScript from "~/assets/logos/javascript.png";
+import JetBrains from "~/assets/logos/jetbrains.svg";
+import Kotlin from "~/assets/logos/kotlin.svg";
+import NodeJSLogo from "~/assets/logos/node-js.svg";
+import OCaml from "~/assets/logos/ocaml.svg";
+import OpenTelemetry from "~/assets/logos/open-telemetry.png";
+import Perl from "~/assets/logos/perl.svg";
+import PHP from "~/assets/logos/php.svg";
+import Python from "~/assets/logos/python.svg";
+import Ruby from "~/assets/logos/ruby.svg";
+import Rust from "~/assets/logos/rust.svg";
+import SVG from "~/assets/logos/svg.svg";
+import TypeScript from "~/assets/logos/typescript.svg";
+import VSCode from "~/assets/logos/vscode.png";
+import WebAssembly from "~/assets/logos/web-assembly.svg";
+import Zig from "~/assets/logos/zig.svg";
+
+import AST from "~/assets/logos/icon-mediation.svg";
+import Accessibility from "~/assets/logos/icon-accessibility.svg";
+import Account from "~/assets/logos/icon-account.svg";
+import Architecture from "~/assets/logos/icon-architecture.svg";
+import Assignment from "~/assets/logos/icon-assignment.svg";
+import AnimationIcon from "~/assets/logos/icon-animation.svg";
+import Autoplay from "~/assets/logos/icon-autoplay.svg";
+import Bug from "~/assets/logos/icon-bug.svg";
+import Calculate from "~/assets/logos/icon-calculate.svg";
+import Code from "~/assets/logos/icon-code.svg";
+import Diversity from "~/assets/logos/icon-diversity.svg";
+import Dock from "~/assets/logos/icon-dock.svg";
+import Docs from "~/assets/logos/icon-docs.svg";
+import Edit from "~/assets/logos/icon-edit.svg";
+import Extension from "~/assets/logos/icon-extension.svg";
+import Footprint from "~/assets/logos/icon-footprint.svg";
+import Forrest from "~/assets/logos/icon-forrest.svg";
+import Handyman from "~/assets/logos/icon-handyman.svg";
+import Hardware from "~/assets/logos/icon-hardware.svg";
+import Headset from "~/assets/logos/icon-headset.svg";
+import Hub from "~/assets/logos/icon-hub.svg";
+import Inclusive from "~/assets/logos/icon-inclusive.svg";
+import Lightning from "~/assets/logos/icon-lightning.svg";
+import Monorepo from "~/assets/logos/icon-monorepo.svg";
+import Palette from "~/assets/logos/icon-palette.svg";
+import Protocol from "~/assets/logos/icon-protocol.svg";
+import Rocket from "~/assets/logos/icon-rocket.svg";
+import ScatterPlot from "~/assets/logos/icon-scatter-plot.svg";
+import Stylus from "~/assets/logos/icon-stylus.svg";
+import Terminal from "~/assets/logos/icon-terminal.svg";
+import Vitals from "~/assets/logos/icon-vitals.svg";
+
+const whiteStrokeIcons: ImageMetadata[] = [
+	AST,
+	Accessibility,
+	Account,
+	AnimationIcon,
+	Assignment,
+	Bug,
+	Autoplay,
+	Calculate,
+	Code,
+	Diversity,
+	Dock,
+	Docs,
+	Edit,
+	Extension,
+	Footprint,
+	Forrest,
+	Handyman,
+	Headset,
+	Hub,
+	Inclusive,
+	Lightning,
+	Monorepo,
+	Palette,
+	Protocol,
+	Rocket,
+	Stylus,
+	Terminal,
+	Vitals,
+];
+
+const images: Record<string, ImageMetadata> = {
+	".Net": DotNet,
+	Haskell,
+	OCaml,
+	Java,
+	Kotlin,
+	Perl,
+	PHP,
+	Python,
+	Ruby,
+	Elixir,
+	Architecture,
+	ASTs: AST,
+	"Accessibility Tree": Accessibility,
+	"Build Optimization": Handyman,
+	C,
+	"C++": Cpp,
+	CLIs: Terminal,
+	"CSS Animations Panel": Autoplay,
+	Canvas: Palette,
+	"Chrome DevTools": ChromeDevTools,
+	"Community Building": Diversity,
+	"Core Web Vitals": Vitals,
+	"Cross-Language": Hub,
+	"Debugging Tools": Dock,
+	Debugging: Bug,
+	Design: Stylus,
+	"Developer Relations": Headset,
+	Docs,
+	Documentation: Docs,
+	"Durable Execution": Hardware,
+	"Editor Extensions": Extension,
+	"Inclusive Design": Inclusive,
+	JavaScript,
+	JetBrains,
+	"Language Server Protocol": Protocol,
+	"Launching Software Products": Rocket,
+	Microservices: ScatterPlot,
+	"Monorepo Tooling": Monorepo,
+	"Node.js": NodeJSLogo,
+	"Open Source": Account,
+	"Open Telemetry": OpenTelemetry,
+	Parsing: Calculate,
+	Performance: Lightning,
+	Rust,
+	SVG,
+	"Source Code": Code,
+	"Task Management": Assignment,
+	"Technical Writing": Edit,
+	Tracing: Footprint,
+	TreeSitter: Forrest,
+	TypeScript,
+	"Web Animations API": AnimationIcon,
+	WebAssembly,
+	Zig,
+	Go,
+	"VS Code": VSCode,
+};
+
+interface Props {
+	tag: string;
+	scale?: number;
+	size?: SessionTagSize;
+}
+
+export type SessionTagSize = "normal" | "large";
+
+const { tag, scale, size } = Astro.props;
+const image = images[tag];
+const isLight = whiteStrokeIcons.includes(image);
+---
+
+<div
+	class:list={["tag-chip", size === "large" ? "tag-large" : "tag-normal"]}
+	style={{ zoom: scale, alignSelf: "end" }}
+>
+	{
+		image && (
+			<Image
+				class:list={["tag-icon", isLight ? "light-icon" : ""]}
+				alt={`${tag} logo`}
+				src={image}
+				height={24}
+			/>
+		)
+	}
+	{tag}
+</div>
+
+<style>
+	.tag-chip {
+		display: inline-flex;
+		align-items: center;
+		background-color: var(--colorBackdropOff);
+		box-shadow: 0 0 0.125rem var(--colorTextShadow);
+		border-radius: 0.25rem;
+		white-space: nowrap;
+		cursor: default;
+	}
+
+	.tag-normal {
+		font-size: 1rem;
+		padding: 0.125rem 0.25rem 0.125rem 0.125rem;
+	}
+
+	.tag-large {
+		font-size: 2.5rem;
+		padding: 0.5rem 0.5rem 0.35rem;
+	}
+
+	.light-icon {
+		filter: invert(1);
+		opacity: 0.5;
+	}
+
+	.tag-icon {
+		margin-right: 0.25rem;
+		max-width: 24px;
+	}
+
+	html.dark .tag-icon {
+		filter: none;
+	}
+</style>

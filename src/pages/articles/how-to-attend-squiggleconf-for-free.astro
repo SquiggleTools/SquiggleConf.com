@@ -1,0 +1,152 @@
+---
+import Arrow from "~/components/Arrow.astro";
+import BodyList from "~/components/BodyList.astro";
+import BodyText from "~/components/BodyText.astro";
+import Button from "~/components/Button.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import { links } from "~/data/links";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"13 different ways you can get a free ticket to SquiggleConf 2025. Free!";
+
+const title = "How to Attend SquiggleConf for Free";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea>
+		<BodyText class="body-text-top">
+			We want to make sure as many people who want to attend SquiggleConf can do
+			so as possible, regardless of their financial situation or whether their
+			employer can pay for them. That's why we offer a variety of ways to get a
+			free ticket to SquiggleConf 2025.
+		</BodyText>
+	</ContentArea>
+
+	<CommonContent heading="Community Participation">
+		<BodyText>
+			SquiggleConf is a community conference first and foremost. We have a
+			standing offer to anybody who has done any of:
+		</BodyText>
+		<BodyList as="ol">
+			<li>
+				Be an organizer of an Boston tech meetup or student group active the
+				year of the conference
+			</li>
+			<li>
+				Speak at a <a href={links.bostonTSClub}>Boston TS Club</a> event within 1
+				year of the conference
+			</li>
+			<li>
+				Speak at a <a href={links.michiganTypeScript}>Michigan TypeScript</a>
+				event within 1 year of the conference
+			</li>
+			<li>
+				Be in a <a href={links.michiganTypeScript}>Michigan TypeScript</a>
+				video within 1 year of the conference
+			</li>
+			<li>Speak or been an MC at a previous SquiggleConf</li>
+		</BodyList>
+	</CommonContent>
+
+	<CommonContent heading="Open Source">
+		<BodyText>
+			6. As thanks for significant contributors to major open source projects
+			for web dev tooling, we offer free tickets to members of major language
+			and tooling teams:
+		</BodyText>
+		<BodyList as="ul">
+			<li>Go ecosystem teams: Go core, esbuild</li>
+			<li>Rust ecosystem teams: Rust core, Cargo, Tauri</li>
+			<li>TypeScript ecosystem teams: TypeScript core, npm, React, VS Code</li>
+			<li>
+				WebAssembly ecosystem teams: Wasmer, Wasmtime, Emscripten,
+				AssemblyScript
+			</li>
+			<li>Zig ecosystem teams: Zig core, the Zig foundation, Bun</li>
+		</BodyList>
+		<BodyText>
+			If you are a significant contributor to one of these projects, or to a
+			project you believe contributes to web dev tooling at the scale of these
+			projects, please reach out to us.
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="Other Avenues">
+		<BodyList as="ol" start="7">
+			<li>
+				<span class="area">Be a Speaker:</span> all of our speakers get a free ticket
+				to SquiggleConf, of course!
+			</li>
+			<li>
+				<span class="area">Group Scholarships:</span> we provide a limited number
+				of free tickets given out to nonprofits, student groups, and other for-good-entities.
+			</li>
+			<li>
+				<span class="area">Local Diversity Scholarships:</span> we provided a limited
+				number of free tickets to individuals who apply to our scholarship to help
+				improve diversity, equity, and inclusion (DEI) in tech. We'll post a public
+				application later this year.
+			</li>
+			<li>
+				<span class="area">Raffle:</span> every year we have a just-for-fun raffle
+				where we give away a ticket to next year's conference.
+			</li>
+			<li>
+				<span class="area">Referrals:</span> ticket purchases come with a unique
+				referral code. You'll get $50 back on every ticket referral and they will
+				get $50 off. This intentionally can reduce your ticket cost to $0.
+			</li>
+			<li>
+				<span class="area">Sponsors:</span> our sponsors receive free tickets as
+				part of their sponsorship tiers. We'll have a sponsorship prospectus available
+				later this season.
+			</li>
+			<li>
+				<span class="area">Volunteering:</span> all our volunteers are welcome to
+				attend all of the conference for free. We have a variety of roles available,
+				and will work with you to make sure your duties don't coincide with any talks
+				you particularly want to attend.
+			</li>
+			<Button
+				as="a"
+				class="apply-button"
+				href={links.volunteer}
+				size="large"
+				target="_blank"
+				variant="emphasized"
+			>
+				Apply to volunteer here
+				<Arrow />
+			</Button>
+		</BodyList>
+	</CommonContent>
+
+	<style>
+		.body-text-top {
+			margin: 5rem auto 0;
+			max-width: 49rem;
+		}
+	</style>
+</PageLayout>
+
+<style>
+	.apply-button {
+		align-self: center;
+		gap: 0.5rem;
+		margin-top: 2rem;
+	}
+
+	.area {
+		font-weight: var(--fontWeightBold);
+	}
+</style>

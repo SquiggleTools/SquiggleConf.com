@@ -6,6 +6,7 @@ import fishSchoolDull from "~/assets/design/fish-school-dull.svg";
 import ContentArea from "./ContentArea.astro";
 import Heading from "./Heading.astro";
 import DecorativeImage from "./DecorativeImage.astro";
+import { slugify } from "~/utils/id";
 
 interface ImagesAndTextTwoColumnImages {
 	primary: ImageMetadata;
@@ -26,7 +27,9 @@ interface Props {
 		</div>
 
 		<div class="images-and-text-two-column-text">
-			<Heading level="h2">{Astro.props.heading}</Heading>
+			<Heading id={slugify(Astro.props.heading)} level="h2">
+				{Astro.props.heading}
+			</Heading>
 
 			<div class="two-column-content">
 				<slot />
@@ -45,11 +48,7 @@ interface Props {
 
 <style>
 	.images-and-text-two-column {
-		background: linear-gradient(
-			180deg,
-			var(--colorBlueBright3) 50%,
-			var(--colorBlueBright2) 100%
-		);
+		background: var(--colorAccentLight);
 		color: var(--colorBackground);
 		padding: 2.5rem 1.5rem;
 	}
@@ -110,7 +109,7 @@ interface Props {
 		}
 
 		.images-and-text-two-column-text {
-			padding: 1rem 8rem 1rem 0;
+			padding: 1rem 8rem 1rem 5rem;
 		}
 
 		.images-secondary {

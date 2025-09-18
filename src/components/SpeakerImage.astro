@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+
+export const speakerImageSizes = {
+	small: 40,
+	medium: 80,
+	large: 120,
+};
+
+export type SpeakerImageSize = keyof typeof speakerImageSizes;
+
+export interface Props {
+	class?: string;
+	size: SpeakerImageSize;
+	src: ImageMetadata;
+}
+
+const { class: className, size, src, ...props } = Astro.props;
+---
+
+<Image
+	alt=""
+	class:list={["speaker-image", className]}
+	height={speakerImageSizes[size]}
+	src={src}
+	width={speakerImageSizes[size]}
+	{...props}
+/>
+
+<style>
+	.speaker-image {
+		border-radius: 100%;
+		user-select: none;
+		object-fit: cover;
+	}
+</style>

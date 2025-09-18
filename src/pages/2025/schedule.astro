@@ -1,0 +1,49 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import { publicSchedule } from "~/data/public";
+import Registration from "~/components/Registration.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+import ScheduledActivities from "~/components/ScheduledActivities.astro";
+
+const description =
+	"The events leading up to, during, and after the conference, as well as the order of talks.";
+---
+
+<PageLayout description={description} title="Schedule">
+	<Hero>
+		<HeroContentsStandard heading="Schedule" squiggly="wide">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<CommonContent>
+		<BodyText class="time-zone-note">
+			All times are in EDT, local to Boston.
+		</BodyText>
+
+		<ScheduledActivities days={publicSchedule} />
+	</CommonContent>
+
+	<Registration />
+</PageLayout>
+
+<style>
+	.tickets-list {
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightMedium);
+		display: flex;
+		gap: 1rem;
+		flex-direction: column;
+	}
+
+	.time-zone-note {
+		margin: auto;
+	}
+
+	.schedule-section {
+		margin-bottom: 3.5rem;
+	}
+</style>

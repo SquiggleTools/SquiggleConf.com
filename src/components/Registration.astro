@@ -9,6 +9,7 @@ import ContentArea from "./ContentArea.astro";
 import DecorativeImage from "./DecorativeImage.astro";
 import Heading from "./Heading.astro";
 import TextSquiggly from "./TextSquiggly.astro";
+import Arrow from "./Arrow.astro";
 ---
 
 <div class="registration">
@@ -23,20 +24,22 @@ import TextSquiggly from "./TextSquiggly.astro";
 		</TextSquiggly>
 		<Button
 			as="a"
+			class="tickets-link"
 			href={links.tickets}
 			target="_blank"
 			size="large"
 			variant="emphasized"
 		>
-			Get early bird tickets now!
+			Get your tickets now for year two
+			<Arrow />
 		</Button>
 	</ContentArea>
 </div>
 
 <style>
 	.registration {
-		background: var(--colorBlueBright4);
-		color: var(--colorBackground);
+		background: var(--colorBlue4);
+		color: var(--colorWhiteIsh);
 		overflow: hidden;
 		position: relative;
 	}
@@ -74,6 +77,11 @@ import TextSquiggly from "./TextSquiggly.astro";
 		font-size: var(--fontSizeLarge);
 		font-weight: var(--fontWeightMedium);
 		margin-bottom: 0.5rem;
+	}
+
+	.tickets-link {
+		display: flex;
+		gap: 0.5rem;
 	}
 
 	@media (width >= 819px) {

@@ -1,0 +1,145 @@
+---
+import { renderSVG } from "uqr";
+import { generateWifiShareLink } from "wifi-share-link";
+
+import Heading from "~/components/Heading.astro";
+import LogoBold from "~/components/LogoBold.astro";
+import Socials from "~/components/Socials.astro";
+import ThemeToggle from "~/components/ThemeToggle.astro";
+import { links } from "~/data/links";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+const ssid = "NETWORK NAME";
+const password = "NETWORK PASSWORD";
+
+const description = "Links for SquiggleConf 2025 attendees";
+const wifiLink = generateWifiShareLink({
+	encryption: "WPA",
+	ssid,
+	password,
+});
+const wifiImage = renderSVG(wifiLink);
+
+const theseAreLinks = {
+	first: [
+		["Conference Schedule", "/schedule"],
+		["Join the Discord", links.discord],
+	] as const,
+	second: [
+		["Feedback Form", links.feedback],
+		["Shop Merch", links.shop],
+		["Watch Last Year's Talks", links.youtube],
+		["Sign Up for the SquiggleConf Newsletter", "/#newsletter"],
+	] as const,
+};
+---
+
+<BaseLayout description={description}>
+	<main class="qr-main">
+		<LogoBold year={2025} />
+		<Heading class="h1" level="h1">Quick Badge Information</Heading>
+		<Socials class="qr-socials" inverted padding="dense" size="small" />
+		<ul>
+			{
+				theseAreLinks.first.map(([children, href]) => (
+					<li>
+						<a href={href} target={href.startsWith("/") ? undefined : "_blank"}>
+							{children}
+						</a>
+					</li>
+				))
+			}
+			<li>
+				<a class="wifi" href={wifiLink}>
+					WiFi
+					<div class="wifi-details">
+						<pre>{ssid}</pre>
+						<pre>{password}</pre>
+					</div>
+
+					<Fragment set:html={wifiImage} />
+				</a>
+			</li>
+			{
+				theseAreLinks.second.map(([children, href]) => (
+					<li>
+						<a href={href} target={href.startsWith("/") ? undefined : "_blank"}>
+							{children}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<div class="theme-toggle-area">
+			<ThemeToggle />
+		</div>
+	</main>
+</BaseLayout>
+
+<style>
+	.qr-main {
+		align-items: center;
+		background: var(--colorBackgroundEmphasized);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 2rem;
+	}
+
+	.h1 {
+		visibility: hidden;
+		height: 0;
+	}
+
+	.qr-socials {
+		justify-content: center;
+		margin-bottom: 2rem;
+	}
+
+	ul {
+		align-items: stretch;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: space-between;
+		text-align: center;
+		margin: auto;
+	}
+
+	li {
+		display: block;
+	}
+
+	a {
+		background: var(--colorSandLight);
+		border-radius: 0.35rem;
+		color: var(--colorBlackIsh);
+		display: block;
+		font-size: var(--fontSizeMedium);
+		padding: 1.25rem;
+		text-decoration: none;
+	}
+
+	.wifi-details {
+		align-items: center;
+		display: flex;
+		line-height: 0;
+		flex-direction: row;
+		padding: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.wifi :global(svg) {
+		width: min(70vw, 10rem);
+		height: min(70vw, 10rem);
+	}
+
+	.theme-toggle-area {
+		position: fixed;
+		bottom: 0.75rem;
+		height: 5rem;
+		right: -1rem;
+	}
+</style>

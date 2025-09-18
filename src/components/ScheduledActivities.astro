@@ -1,0 +1,60 @@
+---
+import { ScheduleDay } from "~/data/schedule";
+import Heading from "~/components/Heading.astro";
+import ScheduledActivity from "~/components/ScheduledActivity.astro";
+import ScheduledActivityBetween from "./2024/ScheduledActivityBetween.astro";
+import ScheduledActivitySession from "./ScheduledActivitySession.astro";
+
+interface Props {
+	days: ScheduleDay[];
+}
+---
+
+<div>
+	{
+		Astro.props.days.map(({ activities, title }) => (
+			<section class="schedule-section">
+				<Heading
+					class="schedule-heading"
+					id={title.split(/\W+/)[0].toLowerCase()}
+					level="h2"
+					link
+				>
+					{title}
+				</Heading>
+
+				{activities.map((activity) => (
+					<>
+						<ScheduledActivity
+							at={activity.at}
+							badge={activity.badge}
+							description={activity.description}
+							location={activity.location}
+							title={activity.title}
+							within={activity.within}
+						/>
+						{activity.within &&
+							activity.within.map((inner) =>
+								inner.type === "between" ? (
+									<ScheduledActivityBetween activity={inner} />
+								) : (
+									<ScheduledActivitySession activity={inner} />
+								),
+							)}
+					</>
+				))}
+			</section>
+		))
+	}
+</div>
+
+<style>
+	.schedule-heading {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarge);
+		font-weight: var(--fontWeightBold);
+		line-height: 1;
+		margin: 3.5rem 0;
+		text-align: center;
+	}
+</style>

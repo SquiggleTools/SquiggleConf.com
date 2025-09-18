@@ -1,18 +1,36 @@
 ---
-import ContentArea from "./ContentArea.astro";
+import { slugify } from "~/utils/id";
+import ContentArea, { ContentAreaWidth } from "./ContentArea.astro";
 import Heading from "./Heading.astro";
 
 interface Props {
 	class?: string;
-	heading: string;
+	heading?: string;
 	level?: "h2" | "h3";
+	width?: ContentAreaWidth;
 }
 
-const { class: className, level = "h2", ...rest } = Astro.props;
+const {
+	class: className,
+	level = "h2",
+	heading,
+	width = "thin",
+	...props
+} = Astro.props;
 ---
 
-<ContentArea class:list={["common-content", className]} width="thin" {...rest}>
-	<Heading level={level}>{Astro.props.heading}</Heading>
+<ContentArea
+	class:list={["common-content", className]}
+	width={width}
+	{...props}
+>
+	{
+		heading && (
+			<Heading id={slugify(heading)} level={level}>
+				{heading}
+			</Heading>
+		)
+	}
 	<slot />
 </ContentArea>
 

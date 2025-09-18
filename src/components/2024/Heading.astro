@@ -1,0 +1,34 @@
+---
+interface Props {
+	class?: string;
+	id?: string;
+	level: "h1" | "h2" | "h3" | "h4";
+	link?: boolean | string;
+}
+
+const { level: As, link, ...rest } = Astro.props;
+---
+
+<As class:list={[Astro.props.class, "heading"]} {...rest}>
+	{
+		link ? (
+			<a href={link === true ? `#${Astro.props.id}` : link}>
+				<slot />
+			</a>
+		) : (
+			<slot />
+		)
+	}
+</As>
+
+<style>
+	.heading {
+		font-family: var(--fontFamilyHeading);
+		letter-spacing: var(--letterSpacingHeading);
+		scroll-margin-top: 2rem;
+	}
+
+	.heading a {
+		text-decoration: none;
+	}
+</style>

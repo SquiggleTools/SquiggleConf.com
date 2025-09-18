@@ -1,0 +1,22 @@
+---
+import { talksBySlug } from "~/data/2024/notion-data";
+import { ActivitySessionData } from "~/data/2024/schedule";
+
+import ScheduledActivity from "./ScheduledActivity.astro";
+
+interface Props {
+	activity: ActivitySessionData;
+}
+
+const { activity } = Astro.props;
+const session = talksBySlug[activity.session];
+---
+
+<ScheduledActivity
+	at={activity.at}
+	description={[session.people.map((speaker) => speaker.name).join(" and ")]}
+	href={`/talks#${session.slug}`}
+	id={session.slug}
+	level="h4"
+	title={session.title}
+/>

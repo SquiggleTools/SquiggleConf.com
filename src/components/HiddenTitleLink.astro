@@ -1,0 +1,26 @@
+---
+import HiddenLink from "./HiddenLink.astro";
+
+interface Props {
+	as: "h2" | "h3";
+	id?: string;
+	class?: string;
+	href: string;
+}
+
+const { as: As, class: className, href, ...props } = Astro.props;
+---
+
+<As class:list={["hidden-title-link", className]} {...props}>
+	<HiddenLink href={href}>
+		<slot />
+	</HiddenLink>
+</As>
+
+<style>
+	.hidden-title-link {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarge);
+		font-weight: var(--fontWeightBold);
+	}
+</style>

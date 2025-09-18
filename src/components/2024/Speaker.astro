@@ -1,0 +1,147 @@
+---
+import { Person, TalkInfo } from "~/data/2024/notion-data";
+
+import BioLinks from "./BioLinks.astro";
+import SafeMarkdown from "../SafeMarkdown.astro";
+import SessionDiscord from "./SessionDiscord.astro";
+import SpeakerImage from "./SpeakerImage.astro";
+import SubtleCard from "./SubtleCard.astro";
+
+interface Props {
+	class?: string;
+	showBioLinkText?: boolean;
+	speaker: Person;
+	talks: TalkInfo[];
+}
+
+const {
+	class: className,
+	showBioLinkText,
+	speaker: { links, qualification, name, role, slug },
+	talks,
+	...rest
+} = Astro.props;
+---
+
+<li class:list={["speaker", className]} id={slug} {...rest}>
+	<SubtleCard>
+		<div class="speaker-top">
+			<div class="speaker-top-content">
+				<div class="speaker-image-container">
+					<SpeakerImage name={name} slug={slug} />
+				</div>
+				<div class="speaker-headline">
+					<div class="speaker-headline-text">
+						<a class="title" href={`#${slug}`}>{name}</a>
+						{
+							qualification && (
+								<div>
+									<SafeMarkdown of={qualification} />
+								</div>
+							)
+						}
+						{
+							role && (
+								<div>
+									<SafeMarkdown of={role} />
+								</div>
+							)
+						}
+					</div>
+					<ul class="speaker-talks">
+						{
+							talks.map((talk) => (
+								<li>
+									<a class="talk-title" href={`/talks#${talk.slug}`}>
+										{talk.title}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+			<slot name="top-right" />
+		</div>
+		<slot name="center" />
+		<div class="speaker-links">
+			<BioLinks
+				class="speaker-bio-links"
+				links={links}
+				name={name}
+				size="large"
+				showText={showBioLinkText}
+			/>
+			{
+				talks.length
+					? talks.map((talk) => <SessionDiscord discord={talk.slug} />)
+					: "MC 🎤"
+			}
+		</div>
+	</SubtleCard>
+</li>
+
+<style>
+	.speaker {
+		text-align: left;
+	}
+
+	.speaker-top {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.speaker-top-content {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		position: relative;
+		width: 100%;
+	}
+
+	.title {
+		display: block;
+		color: var(--colorForegroundBody);
+		font-size: var(--fontSizeH3);
+		font-weight: var(--fontWeightBold);
+		margin-bottom: 0.25rem;
+		text-decoration: none;
+	}
+
+	.title::after {
+		content: " 🔗";
+		opacity: 0;
+		transition: var(--transitionMedium) opacity;
+	}
+
+	:is(.speaker:hover, .speaker:focus-within) .title::after {
+		opacity: 1;
+	}
+
+	.speaker-headline-text {
+		margin-bottom: 0.5rem;
+	}
+
+	.speaker-talks {
+		list-style: none;
+		padding-top: 0.5rem;
+		padding-left: 0;
+		font-size: var(--fontSizeBody);
+	}
+
+	.talk-title {
+		font-size: var(--fontSizeH4);
+		text-decoration: none;
+	}
+
+	html.dark .bio {
+		line-height: 1.4;
+	}
+
+	.speaker-links {
+		justify-content: space-between;
+		display: flex;
+		flex-direction: row;
+		margin-top: 1rem;
+	}
+</style>

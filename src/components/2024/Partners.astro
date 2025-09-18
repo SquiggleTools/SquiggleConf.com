@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+
+import { partnersBySlug } from "~/data/2024/partners";
+
+import FullSection from "./FullSection.astro";
+import BodyText from "./BodyText.astro";
+import HeadingFlanked from "./HeadingFlanked.astro";
+---
+
+<FullSection>
+	<HeadingFlanked id="partners">Partners</HeadingFlanked>
+
+	<BodyText class="partners-blurb" size="large" width="lean">
+		Our partners are lovely friends in the industry who also work to better the
+		world around them.
+	</BodyText>
+
+	<div class="partners">
+		{
+			Object.values(partnersBySlug).map((partner) => (
+				<a
+					href={partner.href}
+					class="partner"
+					rel="noreferrer"
+					target="_blank"
+					title={partner.title}
+				>
+					<Image
+						alt=""
+						class="partner-logo partner-logo-dark"
+						src={partner.logos.dark}
+						width={
+							partner.logos.light.width > partner.logos.light.height * 2
+								? 250
+								: 150
+						}
+					/>
+					<Image
+						alt=""
+						class="partner-logo partner-logo-light"
+						src={partner.logos.light}
+						width={
+							partner.logos.light.width > partner.logos.light.height * 2
+								? 250
+								: 150
+						}
+					/>
+				</a>
+			))
+		}
+	</div>
+</FullSection>
+
+<style>
+	.partners {
+		align-items: center;
+		display: flex;
+		gap: 2rem 0;
+		flex-direction: column;
+		padding: 2rem;
+		justify-content: center;
+		margin: auto;
+		max-width: 90vw;
+	}
+
+	.partners-blurb {
+		margin: 0 auto;
+	}
+
+	.partner {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		min-height: 7rem;
+	}
+
+	.partner-logo {
+		transform: scale(0.9);
+		user-select: none;
+	}
+
+	html.dark .partner-logo-light,
+	html:not(.dark) .partner-logo-dark {
+		display: none;
+	}
+
+	@media (min-width: 490px) {
+		.partner-logo {
+			transform: none;
+		}
+	}
+
+	@media (min-width: 819px) {
+		.partners {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		.partners a {
+			padding: 1.5rem 0;
+		}
+
+		.partner {
+			max-width: calc(49% - 5rem);
+			width: 100%;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.partner {
+			max-width: calc(35% - 5rem);
+		}
+	}
+</style>

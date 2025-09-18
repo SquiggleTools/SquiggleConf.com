@@ -1,0 +1,45 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import Heading from "./Heading.astro";
+import ContentArea from "./ContentArea.astro";
+
+export interface ArticleListInfo {
+	title: string;
+	slug: string;
+	description: string;
+}
+
+interface Props {
+	articles: ArticleListInfo[];
+}
+---
+
+<ContentArea class="articles-list">
+	<ul>
+		{
+			Astro.props.articles.map((article) => (
+				<li>
+					<a href={article.slug}>
+						<Heading level="h2">{article.title}</Heading>
+					</a>
+					<BodyText>{article.description}</BodyText>
+				</li>
+			))
+		}
+	</ul>
+</ContentArea>
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		list-style-type: none;
+		padding: 5rem 0;
+	}
+
+	h2 {
+		font-size: var(--fontSizeMedium);
+		margin-bottom: 0.5rem;
+	}
+</style>

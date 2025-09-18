@@ -1,0 +1,67 @@
+---
+import BodyText from "./BodyText.astro";
+import ContentArea from "./ContentArea.astro";
+import SessionsSummary from "./SessionsSummary.astro";
+import ExplainerHeading from "./explainers/ExplainerHeading.astro";
+---
+
+<ContentArea class="speakers">
+	<ExplainerHeading heading="Sessions" />
+	<div id="sessions"></div>
+
+	<BodyText class="speakers-description">
+		Hear from practitioners of excellent web dev tooling: the devs who bring the
+		squigglies you know and love.
+	</BodyText>
+
+	<SessionsSummary class="speakers-sessions" />
+
+	<div class="after">
+		<BodyText class="after-text">
+			You’ll emerge with the best techniques to supercharge your projects —
+			whether you’re already a tooling wizard or trying to become one.
+		</BodyText>
+
+		<BodyText class="after-text">
+			See full details on <a href="/sessions">Sessions</a> and
+			<a href="/speakers">Speakers</a>.
+		</BodyText>
+	</div>
+</ContentArea>
+
+<style>
+	.speakers {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.speakers-description {
+		margin-bottom: 3rem;
+		max-width: 32rem;
+		text-align: center;
+	}
+
+	.sessions-button {
+		gap: 0.5rem;
+		margin: 1rem 0 3.5rem;
+	}
+
+	.after {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin: 4.5rem 0;
+		text-align: center;
+	}
+
+	.after-text {
+		max-width: 40rem;
+	}
+
+	@media (width >= 1117px) {
+		.sessions-button {
+			margin-top: 0;
+		}
+	}
+</style>

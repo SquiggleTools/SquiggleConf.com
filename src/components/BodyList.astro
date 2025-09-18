@@ -15,4 +15,9 @@ const { as: As, class: className, ...rest } = Astro.props;
 		flex-direction: column;
 		gap: 0.75rem;
 	}
+
+	.body-list :global(ul) {
+		padding-inline-start: 1rem;
+		font-size: 90%;
+	}
 </style>

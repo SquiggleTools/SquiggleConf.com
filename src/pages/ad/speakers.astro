@@ -1,0 +1,174 @@
+---
+import { Image } from "astro:assets";
+import DeepBlueSea from "~/components/2024/DeepBlueSea.astro";
+import Badge from "~/components/hero/Badge.astro";
+import Logo from "~/components/Logo.astro";
+import { mcs } from "~/data/mcs";
+import { speakersBySlug } from "~/data/speakers";
+import { currentYear } from "~/data/years";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+import "~/styles/2024.css";
+---
+
+<BaseLayout
+	description="A Boston conference for excellent web dev tooling."
+	title="Ad: Speakers"
+>
+	<DeepBlueSea>
+		<div class="ad">
+			<div class="top">
+				<div class="top-announcements">Meet this year's amazing speakers</div>
+				<div class="top-branding">
+					<Logo class="top-logo" year={currentYear} />
+					<div class="top-locators">
+						<div>September 18-19</div>
+						<div>Boston</div>
+					</div>
+				</div>
+			</div>
+
+			<ul class="speakers">
+				{
+					Object.values(speakersBySlug).map((speaker) => (
+						<li class="speaker">
+							<div class="speaker-image-container">
+								<Image
+									alt=""
+									class="speaker-image"
+									height={88}
+									src={speaker.image}
+									width={88}
+								/>
+							</div>
+							<div class="speaker-name">
+								<div>{speaker.name.slice(0, speaker.name.indexOf(" "))}</div>
+								<div>{speaker.name.slice(speaker.name.indexOf(" "))}</div>
+							</div>
+						</li>
+					))
+				}
+				{
+					mcs.map((mc) => (
+						<li class="speaker">
+							<div class="speaker-image-container">
+								<Image
+									alt=""
+									class="speaker-image"
+									height={90}
+									src={mc.image}
+									width={90}
+								/>
+							</div>
+							<div class="speaker-name">
+								<div>{mc.name.slice(0, mc.name.indexOf(" "))}</div>
+								<div>{mc.name.slice(mc.name.indexOf(" "))}</div>
+							</div>
+							<Badge class="mc-badge">MC</Badge>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</DeepBlueSea>
+</BaseLayout>
+
+<style>
+	.ad {
+		align-items: flex-start;
+		color: var(--colorAccentLight);
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		height: 100vh;
+		justify-content: space-evenly;
+		padding: 0 7.5rem;
+		text-align: left;
+		width: 100vw;
+	}
+
+	.top {
+		--topFontSize: 3.5rem;
+		align-items: baseline;
+		display: flex;
+		font-family: var(--fontFamilyLogo);
+		font-size: var(--topFontSize);
+		gap: 1.5rem;
+		justify-content: space-between;
+		margin-bottom: -1rem;
+		position: relative;
+		width: 100%;
+	}
+
+	.top-branding {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.top-locators {
+		color: var(--colorBlue2);
+		font-family: var(--fontFamilyHeading);
+		font-size: 2.5rem;
+		text-align: right;
+		transform: translateX(-2.5rem) translateY(1.25rem);
+	}
+
+	.top-logo {
+		/* Please don't just us, this is super hacky, we were short on time 🥲 */
+		transform: scale(2) translateX(-6rem);
+	}
+
+	.top-announcements {
+		font-size: 5rem;
+		font-weight: var(--fontWeightBold);
+		width: 50%;
+		margin-right: 2.5rem;
+		text-align: left;
+		transform: translateY(1rem);
+	}
+
+	.speakers {
+		--textShadowColor: #041a31;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 2.5rem 3.5rem;
+		position: relative;
+		text-shadow:
+			0 0 1rem var(--textShadowColor),
+			0 0 2rem var(--textShadowColor),
+			0 0 2.5rem var(--textShadowColor);
+		width: calc(100% + 5rem);
+	}
+
+	.speaker {
+		align-items: center;
+		display: flex;
+		gap: 1.25rem;
+		font-size: 2.25rem;
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightBold);
+		position: relative;
+		width: calc(25% - 5rem);
+	}
+
+	.speaker-image-container {
+		padding: 3px;
+		background: linear-gradient(
+			to bottom,
+			var(--colorBlueBright6) 0%,
+			var(--colorBlueBright4) 100%
+		);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.mc-badge {
+		margin: 0 -2.5em 2rem 1rem;
+		font-size: 1.5rem;
+		position: absolute;
+		left: -2.5rem;
+		bottom: -2.5rem;
+	}
+</style>

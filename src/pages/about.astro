@@ -1,12 +1,8 @@
 ---
-import carlVitullo from "~/assets/avatars/carl-vitullo.webp";
-import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import dimitriMitropoulos from "~/assets/avatars/dimitri-mitropoulos.jpg";
 import hadleyGarrett from "~/assets/avatars/hadley-garrett.jpg";
 import joshGoldberg from "~/assets/avatars/josh-goldberg.png";
 import katharineMitropoulos from "~/assets/avatars/katharine-mitropoulos.jpg";
-import mariahGoldberg from "~/assets/avatars/mariah-goldberg.webp";
-import sahanaJPrakash from "~/assets/avatars/sahana-j-prakash.jpg";
 import bostonTSClub from "~/assets/logos/boston-ts-club.svg";
 import michiganTypeScript from "~/assets/logos/michigan-typescript.png";
 import { Props as BioProps } from "~/components/Bio.astro";
@@ -16,6 +12,10 @@ import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
 import Bios from "~/components/Bios.astro";
+import Arrow from "~/components/Arrow.astro";
+import Button from "~/components/Button.astro";
+import { links } from "~/data/links";
+import Branding from "~/components/Branding.astro";
 
 const biosSquiggleTools: BioProps[] = [
 	{
@@ -40,23 +40,6 @@ const biosSquiggleTools: BioProps[] = [
 ];
 
 const biosStaff: BioProps[] = [
-	{
-		links: {
-			bluesky: "https://bsky.app/profile/vcarl.com",
-			github: "https://github.com/vcarl",
-			website: "https://vcarl.com",
-		},
-		name: "Carl Vitullo",
-		photo: carlVitullo,
-	},
-	{
-		links: {
-			github: "https://github.com/dmmulroy",
-			twitch: "https://twitch.tv/dmmulroy",
-		},
-		name: "Dillon Mulroy",
-		photo: dillonMulroy,
-	},
 	{
 		links: {
 			github: "https://github.com/dimitropoulos",
@@ -89,21 +72,6 @@ const biosStaff: BioProps[] = [
 		name: "Katharine Mitropoulos",
 		photo: katharineMitropoulos,
 	},
-	{
-		links: {
-			instagram: "https://www.instagram.com/mariahgoldburger",
-			linkedin: "https://www.linkedin.com/in/mariah-anne-cody",
-		},
-		name: "Mariah Goldberg",
-		photo: mariahGoldberg,
-	},
-	{
-		links: {
-			linkedin: "https://www.linkedin.com/in/sahanajprakash",
-		},
-		name: "Sahana J Prakash",
-		photo: sahanaJPrakash,
-	},
 ];
 
 const description = "The SquiggleConf mission and team";
@@ -127,35 +95,32 @@ const description = "The SquiggleConf mission and team";
 
 	<CommonContent heading="Branding">
 		<BodyText>
-			When referring to us in announcements, social media posts, or other broad
-			communications, please use <em>"SquiggleConf"</em>. That's
-			<em>"Squiggle"</em> and <em>"Conf"</em>, no space. We are not
-			<em>"Squiggle Conf"</em>,
-			<em>"Squiggle Conference"</em>, or
-			<em>"SquiggleCon"</em>.
-			<br />
-			<br />
-			Please include alt text with any images [<a
-				href="https://www.linkedin.com/help/linkedin/answer/a519856/adding-alternative-text-to-images-for-accessibility?lang=en"
-				>LinkedIn alt text help</a
-			>] and follow platform accessibility guidelines. We can only share posts
-			that are inclusive to all potential recipients.
-			<br />
-			<br />
-			We don't yet have branding assets finalized for 2025, but will post them here
-			once we do.
+			See <a href="/articles/media-guide">Articles &gt; Media Guide</a> for media
+			asset downloads and usage guidelines for the SquiggleConf brand.
 		</BodyText>
 	</CommonContent>
 
 	<CommonContent heading="Squiggle.Tools">
 		<BodyText>
-			SquiggleConf is a production of Squiggle.Tools, a nonprofit organization
-			(501(c)3 pending) offering ongoing learning opportunities that enable
+			SquiggleConf is a production of Squiggle.Tools, a 501(c)(3) nonprofit
+			organization offering ongoing learning opportunities that enable
 			participants to engage, learn, and advance their careers—regardless of
 			their background or resources.
 		</BodyText>
 
-		<Bios bios={biosSquiggleTools} />
+		<Bios class="about-bios" bios={biosSquiggleTools} />
+
+		<Button
+			as="a"
+			class="donate-button"
+			size="large"
+			variant="emphasized"
+			href={links.donate}
+			target="_blank"
+		>
+			Donate to the Squiggle.Tools 501(c)(3)
+			<Arrow />
+		</Button>
 	</CommonContent>
 
 	<CommonContent heading="Staff Members">
@@ -167,3 +132,15 @@ const description = "The SquiggleConf mission and team";
 		<Bios bios={biosStaff} />
 	</CommonContent>
 </PageLayout>
+
+<style>
+	.about-bios {
+		padding: 1rem 0;
+	}
+
+	.donate-button {
+		align-self: center;
+		display: flex;
+		gap: 0.5rem;
+	}
+</style>

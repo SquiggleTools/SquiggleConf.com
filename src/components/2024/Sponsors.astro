@@ -1,0 +1,34 @@
+---
+import { sponsorsByPlacement } from "~/data/2024/sponsors";
+import BodyText from "./BodyText.astro";
+import FullSection from "./FullSection.astro";
+import HeadingFlanked from "./HeadingFlanked.astro";
+import SponsorLogos from "./SponsorLogos.astro";
+---
+
+<FullSection>
+	<HeadingFlanked id="sponsors">Sponsors</HeadingFlanked>
+	<BodyText class="sponsors-blurb" size="large" width="lean">
+		The support of our generous sponsors help make SquiggleConf possible. They
+		have our sincere appreciation and thanks.
+	</BodyText>
+
+	<SponsorLogos sponsorGroups={sponsorsByPlacement} />
+</FullSection>
+
+<style>
+	.sponsors-blurb {
+		margin: auto;
+	}
+
+	@media (min-width: 819px) {
+		.sponsor-group a {
+			padding: 1.5rem 0;
+		}
+
+		.sponsor {
+			max-width: calc(49% - var(--sponsorSpacing));
+			width: 100%;
+		}
+	}
+</style>

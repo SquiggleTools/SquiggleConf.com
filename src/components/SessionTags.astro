@@ -1,0 +1,23 @@
+---
+import SessionTag from "./SessionTag.astro";
+
+interface Props {
+	class?: string;
+	tags: string[];
+}
+
+const { class: className, tags, ...props } = Astro.props;
+---
+
+<div class:list={["tags", className]} {...props}>
+	{tags.map((tag) => <SessionTag tag={tag} />)}
+</div>
+
+<style>
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0.5rem 0;
+		gap: 0.75rem;
+	}
+</style>

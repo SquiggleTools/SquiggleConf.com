@@ -1,0 +1,28 @@
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["badge", className]} {...props}>
+	<slot />
+</div>
+
+<style>
+	.badge {
+		border-radius: 4px;
+		background: var(--colorAccentMedium);
+		color: var(--colorForegroundAccent);
+		display: inline-block;
+		font-size: var(--fontSizeSmallest);
+		font-weight: var(--fontWeightBold);
+		padding: 0.35rem 0.5rem;
+		text-align: center;
+		user-select: none;
+	}
+
+	@media (min-width: 490px) {
+		.badge {
+			padding: 0.35rem 0.5rem;
+			margin: -0.5rem 0 -0.35rem;
+		}
+	}
+</style>

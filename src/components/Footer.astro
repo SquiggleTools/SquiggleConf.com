@@ -1,8 +1,20 @@
 ---
+import { currentYear, years } from "~/data/years";
 import ContentArea from "./ContentArea.astro";
 import InlineBlock from "./InlineBlock.astro";
 import Logo from "./Logo.astro";
 import Socials from "./Socials.astro";
+
+interface Props {
+	year: number;
+}
+
+const yearPairs =
+	Astro.props.year === currentYear
+		? years
+				.filter((year) => year !== currentYear)
+				.map((year) => [`/${year}`, year] as const)
+		: ([["/", 2025]] as const);
 ---
 
 <footer>
@@ -18,16 +30,22 @@ import Socials from "./Socials.astro";
 			<div class="footer-links">
 				<a href="/code-of-conduct">Code of Conduct</a>
 				<a href="https://shop.squiggle.tools" target="_blank">Shop</a>
-				<a href="https://2024.squiggleconf.com" target="_blank">2024</a>
+				{
+					yearPairs.map(([yearHref, yearText]) => (
+						<a href={yearHref} target="_blank">
+							{yearText}
+						</a>
+					))
+				}
 			</div>
-			<Socials />
+			<Socials class="footer-socials" />
 		</div>
 	</ContentArea>
 </footer>
 
 <style>
 	footer {
-		background: #0f2936;
+		background: var(--colorForeground);
 		color: var(--colorForegroundEmphasized);
 		font-family: var(--fontFamilyHeading);
 		padding: 3.5rem 0;
@@ -49,6 +67,7 @@ import Socials from "./Socials.astro";
 	}
 
 	.right {
+		color: var(--colorBlue1);
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
@@ -63,6 +82,18 @@ import Socials from "./Socials.astro";
 		text-decoration: none;
 	}
 
+	.footer-socials {
+		margin-top: 2rem;
+		max-width: 15rem;
+	}
+
+	@media (width >= 490px) {
+		.footer-socials {
+			margin-top: 0;
+			max-width: none;
+		}
+	}
+
 	@media (width >= 819px) {
 		.footer-content-area {
 			flex-direction: row;
@@ -70,7 +101,6 @@ import Socials from "./Socials.astro";
 
 		.right {
 			align-items: flex-end;
-			color: var(--colorWhiteIsh);
 		}
 	}
 </style>

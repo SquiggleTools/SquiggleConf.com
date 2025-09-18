@@ -1,0 +1,25 @@
+---
+import InlineBlock from "~/components/InlineBlock.astro";
+
+interface Props {
+	class?: string;
+	multiline?: boolean;
+}
+
+const { class: className, multiline, ...props } = Astro.props;
+---
+
+<div class:list={["hero-locators", className]} {...props}>
+	<InlineBlock class="date"
+		>September 18-19, 2025{multiline ? "" : " ·"}</InlineBlock
+	>
+	<InlineBlock class="location">Boston New England Aquarium</InlineBlock>
+</div>
+
+<style>
+	.hero-locators {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeMedium);
+	}
+</style>

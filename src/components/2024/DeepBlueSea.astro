@@ -1,0 +1,82 @@
+---
+import SquiggleWavesBackdrop from "./SquiggleWavesBackdrop.astro";
+
+interface Props {
+	class?: string;
+	light?: "bottom" | "contrast" | "top";
+	unmasked?: boolean;
+}
+
+const { class: className, light = "bottom", unmasked, ...rest } = Astro.props;
+---
+
+<div
+	class:list={["deep-blue-sea", `deep-blue-sea-${light}`, className]}
+	id="home"
+	{...rest}
+>
+	<slot name="toggle" />
+	<div class:list={["squiggles", unmasked && "squiggles-unmasked"]}>
+		<SquiggleWavesBackdrop />
+	</div>
+	<slot />
+	<slot name="waves" />
+</div>
+
+<style>
+	.deep-blue-sea {
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+	}
+
+	.deep-blue-sea-bottom,
+	.deep-blue-sea-top {
+		--squiggleMask: radial-gradient(
+			circle at center,
+			transparent 10%,
+			#000 80%
+		);
+	}
+
+	.deep-blue-sea-bottom {
+		/* background: linear-gradient(
+			180deg,
+			var(--colorHeroShadow) 0%,
+			#156283 100%
+		); */
+		background: linear-gradient(180deg, #051b32 0%, #031830 100%);
+	}
+
+	.deep-blue-sea-top {
+		background: linear-gradient(180deg, #104f69 0%, var(--colorHeroShadow) 90%);
+	}
+
+	.deep-blue-sea-contrast {
+		background: linear-gradient(180deg, #197297 0%, var(--colorHeroShadow) 40%);
+		--squiggleMask: linear-gradient(
+			to bottom,
+			#000 30%,
+			rgba(0, 0, 0, 0.15) 40%,
+			rgba(0, 0, 0, 0.25) 70%,
+			transparent 100%
+		);
+	}
+
+	.squiggles {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		user-select: none;
+	}
+
+	.squiggles:not(.squiggles-unmasked) {
+		mask-image: var(--squiggleMask);
+	}
+
+	.squiggle {
+		position: absolute;
+	}
+</style>

@@ -1,0 +1,9 @@
+---
+import SectionWrapper from "./SectionWrapper.astro";
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<SectionWrapper class={className} {...rest}>
+	<slot />
+</SectionWrapper>

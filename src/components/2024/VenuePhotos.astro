@@ -1,0 +1,59 @@
+---
+import simonsTheaterLecture from "~/assets/2024/photos/simons-theater-lecture.jpg";
+import BodyText from "./BodyText.astro";
+---
+
+<div class="venue-photos">
+	<div class="title"><div class="emoji">🎥</div>The Simons IMAX Theater</div>
+	<img
+		alt="Audience view of the Simons Theater showing a giant screen and people seated in the movie theater seats. Two people are sitting on Q&A seats in front of the screen."
+		class="venue-photo"
+		src={simonsTheaterLecture.src}
+	/>
+	<BodyText class="description">
+		Experience the tech conference with the most comfortable theater seats, the
+		best viewing angle, and the most spectacular IMAX screen.
+		<br />
+		Also a penguin exhibit next door.
+	</BodyText>
+</div>
+
+<style>
+	.title {
+		align-items: center;
+		display: flex;
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH3);
+		justify-content: center;
+		line-height: var(--lineHeightBody);
+	}
+
+	.emoji {
+		font-size: 3rem;
+		margin-right: 1rem;
+		user-select: none;
+	}
+
+	.venue-photos {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		max-width: var(--widthBodyFull);
+		text-align: center;
+		width: 100%;
+	}
+
+	.venue-photo {
+		width: 100%;
+		margin-top: 0.5rem;
+		max-width: calc(100vw - var(--widthBodyPadding));
+		border-radius: 0.5rem;
+		border: 1px solid var(--colorBackdropOff);
+		box-shadow: 0 0 0.125rem var(--colorTextShadow);
+		user-select: none;
+	}
+
+	.description {
+		margin-top: 1rem;
+	}
+</style>

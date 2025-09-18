@@ -1,0 +1,105 @@
+---
+import { type Person } from "~/data/2024/notion-data";
+
+import SafeMarkdown from "../SafeMarkdown.astro";
+import SpeakerImage from "./SpeakerImage.astro";
+
+export interface Props {
+	as: "div" | "li";
+	class?: string;
+	href?: string;
+	person: Person;
+}
+
+const {
+	as: As = "div",
+	class: className,
+	href,
+	person: speaker,
+	...rest
+} = Astro.props;
+---
+
+<As class:list={["speaker-small", className]} {...rest}>
+	<div class="speaker-image-container">
+		<SpeakerImage name={speaker.name} slug={speaker.slug} />
+	</div>
+	<div class="speaker-text">
+		{
+			href && (
+				<a class="speaker-text-links" href={href} aria-label={speaker.name} />
+			)
+		}
+		<div class="name">{speaker.name}</div>
+		<div class="details">
+			{
+				speaker.qualification && (
+					<div>
+						<SafeMarkdown of={speaker.qualification} />
+					</div>
+				)
+			}
+			{
+				speaker.role && (
+					<div>
+						<SafeMarkdown of={speaker.role} />
+					</div>
+				)
+			}
+		</div>
+		<slot />
+	</div>
+</As>
+
+<style>
+	.speaker-small {
+		position: relative;
+		align-items: center;
+		display: flex;
+		gap: 1rem;
+		text-align: left;
+	}
+
+	.speaker-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.speaker-text-links {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 0.5rem;
+		text-decoration: none;
+	}
+
+	.speaker-text-links::before {
+		bottom: calc(-1.1 * var(--cardPadding));
+		content: "";
+		left: calc(-1.1 * var(--cardPadding));
+		position: absolute;
+		right: calc(-1.1 * var(--cardPadding));
+		top: calc(-1.1 * var(--cardPadding));
+	}
+
+	.name {
+		color: var(--colorForegroundBody);
+		font-size: var(--fontSizeH4);
+		display: flex;
+		line-height: 0.9em;
+	}
+
+	.details {
+		font-size: var(--fontSizeBodySmaller);
+		font-weight: var(--fontWeightLight);
+		display: flex;
+		gap: 0.25rem;
+		position: relative;
+		flex-direction: column;
+	}
+
+	.speaker-bio-links {
+		z-index: 1;
+	}
+</style>

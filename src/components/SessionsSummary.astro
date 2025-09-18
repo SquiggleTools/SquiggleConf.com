@@ -1,0 +1,140 @@
+---
+import Heading from "~/components/Heading.astro";
+import { sessionsBySlug } from "~/data/sessions.js";
+import SpeakerImage from "./SpeakerImage.astro";
+import { publicSchedule } from "~/data/public";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+
+const days = publicSchedule
+	.map((day) =>
+		day.activities
+			.flatMap((activity) =>
+				activity.within
+					?.filter((inner) => inner.type === "session")
+					.map((inner) => ({ activity: inner, day })),
+			)
+			.filter((day) => !!day),
+	)
+	.filter((day) => day.length);
+---
+
+<ul class="days" {...props}>
+	{
+		days.map((day) => (
+			<li>
+				<ul class="day">
+					{day.map((data) => {
+						const session = sessionsBySlug[data.activity.session];
+						return (
+							<li class="session">
+								{session.speakers.map((speaker) => (
+									<SpeakerImage
+										class="speaker-image"
+										size="small"
+										src={speaker.image}
+									/>
+								))}
+								<a class="session-title" href={`/sessions#${session.slug}`}>
+									<Heading level="h3">{session.title}</Heading>
+								</a>
+								<div class="session-speaker">
+									{session.speakers.map((speaker) => (
+										<>
+											<span class="speaker-speaker">{speaker.name}</span>
+											<span class="speaker-qualification">
+												{session.qualification ?? speaker.qualification}
+											</span>
+										</>
+									))}
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.days {
+		list-style: none;
+	}
+
+	.day {
+		--sessions-padding: 0.75rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem var(--sessions-padding);
+		list-style-type: none;
+		margin-bottom: 1rem;
+	}
+
+	.session {
+		display: grid;
+		gap: 0 0.75rem;
+		font-family: var(--fontFamilyHeading);
+		grid-template-columns: auto 100%;
+		grid-template-rows: auto 100%;
+	}
+
+	.speaker-image {
+		margin-top: 0.35rem;
+		grid-area: 1 / 1 / 3 / 2;
+	}
+
+	.session-title {
+		grid-area: 1 / 2 / 2 / 3;
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightBold);
+		max-width: calc(90vw - 7rem);
+		text-decoration: none;
+	}
+
+	.session-speaker {
+		color: var(--colorForegroundEmphasized);
+		display: flex;
+		flex-direction: column;
+		grid-area: 2 / 2 / 3 / 3;
+	}
+
+	.speaker-speaker {
+		font-size: var(--fontSizeSmaller);
+	}
+
+	.speaker-qualification {
+		font-size: var(--fontSizeSmallest);
+		font-weight: var(--fontWeightLight);
+		max-width: calc(90vw - 7rem);
+	}
+
+	@media (width >= 1117px) {
+		.days {
+			display: flex;
+			gap: 10%;
+			margin-left: 2.5%;
+		}
+
+		.day {
+			align-items: center;
+			margin-bottom: 0;
+		}
+
+		.session {
+			gap: 0.25rem 0.75rem;
+			max-width: min(35rem, calc(100vw - 10rem));
+			width: 110%;
+		}
+
+		.session-speaker {
+			align-items: baseline;
+			gap: 0.25rem;
+			flex-direction: row;
+		}
+	}
+</style>

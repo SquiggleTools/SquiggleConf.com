@@ -9,12 +9,16 @@
 	--colorBlueBright4: #5aa2c2;
 	--colorBlueBright5: #1f7fab;
 	--colorBlueBright6: #196d9a;
+	--colorBlueDull3: #b0ccd7;
+	--colorBlueDull6: #58646b;
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
 	--colorRed1: #ffbfc2;
+	--colorSandDark: #2c2a29;
+	--colorSandLight: #f7f4f1;
 	--colorWhiteIsh: #eaeaf7;
 
 	--colorAccentDark: var(--colorBlue4);
@@ -26,6 +30,8 @@
 	--colorForeground: var(--colorBlue4);
 	--colorForegroundAccent: var(--colorWhiteIsh);
 	--colorForegroundEmphasized: var(--colorBlue5);
+	--colorSandBackground: var(--colorSandLight);
+	--colorSandForeground: var(--colorBlackIsh);
 	--colorUnhappy: var(--colorRed1);
 
 	--fontFamilyBody: "Inter Variable";
@@ -40,6 +46,7 @@
 	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
 	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
+	--fontSizeLogoLarge: clamp(2.5rem, 5.25vw, 3rem);
 
 	--fontWeightLight: 200;
 	--fontWeightMedium: 300;
@@ -51,10 +58,15 @@
 	--letterSpacingLogo: -1px;
 	--letterSpacingTight: -0.5px;
 
+	--lineHeightLarge: 1.25;
+
 	--sizeContentAreaEmphasized: 43rem;
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
+	--sizeScrollMarginTop: 2rem;
+
+	--transitionMedium: 280ms;
 
 	color-scheme: light;
 }
@@ -84,6 +96,8 @@ html.dark {
 	--colorForeground: var(--colorBlue4);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
+	--colorSandBackground: var(--colorBlue4);
+	--colorSandForeground: var(--colorSandLight);
 	--colorUnhappy: var(--colorRed1);
 }
 

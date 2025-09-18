@@ -1,0 +1,26 @@
+---
+import DeepBlueSea from "./DeepBlueSea.astro";
+---
+
+<DeepBlueSea>
+	<div class="hero-contents">
+		<slot />
+	</div>
+</DeepBlueSea>
+
+<style>
+	.hero-contents {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		padding: clamp(2.5rem, 7.5vw, 5rem) 2rem;
+		position: relative;
+	}
+
+	@media (min-width: 700px) {
+		.hero-contents {
+			padding-top: clamp(7rem, 10vw, 9rem);
+		}
+	}
+</style>

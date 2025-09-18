@@ -4,23 +4,23 @@ import Arrow from "~/components/Arrow.astro";
 import Button from "~/components/Button.astro";
 import ExplainersList from "~/components/explainers/ExplainersList.astro";
 import Hero from "~/components/hero/Hero.astro";
+import HeroLocators from "~/components/hero/HeroLocators.astro";
+import HeroTagline from "~/components/hero/HeroTagline.astro";
 import InlineBlock from "~/components/InlineBlock.astro";
-import LaunchSpeakers from "~/components/LaunchSpeakers.astro";
+import SessionsSummarySection from "~/components/SessionsSummarySection.astro";
 import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
+import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TextSquiggly from "~/components/TextSquiggly.astro";
 import { links } from "~/data/links";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
 <PageLayout description="A Boston conference for excellent web dev tooling.">
-	<Hero scrollNotice>
-		<div class="hero-locators">
-			<InlineBlock class="date">September 18-19, 2025 ·</InlineBlock>
-			<InlineBlock class="location">Boston New England Aquarium</InlineBlock>
-		</div>
+	<Hero scrollNotice tall>
+		<HeroLocators class="hero-locators" />
 
-		<div class="hero-tagline">
+		<HeroTagline>
 			SquiggleConf brings together the admirers, contributors, and maintainers
 			of the latest and greatest in
 			<InlineBlock>
@@ -29,7 +29,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<Fragment slot="after">.</Fragment>
 				</TextSquiggly>
 			</InlineBlock>
-		</div>
+		</HeroTagline>
 
 		<div class="hero-bottom">
 			<Button
@@ -40,31 +40,22 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				href={links.tickets}
 				target="_blank"
 			>
-				Get early bird tickets now!
+				Get your tickets now
 				<Arrow />
 			</Button>
 		</div>
 	</Hero>
-	<LaunchSpeakers />
+	<SessionsSummarySection />
 	<ExplainersList />
 	<AboutUs />
 	<Registration />
+	<SponsorsAndPartners />
 	<Newsletter />
 </PageLayout>
 
 <style>
 	.hero-locators {
-		color: var(--colorAccentMedium);
-		font-family: var(--fontFamilyHeading);
-		font-size: var(--fontSizeMedium);
 		padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(1.5rem, 5vw, 2.5rem);
-	}
-
-	.hero-tagline {
-		color: var(--colorBackground);
-		font-family: var(--fontFamilyHeading);
-		font-size: var(--fontSizeLarger);
-		font-weight: var(--fontWeightMedium);
 	}
 
 	.hero-bottom {

@@ -1,0 +1,162 @@
+---
+import BodyList from "~/components/BodyList.astro";
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"What it's like to start a new in-person tech conference, from a financial perspective.";
+
+const title = "SquiggleConf 2024 Financial Review";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea>
+		<BodyText class="body-text-top">
+			SquiggleConf is a community-oriented local conference run by
+			<a href="/about">Squiggle.Tools</a>, a registered 501(c)(3) nonprofit. Our
+			mission is to promote developer education and bring as wide a range of
+			people as possible into expert developer tooling circles. We don't have
+			any major corporate backing and pay for expenses out of our organizers'
+			personal budgets. We also believe in being open and transparent so others
+			can see what running a conference like ours entails.
+		</BodyText>
+	</ContentArea>
+
+	<CommonContent heading="Overview">
+		<BodyText>
+			SquiggleConf 2024 operated at a net loss of approximately $9,050:
+		</BodyText>
+		<BodyList as="ol">
+			<li><a href="#expenses">Expenses</a>: $57,350</li>
+			<li><a href="#revenue">Revenue</a>: $48,300</li>
+		</BodyList>
+		<BodyText>
+			We knew coming into SquiggleConf 2024 that conferences are expensive and
+			that most -especially first editions- almost always lose money. It's worth
+			it to us because we love the conference, love the people around it, and
+			believe we're making a positive impact on the web development tooling
+			community. 💙
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="Expenses">
+		<BodyText>
+			SquiggleConf 2024 incurred total expenses of approximately $57,350:
+		</BodyText>
+		<BodyList as="ol">
+			<li>Hotel accommodations: $15,750</li>
+			<li>Venue rentals: $12,000</li>
+			<li>Catering: $7,100</li>
+			<li>Transportation: $4,750</li>
+			<li>Marketing and promotions: $4,000</li>
+			<li>Speaker experience: $4,000</li>
+			<li>Post-conference event: $3,000</li>
+			<li>Photography: $2,750</li>
+			<li>On-site branding and rentals: $2,000</li>
+			<li>Merchandise: $2,000</li>
+		</BodyList>
+		<BodyText>
+			This was the smallest set of expenses we felt we could reasonably commit
+			to without drastically worsening the first edition of the conference. For
+			example, we saved an estimated $5,000 by only catering light breakfast and
+			snacks: attendees were given walking guides to the local Faneuil Hall
+			Marketplace for lunch. Selling t-shirts separately from tickets instead of
+			including them the way many conferences do saved us another $2,000 or so.
+			<br /><br />
+			We were also fortunate to be able to reduce costs by performing much of the
+			expensive A/V setup ourselves. The quotes we received from local vendors were
+			all well over $20,000 (some double, and one triple that). We instead used our
+			own equipment and staff, driven over from Michigan TypeScript.
+			<br /><br />
+			Still, tech conferences are <em>expensive</em>. Flying speakers in from
+			around the country and boarding them in a hotel for several nights comes
+			out to an average cost of more than $2,000 per non-local speaker. Renting
+			a venue for a day is also costly, especially factoring being locked into
+			on-site catering.
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="Revenue">
+		<BodyText>
+			SquiggleConf 2024 brought in total revenue of approximately $48,300:
+		</BodyText>
+		<BodyList as="ol">
+			<li>Tickets: $26,100</li>
+			<li>Sponsorships: $22,000</li>
+			<li>Merchandise: $200</li>
+		</BodyList>
+		<BodyText>
+			Traditional conference wisdom suggests you should plan your budget around
+			the expected income from ticket sales, then use sponsorships as a safety
+			net. Post-COVID-lockdown conferences like us find it difficult to make
+			that happen. We've heard from others that expecting roughly a third of
+			revenue to come from sponsorships is common.
+			<br /><br />
+			Ticket sale revenue was somewhat evenly split between regular tickets and those
+			with early bird or other discount codes:
+		</BodyText>
+		<BodyList as="ol">
+			<li>Regular: $13,950</li>
+			<li>Early bird: $3,100</li>
+			<li>Other discounts: $9,050</li>
+		</BodyList>
+		<BodyText>
+			Roughly 70% of tickets came through the last month before the conference.
+			That was terrifying. Other conference organizers warned us about this too,
+			but that only partially alleviated our worry during the earlier months.
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="Closing Thoughts">
+		<BodyText>
+			We're expecting that future iterations of SquiggleConf will be slightly
+			less expensive per day. Some purchased items can be used year-over-year
+			and we've also learned which costs can be avoided if needed. We project
+			that SquiggleConf 2025, which will be 2 days instead of 1, will total
+			roughly $100,000-$110,000 in expenses.
+			<br /><br />
+			We also believe we'll be better positioned to make up money as we grow the
+			conference organizing team and gain credibility from past successful events.
+			We hope to bring on team members who can specialize in particularly valuable
+			tasks such as corporate sponsorships and ticket sales.
+			<br /><br />
+			Our goal is to stabilize the conference organizing flow in 2025, break even
+			in 2026, and start to make back our money in 2027 onwards. We're committed
+			to running at least 2025 and 2026 iterations of SquiggleConf.
+		</BodyText>
+
+		<aside>
+			Want to help with SquiggleConf? Yes please! Apply on
+			<a href="https://volunteer.squiggleconf.com" target="_blank"
+				>SquiggleConf Volunteering</a
+			>.
+		</aside>
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 0;
+		max-width: 49rem;
+	}
+
+	ol {
+		padding-left: 1.5rem;
+	}
+
+	aside {
+		border-left: 3px solid var(--colorAccentMedium);
+		margin-top: 3rem;
+		padding: 0.5rem 0 0.5rem 1rem;
+	}
+</style>

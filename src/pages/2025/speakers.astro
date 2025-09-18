@@ -1,0 +1,40 @@
+---
+import CommonContent from "~/components/CommonContent.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import Registration from "~/components/Registration.astro";
+import Speaker from "~/components/Speaker.astro";
+import { speakersBySlug } from "~/data/speakers";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description = "The presenters talking at SquiggleConf 2025.";
+---
+
+<PageLayout description={description} title="Speakers">
+	<Hero>
+		<HeroContentsStandard heading="Speakers" squiggly="wide">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<CommonContent width="thin">
+		<ul class="speakers">
+			{
+				Object.values(speakersBySlug).map((speaker) => (
+					<Speaker speaker={speaker} class="speaker" />
+				))
+			}
+		</ul>
+	</CommonContent>
+
+	<Registration />
+</PageLayout>
+
+<style>
+	.speakers {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-left: 0;
+	}
+</style>

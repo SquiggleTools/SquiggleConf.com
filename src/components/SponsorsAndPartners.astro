@@ -1,0 +1,126 @@
+---
+import { links } from "~/data/links";
+import { sponsorsByPlacement } from "~/data/sponsors";
+import BodyText from "./BodyText.astro";
+import Button from "./Button.astro";
+import LogoGroups from "./LogoGroups.astro";
+import ExplainerHeading from "./explainers/ExplainerHeading.astro";
+import { partnersByPlacement } from "~/data/partners";
+---
+
+<div class="sponsors-and-partners">
+	<div class="sponsors">
+		<ExplainerHeading heading="Sponsors" />
+		<BodyText class="caption-text">
+			The support of our generous sponsors help make SquiggleConf possible. They
+			have our sincere appreciation and thanks.
+		</BodyText>
+		<LogoGroups
+			class="sponsors-and-partners-groups"
+			groups={sponsorsByPlacement}
+		/>
+		<div class="pitch-area">
+			<BodyText class="caption-text caption-text-bottom">
+				Interested in having your logo here and sponsoring SquiggleConf? We'd
+				love to work with you.
+				<br />
+			</BodyText>
+			<Button
+				as="a"
+				size="large"
+				variant="emphasized"
+				href={links.sponsor}
+				target="_blank"
+			>
+				Sponsorship Prospectus
+			</Button>
+		</div>
+	</div>
+
+	<div class="partners">
+		<ExplainerHeading heading="Partners" />
+		<BodyText class="caption-text">
+			Our partners are lovely friends in the industry who also work to better
+			the world around them.
+		</BodyText>
+		<LogoGroups
+			class="sponsors-and-partners-groups"
+			groups={partnersByPlacement}
+		/>
+		<div class="pitch-area">
+			<BodyText class="caption-text caption-text-bottom">
+				Are you a local company or organization to Boston and want to
+				cross-promote and partner with us? Let's get something going!
+				<br />
+			</BodyText>
+			<Button
+				as="a"
+				size="large"
+				variant="emphasized"
+				href={links.partner}
+				target="_blank"
+			>
+				Partnerships Prospectus
+			</Button>
+		</div>
+	</div>
+</div>
+
+<style>
+	.sponsors-and-partners {
+		--areaPaddingBottom: 3rem;
+		display: grid;
+		text-align: center;
+	}
+
+	.partners {
+		background: var(--colorBlueBright3);
+		padding-bottom: var(--areaPaddingBottom);
+	}
+
+	.caption-text {
+		padding: 0 2rem;
+		max-width: 42rem;
+		margin: 0 auto;
+	}
+
+	.caption-text-bottom {
+		margin-top: 1rem;
+	}
+
+	.sponsors-and-partners-groups {
+		padding-top: 2rem;
+	}
+
+	.pitch-area {
+		flex-grow: 1;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin: 1.5rem 0 var(--areaPaddingBottom);
+		width: 100%;
+	}
+
+	@media (width >= 819px) {
+		.sponsors {
+			grid-area: 1 / 1;
+		}
+
+		.partners {
+			grid-area: 1 / 2;
+		}
+
+		.sponsors,
+		.partners {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.sponsors-and-partners-groups {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>

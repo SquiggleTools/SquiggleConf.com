@@ -1,0 +1,177 @@
+---
+import { type TalkInfo } from "~/data/2024/notion-data";
+
+import SafeMarkdown from "../SafeMarkdown.astro";
+import SessionDiscord from "./SessionDiscord.astro";
+import SpeakerSmall from "./SpeakerSmall.astro";
+import SubtleCard from "./SubtleCard.astro";
+import SessionTags from "./SessionTags.astro";
+import { days } from "~/data/2024/schedule";
+
+interface Props {
+	class?: string;
+	talk: TalkInfo;
+}
+
+const {
+	class: className,
+	talk: { title, people, tags, description, slug },
+	...rest
+} = Astro.props;
+
+const schedule = days
+	.flatMap((day) =>
+		day.activities.flatMap((activity) =>
+			activity.within
+				?.filter((inner) => inner.type === "session" && inner.session === slug)
+				.map((inner) => ({ activity: inner, day })),
+		),
+	)
+	.find((x) => !!x?.activity)!;
+---
+
+<li class:list={["talk", className]} id={slug} {...rest}>
+	<SubtleCard>
+		<div class="talk-top">
+			<a class="title" href={`#${slug}`}>{title}</a>
+			<div class="talk-description">
+				<SafeMarkdown of={description} />
+			</div>
+			<SessionTags tags={tags} />
+		</div>
+
+		<div class="talk-details">
+			<ul class="speakers">
+				{
+					people.map((person) => (
+						<SpeakerSmall
+							as="li"
+							href={`/speakers#${person.slug}`}
+							person={person}
+						/>
+					))
+				}
+			</ul>
+			<div class="talk-metadata">
+				<SessionDiscord discord={slug} />
+				<a class="talk-time" href={`/2024/schedule#${slug}`}>
+					{schedule.activity.at}
+					{schedule.day.title}
+				</a>
+			</div>
+		</div>
+		<div class="talk-details-links"></div>
+	</SubtleCard>
+</li>
+
+<style>
+	.talk {
+		--fontSize: var(--fontSizeBodySmaller);
+		--imageSize: clamp(3.5rem, 10vw, 6rem);
+		display: flex;
+		flex-basis: 0;
+		flex-direction: column;
+		font-family: var(--fontFamilyBody);
+		justify-content: space-between;
+		scroll-margin-top: 1rem;
+	}
+
+	.talk-top {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.title {
+		color: var(--colorForegroundBody);
+		font-size: var(--fontSizeH3);
+		font-weight: var(--fontWeightBold);
+		text-align: left;
+		margin-bottom: 0.5rem;
+		text-decoration: none;
+	}
+
+	.title::after {
+		content: " 🔗";
+		opacity: 0;
+		transition: var(--transitionMedium) opacity;
+	}
+
+	:is(.talk:hover, .talk:focus-within) .title::after {
+		opacity: 1;
+	}
+
+	.talk-description {
+		color: var(--colorForegroundBody);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		line-height: 1.25;
+		overflow: hidden;
+		text-align: left;
+		transition: var(--transitionMedium) line-height;
+	}
+
+	html.dark .talk-description {
+		line-height: 1.4;
+	}
+
+	.talk-details {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.talk-details-links {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.speakers {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		font-family: var(--fontFamilyBody);
+		gap: 2rem;
+		margin-top: 1.5rem;
+		padding-left: 0;
+	}
+
+	.talk-metadata {
+		color: var(--colorDull);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.talk-time {
+		font-size: var(--fontSizeBody);
+	}
+
+	p {
+		margin: 1rem !important;
+	}
+
+	@media (min-width: 700px) {
+		.talk-details {
+			align-items: flex-end;
+			flex-direction: row;
+		}
+	}
+
+	@media (min-width: 1017px) {
+		.talk {
+			max-width: var(--widthBodyFull);
+		}
+
+		.talk-metadata {
+			align-items: flex-end;
+			padding: 0.25rem;
+			text-align: right;
+		}
+	}
+</style>

@@ -1,0 +1,67 @@
+---
+import { talks } from "~/data/2024/talks";
+
+import BodyText from "./BodyText.astro";
+import CardsList from "./CardsList.astro";
+import FullSection from "./FullSection.astro";
+import SpeakerSmall from "./SpeakerSmall.astro";
+import SubtleCard from "./SubtleCard.astro";
+import TagLine from "./TagLine.astro";
+import BioLinks from "./BioLinks.astro";
+---
+
+<FullSection>
+	<TagLine />
+	<br />
+	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
+		See full details on <a href="/2024/sessions">Sessions</a> and <a
+			href="/2024/speakers">Speakers</a
+		>.
+	</BodyText>
+
+	<CardsList class="speakers-list">
+		{
+			talks.flatMap((talk) =>
+				talk.people.map((person) => (
+					<SubtleCard class="speaker-card" renderAs="li">
+						<SpeakerSmall href={`/2024/sessions#${talk.slug}`} person={person}>
+							<BioLinks
+								class="speaker-bio-links"
+								name={person.name}
+								links={person.links}
+							/>
+						</SpeakerSmall>
+					</SubtleCard>
+				)),
+			)
+		}
+	</CardsList>
+
+	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
+		You’ll emerge with the best techniques to supercharge your projects —
+		whether you’re already a tooling wizard or trying to become one.
+		<br />
+		<br />
+		See full details on <a href="/2024/sessions">Sessions</a> and <a
+			href="/2024/speakers">Speakers</a
+		>.
+	</BodyText>
+</FullSection>
+
+<style>
+	.speakers-body-text {
+		margin: auto;
+	}
+
+	@media (min-width: 700px) {
+		.speaker-card {
+			width: 47%;
+		}
+	}
+
+	@media (min-width: 1017px) {
+		.speaker-card {
+			width: 31%;
+		}
+	}
+</style>

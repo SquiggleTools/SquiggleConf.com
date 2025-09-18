@@ -1,0 +1,323 @@
+---
+import BodyList from "~/components/BodyList.astro";
+import BodyText from "~/components/BodyText.astro";
+import CommonContent from "~/components/CommonContent.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import FAQSections from "~/components/FAQSections.astro";
+import Heading from "~/components/Heading.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import ScheduledActivities from "~/components/ScheduledActivities.astro";
+import { links } from "~/data/links";
+import { speakerSchedule } from "~/data/speaking.js";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"All the information you'd need to know as a SquiggleConf 2025 speaker.";
+
+const title = "Speaker Guide";
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea width="thin">
+		<BodyText class="body-text-top">
+			This page has the high-level information you need to know as a speaker at
+			SquiggleConf 2025.
+		</BodyText>
+
+		<BodyText>That includes:</BodyText>
+
+		<BodyList as="ul">
+			<li>
+				<a href="#speaker-expectations">Speaker Expectations</a>: what we need
+				from you before and during
+			</li>
+			<li>
+				<a href="#speaker-schedule">Speaker Schedule</a>: the schedule of
+				activities common to all speakers
+			</li>
+			<li>
+				<a href="#talk">Talk</a>: what will happen around your talk on its day
+			</li>
+			<li>
+				<a href="#faqs">FAQs</a>: all other common questions you might have
+			</li>
+		</BodyList>
+
+		<BodyText>
+			Every speaker will be given access to a private "hotline" channel in the
+			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
+			Please reach out to us there if you have any questions.
+		</BodyText>
+	</ContentArea>
+
+	<CommonContent heading="Speaker Expectations">
+		<BodyText> This is what we'll need from you as a speaker: </BodyText>
+
+		<BodyList as="ul">
+			<li>
+				Your information:
+				<ul>
+					<li>Preferred first and last name for announcements</li>
+					<li>Bio: short (2-3 sentences) and full (1-2 paragraphs)</li>
+					<li>Photo: at least 512x512px</li>
+					<li>
+						Links on social media we share (Bluesky, Mastodon, LinkedIn, X,
+						YouTube, etc.)
+					</li>
+					<li>Specifics on any accessibility, dietary, or other needs</li>
+				</ul>
+			</li>
+			<li>Giving a private talk dry run 2 weeks prior to the conference</li>
+			<li>
+				Joining the <a href={links.discord}>SquiggleConf Discord</a> and responding
+				to questions during the conference
+			</li>
+		</BodyList>
+	</CommonContent>
+
+	<CommonContent heading="Speaker Schedule">
+		<BodyText>
+			Speakers are invited to all public conference events listed on <a
+				href="/schedule">Schedule</a
+			>, though are only required to attend events during their assigned hours.
+			This list also shows the private event you have access to.
+		</BodyText>
+
+		<ScheduledActivities days={speakerSchedule} />
+	</CommonContent>
+
+	<CommonContent heading="Talk">
+		<BodyText> This is what will happen around your talk on its day. </BodyText>
+
+		<BodyList as="ol">
+			<li>20 minutes prior: we'll have a designated space for you to wait</li>
+			<li>10 minutes prior: an A/V volunteer will place a microphone on you</li>
+			<li>
+				5 minutes prior: you'll walk onto the stage and set your laptop up
+			</li>
+			<li>You'll do a wonderful job on the talk, we believe in you!</li>
+			<li>
+				An MC will walk you to the other side of the stage and run a live Q&A
+				with you
+			</li>
+		</BodyList>
+
+		<BodyText>
+			We'll have a dedicated channel set up for you in Discord where attendees
+			can ask you questions during the conference.
+		</BodyText>
+
+		<Heading class="sub-heading" level="h3">Audience Personas</Heading>
+
+		<BodyText>
+			We believe most attendees align to at least one of the following three
+			personas:
+		</BodyText>
+
+		<ul class="sub-list">
+			<li>
+				<strong>Developer</strong>: They work on a standard software team for
+				web development. They use web dev tooling every day and might not be
+				experts, but are excited to learn more how to use their tools more
+				effectively. They may even have time to improve their teams' setups
+				after the conference.
+			</li>
+			<li>
+				<strong>Enthusiast</strong>: They appreciate good dev tooling for the
+				sake of it and try to actively keep up with the latest trends. They tend
+				to read blog posts and deep dives. When allowed, they make sure their
+				projects are using comprehensive tooling configured the way they like
+				it.
+			</li>
+			<li>
+				<strong>Maker</strong>: This person works on or around the tools
+				themselves. Much of the common, popular content in conferences in their
+				area of expertise doesn't appeal to them because they already know it
+				deeply. But they of course recognize it's important to both learn and
+				share.
+			</li>
+		</ul>
+
+		<BodyText>
+			We recommend trying to position your talks to appeal to at least two, if
+			not all three of those personas.
+		</BodyText>
+	</CommonContent>
+
+	<CommonContent heading="FAQs">
+		<BodyText>
+			These are the most common questions we get from speakers. If you have any
+			other questions, please reach out to us in your hotline channel.
+		</BodyText>
+
+		<FAQSections
+			sections={[
+				{
+					pairs: [
+						[
+							"Can I extend my hotel stay?",
+							"Yes, but you'll have to talk with the hotel on your own. Let us know if you need help with that.",
+						],
+						[
+							"Can my +1 stay in my hotel room?",
+							"Of course! They'll also receive a free ticket to the conference. Note that we don't cover other +1 costs such as travel.",
+						],
+						[
+							"How do I book my hotel room?",
+							"Be sure to <strong>call</strong> the Harborside Inn if you want to book. Ask us for a discount code to book in the SquiggleConf block.",
+						],
+						[
+							"How far is the hotel from the venue?",
+							"About a [2 minute walk by foot towards the water](https://www.google.com/maps/dir/Harborside+Inn,+185+State+St,+Boston,+MA+02109/Simons+Theater,+Central+Wharf,+Boston,+MA/@42.3589577,-71.0541134,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x89e370864b81aa3b:0x29c5617b4f529e85!2m2!1d-71.0528824!2d42.3592384!1m5!1m1!1s0x89e3708790db7415:0xa9fbb8bf1c5e8e24!2m2!1d-71.0501946!2d42.3587791!3e0?entry=ttu&g_ep=EgoyMDI1MDUwNy4wIKXMDSoASAFQAw%3D%3D).",
+						],
+						[
+							"Where can I pick up toiletries nearby?",
+							"There is a [7-Eleven next to the hotel](https://www.google.com/maps/place/7-Eleven/@42.3592344,-71.0531519,21z/data=!3m1!5s0x89e3708d5d9bc1dd:0xa146d9e96b0d5416!4m6!3m5!1s0x89e3715588fa5d0d:0xb512a89a39096040!8m2!3d42.359188!4d-71.05307!16s%2Fg%2F11g232jr3m?entry=ttu&g_ep=EgoyMDI1MDUwNy4wIKXMDSoASAFQAw%3D%3D) and a [Walgreens pharmacy a 10 minute walk away](https://www.google.com/maps/dir/Harborside+Inn,+State+Street,+Boston,+MA/Walgreens,+24+School+St,+Boston,+MA+02108/@42.3583403,-71.0571551,18z/data=!3m2!4b1!5s0x89e3708483c2dfa3:0xb1c2f6e51d82959!4m14!4m13!1m5!1m1!1s0x89e370864b81aa3b:0x29c5617b4f529e85!2m2!1d-71.0528824!2d42.3592384!1m5!1m1!1s0x89e370848161a7e5:0x4e2871dbbea4c936!2m2!1d-71.0589654!2d42.3572756!3e2?entry=ttu&g_ep=EgoyMDI1MDUwNy4wIKXMDSoASAFQAw%3D%3D).",
+						],
+						[
+							"What rates can I expect if my employer is sending me?",
+							"We have a discount code we can share with you. You'll need to provide it to the hotel over the phone. Ask us in your speaker hotline channel.",
+						],
+					],
+					title: "Accommodations",
+				},
+				{
+					pairs: [
+						[
+							"Will I be photographed?",
+							"Yes, we'll have a dedicated event photographer during most of the conference.",
+						],
+						[
+							"Will my talk be recorded?",
+							"Yes, we will edit and release on YouTube after the conference for free.",
+						],
+						[
+							"Will YouTube talk have captions generated by AI?",
+							"No, we manually caption our YouTube videos to make sure they're correct.",
+						],
+					],
+					title: "Photos & Videos",
+				},
+				{
+					pairs: [
+						[
+							"Can I schedule earlier and/or multiple dry runs than just the week before?",
+							"Of course! Schedule as many as you need. Let us know if there's anything else can do to help you prepare.",
+						],
+						[
+							"What should I do if I need something else?",
+							"You can ask us anything in your speaker hotline channel.",
+						],
+					],
+					title: "Preparation",
+				},
+				{
+					pairs: [
+						[
+							"Can SquiggleConf cover my accommodations and/or travel?",
+							"Yes, though keep in mind we are a local community event and do not have a large budget. If you work for a company, we ask that you please check whether your employer can pay for you if possible.",
+						],
+						[
+							"If SquiggleConf is covering my travel, how will I be reimbursed?",
+							"Send us your receipts in your speaker hotline channel ahead of the conference, and we'll have a check for you in your room at the hotel.",
+						],
+						[
+							"I'm international and can't take U.S. checks, is there another way?",
+							"Yes, we can arrange a wire transfer or other methods of payment. Please let us know in your speaker hotline channel.",
+						],
+						["Will there be WiFi?", "Yes, the venue will have WiFi."],
+					],
+					title: "Reimbursements",
+				},
+				{
+					pairs: [
+						[
+							"Will there be a confidence monitor and/or stage timer?",
+							"Yes. Our provided setup will have a confidence monitor showing both your slide notes and what attendees see, as well as the number of minutes you have left.",
+						],
+						[
+							"Will there be a speaker room?",
+							"The venue does not have one. We can get you a small private space if you need it, or the hotel is a 2 minute walk away.",
+						],
+						[
+							"Will there be water or other snacks for speakers?",
+							"We'll have small snacks, water, and common medicines available for speakers.",
+						],
+						["Will there be WiFi?", "Yes, the venue will have WiFi."],
+					],
+					title: "Talks",
+				},
+				{
+					pairs: [
+						[
+							"Can I have a +1 ticket?",
+							"Of course! Let us know who you'll be bringing with you.",
+						],
+						[
+							"Can I have a discount code for my friends?",
+							"Of course! Ask us for one in your speaker hotline channel.",
+						],
+					],
+					title: "Tickets",
+				},
+				{
+					pairs: [
+						[
+							"Can I come a day early to offset jetlag?",
+							"We're expecting speakers to arrive the day before the conference and sleep at the hotel the night before. We can also have you speak on the second day if you prefer. We don't have the budget to cover an additional early day, but you can always arrange that with the hotel on your own.",
+						],
+						[
+							"Do I need to bring my own laptop?",
+							"No, we'll have a dedicated stage speaker laptop with a clicker. Send us your slides ahead of time.",
+						],
+						[
+							"Do I need to register my ticket?",
+							"No need, you're in the system. Any +1 you want to bring will need to register, though. Ask in your hotline channel for an invite code to get them in for free.",
+						],
+						[
+							"How do I get to and from the airport?",
+							"We'll have a volunteer drive you to and from the airport. Please let us know your flight details as soon as you know them; we'll coordinate with you.",
+						],
+						[
+							"I have a Visa application, can you help with that?",
+							"Yes, we can write you a letter of invitation to help with your Visa application. Please let us know as soon as possible.",
+						],
+						[
+							"I'm concerned about border crossing difficulties, what should I do?",
+							"Please reach out to us as soon as possible. We can help you with a letter of invitation, public listing of your name and talk on the website, and other documentation. This has not been an issue for us or companies we've worked with in the past, and we will do everything we can to make sure it does not in the future.",
+						],
+					],
+					title: "Travel",
+				},
+			]}
+		/>
+	</CommonContent>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 1.5rem;
+	}
+
+	.sub-heading {
+		font-size: var(--fontSizeMedium);
+		text-align: center;
+		margin: 3rem 0 1rem;
+	}
+
+	.sub-list {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		line-height: 1.35;
+		font-weight: var(--fontWeightMedium);
+		margin: 1rem 1.5rem;
+	}
+</style>

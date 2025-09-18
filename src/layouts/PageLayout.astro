@@ -5,15 +5,18 @@ import BodyArea from "~/components/BodyArea.astro";
 import Footer from "~/components/Footer.astro";
 import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "~/components/ThemeToggle.astro";
+import { currentYear } from "~/data/years";
 
 type Props = HeadProps;
+
+const year = Astro.props.year ?? currentYear;
 ---
 
-<BaseLayout {...Astro.props}>
-	<Header />
+<BaseLayout {...Astro.props} year={year}>
+	<Header year={year} />
 	<BodyArea>
 		<slot />
 		<ThemeToggle />
 	</BodyArea>
-	<Footer />
+	<Footer year={year} />
 </BaseLayout>

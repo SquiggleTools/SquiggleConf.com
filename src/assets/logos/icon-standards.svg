@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="240px" height="240px" fill="#e8eaed">
+  <defs>
+    <g id="person-left">
+      <path
+        d="M0-80v-63q0-44 44.5-70.5T160-240q30 0 56 8t52 34q20 26 20 58v63H0Z M160-280q-33 0-56.5-23.5T80-360q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-280Z" />
+    </g>
+    <g id="person-right" transform="scale(-1,1) translate(-960,0)">
+      <use href="#person-left" />
+    </g>
+    <g id="people">
+      <use href="#person-left" />
+      <use href="#person-right" />
+    </g>
+    <mask id="mask-doc">
+      <rect x="0" y="-960" width="100%" height="100%" fill="white" />
+      <use href="#people" fill="black" stroke="black" stroke-width="140" />
+    </mask>
+  </defs>
+  <!-- Left person -->
+
+  <use href="#person-left" />
+  <use href="#person-right" />
+  <!-- Document with visible masking gap -->
+  <g mask="url(#mask-doc)">
+    <path transform="translate(98,-120) scale(0.8)"
+      d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520Z" />
+  </g>
+</svg>

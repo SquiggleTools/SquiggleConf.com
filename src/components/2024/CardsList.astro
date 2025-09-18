@@ -1,0 +1,42 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<ul class:list={["cards-list", className]} {...rest}>
+	<slot />
+</ul>
+
+<style>
+	.cards-list {
+		display: flex;
+		flex-direction: column;
+		font-family: var(--fontFamilyBody);
+		gap: 2rem;
+		margin: auto;
+		max-width: 30rem;
+		justify-content: center;
+		padding: 2rem var(--widthBodyPadding);
+	}
+
+	@media (min-width: 700px) {
+		.cards-list {
+			align-items: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin: auto;
+			max-width: calc(var(--widthBodyLean) + 4rem);
+		}
+	}
+
+	@media (min-width: 1017px) {
+		.cards-list {
+			padding: 2rem 0;
+			max-width: calc(var(--widthBodyFull) + 2rem);
+		}
+	}
+</style>

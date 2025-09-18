@@ -4,12 +4,13 @@ import Bio, { Props as BioProps } from "~/components/Bio.astro";
 interface Props {
 	bios: BioProps[];
 	size?: "medium" | "large";
+	class?: string;
 }
 
-const { bios, size = "medium" } = Astro.props;
+const { class: className, bios, size = "medium", ...rest } = Astro.props;
 ---
 
-<ul class:list={["bios", `bios-${size}`]}>
+<ul class:list={["bios", `bios-${size}`, className]} {...rest}>
 	{bios.map((bio) => <Bio {...bio} size={size} />)}
 </ul>
 

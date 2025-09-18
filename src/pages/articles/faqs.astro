@@ -1,0 +1,153 @@
+---
+import { markdown } from "@astropub/md";
+
+import BodyText from "~/components/BodyText.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import FAQSection from "~/components/FAQSection.astro";
+import FAQSections from "~/components/FAQSections.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import { links } from "~/data/links";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"Common questions and answers around attending, speaking at, and sponsoring SquiggleConf 2025.";
+
+const title = "Frequently Asked Questions";
+
+type FAQSection = [string, [string, string][]];
+
+const faqs: FAQSection[] = [
+	[
+		"General",
+		[
+			["How big is SquiggleConf?", "We're targeting 200 total attendees."],
+			[
+				"What is the dress code for SquiggleConf?",
+				"Casual. T-shirt and jeans, optionally with a hoodie, is fine for all genders.",
+			],
+			[
+				"Will there be alcohol at SquiggleConf?",
+				"There will be no alcohol provided during any SquiggleConf events, including talks, volunteering, and social events.",
+			],
+		],
+	],
+	[
+		"Schedule",
+		[
+			[
+				"What events are you planning?",
+				`
+See <a href="/schedule">Schedule</a> for a high-level overview of our schedule. Details are partially dependent on corporate sponsorships.
+
+<br />
+
+SquiggleConf will include:
+
+- Social events for all attendees around the conference
+- Breaks and breakout sessions during the conference
+- Spaces to ask speakers questions and network with other attendees
+
+<br />
+
+Subscribe to the <a href="/#newsletter">newsletter</a> to be the first to know more!
+				`,
+			],
+		],
+	],
+	[
+		"Sessions",
+		[
+			[
+				"How can I ask speakers questions?",
+				`Talks have time reserved for live Q&A. Additionally, each session has a channel in Discord where you can ask questions.
+				<br />
+				We'd also encourage you to find them in-person between sessions and start conversations. They're friendly people.`,
+			],
+			[
+				"Will talks be recorded?",
+				"Yes! Talks will be made available online for free after the conference.",
+			],
+			[
+				"Will there be workshops this year?",
+				"No, SquiggleConf 2025 will not include workshops.",
+			],
+		],
+	],
+	[
+		"Tickets",
+		[
+			[
+				"Do you have bulk purchasing and/or group options?",
+				`Yes! See the [tickets purchase link](${links.tickets}) for the options.`,
+			],
+			[
+				"If I can't afford a full ticket, is there a way for me to come?",
+				`Yes! See [How to Attend SquiggleConf for Free](/articles/how-to-attend-squiggleconf-for-free).`,
+			],
+			[
+				"What does or doesn't a ticket include?",
+				`
+Your ticket gets you:
+
+- Access to all attendee social events before, during, and after the conference
+- Complete access to all talks
+- Light beverages and snacks through the conference days
+- One "swag bag" with branded apparel and items
+
+Note that talk tickets _do not_ include:
+
+- Meals, including lunch at <a href="https://faneuilhallmarketplace.com" rel="noreferrer" target="_blank">Faneuil Hall Marketplace</a>
+- Travel to or from the conference
+					`,
+			],
+			[
+				"What is your refund policy?",
+				"Full refunds. If you can't make it, please let us know - we can work with you. <br /> Do not come to SquiggleConf if you have any COVID symptoms.",
+			],
+			[
+				"Will there be ticket sales at the door?",
+				"No. All tickets will be sold online. We also cannot guarantee tickets will be available day-of.",
+			],
+		],
+	],
+] as const;
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly="none">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ContentArea>
+		<BodyText class="body-text-top">
+			Got questions not covered here? Reach out, we'd be happy to talk!
+			<a href="mailto:questions@squiggleconf.com">questions@squiggleconf.com</a>
+		</BodyText>
+
+		<FAQSections sections={faqs.map(([title, pairs]) => ({ title, pairs }))} />
+	</ContentArea>
+</PageLayout>
+
+<style>
+	.body-text-top {
+		margin: 5rem auto 0;
+	}
+
+	.apply-button {
+		align-self: center;
+		gap: 0.5rem;
+		margin-top: 2rem;
+	}
+
+	.area {
+		font-weight: var(--fontWeightBold);
+	}
+
+	.action-button {
+		display: inline-block;
+		margin: 2rem;
+	}
+</style>

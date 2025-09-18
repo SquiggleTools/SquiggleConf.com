@@ -1,0 +1,31 @@
+---
+import cityscape from "~/assets/design/cityscape.svg";
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div
+	class:list={["hero-cityscape", className]}
+	style={{ backgroundImage: `url(${cityscape.src})` }}
+	{...props}
+>
+</div>
+
+<style>
+	.hero-cityscape {
+		background-repeat: repeat-x;
+		height: 32rem;
+		pointer-events: none;
+		position: relative;
+		transform: translateX(-48.5%);
+		user-select: none;
+		min-width: 100vw;
+		width: 150rem;
+	}
+
+	@media (width >= 819px) {
+		.hero-cityscape {
+			transform: translateX(-50%);
+		}
+	}
+</style>

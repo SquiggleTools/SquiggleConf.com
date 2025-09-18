@@ -1,0 +1,21 @@
+---
+import { sessionsBySlug } from "~/data/sessions";
+import { ActivitySessionData } from "~/data/schedule";
+
+import ScheduledActivity from "./ScheduledActivity.astro";
+
+interface Props {
+	activity: ActivitySessionData;
+}
+
+const { activity } = Astro.props;
+const session = sessionsBySlug[activity.session];
+---
+
+<ScheduledActivity
+	description={[session.speakers.map((speaker) => speaker.name).join(" and ")]}
+	href={`/sessions#${session.slug}`}
+	id={session.slug}
+	level="h4"
+	title={session.title}
+/>

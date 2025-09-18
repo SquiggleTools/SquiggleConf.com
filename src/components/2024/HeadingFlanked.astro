@@ -1,0 +1,32 @@
+---
+import Heading from "../Heading.astro";
+import SquiggleFlanked from "./SquiggleFlanked.astro";
+
+interface Props {
+	class?: string;
+	id: string;
+}
+
+const { class: className, id, ...rest } = Astro.props;
+---
+
+<SquiggleFlanked
+	class:list={["squiggle-flanked", className]}
+	width="lean"
+	{...rest}
+>
+	<Heading class="heading" id={id} level="h2" link>
+		<slot />
+	</Heading>
+</SquiggleFlanked>
+
+<style>
+	.squiggle-flanked {
+		margin-bottom: 3rem;
+	}
+
+	.heading {
+		font-size: var(--fontSizeH2);
+		text-align: center;
+	}
+</style>

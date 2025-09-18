@@ -1,0 +1,109 @@
+---
+import { type SpeakerInfo } from "~/data/speakers";
+
+import Card from "./Card.astro";
+import { sessionsBySlug } from "~/data/sessions";
+import SpeakerImage from "./SpeakerImage.astro";
+import HiddenTitleLink from "./HiddenTitleLink.astro";
+import SessionDiscord from "./SessionDiscord.astro";
+import BioLinks from "./2024/BioLinks.astro";
+
+interface Props {
+	class?: string;
+	speaker: SpeakerInfo;
+}
+
+const { class: className, speaker, ...props } = Astro.props;
+---
+
+<li class:list={["speaker", className]} id={speaker.slug} {...props}>
+	<Card>
+		<div class="top">
+			<SpeakerImage src={speaker.image} size="large" />
+			<div class="speaker-info">
+				<div class="speaker-details">
+					<HiddenTitleLink as="h2" href={`/speakers#${speaker.slug}`}>
+						{speaker.name}
+					</HiddenTitleLink>
+					<div class="speaker-qualification">{speaker.qualification}</div>
+					<slot />
+				</div>
+				<ul class="session-links">
+					{
+						Object.values(sessionsBySlug)
+							.filter((session) => session.speakers.includes(speaker))
+							.map((session) => (
+								<a href={`/sessions#${session.slug}`} class="session-link">
+									{session.title}
+								</a>
+							))
+					}
+				</ul>
+			</div>
+		</div>
+		<div class="speaker-bio">
+			<p>{speaker.biography}</p>
+		</div>
+		<div class="bottom">
+			<BioLinks links={speaker.links} name={speaker.name} />
+			<SessionDiscord discord={`talk-${speaker.slug}`} />
+		</div>
+	</Card>
+</li>
+
+<style>
+	.speaker {
+		list-style: none;
+	}
+
+	.top {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.speaker-info {
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		text-decoration: none;
+	}
+
+	.speaker-details {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.speaker-qualification {
+		font-size: var(--fontSizeSmallest);
+	}
+
+	.session-links {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.speaker-bio {
+		margin-top: 1rem;
+	}
+
+	.bottom {
+		display: flex;
+		flex-direction: column;
+		margin-top: 1.5rem;
+		justify-content: space-between;
+	}
+
+	@media (width >= 490px) {
+		.top {
+			flex-direction: row;
+		}
+
+		.bottom {
+			flex-direction: row;
+		}
+	}
+</style>

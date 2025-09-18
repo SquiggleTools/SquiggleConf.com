@@ -17,7 +17,80 @@
         "infra",
         "maintenance",
         "projectManagement",
-        "tool"
+        "tool",
+        "bug"
+      ]
+    },
+    {
+      "login": "yonava",
+      "name": "Yona Alexander Voss-Andreae",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76519301?v=4",
+      "profile": "https://github.com/Yonava",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dimitropoulos",
+      "name": "Dimitri Mitropoulos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15232461?v=4",
+      "profile": "http://youtube.com/@MichiganTypeScript",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "thealexlichter",
+      "name": "Alexander Lichter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/640208?v=4",
+      "profile": "https://lichter.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "corinamurg",
+      "name": "Corina Murg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115652409?v=4",
+      "profile": "http://webforeveryone.us",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "nicolo-ribaudo",
+      "name": "Nicolò Ribaudo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7000710?v=4",
+      "profile": "https://nicr.dev",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "varunshukla07",
+      "name": "Varun Shukla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94779584?v=4",
+      "profile": "https://varunshukla07.vercel.app/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ceci21",
+      "name": "Ceci",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10601897?v=4",
+      "profile": "http://ceci.dev",
+      "contributions": [
+        "maintenance"
+      ]
+    },
+    {
+      "login": "rwaskiewicz",
+      "name": "Ryan Waskiewicz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1930213?v=4",
+      "profile": "http://ducktyped.dev",
+      "contributions": [
+        "code"
       ]
     }
   ],
@@ -27,7 +100,7 @@
     "README.md"
   ],
   "imageSize": 100,
-  "projectName": "SquiggleConf2025",
+  "projectName": "SquiggleConf.com",
   "projectOwner": "SquiggleTools",
   "repoHost": "https://github.com",
   "repoType": "github"

@@ -1,0 +1,70 @@
+---
+import BodyText from "~/components/2024/BodyText.astro";
+import HeadingFlanked from "~/components/2024/HeadingFlanked.astro";
+import HeroForPage from "~/components/2024/HeroForPage.astro";
+import ScheduledActivity from "~/components/2024/ScheduledActivity.astro";
+import ScheduledActivityBetween from "~/components/2024/ScheduledActivityBetween.astro";
+import ScheduledActivitySession from "~/components/2024/ScheduledActivitySession.astro";
+import { days } from "~/data/2024/schedule";
+import PageLayout2024 from "~/layouts/2024/PageLayout2024.astro";
+import "~/styles/2024.css";
+---
+
+<PageLayout2024
+	description="Schedule at SquiggleConf: a Boston conference focused on excellent web dev tooling."
+	title="Schedule"
+>
+	<HeroForPage slot="hero">Schedule</HeroForPage>
+
+	<BodyText class="schedule-body-text" width="lean">
+		All times are in EDT, local to Boston.
+	</BodyText>
+
+	<div class="schedule-days">
+		{
+			days.map(({ activities, title }) => (
+				<section class="schedule-day">
+					<HeadingFlanked id={title.split(/\W+/)[0].toLowerCase()}>
+						{title}
+					</HeadingFlanked>
+
+					{activities.map((activity) => (
+						<>
+							<ScheduledActivity
+								at={activity.at}
+								description={activity.description}
+								location={activity.location}
+								title={activity.title}
+							/>
+							{activity.within &&
+								activity.within.map((inner) =>
+									inner.type === "between" ? (
+										<ScheduledActivityBetween activity={inner} />
+									) : (
+										<ScheduledActivitySession activity={inner} />
+									),
+								)}
+						</>
+					))}
+				</section>
+			))
+		}
+	</div>
+</PageLayout2024>
+
+<style>
+	.schedule-days {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 3.5rem;
+	}
+
+	.schedule-body-text {
+		margin: 0 auto 4rem;
+	}
+
+	.schedule-day:not(:last-of-type) {
+		margin-bottom: 3rem;
+	}
+</style>

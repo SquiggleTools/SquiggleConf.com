@@ -1,0 +1,15 @@
+---
+import { markdown } from "@astropub/md";
+
+interface Props {
+	of: string;
+}
+
+// https://github.com/astro-community/md/issues/20
+const rendered = (await markdown.inline(Astro.props.of)).replaceAll(
+	"<a ",
+	`<a rel="noreferrer" target="_blank"`,
+);
+---
+
+<Fragment set:html={rendered} />

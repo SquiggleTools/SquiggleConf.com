@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import Discord from "~/assets/logos/discord.svg";
+
+interface Props {
+	discord: string;
+}
+
+const { discord } = Astro.props;
+---
+
+<a class="discord" href={`https://discord.squiggleconf.com/#${discord}`}>
+	<Image
+		class="image"
+		src={Discord}
+		alt={`Discord channel ${Discord}`}
+		width={24}
+	/>
+	#{discord}
+</a>
+
+<style>
+	.discord {
+		border-radius: 0.25rem;
+		display: inline-flex;
+		font-family: monospace;
+		font-size: 1rem;
+		padding: 0.25rem 0;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.image {
+		margin-right: 0.5rem;
+		opacity: 0.5;
+		user-select: none;
+	}
+
+	html:not(.dark) .image {
+		filter: hue-rotate(180deg) invert(0.7);
+	}
+</style>

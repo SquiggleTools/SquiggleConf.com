@@ -3,6 +3,7 @@ import { links } from "~/data/links";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
+import { currentYear } from "~/data/years";
 
 function hrefProps(pathname: string) {
 	return {
@@ -11,19 +12,29 @@ function hrefProps(pathname: string) {
 		target: pathname.startsWith("https") ? "_blank" : undefined,
 	};
 }
+
+interface Props {
+	year?: number;
+}
+
+const { year } = Astro.props;
+const logoHref = year === currentYear ? "/" : `/${year}`;
 ---
 
 <header>
 	<ContentArea class="header-content-area-mobile">
-		<a class="logo" href="/"><Logo year /></a>
+		<a class="logo" href={logoHref}><Logo year={year} /></a>
 
 		<details id="details">
 			<summary aria-label="Toggle header">≡</summary>
 			<div class="header-contents-mobile">
-				<a {...hrefProps("/")}>Home</a>
-				<a {...hrefProps("/cfp")}>CFP</a>
+				<a {...hrefProps("/about")}>About</a>
+				<a {...hrefProps("/articles")}>Articles</a>
+				{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
+				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
+				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
 				<a {...hrefProps(links.shop)}>Shop</a>
-				<a {...hrefProps("/travel")}>Travel</a>
+				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 				<Button
 					as="a"
 					class="header-button"
@@ -36,12 +47,15 @@ function hrefProps(pathname: string) {
 	</ContentArea>
 
 	<ContentArea class="header-content-area-wide" width="wide">
-		<a class="logo" href="/"><Logo year /></a>
+		<a class="logo" href={logoHref}><Logo year={year} /></a>
 		<div class="header-links">
-			<a {...hrefProps("/")}>Home</a>
-			<a {...hrefProps("/cfp")}>CFP</a>
+			<a {...hrefProps("/about")}>About</a>
+			<a {...hrefProps("/articles")}>Articles</a>
+			{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
+			{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
+			{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
 			<a {...hrefProps(links.shop)}>Shop</a>
-			<a {...hrefProps("/travel")}>Travel</a>
+			{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 			<Button
 				as="a"
 				class="header-button"
@@ -100,7 +114,7 @@ function hrefProps(pathname: string) {
 		font-size: 4rem;
 		list-style: none;
 		line-height: 0;
-		padding: 1rem;
+		padding: 1rem 0;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -146,7 +160,7 @@ function hrefProps(pathname: string) {
 		display: flex;
 		align-items: center;
 		font-weight: var(--fontWeightLight);
-		gap: 2rem;
+		gap: clamp(0.55rem, 1.25vw, 2rem);
 	}
 
 	.header-link-inactive {
@@ -156,9 +170,10 @@ function hrefProps(pathname: string) {
 	.header-button {
 		justify-content: center;
 		margin-left: 0.35rem;
+		text-wrap: nowrap;
 	}
 
-	@media (width >= 1017px) {
+	@media (width >= 1117px) {
 		.header-content-area-mobile {
 			display: none;
 		}

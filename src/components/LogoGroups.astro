@@ -1,0 +1,101 @@
+---
+import { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+	class?: string;
+	groups: Record<string, LogoGroupData[]>;
+}
+
+export interface LogoGroupData {
+	href: string;
+	logos: {
+		dark: ImageMetadata;
+		light: ImageMetadata;
+	};
+	title: string;
+}
+
+const { class: className, groups: logoGroups, ...props } = Astro.props;
+---
+
+<div class:list={["logo-groups", className]} {...props}>
+	{
+		Object.values(logoGroups).map((logos, i) => (
+			<div class:list={["logo-group", `logo-group-${i}`]}>
+				{logos.map((logo) => (
+					<a
+						class="logo"
+						href={logo.href}
+						rel="noreferrer"
+						target="_blank"
+						title={logo.title}
+					>
+						<Image
+							alt=""
+							class="logo-dark"
+							src={logo.logos.dark}
+							height={128}
+						/>
+						<Image
+							alt=""
+							class="logo-light"
+							src={logo.logos.light}
+							height={128}
+						/>
+					</a>
+				))}
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.logo-groups {
+		gap: 2rem;
+		margin: auto;
+		max-width: 70rem;
+		text-align: center;
+		width: 100%;
+	}
+
+	.logo-group {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		padding: 0 2rem;
+		justify-content: center;
+		margin: auto;
+	}
+
+	.logo-group-0 {
+		--logoSize: 14rem;
+	}
+
+	.logo-group-1 {
+		--logoSize: 11rem;
+	}
+
+	.logo-group-2 {
+		--logoSize: 9rem;
+	}
+
+	.logo-group img {
+		max-height: var(--logoSize);
+		max-width: var(--logoSize);
+	}
+
+	html.dark .logo-light,
+	html:not(.dark) .logo-dark {
+		display: none;
+	}
+
+	@media (min-width: 1117px) {
+		.logo-group {
+			flex-direction: row;
+			justify-content: space-evenly;
+			flex-wrap: wrap;
+			gap: 2rem;
+		}
+	}
+</style>

@@ -1,0 +1,70 @@
+---
+import ArticlesList from "~/components/ArticlesList.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description =
+	"Assorted guides, information, updates, and other useful articles from the SquiggleConf team.";
+---
+
+<PageLayout description={description} title="Articles">
+	<Hero>
+		<HeroContentsStandard heading="Articles">
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	<ArticlesList
+		articles={[
+			{
+				description:
+					"Common questions and answers around attending, speaking at, and sponsoring SquiggleConf 2025.",
+				slug: "/articles/faqs",
+				title: "FAQs",
+			},
+			{
+				description:
+					"13 different ways you can get a free ticket to SquiggleConf 2025. Free!",
+				slug: "/articles/how-to-attend-squiggleconf-for-free",
+				title: "How to Attend SquiggleConf for Free",
+			},
+			{
+				description:
+					"Brand asset downloads, usage guidelines, and pitch templates to help you share the word about SquiggleConf.",
+				slug: "/articles/media-guide",
+				title: "Media Guide",
+			},
+			{
+				description:
+					"All the information you'd need to know as a SquiggleConf 2025 speaker.",
+				slug: "/articles/speaker-guide",
+				title: "Speaker Guide",
+			},
+			{
+				description:
+					"All the information you'd need to know as a SquiggleConf 2025 sponsor.",
+				slug: "/articles/sponsor-guide",
+				title: "Sponsor Guide",
+			},
+			{
+				description:
+					"How to get to and around Boston when you’re attending SquiggleConf.",
+				slug: "/articles/travel",
+				title: "Travel",
+			},
+			{
+				description:
+					"All the information you'd need to know as a SquiggleConf 2025 volunteer.",
+				slug: "/articles/volunteer-guide",
+				title: "Volunteer Guide",
+			},
+			{
+				description:
+					"What it's like to start a new in-person tech conference, from a financial perspective.",
+				slug: "/articles/2024-financial-review",
+				title: "SquiggleConf 2024 Financial Review",
+			},
+		]}
+	/>
+</PageLayout>

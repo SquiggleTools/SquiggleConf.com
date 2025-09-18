@@ -4,6 +4,7 @@ import github from "~/assets/logos/github.svg";
 import linkedin from "~/assets/logos/linkedin.svg";
 import mastodon from "~/assets/logos/mastodon.svg";
 import website from "~/assets/logos/website.svg";
+import x from "~/assets/logos/x.svg";
 import youtube from "~/assets/logos/youtube.svg";
 
 interface Props {
@@ -20,6 +21,7 @@ export interface BioLinksPlatforms {
 	mastodon?: string | null;
 	twitch?: string | null;
 	website?: string | null;
+	x?: string | null;
 	youtube?: string | null;
 }
 
@@ -30,6 +32,7 @@ const aliases = [
 	["github", "on GitHub", github],
 	["linkedin", "on LinkedIn", linkedin],
 	["mastodon", "on Mastodon", mastodon],
+	["x", "on X", x],
 	["youtube", "on YouTube", youtube],
 	["website", "'s website", website],
 ] as const;

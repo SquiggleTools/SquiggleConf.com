@@ -1,0 +1,116 @@
+---
+import BodyText from "~/components/2024/BodyText.astro";
+import HeadingFlanked from "~/components/2024/HeadingFlanked.astro";
+import HeroForPage from "~/components/2024/HeroForPage.astro";
+import Session from "~/components/2024/Session.astro";
+import { talks } from "~/data/2024/talks";
+import PageLayout2024 from "~/layouts/2024/PageLayout2024.astro";
+import "~/styles/2024.css";
+
+const sections = [
+	{
+		talkFormat: "Full",
+		name: "Full-Length Talks",
+		description:
+			"30 minute talks with 5 minutes of live Q&A. These talks dive into their subject area and show new ways of working with your tooling.",
+		date: "October 3rd",
+	},
+	{
+		talkFormat: "Lightning",
+		name: "Lightning Talks",
+		description:
+			"10 minute talks with 3 minutes of live Q&A. These sessions show great tech that you can talk about with the speaker between sessions.",
+		date: "October 3rd",
+	},
+	{
+		talkFormat: "Workshop",
+		name: "Workshops",
+		description:
+			"1-2 hour hands-on sessions with the makers of dev tools. These in-depth, interactive workshops will level up your dev tool crafting skills.",
+		date: "October 4th",
+	},
+] as const;
+---
+
+<PageLayout2024
+	description="Sessions at SquiggleConf: a Boston conference focused on excellent web dev tooling."
+	title="Sessions"
+>
+	<HeroForPage slot="hero">Sessions</HeroForPage>
+
+	<BodyText class="sessions-top" size="large" width="full">
+		SquiggleConf 2024 consisted of two days:
+		<ul>
+			<li>
+				Thursday, October 3rd: A full-day single-track series of full-length and
+				lightning talks
+			</li>
+			<li>Friday, October 4th: Free 1-2 hour morning workshops</li>
+		</ul>
+		See speaker details on <a href="/2024/speakers">Speakers</a>.
+	</BodyText>
+
+	{
+		sections.map(({ talkFormat, name, description }) => (
+			<>
+				<HeadingFlanked
+					class="sessions-header-flanked"
+					id={name.toLowerCase().replaceAll(" ", "-")}
+				>
+					{name}
+				</HeadingFlanked>
+				<BodyText as="p">{description}</BodyText>
+				<ul class="talks-list">
+					{talks
+						.filter((t) => t.talkFormat === talkFormat)
+						.map((talk) => (
+							<Session talk={talk} />
+						))}
+				</ul>
+			</>
+		))
+	}
+
+	<BodyText as="p" class="talks-body-text" size="large" width="lean">
+		You’ll emerge with the best techniques to supercharge your projects —
+		whether you’re already a tooling wizard or trying to become one.
+	</BodyText>
+</PageLayout2024>
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-left: 2.5rem;
+		margin: 1rem 0;
+	}
+
+	.sessions-top {
+		margin-bottom: 5rem;
+		text-align: left;
+	}
+
+	.sessions-header-flanked {
+		margin-top: 1rem;
+	}
+
+	.talks-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin: 2rem;
+		padding: 0 var(--widthBodyPadding);
+		list-style: none;
+	}
+
+	.talks-body-text + .talks-body-text {
+		margin-top: 4rem;
+	}
+
+	@media (min-width: 1017px) {
+		.talks-list {
+			margin: 4rem 2rem;
+		}
+	}
+</style>

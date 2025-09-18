@@ -2,9 +2,10 @@
 export interface Props {
 	description: string;
 	title?: string;
+	year?: number;
 }
 
-const { description } = Astro.props;
+const { description, year = 2025 } = Astro.props;
 
 const banner = new URL("banner.png", Astro.site).toString();
 const favicon = new URL("favicon.png", Astro.site).toString();
@@ -21,7 +22,7 @@ const keywords = [
 
 const title = [
 	Astro.props.title,
-	"SquiggleConf 2025",
+	`SquiggleConf ${year}`,
 	"Supercharging web devs and their tools",
 ]
 	.filter(Boolean)
@@ -104,6 +105,6 @@ const metaPairs = [
 	<meta content={keywords.join()} name="keywords" />
 	<meta content={Astro.generator} name="generator" />
 	<meta content="width=device-width" name="viewport" />
-	<meta content="SquiggleConf 2025" name="apple-mobile-web-app-title" />
+	<meta content=`SquiggleConf ${year}` name="apple-mobile-web-app-title" />
 	<title>{title}</title>
 </head>

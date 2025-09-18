@@ -1,0 +1,26 @@
+---
+import FAQSection, { Props as FAQSectionProps } from "./FAQSection.astro";
+
+interface Props {
+	sections: FAQSectionProps[];
+}
+---
+
+<div class="faq-sections">
+	{
+		Astro.props.sections.map(({ title, pairs: section }) => (
+			<FAQSection pairs={section} title={title} />
+		))
+	}
+</div>
+
+<style>
+	.faq-sections {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		margin-top: 5rem;
+		padding-bottom: 3.5rem;
+		width: 100%;
+	}
+</style>

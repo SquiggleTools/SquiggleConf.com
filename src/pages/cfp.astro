@@ -1,8 +1,6 @@
 ---
-import Arrow from "~/components/Arrow.astro";
 import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
-import Button from "~/components/Button.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
@@ -46,7 +44,7 @@ const topicAreas = [
 	[`WebAssembly`, `Tooling or usage of WebAssembly/WASI/WASM`],
 	[
 		`Other`,
-		`Something fun or incredible. We love off-the-beaten-tail fun things.`,
+		`Something fun or incredible. We love off-the-beaten-trail fun things.`,
 	],
 ];
 ---
@@ -64,25 +62,13 @@ const topicAreas = [
 			2025! This page is a general guide for what you can expect in submitting,
 			including tips for what we're looking for.
 		</BodyText>
-
-		<Button
-			as="a"
-			class="apply-button apply-button-top"
-			size="large"
-			variant="emphasized"
-			href={links.cfp}
-			target="_blank"
-		>
-			Apply to the CFP here!
-			<Arrow />
-		</Button>
 	</CommonContent>
 
 	<CommonContent heading="CFP Highlights">
 		<BodyList as="ul">
 			<li>
-				<strong>📆 Deadline:</strong> We are accepting submissions through May 23rd.
-				You'll hear from us by June 9th.
+				<strong>📆 Deadline:</strong> We accepted submissions through May 23rd. You'll
+				hear from us by June 9th.
 			</li>
 			<li>
 				<strong>🤝 Acceptance:</strong> If we accept your talk, we'll ask you to
@@ -224,25 +210,13 @@ const topicAreas = [
 			<li>
 				<strong>AI:</strong> We absolutely welcome AI being in your talk, but the
 				primary topic(s) should be centered on a dev tooling category such as one
-				our suggested ones.
+				of our suggested ones.
 			</li>
 			<li>
 				<strong>Blockchain/Crypto/NFTs:</strong> We doubt these will be applicable
 				and useful, but we are open minded and welcome you to make your case.
 			</li>
 		</BodyList>
-
-		<Button
-			as="a"
-			class="apply-button apply-button-bottom"
-			size="large"
-			variant="emphasized"
-			href={links.cfp}
-			target="_blank"
-		>
-			Apply to the CFP here!
-			<Arrow />
-		</Button>
 	</CommonContent>
 </PageLayout>
 

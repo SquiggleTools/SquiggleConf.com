@@ -1,0 +1,39 @@
+---
+import Heading from "~/components/Heading.astro";
+import { slugify } from "~/utils/id";
+import HiddenLink from "../HiddenLink.astro";
+
+const { class: className, heading, ...props } = Astro.props;
+const id = slugify(heading);
+---
+
+<Heading
+	class:list={["explainer-heading", className]}
+	id={id}
+	level="h2"
+	{...props}
+>
+	<HiddenLink class="explainer-link" href={`#${id}`}>{heading}</HiddenLink>
+</Heading>
+
+<style>
+	.explainer-heading {
+		font-family: var(--fontFamilyLogo);
+		font-size: var(--fontSizeLarger);
+		color: var(--colorForegroundEmphasized);
+		font-weight: var(--fontWeightSemibold);
+		padding: 3.5rem 2rem 2rem;
+		position: relative;
+		text-align: center;
+		z-index: 1;
+	}
+
+	.explainer-link {
+		text-decoration: none;
+	}
+
+	.explainer-link::after {
+		content: "#";
+		color: var(--colorAccent);
+	}
+</style>

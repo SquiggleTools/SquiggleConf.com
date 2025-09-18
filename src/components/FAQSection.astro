@@ -1,0 +1,106 @@
+---
+import { markdown } from "@astropub/md";
+import { Image } from "astro:assets";
+
+import dropdown from "~/assets/glyphs/dropdown.svg";
+
+import Heading from "./Heading.astro";
+
+export interface Props {
+	pairs: [string, string][];
+	title: string;
+}
+
+const pairs = await Promise.all(
+	Astro.props.pairs.map(async ([question, answer]) => {
+		const parsedAnswer = await markdown(answer);
+		return [question, parsedAnswer];
+	}),
+);
+---
+
+<div>
+	<Heading class="h3" level="h3">
+		{Astro.props.title}
+	</Heading>
+	{
+		pairs.map(([question, answer]) => (
+			<details>
+				<summary>
+					<Image alt="" src={dropdown} />
+					<span>{question}</span>
+				</summary>
+				<div class="faq-answer">{answer}</div>
+			</details>
+		))
+	}
+</div>
+
+<style>
+	.h3 {
+		font-size: var(--fontSizeMedium);
+		font-weight: var(--fontWeightMedium);
+	}
+
+	html.dark summary img {
+		filter: invert();
+	}
+
+	html:not(.dark) summary img {
+		filter: hue-rotate(180deg);
+	}
+
+	details {
+		font-size: var(--fontSizeBody);
+		font-weight: var(--fontWeightLight);
+		margin-bottom: 2rem;
+		text-align: left;
+		width: 100%;
+	}
+
+	details[open] {
+		margin-bottom: 2.5rem;
+	}
+
+	summary {
+		align-items: center;
+		cursor: pointer;
+		display: flex;
+		font-weight: var(--fontWeightSemibold);
+		justify-content: flex-start;
+		gap: 0.5rem;
+		list-style: none;
+		margin-top: 1.75rem;
+		position: relative;
+	}
+
+	details[open] summary {
+		margin-bottom: 1rem;
+	}
+
+	details summary img {
+		transition: var(--transitionMedium) transform;
+		user-select: none;
+		height: 0.75rem;
+	}
+
+	details[open] summary img {
+		transform: rotate(180deg);
+	}
+
+	@media (min-width: 819px) {
+		.faq-answer {
+			padding: 0 2rem 0 2.5rem;
+		}
+	}
+</style>
+
+<style is:global>
+	details ul {
+		margin: 0.75rem 0 0.75rem 1rem;
+	}
+
+	details li {
+		list-style: initial;
+	}
+</style>
