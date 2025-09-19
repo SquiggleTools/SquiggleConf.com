@@ -7,12 +7,10 @@ import Hero from "~/components/hero/Hero.astro";
 import HeroLocators from "~/components/hero/HeroLocators.astro";
 import HeroTagline from "~/components/hero/HeroTagline.astro";
 import InlineBlock from "~/components/InlineBlock.astro";
-import SessionsSummarySection from "~/components/SessionsSummarySection.astro";
 import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TextSquiggly from "~/components/TextSquiggly.astro";
-import { links } from "~/data/links";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
@@ -37,15 +35,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				class="hero-button"
 				size="large"
 				variant="emphasized"
-				href={links.tickets}
-				target="_blank"
+				href="#newsletter"
 			>
-				Get your tickets now
+				Subscribe up for 2027 conference updates
 				<Arrow />
 			</Button>
 		</div>
 	</Hero>
-	<SessionsSummarySection />
 	<ExplainersList />
 	<AboutUs />
 	<Registration />
