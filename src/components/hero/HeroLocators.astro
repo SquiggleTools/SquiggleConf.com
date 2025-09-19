@@ -10,9 +10,7 @@ const { class: className, multiline, ...props } = Astro.props;
 ---
 
 <div class:list={["hero-locators", className]} {...props}>
-	<InlineBlock class="date"
-		>Thank you for joining us!{multiline ? "" : " ·"}</InlineBlock
-	>
+	<InlineBlock class="date">Thank you for joining us!</InlineBlock>
 	<InlineBlock class="location">SquiggleConf returns Spring 2027</InlineBlock>
 </div>
 
