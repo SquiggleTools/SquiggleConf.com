@@ -77,9 +77,20 @@
 		"typescript-eslint": "^8.32.1"
 	},
 	"engines": {
-		"node": "20.11.0"
+		"node": ">=20.11.0"
 	},
 	"publishConfig": {
 		"provenance": true
+	},
+	"pnpm": {
+		"peerDependencyRules": {
+			"allowedVersions": {
+				"@astrojs/markdown-remark": "6",
+				"astro": "5"
+			}
+		},
+		"ignoredBuiltDependencies": [
+			"sharp"
+		]
 	}
 }

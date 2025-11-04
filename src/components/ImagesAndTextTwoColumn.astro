@@ -23,7 +23,7 @@ interface Props {
 	<ContentArea as="section" class="images-and-text-two-column-content">
 		<div class="images-and-text-two-column-decorations">
 			<DecorativeImage class="fish-school-dull" src={fishSchoolDull} />
-			<Image alt="" layout="responsive" src={Astro.props.images.primary} />
+			<Image alt="" src={Astro.props.images.primary} />
 		</div>
 
 		<div class="images-and-text-two-column-text">
@@ -37,11 +37,7 @@ interface Props {
 		</div>
 
 		<div class="images-secondary">
-			{
-				Astro.props.images.secondary.map((image) => (
-					<Image {...image} layout="responsive" />
-				))
-			}
+			{Astro.props.images.secondary.map((image) => <Image {...image} />)}
 		</div>
 	</ContentArea>
 </div>
