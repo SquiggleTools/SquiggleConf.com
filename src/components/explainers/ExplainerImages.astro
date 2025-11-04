@@ -44,11 +44,7 @@ function computeImageSizes(
 <div
 	class:list={["explainer-images", `explainer-images-${Astro.props.direction}`]}
 >
-	<Image
-		class="explainer-image-primary"
-		layout="responsive"
-		{...Astro.props.photos.primary}
-	/>
+	<Image class="explainer-image-primary" {...Astro.props.photos.primary} />
 	{
 		Astro.props.photos.secondary.map((secondary, i) => (
 			<Image
