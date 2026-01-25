@@ -50,6 +50,9 @@ importers:
       wifi-share-link:
         specifier: ^0.1.2
         version: 0.1.2
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
     devDependencies:
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.6.0
