@@ -6,8 +6,9 @@ export default defineConfig({
 	adapter: vercel({
 		webAnalytics: { enabled: true },
 	}),
-	experimental: {
-		responsiveImages: true,
+	image: {
+		layout: "constrained",
+		responsiveStyles: true,
 	},
 	integrations: [konamiEmojiBlast()],
 	output: "server",
