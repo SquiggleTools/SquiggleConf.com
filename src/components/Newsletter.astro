@@ -99,10 +99,9 @@ import Heading from "./Heading.astro";
 				"Content-Type": "application/x-www-form-urlencoded",
 			},
 		})
-			.then((response) => [response.ok, response.json(), response] as const)
+			.then((response) => [response.ok, response.text(), response] as const)
 			.then(([ok, dataPromise, response]) => {
 				dataPromise.then((data) => {
-					console.log({ data });
 					if (ok) {
 						setMessage("Thanks for signing up!", "happy");
 						form.reset();

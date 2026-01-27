@@ -7,7 +7,8 @@ const bodySchema = z.object({
 });
 
 export const POST: APIRoute = async ({ request }) => {
-	const body = bodySchema.safeParse(await request.json());
+	const formData = Object.fromEntries(await request.formData());
+	const body = bodySchema.safeParse(formData);
 	if (body.error) {
 		return new Response("Invalid body", {
 			status: 400,
@@ -30,12 +31,11 @@ export const POST: APIRoute = async ({ request }) => {
 			method: "POST",
 		});
 
-		if (response.ok || isBrevoDuplicateIdentifier(await response.json())) {
-			return new Response("Thanks for subscribing!", { status: 200 });
-		}
+		console.log(response);
 
-		console.error(response);
-		return new Response("Error", { status: 400 });
+		return response.ok || isBrevoDuplicateIdentifier(await response.json())
+			? new Response("Thanks for signing up!", { status: 200 })
+			: new Response("Error", { status: 400 });
 	} catch (error) {
 		console.error(error);
 		return new Response("Error", { status: 400 });
