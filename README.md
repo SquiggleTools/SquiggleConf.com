@@ -20,6 +20,11 @@ pnpm i
 pnpm dev
 ```
 
+### Environment Variables
+
+To get the newsletter API running, copy `.env.template` to an `.env` file and fill in the Brevo API key value from our password manager.
+This is not necessary unless you want to work on the newsletter API.
+
 ## Contributors
 
 <!-- spellchecker: disable -->

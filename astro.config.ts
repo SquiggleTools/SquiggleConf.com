@@ -1,11 +1,17 @@
 import vercel from "@astrojs/vercel";
 import { konamiEmojiBlast } from "@konami-emoji-blast/astro";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
 	adapter: vercel({
 		webAnalytics: { enabled: true },
 	}),
+	env: {
+		schema: {
+			BREVO_API_KEY: envField.string({ access: "secret", context: "server" }),
+			BREVO_LIST_ID: envField.number({ access: "public", context: "server" }),
+		},
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,

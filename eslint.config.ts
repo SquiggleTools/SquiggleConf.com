@@ -63,6 +63,7 @@ export default defineConfig(
 			},
 		},
 		rules: {
+			"n/no-missing-import": "off",
 			"n/no-unpublished-import": "off",
 
 			// Stylistic concerns that don't interfere with Prettier

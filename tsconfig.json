@@ -17,5 +17,5 @@
 		"strict": true,
 		"target": "ESNext"
 	},
-	"include": ["api", "src"]
+	"include": ["src"]
 }

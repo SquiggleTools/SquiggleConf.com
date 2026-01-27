@@ -5,6 +5,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/prepare
+      - run: cp .env.template .env
       - run: pnpm build
   lint:
     name: Lint
@@ -12,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/prepare
+      - run: pnpm astro sync
       - run: pnpm lint
   lint_knip:
     name: Lint Knip
@@ -47,6 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/prepare
+      - run: pnpm astro sync
       - run: pnpm tsc
 
 name: CI
