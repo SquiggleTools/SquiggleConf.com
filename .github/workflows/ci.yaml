@@ -5,7 +5,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/prepare
-      - run: cp .env.example .env
+      - run: cp .env.template .env
       - run: pnpm build
   lint:
     name: Lint
