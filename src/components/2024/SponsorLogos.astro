@@ -22,8 +22,14 @@ const { light, sponsorGroups } = Astro.props;
 
 <div class="sponsor-logos">
 	{
-		Object.entries(sponsorGroups).map(([placement, sponsors]) => (
-			<div class:list={["sponsor-group", `sponsor-group-${placement}`]}>
+		Object.entries(sponsorGroups).map(([placement, sponsors], index) => (
+			<div
+				class:list={[
+					"sponsor-group",
+					`sponsor-group-${index}`,
+					`sponsor-group-${placement}`,
+				]}
+			>
 				{sponsors.map((sponsor) => (
 					<a
 						class="sponsor"
