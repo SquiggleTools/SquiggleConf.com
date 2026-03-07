@@ -21,8 +21,6 @@ const { light, sponsorGroups } = Astro.props;
 ---
 
 <div class="sponsor-logos">
-	todo: use the placement in CSS variables, instead of the existing
-	-normal/small
 	{
 		Object.entries(sponsorGroups).map(([placement, sponsors]) => (
 			<div class:list={["sponsor-group", `sponsor-group-${placement}`]}>
