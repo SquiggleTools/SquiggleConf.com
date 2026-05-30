@@ -9,6 +9,11 @@ import Registration from "~/components/Registration.astro";
 import Logo from "~/components/Logo.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import { sessionsBySlug } from "~/data/sessions";
+import timelineFish1 from "~/assets/design/timeline-fish-1.svg";
+import timelineFish2 from "~/assets/design/timeline-fish-2.svg";
+import timelineFish3 from "~/assets/design/timeline-fish-3.svg";
+import timelineFish4 from "~/assets/design/timeline-fish-4.svg";
+import timelineFish5 from "~/assets/design/timeline-fish-5.svg";
 import group from "~/assets/stills/speakers-event-group.png";
 import harbor from "~/assets/stills/boston-harbor.png";
 import networking from "~/assets/stills/attendees-networking.png";
@@ -86,6 +91,73 @@ const afternoonTalksSessions = [
 		</div>
 	</Hero>
 	<section class="timeline-section" aria-label="Timeline preview">
+		<div class="timeline-fish-layer" aria-hidden="true">
+			<div class="timeline-fish-shell timeline-fish-shell-1">
+				<div class="timeline-fish-body">
+					<img
+						class="timeline-fish-image"
+						src={timelineFish1.src}
+						width={timelineFish1.width}
+						height={timelineFish1.height}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+			<div class="timeline-fish-shell timeline-fish-shell-2">
+				<div class="timeline-fish-body">
+					<img
+						class="timeline-fish-image"
+						src={timelineFish2.src}
+						width={timelineFish2.width}
+						height={timelineFish2.height}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+			<div class="timeline-fish-shell timeline-fish-shell-3">
+				<div class="timeline-fish-body">
+					<img
+						class="timeline-fish-image"
+						src={timelineFish3.src}
+						width={timelineFish3.width}
+						height={timelineFish3.height}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+			<div class="timeline-fish-shell timeline-fish-shell-4">
+				<div class="timeline-fish-body">
+					<img
+						class="timeline-fish-image"
+						src={timelineFish4.src}
+						width={timelineFish4.width}
+						height={timelineFish4.height}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+			<div class="timeline-fish-shell timeline-fish-shell-5">
+				<div class="timeline-fish-body">
+					<img
+						class="timeline-fish-image"
+						src={timelineFish5.src}
+						width={timelineFish5.width}
+						height={timelineFish5.height}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+		</div>
 		<h2 class="timeline-heading">your devtools fieldtrip</h2>
 		<div class="timeline-grid">
 			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
@@ -653,6 +725,152 @@ const afternoonTalksSessions = [
 			text-shadow var(--timeline-hover-duration) ease,
 			transform var(--timeline-hover-duration) ease;
 		z-index: 1;
+	}
+
+	.timeline-fish-layer {
+		inset: clamp(0.65rem, 2vw, 1.65rem) 0 auto;
+		pointer-events: none;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.timeline-fish-shell {
+		left: 0;
+		opacity: 0;
+		filter: drop-shadow(0 0.7rem 1.3rem rgba(6, 17, 33, 0.18));
+		pointer-events: none;
+		position: absolute;
+		transform: translate3d(-3rem, 0, 0);
+		transform-origin: center;
+		user-select: none;
+		will-change: opacity, transform;
+	}
+
+	.timeline-fish-body {
+		animation: timeline-fish-swim 2480ms cubic-bezier(0.45, 0.05, 0.55, 0.95)
+			infinite;
+		transform-origin: var(--fish-origin-x, 26%) 50%;
+		will-change: transform;
+	}
+
+	.timeline-fish-image {
+		display: block;
+		height: 100%;
+		max-width: none;
+		width: auto;
+	}
+
+	.timeline-fish-shell-1 {
+		--fish-base-opacity: 0.96;
+		--fish-origin-x: 24%;
+		height: clamp(3.45rem, 5.4vw, 4.8rem);
+		left: 0.4rem;
+		top: 0.2rem;
+	}
+
+	.timeline-fish-shell-2 {
+		--fish-base-opacity: 0.84;
+		--fish-origin-x: 28%;
+		height: clamp(2.95rem, 4.8vw, 4rem);
+		left: 0.2rem;
+		top: 3.2rem;
+	}
+
+	.timeline-fish-shell-3 {
+		--fish-base-opacity: 0.88;
+		--fish-origin-x: 25%;
+		height: clamp(3.15rem, 5vw, 4.15rem);
+		left: 0.1rem;
+		top: 5.15rem;
+	}
+
+	.timeline-fish-shell-4 {
+		--fish-base-opacity: 0.78;
+		--fish-origin-x: 23%;
+		height: clamp(4rem, 6.3vw, 5.5rem);
+		left: 0.3rem;
+		top: 1.45rem;
+	}
+
+	.timeline-fish-shell-5 {
+		--fish-base-opacity: 0.82;
+		--fish-origin-x: 27%;
+		height: clamp(4.1rem, 6.4vw, 5.65rem);
+		left: 0;
+		top: 4.35rem;
+	}
+
+	.timeline-fish-shell-2 .timeline-fish-body,
+	.timeline-fish-shell-5 .timeline-fish-body {
+		animation-delay: -1.1s;
+		animation-duration: 2760ms;
+		animation-name: timeline-fish-swim-wide;
+	}
+
+	.timeline-fish-shell-3 .timeline-fish-body {
+		animation-delay: -0.65s;
+		animation-duration: 2310ms;
+	}
+
+	.timeline-fish-shell-4 .timeline-fish-body {
+		animation-delay: -1.45s;
+		animation-duration: 2920ms;
+		animation-direction: reverse;
+	}
+
+	@keyframes timeline-fish-swim {
+		0% {
+			transform: rotate(-5deg) skewY(-2deg) scaleX(0.985) scaleY(1.02);
+		}
+
+		18% {
+			transform: translate3d(0.2rem, -0.08rem, 0) rotate(1deg) skewY(2deg)
+				scaleX(1.035) scaleY(0.98);
+		}
+
+		37% {
+			transform: translate3d(0, 0, 0) rotate(6deg) skewY(0deg) scaleX(0.995)
+				scaleY(1.01);
+		}
+
+		62% {
+			transform: translate3d(-0.14rem, 0.09rem, 0) rotate(0deg) skewY(-2deg)
+				scaleX(1.03) scaleY(0.982);
+		}
+
+		82% {
+			transform: translate3d(0.14rem, -0.05rem, 0) rotate(-6deg) skewY(1.5deg)
+				scaleX(0.99) scaleY(1.02);
+		}
+
+		100% {
+			transform: rotate(-5deg) skewY(-2deg) scaleX(0.985) scaleY(1.02);
+		}
+	}
+
+	@keyframes timeline-fish-swim-wide {
+		0% {
+			transform: rotate(-6deg) skewY(-2.5deg) scaleX(0.98) scaleY(1.025);
+		}
+
+		22% {
+			transform: translate3d(0.24rem, -0.11rem, 0) rotate(2deg) skewY(3deg)
+				scaleX(1.045) scaleY(0.975);
+		}
+
+		48% {
+			transform: translate3d(0, 0, 0) rotate(8deg) skewY(0deg) scaleX(0.995)
+				scaleY(1.01);
+		}
+
+		72% {
+			transform: translate3d(-0.18rem, 0.12rem, 0) rotate(-1deg) skewY(-2.5deg)
+				scaleX(1.04) scaleY(0.975);
+		}
+
+		100% {
+			transform: rotate(-6deg) skewY(-2.5deg) scaleX(0.98) scaleY(1.025);
+		}
 	}
 
 	.timeline-grid {
@@ -1758,8 +1976,10 @@ const afternoonTalksSessions = [
 		.timeline-content::after,
 		.timeline-content h2,
 		.timeline-subtitle,
-		.timeline-copy p {
+		.timeline-copy p,
+		.timeline-fish-body {
 			transition: none;
+			animation: none;
 		}
 	}
 </style>
@@ -1769,6 +1989,183 @@ const afternoonTalksSessions = [
 	const timelineCards = Array.from(
 		document.querySelectorAll(".timeline-content"),
 	).filter((element) => element instanceof HTMLElement);
+	const timelineSection = document.querySelector(".timeline-section");
+	const timelineFish = Array.from(
+		document.querySelectorAll(".timeline-fish-shell"),
+	).filter((element) => element instanceof HTMLElement);
+	const morningTalksEntry = document.querySelector(
+		'[data-timeline-entry="talks-morning"]',
+	);
+	const reducedMotionQuery = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	);
+
+	if (
+		timelineSection instanceof HTMLElement &&
+		timelineFish.length > 0 &&
+		morningTalksEntry instanceof HTMLElement
+	) {
+		let frameRequested = false;
+		const fishConfigs = [
+			{
+				baseRotate: -8,
+				bobAmplitude: 6,
+				bobFrequency: 1.12,
+				driftY: -6,
+				end: 1.1,
+				exitOffset: 26,
+				finAmplitude: 4,
+				opacity: 0.96,
+				phase: 0.2,
+				rotateAmplitude: 5,
+				scale: 0.96,
+				start: -0.18,
+			},
+			{
+				baseRotate: 4,
+				bobAmplitude: 9,
+				bobFrequency: 1.5,
+				driftY: 5,
+				end: 1.16,
+				exitOffset: 22,
+				finAmplitude: 5,
+				opacity: 0.84,
+				phase: 1.1,
+				rotateAmplitude: 7,
+				scale: 0.82,
+				start: -0.08,
+			},
+			{
+				baseRotate: -3,
+				bobAmplitude: 10,
+				bobFrequency: 1.35,
+				driftY: -2,
+				end: 1.22,
+				exitOffset: 20,
+				finAmplitude: 6,
+				opacity: 0.88,
+				phase: 2.2,
+				rotateAmplitude: 5,
+				scale: 0.86,
+				start: -0.02,
+			},
+			{
+				baseRotate: 7,
+				bobAmplitude: 8,
+				bobFrequency: 0.95,
+				driftY: 7,
+				end: 1.12,
+				exitOffset: 24,
+				finAmplitude: 4,
+				opacity: 0.78,
+				phase: 0.8,
+				rotateAmplitude: 6,
+				scale: 0.92,
+				start: -0.22,
+			},
+			{
+				baseRotate: 2,
+				bobAmplitude: 11,
+				bobFrequency: 1.25,
+				driftY: -8,
+				end: 1.28,
+				exitOffset: 18,
+				finAmplitude: 6,
+				opacity: 0.82,
+				phase: 2.75,
+				rotateAmplitude: 8,
+				scale: 0.88,
+				start: -0.14,
+			},
+		];
+
+		const getPageTop = (element) =>
+			element.getBoundingClientRect().top + window.scrollY;
+
+		const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+		const easeInOutSine = (value) => 0.5 - Math.cos(value * Math.PI) / 2;
+
+		const updateTimelineFish = () => {
+			frameRequested = false;
+			const viewportTravel = timelineSection.offsetWidth;
+
+			if (reducedMotionQuery.matches) {
+				for (const [index, fish] of timelineFish.entries()) {
+					const config = fishConfigs[index];
+					const visibleX = 1.8 + index * 8.25;
+					fish.style.opacity = `${config.opacity}`;
+					fish.style.transform = `translate3d(${visibleX}rem, 0, 0) rotate(${config.baseRotate}deg) scale(${config.scale})`;
+				}
+				return;
+			}
+
+			const start = getPageTop(timelineSection) - window.innerHeight * 0.34;
+			const end =
+				getPageTop(morningTalksEntry) +
+				morningTalksEntry.offsetHeight +
+				window.innerHeight * 0.75;
+			const scrollAnchor = window.scrollY + window.innerHeight * 0.28;
+			const rawProgress = (scrollAnchor - start) / Math.max(end - start, 1);
+			const clampedProgress = clamp(rawProgress, 0, 1);
+
+			for (const [index, fish] of timelineFish.entries()) {
+				const config = fishConfigs[index];
+				const entryOffset = fish.offsetWidth + 10;
+				const exitOffset = fish.offsetWidth + config.exitOffset;
+				const localProgress = clamp(
+					(clampedProgress - config.start) / (config.end - config.start),
+					0,
+					1,
+				);
+				const easedProgress = easeInOutSine(localProgress);
+				const bodyWave = Math.sin(
+					localProgress * Math.PI * 2 * config.bobFrequency + config.phase,
+				);
+				const finWave = Math.sin(
+					localProgress * Math.PI * 4.2 + config.phase * 1.7,
+				);
+				const translateX =
+					-entryOffset +
+					easedProgress * (viewportTravel + entryOffset + exitOffset);
+				const translateY =
+					bodyWave * config.bobAmplitude +
+					finWave * config.finAmplitude +
+					easedProgress * config.driftY;
+				const fadeDistance = 0.14;
+				const opacity =
+					Math.min(
+						clamp(localProgress / fadeDistance, 0, 1),
+						clamp((1 - localProgress) / fadeDistance, 0, 1),
+					) * config.opacity;
+				const rotate =
+					config.baseRotate +
+					bodyWave * config.rotateAmplitude +
+					finWave * (config.rotateAmplitude * 0.4);
+
+				fish.style.opacity = `${opacity}`;
+				fish.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${config.scale})`;
+			}
+		};
+
+		const requestTimelineFishUpdate = () => {
+			if (frameRequested) {
+				return;
+			}
+
+			frameRequested = true;
+			window.requestAnimationFrame(updateTimelineFish);
+		};
+
+		updateTimelineFish();
+		window.addEventListener("scroll", requestTimelineFishUpdate, {
+			passive: true,
+		});
+		window.addEventListener("resize", requestTimelineFishUpdate);
+		if (typeof reducedMotionQuery.addEventListener === "function") {
+			reducedMotionQuery.addEventListener("change", requestTimelineFishUpdate);
+		}
+	}
 
 	for (const card of timelineCards) {
 		card.addEventListener("pointermove", (event) => {

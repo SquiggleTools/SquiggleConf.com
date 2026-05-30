@@ -1,9 +1,20 @@
 ---
 import themeMoon from "~/assets/design/theme-moon.svg";
 import themeSun from "~/assets/design/theme-sun.svg";
+
+interface Props {
+	placement?: "floating" | "inline";
+}
+
+const { placement = "floating" } = Astro.props;
 ---
 
-<div class="theme-toggle">
+<div
+	class:list={[
+		"theme-toggle",
+		placement === "inline" ? "theme-toggle-inline" : "theme-toggle-floating",
+	]}
+>
 	<button
 		aria-label="Theme toggle (enable JavaScript to use)"
 		class="theme-button"
@@ -60,10 +71,21 @@ import themeSun from "~/assets/design/theme-sun.svg";
 <style>
 	.theme-toggle {
 		opacity: 0.9;
+	}
+
+	.theme-toggle-floating {
 		position: absolute;
 		right: 2.5rem;
 		top: 2.5rem;
 		z-index: 1;
+	}
+
+	.theme-toggle-inline {
+		display: inline-flex;
+		position: static;
+		right: auto;
+		top: auto;
+		z-index: auto;
 	}
 
 	.theme-button {

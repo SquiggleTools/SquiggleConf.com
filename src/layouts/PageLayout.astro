@@ -4,7 +4,6 @@ import Header from "~/components/Header.astro";
 import BodyArea from "~/components/BodyArea.astro";
 import Footer from "~/components/Footer.astro";
 import BaseLayout from "./BaseLayout.astro";
-import ThemeToggle from "~/components/ThemeToggle.astro";
 import { currentYear } from "~/data/years";
 
 type Props = HeadProps & {
@@ -23,7 +22,6 @@ const year = Astro.props.year ?? currentYear;
 	/>
 	<BodyArea>
 		<slot />
-		<ThemeToggle />
 	</BodyArea>
 	<Footer year={year} />
 </BaseLayout>

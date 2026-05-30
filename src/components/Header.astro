@@ -40,7 +40,6 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 			<div class="header-contents-mobile">
 				{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 				<a {...hrefProps("/articles")}>Articles</a>
-				{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
 				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
 				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
 				{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
@@ -67,7 +66,6 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 		<div class="header-links">
 			{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 			<a {...hrefProps("/articles")}>Articles</a>
-			{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
 			{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
 			{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
 			{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
