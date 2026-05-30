@@ -1,47 +1,551 @@
 ---
+import { Image } from "astro:assets";
+
 import AboutUs from "~/components/AboutUs.astro";
-import Arrow from "~/components/Arrow.astro";
-import Button from "~/components/Button.astro";
 import ExplainersList from "~/components/explainers/ExplainersList.astro";
 import Hero from "~/components/hero/Hero.astro";
-import HeroLocators from "~/components/hero/HeroLocators.astro";
-import HeroTagline from "~/components/hero/HeroTagline.astro";
-import InlineBlock from "~/components/InlineBlock.astro";
 import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
+import Logo from "~/components/Logo.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
-import TextSquiggly from "~/components/TextSquiggly.astro";
+import { sessionsBySlug } from "~/data/sessions";
+import group from "~/assets/stills/speakers-event-group.png";
+import harbor from "~/assets/stills/boston-harbor.png";
+import networking from "~/assets/stills/attendees-networking.png";
+import signage from "~/assets/stills/signage-outside-venue.png";
+import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
+import robbyRussell from "~/assets/avatars/robby-russell.jpg";
 import PageLayout from "~/layouts/PageLayout.astro";
+
+const talksSessions = [
+	"a-world-class-local-dev-loop-with-aspire",
+	"aot-compiling-typescript-to-wasm-and-native",
+	"catch-accessibility-issues-at-the-source-with-storybook",
+].map((slug) => {
+	const session = sessionsBySlug[slug];
+	const speaker = session.speakers[0];
+
+	return {
+		image: speaker.image,
+		name: speaker.name,
+		qualification: session.qualification ?? speaker.qualification,
+		title: session.title,
+	};
+});
+
+const lateTalksSessions = [
+	"make-tools-that-people-love",
+	"rolldown-how-vite-bundles-at-the-speed-of-rust",
+].map((slug) => {
+	const session = sessionsBySlug[slug];
+	const speaker = session.speakers[0];
+
+	return {
+		image: speaker.image,
+		name: speaker.name,
+		qualification: session.qualification ?? speaker.qualification,
+		title: session.title,
+	};
+});
+
+const afternoonTalksSessions = [
+	"effect-type-safe-errors-and-dependency-injection",
+	"source-maps-how-does-the-magic-work",
+	"cross-browser-devtools-with-webextensions",
+].map((slug) => {
+	const session = sessionsBySlug[slug];
+	const speaker = session.speakers[0];
+
+	return {
+		image: speaker.image,
+		name: speaker.name,
+		qualification: session.qualification ?? speaker.qualification,
+		title: session.title,
+	};
+});
 ---
 
-<PageLayout description="A Boston conference for excellent web dev tooling.">
-	<Hero scrollNotice tall>
-		<HeroLocators class="hero-locators" />
-
-		<HeroTagline>
-			SquiggleConf brings together the admirers, contributors, and maintainers
-			of the latest and greatest in
-			<InlineBlock>
-				<TextSquiggly width="wide">
-					<Fragment slot="inside">web dev tooling</Fragment>
-					<Fragment slot="after">.</Fragment>
-				</TextSquiggly>
-			</InlineBlock>
-		</HeroTagline>
-
-		<div class="hero-bottom">
-			<Button
-				as="a"
-				class="hero-button"
-				size="large"
-				variant="emphasized"
-				href="#newsletter"
-			>
-				Subscribe for 2027 conference updates
-				<Arrow />
-			</Button>
+<PageLayout
+	description="A Boston conference for excellent web dev tooling."
+	hideHeaderLinks={["about", "shop"]}
+	hideHeaderLogo
+>
+	<Hero tall>
+		<div class="hero-intro">
+			<Logo class="hero-logo" />
+			<p class="hero-subtitle">your devtools fieldtrip</p>
 		</div>
 	</Hero>
+	<section class="timeline-section" aria-label="Timeline preview">
+		<div class="timeline-grid">
+			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+			<div class="timeline-cap">
+				<p>Thursday</p>
+				<p>May 6th</p>
+			</div>
+			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+
+			<div class="timeline-venue">
+				<p>@ Ned</p>
+				<p>Devine's</p>
+			</div>
+			<div class="timeline-rail">
+				<p class="timeline-time">6pm</p>
+			</div>
+
+			<div class="timeline-content">
+				<h2>Launch Party!</h2>
+				<p class="timeline-subtitle">6-9pm</p>
+				<div class="timeline-collage" aria-label="Launch party collage">
+					<div class="collage-photo collage-photo-1">
+						<Image alt="People networking at SquiggleConf" src={networking} />
+					</div>
+					<div class="collage-photo collage-photo-2">
+						<Image alt="Boston harbor near the venue" src={harbor} />
+					</div>
+					<div class="collage-photo collage-photo-3">
+						<Image alt="Speakers gathered together at the event" src={group} />
+					</div>
+					<div class="collage-photo collage-photo-4">
+						<Image alt="Conference signage at the venue" src={signage} />
+					</div>
+				</div>
+				<div class="timeline-copy">
+					<p>
+						Kick off the weekend with snacks, drinks, and an easy room full of
+						tool-loving people. It is the place to settle in, say hi, and start
+						the conference with a little momentum.
+					</p>
+				</div>
+			</div>
+
+			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+			<div class="timeline-cap">
+				<p>Friday</p>
+				<p>May 7th</p>
+			</div>
+			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+
+			<div class="timeline-venue timeline-venue-aquarium">
+				<p>@ New</p>
+				<p>England</p>
+				<p>Aquarium</p>
+			</div>
+			<div class="timeline-rail timeline-rail-short">
+				<p class="timeline-time">7am</p>
+			</div>
+
+			<div class="timeline-content timeline-content-run">
+				<div class="timeline-title-row">
+					<div class="timeline-title-copy">
+						<h2>Fun Run</h2>
+						<p class="timeline-subtitle">7-7:30am</p>
+					</div>
+					<div class="timeline-mini-collage" aria-label="Fun run collage">
+						<div class="mini-collage-photo mini-collage-photo-1">
+							<Image alt="Boston harbor near the venue" src={harbor} />
+						</div>
+						<div class="mini-collage-photo mini-collage-photo-2">
+							<Image alt="People networking at SquiggleConf" src={networking} />
+						</div>
+					</div>
+				</div>
+				<div class="timeline-copy">
+					<p>
+						A quick waterfront loop to wake everybody up before the day begins.
+					</p>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
+			<div class="timeline-rail timeline-rail-checkin">
+				<p class="timeline-time">8am</p>
+			</div>
+
+			<div class="timeline-content timeline-content-checkin">
+				<h2>Check In</h2>
+				<div class="timeline-copy">
+					<p>
+						Pick up your badge, settle in, and grab a coffee before the first
+						sessions start.
+					</p>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
+			<div class="timeline-rail timeline-rail-talks">
+				<p class="timeline-time">9am</p>
+			</div>
+
+			<div class="timeline-content timeline-content-talks">
+				<h2>Talks</h2>
+				<div class="talks-list" aria-label="Speaker talks">
+					{
+						talksSessions.map((talk) => (
+							<article class="talk-card">
+								<div class="talk-avatar">
+									<Image alt={talk.name} src={talk.image} />
+								</div>
+								<div class="talk-copy">
+									<h3>{talk.title}</h3>
+									<p class="talk-speaker">{talk.name}</p>
+									<p class="talk-role">{talk.qualification}</p>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
+			<div class="timeline-rail timeline-rail-break">
+				<p class="timeline-time">10:30am</p>
+			</div>
+
+			<div class="timeline-content timeline-content-break">
+				<h2>Milk &amp; Cookies Break</h2>
+				<div class="break-body">
+					<div
+						class="break-collage"
+						aria-label="Milk and Cookies break collage"
+					>
+						<div class="break-photo break-photo-1">
+							<Image alt="People networking at SquiggleConf" src={networking} />
+						</div>
+						<div class="break-photo break-photo-2">
+							<Image
+								alt="Speakers gathered together at the event"
+								src={group}
+							/>
+						</div>
+						<div class="break-photo break-photo-3">
+							<Image alt="Conference signage at the venue" src={signage} />
+						</div>
+					</div>
+					<div class="break-copy timeline-copy">
+						<p>
+							Pause for a reset, catch up with people you just met, and trade
+							notes on the morning’s talks.
+						</p>
+						<p>
+							The break keeps the middle of the day loose and social before
+							everyone heads back into the next block.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
+			<div class="timeline-rail timeline-rail-talks timeline-rail-talks-late">
+				<p class="timeline-time">11am</p>
+			</div>
+
+			<div
+				class="timeline-content timeline-content-talks timeline-content-talks-late"
+			>
+				<h2>Talks</h2>
+				<div
+					class="talks-list talks-list-short"
+					aria-label="Late morning talks"
+				>
+					{
+						lateTalksSessions.map((talk) => (
+							<article class="talk-card">
+								<div class="talk-avatar">
+									<Image alt={talk.name} src={talk.image} />
+								</div>
+								<div class="talk-copy">
+									<h3>{talk.title}</h3>
+									<p class="talk-speaker">{talk.name}</p>
+									<p class="talk-role">{talk.qualification}</p>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-lunch">
+				<p>@ Historic</p>
+				<p>Faneuil</p>
+				<p>Hall</p>
+				<p>Market</p>
+			</div>
+			<div class="timeline-rail timeline-rail-lunch">
+				<p class="timeline-time">12pm</p>
+			</div>
+
+			<div class="timeline-content timeline-content-lunch">
+				<h2>Lunch</h2>
+				<div class="lunch-body">
+					<div class="lunch-collage" aria-label="Lunch collage">
+						<div class="lunch-photo lunch-photo-1">
+							<Image alt="Boston harbor near the venue" src={harbor} />
+						</div>
+						<div class="lunch-photo lunch-photo-2">
+							<Image alt="People networking at SquiggleConf" src={networking} />
+						</div>
+						<div class="lunch-photo lunch-photo-3">
+							<Image alt="Conference signage at the venue" src={signage} />
+						</div>
+						<div class="lunch-photo lunch-photo-4">
+							<Image
+								alt="Speakers gathered together at the event"
+								src={group}
+							/>
+						</div>
+						<div class="lunch-photo lunch-photo-5">
+							<Image alt="People networking at SquiggleConf" src={networking} />
+						</div>
+					</div>
+					<div class="lunch-copy timeline-copy">
+						<p>
+							Head out together for lunch in the market, keep conversations
+							moving, and let the middle of the day feel like a field trip.
+						</p>
+						<ul class="lunch-links">
+							<li>
+								<a
+									href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
+								>
+									Boston &amp; Maine Fish Company
+								</a>
+							</li>
+							<li>
+								<a href="https://faneuilhallmarketplace.com/go/boston-chowda">
+									Boston Chowda
+								</a>
+							</li>
+							<li>
+								<a href="https://faneuilhallmarketplace.com/go/prime-shoppe">
+									Prime Shoppe
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://faneuilhallmarketplace.com/go/steves-greek-cuisine"
+								>
+									Steve's Greek Cuisine
+								</a>
+							</li>
+						</ul>
+						<p>
+							It should stay busy, walkable, and social before everyone regroups
+							for the afternoon talks.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-aquarium">
+				<p>@ New</p>
+				<p>England</p>
+				<p>Aquarium</p>
+			</div>
+			<div
+				class="timeline-rail timeline-rail-talks timeline-rail-talks-afternoon"
+			>
+				<p class="timeline-time">2pm</p>
+			</div>
+
+			<div
+				class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
+			>
+				<h2>Talks</h2>
+				<div class="talks-list" aria-label="Afternoon talks">
+					{
+						afternoonTalksSessions.map((talk) => (
+							<article class="talk-card">
+								<div class="talk-avatar">
+									<Image alt={talk.name} src={talk.image} />
+								</div>
+								<div class="talk-copy">
+									<h3>{talk.title}</h3>
+									<p class="talk-speaker">{talk.name}</p>
+									<p class="talk-role">{talk.qualification}</p>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
+			<div class="timeline-rail timeline-rail-explore">
+				<p class="timeline-time">3:30pm</p>
+			</div>
+
+			<div class="timeline-content timeline-content-explore">
+				<h2>Explore Boston</h2>
+				<p class="timeline-subtitle">choose your own adventure</p>
+				<div class="explore-options" aria-label="Explore Boston options">
+					<article class="explore-card">
+						<div class="explore-choice" aria-hidden="true">
+							<span class="explore-radio"
+								><span class="explore-radio-dot"></span></span
+							>
+						</div>
+						<div class="explore-card-body">
+							<div class="explore-photo">
+								<Image alt="Boston harbor near the venue" src={harbor} />
+							</div>
+							<div class="explore-copy">
+								<h3>Duck Boat Tour</h3>
+								<p>
+									See more of the city in one shot with a classic Boston ride
+									that keeps the afternoon easy and social.
+								</p>
+							</div>
+						</div>
+					</article>
+					<article class="explore-card">
+						<div class="explore-choice" aria-hidden="true">
+							<span class="explore-radio"
+								><span class="explore-radio-dot"></span></span
+							>
+						</div>
+						<div class="explore-card-body">
+							<div class="explore-photo">
+								<Image alt="Conference signage at the venue" src={signage} />
+							</div>
+							<div class="explore-copy">
+								<h3>Scavenger Hunt</h3>
+								<p>
+									A loose city walk with clues, checkpoints, and small teams
+									moving through the neighborhood together.
+								</p>
+							</div>
+						</div>
+					</article>
+					<article class="explore-card">
+						<div class="explore-choice" aria-hidden="true">
+							<span class="explore-radio"
+								><span class="explore-radio-dot"></span></span
+							>
+						</div>
+						<div class="explore-card-body">
+							<div class="explore-photo">
+								<Image
+									alt="People networking at SquiggleConf"
+									src={networking}
+								/>
+							</div>
+							<div class="explore-copy">
+								<h3>Rest Up</h3>
+								<p>
+									Take a quiet block to recharge, reset, and come back ready for
+									the evening without over-scheduling the day.
+								</p>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-urban">
+				<p>@ Urban</p>
+				<p>Wild</p>
+			</div>
+			<div class="timeline-rail timeline-rail-syntax">
+				<p class="timeline-time">5:30pm</p>
+			</div>
+
+			<div class="timeline-content timeline-content-syntax">
+				<h2>Syntax.fm Live</h2>
+				<div class="event-body">
+					<div class="event-hero-image event-hero-image-wide">
+						<img
+							alt="Syntax.fm live YouTube thumbnail"
+							src="https://i.ytimg.com/vi/PXO0iopa5QI/hqdefault.jpg"
+							loading="lazy"
+						/>
+					</div>
+					<div class="timeline-copy">
+						<p>
+							Wes and Scott are bringing Syntax.fm live to Urban Wild, and
+							they’re going to interview someone cool in front of the whole
+							room.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-urban">
+				<p>@ Urban</p>
+				<p>Wild</p>
+			</div>
+			<div class="timeline-rail timeline-rail-fireside">
+				<p class="timeline-time">6:30pm</p>
+			</div>
+
+			<div class="timeline-content timeline-content-fireside">
+				<h2>Fireside Chat: The Fight for the JavaScript Trademark</h2>
+				<div class="event-body">
+					<div
+						class="fireside-avatars"
+						aria-label="Placeholder avatars for fireside chat guests"
+					>
+						<div class="fireside-avatar fireside-avatar-1">
+							<Image
+								alt="Placeholder avatar for Ryan Dahl"
+								src={robbyRussell}
+							/>
+						</div>
+						<div class="fireside-avatar fireside-avatar-2">
+							<Image
+								alt="Placeholder avatar for Dillon Mulroy"
+								src={dillonMulroy}
+							/>
+						</div>
+					</div>
+					<div class="timeline-copy">
+						<p>
+							A focused conversation about the long fight over the JavaScript
+							trademark, with placeholder guest art for now until the final
+							assets are ready.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="timeline-venue timeline-venue-urban">
+				<p>@ Urban</p>
+				<p>Wild</p>
+			</div>
+			<div class="timeline-rail timeline-rail-afterparty">
+				<p class="timeline-time">7pm</p>
+			</div>
+
+			<div class="timeline-content timeline-content-afterparty">
+				<h2>After Party</h2>
+				<p class="timeline-subtitle">7-9pm</p>
+				<div class="afterparty-collage" aria-label="After party collage">
+					<div class="afterparty-photo afterparty-photo-1">
+						<Image alt="People networking at SquiggleConf" src={networking} />
+					</div>
+					<div class="afterparty-photo afterparty-photo-2">
+						<Image alt="Boston harbor near the venue" src={harbor} />
+					</div>
+					<div class="afterparty-photo afterparty-photo-3">
+						<Image alt="Speakers gathered together at the event" src={group} />
+					</div>
+					<div class="afterparty-photo afterparty-photo-4">
+						<Image alt="Conference signage at the venue" src={signage} />
+					</div>
+					<div class="afterparty-photo afterparty-photo-5">
+						<Image alt="People networking at SquiggleConf" src={networking} />
+					</div>
+				</div>
+				<div class="timeline-copy">
+					<p>
+						Urban Wild Boston is the kind of place that makes an after party
+						easy: lots of room, good energy, and enough atmosphere to keep
+						people hanging around after the talks are done.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 	<ExplainersList />
 	<AboutUs />
 	<Registration />
@@ -50,19 +554,909 @@ import PageLayout from "~/layouts/PageLayout.astro";
 </PageLayout>
 
 <style>
-	.hero-locators {
-		padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(1.5rem, 5vw, 2.5rem);
-	}
-
-	.hero-bottom {
-		align-items: flex-start;
+	.hero-intro {
+		align-items: center;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		margin-top: 3.5rem;
+		gap: 2rem;
+		min-height: clamp(17rem, 46vw, 24rem);
+		justify-content: center;
+		padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(4.5rem, 11vw, 7rem);
+		text-align: center;
 	}
 
-	.hero-button {
-		gap: 0.5rem;
+	.hero-logo {
+		font-size: clamp(3.5rem, 11vw, 7.5rem);
+		line-height: 0.95;
+	}
+
+	.hero-subtitle {
+		color: var(--colorBackground);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.25rem, 3vw, 2rem);
+		font-style: italic;
+		font-weight: var(--fontWeightMedium);
+		margin: 0 0 0.75rem;
+	}
+
+	.timeline-section {
+		background: linear-gradient(
+			180deg,
+			var(--colorBlueBright3) 0%,
+			var(--colorBlueBright4) 100%
+		);
+		padding: 0 1rem clamp(3rem, 7vw, 5rem);
+	}
+
+	.timeline-grid {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 12.5% 12.5% 75%;
+		margin: 0 auto;
+		max-width: min(100%, var(--sizeContentAreaWide));
+		padding-top: 1rem;
+	}
+
+	.timeline-cell-empty {
+		min-height: 0;
+	}
+
+	.timeline-venue {
+		align-items: flex-end;
+		color: var(--colorForegroundEmphasized);
+		display: flex;
+		flex-direction: column;
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.5rem;
+		font-weight: 500;
+		justify-content: flex-start;
+		line-height: 1.12;
+		margin: 0;
+		padding: 1rem 1.5rem 0 0;
+		text-align: right;
+	}
+
+	.timeline-venue p {
+		margin: 0;
+	}
+
+	.timeline-venue-empty {
+		min-height: 0;
+		padding: 0;
+	}
+
+	.timeline-rail {
+		background: var(--colorBlueBright1);
+		border: 1px solid var(--colorBlue3);
+		display: flex;
+		flex-direction: column;
+		min-height: 23rem;
+	}
+
+	.timeline-rail-short {
+		min-height: 10rem;
+	}
+
+	.timeline-rail-checkin {
+		min-height: 7rem;
+	}
+
+	.timeline-rail-talks {
+		min-height: 25rem;
+	}
+
+	.timeline-rail-break {
+		min-height: 14rem;
+	}
+
+	.timeline-rail-talks-late {
+		min-height: 19rem;
+	}
+
+	.timeline-rail-lunch {
+		min-height: 24rem;
+	}
+
+	.timeline-rail-talks-afternoon {
+		min-height: 25rem;
+	}
+
+	.timeline-rail-explore {
+		min-height: 28rem;
+	}
+
+	.timeline-rail-syntax {
+		min-height: 13rem;
+	}
+
+	.timeline-rail-fireside {
+		min-height: 12rem;
+	}
+
+	.timeline-rail-afterparty {
+		min-height: 18rem;
+	}
+
+	.timeline-cap {
+		background: var(--colorBlue2);
+		color: var(--colorForeground);
+
+		border: 1px solid var(--colorBlue3);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(0.95rem, 1.45vw, 1.1rem);
+		font-weight: 700;
+		line-height: 1.1;
+		grid-column: 2;
+		padding: 0.8rem 0.55rem;
+		text-align: center;
+	}
+
+	.timeline-cap p,
+	.timeline-time {
+		margin: 0;
+	}
+
+	.timeline-time {
+		color: var(--colorBackground);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.3rem, 2vw, 1.6rem);
+		font-weight: 700;
+		padding-top: 1.15rem;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+		text-align: center;
+	}
+
+	.timeline-content {
+		padding: 0.6rem 0 0 1.9rem;
+	}
+
+	.timeline-content-run {
+		padding-top: 0.85rem;
+	}
+
+	.timeline-content-checkin {
+		padding-top: 1rem;
+	}
+
+	.timeline-content-talks,
+	.timeline-content-break {
+		padding-top: 1rem;
+	}
+
+	.timeline-content-lunch {
+		padding-top: 1rem;
+	}
+
+	.timeline-content-talks-afternoon {
+		padding-top: 1rem;
+	}
+
+	.timeline-content-explore {
+		padding-top: 1rem;
+	}
+
+	.timeline-content-syntax,
+	.timeline-content-fireside,
+	.timeline-content-afterparty {
+		padding-top: 1rem;
+	}
+
+	.timeline-content h2 {
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
+		font-weight: 700;
+		line-height: 1;
+		margin: 0;
+	}
+
+	.timeline-title-row {
+		align-items: start;
+		display: inline-flex;
+		gap: 0.6rem;
+		justify-content: flex-start;
+		min-height: 5.75rem;
+		width: fit-content;
+	}
+
+	.timeline-title-copy {
+		display: grid;
+		gap: 0.3rem;
+		justify-items: start;
+	}
+
+	.timeline-content-run .timeline-subtitle {
+		margin: 0;
+	}
+
+	.timeline-subtitle {
+		color: var(--colorForegroundEmphasized);
+		display: block;
+		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
+		font-weight: 500;
+		margin: 0.32rem 0 1.1rem;
+	}
+
+	.timeline-mini-collage {
+		flex: 0 0 auto;
+		position: relative;
+		transform: translateY(-0.05rem);
+		width: 9.9rem;
+	}
+
+	.mini-collage-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: absolute;
+		width: 6.3rem;
+	}
+
+	.mini-collage-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.mini-collage-photo-1 {
+		height: 5.8rem;
+		left: 0.3rem;
+		top: -3.5rem;
+		transform: rotate(-10deg);
+	}
+
+	.mini-collage-photo-2 {
+		height: 5.9rem;
+		left: 4.15rem;
+		top: -2rem;
+		transform: rotate(8deg);
+	}
+
+	.timeline-collage {
+		height: clamp(7.5rem, 14vw, 9.5rem);
+		margin-bottom: 1rem;
+		position: relative;
+		width: min(100%, 31rem);
+	}
+
+	.collage-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.4rem 0.9rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: absolute;
+		width: 8.9rem;
+	}
+
+	.collage-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.collage-photo-1 {
+		height: 6.5rem;
+		left: 0.2rem;
+		top: 1.15rem;
+		transform: rotate(-12deg);
+	}
+
+	.collage-photo-2 {
+		height: 6.3rem;
+		left: 6.1rem;
+		top: 0.1rem;
+		transform: rotate(-2deg);
+	}
+
+	.collage-photo-3 {
+		height: 6.4rem;
+		left: 13rem;
+		top: 0.85rem;
+		transform: rotate(9deg);
+	}
+
+	.collage-photo-4 {
+		height: 6rem;
+		left: 20rem;
+		top: 0.9rem;
+		transform: rotate(4deg);
+	}
+
+	.timeline-copy {
+		display: grid;
+		gap: 0.45rem;
+		max-width: 46rem;
+	}
+
+	.timeline-copy p {
+		font-size: clamp(0.95rem, 1.35vw, 1rem);
+		line-height: 1.45;
+		margin: 0;
+		max-width: 62ch;
+	}
+
+	.talks-list {
+		display: grid;
+		gap: 0.8rem;
+		margin-top: 0.8rem;
+	}
+
+	.talks-list-short {
+		max-width: 44rem;
+	}
+
+	.talk-card {
+		align-items: stretch;
+		display: grid;
+		gap: 0.8rem;
+		grid-template-columns: 5rem 1fr;
+	}
+
+	.talk-avatar {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.45rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+	}
+
+	.talk-avatar :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.talk-copy {
+		display: grid;
+		grid-template-rows: auto auto auto;
+		min-height: 5.75rem;
+	}
+
+	.talk-copy h3 {
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1rem, 1.55vw, 1.2rem);
+		font-weight: 700;
+		line-height: 1.08;
+		margin: 0;
+	}
+
+	.talk-speaker {
+		color: var(--colorBackground);
+		font-size: clamp(0.92rem, 1.2vw, 1rem);
+		font-weight: 600;
+		margin: 0.2rem 0 0;
+	}
+
+	.talk-role {
+		color: var(--colorForegroundEmphasized);
+		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+		line-height: 1.25;
+		margin: 0.12rem 0 0;
+	}
+
+	.break-body {
+		display: grid;
+		align-items: start;
+		column-gap: 0.8rem;
+		grid-template-columns: auto minmax(0, 1fr);
+		margin-top: 0.8rem;
+	}
+
+	.break-collage {
+		height: 8rem;
+		position: relative;
+		width: 18.6rem;
+	}
+
+	.break-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: absolute;
+		width: 7.5rem;
+	}
+
+	.break-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.break-photo-1 {
+		height: 5.7rem;
+		left: 0.25rem;
+		top: 1rem;
+		transform: rotate(-8deg);
+	}
+
+	.break-photo-2 {
+		height: 5.8rem;
+		left: 5.4rem;
+		top: 0.2rem;
+		transform: rotate(2deg);
+	}
+
+	.break-photo-3 {
+		height: 5.7rem;
+		left: 10.6rem;
+		top: 1rem;
+		transform: rotate(7deg);
+	}
+
+	.break-copy {
+		align-content: start;
+	}
+
+	.timeline-venue-lunch {
+		line-height: 1.02;
+		padding-top: 0.9rem;
+	}
+
+	.timeline-venue-aquarium {
+		line-height: 1.02;
+		padding-top: 0.9rem;
+	}
+
+	.timeline-venue-urban {
+		line-height: 1.02;
+		padding-top: 0.9rem;
+	}
+
+	.lunch-body {
+		align-items: start;
+		display: grid;
+		column-gap: 1.35rem;
+		grid-template-columns: 19rem minmax(0, 1fr);
+		margin: 0.95rem 0 0.4rem;
+		max-width: 50rem;
+	}
+
+	.lunch-collage {
+		height: 16.25rem;
+		max-width: 19rem;
+		position: relative;
+		width: 19rem;
+	}
+
+	.lunch-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: absolute;
+	}
+
+	.lunch-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.lunch-photo-1 {
+		height: 6.8rem;
+		left: 2.8rem;
+		top: 0.25rem;
+		transform: rotate(-8deg);
+		width: 6.8rem;
+	}
+
+	.lunch-photo-2 {
+		height: 5.4rem;
+		left: 8.1rem;
+		top: 0.95rem;
+		transform: rotate(1deg);
+		width: 8.6rem;
+	}
+
+	.lunch-photo-3 {
+		height: 5.8rem;
+		left: 1.1rem;
+		top: 5.5rem;
+		transform: rotate(6deg);
+		width: 7.2rem;
+	}
+
+	.lunch-photo-4 {
+		height: 6.2rem;
+		left: 8.6rem;
+		top: 6rem;
+		transform: rotate(-7deg);
+		width: 6.8rem;
+	}
+
+	.lunch-photo-5 {
+		height: 6.7rem;
+		left: 4.7rem;
+		top: 9rem;
+		transform: rotate(2deg);
+		width: 7.4rem;
+	}
+
+	.lunch-photo-6 {
+		display: none;
+	}
+
+	.lunch-copy {
+		padding-top: 0.4rem;
+	}
+
+	.lunch-links {
+		display: grid;
+		gap: 0.3rem;
+		margin: 0;
+		padding-left: 1.2rem;
+	}
+
+	.lunch-links a {
+		color: var(--colorBackground);
+		font-weight: 600;
+		text-decoration-thickness: 0.08em;
+		text-underline-offset: 0.14em;
+	}
+
+	.explore-options {
+		display: grid;
+		gap: 0.75rem;
+		margin-top: 0.8rem;
+		max-width: 42rem;
+	}
+
+	.explore-card {
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid var(--colorBlue3);
+		box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.14);
+		display: grid;
+		grid-template-columns: 3.5rem 1fr;
+		transition:
+			background-color 160ms ease,
+			border-color 160ms ease,
+			box-shadow 160ms ease,
+			transform 160ms ease;
+	}
+
+	.explore-card:hover {
+		background: rgba(255, 255, 255, 0.14);
+		border-color: rgba(255, 255, 255, 0.38);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+		transform: translateX(0.08rem);
+	}
+
+	.explore-choice {
+		align-items: center;
+		border-right: 1px solid var(--colorBlue3);
+		display: flex;
+		justify-content: center;
+		padding: 0.75rem 0.25rem;
+	}
+
+	.explore-radio {
+		align-items: center;
+		background: rgba(255, 255, 255, 0.08);
+		border: 2px solid var(--colorBackground);
+		border-radius: 999px;
+		display: inline-flex;
+		height: 1.45rem;
+		justify-content: center;
+		transition:
+			background-color 160ms ease,
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+		width: 1.45rem;
+	}
+
+	.explore-card:hover .explore-radio {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 0 0 0.18rem rgba(255, 255, 255, 0.12);
+	}
+
+	.explore-radio-dot {
+		background: var(--colorBackground);
+		border-radius: 999px;
+		display: block;
+		height: 0.46rem;
+		opacity: 0;
+		transform: scale(0.2);
+		transition:
+			opacity 160ms ease,
+			transform 160ms ease;
+		width: 0.46rem;
+	}
+
+	.explore-card:hover .explore-radio-dot {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.explore-card-body {
+		align-items: start;
+		display: grid;
+		column-gap: 0.9rem;
+		grid-template-columns: 4.8rem minmax(0, 1fr);
+		min-width: 0;
+		padding: 0.85rem 1rem;
+	}
+
+	.explore-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		display: block;
+		height: 4.8rem;
+		min-width: 4.8rem;
+		overflow: hidden;
+		width: 4.8rem;
+	}
+
+	.explore-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.explore-copy {
+		display: grid;
+		gap: 0.3rem;
+		min-width: 0;
+	}
+
+	.explore-copy h3 {
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+		font-weight: 700;
+		line-height: 1.05;
+		margin: 0;
+	}
+
+	.explore-copy p {
+		font-size: clamp(0.95rem, 1.25vw, 1rem);
+		line-height: 1.4;
+		margin: 0;
+		max-width: 48ch;
+	}
+
+	.event-body {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: auto minmax(0, 1fr);
+		margin-top: 0.85rem;
+		max-width: 48rem;
+	}
+
+	.event-hero-image {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+	}
+
+	.event-hero-image-wide {
+		height: 8rem;
+		width: 14.2rem;
+	}
+
+	.event-hero-image img {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.fireside-avatars {
+		height: 7.25rem;
+		position: relative;
+		width: 8rem;
+	}
+
+	.fireside-avatar {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 999px;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		height: 4.9rem;
+		overflow: hidden;
+		position: absolute;
+		width: 4.9rem;
+	}
+
+	.fireside-avatar :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.fireside-avatar-1 {
+		left: 0.2rem;
+		top: 0.4rem;
+		transform: rotate(-7deg);
+	}
+
+	.fireside-avatar-2 {
+		left: 3rem;
+		top: 1.6rem;
+		transform: rotate(6deg);
+	}
+
+	.afterparty-collage {
+		height: 11.75rem;
+		margin: 0.5rem 0 1rem;
+		position: relative;
+		width: min(100%, 37rem);
+	}
+
+	.afterparty-photo {
+		background: white;
+		border: 2px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: absolute;
+	}
+
+	.afterparty-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.afterparty-photo-1 {
+		height: 7rem;
+		left: 0.4rem;
+		top: 2rem;
+		transform: rotate(-8deg);
+		width: 9.4rem;
+	}
+
+	.afterparty-photo-2 {
+		height: 6.6rem;
+		left: 7.4rem;
+		top: 0.35rem;
+		transform: rotate(-2deg);
+		width: 9.8rem;
+	}
+
+	.afterparty-photo-3 {
+		height: 6.9rem;
+		left: 15.9rem;
+		top: 1.65rem;
+		transform: rotate(7deg);
+		width: 9.2rem;
+	}
+
+	.afterparty-photo-4 {
+		height: 6.5rem;
+		left: 24rem;
+		top: 0.7rem;
+		transform: rotate(3deg);
+		width: 8.8rem;
+	}
+
+	.afterparty-photo-5 {
+		height: 7.2rem;
+		left: 11rem;
+		top: 4.4rem;
+		transform: rotate(-5deg);
+		width: 10rem;
+	}
+
+	@media (width < 900px) {
+		.timeline-grid {
+			gap: 0.8rem;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+		}
+
+		.timeline-cap {
+			grid-column: auto;
+		}
+
+		.timeline-venue {
+			padding: 0;
+		}
+
+		.timeline-rail {
+			min-height: auto;
+		}
+
+		.timeline-content {
+			padding: 0;
+		}
+
+		.break-body {
+			grid-template-columns: 1fr;
+		}
+
+		.lunch-body {
+			grid-template-columns: 1fr;
+			row-gap: 0.9rem;
+		}
+
+		.lunch-collage {
+			display: grid;
+			gap: 0.7rem 0.8rem;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			height: auto;
+			max-width: 19rem;
+			position: static;
+			width: 100%;
+		}
+
+		.lunch-photo {
+			position: static;
+			transform: none;
+			width: 100%;
+		}
+
+		.lunch-photo-1,
+		.lunch-photo-3,
+		.lunch-photo-5 {
+			height: 5.5rem;
+		}
+
+		.lunch-photo-2,
+		.lunch-photo-4 {
+			height: 4.2rem;
+		}
+
+		.lunch-photo-6 {
+			display: none;
+		}
+
+		.explore-card {
+			grid-template-columns: 3rem minmax(0, 1fr);
+		}
+
+		.explore-choice {
+			padding: 0.65rem 0.2rem;
+		}
+
+		.explore-card-body {
+			column-gap: 0.7rem;
+			grid-template-columns: 4rem minmax(0, 1fr);
+			padding: 0.7rem 0.8rem;
+		}
+
+		.explore-photo {
+			height: 4rem;
+			min-width: 4rem;
+			width: 4rem;
+		}
+
+		.explore-copy h3 {
+			font-size: 1.15rem;
+		}
+
+		.timeline-title-row {
+			align-items: flex-start;
+			gap: 0.65rem;
+			display: flex;
+			flex-direction: column;
+			min-height: auto;
+			width: auto;
+		}
+
+		.timeline-title-copy {
+			justify-items: start;
+		}
+
+		.timeline-mini-collage {
+			justify-self: start;
+			transform: none;
+		}
 	}
 </style>

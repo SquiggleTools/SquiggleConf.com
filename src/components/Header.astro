@@ -14,54 +14,70 @@ function hrefProps(pathname: string) {
 }
 
 interface Props {
+	hideLogo?: boolean;
+	hideTopLinks?: string[];
 	year?: number;
 }
 
-const { year } = Astro.props;
+const { hideLogo = false, hideTopLinks = [], year } = Astro.props;
 const logoHref = year === currentYear ? "/" : `/${year}`;
+const shouldShowAbout = !hideTopLinks.includes("about");
+const shouldShowShop = !hideTopLinks.includes("shop");
 ---
 
 <header>
 	<ContentArea class="header-content-area-mobile">
-		<a class="logo" href={logoHref}><Logo year={year} /></a>
+		{
+			!hideLogo && (
+				<a class="logo" href={logoHref}>
+					<Logo year={year} />
+				</a>
+			)
+		}
 
 		<details id="details">
 			<summary aria-label="Toggle header">≡</summary>
 			<div class="header-contents-mobile">
-				<a {...hrefProps("/about")}>About</a>
+				{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 				<a {...hrefProps("/articles")}>Articles</a>
 				{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
 				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
 				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
-				<a {...hrefProps(links.shop)}>Shop</a>
+				{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
 				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 				<Button
 					as="a"
 					class="header-button"
 					href={links.tickets}
 					target="_blank"
-					variant="accent">Get your ticket</Button
+					variant="accent">2027 Tickets</Button
 				>
 			</div>
 		</details>
 	</ContentArea>
 
 	<ContentArea class="header-content-area-wide" width="wide">
-		<a class="logo" href={logoHref}><Logo year={year} /></a>
+		{
+			!hideLogo && (
+				<a class="logo" href={logoHref}>
+					<Logo year={year} />
+				</a>
+			)
+		}
 		<div class="header-links">
-			<a {...hrefProps("/about")}>About</a>
+			{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 			<a {...hrefProps("/articles")}>Articles</a>
 			{year === currentYear && <a {...hrefProps("/schedule")}>Schedule</a>}
 			{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
 			{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
-			<a {...hrefProps(links.shop)}>Shop</a>
+			{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
 			{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 			<Button
 				as="a"
 				class="header-button"
 				href={links.tickets}
 				target="_blank"
-				variant="accent">Get your ticket</Button
+				variant="accent">2027 Tickets</Button
 			>
 		</div>
 	</ContentArea>
@@ -80,9 +96,9 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 
 <style>
 	header {
-		border-bottom: 1px solid var(--colorBlue3);
+		border-bottom: 0;
 		color: var(--colorWhiteIsh);
-		background: var(--colorForeground);
+		background: var(--colorBlueBright1);
 		font-size: var(--fontSizeSmaller);
 		padding: 1.5rem 0;
 		width: 100%;
@@ -96,6 +112,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 		align-items: center;
 		display: flex;
 		justify-content: space-between;
+		min-height: 2.5rem;
 		position: relative;
 	}
 
@@ -127,7 +144,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 
 	.header-contents-mobile {
 		--offsetTop: 4.5rem;
-		background: var(--colorForeground);
+		background: var(--colorBlueBright1);
 		box-shadow: 0 0 1rem var(--colorTextShadow);
 		display: flex;
 		flex-direction: column;
@@ -168,6 +185,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 	}
 
 	.header-button {
+		border-radius: 0.85rem;
 		justify-content: center;
 		margin-left: 0.35rem;
 		text-wrap: nowrap;
@@ -181,7 +199,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 		.header-content-area-wide {
 			align-items: center;
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-end;
 		}
 	}
 </style>
