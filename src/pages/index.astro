@@ -13,6 +13,15 @@ import group from "~/assets/stills/speakers-event-group.png";
 import harbor from "~/assets/stills/boston-harbor.png";
 import networking from "~/assets/stills/attendees-networking.png";
 import signage from "~/assets/stills/signage-outside-venue.png";
+import duck1 from "~/assets/2027/duck-1.jpg";
+import duck2 from "~/assets/2027/duck-2.jpg";
+import duck3 from "~/assets/2027/duck-3.jpg";
+import funrun1 from "~/assets/2027/funrun-1.jpg";
+import funrun2 from "~/assets/2027/funrun-2.jpg";
+import milkcookies1 from "~/assets/2027/milkcookies-1.jpg";
+import milkcookies2 from "~/assets/2027/milkcookies-2.png";
+import milkcookies3 from "~/assets/2027/milkcookies-3.jpg";
+import rest1 from "~/assets/2027/rest-1.jpg";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import robbyRussell from "~/assets/avatars/robby-russell.jpg";
 import PageLayout from "~/layouts/PageLayout.astro";
@@ -73,10 +82,11 @@ const afternoonTalksSessions = [
 	<Hero tall>
 		<div class="hero-intro">
 			<Logo class="hero-logo" />
-			<p class="hero-subtitle">your devtools fieldtrip</p>
+			<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
 		</div>
 	</Hero>
 	<section class="timeline-section" aria-label="Timeline preview">
+		<h2 class="timeline-heading">your devtools fieldtrip</h2>
 		<div class="timeline-grid">
 			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
 			<div class="timeline-cap">
@@ -93,20 +103,20 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">6pm</p>
 			</div>
 
-			<div class="timeline-content">
+			<div class="timeline-content" data-timeline-entry="launch">
 				<h2>Launch Party!</h2>
 				<p class="timeline-subtitle">6-9pm</p>
 				<div class="timeline-collage" aria-label="Launch party collage">
-					<div class="collage-photo collage-photo-1">
+					<div class="launchparty-photo launchparty-photo-1">
 						<Image alt="People networking at SquiggleConf" src={networking} />
 					</div>
-					<div class="collage-photo collage-photo-2">
+					<div class="launchparty-photo launchparty-photo-2">
 						<Image alt="Boston harbor near the venue" src={harbor} />
 					</div>
-					<div class="collage-photo collage-photo-3">
+					<div class="launchparty-photo launchparty-photo-3">
 						<Image alt="Speakers gathered together at the event" src={group} />
 					</div>
-					<div class="collage-photo collage-photo-4">
+					<div class="launchparty-photo launchparty-photo-4">
 						<Image alt="Conference signage at the venue" src={signage} />
 					</div>
 				</div>
@@ -135,18 +145,21 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">7am</p>
 			</div>
 
-			<div class="timeline-content timeline-content-run">
+			<div
+				class="timeline-content timeline-content-run"
+				data-timeline-entry="fun-run"
+			>
 				<div class="timeline-title-row">
 					<div class="timeline-title-copy">
 						<h2>Fun Run</h2>
 						<p class="timeline-subtitle">7-7:30am</p>
 					</div>
 					<div class="timeline-mini-collage" aria-label="Fun run collage">
-						<div class="mini-collage-photo mini-collage-photo-1">
-							<Image alt="Boston harbor near the venue" src={harbor} />
+						<div class="funrun-photo funrun-photo-1">
+							<Image alt="Fun Run route by the waterfront" src={funrun1} />
 						</div>
-						<div class="mini-collage-photo mini-collage-photo-2">
-							<Image alt="People networking at SquiggleConf" src={networking} />
+						<div class="funrun-photo funrun-photo-2">
+							<Image alt="Runners gathering before the Fun Run" src={funrun2} />
 						</div>
 					</div>
 				</div>
@@ -162,7 +175,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">8am</p>
 			</div>
 
-			<div class="timeline-content timeline-content-checkin">
+			<div
+				class="timeline-content timeline-content-checkin"
+				data-timeline-entry="check-in"
+			>
 				<h2>Check In</h2>
 				<div class="timeline-copy">
 					<p>
@@ -177,7 +193,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">9am</p>
 			</div>
 
-			<div class="timeline-content timeline-content-talks">
+			<div
+				class="timeline-content timeline-content-talks"
+				data-timeline-entry="talks-morning"
+			>
 				<h2>Talks</h2>
 				<div class="talks-list" aria-label="Speaker talks">
 					{
@@ -202,7 +221,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">10:30am</p>
 			</div>
 
-			<div class="timeline-content timeline-content-break">
+			<div
+				class="timeline-content timeline-content-break"
+				data-timeline-entry="cookies-break"
+			>
 				<h2>Milk &amp; Cookies Break</h2>
 				<div class="break-body">
 					<div
@@ -210,16 +232,13 @@ const afternoonTalksSessions = [
 						aria-label="Milk and Cookies break collage"
 					>
 						<div class="break-photo break-photo-1">
-							<Image alt="People networking at SquiggleConf" src={networking} />
+							<Image alt="Milk and cookies spread" src={milkcookies3} />
 						</div>
 						<div class="break-photo break-photo-2">
-							<Image
-								alt="Speakers gathered together at the event"
-								src={group}
-							/>
+							<Image alt="Cookies at the break" src={milkcookies1} />
 						</div>
 						<div class="break-photo break-photo-3">
-							<Image alt="Conference signage at the venue" src={signage} />
+							<Image alt="Milk and cookies break crowd" src={milkcookies2} />
 						</div>
 					</div>
 					<div class="break-copy timeline-copy">
@@ -242,6 +261,7 @@ const afternoonTalksSessions = [
 
 			<div
 				class="timeline-content timeline-content-talks timeline-content-talks-late"
+				data-timeline-entry="talks-late"
 			>
 				<h2>Talks</h2>
 				<div
@@ -266,8 +286,7 @@ const afternoonTalksSessions = [
 			</div>
 
 			<div class="timeline-venue timeline-venue-lunch">
-				<p>@ Historic</p>
-				<p>Faneuil</p>
+				<p>@ Faneuil</p>
 				<p>Hall</p>
 				<p>Market</p>
 			</div>
@@ -275,7 +294,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">12pm</p>
 			</div>
 
-			<div class="timeline-content timeline-content-lunch">
+			<div
+				class="timeline-content timeline-content-lunch"
+				data-timeline-entry="lunch"
+			>
 				<h2>Lunch</h2>
 				<div class="lunch-body">
 					<div class="lunch-collage" aria-label="Lunch collage">
@@ -350,6 +372,7 @@ const afternoonTalksSessions = [
 
 			<div
 				class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
+				data-timeline-entry="talks-afternoon"
 			>
 				<h2>Talks</h2>
 				<div class="talks-list" aria-label="Afternoon talks">
@@ -375,7 +398,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">3:30pm</p>
 			</div>
 
-			<div class="timeline-content timeline-content-explore">
+			<div
+				class="timeline-content timeline-content-explore"
+				data-timeline-entry="explore-boston"
+			>
 				<h2>Explore Boston</h2>
 				<p class="timeline-subtitle">choose your own adventure</p>
 				<div class="explore-options" aria-label="Explore Boston options">
@@ -387,7 +413,7 @@ const afternoonTalksSessions = [
 						</div>
 						<div class="explore-card-body">
 							<div class="explore-photo">
-								<Image alt="Boston harbor near the venue" src={harbor} />
+								<Image alt="Duck boat on the water" src={duck1} />
 							</div>
 							<div class="explore-copy">
 								<h3>Duck Boat Tour</h3>
@@ -406,7 +432,7 @@ const afternoonTalksSessions = [
 						</div>
 						<div class="explore-card-body">
 							<div class="explore-photo">
-								<Image alt="Conference signage at the venue" src={signage} />
+								<Image alt="Scavenger hunt clue card" src={duck2} />
 							</div>
 							<div class="explore-copy">
 								<h3>Scavenger Hunt</h3>
@@ -425,10 +451,7 @@ const afternoonTalksSessions = [
 						</div>
 						<div class="explore-card-body">
 							<div class="explore-photo">
-								<Image
-									alt="People networking at SquiggleConf"
-									src={networking}
-								/>
+								<Image alt="Quiet place to rest up" src={rest1} />
 							</div>
 							<div class="explore-copy">
 								<h3>Rest Up</h3>
@@ -450,7 +473,10 @@ const afternoonTalksSessions = [
 				<p class="timeline-time">5:30pm</p>
 			</div>
 
-			<div class="timeline-content timeline-content-syntax">
+			<div
+				class="timeline-content timeline-content-syntax"
+				data-timeline-entry="syntax-live"
+			>
 				<h2>Syntax.fm Live</h2>
 				<div class="event-body">
 					<div class="event-hero-image event-hero-image-wide">
@@ -470,15 +496,15 @@ const afternoonTalksSessions = [
 				</div>
 			</div>
 
-			<div class="timeline-venue timeline-venue-urban">
-				<p>@ Urban</p>
-				<p>Wild</p>
-			</div>
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
 			<div class="timeline-rail timeline-rail-fireside">
 				<p class="timeline-time">6:30pm</p>
 			</div>
 
-			<div class="timeline-content timeline-content-fireside">
+			<div
+				class="timeline-content timeline-content-fireside"
+				data-timeline-entry="fireside-chat"
+			>
 				<h2>Fireside Chat: The Fight for the JavaScript Trademark</h2>
 				<div class="event-body">
 					<div
@@ -508,15 +534,15 @@ const afternoonTalksSessions = [
 				</div>
 			</div>
 
-			<div class="timeline-venue timeline-venue-urban">
-				<p>@ Urban</p>
-				<p>Wild</p>
-			</div>
+			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
 			<div class="timeline-rail timeline-rail-afterparty">
 				<p class="timeline-time">7pm</p>
 			</div>
 
-			<div class="timeline-content timeline-content-afterparty">
+			<div
+				class="timeline-content timeline-content-afterparty"
+				data-timeline-entry="after-party"
+			>
 				<h2>After Party</h2>
 				<p class="timeline-subtitle">7-9pm</p>
 				<div class="afterparty-collage" aria-label="After party collage">
@@ -559,9 +585,8 @@ const afternoonTalksSessions = [
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		min-height: clamp(17rem, 46vw, 24rem);
 		justify-content: center;
-		padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(4.5rem, 11vw, 7rem);
+		padding: 3.5rem 0;
 		text-align: center;
 	}
 
@@ -576,25 +601,69 @@ const afternoonTalksSessions = [
 		font-size: clamp(1.25rem, 3vw, 2rem);
 		font-style: italic;
 		font-weight: var(--fontWeightMedium);
+		letter-spacing: 0.05em;
 		margin: 0 0 0.75rem;
 	}
 
 	.timeline-section {
+		--timeline-hover-duration: 220ms;
+		background:
+			linear-gradient(
+				180deg,
+				rgba(255, 255, 255, 0.045) 0%,
+				rgba(255, 255, 255, 0.018) 22%,
+				rgba(255, 255, 255, 0) 72%
+			),
+			var(--colorBlueBright3);
+		isolation: isolate;
+		overflow: clip;
+		padding: 0 1rem clamp(3rem, 7vw, 5rem);
+		position: relative;
+	}
+
+	.timeline-section::before {
 		background: linear-gradient(
 			180deg,
-			var(--colorBlueBright3) 0%,
-			var(--colorBlueBright4) 100%
+			rgba(255, 255, 255, 0.035) 0%,
+			rgba(255, 255, 255, 0.015) 26%,
+			transparent 68%
 		);
-		padding: 0 1rem clamp(3rem, 7vw, 5rem);
+		content: "";
+		inset: 0;
+		opacity: 0.9;
+		pointer-events: none;
+		position: absolute;
+		transition: opacity var(--timeline-hover-duration) ease;
+		z-index: 0;
+	}
+
+	.timeline-heading {
+		color: var(--colorBackground);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+		font-weight: var(--fontWeightLogo);
+		letter-spacing: 0.04em;
+		margin: 0 auto;
+		max-width: min(100%, var(--sizeContentAreaWide));
+		padding-top: clamp(1.5rem, 4vw, 3rem);
+		position: relative;
+		text-align: center;
+		transition:
+			letter-spacing var(--timeline-hover-duration) ease,
+			text-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+		z-index: 1;
 	}
 
 	.timeline-grid {
 		display: grid;
 		grid-template-rows: auto 1fr;
-		grid-template-columns: 12.5% 12.5% 75%;
+		grid-template-columns: 12.5% 10.5% 75%;
 		margin: 0 auto;
 		max-width: min(100%, var(--sizeContentAreaWide));
 		padding-top: 1rem;
+		position: relative;
+		z-index: 1;
 	}
 
 	.timeline-cell-empty {
@@ -614,6 +683,10 @@ const afternoonTalksSessions = [
 		margin: 0;
 		padding: 1rem 1.5rem 0 0;
 		text-align: right;
+		transition:
+			color var(--timeline-hover-duration) ease,
+			opacity var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
 	}
 
 	.timeline-venue p {
@@ -630,51 +703,8 @@ const afternoonTalksSessions = [
 		border: 1px solid var(--colorBlue3);
 		display: flex;
 		flex-direction: column;
-		min-height: 23rem;
-	}
-
-	.timeline-rail-short {
-		min-height: 10rem;
-	}
-
-	.timeline-rail-checkin {
-		min-height: 7rem;
-	}
-
-	.timeline-rail-talks {
-		min-height: 25rem;
-	}
-
-	.timeline-rail-break {
-		min-height: 14rem;
-	}
-
-	.timeline-rail-talks-late {
-		min-height: 19rem;
-	}
-
-	.timeline-rail-lunch {
-		min-height: 24rem;
-	}
-
-	.timeline-rail-talks-afternoon {
-		min-height: 25rem;
-	}
-
-	.timeline-rail-explore {
-		min-height: 28rem;
-	}
-
-	.timeline-rail-syntax {
-		min-height: 13rem;
-	}
-
-	.timeline-rail-fireside {
-		min-height: 12rem;
-	}
-
-	.timeline-rail-afterparty {
-		min-height: 18rem;
+		overflow: hidden;
+		position: relative;
 	}
 
 	.timeline-cap {
@@ -707,38 +737,128 @@ const afternoonTalksSessions = [
 	}
 
 	.timeline-content {
-		padding: 0.6rem 0 0 1.9rem;
+		--timeline-card-pointer-x: 50%;
+		--timeline-card-pointer-y: 50%;
+		isolation: isolate;
+		padding: 1.1rem 0 2rem 2rem;
+		position: relative;
+		transition: transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.timeline-content::before {
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.09),
+			rgba(255, 255, 255, 0.02)
+		);
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		border-radius: 1rem;
+		box-shadow: none;
+		content: "";
+		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
+		opacity: 0.22;
+		pointer-events: none;
+		position: absolute;
+		transform: scale(0.985);
+		z-index: 0;
+		transition:
+			opacity var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content::after {
+		background: radial-gradient(
+			circle 25rem at var(--timeline-card-pointer-x)
+				var(--timeline-card-pointer-y),
+			color-mix(in srgb, var(--colorBlue2) 92%, white 8%) 0,
+			color-mix(in srgb, var(--colorBlue2) 52%, transparent) 28%,
+			transparent 60%
+		);
+		border-radius: 1rem;
+		content: "";
+		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
+		opacity: 0;
+		padding: 3px;
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+		transition: opacity var(--timeline-hover-duration) ease;
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+	}
+
+	.timeline-content:hover,
+	.timeline-content:focus-within {
+		transform: translateX(0.3rem);
+	}
+
+	.timeline-content:hover::before,
+	.timeline-content:focus-within::before {
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.13),
+			rgba(255, 255, 255, 0.03)
+		);
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+			0 1rem 2rem rgba(7, 20, 38, 0.14);
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.timeline-content:hover::after,
+	.timeline-content:focus-within::after {
+		opacity: 1;
 	}
 
 	.timeline-content-run {
-		padding-top: 0.85rem;
+		min-height: 10rem;
+		padding-top: 1.2rem;
 	}
 
 	.timeline-content-checkin {
-		padding-top: 1rem;
+		padding-top: 1.35rem;
 	}
 
 	.timeline-content-talks,
 	.timeline-content-break {
-		padding-top: 1rem;
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-break {
+		min-height: 14rem;
 	}
 
 	.timeline-content-lunch {
-		padding-top: 1rem;
+		min-height: 24rem;
+		padding-top: 1.35rem;
 	}
 
 	.timeline-content-talks-afternoon {
-		padding-top: 1rem;
+		padding-top: 1.35rem;
 	}
 
 	.timeline-content-explore {
-		padding-top: 1rem;
+		padding-top: 1.35rem;
 	}
 
 	.timeline-content-syntax,
 	.timeline-content-fireside,
 	.timeline-content-afterparty {
-		padding-top: 1rem;
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-afterparty {
+		min-height: 18rem;
 	}
 
 	.timeline-content h2 {
@@ -747,6 +867,17 @@ const afternoonTalksSessions = [
 		font-weight: 700;
 		line-height: 1;
 		margin: 0;
+		transition:
+			color var(--timeline-hover-duration) ease,
+			text-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover h2,
+	.timeline-content:focus-within h2 {
+		color: white;
+		text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
+		transform: translateX(0.08rem);
 	}
 
 	.timeline-title-row {
@@ -774,6 +905,108 @@ const afternoonTalksSessions = [
 		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
 		font-weight: 500;
 		margin: 0.32rem 0 1.1rem;
+		transition: color var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover .timeline-subtitle,
+	.timeline-content:focus-within .timeline-subtitle {
+		color: rgba(255, 255, 255, 0.88);
+	}
+
+	.timeline-content
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.talk-avatar,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		) {
+		transform-origin: center;
+		transition:
+			scale var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		will-change: scale;
+	}
+
+	.timeline-content:hover
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		),
+	.timeline-content:focus-within
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		) {
+		scale: 1.25;
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	.timeline-content
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.talk-avatar,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		)
+		:is(img, :global(img)) {
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(0.95);
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	.timeline-content:hover
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.talk-avatar,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		)
+		:is(img, :global(img)),
+	.timeline-content:focus-within
+		:is(
+			.funrun-photo,
+			.launchparty-photo,
+			.talk-avatar,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image,
+			.fireside-avatar,
+			.afterparty-photo
+		)
+		:is(img, :global(img)) {
+		filter: saturate(1.05);
+		transform: scale(1.1) translate3d(0, -0.06rem, 0);
 	}
 
 	.timeline-mini-collage {
@@ -783,35 +1016,65 @@ const afternoonTalksSessions = [
 		width: 9.9rem;
 	}
 
-	.mini-collage-photo {
+	.funrun-photo {
 		background: white;
 		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
 		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
 		overflow: hidden;
 		position: absolute;
-		width: 6.3rem;
 	}
 
-	.mini-collage-photo :global(img) {
+	.funrun-photo :global(img) {
 		display: block;
 		height: 100%;
 		object-fit: cover;
 		width: 100%;
 	}
 
-	.mini-collage-photo-1 {
-		height: 5.8rem;
-		left: 0.3rem;
-		top: -3.5rem;
+	.funrun-photo-1 {
+		height: 7rem;
+		width: 5rem;
+		left: 6rem;
+		top: -4rem;
+		transform: rotate(35deg);
+	}
+
+	.timeline-content .funrun-photo-1,
+	.timeline-content .funrun-photo-2 {
+		transition:
+			left var(--timeline-hover-duration) ease,
+			top var(--timeline-hover-duration) ease,
+			scale var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover .funrun-photo-1,
+	.timeline-content:focus-within .funrun-photo-1 {
+		left: 7rem;
+		top: -5rem;
+	}
+
+	.timeline-content:hover .funrun-photo-2,
+	.timeline-content:focus-within .funrun-photo-2 {
+		left: 0.75rem;
+		top: -6rem;
+	}
+
+	.funrun-photo-1 :global(img) {
+		object-position: 10% 10%;
+	}
+
+	.funrun-photo-2 {
+		height: 8rem;
+		width: 6rem;
+		left: 1rem;
+		top: -4rem;
 		transform: rotate(-10deg);
 	}
 
-	.mini-collage-photo-2 {
-		height: 5.9rem;
-		left: 4.15rem;
-		top: -2rem;
-		transform: rotate(8deg);
+	.funrun-photo-2 :global(img) {
+		object-position: 38% 50%;
 	}
 
 	.timeline-collage {
@@ -821,7 +1084,7 @@ const afternoonTalksSessions = [
 		width: min(100%, 31rem);
 	}
 
-	.collage-photo {
+	.launchparty-photo {
 		background: white;
 		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
@@ -831,35 +1094,35 @@ const afternoonTalksSessions = [
 		width: 8.9rem;
 	}
 
-	.collage-photo :global(img) {
+	.launchparty-photo :global(img) {
 		display: block;
 		height: 100%;
 		object-fit: cover;
 		width: 100%;
 	}
 
-	.collage-photo-1 {
+	.launchparty-photo-1 {
 		height: 6.5rem;
 		left: 0.2rem;
 		top: 1.15rem;
 		transform: rotate(-12deg);
 	}
 
-	.collage-photo-2 {
+	.launchparty-photo-2 {
 		height: 6.3rem;
 		left: 6.1rem;
 		top: 0.1rem;
 		transform: rotate(-2deg);
 	}
 
-	.collage-photo-3 {
+	.launchparty-photo-3 {
 		height: 6.4rem;
 		left: 13rem;
 		top: 0.85rem;
 		transform: rotate(9deg);
 	}
 
-	.collage-photo-4 {
+	.launchparty-photo-4 {
 		height: 6rem;
 		left: 20rem;
 		top: 0.9rem;
@@ -877,6 +1140,12 @@ const afternoonTalksSessions = [
 		line-height: 1.45;
 		margin: 0;
 		max-width: 62ch;
+		transition: color var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover .timeline-copy p,
+	.timeline-content:focus-within .timeline-copy p {
+		color: rgba(255, 255, 255, 0.9);
 	}
 
 	.talks-list {
@@ -960,18 +1229,18 @@ const afternoonTalksSessions = [
 		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
 		overflow: hidden;
 		position: absolute;
-		width: 7.5rem;
 	}
 
 	.break-photo :global(img) {
 		display: block;
 		height: 100%;
-		object-fit: cover;
 		width: 100%;
+		object-fit: cover;
 	}
 
 	.break-photo-1 {
 		height: 5.7rem;
+		width: 7.5rem;
 		left: 0.25rem;
 		top: 1rem;
 		transform: rotate(-8deg);
@@ -979,16 +1248,23 @@ const afternoonTalksSessions = [
 
 	.break-photo-2 {
 		height: 5.8rem;
+		width: 7.5rem;
 		left: 5.4rem;
 		top: 0.2rem;
+		z-index: 1;
 		transform: rotate(2deg);
 	}
 
 	.break-photo-3 {
-		height: 5.7rem;
-		left: 10.6rem;
-		top: 1rem;
-		transform: rotate(7deg);
+		height: 5rem;
+		width: 6rem;
+		left: 11rem;
+		top: 2rem;
+		transform: rotate(10deg);
+	}
+
+	.break-photo-3 :global(img) {
+		object-position: 10% 0%;
 	}
 
 	.break-copy {
@@ -1118,10 +1394,10 @@ const afternoonTalksSessions = [
 		display: grid;
 		grid-template-columns: 3.5rem 1fr;
 		transition:
-			background-color 160ms ease,
-			border-color 160ms ease,
-			box-shadow 160ms ease,
-			transform 160ms ease;
+			background-color var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
 	}
 
 	.explore-card:hover {
@@ -1148,9 +1424,9 @@ const afternoonTalksSessions = [
 		height: 1.45rem;
 		justify-content: center;
 		transition:
-			background-color 160ms ease,
-			border-color 160ms ease,
-			box-shadow 160ms ease;
+			background-color var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
 		width: 1.45rem;
 	}
 
@@ -1168,8 +1444,8 @@ const afternoonTalksSessions = [
 		opacity: 0;
 		transform: scale(0.2);
 		transition:
-			opacity 160ms ease,
-			transform 160ms ease;
+			opacity var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
 		width: 0.46rem;
 	}
 
@@ -1377,6 +1653,14 @@ const afternoonTalksSessions = [
 			padding: 0;
 		}
 
+		.timeline-content::before {
+			inset: 0.2rem -0.1rem 0.35rem;
+		}
+
+		.timeline-content::after {
+			inset: 0.2rem -0.1rem 0.35rem;
+		}
+
 		.break-body {
 			grid-template-columns: 1fr;
 		}
@@ -1458,5 +1742,53 @@ const afternoonTalksSessions = [
 			justify-self: start;
 			transform: none;
 		}
+
+		.timeline-content:hover,
+		.timeline-content:focus-within {
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline-section::before,
+		.timeline-heading,
+		.timeline-venue,
+		.timeline-content,
+		.timeline-content::before,
+		.timeline-content::after,
+		.timeline-content h2,
+		.timeline-subtitle,
+		.timeline-copy p {
+			transition: none;
+		}
 	}
 </style>
+
+<script>
+	// @ts-nocheck
+	const timelineCards = Array.from(
+		document.querySelectorAll(".timeline-content"),
+	).filter((element) => element instanceof HTMLElement);
+
+	for (const card of timelineCards) {
+		card.addEventListener("pointermove", (event) => {
+			const rect = card.getBoundingClientRect();
+			const x = ((event.clientX - rect.left) / rect.width) * 100;
+			const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+			card.style.setProperty(
+				"--timeline-card-pointer-x",
+				`${Math.min(Math.max(x, 0), 100).toFixed(2)}%`,
+			);
+			card.style.setProperty(
+				"--timeline-card-pointer-y",
+				`${Math.min(Math.max(y, 0), 100).toFixed(2)}%`,
+			);
+		});
+
+		card.addEventListener("pointerleave", () => {
+			card.style.setProperty("--timeline-card-pointer-x", "50%");
+			card.style.setProperty("--timeline-card-pointer-y", "50%");
+		});
+	}
+</script>
