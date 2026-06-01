@@ -1,0 +1,46 @@
+<div class="deep-sea-surface">
+	<slot />
+</div>
+
+<style>
+	.deep-sea-surface {
+		background: linear-gradient(
+				#124067 0%,
+				#0c3357 10%,
+				#062446 20%,
+				#062241 40%,
+				#041a37 60%,
+				#031733 80%,
+				#051630 100%
+			)
+			var(--colorBlueBright3);
+		isolation: isolate;
+		overflow: clip;
+		position: relative;
+	}
+
+	.deep-sea-surface::after {
+		background:
+			repeating-linear-gradient(
+				116deg,
+				rgba(255, 255, 255, 0.042) 0 2px,
+				transparent 2px 18px,
+				rgba(118, 217, 255, 0.028) 18px 20px,
+				transparent 20px 34px
+			),
+			repeating-linear-gradient(
+				-64deg,
+				rgba(255, 255, 255, 0.018) 0 1px,
+				transparent 1px 15px,
+				rgba(56, 173, 223, 0.026) 15px 17px,
+				transparent 17px 31px
+			);
+		content: "";
+		inset: 0;
+		mix-blend-mode: screen;
+		opacity: 0.28;
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+	}
+</style>

@@ -2,7 +2,6 @@
 import mantaDown from "~/assets/design/manta-down.svg";
 import mantaUp from "~/assets/design/manta-up.svg";
 import squiggleThickWide from "~/assets/design/squiggle-thick-wide.svg";
-import { links } from "~/data/links";
 
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
@@ -23,7 +22,6 @@ import Arrow from "./Arrow.astro";
 			as="a"
 			class="tickets-link"
 			href="/#newsletter"
-			target="_blank"
 			size="large"
 			variant="emphasized"
 		>
@@ -35,7 +33,6 @@ import Arrow from "./Arrow.astro";
 
 <style>
 	.registration {
-		background: var(--colorBlue4);
 		color: var(--colorWhiteIsh);
 		overflow: hidden;
 		position: relative;
@@ -44,8 +41,10 @@ import Arrow from "./Arrow.astro";
 	.squiggle-thick-wide {
 		height: 100%;
 		left: 0;
+		opacity: 0.22;
 		top: 0%;
 		width: 100%;
+		z-index: 0;
 	}
 
 	.manta-down {
@@ -68,6 +67,7 @@ import Arrow from "./Arrow.astro";
 		min-height: 14rem;
 		padding: 3.5rem;
 		position: relative;
+		z-index: 1;
 	}
 
 	.tickets-link {

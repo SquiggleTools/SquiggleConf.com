@@ -4,9 +4,11 @@ import { Image } from "astro:assets";
 import Hero from "~/components/hero/Hero.astro";
 import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
+import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Logo from "~/components/Logo.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
+import { speakersBySlug } from "~/data/speakers";
 import { sessionsBySlug } from "~/data/sessions";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg";
@@ -22,6 +24,9 @@ import terminalShop from "~/assets/2027/terminal.shop.svg";
 import duck1 from "~/assets/2027/duck-1.jpg";
 import duck2 from "~/assets/2027/duck-2.jpg";
 import duck3 from "~/assets/2027/duck-3.jpg";
+import bigRav from "~/assets/2027/bigrav.png";
+import maddyPortrait from "~/assets/2027/maddy.jpeg";
+import everybodySquiggling from "~/assets/2027/everybody-squiggling.jpg";
 import funrun1 from "~/assets/2027/funrun-1.jpg";
 import funrun2 from "~/assets/2027/funrun-2.jpg";
 import milkcookies1 from "~/assets/2027/milkcookies-1.jpg";
@@ -78,6 +83,18 @@ const afternoonTalksSessions = [
 		title: session.title,
 	};
 });
+
+const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
+	(slug) => {
+		const speaker = speakersBySlug[slug];
+
+		return {
+			image: slug === "maddy-montaquila" ? maddyPortrait : speaker.image,
+			name: speaker.name,
+			qualification: speaker.qualification,
+		};
+	},
+);
 ---
 
 <PageLayout
@@ -91,391 +108,752 @@ const afternoonTalksSessions = [
 			<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
 		</div>
 	</Hero>
-	<section class="timeline-section" aria-label="Timeline preview">
-		<div class="timeline-fish-layer" aria-hidden="true">
-			<div class="timeline-fish-shell timeline-fish-shell-1">
-				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={timelineFish1.src}
-						width={timelineFish1.width}
-						height={timelineFish1.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
-			<div class="timeline-fish-shell timeline-fish-shell-2">
-				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={timelineFish2.src}
-						width={timelineFish2.width}
-						height={timelineFish2.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
-			<div class="timeline-fish-shell timeline-fish-shell-3">
-				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={timelineFish3.src}
-						width={timelineFish3.width}
-						height={timelineFish3.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
-			<div class="timeline-fish-shell timeline-fish-shell-4">
-				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={timelineFish4.src}
-						width={timelineFish4.width}
-						height={timelineFish4.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
-			<div class="timeline-fish-shell timeline-fish-shell-5">
-				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={timelineFish5.src}
-						width={timelineFish5.width}
-						height={timelineFish5.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
-		</div>
-		<h2 class="timeline-heading">your devtools fieldtrip</h2>
-		<div class="timeline-grid">
-			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
-			<div class="timeline-cap timeline-top">
-				<p>Thursday</p>
-				<p>May 6th</p>
-			</div>
-			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
-
-			<div class="timeline-venue">
-				<p>@</p>
-				<p>Ned</p>
-				<p>Devine's</p>
-			</div>
-			<div class="timeline-rail">
-				<p class="timeline-time">6pm</p>
-			</div>
-
-			<div class="timeline-content" data-timeline-entry="launch">
-				<h2>Launch Party!</h2>
-				<p class="timeline-subtitle">6-9pm</p>
-				<div class="timeline-collage" aria-label="Launch party collage">
-					<div class="launchparty-photo launchparty-photo-1">
-						<Image
-							alt="People networking at SquiggleConf"
-							src={networking}
-							loading="eager"
-						/>
-					</div>
-					<div class="launchparty-photo launchparty-photo-2">
-						<Image
-							alt="Boston harbor near the venue"
-							src={harbor}
-							loading="eager"
-						/>
-					</div>
-					<div class="launchparty-photo launchparty-photo-3">
-						<Image
-							alt="Speakers gathered together at the event"
-							src={group}
-							loading="eager"
-						/>
-					</div>
-					<div class="launchparty-photo launchparty-photo-4">
-						<Image
-							alt="Conference signage at the venue"
-							src={signage}
-							loading="eager"
-						/>
-					</div>
-				</div>
-				<div class="timeline-copy">
-					<p>
-						Kick off the weekend with snacks, drinks, and an easy room full of
-						tool-loving people. It is the place to settle in, say hi, and start
-						the conference with a little momentum.
-					</p>
-				</div>
-			</div>
-
-			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
-			<div class="timeline-cap">
-				<p>Friday</p>
-				<p>May 7th</p>
-			</div>
-			<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
-
-			<div
-				class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-morning"
-			>
-				<div class="timeline-venue-stack">
-					<p>@</p>
-					<p>New</p>
-					<p>England</p>
-					<p>Aquarium</p>
-				</div>
-			</div>
-			<div class="timeline-rail timeline-rail-short">
-				<p class="timeline-time">7am</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-run"
-				data-timeline-entry="fun-run"
-			>
-				<div class="timeline-title-row">
-					<div class="timeline-title-copy">
-						<h2>Fun Run</h2>
-						<p class="timeline-subtitle">7-7:30am</p>
-					</div>
-					<div class="timeline-mini-collage" aria-label="Fun run collage">
-						<div class="funrun-photo funrun-photo-1">
-							<Image
-								alt="Fun Run route by the waterfront"
-								src={funrun1}
-								loading="eager"
-							/>
-						</div>
-						<div class="funrun-photo funrun-photo-2">
-							<Image
-								alt="Runners gathering before the Fun Run"
-								src={funrun2}
-								loading="eager"
-							/>
-						</div>
-					</div>
-				</div>
-				<div class="timeline-copy">
-					<p>
-						A quick waterfront loop to wake everybody up before the day begins.
-					</p>
-				</div>
-			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-checkin">
-				<p class="timeline-time">8am</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-checkin"
-				data-timeline-entry="check-in"
-			>
-				<h2>Check In</h2>
-				<div class="timeline-copy">
-					<p>
-						Pick up your badge, settle in, and grab a coffee before the first
-						sessions start.
-					</p>
-					<a
-						class="timeline-checkin-button"
-						href="https://terminal.shop"
-						rel="noreferrer"
-						target="_blank"
-					>
-						<Image
+	<DeepSeaSurface>
+		<section class="timeline-section" aria-label="Timeline preview">
+			<div class="timeline-fish-layer" aria-hidden="true">
+				<div class="timeline-fish-shell timeline-fish-shell-1">
+					<div class="timeline-fish-body">
+						<img
+							class="timeline-fish-image"
+							src={timelineFish1.src}
+							width={timelineFish1.width}
+							height={timelineFish1.height}
 							alt=""
-							aria-hidden="true"
-							class="timeline-checkin-button-icon"
-							src={terminalShop}
-						/>
-						<span>terminal.shop coffee</span>
-					</a>
-				</div>
-			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-talks">
-				<p class="timeline-time">9am</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-talks"
-				data-timeline-entry="talks-morning"
-			>
-				<h2>Talks</h2>
-				<div class="talks-intro-row">
-					<div class="timeline-copy talks-intro-copy">
-						<p>
-							The talks take place in an IMAX theater. That means super
-							comfortable seats, great visibility, and a 60ft high screen.<br
-							/>Also, a penguin exhibit next door.
-						</p>
-					</div>
-					<div class="talks-venue-photo">
-						<Image
-							alt="Presenter on stage inside the Simons IMAX Theater"
-							src={presentingInsideVenue}
-							loading="eager"
+							loading="lazy"
+							decoding="async"
 						/>
 					</div>
 				</div>
-				<div class="talks-list" aria-label="Speaker talks">
-					{
-						talksSessions.map((talk) => (
-							<article class="talk-card">
-								<div class="talk-avatar">
-									<Image alt={talk.name} src={talk.image} />
-								</div>
-								<div class="talk-copy">
-									<h3>{talk.title}</h3>
-									<p class="talk-speaker">{talk.name}</p>
-									<p class="talk-role">{talk.qualification}</p>
-								</div>
-							</article>
-						))
-					}
-				</div>
-			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-break">
-				<p class="timeline-time">10:30am</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-break"
-				data-timeline-entry="cookies-break"
-			>
-				<h2>Milk &amp; Cookies Break</h2>
-				<div class="break-body">
-					<div
-						class="break-collage"
-						aria-label="Milk and Cookies break collage"
-					>
-						<div class="break-photo break-photo-1">
-							<Image
-								alt="Milk and cookies spread"
-								src={milkcookies3}
-								loading="eager"
-							/>
-						</div>
-						<div class="break-photo break-photo-2">
-							<Image
-								alt="Cookies at the break"
-								src={milkcookies1}
-								loading="eager"
-							/>
-						</div>
-						<div class="break-photo break-photo-3">
-							<Image
-								alt="Milk and cookies break crowd"
-								src={milkcookies2}
-								loading="eager"
-							/>
-						</div>
+				<div class="timeline-fish-shell timeline-fish-shell-2">
+					<div class="timeline-fish-body">
+						<img
+							class="timeline-fish-image"
+							src={timelineFish2.src}
+							width={timelineFish2.width}
+							height={timelineFish2.height}
+							alt=""
+							loading="lazy"
+							decoding="async"
+						/>
 					</div>
-					<div class="break-copy timeline-copy">
-						<p>
-							Pause for a reset, catch up with people you just met, and trade
-							notes on the morning’s talks.
-						</p>
-						<p>
-							The break keeps the middle of the day loose and social before
-							everyone heads back into the next block.
-						</p>
+				</div>
+				<div class="timeline-fish-shell timeline-fish-shell-3">
+					<div class="timeline-fish-body">
+						<img
+							class="timeline-fish-image"
+							src={timelineFish3.src}
+							width={timelineFish3.width}
+							height={timelineFish3.height}
+							alt=""
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+				</div>
+				<div class="timeline-fish-shell timeline-fish-shell-4">
+					<div class="timeline-fish-body">
+						<img
+							class="timeline-fish-image"
+							src={timelineFish4.src}
+							width={timelineFish4.width}
+							height={timelineFish4.height}
+							alt=""
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+				</div>
+				<div class="timeline-fish-shell timeline-fish-shell-5">
+					<div class="timeline-fish-body">
+						<img
+							class="timeline-fish-image"
+							src={timelineFish5.src}
+							width={timelineFish5.width}
+							height={timelineFish5.height}
+							alt=""
+							loading="lazy"
+							decoding="async"
+						/>
 					</div>
 				</div>
 			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-talks timeline-rail-talks-late">
-				<p class="timeline-time">11am</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-talks timeline-content-talks-late"
-				data-timeline-entry="talks-late"
-			>
-				<h2>Talks</h2>
-				<div
-					class="talks-list talks-list-short"
-					aria-label="Late morning talks"
-				>
-					{
-						lateTalksSessions.map((talk) => (
-							<article class="talk-card">
-								<div class="talk-avatar">
-									<Image alt={talk.name} src={talk.image} />
-								</div>
-								<div class="talk-copy">
-									<h3>{talk.title}</h3>
-									<p class="talk-speaker">{talk.name}</p>
-									<p class="talk-role">{talk.qualification}</p>
-								</div>
-							</article>
-						))
-					}
+			<div class="timeline-heading">
+				<div class="timeline-postcard-column">
+					<span class="timeline-postcard timeline-postcard-front">
+						<span class="timeline-postcard-front-photo">
+							<Image
+								alt="SquiggleConf attendees gathered together"
+								src={everybodySquiggling}
+								loading="eager"
+							/>
+						</span>
+						<span class="timeline-postcard-front-label"
+							>SquiggleConf: your devtools fieldtrip</span
+						>
+					</span>
+					<p class="timeline-postcard-note">
+						* yes, you'll really get this postcard
+					</p>
 				</div>
+				<span class="timeline-postcard timeline-postcard-back">
+					<span class="timeline-postcard-back-message">
+						<span class="timeline-postcard-back-kicker">Hi Mom,</span>
+						<span>
+							SquiggleConf was so much fun this year. I learned all about
+							abstract syntax trees, AI agent harnesses, and met the people
+							leading the industry.
+						</span>
+					</span>
+					<span class="timeline-postcard-back-divider" aria-hidden="true"
+					></span>
+					<span class="timeline-postcard-back-address">
+						<span class="timeline-postcard-stamp" aria-hidden="true">BOS</span>
+						<span class="timeline-postcard-address-name">Devtools Friend</span>
+						<span class="timeline-postcard-address-line"
+							>your devtools fieldtrip</span
+						>
+						<span class="timeline-postcard-address-line"
+							>Boston, Massachusetts</span
+						>
+						<span class="timeline-postcard-address-line">SquiggleConf 2025</span
+						>
+					</span>
+				</span>
 			</div>
+			<div class="timeline-grid">
+				<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+				<div class="timeline-cap timeline-top">
+					<p>Thursday</p>
+					<p>May 6th</p>
+				</div>
+				<div class="timeline-grid-intro">
+					<h3>SquiggleConf 2027</h3>
+					<p>Boston, Massachusetts</p>
+				</div>
 
-			<div class="timeline-venue timeline-venue-lunch">
-				<p>@</p>
-				<p>Faneuil</p>
-				<p>Hall</p>
-				<p>Market</p>
-			</div>
-			<div class="timeline-rail timeline-rail-lunch">
-				<p class="timeline-time">12pm</p>
-			</div>
+				<div class="timeline-venue">
+					<p>@</p>
+					<p>Ned</p>
+					<p>Devine's</p>
+				</div>
+				<div class="timeline-rail timeline-bottom">
+					<p class="timeline-time">6pm</p>
+				</div>
 
-			<div
-				class="timeline-content timeline-content-lunch"
-				data-timeline-entry="lunch"
-			>
-				<h2>Lunch</h2>
-				<div class="lunch-body">
-					<div class="lunch-collage" aria-label="Lunch collage">
-						<div class="lunch-photo lunch-photo-1">
+				<div class="timeline-content" data-timeline-entry="launch">
+					<h2>Launch Party!</h2>
+					<p class="timeline-subtitle">6-9pm</p>
+					<div class="timeline-collage" aria-label="Launch party collage">
+						<div class="launchparty-photo launchparty-photo-1">
+							<Image
+								alt="People networking at SquiggleConf"
+								src={networking}
+								loading="eager"
+							/>
+						</div>
+						<div class="launchparty-photo launchparty-photo-2">
 							<Image
 								alt="Boston harbor near the venue"
 								src={harbor}
 								loading="eager"
 							/>
 						</div>
-						<div class="lunch-photo lunch-photo-2">
-							<Image
-								alt="People networking at SquiggleConf"
-								src={networking}
-								loading="eager"
-							/>
-						</div>
-						<div class="lunch-photo lunch-photo-3">
-							<Image
-								alt="Conference signage at the venue"
-								src={signage}
-								loading="eager"
-							/>
-						</div>
-						<div class="lunch-photo lunch-photo-4">
+						<div class="launchparty-photo launchparty-photo-3">
 							<Image
 								alt="Speakers gathered together at the event"
 								src={group}
 								loading="eager"
 							/>
 						</div>
-						<div class="lunch-photo lunch-photo-5">
+						<div class="launchparty-photo launchparty-photo-4">
+							<Image
+								alt="Conference signage at the venue"
+								src={signage}
+								loading="eager"
+							/>
+						</div>
+					</div>
+					<div class="timeline-copy">
+						<p>
+							Kick off the weekend with snacks, drinks, and an easy room full of
+							tool-loving people. It is the place to settle in, say hi, and
+							start the conference with a little momentum.
+						</p>
+					</div>
+				</div>
+
+				<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+				<div class="timeline-cap timeline-top">
+					<p>Friday</p>
+					<p>May 7th</p>
+				</div>
+				<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
+
+				<div
+					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-morning"
+				>
+					<div class="timeline-venue-stack">
+						<p>@</p>
+						<p>New</p>
+						<p>England</p>
+						<p>Aquarium</p>
+					</div>
+				</div>
+				<div class="timeline-rail timeline-rail-short">
+					<p class="timeline-time">7am</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-run"
+					data-timeline-entry="fun-run"
+				>
+					<div class="timeline-title-row">
+						<div class="timeline-title-copy">
+							<h2>Fun Run</h2>
+							<p class="timeline-subtitle">7-7:30am</p>
+						</div>
+						<div class="timeline-mini-collage" aria-label="Fun run collage">
+							<div class="funrun-photo funrun-photo-1">
+								<Image
+									alt="Fun Run route by the waterfront"
+									src={funrun1}
+									loading="eager"
+								/>
+							</div>
+							<div class="funrun-photo funrun-photo-2">
+								<Image
+									alt="Runners gathering before the Fun Run"
+									src={funrun2}
+									loading="eager"
+								/>
+							</div>
+						</div>
+					</div>
+					<div class="timeline-copy">
+						<p>
+							Optional for some, best way to start the day for others! It's an
+							casual yet eventful 5k through the Boston shoreline.
+						</p>
+					</div>
+				</div>
+
+				<div
+					class="timeline-venue timeline-venue-empty timeline-cell-span-two"
+					aria-hidden="true"
+				>
+				</div>
+				<div class="timeline-rail timeline-rail-checkin timeline-cell-span-two">
+					<p class="timeline-time">8am</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-checkin"
+					data-timeline-entry="check-in"
+				>
+					<h2>Check In</h2>
+					<div class="timeline-copy">
+						<p>
+							Pick up your badge, settle in, and grab a coffee before the first
+							sessions start.
+						</p>
+						<a
+							class="timeline-checkin-button"
+							href="https://terminal.shop"
+							rel="noreferrer"
+							target="_blank"
+						>
+							<Image
+								alt=""
+								aria-hidden="true"
+								class="timeline-checkin-button-icon"
+								src={terminalShop}
+							/>
+							<span>terminal.shop coffee</span>
+						</a>
+					</div>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-mcs"
+					data-timeline-entry="mcs"
+				>
+					<h2>Meet your MCs!</h2>
+					<div class="timeline-hosts-list" aria-label="Conference MCs">
+						{
+							timelineMCs.map((host) => (
+								<article class="timeline-host-card">
+									<div class="talk-avatar timeline-host-avatar">
+										<Image alt={host.name} src={host.image} loading="eager" />
+									</div>
+									<div class="timeline-host-copy">
+										<h3>{host.name}</h3>
+										<p class="timeline-host-role">{host.qualification}</p>
+									</div>
+								</article>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
+				</div>
+				<div class="timeline-rail timeline-rail-talks">
+					<p class="timeline-time">9am</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-talks"
+					data-timeline-entry="talks-morning"
+				>
+					<h2>Talks</h2>
+					<div class="talks-intro-row">
+						<div class="timeline-copy talks-intro-copy">
+							<p>
+								The talks take place in an IMAX theater. That means super
+								comfortable seats, great visibility, and a 60ft high screen.<br
+								/>Also, a penguin exhibit next door.
+							</p>
+						</div>
+						<div class="talks-venue-photo">
+							<Image
+								alt="Presenter on stage inside the Simons IMAX Theater"
+								src={presentingInsideVenue}
+								loading="eager"
+							/>
+						</div>
+					</div>
+					<div class="talks-list" aria-label="Speaker talks">
+						{
+							talksSessions.map((talk) => (
+								<article class="talk-card">
+									<div class="talk-avatar">
+										<Image alt={talk.name} src={talk.image} />
+									</div>
+									<div class="talk-copy">
+										<h3>{talk.title}</h3>
+										<p class="talk-speaker">{talk.name}</p>
+										<p class="talk-role">{talk.qualification}</p>
+									</div>
+								</article>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
+				</div>
+				<div class="timeline-rail timeline-rail-break">
+					<p class="timeline-time">10:30am</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-break"
+					data-timeline-entry="cookies-break"
+				>
+					<h2>Milk &amp; Cookies Break</h2>
+					<div class="break-body">
+						<div
+							class="break-collage"
+							aria-label="Milk and Cookies break collage"
+						>
+							<div class="break-photo break-photo-1">
+								<Image
+									alt="Milk and cookies spread"
+									src={milkcookies3}
+									loading="eager"
+								/>
+							</div>
+							<div class="break-photo break-photo-2">
+								<Image
+									alt="Cookies at the break"
+									src={milkcookies1}
+									loading="eager"
+								/>
+							</div>
+							<div class="break-photo break-photo-3">
+								<Image
+									alt="Milk and cookies break crowd"
+									src={milkcookies2}
+									loading="eager"
+								/>
+							</div>
+						</div>
+						<div class="break-copy timeline-copy">
+							<p>
+								Pause for a reset, catch up with people you just met, and trade
+								notes on the morning’s talks.
+							</p>
+							<p>
+								The break keeps the middle of the day loose and social before
+								everyone heads back into the next block.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
+				</div>
+				<div class="timeline-rail timeline-rail-talks timeline-rail-talks-late">
+					<p class="timeline-time">11am</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-talks timeline-content-talks-late"
+					data-timeline-entry="talks-late"
+				>
+					<h2>Talks</h2>
+					<div
+						class="talks-list talks-list-short"
+						aria-label="Late morning talks"
+					>
+						{
+							lateTalksSessions.map((talk) => (
+								<article class="talk-card">
+									<div class="talk-avatar">
+										<Image alt={talk.name} src={talk.image} />
+									</div>
+									<div class="talk-copy">
+										<h3>{talk.title}</h3>
+										<p class="talk-speaker">{talk.name}</p>
+										<p class="talk-role">{talk.qualification}</p>
+									</div>
+								</article>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-lunch">
+					<p>@</p>
+					<p>Faneuil</p>
+					<p>Hall</p>
+					<p>Market</p>
+				</div>
+				<div class="timeline-rail timeline-rail-lunch">
+					<p class="timeline-time">12pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-lunch"
+					data-timeline-entry="lunch"
+				>
+					<h2>Lunch</h2>
+					<div class="lunch-body">
+						<div class="lunch-collage" aria-label="Lunch collage">
+							<div class="lunch-photo lunch-photo-1">
+								<Image
+									alt="Boston harbor near the venue"
+									src={harbor}
+									loading="eager"
+								/>
+							</div>
+							<div class="lunch-photo lunch-photo-2">
+								<Image
+									alt="People networking at SquiggleConf"
+									src={networking}
+									loading="eager"
+								/>
+							</div>
+							<div class="lunch-photo lunch-photo-3">
+								<Image
+									alt="Conference signage at the venue"
+									src={signage}
+									loading="eager"
+								/>
+							</div>
+							<div class="lunch-photo lunch-photo-4">
+								<Image
+									alt="Speakers gathered together at the event"
+									src={group}
+									loading="eager"
+								/>
+							</div>
+							<div class="lunch-photo lunch-photo-5">
+								<Image
+									alt="People networking at SquiggleConf"
+									src={networking}
+									loading="eager"
+								/>
+							</div>
+						</div>
+						<div class="lunch-copy timeline-copy">
+							<p>
+								Head out together for lunch in the market, keep conversations
+								moving, and let the middle of the day feel like a field trip.
+							</p>
+							<ul class="lunch-links">
+								<li>
+									<a
+										href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
+									>
+										Boston &amp; Maine Fish Company
+									</a>
+								</li>
+								<li>
+									<a href="https://faneuilhallmarketplace.com/go/boston-chowda">
+										Boston Chowda
+									</a>
+								</li>
+								<li>
+									<a href="https://faneuilhallmarketplace.com/go/prime-shoppe">
+										Prime Shoppe
+									</a>
+								</li>
+								<li>
+									<a
+										href="https://faneuilhallmarketplace.com/go/steves-greek-cuisine"
+									>
+										Steve's Greek Cuisine
+									</a>
+								</li>
+							</ul>
+							<p>
+								It should stay busy, walkable, and social before everyone
+								regroups for the afternoon talks.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div
+					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-afternoon"
+				>
+					<div class="timeline-venue-stack">
+						<p>@</p>
+						<p>New</p>
+						<p>England</p>
+						<p>Aquarium</p>
+						<div
+							class="timeline-venue-decoration timeline-venue-decoration-turtle"
+							aria-hidden="true"
+						>
+							<TimelineTalksTurtle />
+						</div>
+					</div>
+				</div>
+				<div
+					class="timeline-rail timeline-rail-talks timeline-rail-talks-afternoon"
+				>
+					<p class="timeline-time">2pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
+					data-timeline-entry="talks-afternoon"
+				>
+					<h2>Talks</h2>
+					<div class="talks-list" aria-label="Afternoon talks">
+						{
+							afternoonTalksSessions.map((talk) => (
+								<article class="talk-card">
+									<div class="talk-avatar">
+										<Image alt={talk.name} src={talk.image} />
+									</div>
+									<div class="talk-copy">
+										<h3>{talk.title}</h3>
+										<p class="talk-speaker">{talk.name}</p>
+										<p class="talk-role">{talk.qualification}</p>
+									</div>
+								</article>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
+				</div>
+				<div class="timeline-rail timeline-rail-explore">
+					<p class="timeline-time">3:30pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-explore"
+					data-timeline-entry="explore-boston"
+				>
+					<h2>Explore Boston</h2>
+					<p class="timeline-subtitle">choose your own adventure</p>
+					<div class="explore-options" aria-label="Explore Boston options">
+						<article class="explore-card">
+							<div class="explore-choice" aria-hidden="true">
+								<span class="explore-radio"
+									><span class="explore-radio-dot"></span></span
+								>
+							</div>
+							<div class="explore-card-body">
+								<div class="explore-photo">
+									<Image alt="Duck boat on the water" src={duck2} />
+								</div>
+								<div class="explore-copy">
+									<h3>Duck Boat Tour</h3>
+									<p>
+										See more of the city in one shot with a classic Boston ride
+										that keeps the afternoon easy and social.
+									</p>
+								</div>
+							</div>
+						</article>
+						<article class="explore-card">
+							<div class="explore-choice" aria-hidden="true">
+								<span class="explore-radio"
+									><span class="explore-radio-dot"></span></span
+								>
+							</div>
+							<div class="explore-card-body">
+								<div class="explore-photo">
+									<Image alt="Scavenger hunt clue card" src={duck1} />
+								</div>
+								<div class="explore-copy">
+									<h3>Scavenger Hunt</h3>
+									<p>
+										A loose city walk with clues, checkpoints, and small teams
+										moving through the neighborhood together.
+									</p>
+								</div>
+							</div>
+						</article>
+						<article class="explore-card">
+							<div class="explore-choice" aria-hidden="true">
+								<span class="explore-radio"
+									><span class="explore-radio-dot"></span></span
+								>
+							</div>
+							<div class="explore-card-body">
+								<div class="explore-photo explore-photo-rest">
+									<Image alt="Quiet place to rest up" src={rest1} />
+								</div>
+								<div class="explore-copy">
+									<h3>Rest Up</h3>
+									<p>
+										Take a quiet block to recharge, reset, and come back ready
+										for the evening without over-scheduling the day.
+									</p>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-urban">
+					<p>@</p>
+					<p>Urban</p>
+					<p>Wild</p>
+					<p>Boston</p>
+				</div>
+				<div class="timeline-rail timeline-rail-syntax">
+					<p class="timeline-time">5:30pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-syntax"
+					data-timeline-entry="syntax-live"
+				>
+					<h2>Syntax.fm Live</h2>
+					<div class="event-body">
+						<div class="event-hero-image event-hero-image-wide">
+							<img
+								alt="Syntax.fm live YouTube thumbnail"
+								src="https://i.ytimg.com/vi/PXO0iopa5QI/hqdefault.jpg"
+								loading="eager"
+							/>
+						</div>
+						<div class="timeline-copy">
+							<p>
+								Wes and Scott are bringing Syntax.fm live to Urban Wild, and
+								they’re going to interview someone cool in front of the whole
+								room.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
+				</div>
+				<div class="timeline-rail timeline-rail-fireside">
+					<p class="timeline-time">6:30pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-fireside"
+					data-timeline-entry="fireside-chat"
+				>
+					<h2>Fireside Chat: The Fight for the JavaScript Trademark</h2>
+					<div class="event-body">
+						<div
+							class="fireside-avatars"
+							aria-label="Placeholder avatars for fireside chat guests"
+						>
+							<div class="fireside-avatar fireside-avatar-1">
+								<Image
+									alt="Placeholder avatar for Ryan Dahl"
+									src={robbyRussell}
+									loading="eager"
+								/>
+							</div>
+							<div class="fireside-avatar fireside-avatar-2">
+								<Image
+									alt="Placeholder avatar for Dillon Mulroy"
+									src={dillonMulroy}
+									loading="eager"
+								/>
+							</div>
+						</div>
+						<div class="timeline-copy">
+							<p>
+								A focused conversation about the long fight over the JavaScript
+								trademark, with placeholder guest art for now until the final
+								assets are ready.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div
+					class="timeline-venue timeline-venue-empty timeline-cell-span-two"
+					aria-hidden="true"
+				>
+				</div>
+				<div
+					class="timeline-rail timeline-rail-afterparty timeline-bottom timeline-cell-span-two"
+				>
+					<p class="timeline-time">7pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-afterparty"
+					data-timeline-entry="after-party"
+				>
+					<h2>After Party</h2>
+					<p class="timeline-subtitle">7-9pm</p>
+					<div class="afterparty-collage" aria-label="After party collage">
+						<div class="afterparty-photo afterparty-photo-1">
+							<Image
+								alt="People networking at SquiggleConf"
+								src={networking}
+								loading="eager"
+							/>
+						</div>
+						<div class="afterparty-photo afterparty-photo-2">
+							<Image
+								alt="Boston harbor near the venue"
+								src={harbor}
+								loading="eager"
+							/>
+						</div>
+						<div class="afterparty-photo afterparty-photo-3">
+							<Image
+								alt="Speakers gathered together at the event"
+								src={group}
+								loading="eager"
+							/>
+						</div>
+						<div class="afterparty-photo afterparty-photo-4">
+							<Image
+								alt="Conference signage at the venue"
+								src={signage}
+								loading="eager"
+							/>
+						</div>
+						<div class="afterparty-photo afterparty-photo-5">
 							<Image
 								alt="People networking at SquiggleConf"
 								src={networking}
@@ -483,294 +861,39 @@ const afternoonTalksSessions = [
 							/>
 						</div>
 					</div>
-					<div class="lunch-copy timeline-copy">
-						<p>
-							Head out together for lunch in the market, keep conversations
-							moving, and let the middle of the day feel like a field trip.
-						</p>
-						<ul class="lunch-links">
-							<li>
-								<a
-									href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
-								>
-									Boston &amp; Maine Fish Company
-								</a>
-							</li>
-							<li>
-								<a href="https://faneuilhallmarketplace.com/go/boston-chowda">
-									Boston Chowda
-								</a>
-							</li>
-							<li>
-								<a href="https://faneuilhallmarketplace.com/go/prime-shoppe">
-									Prime Shoppe
-								</a>
-							</li>
-							<li>
-								<a
-									href="https://faneuilhallmarketplace.com/go/steves-greek-cuisine"
-								>
-									Steve's Greek Cuisine
-								</a>
-							</li>
-						</ul>
-						<p>
-							It should stay busy, walkable, and social before everyone regroups
-							for the afternoon talks.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div
-				class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-afternoon"
-			>
-				<div class="timeline-venue-stack">
-					<p>@</p>
-					<p>New</p>
-					<p>England</p>
-					<p>Aquarium</p>
-					<div
-						class="timeline-venue-decoration timeline-venue-decoration-turtle"
-						aria-hidden="true"
-					>
-						<TimelineTalksTurtle />
-					</div>
-				</div>
-			</div>
-			<div
-				class="timeline-rail timeline-rail-talks timeline-rail-talks-afternoon"
-			>
-				<p class="timeline-time">2pm</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
-				data-timeline-entry="talks-afternoon"
-			>
-				<h2>Talks</h2>
-				<div class="talks-list" aria-label="Afternoon talks">
-					{
-						afternoonTalksSessions.map((talk) => (
-							<article class="talk-card">
-								<div class="talk-avatar">
-									<Image alt={talk.name} src={talk.image} />
-								</div>
-								<div class="talk-copy">
-									<h3>{talk.title}</h3>
-									<p class="talk-speaker">{talk.name}</p>
-									<p class="talk-role">{talk.qualification}</p>
-								</div>
-							</article>
-						))
-					}
-				</div>
-			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-explore">
-				<p class="timeline-time">3:30pm</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-explore"
-				data-timeline-entry="explore-boston"
-			>
-				<h2>Explore Boston</h2>
-				<p class="timeline-subtitle">choose your own adventure</p>
-				<div class="explore-options" aria-label="Explore Boston options">
-					<article class="explore-card">
-						<div class="explore-choice" aria-hidden="true">
-							<span class="explore-radio"
-								><span class="explore-radio-dot"></span></span
-							>
-						</div>
-						<div class="explore-card-body">
-							<div class="explore-photo">
-								<Image alt="Duck boat on the water" src={duck2} />
-							</div>
-							<div class="explore-copy">
-								<h3>Duck Boat Tour</h3>
-								<p>
-									See more of the city in one shot with a classic Boston ride
-									that keeps the afternoon easy and social.
-								</p>
-							</div>
-						</div>
-					</article>
-					<article class="explore-card">
-						<div class="explore-choice" aria-hidden="true">
-							<span class="explore-radio"
-								><span class="explore-radio-dot"></span></span
-							>
-						</div>
-						<div class="explore-card-body">
-							<div class="explore-photo">
-								<Image alt="Scavenger hunt clue card" src={duck1} />
-							</div>
-							<div class="explore-copy">
-								<h3>Scavenger Hunt</h3>
-								<p>
-									A loose city walk with clues, checkpoints, and small teams
-									moving through the neighborhood together.
-								</p>
-							</div>
-						</div>
-					</article>
-					<article class="explore-card">
-						<div class="explore-choice" aria-hidden="true">
-							<span class="explore-radio"
-								><span class="explore-radio-dot"></span></span
-							>
-						</div>
-						<div class="explore-card-body">
-							<div class="explore-photo explore-photo-rest">
-								<Image alt="Quiet place to rest up" src={rest1} />
-							</div>
-							<div class="explore-copy">
-								<h3>Rest Up</h3>
-								<p>
-									Take a quiet block to recharge, reset, and come back ready for
-									the evening without over-scheduling the day.
-								</p>
-							</div>
-						</div>
-					</article>
-				</div>
-			</div>
-
-			<div class="timeline-venue timeline-venue-urban">
-				<p>@</p>
-				<p>Urban</p>
-				<p>Wild</p>
-				<p>Boston</p>
-			</div>
-			<div class="timeline-rail timeline-rail-syntax">
-				<p class="timeline-time">5:30pm</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-syntax"
-				data-timeline-entry="syntax-live"
-			>
-				<h2>Syntax.fm Live</h2>
-				<div class="event-body">
-					<div class="event-hero-image event-hero-image-wide">
-						<img
-							alt="Syntax.fm live YouTube thumbnail"
-							src="https://i.ytimg.com/vi/PXO0iopa5QI/hqdefault.jpg"
-							loading="eager"
-						/>
-					</div>
 					<div class="timeline-copy">
 						<p>
-							Wes and Scott are bringing Syntax.fm live to Urban Wild, and
-							they’re going to interview someone cool in front of the whole
-							room.
+							Urban Wild Boston is the kind of place that makes an after party
+							easy: lots of room, good energy, and enough atmosphere to keep
+							people hanging around after the talks are done.
 						</p>
 					</div>
 				</div>
-			</div>
 
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-fireside">
-				<p class="timeline-time">6:30pm</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-fireside"
-				data-timeline-entry="fireside-chat"
-			>
-				<h2>Fireside Chat: The Fight for the JavaScript Trademark</h2>
-				<div class="event-body">
-					<div
-						class="fireside-avatars"
-						aria-label="Placeholder avatars for fireside chat guests"
-					>
-						<div class="fireside-avatar fireside-avatar-1">
-							<Image
-								alt="Placeholder avatar for Ryan Dahl"
-								src={robbyRussell}
-								loading="eager"
-							/>
+				<div
+					class="timeline-content timeline-content-bigrav"
+					data-timeline-entry="big-rav"
+				>
+					<h2>Big Rav</h2>
+					<p class="timeline-subtitle">9-10pm</p>
+					<div class="event-body event-body-featured-avatar">
+						<div class="fireside-avatar fireside-avatar-featured">
+							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
 						</div>
-						<div class="fireside-avatar fireside-avatar-2">
-							<Image
-								alt="Placeholder avatar for Dillon Mulroy"
-								src={dillonMulroy}
-								loading="eager"
-							/>
+						<div class="timeline-copy">
+							<p>
+								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
+								alternative, indie, and punk rock band that combines pop-punk vocals
+								with classic rock and prog-rock influences, with SquiggleConf's own
+								Maddy Montaquila on vocals.
+							</p>
 						</div>
 					</div>
-					<div class="timeline-copy">
-						<p>
-							A focused conversation about the long fight over the JavaScript
-							trademark, with placeholder guest art for now until the final
-							assets are ready.
-						</p>
-					</div>
 				</div>
 			</div>
-
-			<div class="timeline-venue timeline-venue-empty" aria-hidden="true"></div>
-			<div class="timeline-rail timeline-rail-afterparty timeline-bottom">
-				<p class="timeline-time">7pm</p>
-			</div>
-
-			<div
-				class="timeline-content timeline-content-afterparty"
-				data-timeline-entry="after-party"
-			>
-				<h2>After Party</h2>
-				<p class="timeline-subtitle">7-9pm</p>
-				<div class="afterparty-collage" aria-label="After party collage">
-					<div class="afterparty-photo afterparty-photo-1">
-						<Image
-							alt="People networking at SquiggleConf"
-							src={networking}
-							loading="eager"
-						/>
-					</div>
-					<div class="afterparty-photo afterparty-photo-2">
-						<Image
-							alt="Boston harbor near the venue"
-							src={harbor}
-							loading="eager"
-						/>
-					</div>
-					<div class="afterparty-photo afterparty-photo-3">
-						<Image
-							alt="Speakers gathered together at the event"
-							src={group}
-							loading="eager"
-						/>
-					</div>
-					<div class="afterparty-photo afterparty-photo-4">
-						<Image
-							alt="Conference signage at the venue"
-							src={signage}
-							loading="eager"
-						/>
-					</div>
-					<div class="afterparty-photo afterparty-photo-5">
-						<Image
-							alt="People networking at SquiggleConf"
-							src={networking}
-							loading="eager"
-						/>
-					</div>
-				</div>
-				<div class="timeline-copy">
-					<p>
-						Urban Wild Boston is the kind of place that makes an after party
-						easy: lots of room, good energy, and enough atmosphere to keep
-						people hanging around after the talks are done.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-	<Registration />
+		</section>
+		<Registration />
+	</DeepSeaSurface>
 	<SponsorsAndPartners />
 	<Newsletter />
 </PageLayout>
@@ -800,33 +923,17 @@ const afternoonTalksSessions = [
 		letter-spacing: 0.05em;
 		margin: 0 0 0.35rem;
 	}
-
 	.timeline-section {
 		--timeline-hover-duration: 220ms;
-		background:
-			linear-gradient(
-				180deg,
-				rgba(255, 255, 255, 0.045) 0%,
-				rgba(255, 255, 255, 0.018) 22%,
-				rgba(255, 255, 255, 0) 72%
-			),
-			var(--colorBlueBright3);
 		isolation: isolate;
-		overflow: clip;
-		padding: 0 1rem clamp(3rem, 7vw, 5rem);
+		padding: 2rem 1rem clamp(3rem, 7vw, 5rem);
 		position: relative;
 	}
 
 	.timeline-section::before {
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0.035) 0%,
-			rgba(255, 255, 255, 0.015) 26%,
-			transparent 68%
-		);
 		content: "";
 		inset: 0;
-		opacity: 0.9;
+		opacity: 1;
 		pointer-events: none;
 		position: absolute;
 		transition: opacity var(--timeline-hover-duration) ease;
@@ -834,21 +941,195 @@ const afternoonTalksSessions = [
 	}
 
 	.timeline-heading {
-		color: var(--colorBackground);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.5rem, 3.4vw, 2.5rem);
-		font-weight: var(--fontWeightLogo);
-		letter-spacing: 0.04em;
+		display: grid;
+		gap: 1.2rem;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		justify-items: center;
 		margin: 0 auto;
-		max-width: min(100%, var(--sizeContentAreaWide));
+		max-width: min(100%, 42rem);
+		padding: 0.2rem 0;
 		padding-top: clamp(1.5rem, 4vw, 3rem);
 		position: relative;
 		text-align: center;
-		transition:
-			letter-spacing var(--timeline-hover-duration) ease,
-			text-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
 		z-index: 1;
+	}
+
+	.timeline-section-heading {
+		color: #eef6ff;
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.8rem, 4vw, 3.25rem);
+		font-weight: var(--fontWeightSemibold);
+		letter-spacing: 0.01em;
+		line-height: 0.95;
+		margin: 0 auto;
+		max-width: fit-content;
+		position: relative;
+		text-align: center;
+		text-wrap: balance;
+		z-index: 1;
+	}
+
+	.timeline-section-heading-postcard {
+		margin-bottom: 0.9rem;
+		margin-top: clamp(0.3rem, 1vw, 0.75rem);
+	}
+
+	.timeline-section-heading-grid {
+		margin-bottom: 1.35rem;
+		margin-top: clamp(1.75rem, 4vw, 2.75rem);
+	}
+
+	.timeline-postcard {
+		aspect-ratio: 6 / 4;
+		background: #f7f2ea;
+		border-radius: 0.2rem;
+		display: block;
+		position: relative;
+		width: 100%;
+	}
+
+	.timeline-postcard-column {
+		display: grid;
+		gap: 1rem;
+		width: 100%;
+		margin-bottom: 1rem;
+	}
+
+	.timeline-postcard-front {
+		box-shadow:
+			0 0.22rem 0 rgba(255, 255, 255, 0.18),
+			0 1rem 2.2rem rgba(2, 14, 31, 0.26);
+		overflow: hidden;
+		padding: 0.55rem 0.55rem 2.25rem;
+		transform: rotate(-4deg);
+		transition:
+			box-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-postcard-front:hover,
+	.timeline-postcard-front:focus-within {
+		box-shadow:
+			0 0.24rem 0 rgba(255, 255, 255, 0.2),
+			0 1.15rem 2.35rem rgba(2, 14, 31, 0.32);
+		transform: rotate(-3deg) translateY(-0.08rem);
+	}
+
+	.timeline-postcard-front-photo {
+		background: white;
+		border: 1px solid rgba(4, 25, 48, 0.12);
+		box-shadow: 0 0.3rem 0.7rem rgba(4, 25, 48, 0.12);
+		display: block;
+		height: 100%;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	.timeline-postcard-front-photo :global(img) {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.timeline-postcard-front-label {
+		bottom: 0.68rem;
+		color: #36506a;
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.8rem;
+		left: 0;
+		letter-spacing: 0.04em;
+		position: absolute;
+		text-align: center;
+		text-transform: uppercase;
+		width: 100%;
+	}
+
+	.timeline-postcard-note {
+		color: rgba(223, 239, 255, 0.72);
+		font-size: clamp(0.82rem, 1.15vw, 0.92rem);
+		line-height: 1.3;
+		margin: 0;
+		text-align: center;
+	}
+
+	.timeline-postcard-back {
+		border: 1px solid rgba(29, 53, 82, 0.14);
+		box-shadow: 0 0.8rem 2rem rgba(2, 14, 31, 0.2);
+		color: #274764;
+		display: grid;
+		gap: 0.8rem;
+		grid-template-columns: minmax(0, 1.05fr) 1px minmax(8.5rem, 0.95fr);
+		padding: 0.95rem 1rem 0.9rem;
+		text-align: left;
+		transform: rotate(2deg);
+		transition:
+			box-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-postcard-back:hover,
+	.timeline-postcard-back:focus-within {
+		box-shadow: 0 0.95rem 2.25rem rgba(2, 14, 31, 0.24);
+		transform: rotate(1.25deg) translateY(-0.08rem);
+	}
+
+	.timeline-postcard-back-message {
+		display: grid;
+		gap: 0.6rem;
+		line-height: 1.42;
+	}
+
+	.timeline-postcard-back-message span {
+		color: #2d4d6b;
+		font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+	}
+
+	.timeline-postcard-back-kicker {
+		color: #1d3852;
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1rem, 1.45vw, 1.12rem);
+		font-weight: var(--fontWeightSemibold);
+		line-height: 1.1;
+	}
+
+	.timeline-postcard-back-divider {
+		background: rgba(29, 53, 82, 0.18);
+		border-radius: 999px;
+		width: 1px;
+	}
+
+	.timeline-postcard-back-address {
+		align-content: start;
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.timeline-postcard-stamp {
+		align-items: center;
+		background: linear-gradient(180deg, #7dcfe2 0%, #a4dce8 100%);
+		border: 2px dashed rgba(29, 53, 82, 0.3);
+		border-radius: 0.15rem;
+		color: #134464;
+		display: inline-flex;
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.95rem;
+		font-weight: var(--fontWeightSemibold);
+		justify-self: end;
+		padding: 0.55rem 0.6rem;
+	}
+
+	.timeline-postcard-address-name,
+	.timeline-postcard-address-line {
+		border-bottom: 2px solid rgba(29, 53, 82, 0.7);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(0.96rem, 1.4vw, 1.08rem);
+		line-height: 1.08;
+		padding-bottom: 0.22rem;
+	}
+
+	.timeline-postcard-address-name {
+		margin-top: 0.25rem;
 	}
 
 	.timeline-fish-layer {
@@ -1014,6 +1295,35 @@ const afternoonTalksSessions = [
 		min-height: 0;
 	}
 
+	.timeline-grid-intro {
+		align-content: center;
+		display: grid;
+		gap: 0.25rem;
+		margin: 0;
+		min-height: 0;
+		margin-top: 1rem;
+		padding-left: 2rem;
+	}
+
+	.timeline-grid-intro h3,
+	.timeline-grid-intro p {
+		margin: 0;
+	}
+
+	.timeline-grid-intro h3 {
+		color: #eef6ff;
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
+		font-weight: 700;
+		line-height: 0.98;
+	}
+
+	.timeline-grid-intro p {
+		color: rgba(223, 239, 255, 0.78);
+		font-size: clamp(0.92rem, 1.3vw, 1rem);
+		line-height: 1.2;
+	}
+
 	.timeline-venue {
 		align-items: flex-end;
 		color: var(--colorForegroundEmphasized);
@@ -1048,6 +1358,10 @@ const afternoonTalksSessions = [
 		padding: 0;
 	}
 
+	.timeline-cell-span-two {
+		grid-row: span 2;
+	}
+
 	.timeline-rail {
 		background: var(--colorBlueBright1);
 		border: 1px solid var(--colorBlue3);
@@ -1058,12 +1372,12 @@ const afternoonTalksSessions = [
 	}
 
 	.timeline-cap {
-		background: var(--colorBlue2);
-		color: var(--colorForeground);
+		background: color-mix(in srgb, var(--colorBlue2) 60%, transparent);
+		color: color-mix(in srgb, var(--colorBackground) 85%, transparent);
 
 		border: 1px solid var(--colorBlue3);
 		font-family: var(--fontFamilyHeading);
-		font-size: clamp(0.95rem, 1.45vw, 1.1rem);
+		font-size: 1.1rem;
 		font-weight: 700;
 		line-height: 1.1;
 		grid-column: 2;
@@ -1173,6 +1487,10 @@ const afternoonTalksSessions = [
 	}
 
 	.timeline-content-checkin {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-mcs {
 		padding-top: 1.35rem;
 	}
 
@@ -1473,6 +1791,7 @@ const afternoonTalksSessions = [
 	}
 
 	.timeline-top {
+		margin-top: 1rem;
 		border-top-right-radius: 8px;
 		border-top-left-radius: 8px;
 	}
@@ -1623,6 +1942,48 @@ const afternoonTalksSessions = [
 		margin-top: 0.8rem;
 		position: relative;
 		z-index: 1;
+	}
+
+	.timeline-hosts-list {
+		display: grid;
+		gap: 0.9rem;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-top: 0.8rem;
+		max-width: 44rem;
+	}
+
+	.timeline-host-card {
+		align-items: center;
+		display: grid;
+		gap: 0.8rem;
+		grid-template-columns: 5rem 1fr;
+	}
+
+	.timeline-host-avatar {
+		aspect-ratio: 1;
+	}
+
+	.timeline-host-copy {
+		display: grid;
+		gap: 0.28rem;
+		min-height: 5rem;
+		place-content: center start;
+	}
+
+	.timeline-host-copy h3 {
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.1rem;
+		font-weight: 700;
+		line-height: 1.15;
+		margin: 0;
+	}
+
+	.timeline-host-role {
+		color: var(--colorForegroundEmphasized);
+		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+		font-weight: 300;
+		line-height: 1.25;
+		margin: 0;
 	}
 
 	.talks-list-short {
@@ -2056,6 +2417,39 @@ const afternoonTalksSessions = [
 		transform: rotate(6deg);
 	}
 
+	.event-body-featured-avatar {
+		align-items: center;
+	}
+
+	.fireside-avatar-featured {
+		height: 9.8rem;
+		position: relative;
+		transform-origin: top right;
+		transform: none;
+		width: 9.8rem;
+	}
+
+	.fireside-avatar-featured :global(img) {
+		object-position: center 22%;
+		transform-origin: top right;
+		transition:
+			object-position var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content-bigrav:hover .fireside-avatar-featured,
+	.timeline-content-bigrav:focus-within .fireside-avatar-featured {
+		transform-origin: top right;
+	}
+
+	.timeline-content-bigrav:hover .fireside-avatar-featured :global(img),
+	.timeline-content-bigrav:focus-within .fireside-avatar-featured :global(img) {
+		object-position: left bottom;
+		transform: scale(1.1);
+		transform-origin: top right;
+	}
+
 	.afterparty-collage {
 		height: 11.75rem;
 		margin: 0.5rem 0 1rem;
@@ -2128,6 +2522,10 @@ const afternoonTalksSessions = [
 
 		.timeline-cap {
 			grid-column: auto;
+		}
+
+		.timeline-grid-intro {
+			padding: 0 0 0.2rem;
 		}
 
 		.timeline-venue {
@@ -2230,6 +2628,10 @@ const afternoonTalksSessions = [
 		.talks-intro-row {
 			min-height: 0;
 			padding-right: 0;
+		}
+
+		.timeline-hosts-list {
+			grid-template-columns: 1fr;
 		}
 
 		.talks-venue-photo {
