@@ -37,20 +37,20 @@ interface Props {
 		);
 		z-index: 1;
 		color: var(--colorBackground);
-		padding-bottom: calc(var(--cityscapeHeightArea) + 2.5rem);
+		padding-bottom: var(--cityscapeHeightArea);
 		position: relative;
 	}
 
 	.hero.common {
-		--cityscapeHeightArea: 16rem;
+		--cityscapeHeightArea: 10rem;
 	}
 
 	.hero.tall {
-		--cityscapeHeightArea: 20rem;
+		--cityscapeHeightArea: 8rem;
 	}
 
 	.hero-decorations {
-		bottom: -2.5rem;
+		bottom: -1.5rem;
 		pointer-events: none;
 		position: absolute;
 		height: 100%;

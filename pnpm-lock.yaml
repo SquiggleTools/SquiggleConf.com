@@ -26,6 +26,9 @@ importers:
       '@fontsource-variable/urbanist':
         specifier: ^5.2.7
         version: 5.2.7
+      '@fontsource/geist-mono':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@konami-emoji-blast/astro':
         specifier: ^0.2.0
         version: 0.2.0(astro@5.16.15(@types/node@25.0.10)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.56.0)(typescript@5.9.3)(yaml@2.8.2))(konami-emoji-blast@0.6.0)
@@ -843,6 +846,9 @@ packages:
 
   '@fontsource-variable/urbanist@5.2.7':
     resolution: {integrity: sha512-OYeUoBQhwm3pbXG5yUxq1omO9H64Dx1eKxldKYOztrf+8GFG1vu3FP/zZpmFOwtgsPj2h6JYHX9VVWopSxvOyQ==}
+
+  '@fontsource/geist-mono@5.2.8':
+    resolution: {integrity: sha512-YqZUb3X42GjRaHkibUNyE8K4Rk9A6I9Ez81YpJYiuJN4ggmTW2ixoQpa9EWCPfXZtIsCQJTyrDoV9OJOZO/UcA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4380,6 +4386,8 @@ snapshots:
   '@fontsource-variable/josefin-sans@5.2.8': {}
 
   '@fontsource-variable/urbanist@5.2.7': {}
+
+  '@fontsource/geist-mono@5.2.8': {}
 
   '@humanfs/core@0.19.1': {}
 

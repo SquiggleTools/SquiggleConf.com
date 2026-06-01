@@ -1,0 +1,213 @@
+---
+import turtleSvg from "~/assets/design/turtle.svg?raw";
+---
+
+<div class="timeline-talks-turtle" aria-hidden="true">
+	<div class="timeline-talks-turtle-bubbles">
+		<span class="timeline-talks-turtle-bubble bubble-1"></span>
+		<span class="timeline-talks-turtle-bubble bubble-2"></span>
+		<span class="timeline-talks-turtle-bubble bubble-3"></span>
+		<span class="timeline-talks-turtle-bubble bubble-4"></span>
+	</div>
+	<div class="timeline-talks-turtle-art" set:html={turtleSvg} />
+</div>
+
+<style>
+	.timeline-talks-turtle {
+		filter: drop-shadow(0 0.7rem 1.3rem rgba(4, 25, 48, 0.16));
+		margin-left: auto;
+		pointer-events: none;
+		position: relative;
+		width: 8rem;
+	}
+
+	.timeline-talks-turtle-art {
+		animation: timeline-talks-turtle-drift 6.8s ease-in-out infinite;
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	.timeline-talks-turtle :global(svg) {
+		display: block;
+		height: auto;
+		overflow: visible;
+		width: 100%;
+	}
+
+	.timeline-talks-turtle :global(svg path) {
+		transform-box: fill-box;
+		will-change: transform;
+	}
+
+	.timeline-talks-turtle :global(svg path:nth-of-type(2)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(3)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(4)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(5)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(6)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(7)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(8)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(9)) {
+		animation: timeline-talks-turtle-flipper-a 3.1s ease-in-out infinite;
+		transform-origin: 78% 42%;
+	}
+
+	.timeline-talks-turtle :global(svg path:nth-of-type(15)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(16)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(17)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(18)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(19)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(20)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(21)) {
+		animation: timeline-talks-turtle-flipper-b 3.45s ease-in-out infinite -1.1s;
+		transform-origin: 22% 32%;
+	}
+
+	.timeline-talks-turtle :global(svg path:nth-of-type(22)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(23)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(24)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(25)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(26)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(27)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(28)),
+	.timeline-talks-turtle :global(svg path:nth-of-type(29)) {
+		animation: timeline-talks-turtle-flipper-c 3.2s ease-in-out infinite -0.6s;
+		transform-origin: 30% 18%;
+	}
+
+	.timeline-talks-turtle-bubbles {
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.timeline-talks-turtle-bubble {
+		animation: timeline-talks-turtle-bubble 3.9s ease-in infinite;
+		background: rgba(255, 255, 255, 0.42);
+		border: 1px solid rgba(255, 255, 255, 0.52);
+		border-radius: 999px;
+		box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.08);
+		opacity: 0;
+		position: absolute;
+	}
+
+	.bubble-1 {
+		height: 0.42rem;
+		right: 2.1rem;
+		top: 1rem;
+		width: 0.42rem;
+	}
+
+	.bubble-2 {
+		animation-delay: 1.1s;
+		height: 0.28rem;
+		right: 1.45rem;
+		top: 1.5rem;
+		width: 0.28rem;
+	}
+
+	.bubble-3 {
+		animation-delay: 2s;
+		height: 0.52rem;
+		right: 2.75rem;
+		top: 1.85rem;
+		width: 0.52rem;
+	}
+
+	.bubble-4 {
+		animation-delay: 2.8s;
+		height: 0.24rem;
+		right: 2rem;
+		top: 2.3rem;
+		width: 0.24rem;
+	}
+
+	@keyframes timeline-talks-turtle-drift {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0) rotate(-2deg);
+		}
+
+		50% {
+			transform: translate3d(-0.12rem, -0.2rem, 0) rotate(1.5deg);
+		}
+	}
+
+	@keyframes timeline-talks-turtle-flipper-a {
+		0%,
+		100% {
+			transform: rotate(0deg) skewY(0deg) scaleY(1);
+		}
+
+		50% {
+			transform: rotate(5deg) skewY(3deg) scaleY(1.04);
+		}
+	}
+
+	@keyframes timeline-talks-turtle-flipper-b {
+		0%,
+		100% {
+			transform: rotate(0deg) skewY(0deg) scaleX(1);
+		}
+
+		50% {
+			transform: rotate(-6deg) skewX(-3deg) scaleX(1.03);
+		}
+	}
+
+	@keyframes timeline-talks-turtle-flipper-c {
+		0%,
+		100% {
+			transform: rotate(0deg) skewX(0deg) scaleY(1);
+		}
+
+		50% {
+			transform: rotate(7deg) skewY(-3deg) scaleY(1.05);
+		}
+	}
+
+	@keyframes timeline-talks-turtle-bubble {
+		0% {
+			opacity: 0;
+			transform: translate3d(0, 0.35rem, 0) scale(0.6);
+		}
+
+		20% {
+			opacity: 0.62;
+		}
+
+		100% {
+			opacity: 0;
+			transform: translate3d(0.35rem, -1.8rem, 0) scale(1.18);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline-talks-turtle-art,
+		.timeline-talks-turtle-bubble,
+		.timeline-talks-turtle :global(svg path:nth-of-type(2)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(3)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(4)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(5)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(6)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(7)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(8)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(9)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(15)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(16)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(17)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(18)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(19)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(20)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(21)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(22)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(23)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(24)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(25)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(26)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(27)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(28)),
+		.timeline-talks-turtle :global(svg path:nth-of-type(29)) {
+			animation: none;
+		}
+	}
+</style>

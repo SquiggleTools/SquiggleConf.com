@@ -37,6 +37,7 @@
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
+	--fontFamilyMonospace: "Geist Mono", monospace;
 
 	--fontSizeSmallest: clamp(0.7rem, 1.9vw, 0.9rem);
 	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
