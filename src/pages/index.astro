@@ -7,7 +7,6 @@ import Hero from "~/components/hero/Hero.astro";
 import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
-import Logo from "~/components/Logo.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
 import { speakersBySlug } from "~/data/speakers";
@@ -49,6 +48,16 @@ import milkcookies2 from "~/assets/2027/milkcookies-2.png";
 import milkcookies3 from "~/assets/2027/milkcookies-3.jpg";
 import rest1 from "~/assets/2027/rest-1.jpg";
 import ryanDahl from "~/assets/2027/ryandahl.png";
+import scottTolinski from "~/assets/2027/scotttolinski.jpeg";
+import squiggleConfLogo from "~/assets/2027/SquiggleConf-Logo.svg";
+import thePrimeagen from "~/assets/2027/theprimagen.jpeg";
+import urbanwildLogo from "~/assets/2027/urbanwild-logo.png";
+import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
+import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
+import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
+import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
+import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
+import wesBos from "~/assets/2027/wesbos.jpeg";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import PageLayout from "~/layouts/PageLayout.astro";
 
@@ -63,8 +72,8 @@ const talksSessions = [
 		image: placeholder1,
 		isPlaceholder: true,
 		name: "Your Name Here",
-		qualification: "TypeScript whisperer",
-		title: "Why Is This Type Slow?",
+		qualification: "maintainer of a package in your lockfile",
+		title: "The Package You've Never Heard Of That Runs Half the Internet",
 	},
 	{
 		image: placeholder2,
@@ -80,8 +89,8 @@ const lateTalksSessions = [
 		image: placeholder3,
 		isPlaceholder: true,
 		name: "Placeholder McPlaceholderface",
-		qualification: "maintainer of a package in your lockfile",
-		title: "The Package You've Never Heard Of That Runs Half the Internet",
+		qualification: "TypeScript whisperer",
+		title: "Why Is This Type Slow?",
 	},
 	{
 		image: placeholder7,
@@ -169,7 +178,14 @@ const lunchSpots = [
 >
 	<Hero tall>
 		<div class="hero-intro">
-			<Logo class="hero-logo" />
+			<img
+				class="hero-logo"
+				src={squiggleConfLogo.src}
+				width={squiggleConfLogo.width}
+				height={squiggleConfLogo.height}
+				alt="SquiggleConf"
+				loading="eager"
+			/>
 			<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
 		</div>
 	</Hero>
@@ -245,9 +261,9 @@ const lunchSpots = [
 			<h2 class="postcard-heading">for those that make the squiggles</h2>
 			<p class="postcard-intro">
 				SquiggleConf is a conference focused on software developer tools: AI
-				tools, linters, code editors, performance tools, debuggers, and more. We
-				mix heavy talks with fun events. Think of it like your devtools
-				fieldtrip.
+				tools, linters, code editors, performance and security tools, debuggers,
+				and more. We mix heavy talks with fun events.<br />Think of it like your
+				devtools fieldtrip.
 			</p>
 			<div
 				class="postcard-gallery"
@@ -449,7 +465,9 @@ const lunchSpots = [
 				>
 					<h2>Simons IMAX Theater</h2>
 					<div class="event-body">
-						<div class="event-hero-image event-hero-image-wide">
+						<div
+							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
+						>
 							<Image
 								alt="Presenter on stage inside the Simons IMAX Theater"
 								src={presentingInsideVenue}
@@ -683,9 +701,9 @@ const lunchSpots = [
 							<p>
 								Head out together into
 								<a href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace dining</a
-								>, keep conversations moving, and treat the middle of the day
-								like your devtools field trip lunch break.
+									Faneuil Hall Marketplace</a
+								> at Quincy Market, keep conversations moving, and treat the middle
+								of the day like your devtools field trip lunch break.
 							</p>
 							<ul class="lunch-links">
 								<li>
@@ -812,8 +830,8 @@ const lunchSpots = [
 								<div class="explore-copy">
 									<h3>Duck Boat Tour</h3>
 									<p>
-										See more of the city in one shot with a classic Boston ride
-										that keeps the afternoon easy and social.
+										A SquiggleConf tradition: an amphibious boat! See more of
+										the city in one shot with a classic Boston ride.
 									</p>
 								</div>
 							</div>
@@ -832,7 +850,7 @@ const lunchSpots = [
 									<h3>Scavenger Hunt</h3>
 									<p>
 										A loose city walk with clues, checkpoints, and small teams
-										moving through the neighborhood together.
+										racing to win a big prize.
 									</p>
 								</div>
 							</div>
@@ -860,7 +878,7 @@ const lunchSpots = [
 				</div>
 
 				<div
-					class="timeline-venue timeline-venue-urban timeline-cell-span-four"
+					class="timeline-venue timeline-venue-urban timeline-cell-span-five"
 				>
 					<div class="timeline-venue-stack">
 						<p>Urban</p>
@@ -868,8 +886,32 @@ const lunchSpots = [
 						<p>Boston</p>
 					</div>
 				</div>
-				<div class="timeline-rail timeline-rail-syntax">
+				<div class="timeline-rail timeline-rail-syntax timeline-cell-span-two">
 					<p class="timeline-time">6pm</p>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-syntax"
+					data-timeline-entry="arrive-urban-wild"
+				>
+					<h2>Arrive at Urban Wild</h2>
+					<div class="event-body">
+						<div
+							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
+						>
+							<Image
+								alt="Urban Wild Boston logo"
+								src={urbanwildLogo}
+								loading="eager"
+							/>
+						</div>
+						<div class="timeline-copy">
+							<p>
+								The rest of the night takes place at Urban Wild Boston. Also the
+								last clue of the Scavenger Hunt may or may not be here.......
+							</p>
+						</div>
+					</div>
 				</div>
 
 				<div
@@ -878,18 +920,34 @@ const lunchSpots = [
 				>
 					<h2>Syntax.fm Live</h2>
 					<div class="event-body">
-						<div class="event-hero-image event-hero-image-wide">
-							<img
-								alt="Syntax.fm live YouTube thumbnail"
-								src="https://i.ytimg.com/vi/PXO0iopa5QI/hqdefault.jpg"
-								loading="eager"
-							/>
+						<div class="syntax-avatars" aria-label="Syntax.fm live guests">
+							<div
+								class="event-hero-image event-hero-image-square syntax-hero-image"
+							>
+								<Image
+									alt="ThePrimeagen portrait"
+									src={thePrimeagen}
+									loading="eager"
+								/>
+							</div>
+							<div class="syntax-avatar syntax-avatar-left">
+								<Image alt="Wes Bos portrait" src={wesBos} loading="eager" />
+							</div>
+							<div class="syntax-avatar syntax-avatar-right">
+								<Image
+									alt="Scott Tolinski portrait"
+									src={scottTolinski}
+									loading="eager"
+								/>
+							</div>
 						</div>
 						<div class="timeline-copy">
+							<h3 class="fireside-topic">
+								How to Find Time to Learn After Work
+							</h3>
 							<p>
-								Wes and Scott are bringing Syntax.fm live to Urban Wild, and
-								they’re going to interview someone cool in front of the whole
-								room.
+								Join Wes and Scott in a live podcast recording of Syntax.fm
+								featuring ThePrimeagen.
 							</p>
 						</div>
 					</div>
@@ -925,13 +983,14 @@ const lunchSpots = [
 						</div>
 						<div class="timeline-copy">
 							<h3 class="fireside-topic">
-								The Fight for the JavaScript Trademark
+								The Fight to Free the JavaScript Trademark
 							</h3>
 							<p>
 								Node.js and Deno creator Ryan Dahl takes the stage to break down
 								Deno's ongoing legal crusade against Oracle to free the
 								"JavaScript" trademark.
-							</p><p>hosted by Dillon Mulroy</p>
+							</p>
+							<p class="fireside-host">hosted by Dillon Mulroy</p>
 						</div>
 					</div>
 				</div>
@@ -950,53 +1009,34 @@ const lunchSpots = [
 					<p class="timeline-subtitle">7:30-9pm</p>
 					<div class="afterparty-collage" aria-label="After party collage">
 						<div class="afterparty-photo afterparty-photo-1">
-							<Image
-								alt="People networking at SquiggleConf"
-								src={networking}
-								loading="eager"
-							/>
+							<Image alt="" src={urbanwild1} loading="eager" />
 						</div>
 						<div class="afterparty-photo afterparty-photo-2">
-							<Image
-								alt="Boston harbor near the venue"
-								src={harbor}
-								loading="eager"
-							/>
+							<Image alt="" src={urbanwild2} loading="eager" />
 						</div>
 						<div class="afterparty-photo afterparty-photo-3">
-							<Image
-								alt="Speakers gathered together at the event"
-								src={group}
-								loading="eager"
-							/>
+							<Image alt="" src={urbanwild3} loading="eager" />
 						</div>
 						<div class="afterparty-photo afterparty-photo-4">
-							<Image
-								alt="Conference signage at the venue"
-								src={signage}
-								loading="eager"
-							/>
+							<Image alt="" src={urbanwild4} loading="eager" />
 						</div>
 						<div class="afterparty-photo afterparty-photo-5">
-							<Image
-								alt="People networking at SquiggleConf"
-								src={networking}
-								loading="eager"
-							/>
+							<Image alt="" src={urbanwild5} loading="eager" />
 						</div>
 					</div>
 					<div class="timeline-copy">
 						<p>
-							Urban Wild Boston is the kind of place that makes an after party
-							easy: lots of room, good energy, and enough atmosphere to keep
-							people hanging around after the talks are done.
+							After the podcast and fireside chat, we'll switch into party mode
+							at Urban Wild: video arcade bowling, lots of light bites and
+							refreshments, and most of all - a chance to hang with everyone you
+							just met at the conference!
 						</p>
 					</div>
 				</div>
 
 				<div class="timeline-content" data-timeline-entry="big-rav">
 					<h2>Big Rav</h2>
-					<p class="timeline-subtitle">9-9:30pm</p>
+					<p class="timeline-subtitle">9pm</p>
 					<div class="event-body">
 						<div class="event-hero-image event-hero-image-circle">
 							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
@@ -1005,8 +1045,10 @@ const lunchSpots = [
 							<p>
 								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
 								alternative, indie, and punk rock band that combines pop-punk vocals
-								with classic rock and prog-rock influences, with SquiggleConf's own
-								Maddy Montaquila on vocals.
+								with classic rock and prog-rock influences.
+								<span class="fireside-host">
+									featuring SquiggleConf's own Maddy Montaquila on vocals.
+								</span>
 							</p>
 						</div>
 					</div>
@@ -1031,8 +1073,10 @@ const lunchSpots = [
 	}
 
 	.hero-logo {
-		font-size: clamp(2.4rem, 7.5vw, 4.8rem);
-		line-height: 0.95;
+		display: block;
+		height: auto;
+		max-width: 100%;
+		width: clamp(16rem, 43vw, 36rem);
 	}
 
 	.hero-subtitle {
@@ -1045,6 +1089,8 @@ const lunchSpots = [
 		margin: 0 0 0.35rem;
 	}
 	.timeline-section {
+		--timeline-image-border-color: rgba(4, 25, 48, 0.18);
+		--timeline-image-border-width: 2px;
 		--timeline-hover-duration: 220ms;
 		isolation: isolate;
 		padding: 2rem 1rem clamp(3rem, 7vw, 5rem);
@@ -1201,17 +1247,23 @@ const lunchSpots = [
 	.postcard-stack-flip:hover,
 	.postcard-stack-flip:focus-within {
 		animation: none;
-		transform: rotate(4deg) translateY(-0.08rem);
 	}
 
 	.postcard-flip-scene {
 		overflow: visible;
 		perspective: 1200px;
+		transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 		width: 100%;
+	}
+
+	.postcard-stack-flip:hover .postcard-flip-scene,
+	.postcard-stack-flip:focus-within .postcard-flip-scene {
+		transform: rotate(8deg) translateY(-0.08rem);
 	}
 
 	.postcard-flip-inner {
 		aspect-ratio: 6 / 4;
+		pointer-events: none;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -1236,6 +1288,7 @@ const lunchSpots = [
 		display: block;
 		inset: 0;
 		overflow: visible;
+		pointer-events: none;
 		position: absolute;
 		width: 100%;
 	}
@@ -1252,6 +1305,7 @@ const lunchSpots = [
 	.postcard-face-front .postcard,
 	.postcard-face-back .postcard {
 		height: 100%;
+		pointer-events: none;
 		width: 100%;
 	}
 
@@ -1319,6 +1373,7 @@ const lunchSpots = [
 	.postcard-note-back {
 		left: 50%;
 		opacity: 0;
+		pointer-events: none;
 		position: absolute;
 		top: calc(100% + 0.55rem);
 		transform: translateX(-50%);
@@ -1345,7 +1400,11 @@ const lunchSpots = [
 		.postcard-stack-flip:hover,
 		.postcard-stack-flip:focus-within {
 			animation: none;
-			transform: rotate(0deg) translateY(-0.08rem);
+		}
+
+		.postcard-stack-flip:hover .postcard-flip-scene,
+		.postcard-stack-flip:focus-within .postcard-flip-scene {
+			transform: translateY(-0.08rem);
 		}
 	}
 
@@ -1500,11 +1559,12 @@ const lunchSpots = [
 	.timeline-grid {
 		display: grid;
 		grid-template-rows: auto 1fr;
-		grid-template-columns: 12.5% 10.5% 75%;
+		grid-template-columns: 15% 10% 75%;
 		margin: 0 auto;
 		max-width: min(100%, var(--sizeContentAreaWide));
 		padding-top: 1rem;
 		position: relative;
+		padding-right: 1rem;
 		z-index: 1;
 	}
 
@@ -1648,6 +1708,10 @@ const lunchSpots = [
 
 	.timeline-cell-span-four {
 		grid-row: span 4;
+	}
+
+	.timeline-cell-span-five {
+		grid-row: span 5;
 	}
 
 	.timeline-cell-span-seven {
@@ -1867,16 +1931,6 @@ const lunchSpots = [
 		padding-top: 1.35rem;
 	}
 
-	.timeline-content-syntax,
-	.timeline-content-fireside,
-	.timeline-content-afterparty {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content-afterparty {
-		min-height: 18rem;
-	}
-
 	.timeline-content h2 {
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
@@ -1931,15 +1985,11 @@ const lunchSpots = [
 
 	.timeline-content
 		:is(
-			.funrun-photo,
 			.launchparty-photo,
-			.talk-avatar,
 			.break-photo,
 			.lunch-photo,
 			.explore-photo,
-			.event-hero-image,
-			.fireside-avatar,
-			.afterparty-photo
+			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
 		) {
 		transform-origin: center;
 		transition:
@@ -1954,25 +2004,19 @@ const lunchSpots = [
 
 	.timeline-content:hover
 		:is(
-			.funrun-photo,
 			.launchparty-photo,
 			.break-photo,
 			.lunch-photo,
 			.explore-photo,
-			.event-hero-image,
-			.fireside-avatar,
-			.afterparty-photo
+			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
 		),
 	.timeline-content:focus-within
 		:is(
-			.funrun-photo,
 			.launchparty-photo,
 			.break-photo,
 			.lunch-photo,
 			.explore-photo,
-			.event-hero-image,
-			.fireside-avatar,
-			.afterparty-photo
+			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
 		) {
 		scale: 1.25;
 		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
@@ -1980,45 +2024,127 @@ const lunchSpots = [
 
 	.timeline-content
 		:is(
-			.funrun-photo,
-			.launchparty-photo,
 			.talk-avatar,
-			.break-photo,
-			.lunch-photo,
-			.explore-photo,
-			.event-hero-image,
 			.fireside-avatar,
-			.afterparty-photo
-		)
-		:is(img, :global(img)) {
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		transform: scale(0.95);
-		transform-origin: center;
-		will-change: transform;
-	}
-
-	.timeline-content .event-hero-image :is(img, :global(img)) {
-		transform: scale(1);
-		transform-origin: top right;
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		) {
+		transition: box-shadow var(--timeline-hover-duration) ease;
 	}
 
 	.timeline-content:hover
+		:is(
+			.talk-avatar,
+			.fireside-avatar,
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		),
+	.timeline-content:focus-within
+		:is(
+			.talk-avatar,
+			.fireside-avatar,
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	.timeline-section
 		:is(
 			.funrun-photo,
 			.launchparty-photo,
 			.talk-avatar,
 			.break-photo,
-			.lunch-photo,
 			.explore-photo,
 			.event-hero-image,
 			.fireside-avatar,
-			.afterparty-photo
+			.syntax-avatar,
+			.afterparty-photo,
+			.lunch-carousel-viewport
+		) {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+
+	.timeline-content
+		:is(
+			.launchparty-photo,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
+		)
+		:is(img, :global(img)) {
+		transition: filter var(--timeline-hover-duration) ease;
+		transform: none;
+		will-change: auto;
+	}
+
+	.timeline-content
+		:is(
+			.talk-avatar,
+			.fireside-avatar,
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		)
+		:is(img, :global(img)) {
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(1);
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	.timeline-content .event-hero-image :is(img, :global(img)) {
+		transform: none;
+		transform-origin: top right;
+	}
+
+	.timeline-content:hover
+		:is(
+			.launchparty-photo,
+			.break-photo,
+			.lunch-photo,
+			.explore-photo,
+			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
 		)
 		:is(img, :global(img)),
-	.timeline-content:hover .event-hero-image :is(img, :global(img)),
-	.timeline-content:focus-within .event-hero-image :is(img, :global(img)) {
+	.timeline-content:hover
+		.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
+		:is(img, :global(img)),
+	.timeline-content:focus-within
+		.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
+		:is(img, :global(img)) {
+		transform: none;
+	}
+
+	.timeline-content:hover
+		:is(
+			.talk-avatar,
+			.fireside-avatar,
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		)
+		:is(img, :global(img)),
+	.timeline-content:focus-within
+		:is(
+			.talk-avatar,
+			.fireside-avatar,
+			.syntax-avatar,
+			.syntax-hero-image,
+			.event-hero-image-pinned
+		)
+		:is(img, :global(img)) {
 		transform: scale(1.1);
 	}
 
@@ -2030,11 +2156,7 @@ const lunchSpots = [
 	}
 
 	.funrun-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 		position: absolute;
 	}
 
@@ -2050,28 +2172,20 @@ const lunchSpots = [
 		width: 5rem;
 		left: 6rem;
 		top: -4rem;
-		transform: rotate(35deg);
+		transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
 	}
 
 	.timeline-content .funrun-photo-1,
 	.timeline-content .funrun-photo-2 {
 		transition:
-			left var(--timeline-hover-duration) ease,
-			top var(--timeline-hover-duration) ease,
-			scale var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease,
 			box-shadow var(--timeline-hover-duration) ease;
+		will-change: transform;
 	}
 
 	.timeline-content:hover .funrun-photo-1,
 	.timeline-content:focus-within .funrun-photo-1 {
-		left: 7rem;
-		top: -5rem;
-	}
-
-	.timeline-content:hover .funrun-photo-2,
-	.timeline-content:focus-within .funrun-photo-2 {
-		left: 0.75rem;
-		top: -6rem;
+		transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
 	}
 
 	.timeline-top {
@@ -2094,7 +2208,12 @@ const lunchSpots = [
 		width: 6rem;
 		left: 1rem;
 		top: -4rem;
-		transform: rotate(-10deg);
+		transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+	}
+
+	.timeline-content:hover .funrun-photo-2,
+	.timeline-content:focus-within .funrun-photo-2 {
+		transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
 	}
 
 	.funrun-photo-2 :global(img) {
@@ -2109,11 +2228,7 @@ const lunchSpots = [
 	}
 
 	.launchparty-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.4rem 0.9rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 		position: absolute;
 		width: 8.9rem;
 	}
@@ -2157,6 +2272,12 @@ const lunchSpots = [
 		display: grid;
 		gap: 0.45rem;
 		max-width: 46rem;
+	}
+
+	.timeline-content-syntax .timeline-copy,
+	.timeline-content-fireside .timeline-copy {
+		align-content: center;
+		align-self: center;
 	}
 
 	.timeline-copy p {
@@ -2247,11 +2368,7 @@ const lunchSpots = [
 	}
 
 	.talk-avatar {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.45rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 	}
 
 	.talk-avatar-placeholder {
@@ -2273,7 +2390,14 @@ const lunchSpots = [
 		z-index: 1;
 	}
 
+	.talk-avatar :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
 	.talk-avatar :global(img) {
+		border-radius: inherit;
 		display: block;
 		height: 100%;
 		object-fit: cover;
@@ -2339,11 +2463,7 @@ const lunchSpots = [
 	}
 
 	.break-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 		position: absolute;
 	}
 
@@ -2404,11 +2524,7 @@ const lunchSpots = [
 	}
 
 	.lunch-carousel-viewport {
-		background: white;
-		border: 4px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.9rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -2624,14 +2740,10 @@ const lunchSpots = [
 	}
 
 	.explore-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
 		display: block;
 		height: 4.8rem;
 		min-width: 4.8rem;
-		overflow: hidden;
 		width: 4.8rem;
 	}
 
@@ -2676,11 +2788,7 @@ const lunchSpots = [
 	}
 
 	.event-hero-image {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
 	}
 
 	.event-hero-image-wide {
@@ -2720,17 +2828,20 @@ const lunchSpots = [
 	}
 
 	.fireside-avatar {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
 		border-radius: 999px;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
 		height: 4.9rem;
-		overflow: hidden;
 		position: absolute;
 		width: 4.9rem;
 	}
 
+	.fireside-avatar :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
 	.fireside-avatar :global(img) {
+		border-radius: inherit;
 		display: block;
 		height: 100%;
 		object-fit: cover;
@@ -2752,6 +2863,55 @@ const lunchSpots = [
 		z-index: 2;
 	}
 
+	.syntax-avatars {
+		height: 12rem;
+		position: relative;
+		width: 12rem;
+	}
+
+	.syntax-hero-image {
+		left: 1.7rem;
+		position: absolute;
+		top: 0.25rem;
+		height: 8.75rem;
+		width: 8.75rem;
+		z-index: 1;
+	}
+
+	.syntax-avatar {
+		border-radius: 999px;
+		height: 4.35rem;
+		position: absolute;
+		width: 4.35rem;
+		z-index: 2;
+	}
+
+	.syntax-avatar :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.syntax-avatar :global(img) {
+		border-radius: inherit;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.syntax-avatar-left {
+		bottom: 0.65rem;
+		left: 0;
+		transform: rotate(-7deg);
+	}
+
+	.syntax-avatar-right {
+		bottom: 0.35rem;
+		right: 0.1rem;
+		transform: rotate(7deg);
+	}
+
 	.fireside-topic {
 		color: var(--colorForegroundEmphasized);
 		font-family: var(--fontFamilyHeading);
@@ -2761,20 +2921,55 @@ const lunchSpots = [
 		margin: 0 0 0.65rem;
 	}
 
+	.fireside-host {
+		font-style: italic;
+	}
+
 	.afterparty-collage {
-		height: 11.75rem;
+		height: 20em;
 		margin: 0.5rem 0 1rem;
 		position: relative;
-		width: min(100%, 37rem);
+		width: min(100%, 38rem);
 	}
 
 	.afterparty-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
+		aspect-ratio: var(--afterparty-photo-aspect, 16 / 9);
 		border-radius: 0.35rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
+		height: auto;
 		position: absolute;
+		width: var(--afterparty-photo-width, 20%);
+	}
+
+	.timeline-content .launchparty-photo,
+	.timeline-content .afterparty-photo {
+		transition:
+			scale var(--timeline-hover-duration) ease,
+			border-width var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		will-change: scale;
+	}
+
+	.timeline-content:hover :is(.launchparty-photo, .afterparty-photo),
+	.timeline-content:focus-within :is(.launchparty-photo, .afterparty-photo) {
+		scale: 1.25;
+		border-width: 1px;
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	.timeline-content .launchparty-photo :is(img, :global(img)),
+	.timeline-content .afterparty-photo :is(img, :global(img)) {
+		transform: none;
+		transition: filter var(--timeline-hover-duration) ease;
+		will-change: auto;
+	}
+
+	.timeline-content:hover
+		:is(.launchparty-photo, .afterparty-photo)
+		:is(img, :global(img)),
+	.timeline-content:focus-within
+		:is(.launchparty-photo, .afterparty-photo)
+		:is(img, :global(img)) {
+		transform: none;
 	}
 
 	.afterparty-photo :global(img) {
@@ -2785,43 +2980,48 @@ const lunchSpots = [
 	}
 
 	.afterparty-photo-1 {
-		height: 7rem;
-		left: 0.4rem;
-		top: 2rem;
-		transform: rotate(-8deg);
-		width: 9.4rem;
+		--afterparty-photo-aspect: 16 / 9;
+		--afterparty-photo-width: 66%;
+		left: 0%;
+		top: 0%;
+		transform: rotate(-6deg);
+		z-index: 5;
 	}
 
 	.afterparty-photo-2 {
-		height: 6.6rem;
-		left: 7.4rem;
-		top: 0.35rem;
-		transform: rotate(-2deg);
-		width: 9.8rem;
+		--afterparty-photo-aspect: 14 / 16;
+		--afterparty-photo-width: 26%;
+		left: 65%;
+		top: 9%;
+		transform: rotate(8deg);
+		z-index: 4;
 	}
 
 	.afterparty-photo-3 {
-		height: 6.9rem;
-		left: 15.9rem;
-		top: 1.65rem;
-		transform: rotate(7deg);
-		width: 9.2rem;
+		--afterparty-photo-aspect: 16 / 9;
+		--afterparty-photo-width: 33%;
+		left: 50%;
+		top: -25%;
+		transform: rotate(0deg);
+		z-index: 2;
 	}
 
 	.afterparty-photo-4 {
-		height: 6.5rem;
-		left: 24rem;
-		top: 0.7rem;
-		transform: rotate(3deg);
-		width: 8.8rem;
+		--afterparty-photo-aspect: 16 / 9;
+		--afterparty-photo-width: 31%;
+		left: 76%;
+		top: -3%;
+		transform: rotate(19deg);
+		z-index: 1;
 	}
 
 	.afterparty-photo-5 {
-		height: 7.2rem;
-		left: 11rem;
-		top: 4.4rem;
-		transform: rotate(-5deg);
-		width: 10rem;
+		--afterparty-photo-aspect: 16 / 9;
+		--afterparty-photo-width: 30%;
+		left: 47%;
+		top: 53%;
+		transform: rotate(7deg);
+		z-index: 5;
 	}
 
 	@media (width < 900px) {
@@ -2829,6 +3029,7 @@ const lunchSpots = [
 			gap: 0.8rem;
 			grid-template-columns: 1fr;
 			grid-template-rows: auto;
+			padding-left: clamp(0.8rem, 4vw, 1.35rem);
 		}
 
 		.timeline-cap {
