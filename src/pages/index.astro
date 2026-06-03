@@ -251,40 +251,48 @@ const lunchSpots = [
 			</p>
 			<div
 				class="postcard-gallery"
-				style="--postcard-front-width: 24rem; --postcard-back-width: 21rem;"
+				style="--postcard-back-width: 21rem; --postcard-front-scale: 1.5;"
 			>
-				<div class="postcard-stack postcard-stack-front">
-					<span class="postcard postcard-front">
-						<Image
-							alt="Front of the SquiggleConf postcard"
-							src={postcardFront}
-							loading="eager"
-						/>
-					</span>
-				</div>
-				<div class="postcard-stack postcard-stack-back">
-					<span class="postcard postcard-back">
-						<Image
-							alt="Back of the SquiggleConf postcard"
-							src={postcardBack}
-							loading="eager"
-						/>
-						<span class="postcard-back-message">
-							<span class="postcard-back-greeting">Hi Mom,</span>
-							<span>
-								SquiggleConf was so much fun this year! <br />I learned all
-								about abstract syntax trees, AI agent harnesses, and met the
-								devs leading the industry!
+				<div class="postcard-stack postcard-stack-flip">
+					<div class="postcard-flip-scene">
+						<div class="postcard-flip-inner">
+							<span class="postcard-face postcard-face-front">
+								<span class="postcard postcard-front">
+									<Image
+										alt="Front of the SquiggleConf postcard"
+										src={postcardFront}
+										loading="eager"
+									/>
+								</span>
 							</span>
-						</span>
-						<span class="postcard-back-address">
-							<span>New England Aquarium</span>
-							<span>Simons Theater</span>
-							<span>1 Central Wharf</span>
-							<span>Boston, MA 02110</span>
-						</span>
-					</span>
-					<p class="postcard-note">* yes, you'll really get this postcard</p>
+							<span class="postcard-face postcard-face-back">
+								<span class="postcard postcard-back">
+									<Image
+										alt="Back of the SquiggleConf postcard"
+										src={postcardBack}
+										loading="eager"
+									/>
+									<span class="postcard-back-message">
+										<span class="postcard-back-greeting">Hi Mom,</span>
+										<span>
+											SquiggleConf was so much fun this year! <br />I learned
+											all about abstract syntax trees, AI agent harnesses, and
+											met the devs leading the industry!
+										</span>
+									</span>
+									<span class="postcard-back-address">
+										<span>New England Aquarium</span>
+										<span>Simons Theater</span>
+										<span>1 Central Wharf</span>
+										<span>Boston, MA 02110</span>
+									</span>
+								</span>
+								<span class="postcard-note postcard-note-back"
+									>* yes, you'll really get this postcard</span
+								>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="timeline-grid">
@@ -1102,7 +1110,9 @@ const lunchSpots = [
 		display: block;
 		overflow: hidden;
 		position: relative;
-		transition: box-shadow var(--timeline-hover-duration) ease;
+		transition:
+			box-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
 		width: 100%;
 	}
 
@@ -1115,10 +1125,10 @@ const lunchSpots = [
 
 	.postcard-gallery {
 		display: flex;
-		flex-wrap: wrap;
-		gap: clamp(1rem, 3vw, 2rem);
-		justify-content: center;
-		align-items: flex-start;
+		flex-direction: column;
+		gap: 0;
+		justify-content: flex-start;
+		align-items: center;
 		margin: 0 auto 1.15rem;
 		width: 100%;
 	}
@@ -1158,40 +1168,91 @@ const lunchSpots = [
 		transition: transform var(--timeline-hover-duration) ease;
 	}
 
-	.postcard-stack-front {
+	@keyframes postcard-idle-wiggle {
+		0%,
+		84%,
+		100% {
+			transform: rotate(-4deg);
+		}
+
+		88% {
+			transform: rotate(-2.8deg) translateY(-0.04rem);
+		}
+
+		92% {
+			transform: rotate(-5.1deg) translateY(0.02rem);
+		}
+
+		96% {
+			transform: rotate(-3.3deg) translateY(-0.03rem);
+		}
+	}
+
+	.postcard-stack-flip {
+		animation: postcard-idle-wiggle 5s ease-in-out infinite;
+		padding-bottom: 2.2rem;
 		transform: rotate(-4deg);
-		width: min(100%, var(--postcard-front-width, 24rem));
+		width: min(
+			100%,
+			calc(var(--postcard-back-width, 21rem) * var(--postcard-front-scale, 1.5))
+		);
 	}
 
-	.postcard-stack-front:hover,
-	.postcard-stack-front:focus-within {
-		transform: rotate(-3deg) translateY(-0.08rem);
+	.postcard-stack-flip:hover,
+	.postcard-stack-flip:focus-within {
+		animation: none;
+		transform: rotate(4deg) translateY(-0.08rem);
 	}
 
-	.postcard-stack-front:hover .postcard-front,
-	.postcard-stack-front:focus-within .postcard-front {
+	.postcard-flip-scene {
+		overflow: visible;
+		perspective: 1200px;
+		width: 100%;
+	}
+
+	.postcard-flip-inner {
+		aspect-ratio: 6 / 4;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+		width: 100%;
+	}
+
+	.postcard-stack-flip:hover .postcard-flip-inner,
+	.postcard-stack-flip:focus-within .postcard-flip-inner {
+		transform: rotateY(180deg);
+	}
+
+	.postcard-stack-flip:hover .postcard,
+	.postcard-stack-flip:focus-within .postcard {
 		box-shadow:
 			0 0.08rem 0 rgba(255, 255, 255, 0.56),
 			0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
 			0 1.65rem 3rem rgba(2, 14, 31, 0.28);
 	}
 
-	.postcard-stack-back {
-		transform: rotate(2deg);
-		width: min(100%, var(--postcard-back-width, 21rem));
+	.postcard-face {
+		backface-visibility: hidden;
+		display: block;
+		inset: 0;
+		overflow: visible;
+		position: absolute;
+		width: 100%;
 	}
 
-	.postcard-stack-back:hover,
-	.postcard-stack-back:focus-within {
-		transform: rotate(1.25deg) translateY(-0.08rem);
+	.postcard-face-back {
+		transform: rotateY(180deg);
 	}
 
-	.postcard-stack-back:hover .postcard-back,
-	.postcard-stack-back:focus-within .postcard-back {
-		box-shadow:
-			0 0.08rem 0 rgba(255, 255, 255, 0.56),
-			0 0.4rem 0.9rem rgba(2, 14, 31, 0.15),
-			0 1.5rem 2.85rem rgba(2, 14, 31, 0.26);
+	.postcard-face-front,
+	.postcard-face-back {
+		height: 100%;
+	}
+
+	.postcard-face-front .postcard,
+	.postcard-face-back .postcard {
+		height: 100%;
+		width: 100%;
 	}
 
 	.postcard-front {
@@ -1217,7 +1278,7 @@ const lunchSpots = [
 
 	.postcard-back-message span {
 		font-family: "Shantell Sans", cursive;
-		font-size: 0.8rem;
+		font-size: 1.2rem;
 		font-weight: 400;
 	}
 
@@ -1226,7 +1287,7 @@ const lunchSpots = [
 	}
 
 	.postcard-back-address {
-		bottom: 16%;
+		bottom: 15%;
 		color: #49515f;
 		display: grid;
 		gap: clamp(0.12rem, 0.35vw, 0.2rem);
@@ -1239,9 +1300,9 @@ const lunchSpots = [
 
 	.postcard-back-address span {
 		font-family: "Shantell Sans", cursive;
-		font-size: 0.6rem;
+		font-size: 0.8rem;
 		font-weight: 400;
-		line-height: 1.4;
+		line-height: 1.7;
 	}
 
 	.postcard-note {
@@ -1255,10 +1316,36 @@ const lunchSpots = [
 		text-wrap: balance;
 	}
 
+	.postcard-note-back {
+		left: 50%;
+		opacity: 0;
+		position: absolute;
+		top: calc(100% + 0.55rem);
+		transform: translateX(-50%);
+		transition: opacity 240ms ease;
+		width: min(100%, 20rem);
+	}
+
+	.postcard-stack-flip:hover .postcard-note-back,
+	.postcard-stack-flip:focus-within .postcard-note-back {
+		opacity: 1;
+	}
+
 	@media (max-width: 46rem) {
 		.postcard-gallery {
 			flex-direction: column;
 			align-items: center;
+		}
+
+		.postcard-stack-flip {
+			animation: postcard-idle-wiggle 5s ease-in-out infinite;
+			transform: none;
+		}
+
+		.postcard-stack-flip:hover,
+		.postcard-stack-flip:focus-within {
+			animation: none;
+			transform: rotate(0deg) translateY(-0.08rem);
 		}
 	}
 
@@ -2858,6 +2945,8 @@ const lunchSpots = [
 	@media (prefers-reduced-motion: reduce) {
 		.timeline-section::before,
 		.timeline-heading,
+		.postcard-stack-flip,
+		.postcard-flip-inner,
 		.timeline-venue,
 		.timeline-venue-stack,
 		.timeline-venue-decoration,
