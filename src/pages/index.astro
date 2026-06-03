@@ -1,4 +1,6 @@
 ---
+import "@fontsource/shantell-sans";
+
 import { Image } from "astro:assets";
 
 import Hero from "~/components/hero/Hero.astro";
@@ -9,7 +11,6 @@ import Logo from "~/components/Logo.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
 import { speakersBySlug } from "~/data/speakers";
-import { sessionsBySlug } from "~/data/sessions";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg";
@@ -25,64 +26,95 @@ import duck1 from "~/assets/2027/duck-1.jpg";
 import duck2 from "~/assets/2027/duck-2.jpg";
 import duck3 from "~/assets/2027/duck-3.jpg";
 import bigRav from "~/assets/2027/bigrav.png";
+import lunchBerryTwist from "~/assets/2027/lunch-berry-twist.jpg";
+import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.jpg";
+import lunchRegina from "~/assets/2027/lunch-regina.jpg";
+import lunchSalad from "~/assets/2027/lunch-salad.jpg";
+import lunchWickedLobsta from "~/assets/2027/lunch-wicked-lobsta.jpg";
 import maddyPortrait from "~/assets/2027/maddy.jpeg";
-import everybodySquiggling from "~/assets/2027/everybody-squiggling.jpg";
+import placeholder1 from "~/assets/2027/placeholder-1.png";
+import placeholder2 from "~/assets/2027/placeholder-2.png";
+import placeholder3 from "~/assets/2027/placeholder-3.png";
+import placeholder4 from "~/assets/2027/placeholder-4.png";
+import placeholder5 from "~/assets/2027/placeholder-5.png";
+import placeholder6 from "~/assets/2027/placeholder-6.png";
+import placeholder7 from "~/assets/2027/placeholder-7.png";
+import tannerPortrait from "~/assets/2027/tanner.jpeg";
+import postcardBack from "~/assets/2027/postcard-back.png";
+import postcardFront from "~/assets/2027/postcard-front.png";
 import funrun1 from "~/assets/2027/funrun-1.jpg";
 import funrun2 from "~/assets/2027/funrun-2.jpg";
 import milkcookies1 from "~/assets/2027/milkcookies-1.jpg";
 import milkcookies2 from "~/assets/2027/milkcookies-2.png";
 import milkcookies3 from "~/assets/2027/milkcookies-3.jpg";
 import rest1 from "~/assets/2027/rest-1.jpg";
+import ryanDahl from "~/assets/2027/ryandahl.png";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
-import robbyRussell from "~/assets/avatars/robby-russell.jpg";
 import PageLayout from "~/layouts/PageLayout.astro";
 
 const talksSessions = [
-	"a-world-class-local-dev-loop-with-aspire",
-	"aot-compiling-typescript-to-wasm-and-native",
-	"catch-accessibility-issues-at-the-source-with-storybook",
-].map((slug) => {
-	const session = sessionsBySlug[slug];
-	const speaker = session.speakers[0];
-
-	return {
-		image: speaker.image,
-		name: speaker.name,
-		qualification: session.qualification ?? speaker.qualification,
-		title: session.title,
-	};
-});
+	{
+		image: tannerPortrait,
+		name: "Tanner Linsley",
+		qualification: "creator of all things TanStack",
+		title: "TanStack AI: Our Biggest Lessons Learned",
+	},
+	{
+		image: placeholder1,
+		isPlaceholder: true,
+		name: "Your Name Here",
+		qualification: "TypeScript whisperer",
+		title: "Why Is This Type Slow?",
+	},
+	{
+		image: placeholder2,
+		isPlaceholder: true,
+		name: "Speaker Loading...",
+		qualification: "accidentally became a language designer",
+		title: "One Small Syntax Change, One Giant Migration Guide",
+	},
+];
 
 const lateTalksSessions = [
-	"make-tools-that-people-love",
-	"rolldown-how-vite-bundles-at-the-speed-of-rust",
-].map((slug) => {
-	const session = sessionsBySlug[slug];
-	const speaker = session.speakers[0];
-
-	return {
-		image: speaker.image,
-		name: speaker.name,
-		qualification: session.qualification ?? speaker.qualification,
-		title: session.title,
-	};
-});
+	{
+		image: placeholder3,
+		isPlaceholder: true,
+		name: "Placeholder McPlaceholderface",
+		qualification: "maintainer of a package in your lockfile",
+		title: "The Package You've Never Heard Of That Runs Half the Internet",
+	},
+	{
+		image: placeholder7,
+		isPlaceholder: true,
+		name: "Your Favorite Developer",
+		qualification: "local development maximalist",
+		title: "The 42-Second Dev Loop",
+	},
+];
 
 const afternoonTalksSessions = [
-	"effect-type-safe-errors-and-dependency-injection",
-	"source-maps-how-does-the-magic-work",
-	"cross-browser-devtools-with-webextensions",
-].map((slug) => {
-	const session = sessionsBySlug[slug];
-	const speaker = session.speakers[0];
-
-	return {
-		image: speaker.image,
-		name: speaker.name,
-		qualification: session.qualification ?? speaker.qualification,
-		title: session.title,
-	};
-});
+	{
+		image: placeholder5,
+		isPlaceholder: true,
+		name: "Mysterious Industry Person",
+		qualification: "compiler engineer and standards enjoyer",
+		title: "The Runtime Is Lying To You",
+	},
+	{
+		image: placeholder6,
+		isPlaceholder: true,
+		name: "Anonymous Core Team Member",
+		qualification: "spends their days reading specification prose",
+		title: "The Feature Everyone Uses Incorrectly",
+	},
+	{
+		image: placeholder4,
+		isPlaceholder: true,
+		name: "Future Squiggle Speaker",
+		qualification: "creator of an unreasonable amount of tooling",
+		title: "Making Developers 3% Faster at Enormous Personal Cost",
+	},
+];
 
 const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 	(slug) => {
@@ -95,6 +127,39 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		};
 	},
 );
+
+const lunchSpots = [
+	{
+		alt: "Regina Pizzeria pizza slices",
+		image: lunchRegina,
+		name: "Regina Pizzeria",
+		url: "https://faneuilhallmarketplace.com/go/regina-pizzeria",
+	},
+	{
+		alt: "Wicked Lobsta lobster roll",
+		image: lunchWickedLobsta,
+		name: "Wicked Lobsta",
+		url: "https://faneuilhallmarketplace.com/go/wicked-lobsta",
+	},
+	{
+		alt: "Boston & Maine Fish Company seafood plate",
+		image: lunchBostonChowda,
+		name: "Boston & Maine Fish Company",
+		url: "https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company",
+	},
+	{
+		alt: "The Berry Twist dessert cup",
+		image: lunchBerryTwist,
+		name: "The Berry Twist",
+		url: "https://faneuilhallmarketplace.com/go/the-berry-twist",
+	},
+	{
+		alt: "Green Organic Bowl salad",
+		image: lunchSalad,
+		name: "Green Organic Bowl",
+		url: "https://faneuilhallmarketplace.com/go/green-organic-bowl",
+	},
+];
 ---
 
 <PageLayout
@@ -177,48 +242,50 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 			</div>
-			<div class="timeline-heading">
-				<div class="timeline-postcard-column">
-					<span class="timeline-postcard timeline-postcard-front">
-						<span class="timeline-postcard-front-photo">
-							<Image
-								alt="SquiggleConf attendees gathered together"
-								src={everybodySquiggling}
-								loading="eager"
-							/>
-						</span>
-						<span class="timeline-postcard-front-label"
-							>SquiggleConf: your devtools fieldtrip</span
-						>
+			<h2 class="postcard-heading">for those that make the squiggles</h2>
+			<p class="postcard-intro">
+				SquiggleConf is a conference focused on software developer tools: AI
+				tools, linters, code editors, performance tools, debuggers, and more. We
+				mix heavy talks with fun events. Think of it like your devtools
+				fieldtrip.
+			</p>
+			<div
+				class="postcard-gallery"
+				style="--postcard-front-width: 24rem; --postcard-back-width: 21rem;"
+			>
+				<div class="postcard-stack postcard-stack-front">
+					<span class="postcard postcard-front">
+						<Image
+							alt="Front of the SquiggleConf postcard"
+							src={postcardFront}
+							loading="eager"
+						/>
 					</span>
-					<p class="timeline-postcard-note">
-						* yes, you'll really get this postcard
-					</p>
 				</div>
-				<span class="timeline-postcard timeline-postcard-back">
-					<span class="timeline-postcard-back-message">
-						<span class="timeline-postcard-back-kicker">Hi Mom,</span>
-						<span>
-							SquiggleConf was so much fun this year. I learned all about
-							abstract syntax trees, AI agent harnesses, and met the people
-							leading the industry.
+				<div class="postcard-stack postcard-stack-back">
+					<span class="postcard postcard-back">
+						<Image
+							alt="Back of the SquiggleConf postcard"
+							src={postcardBack}
+							loading="eager"
+						/>
+						<span class="postcard-back-message">
+							<span class="postcard-back-greeting">Hi Mom,</span>
+							<span>
+								SquiggleConf was so much fun this year! <br />I learned all
+								about abstract syntax trees, AI agent harnesses, and met the
+								devs leading the industry!
+							</span>
+						</span>
+						<span class="postcard-back-address">
+							<span>New England Aquarium</span>
+							<span>Simons Theater</span>
+							<span>1 Central Wharf</span>
+							<span>Boston, MA 02110</span>
 						</span>
 					</span>
-					<span class="timeline-postcard-back-divider" aria-hidden="true"
-					></span>
-					<span class="timeline-postcard-back-address">
-						<span class="timeline-postcard-stamp" aria-hidden="true">BOS</span>
-						<span class="timeline-postcard-address-name">Devtools Friend</span>
-						<span class="timeline-postcard-address-line"
-							>your devtools fieldtrip</span
-						>
-						<span class="timeline-postcard-address-line"
-							>Boston, Massachusetts</span
-						>
-						<span class="timeline-postcard-address-line">SquiggleConf 2025</span
-						>
-					</span>
-				</span>
+					<p class="postcard-note">* yes, you'll really get this postcard</p>
+				</div>
 			</div>
 			<div class="timeline-grid">
 				<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
@@ -232,9 +299,10 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 				</div>
 
 				<div class="timeline-venue">
-					<p>@</p>
-					<p>Ned</p>
-					<p>Devine's</p>
+					<div class="timeline-venue-stack">
+						<p>Ned</p>
+						<p>Devine's</p>
+					</div>
 				</div>
 				<div class="timeline-rail timeline-bottom">
 					<p class="timeline-time">6pm</p>
@@ -290,10 +358,9 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 				<div class="timeline-cell timeline-cell-empty" aria-hidden="true"></div>
 
 				<div
-					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-morning"
+					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-morning timeline-cell-span-seven"
 				>
 					<div class="timeline-venue-stack">
-						<p>@</p>
 						<p>New</p>
 						<p>England</p>
 						<p>Aquarium</p>
@@ -337,11 +404,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div
-					class="timeline-venue timeline-venue-empty timeline-cell-span-two"
-					aria-hidden="true"
-				>
-				</div>
 				<div class="timeline-rail timeline-rail-checkin timeline-cell-span-two">
 					<p class="timeline-time">8am</p>
 				</div>
@@ -353,8 +415,8 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					<h2>Check In</h2>
 					<div class="timeline-copy">
 						<p>
-							Pick up your badge, settle in, and grab a coffee before the first
-							sessions start.
+							Pick up your badge, settle in, and grab a terminal.shop coffee
+							before the first sessions start.
 						</p>
 						<a
 							class="timeline-checkin-button"
@@ -371,6 +433,33 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 							<span>terminal.shop coffee</span>
 						</a>
 					</div>
+				</div>
+
+				<div
+					class="timeline-content timeline-content-mcs"
+					data-timeline-entry="simons-imax-theater"
+				>
+					<h2>Simons IMAX Theater</h2>
+					<div class="event-body">
+						<div class="event-hero-image event-hero-image-wide">
+							<Image
+								alt="Presenter on stage inside the Simons IMAX Theater"
+								src={presentingInsideVenue}
+								loading="eager"
+							/>
+						</div>
+						<div class="timeline-copy">
+							<p>
+								The talks take place in an IMAX theater. That means super
+								comfortable seats, great visibility, and a 60ft high screen.
+							</p>
+							<p>Also, a penguin exhibit next door.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="timeline-rail timeline-rail-talks timeline-cell-span-two">
+					<p class="timeline-time">9am</p>
 				</div>
 
 				<div
@@ -395,39 +484,30 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
-				</div>
-				<div class="timeline-rail timeline-rail-talks">
-					<p class="timeline-time">9am</p>
-				</div>
-
 				<div
 					class="timeline-content timeline-content-talks"
 					data-timeline-entry="talks-morning"
 				>
 					<h2>Talks</h2>
-					<div class="talks-intro-row">
-						<div class="timeline-copy talks-intro-copy">
-							<p>
-								The talks take place in an IMAX theater. That means super
-								comfortable seats, great visibility, and a 60ft high screen.<br
-								/>Also, a penguin exhibit next door.
-							</p>
-						</div>
-						<div class="talks-venue-photo">
-							<Image
-								alt="Presenter on stage inside the Simons IMAX Theater"
-								src={presentingInsideVenue}
-								loading="eager"
-							/>
-						</div>
-					</div>
 					<div class="talks-list" aria-label="Speaker talks">
 						{
 							talksSessions.map((talk) => (
 								<article class="talk-card">
-									<div class="talk-avatar">
+									<div
+										class:list={[
+											"talk-avatar",
+											talk.isPlaceholder && "talk-avatar-placeholder",
+										]}
+									>
 										<Image alt={talk.name} src={talk.image} />
+										{talk.isPlaceholder && (
+											<span
+												class="talk-avatar-placeholder-mark"
+												aria-hidden="true"
+											>
+												?
+											</span>
+										)}
 									</div>
 									<div class="talk-copy">
 										<h3>{talk.title}</h3>
@@ -440,8 +520,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
-				</div>
 				<div class="timeline-rail timeline-rail-break">
 					<p class="timeline-time">10:30am</p>
 				</div>
@@ -479,20 +557,14 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 							</div>
 						</div>
 						<div class="break-copy timeline-copy">
-							<p>
-								Pause for a reset, catch up with people you just met, and trade
-								notes on the morning’s talks.
-							</p>
-							<p>
-								The break keeps the middle of the day loose and social before
-								everyone heads back into the next block.
+							<p>A SguiggleConf classic!</p><p>
+								Catch up with people you just met, and trade notes on the
+								morning’s talks.
 							</p>
 						</div>
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
-				</div>
 				<div class="timeline-rail timeline-rail-talks timeline-rail-talks-late">
 					<p class="timeline-time">11am</p>
 				</div>
@@ -509,8 +581,21 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 						{
 							lateTalksSessions.map((talk) => (
 								<article class="talk-card">
-									<div class="talk-avatar">
+									<div
+										class:list={[
+											"talk-avatar",
+											talk.isPlaceholder && "talk-avatar-placeholder",
+										]}
+									>
 										<Image alt={talk.name} src={talk.image} />
+										{talk.isPlaceholder && (
+											<span
+												class="talk-avatar-placeholder-mark"
+												aria-hidden="true"
+											>
+												?
+											</span>
+										)}
 									</div>
 									<div class="talk-copy">
 										<h3>{talk.title}</h3>
@@ -524,10 +609,10 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 				</div>
 
 				<div class="timeline-venue timeline-venue-lunch">
-					<p>@</p>
-					<p>Faneuil</p>
-					<p>Hall</p>
-					<p>Market</p>
+					<div class="timeline-venue-stack">
+						<p>Quincy</p>
+						<p>Market</p>
+					</div>
 				</div>
 				<div class="timeline-rail timeline-rail-lunch">
 					<p class="timeline-time">12pm</p>
@@ -539,49 +624,74 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 				>
 					<h2>Lunch</h2>
 					<div class="lunch-body">
-						<div class="lunch-collage" aria-label="Lunch collage">
-							<div class="lunch-photo lunch-photo-1">
-								<Image
-									alt="Boston harbor near the venue"
-									src={harbor}
-									loading="eager"
-								/>
+						<div
+							class="lunch-carousel"
+							data-lunch-carousel
+							aria-label="Lunch options photo carousel"
+						>
+							<div class="lunch-carousel-viewport">
+								<div class="lunch-carousel-track" data-lunch-track>
+									{
+										lunchSpots.map((spot, index) => (
+											<div
+												class="lunch-slide"
+												data-lunch-slide
+												aria-hidden={index === 0 ? "false" : "true"}
+											>
+												<div class="lunch-slide-image">
+													<Image
+														alt={spot.alt}
+														src={spot.image}
+														loading={index === 0 ? "eager" : "lazy"}
+													/>
+												</div>
+												<div class="lunch-slide-caption">
+													<strong>{spot.name}</strong>
+												</div>
+											</div>
+										))
+									}
+								</div>
 							</div>
-							<div class="lunch-photo lunch-photo-2">
-								<Image
-									alt="People networking at SquiggleConf"
-									src={networking}
-									loading="eager"
-								/>
-							</div>
-							<div class="lunch-photo lunch-photo-3">
-								<Image
-									alt="Conference signage at the venue"
-									src={signage}
-									loading="eager"
-								/>
-							</div>
-							<div class="lunch-photo lunch-photo-4">
-								<Image
-									alt="Speakers gathered together at the event"
-									src={group}
-									loading="eager"
-								/>
-							</div>
-							<div class="lunch-photo lunch-photo-5">
-								<Image
-									alt="People networking at SquiggleConf"
-									src={networking}
-									loading="eager"
-								/>
+							<div
+								class="lunch-carousel-dots"
+								aria-label="Lunch image navigation"
+							>
+								{
+									lunchSpots.map((spot, index) => (
+										<button
+											type="button"
+											class="lunch-carousel-dot"
+											data-lunch-dot
+											data-lunch-index={index}
+											aria-label={`Show ${spot.name}`}
+											aria-pressed={index === 0 ? "true" : "false"}
+										/>
+									))
+								}
 							</div>
 						</div>
 						<div class="lunch-copy timeline-copy">
 							<p>
-								Head out together for lunch in the market, keep conversations
-								moving, and let the middle of the day feel like a field trip.
+								Head out together into
+								<a href="https://faneuilhallmarketplace.com/dining">
+									Faneuil Hall Marketplace dining</a
+								>, keep conversations moving, and treat the middle of the day
+								like your devtools field trip lunch break.
 							</p>
 							<ul class="lunch-links">
+								<li>
+									<a
+										href="https://faneuilhallmarketplace.com/go/regina-pizzeria"
+									>
+										Regina Pizzeria
+									</a>
+								</li>
+								<li>
+									<a href="https://faneuilhallmarketplace.com/go/wicked-lobsta">
+										Wicked Lobsta
+									</a>
+								</li>
 								<li>
 									<a
 										href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
@@ -590,36 +700,33 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 									</a>
 								</li>
 								<li>
-									<a href="https://faneuilhallmarketplace.com/go/boston-chowda">
-										Boston Chowda
-									</a>
-								</li>
-								<li>
-									<a href="https://faneuilhallmarketplace.com/go/prime-shoppe">
-										Prime Shoppe
+									<a
+										href="https://faneuilhallmarketplace.com/go/the-berry-twist"
+									>
+										The Berry Twist
 									</a>
 								</li>
 								<li>
 									<a
-										href="https://faneuilhallmarketplace.com/go/steves-greek-cuisine"
+										href="https://faneuilhallmarketplace.com/go/green-organic-bowl"
 									>
-										Steve's Greek Cuisine
+										Green Organic Bowl
 									</a>
 								</li>
 							</ul>
 							<p>
-								It should stay busy, walkable, and social before everyone
-								regroups for the afternoon talks.
+								Fast options, easy wandering, and enough variety that everyone
+								can grab something good before heading back for the afternoon
+								block.
 							</p>
 						</div>
 					</div>
 				</div>
 
 				<div
-					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-afternoon"
+					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-afternoon timeline-cell-span-two"
 				>
 					<div class="timeline-venue-stack">
-						<p>@</p>
 						<p>New</p>
 						<p>England</p>
 						<p>Aquarium</p>
@@ -646,8 +753,21 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 						{
 							afternoonTalksSessions.map((talk) => (
 								<article class="talk-card">
-									<div class="talk-avatar">
+									<div
+										class:list={[
+											"talk-avatar",
+											talk.isPlaceholder && "talk-avatar-placeholder",
+										]}
+									>
 										<Image alt={talk.name} src={talk.image} />
+										{talk.isPlaceholder && (
+											<span
+												class="talk-avatar-placeholder-mark"
+												aria-hidden="true"
+											>
+												?
+											</span>
+										)}
 									</div>
 									<div class="talk-copy">
 										<h3>{talk.title}</h3>
@@ -660,8 +780,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
-				</div>
 				<div class="timeline-rail timeline-rail-explore">
 					<p class="timeline-time">3:30pm</p>
 				</div>
@@ -733,14 +851,17 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-urban">
-					<p>@</p>
-					<p>Urban</p>
-					<p>Wild</p>
-					<p>Boston</p>
+				<div
+					class="timeline-venue timeline-venue-urban timeline-cell-span-four"
+				>
+					<div class="timeline-venue-stack">
+						<p>Urban</p>
+						<p>Wild</p>
+						<p>Boston</p>
+					</div>
 				</div>
 				<div class="timeline-rail timeline-rail-syntax">
-					<p class="timeline-time">5:30pm</p>
+					<p class="timeline-time">6pm</p>
 				</div>
 
 				<div
@@ -766,56 +887,51 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div class="timeline-venue timeline-venue-empty" aria-hidden="true">
-				</div>
 				<div class="timeline-rail timeline-rail-fireside">
-					<p class="timeline-time">6:30pm</p>
+					<p class="timeline-time">7pm</p>
 				</div>
 
 				<div
 					class="timeline-content timeline-content-fireside"
 					data-timeline-entry="fireside-chat"
 				>
-					<h2>Fireside Chat: The Fight for the JavaScript Trademark</h2>
+					<h2>Fireside Chat</h2>
 					<div class="event-body">
-						<div
-							class="fireside-avatars"
-							aria-label="Placeholder avatars for fireside chat guests"
-						>
-							<div class="fireside-avatar fireside-avatar-1">
+						<div class="fireside-avatars" aria-label="Fireside chat guests">
+							<div
+								class="event-hero-image event-hero-image-circle fireside-hero-image"
+							>
 								<Image
-									alt="Placeholder avatar for Ryan Dahl"
-									src={robbyRussell}
+									alt="Ryan Dahl portrait"
+									src={ryanDahl}
 									loading="eager"
 								/>
 							</div>
-							<div class="fireside-avatar fireside-avatar-2">
+							<div class="fireside-avatar fireside-avatar-corner">
 								<Image
-									alt="Placeholder avatar for Dillon Mulroy"
+									alt="Dillon Mulroy portrait"
 									src={dillonMulroy}
 									loading="eager"
 								/>
 							</div>
 						</div>
 						<div class="timeline-copy">
+							<h3 class="fireside-topic">
+								The Fight for the JavaScript Trademark
+							</h3>
 							<p>
-								A focused conversation about the long fight over the JavaScript
-								trademark, with placeholder guest art for now until the final
-								assets are ready.
-							</p>
+								Node.js and Deno creator Ryan Dahl takes the stage to break down
+								Deno's ongoing legal crusade against Oracle to free the
+								"JavaScript" trademark.
+							</p><p>hosted by Dillon Mulroy</p>
 						</div>
 					</div>
 				</div>
 
 				<div
-					class="timeline-venue timeline-venue-empty timeline-cell-span-two"
-					aria-hidden="true"
-				>
-				</div>
-				<div
 					class="timeline-rail timeline-rail-afterparty timeline-bottom timeline-cell-span-two"
 				>
-					<p class="timeline-time">7pm</p>
+					<p class="timeline-time">7:30pm</p>
 				</div>
 
 				<div
@@ -823,7 +939,7 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					data-timeline-entry="after-party"
 				>
 					<h2>After Party</h2>
-					<p class="timeline-subtitle">7-9pm</p>
+					<p class="timeline-subtitle">7:30-9pm</p>
 					<div class="afterparty-collage" aria-label="After party collage">
 						<div class="afterparty-photo afterparty-photo-1">
 							<Image
@@ -870,14 +986,11 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 					</div>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-bigrav"
-					data-timeline-entry="big-rav"
-				>
+				<div class="timeline-content" data-timeline-entry="big-rav">
 					<h2>Big Rav</h2>
-					<p class="timeline-subtitle">9-10pm</p>
-					<div class="event-body event-body-featured-avatar">
-						<div class="fireside-avatar fireside-avatar-featured">
+					<p class="timeline-subtitle">9-9:30pm</p>
+					<div class="event-body">
+						<div class="event-hero-image event-hero-image-circle">
 							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
 						</div>
 						<div class="timeline-copy">
@@ -979,157 +1092,174 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		margin-top: clamp(1.75rem, 4vw, 2.75rem);
 	}
 
-	.timeline-postcard {
+	.postcard {
 		aspect-ratio: 6 / 4;
-		background: #f7f2ea;
-		border-radius: 0.2rem;
+		border-radius: 0.45rem;
+		box-shadow:
+			0 0.08rem 0 rgba(255, 255, 255, 0.5),
+			0 0.35rem 0.75rem rgba(2, 14, 31, 0.14),
+			0 1.35rem 2.6rem rgba(2, 14, 31, 0.24);
 		display: block;
+		overflow: hidden;
 		position: relative;
+		transition: box-shadow var(--timeline-hover-duration) ease;
 		width: 100%;
 	}
 
-	.timeline-postcard-column {
-		display: grid;
-		gap: 1rem;
-		width: 100%;
-		margin-bottom: 1rem;
-	}
-
-	.timeline-postcard-front {
-		box-shadow:
-			0 0.22rem 0 rgba(255, 255, 255, 0.18),
-			0 1rem 2.2rem rgba(2, 14, 31, 0.26);
-		overflow: hidden;
-		padding: 0.55rem 0.55rem 2.25rem;
-		transform: rotate(-4deg);
-		transition:
-			box-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-postcard-front:hover,
-	.timeline-postcard-front:focus-within {
-		box-shadow:
-			0 0.24rem 0 rgba(255, 255, 255, 0.2),
-			0 1.15rem 2.35rem rgba(2, 14, 31, 0.32);
-		transform: rotate(-3deg) translateY(-0.08rem);
-	}
-
-	.timeline-postcard-front-photo {
-		background: white;
-		border: 1px solid rgba(4, 25, 48, 0.12);
-		box-shadow: 0 0.3rem 0.7rem rgba(4, 25, 48, 0.12);
-		display: block;
-		height: 100%;
-		overflow: hidden;
-		width: 100%;
-	}
-
-	.timeline-postcard-front-photo :global(img) {
+	.postcard :global(img) {
 		display: block;
 		height: 100%;
 		object-fit: cover;
 		width: 100%;
 	}
 
-	.timeline-postcard-front-label {
-		bottom: 0.68rem;
-		color: #36506a;
-		font-family: var(--fontFamilyHeading);
-		font-size: 0.8rem;
-		left: 0;
-		letter-spacing: 0.04em;
-		position: absolute;
-		text-align: center;
-		text-transform: uppercase;
+	.postcard-gallery {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(1rem, 3vw, 2rem);
+		justify-content: center;
+		align-items: flex-start;
+		margin: 0 auto 1.15rem;
 		width: 100%;
 	}
 
-	.timeline-postcard-note {
-		color: rgba(223, 239, 255, 0.72);
-		font-size: clamp(0.82rem, 1.15vw, 0.92rem);
-		line-height: 1.3;
-		margin: 0;
+	.postcard-heading {
+		color: #eef6ff;
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
+		font-style: italic;
+		font-weight: 700;
+		line-height: 1;
+		padding-top: 1rem;
+		margin: 0 auto;
+		max-width: fit-content;
+		position: relative;
 		text-align: center;
+		z-index: 1;
 	}
 
-	.timeline-postcard-back {
-		border: 1px solid rgba(29, 53, 82, 0.14);
-		box-shadow: 0 0.8rem 2rem rgba(2, 14, 31, 0.2);
-		color: #274764;
+	.postcard-intro {
+		color: color-mix(in srgb, #eef6ff 88%, white 12%);
+		font-size: clamp(1rem, 1.35vw, 1.12rem);
+		line-height: 1.6;
+		margin: 0.85rem auto 0;
+		max-width: 41rem;
+		padding: 0 1rem;
+		text-align: center;
+		text-wrap: pretty;
+	}
+
+	.postcard-stack {
+		margin: 3em 0 2rem 0;
 		display: grid;
-		gap: 0.8rem;
-		grid-template-columns: minmax(0, 1.05fr) 1px minmax(8.5rem, 0.95fr);
-		padding: 0.95rem 1rem 0.9rem;
-		text-align: left;
-		transform: rotate(2deg);
-		transition:
-			box-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
+		gap: 0.5rem;
+		justify-items: center;
+		width: min(100%, 100vw - 2rem);
+		transition: transform var(--timeline-hover-duration) ease;
 	}
 
-	.timeline-postcard-back:hover,
-	.timeline-postcard-back:focus-within {
-		box-shadow: 0 0.95rem 2.25rem rgba(2, 14, 31, 0.24);
+	.postcard-stack-front {
+		transform: rotate(-4deg);
+		width: min(100%, var(--postcard-front-width, 24rem));
+	}
+
+	.postcard-stack-front:hover,
+	.postcard-stack-front:focus-within {
+		transform: rotate(-3deg) translateY(-0.08rem);
+	}
+
+	.postcard-stack-front:hover .postcard-front,
+	.postcard-stack-front:focus-within .postcard-front {
+		box-shadow:
+			0 0.08rem 0 rgba(255, 255, 255, 0.56),
+			0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
+			0 1.65rem 3rem rgba(2, 14, 31, 0.28);
+	}
+
+	.postcard-stack-back {
+		transform: rotate(2deg);
+		width: min(100%, var(--postcard-back-width, 21rem));
+	}
+
+	.postcard-stack-back:hover,
+	.postcard-stack-back:focus-within {
 		transform: rotate(1.25deg) translateY(-0.08rem);
 	}
 
-	.timeline-postcard-back-message {
+	.postcard-stack-back:hover .postcard-back,
+	.postcard-stack-back:focus-within .postcard-back {
+		box-shadow:
+			0 0.08rem 0 rgba(255, 255, 255, 0.56),
+			0 0.4rem 0.9rem rgba(2, 14, 31, 0.15),
+			0 1.5rem 2.85rem rgba(2, 14, 31, 0.26);
+	}
+
+	.postcard-front {
+		background: #f7f2ea;
+	}
+
+	.postcard-back {
+		background: #fffdf8;
+	}
+
+	.postcard-back-message {
+		color: #49515f;
 		display: grid;
-		gap: 0.6rem;
-		line-height: 1.42;
+		gap: clamp(0.35rem, 0.8vw, 0.6rem);
+		inset: 12% auto auto 7%;
+		line-height: 1.5;
+		max-width: 40%;
+		pointer-events: none;
+		position: absolute;
+		text-align: left;
+		text-wrap: pretty;
 	}
 
-	.timeline-postcard-back-message span {
-		color: #2d4d6b;
-		font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+	.postcard-back-message span {
+		font-family: "Shantell Sans", cursive;
+		font-size: 0.8rem;
+		font-weight: 400;
 	}
 
-	.timeline-postcard-back-kicker {
-		color: #1d3852;
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1rem, 1.45vw, 1.12rem);
-		font-weight: var(--fontWeightSemibold);
-		line-height: 1.1;
+	.postcard-back-greeting {
+		font-size: clamp(0.8rem, 1.02vw, 1rem);
 	}
 
-	.timeline-postcard-back-divider {
-		background: rgba(29, 53, 82, 0.18);
-		border-radius: 999px;
-		width: 1px;
-	}
-
-	.timeline-postcard-back-address {
-		align-content: start;
+	.postcard-back-address {
+		bottom: 16%;
+		color: #49515f;
 		display: grid;
-		gap: 0.5rem;
+		gap: clamp(0.12rem, 0.35vw, 0.2rem);
+		left: 55%;
+		max-width: 41%;
+		pointer-events: none;
+		position: absolute;
+		text-align: left;
 	}
 
-	.timeline-postcard-stamp {
-		align-items: center;
-		background: linear-gradient(180deg, #7dcfe2 0%, #a4dce8 100%);
-		border: 2px dashed rgba(29, 53, 82, 0.3);
-		border-radius: 0.15rem;
-		color: #134464;
-		display: inline-flex;
-		font-family: var(--fontFamilyHeading);
-		font-size: 0.95rem;
-		font-weight: var(--fontWeightSemibold);
-		justify-self: end;
-		padding: 0.55rem 0.6rem;
+	.postcard-back-address span {
+		font-family: "Shantell Sans", cursive;
+		font-size: 0.6rem;
+		font-weight: 400;
+		line-height: 1.4;
 	}
 
-	.timeline-postcard-address-name,
-	.timeline-postcard-address-line {
-		border-bottom: 2px solid rgba(29, 53, 82, 0.7);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(0.96rem, 1.4vw, 1.08rem);
-		line-height: 1.08;
-		padding-bottom: 0.22rem;
+	.postcard-note {
+		color: rgba(223, 239, 255, 0.78);
+		font-size: clamp(0.82rem, 1.15vw, 0.92rem);
+		line-height: 1.3;
+		margin: 0;
+		max-width: min(100%, 20rem);
+		padding: 0 0.5rem;
+		text-align: center;
+		text-wrap: balance;
 	}
 
-	.timeline-postcard-address-name {
-		margin-top: 0.25rem;
+	@media (max-width: 46rem) {
+		.postcard-gallery {
+			flex-direction: column;
+			align-items: center;
+		}
 	}
 
 	.timeline-fish-layer {
@@ -1334,7 +1464,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		font-weight: 600;
 		justify-content: flex-start;
 		line-height: 1.12;
-		margin-top: 1rem;
 		padding: 0 1rem 0 0;
 		text-align: right;
 		transition:
@@ -1353,6 +1482,74 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		position: relative;
 	}
 
+	@keyframes timeline-venue-wiggle {
+		0% {
+			transform: translate3d(0, 0, 0) rotate(-0.4deg);
+		}
+
+		25% {
+			transform: translate3d(0.04rem, -0.02rem, 0) rotate(0.48deg);
+		}
+
+		50% {
+			transform: translate3d(-0.06rem, 0.03rem, 0) rotate(-0.55deg);
+		}
+
+		75% {
+			transform: translate3d(0.035rem, -0.015rem, 0) rotate(0.35deg);
+		}
+
+		100% {
+			transform: translate3d(0, 0, 0) rotate(-0.4deg);
+		}
+	}
+
+	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack::before {
+		color: rgba(125, 207, 226, 0.7);
+		content: "@";
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.5rem;
+		font-weight: 700;
+		left: -0.15rem;
+		line-height: 1;
+		opacity: 0.72;
+		position: absolute;
+		top: -0.5rem;
+		transform: rotate(-10deg);
+		text-shadow: 0 0.12rem 0.4rem rgba(4, 25, 48, 0.24);
+	}
+
+	.timeline-venue:not(.timeline-venue-empty) {
+		align-self: stretch;
+	}
+
+	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack {
+		animation: timeline-venue-wiggle 650ms ease-in-out infinite;
+		animation-play-state: paused;
+		backdrop-filter: blur(14px) saturate(140%);
+		background: rgba(5, 23, 43, 0.72);
+		border: 1px solid rgba(125, 207, 226, 0.22);
+		border-radius: 0.9rem;
+		box-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
+		padding: 0.85rem 0.9rem 0.8rem 1.45rem;
+		position: sticky;
+		top: clamp(1rem, 4vw, 4.5rem);
+		transform-origin: top right;
+		z-index: 2;
+	}
+
+	:root[data-timeline-scrolling="true"]
+		.timeline-venue:not(.timeline-venue-empty)
+		.timeline-venue-stack {
+		animation-play-state: running;
+	}
+
+	.timeline-venue-aquarium-afternoon .timeline-venue-stack {
+		margin-bottom: var(--timeline-venue-stop-offset, 6rem);
+		padding-bottom: 3.75rem;
+		padding-right: 3.85rem;
+	}
+
 	.timeline-venue-empty {
 		min-height: 0;
 		padding: 0;
@@ -1360,6 +1557,14 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 
 	.timeline-cell-span-two {
 		grid-row: span 2;
+	}
+
+	.timeline-cell-span-four {
+		grid-row: span 4;
+	}
+
+	.timeline-cell-span-seven {
+		grid-row: span 7;
 	}
 
 	.timeline-rail {
@@ -1486,10 +1691,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		padding-top: 1.2rem;
 	}
 
-	.timeline-content-checkin {
-		padding-top: 1.35rem;
-	}
-
 	.timeline-content-mcs {
 		padding-top: 1.35rem;
 	}
@@ -1568,7 +1769,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 	}
 
 	.timeline-content-lunch {
-		min-height: 24rem;
 		padding-top: 1.35rem;
 	}
 
@@ -1661,6 +1861,10 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		will-change: scale;
 	}
 
+	.timeline-content .event-hero-image {
+		transform-origin: top right;
+	}
+
 	.timeline-content:hover
 		:is(
 			.funrun-photo,
@@ -1708,6 +1912,11 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		will-change: transform;
 	}
 
+	.timeline-content .event-hero-image :is(img, :global(img)) {
+		transform: scale(1);
+		transform-origin: top right;
+	}
+
 	.timeline-content:hover
 		:is(
 			.funrun-photo,
@@ -1721,28 +1930,16 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 			.afterparty-photo
 		)
 		:is(img, :global(img)),
-	.timeline-content:focus-within
-		:is(
-			.funrun-photo,
-			.launchparty-photo,
-			.talk-avatar,
-			.break-photo,
-			.lunch-photo,
-			.explore-photo,
-			.event-hero-image,
-			.fireside-avatar,
-			.afterparty-photo
-		)
-		:is(img, :global(img)) {
-		filter: saturate(1.05);
-		transform: scale(1.1) translate3d(0, -0.06rem, 0);
+	.timeline-content:hover .event-hero-image :is(img, :global(img)),
+	.timeline-content:focus-within .event-hero-image :is(img, :global(img)) {
+		transform: scale(1.1);
 	}
 
 	.timeline-mini-collage {
-		flex: 0 0 auto;
-		position: relative;
-		transform: translateY(-0.05rem);
-		width: 9.9rem;
+		justify-self: start;
+		transform: none;
+		position: absolute;
+		left: 130px;
 	}
 
 	.funrun-photo {
@@ -1883,54 +2080,6 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		transition: color var(--timeline-hover-duration) ease;
 	}
 
-	.talks-intro-row {
-		display: block;
-		margin-top: 0.5rem;
-		padding-right: min(37%, 10rem);
-		position: relative;
-	}
-
-	.talks-venue-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
-		border-radius: 0.45rem;
-		box-shadow: 0 0.45rem 0.95rem rgba(4, 25, 48, 0.14);
-		aspect-ratio: 16 / 9;
-		height: 5rem;
-		overflow: hidden;
-		position: absolute;
-		right: 0.15rem;
-		top: -4rem;
-		transform: rotate(8deg);
-		transform-origin: bottom left;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		z-index: 2;
-	}
-
-	.talks-venue-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		width: 100%;
-	}
-
-	.timeline-content:hover .talks-venue-photo,
-	.timeline-content:focus-within .talks-venue-photo {
-		box-shadow: 0 0.9rem 1.4rem rgba(4, 25, 48, 0.2);
-		transform: translate3d(-10rem, -2rem, 0) rotate(10deg) scale(2);
-	}
-
-	.timeline-content:hover .talks-venue-photo :global(img),
-	.timeline-content:focus-within .talks-venue-photo :global(img) {
-		filter: saturate(1.06);
-		transform: scale(1.12);
-	}
-
 	.timeline-content:hover .timeline-copy p,
 	.timeline-content:focus-within .timeline-copy p {
 		color: rgba(255, 255, 255, 0.9);
@@ -1997,10 +2146,10 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 	}
 
 	.timeline-venue-decoration-turtle {
+		top: 5rem;
 		right: -5rem;
-		top: calc(100% + 0.3rem);
-		transform: rotate(4deg);
-		transform-origin: top right;
+		transform: rotate(4deg) scale(0.94);
+		transform-origin: bottom right;
 	}
 
 	.talk-card {
@@ -2018,11 +2167,46 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		overflow: hidden;
 	}
 
+	.talk-avatar-placeholder {
+		isolation: isolate;
+		position: relative;
+	}
+
+	.talk-avatar-placeholder::before,
+	.talk-avatar-placeholder::after {
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.talk-avatar-placeholder::before {
+		backdrop-filter: blur(2px) saturate(0.82);
+		background: rgba(232, 237, 244, 0.08);
+		z-index: 1;
+	}
+
 	.talk-avatar :global(img) {
 		display: block;
 		height: 100%;
 		object-fit: cover;
 		width: 100%;
+	}
+
+	.talk-avatar-placeholder-mark {
+		color: rgba(255, 255, 255, 0.92);
+		display: block;
+		font-family: var(--fontFamilyHeading);
+		font-size: 3rem;
+		font-weight: 700;
+		left: 50%;
+		line-height: 1;
+		pointer-events: none;
+		position: absolute;
+		text-shadow: 0 0.08rem 0.22rem rgba(4, 25, 48, 0.3);
+		top: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 3;
 	}
 
 	.talk-copy {
@@ -2116,104 +2300,147 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		align-content: start;
 	}
 
-	.timeline-venue-lunch {
-		line-height: 1.02;
-		padding-top: 0.9rem;
-	}
-
-	.timeline-venue-aquarium {
-		line-height: 1.02;
-		padding-top: 0.9rem;
-	}
-
-	.timeline-venue-urban {
-		line-height: 1.02;
-		padding-top: 0.9rem;
-	}
-
 	.lunch-body {
 		align-items: start;
 		display: grid;
-		column-gap: 1.35rem;
-		grid-template-columns: 19rem minmax(0, 1fr);
-		margin: 0.95rem 0 0.4rem;
-		max-width: 50rem;
+		column-gap: 1rem;
+		grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
+		margin: 1rem 0 0.5rem;
 	}
 
-	.lunch-collage {
-		height: 16.25rem;
-		max-width: 19rem;
-		position: relative;
-		width: 19rem;
-	}
-
-	.lunch-photo {
-		background: white;
-		border: 2px solid rgba(4, 25, 48, 0.18);
-		border-radius: 0.35rem;
-		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
-		overflow: hidden;
-		position: absolute;
-	}
-
-	.lunch-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
+	.lunch-carousel {
+		display: grid;
+		gap: 0.7rem;
+		max-width: 10rem;
+		margin: auto 0;
 		width: 100%;
 	}
 
-	.lunch-photo-1 {
-		height: 6.8rem;
-		left: 2.8rem;
-		top: 0.25rem;
-		transform: rotate(-8deg);
-		width: 6.8rem;
+	.lunch-carousel-viewport {
+		background: white;
+		border: 4px solid rgba(4, 25, 48, 0.18);
+		border-radius: 0.9rem;
+		box-shadow: 0 0.35rem 0.8rem rgba(4, 25, 48, 0.12);
+		overflow: hidden;
+		position: relative;
 	}
 
-	.lunch-photo-2 {
-		height: 5.4rem;
-		left: 8.1rem;
-		top: 0.95rem;
-		transform: rotate(1deg);
-		width: 8.6rem;
+	.lunch-carousel-track {
+		display: flex;
+		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
+		transition: transform 320ms ease;
+		will-change: transform;
 	}
 
-	.lunch-photo-3 {
-		height: 5.8rem;
-		left: 1.1rem;
-		top: 5.5rem;
-		transform: rotate(6deg);
-		width: 7.2rem;
+	.lunch-slide {
+		flex: 0 0 100%;
+		position: relative;
 	}
 
-	.lunch-photo-4 {
-		height: 6.2rem;
-		left: 8.6rem;
-		top: 6rem;
-		transform: rotate(-7deg);
-		width: 6.8rem;
+	.lunch-slide-image {
+		aspect-ratio: 1 / 1;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.16),
+			rgba(255, 255, 255, 0.03)
+		);
 	}
 
-	.lunch-photo-5 {
-		height: 6.7rem;
-		left: 4.7rem;
-		top: 9rem;
-		transform: rotate(2deg);
-		width: 7.4rem;
+	.lunch-slide-image :global(picture),
+	.lunch-slide-image :global(img) {
+		display: block;
+		height: 100%;
+		width: 100%;
 	}
 
-	.lunch-photo-6 {
-		display: none;
+	.lunch-slide-image :global(img) {
+		object-fit: cover;
+	}
+
+	.lunch-slide-caption {
+		align-items: end;
+		background: linear-gradient(
+			180deg,
+			rgba(3, 13, 26, 0) 0%,
+			rgba(3, 13, 26, 0.72) 58%,
+			rgba(3, 13, 26, 0.88) 100%
+		);
+		bottom: 0;
+		color: #f7fbff;
+		display: grid;
+		gap: 0.12rem;
+		left: 0;
+		padding: 2rem 0.9rem 0.8rem;
+		position: absolute;
+		right: 0;
+		text-shadow: 0 0.15rem 0.35rem rgba(0, 0, 0, 0.28);
+	}
+
+	.lunch-slide-caption span {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		opacity: 0.76;
+		text-transform: uppercase;
+	}
+
+	.lunch-slide-caption strong {
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.08rem;
+		font-weight: 700;
+		line-height: 1.05;
+	}
+
+	.lunch-carousel-dots {
+		display: flex;
+		gap: 0.45rem;
+		justify-content: center;
+		padding-bottom: 0.15rem;
+	}
+
+	.lunch-carousel-dot {
+		appearance: none;
+		background: rgba(255, 255, 255, 0.24);
+		border: 1px solid rgba(188, 223, 233, 0.45);
+		border-radius: 999px;
+		cursor: pointer;
+		height: 0.65rem;
+		margin: 0;
+		padding: 0;
+		transition:
+			background-color 180ms ease,
+			transform 180ms ease,
+			width 180ms ease;
+		width: 0.65rem;
+	}
+
+	.lunch-carousel-dot[aria-pressed="true"] {
+		background: rgba(239, 248, 255, 0.96);
+		transform: scale(1.02);
+		width: 1.7rem;
+	}
+
+	.lunch-carousel-dot:hover,
+	.lunch-carousel-dot:focus-visible {
+		background: rgba(239, 248, 255, 0.72);
+		outline: none;
 	}
 
 	.lunch-copy {
-		padding-top: 0.4rem;
+		align-content: start;
+		padding-top: 0.2rem;
+	}
+
+	.lunch-copy a {
+		color: var(--colorBackground);
+		font-weight: 700;
+		text-decoration-thickness: 0.08em;
+		text-underline-offset: 0.14em;
 	}
 
 	.lunch-links {
 		display: grid;
-		gap: 0.3rem;
+		gap: 0.42rem;
 		margin: 0;
 		padding-left: 1.2rem;
 	}
@@ -2371,10 +2598,28 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 
 	.event-hero-image-wide {
 		height: 8rem;
-		width: 14.2rem;
+		width: 14rem;
 	}
 
-	.event-hero-image img {
+	.event-hero-image-square {
+		height: 8.6rem;
+		width: 8.6rem;
+	}
+
+	.event-hero-image-circle {
+		border-radius: 999px;
+		height: 8rem;
+		width: 8rem;
+	}
+
+	.event-hero-image :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.event-hero-image :global(img) {
+		border-radius: inherit;
 		display: block;
 		height: 100%;
 		object-fit: cover;
@@ -2382,9 +2627,9 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 	}
 
 	.fireside-avatars {
-		height: 7.25rem;
+		height: 10rem;
 		position: relative;
-		width: 8rem;
+		width: 10rem;
 	}
 
 	.fireside-avatar {
@@ -2405,49 +2650,28 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		width: 100%;
 	}
 
-	.fireside-avatar-1 {
+	.fireside-hero-image {
 		left: 0.2rem;
-		top: 0.4rem;
-		transform: rotate(-7deg);
+		position: absolute;
+		top: 0.2rem;
 	}
 
-	.fireside-avatar-2 {
-		left: 3rem;
-		top: 1.6rem;
+	.fireside-avatar-corner {
+		height: 5rem;
+		left: 5rem;
+		top: 6.5rem;
 		transform: rotate(6deg);
+		width: 5rem;
+		z-index: 2;
 	}
 
-	.event-body-featured-avatar {
-		align-items: center;
-	}
-
-	.fireside-avatar-featured {
-		height: 9.8rem;
-		position: relative;
-		transform-origin: top right;
-		transform: none;
-		width: 9.8rem;
-	}
-
-	.fireside-avatar-featured :global(img) {
-		object-position: center 22%;
-		transform-origin: top right;
-		transition:
-			object-position var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-content-bigrav:hover .fireside-avatar-featured,
-	.timeline-content-bigrav:focus-within .fireside-avatar-featured {
-		transform-origin: top right;
-	}
-
-	.timeline-content-bigrav:hover .fireside-avatar-featured :global(img),
-	.timeline-content-bigrav:focus-within .fireside-avatar-featured :global(img) {
-		object-position: left bottom;
-		transform: scale(1.1);
-		transform-origin: top right;
+	.fireside-topic {
+		color: var(--colorForegroundEmphasized);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.6rem;
+		font-weight: 700;
+		line-height: 1.05;
+		margin: 0 0 0.65rem;
 	}
 
 	.afterparty-collage {
@@ -2532,6 +2756,16 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 			padding: 0;
 		}
 
+		.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack {
+			backdrop-filter: none;
+			background: none;
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+			padding: 0;
+			position: static;
+		}
+
 		.timeline-rail {
 			min-height: auto;
 		}
@@ -2557,35 +2791,16 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 			row-gap: 0.9rem;
 		}
 
-		.lunch-collage {
-			display: grid;
-			gap: 0.7rem 0.8rem;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			height: auto;
-			max-width: 19rem;
-			position: static;
-			width: 100%;
+		.lunch-carousel {
+			max-width: 21rem;
 		}
 
-		.lunch-photo {
-			position: static;
-			transform: none;
-			width: 100%;
+		.lunch-slide-image {
+			aspect-ratio: 1.15 / 1;
 		}
 
-		.lunch-photo-1,
-		.lunch-photo-3,
-		.lunch-photo-5 {
-			height: 5.5rem;
-		}
-
-		.lunch-photo-2,
-		.lunch-photo-4 {
-			height: 4.2rem;
-		}
-
-		.lunch-photo-6 {
-			display: none;
+		.lunch-copy {
+			padding-top: 0;
 		}
 
 		.explore-card {
@@ -2625,34 +2840,13 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 			justify-items: start;
 		}
 
-		.talks-intro-row {
-			min-height: 0;
-			padding-right: 0;
-		}
-
 		.timeline-hosts-list {
 			grid-template-columns: 1fr;
 		}
 
-		.talks-venue-photo {
-			height: 11rem;
-			justify-self: start;
-			max-width: 100%;
-			position: relative;
-			right: auto;
-			top: auto;
-			transform: rotate(3deg);
-			width: min(100%, 18rem);
-		}
-
 		.timeline-venue-decoration-turtle {
 			transform: scale(0.82) rotate(4deg);
-			transform-origin: top right;
-		}
-
-		.timeline-mini-collage {
-			justify-self: start;
-			transform: none;
+			transform-origin: bottom right;
 		}
 
 		.timeline-content:hover,
@@ -2665,6 +2859,8 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		.timeline-section::before,
 		.timeline-heading,
 		.timeline-venue,
+		.timeline-venue-stack,
+		.timeline-venue-decoration,
 		.timeline-content,
 		.timeline-content::before,
 		.timeline-content::after,
@@ -2693,6 +2889,9 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 	const reducedMotionQuery = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	);
+	const lunchCarousels = Array.from(
+		document.querySelectorAll("[data-lunch-carousel]"),
+	).filter((element) => element instanceof HTMLElement);
 
 	if (
 		timelineSection instanceof HTMLElement &&
@@ -2700,6 +2899,8 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 		morningTalksEntry instanceof HTMLElement
 	) {
 		let frameRequested = false;
+		let scrollIdleTimer = 0;
+		const scrollingAttribute = "data-timeline-scrolling";
 		const fishConfigs = [
 			{
 				baseRotate: -8,
@@ -2846,14 +3047,110 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 			window.requestAnimationFrame(updateTimelineFish);
 		};
 
+		const setTimelineScrolling = () => {
+			if (reducedMotionQuery.matches) {
+				document.documentElement.removeAttribute(scrollingAttribute);
+				return;
+			}
+
+			document.documentElement.setAttribute(scrollingAttribute, "true");
+			window.clearTimeout(scrollIdleTimer);
+			scrollIdleTimer = window.setTimeout(() => {
+				document.documentElement.removeAttribute(scrollingAttribute);
+			}, 140);
+		};
+
+		const handleTimelineScroll = () => {
+			setTimelineScrolling();
+			requestTimelineFishUpdate();
+		};
+
 		updateTimelineFish();
-		window.addEventListener("scroll", requestTimelineFishUpdate, {
+		window.addEventListener("scroll", handleTimelineScroll, {
 			passive: true,
 		});
 		window.addEventListener("resize", requestTimelineFishUpdate);
 		if (typeof reducedMotionQuery.addEventListener === "function") {
-			reducedMotionQuery.addEventListener("change", requestTimelineFishUpdate);
+			reducedMotionQuery.addEventListener("change", () => {
+				if (reducedMotionQuery.matches) {
+					window.clearTimeout(scrollIdleTimer);
+					document.documentElement.removeAttribute(scrollingAttribute);
+				}
+
+				requestTimelineFishUpdate();
+			});
 		}
+	}
+
+	for (const carousel of lunchCarousels) {
+		const dots = Array.from(
+			carousel.querySelectorAll("[data-lunch-dot]"),
+		).filter((element) => element instanceof HTMLButtonElement);
+		const slides = Array.from(
+			carousel.querySelectorAll("[data-lunch-slide]"),
+		).filter((element) => element instanceof HTMLElement);
+		let activeIndex = 0;
+		let autoAdvanceTimer = 0;
+
+		const setLunchSlide = (index) => {
+			activeIndex = ((index % slides.length) + slides.length) % slides.length;
+			carousel.style.setProperty("--lunch-carousel-index", `${activeIndex}`);
+
+			for (const [slideIndex, slide] of slides.entries()) {
+				slide.setAttribute(
+					"aria-hidden",
+					slideIndex === activeIndex ? "false" : "true",
+				);
+			}
+
+			for (const [dotIndex, dot] of dots.entries()) {
+				dot.setAttribute(
+					"aria-pressed",
+					dotIndex === activeIndex ? "true" : "false",
+				);
+			}
+		};
+
+		const stopLunchAutoAdvance = () => {
+			window.clearInterval(autoAdvanceTimer);
+			autoAdvanceTimer = 0;
+		};
+
+		const startLunchAutoAdvance = () => {
+			if (reducedMotionQuery.matches || slides.length < 2) {
+				return;
+			}
+
+			stopLunchAutoAdvance();
+			autoAdvanceTimer = window.setInterval(() => {
+				setLunchSlide(activeIndex + 1);
+			}, 3400);
+		};
+
+		for (const dot of dots) {
+			dot.addEventListener("click", () => {
+				const nextIndex = Number(dot.dataset.lunchIndex ?? activeIndex);
+				setLunchSlide(nextIndex);
+				startLunchAutoAdvance();
+			});
+		}
+
+		carousel.addEventListener("pointerenter", stopLunchAutoAdvance);
+		carousel.addEventListener("pointerleave", startLunchAutoAdvance);
+		carousel.addEventListener("focusin", stopLunchAutoAdvance);
+		carousel.addEventListener("focusout", () => {
+			const activeElement = document.activeElement;
+
+			if (
+				!(activeElement instanceof Node) ||
+				!carousel.contains(activeElement)
+			) {
+				startLunchAutoAdvance();
+			}
+		});
+
+		setLunchSlide(0);
+		startLunchAutoAdvance();
 	}
 
 	for (const card of timelineCards) {
