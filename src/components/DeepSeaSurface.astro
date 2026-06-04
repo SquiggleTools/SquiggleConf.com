@@ -5,18 +5,43 @@
 <style>
 	.deep-sea-surface {
 		background: linear-gradient(
-				#124067 0%,
-				#0c3357 10%,
-				#062446 20%,
-				#062241 40%,
-				#041a37 60%,
-				#031733 80%,
-				#051630 100%
+				to bottom,
+				#0684e0,
+				#0b79d2,
+				#0e6fc5,
+				#0f65b7,
+				#0e5baa,
+				#0c549f,
+				#0a4e95,
+				#07478a,
+				#054280,
+				#043d76,
+				#03386c,
+				#033362
 			)
 			var(--colorBlueBright3);
 		isolation: isolate;
 		overflow: clip;
 		position: relative;
+	}
+
+	:global(html.dark) .deep-sea-surface {
+		background: linear-gradient(
+				to bottom,
+				#004077,
+				#013a6c,
+				#033461,
+				#032e56,
+				#04284c,
+				#042446,
+				#042140,
+				#041d3a,
+				#041b37,
+				#041933,
+				#041630,
+				#04142d
+			)
+			var(--colorBlueBright3);
 	}
 
 	.deep-sea-surface::after {
@@ -38,9 +63,13 @@
 		content: "";
 		inset: 0;
 		mix-blend-mode: screen;
-		opacity: 0.28;
+		opacity: 0.25;
 		pointer-events: none;
 		position: absolute;
 		z-index: 0;
+	}
+
+	:global(html.dark) .deep-sea-surface::after {
+		opacity: 0.31;
 	}
 </style>

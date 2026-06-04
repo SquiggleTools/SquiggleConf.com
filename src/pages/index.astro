@@ -49,7 +49,7 @@ import milkcookies3 from "~/assets/2027/milkcookies-3.jpg";
 import rest1 from "~/assets/2027/rest-1.jpg";
 import ryanDahl from "~/assets/2027/ryandahl.png";
 import scottTolinski from "~/assets/2027/scotttolinski.jpeg";
-import squiggleConfLogo from "~/assets/2027/SquiggleConf-Logo.svg";
+import squiggleConfLogoRaw from "~/assets/2027/SquiggleConf-Logo.svg?raw";
 import thePrimeagen from "~/assets/2027/theprimagen.jpeg";
 import urbanwildLogo from "~/assets/2027/urbanwild-logo.png";
 import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
@@ -169,6 +169,11 @@ const lunchSpots = [
 		url: "https://faneuilhallmarketplace.com/go/green-organic-bowl",
 	},
 ];
+
+const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
+	'fill="white"',
+	'fill="var(--hero-logo-fill, white)"',
+);
 ---
 
 <PageLayout
@@ -176,15 +181,20 @@ const lunchSpots = [
 	hideHeaderLinks={["about", "shop"]}
 	hideHeaderLogo
 >
+	<div
+		slot="pageTop"
+		class="private-preview-banner"
+		aria-label="Private preview notice"
+	>
+		PRIVATE PREVIEW
+	</div>
 	<Hero tall>
 		<div class="hero-intro">
-			<img
+			<div
 				class="hero-logo"
-				src={squiggleConfLogo.src}
-				width={squiggleConfLogo.width}
-				height={squiggleConfLogo.height}
-				alt="SquiggleConf"
-				loading="eager"
+				aria-label="SquiggleConf"
+				role="img"
+				set:html={squiggleConfLogoSvg}
 			/>
 			<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
 		</div>
@@ -258,7 +268,7 @@ const lunchSpots = [
 					</div>
 				</div>
 			</div>
-			<h2 class="postcard-heading">for those that make the squiggles</h2>
+			<h2 class="postcard-heading">the devtools conference</h2>
 			<p class="postcard-intro">
 				SquiggleConf is a conference focused on software developer tools: AI
 				tools, linters, code editors, performance and security tools, debuggers,
@@ -922,7 +932,7 @@ const lunchSpots = [
 					<div class="event-body">
 						<div class="syntax-avatars" aria-label="Syntax.fm live guests">
 							<div
-								class="event-hero-image event-hero-image-square syntax-hero-image"
+								class="event-hero-image event-hero-image-circle syntax-hero-image"
 							>
 								<Image
 									alt="ThePrimeagen portrait"
@@ -1062,6 +1072,24 @@ const lunchSpots = [
 </PageLayout>
 
 <style>
+	.private-preview-banner {
+		background: linear-gradient(90deg, #ff4fa3 0%, #ff0f87 100%);
+		box-shadow:
+			0 0.3rem 0.8rem rgba(255, 15, 135, 0.12),
+			inset 0 -1px 0 rgba(109, 0, 53, 0.22);
+		color: #fff8fc;
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.22em;
+		padding: 0.75rem 1rem;
+		position: relative;
+		text-align: center;
+		text-transform: uppercase;
+		width: 100%;
+		z-index: 2;
+	}
+
 	.hero-intro {
 		align-items: center;
 		display: flex;
@@ -1073,10 +1101,21 @@ const lunchSpots = [
 	}
 
 	.hero-logo {
+		--hero-logo-fill: #041930;
 		display: block;
 		height: auto;
 		max-width: 100%;
 		width: clamp(16rem, 43vw, 36rem);
+	}
+
+	:global(html.dark) .hero-logo {
+		--hero-logo-fill: white;
+	}
+
+	.hero-logo :global(svg) {
+		display: block;
+		height: auto;
+		width: 100%;
 	}
 
 	.hero-subtitle {
@@ -1089,12 +1128,49 @@ const lunchSpots = [
 		margin: 0 0 0.35rem;
 	}
 	.timeline-section {
+		--timeline-heading-color: #eef6ff;
+		--timeline-copy-color: rgba(233, 244, 255, 0.84);
+		--timeline-muted-color: rgba(198, 225, 244, 0.82);
+		--timeline-link-color: #f7fbff;
+		--timeline-rail-background: rgba(255, 255, 255, 0.04);
+		--timeline-rail-border-color: rgba(232, 245, 255, 0.26);
+		--timeline-cap-background: rgba(3, 51, 98, 0.48);
+		--timeline-cap-color: #f7fbff;
+		--timeline-time-color: #eef6ff;
+		--timeline-time-shadow: 0 1px 0 rgba(4, 25, 48, 0.16);
+		--timeline-venue-color: rgba(238, 246, 255, 0.9);
+		--timeline-venue-at-color: rgba(238, 246, 255, 0.72);
+		--timeline-venue-stack-background: rgba(255, 255, 255, 0.04);
+		--timeline-venue-stack-border-color: rgba(232, 245, 255, 0.26);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.12);
 		--timeline-image-border-color: rgba(4, 25, 48, 0.18);
 		--timeline-image-border-width: 2px;
 		--timeline-hover-duration: 220ms;
 		isolation: isolate;
 		padding: 2rem 1rem clamp(3rem, 7vw, 5rem);
 		position: relative;
+	}
+
+	:global(html.dark) .timeline-section {
+		--timeline-rail-background: var(--colorBlueBright1);
+		--timeline-rail-border-color: var(--colorBlue3);
+		--timeline-cap-background: color-mix(
+			in srgb,
+			var(--colorBlue2) 60%,
+			transparent
+		);
+		--timeline-cap-color: color-mix(
+			in srgb,
+			var(--colorBackground) 85%,
+			transparent
+		);
+		--timeline-time-color: var(--colorBackground);
+		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+		--timeline-venue-color: var(--timeline-heading-color);
+		--timeline-venue-at-color: rgba(125, 207, 226, 0.7);
+		--timeline-venue-stack-background: rgba(5, 23, 43, 0.72);
+		--timeline-venue-stack-border-color: rgba(125, 207, 226, 0.22);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
 	}
 
 	.timeline-section::before {
@@ -1603,7 +1679,7 @@ const lunchSpots = [
 
 	.timeline-venue {
 		align-items: flex-end;
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-venue-color);
 		display: flex;
 		flex-direction: column;
 		font-family: var(--fontFamilyHeading);
@@ -1652,7 +1728,7 @@ const lunchSpots = [
 	}
 
 	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack::before {
-		color: rgba(125, 207, 226, 0.7);
+		color: var(--timeline-venue-at-color);
 		content: "@";
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.5rem;
@@ -1674,10 +1750,10 @@ const lunchSpots = [
 		animation: timeline-venue-wiggle 650ms ease-in-out infinite;
 		animation-play-state: paused;
 		backdrop-filter: blur(14px) saturate(140%);
-		background: rgba(5, 23, 43, 0.72);
-		border: 1px solid rgba(125, 207, 226, 0.22);
+		background: var(--timeline-venue-stack-background);
+		border: 1px solid var(--timeline-venue-stack-border-color);
 		border-radius: 0.9rem;
-		box-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
+		box-shadow: var(--timeline-venue-stack-shadow);
 		padding: 0.85rem 0.9rem 0.8rem 1.45rem;
 		position: sticky;
 		top: clamp(1rem, 4vw, 4.5rem);
@@ -1719,8 +1795,8 @@ const lunchSpots = [
 	}
 
 	.timeline-rail {
-		background: var(--colorBlueBright1);
-		border: 1px solid var(--colorBlue3);
+		background: var(--timeline-rail-background);
+		border: 1px solid var(--timeline-rail-border-color);
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
@@ -1728,10 +1804,10 @@ const lunchSpots = [
 	}
 
 	.timeline-cap {
-		background: color-mix(in srgb, var(--colorBlue2) 60%, transparent);
-		color: color-mix(in srgb, var(--colorBackground) 85%, transparent);
+		background: var(--timeline-cap-background);
+		color: var(--timeline-cap-color);
 
-		border: 1px solid var(--colorBlue3);
+		border: 1px solid var(--timeline-rail-border-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.1rem;
 		font-weight: 700;
@@ -1747,13 +1823,13 @@ const lunchSpots = [
 	}
 
 	.timeline-time {
-		color: var(--colorBackground);
+		color: var(--timeline-time-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.3rem, 2vw, 1.6rem);
 		font-weight: 700;
 		margin-top: 1rem;
 		padding-top: 1.15rem;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+		text-shadow: var(--timeline-time-shadow);
 		text-align: center;
 	}
 
@@ -1862,7 +1938,7 @@ const lunchSpots = [
 			inset 0 1px 0 rgba(255, 255, 255, 0.2),
 			0 1rem 2rem rgba(255, 94, 0, 0.16),
 			0 0 0 1px rgba(255, 94, 0, 0.12);
-		color: var(--colorBackground);
+		color: #f7fbff;
 		display: inline-flex;
 		gap: 0.7rem;
 		height: fit-content;
@@ -1932,6 +2008,7 @@ const lunchSpots = [
 	}
 
 	.timeline-content h2 {
+		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
 		font-weight: 700;
@@ -1970,7 +2047,7 @@ const lunchSpots = [
 	}
 
 	.timeline-subtitle {
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-muted-color);
 		display: block;
 		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
 		font-weight: 500;
@@ -2281,6 +2358,7 @@ const lunchSpots = [
 	}
 
 	.timeline-copy p {
+		color: var(--timeline-copy-color);
 		font-size: clamp(0.95rem, 1.35vw, 1rem);
 		line-height: 1.45;
 		margin: 0;
@@ -2328,6 +2406,7 @@ const lunchSpots = [
 	}
 
 	.timeline-host-copy h3 {
+		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.1rem;
 		font-weight: 700;
@@ -2336,7 +2415,7 @@ const lunchSpots = [
 	}
 
 	.timeline-host-role {
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-muted-color);
 		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
 		font-weight: 300;
 		line-height: 1.25;
@@ -2354,8 +2433,8 @@ const lunchSpots = [
 	}
 
 	.timeline-venue-decoration-turtle {
-		top: 5rem;
-		right: -5rem;
+		top: 6rem;
+		right: -1rem;
 		transform: rotate(4deg) scale(0.94);
 		transform-origin: bottom right;
 	}
@@ -2427,6 +2506,7 @@ const lunchSpots = [
 	}
 
 	.talk-copy h3 {
+		color: var(--timeline-heading-color);
 		align-self: center;
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.1rem;
@@ -2436,13 +2516,13 @@ const lunchSpots = [
 	}
 
 	.talk-speaker {
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-muted-color);
 		font-size: clamp(0.92rem, 1.2vw, 1rem);
 		font-weight: 600;
 	}
 
 	.talk-role {
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-muted-color);
 		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
 		line-height: 1.25;
 		font-weight: 300;
@@ -2629,27 +2709,36 @@ const lunchSpots = [
 		outline: none;
 	}
 
+	.lunch-carousel-dot:focus-visible {
+		box-shadow: 0 0 0 0.16rem rgba(239, 248, 255, 0.28);
+	}
+
 	.lunch-copy {
 		align-content: start;
 		padding-top: 0.2rem;
 	}
 
 	.lunch-copy a {
-		color: var(--colorBackground);
+		color: var(--timeline-link-color);
 		font-weight: 700;
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
 	}
 
 	.lunch-links {
+		color: var(--timeline-link-color);
 		display: grid;
 		gap: 0.42rem;
 		margin: 0;
 		padding-left: 1.2rem;
 	}
 
+	.lunch-links li::marker {
+		color: var(--timeline-link-color);
+	}
+
 	.lunch-links a {
-		color: var(--colorBackground);
+		color: var(--timeline-link-color);
 		font-weight: 600;
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
@@ -2694,7 +2783,7 @@ const lunchSpots = [
 	.explore-radio {
 		align-items: center;
 		background: rgba(255, 255, 255, 0.08);
-		border: 2px solid var(--colorBackground);
+		border: 2px solid rgba(239, 248, 255, 0.74);
 		border-radius: 999px;
 		display: inline-flex;
 		height: 1.45rem;
@@ -2713,7 +2802,7 @@ const lunchSpots = [
 	}
 
 	.explore-radio-dot {
-		background: var(--colorBackground);
+		background: var(--timeline-link-color);
 		border-radius: 999px;
 		display: block;
 		height: 0.46rem;
@@ -2765,6 +2854,7 @@ const lunchSpots = [
 	}
 
 	.explore-copy h3 {
+		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.2rem, 1.7vw, 1.45rem);
 		font-weight: 700;
@@ -2773,6 +2863,7 @@ const lunchSpots = [
 	}
 
 	.explore-copy p {
+		color: var(--timeline-copy-color);
 		font-size: clamp(0.95rem, 1.25vw, 1rem);
 		line-height: 1.4;
 		margin: 0;
@@ -2849,40 +2940,40 @@ const lunchSpots = [
 	}
 
 	.fireside-hero-image {
-		left: 0.2rem;
+		left: -1rem;
 		position: absolute;
-		top: 0.2rem;
+		top: 1rem;
 	}
 
 	.fireside-avatar-corner {
 		height: 5rem;
 		left: 5rem;
-		top: 6.5rem;
+		top: 5rem;
 		transform: rotate(6deg);
 		width: 5rem;
 		z-index: 2;
 	}
 
 	.syntax-avatars {
-		height: 12rem;
+		height: 11rem;
 		position: relative;
-		width: 12rem;
+		width: 11.5rem;
 	}
 
 	.syntax-hero-image {
-		left: 1.7rem;
+		height: 8rem;
+		left: 3rem;
 		position: absolute;
-		top: 0.25rem;
-		height: 8.75rem;
-		width: 8.75rem;
+		top: 1.65rem;
+		width: 8rem;
 		z-index: 1;
 	}
 
 	.syntax-avatar {
 		border-radius: 999px;
-		height: 4.35rem;
+		height: 5rem;
 		position: absolute;
-		width: 4.35rem;
+		width: 5rem;
 		z-index: 2;
 	}
 
@@ -2901,19 +2992,19 @@ const lunchSpots = [
 	}
 
 	.syntax-avatar-left {
-		bottom: 0.65rem;
-		left: 0;
+		left: 0rem;
+		top: 1rem;
 		transform: rotate(-7deg);
 	}
 
 	.syntax-avatar-right {
-		bottom: 0.35rem;
-		right: 0.1rem;
+		left: 0rem;
+		top: 5rem;
 		transform: rotate(7deg);
 	}
 
 	.fireside-topic {
-		color: var(--colorForegroundEmphasized);
+		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.6rem;
 		font-weight: 700;
@@ -3081,6 +3172,11 @@ const lunchSpots = [
 
 		.lunch-carousel {
 			max-width: 21rem;
+		}
+
+		.private-preview-banner {
+			font-size: 0.66rem;
+			padding: 0.65rem 0.8rem;
 		}
 
 		.lunch-slide-image {
@@ -3422,6 +3518,10 @@ const lunchSpots = [
 				const nextIndex = Number(dot.dataset.lunchIndex ?? activeIndex);
 				setLunchSlide(nextIndex);
 				startLunchAutoAdvance();
+
+				if (!dot.matches(":focus-visible")) {
+					dot.blur();
+				}
 			});
 		}
 

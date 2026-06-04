@@ -15,6 +15,7 @@ const year = Astro.props.year ?? currentYear;
 ---
 
 <BaseLayout {...Astro.props} year={year}>
+	<slot name="pageTop" />
 	<Header
 		hideLogo={Astro.props.hideHeaderLogo}
 		hideTopLinks={Astro.props.hideHeaderLinks}

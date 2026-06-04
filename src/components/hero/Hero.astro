@@ -30,15 +30,15 @@ interface Props {
 
 <style>
 	.hero {
-		background: linear-gradient(
-			180deg,
-			var(--colorBlueBright1) 0%,
-			var(--colorBlueBright2) 100%
-		);
+		background: #f5f9ff;
 		z-index: 1;
 		color: var(--colorBackground);
 		padding-bottom: var(--cityscapeHeightArea);
 		position: relative;
+	}
+
+	:global(html.dark) .hero {
+		background: #04142d;
 	}
 
 	.hero.common {

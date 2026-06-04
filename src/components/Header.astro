@@ -94,16 +94,57 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 
 <style>
 	header {
+		--header-background: #f5f9ff;
+		--header-foreground: var(--colorBlue5);
+		--header-logo-text: var(--colorBlue5);
+		--header-logo-year: var(--colorBlue3);
+		--header-button-background: rgba(255, 255, 255, 0.08);
+		--header-button-border: rgba(4, 25, 48, 0.22);
+		--header-button-foreground: var(--colorBlue5);
+		--header-button-hover-background: rgba(4, 25, 48, 0.14);
+		--header-button-hover-border: rgba(4, 25, 48, 0.3);
+		--header-button-hover-foreground: var(--colorBlue5);
+		--header-button-glow: 0 0.1rem 0.1rem rgba(4, 25, 48, 0.12);
+		--header-button-ring: 0 0 0 1px rgba(4, 25, 48, 0.08);
 		border-bottom: 0;
-		color: var(--colorWhiteIsh);
-		background: var(--colorBlueBright1);
+		color: var(--header-foreground);
+		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
 		padding: 1.5rem 0;
 		width: 100%;
 	}
 
+	:global(html.dark) header {
+		--header-background: #04142d;
+		--header-foreground: var(--colorWhiteIsh);
+		--header-logo-text: var(--colorWhiteIsh);
+		--header-logo-year: var(--colorBlue2);
+		--header-button-background: color-mix(
+			in srgb,
+			var(--colorBlue2) 60%,
+			transparent
+		);
+		--header-button-border: rgba(125, 207, 226, 0.34);
+		--header-button-foreground: var(--colorWhiteIsh);
+		--header-button-hover-background: color-mix(
+			in srgb,
+			var(--colorBlue2) 78%,
+			transparent
+		);
+		--header-button-hover-border: rgba(125, 207, 226, 0.46);
+		--header-button-hover-foreground: var(--colorWhiteIsh);
+		--header-button-glow: 0 0.25rem 1rem rgba(56, 206, 214, 0.18);
+		--header-button-ring: 0 0 0 1px rgba(125, 207, 226, 0.18);
+	}
+
 	.logo {
 		text-decoration: none;
+	}
+
+	a.logo :global(.logo.regular) {
+		--colorLogoText: var(--header-logo-text);
+		--colorLogoYear: var(--header-logo-year);
+		text-shadow: none;
 	}
 
 	.header-content-area-mobile {
@@ -124,6 +165,7 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 	}
 
 	summary {
+		color: inherit;
 		display: inline-block;
 		cursor: pointer;
 		font-size: 4rem;
@@ -142,7 +184,7 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 
 	.header-contents-mobile {
 		--offsetTop: 4.5rem;
-		background: var(--colorBlueBright1);
+		background: var(--header-background);
 		box-shadow: 0 0 1rem var(--colorTextShadow);
 		display: flex;
 		flex-direction: column;
@@ -178,15 +220,53 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 		gap: clamp(0.55rem, 1.25vw, 2rem);
 	}
 
+	.header-links a,
+	.header-contents-mobile a {
+		color: inherit;
+	}
+
 	.header-link-inactive {
 		text-decoration: none;
 	}
 
 	.header-button {
+		--colorButtonBackground: var(--header-button-background);
+		--colorButtonBorderHover: var(--header-button-hover-border);
+		--colorButtonBackgroundHover: var(--header-button-hover-background);
+		--colorButtonColor: var(--header-button-foreground);
+		--colorButtonColorHover: var(--header-button-hover-foreground);
+		border: 2px solid var(--header-button-border);
 		border-radius: 0.85rem;
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.16),
+			var(--header-button-glow),
+			var(--header-button-ring);
+		font-weight: var(--fontWeightBold);
 		justify-content: center;
 		margin-left: 0.35rem;
 		text-wrap: nowrap;
+		transition:
+			background 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			transform 180ms ease;
+	}
+
+	.header-button:hover,
+	.header-button:focus-visible {
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.22),
+			0 0.25rem 0.5rem rgba(4, 25, 48, 0.16),
+			0 0 0 1px var(--header-button-hover-border);
+		transform: translateY(-1px);
+	}
+
+	:global(html.dark) .header-button:hover,
+	:global(html.dark) .header-button:focus-visible {
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.18),
+			0 0.25rem 0.5rem rgba(56, 206, 214, 0.22),
+			0 0 0 1px var(--header-button-hover-border);
 	}
 
 	@media (width >= 1117px) {
