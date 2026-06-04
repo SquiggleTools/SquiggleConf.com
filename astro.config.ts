@@ -8,8 +8,16 @@ export default defineConfig({
 	}),
 	env: {
 		schema: {
-			BREVO_API_KEY: envField.string({ access: "secret", context: "server" }),
-			BREVO_LIST_ID: envField.number({ access: "public", context: "server" }),
+			BREVO_API_KEY: envField.string({
+				access: "secret",
+				context: "server",
+				optional: true,
+			}),
+			BREVO_LIST_ID: envField.number({
+				access: "public",
+				context: "server",
+				optional: true,
+			}),
 		},
 	},
 	image: {

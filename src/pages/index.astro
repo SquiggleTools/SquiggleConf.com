@@ -4,7 +4,6 @@ import "@fontsource/shantell-sans";
 import { Image } from "astro:assets";
 
 import Hero from "~/components/hero/Hero.astro";
-import Newsletter from "~/components/Newsletter.astro";
 import Registration from "~/components/Registration.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
@@ -19,11 +18,9 @@ import group from "~/assets/stills/speakers-event-group.png";
 import harbor from "~/assets/stills/boston-harbor.png";
 import networking from "~/assets/stills/attendees-networking.png";
 import presentingInsideVenue from "~/assets/stills/presenting-inside-venue.png";
-import signage from "~/assets/stills/signage-outside-venue.png";
 import terminalShop from "~/assets/2027/terminal.shop.svg";
 import duck1 from "~/assets/2027/duck-1.jpg";
 import duck2 from "~/assets/2027/duck-2.jpg";
-import duck3 from "~/assets/2027/duck-3.jpg";
 import bigRav from "~/assets/2027/bigrav.png";
 import lunchBerryTwist from "~/assets/2027/lunch-berry-twist.jpg";
 import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.jpg";
@@ -394,13 +391,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 							<Image
 								alt="Speakers gathered together at the event"
 								src={group}
-								loading="eager"
-							/>
-						</div>
-						<div class="launchparty-photo launchparty-photo-4">
-							<Image
-								alt="Conference signage at the venue"
-								src={signage}
 								loading="eager"
 							/>
 						</div>
@@ -1397,7 +1387,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		<Registration />
 	</DeepSeaSurface>
 	<SponsorsAndPartners />
-	<Newsletter />
 </PageLayout>
 
 <style>
@@ -1430,7 +1419,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.hero-logo {
-		--hero-logo-fill: #041930;
+		--hero-logo-fill: #2f3f50;
 		display: block;
 		height: auto;
 		max-width: 100%;
@@ -1604,8 +1593,8 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		font-size: clamp(1rem, 1.35vw, 1.12rem);
 		line-height: 1.6;
 		margin: 0.85rem auto 0;
-		max-width: 41rem;
 		padding: 0 1rem;
+		max-width: 35rem;
 		text-align: center;
 		text-wrap: pretty;
 	}
@@ -2779,13 +2768,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		transform: rotate(9deg);
 	}
 
-	.launchparty-photo-4 {
-		height: 6rem;
-		left: 20rem;
-		top: 0.9rem;
-		transform: rotate(4deg);
-	}
-
 	.timeline-copy {
 		display: grid;
 		gap: 0.45rem;
@@ -3458,7 +3440,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.afterparty-collage {
-		height: 21.6em;
+		height: 16em;
 		margin: 1.9rem 0 1.1rem;
 		position: relative;
 		width: min(100%, 38rem);
@@ -3588,6 +3570,10 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 
 		.timeline-venue,
 		.timeline-rail {
+			display: none;
+		}
+
+		.timeline-fish-layer {
 			display: none;
 		}
 

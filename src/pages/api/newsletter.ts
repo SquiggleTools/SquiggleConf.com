@@ -7,6 +7,12 @@ const bodySchema = z.object({
 });
 
 export const POST: APIRoute = async ({ request }) => {
+	if (!BREVO_API_KEY || BREVO_LIST_ID === undefined) {
+		return new Response("Newsletter signup is unavailable", {
+			status: 503,
+		});
+	}
+
 	const formData = Object.fromEntries(await request.formData());
 	const body = bodySchema.safeParse(formData);
 	if (body.error) {
