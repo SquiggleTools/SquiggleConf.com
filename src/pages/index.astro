@@ -61,6 +61,13 @@ import wesBos from "~/assets/2027/wesbos.jpeg";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import PageLayout from "~/layouts/PageLayout.astro";
 
+const locationLinks = {
+	aquarium: "https://maps.app.goo.gl/FodmfsLGZYALV1Hh9",
+	nedDevines: "https://maps.app.goo.gl/rD3zWzuJ1U9VuSdN9",
+	quincyMarket: "https://maps.app.goo.gl/mQyHoaGZgip8pfux5",
+	urbanWild: "https://maps.app.goo.gl/ADbjjYdyB3AVstH67",
+};
+
 const talksSessions = [
 	{
 		image: tannerPortrait,
@@ -334,8 +341,15 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 
 				<div class="timeline-venue">
 					<div class="timeline-venue-stack">
-						<p>Ned</p>
-						<p>Devine's</p>
+						<a
+							class="timeline-location-link timeline-location-link-stack"
+							href={locationLinks.nedDevines}
+							rel="noreferrer"
+							target="_blank"
+						>
+							<p>Ned</p>
+							<p>Devine's</p>
+						</a>
 					</div>
 				</div>
 				<div class="timeline-rail timeline-bottom">
@@ -343,9 +357,25 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 				</div>
 
 				<div class="timeline-content" data-timeline-entry="launch">
-					<h2>Launch Party!</h2>
-					<p class="timeline-subtitle">6-9pm</p>
-					<div class="timeline-collage" aria-label="Launch party collage">
+					<div class="timeline-heading-line">
+						<h2>Launch Party!</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-range"
+						>
+							6-9pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.nedDevines}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Ned Devine's
+						</a>
+					</div>
+					<div class="launchparty-collage" aria-label="Launch party collage">
 						<div class="launchparty-photo launchparty-photo-1">
 							<Image
 								alt="People networking at SquiggleConf"
@@ -395,9 +425,16 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-morning timeline-cell-span-seven"
 				>
 					<div class="timeline-venue-stack">
-						<p>New</p>
-						<p>England</p>
-						<p>Aquarium</p>
+						<a
+							class="timeline-location-link timeline-location-link-stack"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							<p>New</p>
+							<p>England</p>
+							<p>Aquarium</p>
+						</a>
 					</div>
 				</div>
 				<div class="timeline-rail timeline-rail-short">
@@ -405,15 +442,34 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 				</div>
 
 				<div
-					class="timeline-content timeline-content-run"
+					class="timeline-content timeline-content-funrun"
 					data-timeline-entry="fun-run"
 				>
 					<div class="timeline-title-row">
 						<div class="timeline-title-copy">
-							<h2>Fun Run</h2>
-							<p class="timeline-subtitle">7-7:30am</p>
+							<div class="timeline-heading-line">
+								<h2>Fun Run</h2>
+								<p
+									class="timeline-subtitle timeline-inline-time timeline-inline-time-range"
+								>
+									7-7:30am
+								</p>
+							</div>
+							<div class="timeline-mobile-meta">
+								<a
+									class="timeline-mobile-location timeline-location-link"
+									href={locationLinks.aquarium}
+									rel="noreferrer"
+									target="_blank"
+								>
+									New England Aquarium
+								</a>
+							</div>
 						</div>
-						<div class="timeline-mini-collage" aria-label="Fun run collage">
+						<div
+							class="funrun-collage funrun-collage-desktop"
+							aria-label="Fun run collage"
+						>
 							<div class="funrun-photo funrun-photo-1">
 								<Image
 									alt="Fun Run route by the waterfront"
@@ -430,11 +486,34 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 							</div>
 						</div>
 					</div>
-					<div class="timeline-copy">
-						<p>
-							Optional for some, best way to start the day for others! It's an
-							casual yet eventful 5k through the Boston shoreline.
-						</p>
+					<div class="funrun-body">
+						<div class="timeline-copy">
+							<p>
+								Optional for some, best way to start the day for others! It's an
+								casual yet eventful 5k through the Boston shoreline.
+							</p>
+						</div>
+						<div
+							class="funrun-collage funrun-collage-mobile"
+							aria-hidden="true"
+						>
+							<div class="funrun-photo funrun-photo-1">
+								<Image
+									alt=""
+									aria-hidden="true"
+									src={funrun1}
+									loading="eager"
+								/>
+							</div>
+							<div class="funrun-photo funrun-photo-2">
+								<Image
+									alt=""
+									aria-hidden="true"
+									src={funrun2}
+									loading="eager"
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -446,7 +525,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-checkin"
 					data-timeline-entry="check-in"
 				>
-					<h2>Check In</h2>
+					<div class="timeline-heading-line">
+						<h2>Check In</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							8am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="timeline-copy">
 						<p>
 							Pick up your badge, settle in, and grab a terminal.shop coffee
@@ -473,7 +569,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-mcs"
 					data-timeline-entry="simons-imax-theater"
 				>
-					<h2>Simons IMAX Theater</h2>
+					<div class="timeline-heading-line">
+						<h2>Simons IMAX Theater</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							8am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="event-body">
 						<div
 							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
@@ -502,7 +615,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-mcs"
 					data-timeline-entry="mcs"
 				>
-					<h2>Meet your MCs!</h2>
+					<div class="timeline-heading-line">
+						<h2>Meet your MCs!</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							9am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="timeline-hosts-list" aria-label="Conference MCs">
 						{
 							timelineMCs.map((host) => (
@@ -524,7 +654,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-talks"
 					data-timeline-entry="talks-morning"
 				>
-					<h2>Talks</h2>
+					<div class="timeline-heading-line">
+						<h2>Talks</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							9am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="talks-list" aria-label="Speaker talks">
 						{
 							talksSessions.map((talk) => (
@@ -564,10 +711,27 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-break"
 					data-timeline-entry="cookies-break"
 				>
-					<h2>Milk &amp; Cookies Break</h2>
+					<div class="timeline-heading-line">
+						<h2>Milk &amp; Cookies Break</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							10:30am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="break-body">
 						<div
-							class="break-collage"
+							class="cookiesbreak-collage"
 							aria-label="Milk and Cookies break collage"
 						>
 							<div class="break-photo break-photo-1">
@@ -609,7 +773,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-talks timeline-content-talks-late"
 					data-timeline-entry="talks-late"
 				>
-					<h2>Talks</h2>
+					<div class="timeline-heading-line">
+						<h2>Talks</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							11am
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div
 						class="talks-list talks-list-short"
 						aria-label="Late morning talks"
@@ -646,8 +827,15 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 
 				<div class="timeline-venue timeline-venue-lunch">
 					<div class="timeline-venue-stack">
-						<p>Quincy</p>
-						<p>Market</p>
+						<a
+							class="timeline-location-link timeline-location-link-stack"
+							href={locationLinks.quincyMarket}
+							rel="noreferrer"
+							target="_blank"
+						>
+							<p>Quincy</p>
+							<p>Market</p>
+						</a>
 					</div>
 				</div>
 				<div class="timeline-rail timeline-rail-lunch">
@@ -658,7 +846,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-lunch"
 					data-timeline-entry="lunch"
 				>
-					<h2>Lunch</h2>
+					<div class="timeline-heading-line">
+						<h2>Lunch</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							12pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.quincyMarket}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Quincy Market
+						</a>
+					</div>
 					<div class="lunch-body">
 						<div
 							class="lunch-carousel"
@@ -763,9 +968,16 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-venue timeline-venue-aquarium timeline-venue-aquarium-afternoon timeline-cell-span-two"
 				>
 					<div class="timeline-venue-stack">
-						<p>New</p>
-						<p>England</p>
-						<p>Aquarium</p>
+						<a
+							class="timeline-location-link timeline-location-link-stack"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							<p>New</p>
+							<p>England</p>
+							<p>Aquarium</p>
+						</a>
 						<div
 							class="timeline-venue-decoration timeline-venue-decoration-turtle"
 							aria-hidden="true"
@@ -784,7 +996,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
 					data-timeline-entry="talks-afternoon"
 				>
-					<h2>Talks</h2>
+					<div class="timeline-heading-line">
+						<h2>Talks</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							2pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.aquarium}
+							rel="noreferrer"
+							target="_blank"
+						>
+							New England Aquarium
+						</a>
+					</div>
 					<div class="talks-list" aria-label="Afternoon talks">
 						{
 							afternoonTalksSessions.map((talk) => (
@@ -824,8 +1053,18 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-explore"
 					data-timeline-entry="explore-boston"
 				>
-					<h2>Explore Boston</h2>
+					<div class="timeline-heading-line">
+						<h2>Explore Boston</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							3:30pm
+						</p>
+					</div>
 					<p class="timeline-subtitle">choose your own adventure</p>
+					<div class="timeline-mobile-meta">
+						<p class="timeline-mobile-location">Boston</p>
+					</div>
 					<div class="explore-options" aria-label="Explore Boston options">
 						<article class="explore-card">
 							<div class="explore-choice" aria-hidden="true">
@@ -891,9 +1130,16 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-venue timeline-venue-urban timeline-cell-span-five"
 				>
 					<div class="timeline-venue-stack">
-						<p>Urban</p>
-						<p>Wild</p>
-						<p>Boston</p>
+						<a
+							class="timeline-location-link timeline-location-link-stack"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							<p>Urban</p>
+							<p>Wild</p>
+							<p>Boston</p>
+						</a>
 					</div>
 				</div>
 				<div class="timeline-rail timeline-rail-syntax timeline-cell-span-two">
@@ -904,7 +1150,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-syntax"
 					data-timeline-entry="arrive-urban-wild"
 				>
-					<h2>Arrive at Urban Wild</h2>
+					<div class="timeline-heading-line">
+						<h2>Arrive at Urban Wild</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							6pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Urban Wild Boston
+						</a>
+					</div>
 					<div class="event-body">
 						<div
 							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
@@ -928,9 +1191,26 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-syntax"
 					data-timeline-entry="syntax-live"
 				>
-					<h2>Syntax.fm Live</h2>
+					<div class="timeline-heading-line">
+						<h2>Syntax.fm Live</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							6pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Urban Wild Boston
+						</a>
+					</div>
 					<div class="event-body">
-						<div class="syntax-avatars" aria-label="Syntax.fm live guests">
+						<div class="syntaxlive-avatars" aria-label="Syntax.fm live guests">
 							<div
 								class="event-hero-image event-hero-image-circle syntax-hero-image"
 							>
@@ -971,9 +1251,26 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-fireside"
 					data-timeline-entry="fireside-chat"
 				>
-					<h2>Fireside Chat</h2>
+					<div class="timeline-heading-line">
+						<h2>Fireside Chat</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							7pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Urban Wild Boston
+						</a>
+					</div>
 					<div class="event-body">
-						<div class="fireside-avatars" aria-label="Fireside chat guests">
+						<div class="firesidechat-avatars" aria-label="Fireside chat guests">
 							<div
 								class="event-hero-image event-hero-image-circle fireside-hero-image"
 							>
@@ -1015,8 +1312,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					class="timeline-content timeline-content-afterparty"
 					data-timeline-entry="after-party"
 				>
-					<h2>After Party</h2>
-					<p class="timeline-subtitle">7:30-9pm</p>
+					<div class="timeline-heading-line">
+						<h2>After Party</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-range"
+						>
+							7:30-9pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Urban Wild Boston
+						</a>
+					</div>
 					<div class="afterparty-collage" aria-label="After party collage">
 						<div class="afterparty-photo afterparty-photo-1">
 							<Image alt="" src={urbanwild1} loading="eager" />
@@ -1045,8 +1358,24 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 				</div>
 
 				<div class="timeline-content" data-timeline-entry="big-rav">
-					<h2>Big Rav</h2>
-					<p class="timeline-subtitle">9pm</p>
+					<div class="timeline-heading-line">
+						<h2>Big Rav</h2>
+						<p
+							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
+						>
+							9pm
+						</p>
+					</div>
+					<div class="timeline-mobile-meta">
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={locationLinks.urbanWild}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Urban Wild Boston
+						</a>
+					</div>
 					<div class="event-body">
 						<div class="event-hero-image event-hero-image-circle">
 							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
@@ -1462,6 +1791,26 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		opacity: 1;
 	}
 
+	@keyframes timeline-card-outline-flash {
+		0% {
+			opacity: 0;
+			transform: scale(0.992);
+		}
+
+		22% {
+			opacity: 0.48;
+		}
+
+		68% {
+			opacity: 0.22;
+		}
+
+		100% {
+			opacity: 0;
+			transform: scale(1.004);
+		}
+	}
+
 	@media (max-width: 46rem) {
 		.postcard-gallery {
 			flex-direction: column;
@@ -1481,6 +1830,29 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		.postcard-stack-flip:hover .postcard-flip-scene,
 		.postcard-stack-flip:focus-within .postcard-flip-scene {
 			transform: translateY(-0.08rem);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] {
+			animation: none;
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-scene {
+			transform: translateY(-0.08rem);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-inner {
+			transform: rotateY(180deg);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard {
+			box-shadow:
+				0 0.08rem 0 rgba(255, 255, 255, 0.56),
+				0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
+				0 1.65rem 3rem rgba(2, 14, 31, 0.28);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
+			opacity: 1;
 		}
 	}
 
@@ -1699,6 +2071,21 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		margin: 0;
 	}
 
+	.timeline-location-link {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.timeline-location-link:hover,
+	.timeline-location-link:focus-visible {
+		text-decoration: underline;
+	}
+
+	.timeline-location-link-stack {
+		display: grid;
+		justify-items: end;
+	}
+
 	.timeline-venue-stack {
 		display: grid;
 		justify-items: end;
@@ -1913,7 +2300,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		opacity: 1;
 	}
 
-	.timeline-content-run {
+	.timeline-content-funrun {
 		min-height: 10rem;
 		padding-top: 1.2rem;
 	}
@@ -2020,6 +2407,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			transform var(--timeline-hover-duration) ease;
 	}
 
+	.timeline-heading-line {
+		align-items: baseline;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.7rem;
+		margin-bottom: 1.1rem;
+	}
+
 	.timeline-content:hover h2,
 	.timeline-content:focus-within h2 {
 		color: white;
@@ -2036,14 +2431,30 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		width: fit-content;
 	}
 
+	.timeline-content-funrun .timeline-title-row {
+		position: relative;
+	}
+
 	.timeline-title-copy {
 		display: grid;
 		gap: 0.3rem;
 		justify-items: start;
 	}
 
-	.timeline-content-run .timeline-subtitle {
+	.timeline-content-funrun .timeline-subtitle {
 		margin: 0;
+	}
+
+	.funrun-body {
+		position: relative;
+	}
+
+	.timeline-content-funrun .timeline-copy {
+		max-width: 50%;
+	}
+
+	.funrun-collage-mobile {
+		display: none;
 	}
 
 	.timeline-subtitle {
@@ -2055,8 +2466,37 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		transition: color var(--timeline-hover-duration) ease;
 	}
 
+	.timeline-inline-time {
+		display: inline-block;
+		margin: 0;
+	}
+
+	.timeline-inline-time-point {
+		display: none;
+	}
+
+	.timeline-mobile-meta {
+		display: none;
+	}
+
+	.timeline-mobile-meta :is(p, a) {
+		margin: 0;
+	}
+
+	.timeline-mobile-time,
+	.timeline-mobile-location {
+		color: var(--timeline-muted-color);
+		font-size: 0.95rem;
+		font-weight: 500;
+		line-height: 1.2;
+		transition: color var(--timeline-hover-duration) ease;
+	}
+
 	.timeline-content:hover .timeline-subtitle,
-	.timeline-content:focus-within .timeline-subtitle {
+	.timeline-content:focus-within .timeline-subtitle,
+	.timeline-content:hover :is(.timeline-mobile-time, .timeline-mobile-location),
+	.timeline-content:focus-within
+		:is(.timeline-mobile-time, .timeline-mobile-location) {
 		color: rgba(255, 255, 255, 0.88);
 	}
 
@@ -2225,11 +2665,12 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		transform: scale(1.1);
 	}
 
-	.timeline-mini-collage {
+	.funrun-collage {
 		justify-self: start;
-		transform: none;
 		position: absolute;
-		left: 130px;
+		left: 14rem;
+		top: 0.7rem;
+		transform: none;
 	}
 
 	.funrun-photo {
@@ -2297,7 +2738,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		object-position: 38% 50%;
 	}
 
-	.timeline-collage {
+	.launchparty-collage {
 		height: clamp(7.5rem, 14vw, 9.5rem);
 		margin-bottom: 1rem;
 		position: relative;
@@ -2536,7 +2977,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		margin-top: 0.8rem;
 	}
 
-	.break-collage {
+	.cookiesbreak-collage {
 		height: 8rem;
 		position: relative;
 		width: 18.6rem;
@@ -2912,7 +3353,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		width: 100%;
 	}
 
-	.fireside-avatars {
+	.firesidechat-avatars {
 		height: 10rem;
 		position: relative;
 		width: 10rem;
@@ -2954,7 +3395,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		z-index: 2;
 	}
 
-	.syntax-avatars {
+	.syntaxlive-avatars {
 		height: 11rem;
 		position: relative;
 		width: 11.5rem;
@@ -3017,8 +3458,8 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.afterparty-collage {
-		height: 20em;
-		margin: 0.5rem 0 1rem;
+		height: 21.6em;
+		margin: 1.9rem 0 1.1rem;
 		position: relative;
 		width: min(100%, 38rem);
 	}
@@ -3092,7 +3533,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		--afterparty-photo-aspect: 16 / 9;
 		--afterparty-photo-width: 33%;
 		left: 50%;
-		top: -25%;
+		top: -8%;
 		transform: rotate(0deg);
 		z-index: 2;
 	}
@@ -3101,7 +3542,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		--afterparty-photo-aspect: 16 / 9;
 		--afterparty-photo-width: 31%;
 		left: 76%;
-		top: -3%;
+		top: 8%;
 		transform: rotate(19deg);
 		z-index: 1;
 	}
@@ -3110,55 +3551,310 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		--afterparty-photo-aspect: 16 / 9;
 		--afterparty-photo-width: 30%;
 		left: 47%;
-		top: 53%;
+		top: 49%;
 		transform: rotate(7deg);
 		z-index: 5;
 	}
 
 	@media (width < 900px) {
 		.timeline-grid {
-			gap: 0.8rem;
+			gap: 0.65rem;
 			grid-template-columns: 1fr;
 			grid-template-rows: auto;
-			padding-left: clamp(0.8rem, 4vw, 1.35rem);
+			padding-inline: 0.35rem;
+		}
+
+		.timeline-cell-empty {
+			display: none;
+		}
+
+		.timeline-cell-span-two,
+		.timeline-cell-span-four,
+		.timeline-cell-span-five,
+		.timeline-cell-span-seven {
+			grid-row: auto;
 		}
 
 		.timeline-cap {
+			border-radius: 8px;
 			grid-column: auto;
 		}
 
 		.timeline-grid-intro {
-			padding: 0 0 0.2rem;
+			margin-top: 0;
+			order: -1;
+			padding: 0 0.15rem 0.2rem;
 		}
 
-		.timeline-venue {
-			padding: 0;
-		}
-
-		.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack {
-			backdrop-filter: none;
-			background: none;
-			border: 0;
-			border-radius: 0;
-			box-shadow: none;
-			padding: 0;
-			position: static;
-		}
-
+		.timeline-venue,
 		.timeline-rail {
-			min-height: auto;
+			display: none;
 		}
 
 		.timeline-content {
-			padding: 0;
+			margin: 0.85rem 0;
+			padding-bottom: 1rem;
+			padding-left: 0.85rem;
+			padding-right: 0.75rem;
+		}
+
+		.timeline-mobile-meta {
+			display: grid;
+			gap: 0.15rem;
+			margin: -0.6rem 0 1rem;
+		}
+
+		.timeline-inline-time-point {
+			display: inline-block;
+		}
+
+		.timeline-title-copy .timeline-mobile-meta {
+			margin-top: -0.15rem;
 		}
 
 		.timeline-content::before {
-			inset: 0.2rem -0.1rem 0.35rem;
+			inset: 0.15rem -0.02rem 0.28rem;
 		}
 
 		.timeline-content::after {
-			inset: 0.2rem -0.1rem 0.35rem;
+			inset: 0.15rem -0.02rem 0.28rem;
+		}
+
+		.postcard-stack-flip:hover,
+		.postcard-stack-flip:focus-within {
+			animation: postcard-idle-wiggle 5s ease-in-out infinite;
+		}
+
+		.postcard-stack-flip:hover .postcard-flip-scene,
+		.postcard-stack-flip:focus-within .postcard-flip-scene {
+			transform: none;
+		}
+
+		.postcard-stack-flip:hover .postcard-flip-inner,
+		.postcard-stack-flip:focus-within .postcard-flip-inner {
+			transform: none;
+		}
+
+		.postcard-stack-flip:hover .postcard,
+		.postcard-stack-flip:focus-within .postcard {
+			box-shadow:
+				0 0.08rem 0 rgba(255, 255, 255, 0.5),
+				0 0.35rem 0.75rem rgba(2, 14, 31, 0.14),
+				0 1.35rem 2.6rem rgba(2, 14, 31, 0.24);
+		}
+
+		.postcard-stack-flip:hover .postcard-note-back,
+		.postcard-stack-flip:focus-within .postcard-note-back {
+			opacity: 0;
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] {
+			animation: none;
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-scene {
+			transform: translateY(-0.08rem);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-inner {
+			transform: rotateY(180deg);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard {
+			box-shadow:
+				0 0.08rem 0 rgba(255, 255, 255, 0.56),
+				0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
+				0 1.65rem 3rem rgba(2, 14, 31, 0.28);
+		}
+
+		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
+			opacity: 1;
+		}
+
+		.timeline-content:hover::before,
+		.timeline-content:focus-within::before {
+			background: none;
+			box-shadow: none;
+			opacity: 0.22;
+			transform: scale(0.985);
+		}
+
+		.timeline-content:hover::after,
+		.timeline-content:focus-within::after {
+			animation: none;
+			opacity: 0;
+			transform: none;
+		}
+
+		.timeline-content:hover h2,
+		.timeline-content:focus-within h2 {
+			color: var(--timeline-heading-color);
+			text-shadow: none;
+			transform: none;
+		}
+
+		.timeline-content:hover .timeline-subtitle,
+		.timeline-content:focus-within .timeline-subtitle,
+		.timeline-content:hover
+			:is(.timeline-mobile-time, .timeline-mobile-location),
+		.timeline-content:focus-within
+			:is(.timeline-mobile-time, .timeline-mobile-location) {
+			color: var(--timeline-muted-color);
+		}
+
+		.timeline-content:hover .timeline-copy p,
+		.timeline-content:focus-within .timeline-copy p {
+			color: var(--timeline-copy-color);
+		}
+
+		.timeline-content:hover
+			:is(
+				.launchparty-photo,
+				.break-photo,
+				.lunch-photo,
+				.explore-photo,
+				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned,
+				.launchparty-photo,
+				.afterparty-photo
+			),
+		.timeline-content:focus-within
+			:is(
+				.launchparty-photo,
+				.break-photo,
+				.lunch-photo,
+				.explore-photo,
+				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned,
+				.launchparty-photo,
+				.afterparty-photo
+			) {
+			scale: 1;
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		}
+
+		.timeline-content:hover
+			:is(
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned
+			)
+			:is(img, :global(img)),
+		.timeline-content:focus-within
+			:is(
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned
+			)
+			:is(img, :global(img)) {
+			transform: scale(1);
+		}
+
+		.timeline-content:hover .funrun-photo-1,
+		.timeline-content:focus-within .funrun-photo-1 {
+			transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		}
+
+		.timeline-content:hover .funrun-photo-2,
+		.timeline-content:focus-within .funrun-photo-2 {
+			transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		}
+
+		.timeline-content[data-mobile-active="true"]::before {
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.13),
+				rgba(255, 255, 255, 0.03)
+			);
+			box-shadow:
+				inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+				0 0.85rem 1.8rem rgba(7, 20, 38, 0.16);
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.timeline-content[data-mobile-active="true"]::after {
+			animation: timeline-card-outline-flash 1600ms
+				cubic-bezier(0.22, 1, 0.36, 1) 1;
+			background: linear-gradient(
+				135deg,
+				rgba(197, 237, 255, 0.5),
+				rgba(255, 255, 255, 0.42)
+			);
+			opacity: 0;
+			padding: 1.5px;
+			transform: scale(1);
+			transform-origin: center;
+		}
+
+		.timeline-content[data-mobile-active="true"] h2 {
+			color: white;
+			text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
+		}
+
+		.timeline-content[data-mobile-active="true"] .timeline-subtitle,
+		.timeline-content[data-mobile-active="true"]
+			:is(.timeline-mobile-time, .timeline-mobile-location),
+		.timeline-content[data-mobile-active="true"] .timeline-copy p {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:is(
+				.launchparty-photo,
+				.break-photo,
+				.lunch-photo,
+				.explore-photo,
+				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
+				.launchparty-photo,
+				.afterparty-photo
+			) {
+			scale: 1.12;
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:is(
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned
+			) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:is(
+				.talk-avatar,
+				.fireside-avatar,
+				.syntax-avatar,
+				.syntax-hero-image,
+				.event-hero-image-pinned
+			)
+			:is(img, :global(img)) {
+			transform: scale(1.07);
+		}
+
+		.timeline-content[data-mobile-active="true"] .funrun-photo-1 {
+			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
+		}
+
+		.timeline-content[data-mobile-active="true"] .funrun-photo-2 {
+			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
 		}
 
 		.break-body {
@@ -3224,6 +3920,64 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			justify-items: start;
 		}
 
+		.timeline-content-funrun .timeline-copy {
+			margin-top: 0.15rem;
+			max-width: none;
+		}
+
+		.funrun-collage-desktop {
+			display: none;
+		}
+
+		.funrun-body {
+			align-items: start;
+			column-gap: 0.9rem;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 8rem;
+		}
+
+		.funrun-collage-mobile {
+			align-self: start;
+			display: block;
+			justify-self: end;
+			left: auto;
+			min-height: 7.6rem;
+			position: relative;
+			right: auto;
+			top: -1rem;
+			width: 8rem;
+		}
+
+		.funrun-collage-mobile .timeline-copy {
+			color: red;
+		}
+
+		.funrun-collage-mobile .funrun-photo-1 {
+			height: 5.45rem;
+			left: 3.8rem;
+			top: 0.3rem;
+			width: 3.75rem;
+		}
+
+		.funrun-collage-mobile .funrun-photo-2 {
+			height: 6.1rem;
+			left: 0;
+			top: 0.7rem;
+			width: 4.35rem;
+		}
+
+		.timeline-content[data-timeline-entry="simons-imax-theater"] .event-body {
+			grid-template-columns: 1fr;
+			gap: 0.85rem;
+		}
+
+		.timeline-content[data-timeline-entry="simons-imax-theater"]
+			.event-hero-image-wide {
+			justify-self: start;
+			max-width: 100%;
+			width: min(100%, 14rem);
+		}
+
 		.timeline-hosts-list {
 			grid-template-columns: 1fr;
 		}
@@ -3231,11 +3985,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		.timeline-venue-decoration-turtle {
 			transform: scale(0.82) rotate(4deg);
 			transform-origin: bottom right;
-		}
-
-		.timeline-content:hover,
-		.timeline-content:focus-within {
-			transform: none;
 		}
 	}
 
@@ -3272,12 +4021,22 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	const morningTalksEntry = document.querySelector(
 		'[data-timeline-entry="talks-morning"]',
 	);
+	const postcardStack = document.querySelector(".postcard-stack-flip");
 	const reducedMotionQuery = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	);
+	const mobileTimelineQuery = window.matchMedia("(max-width: 899px)");
 	const lunchCarousels = Array.from(
 		document.querySelectorAll("[data-lunch-carousel]"),
 	).filter((element) => element instanceof HTMLElement);
+	const timelineCardHeaders = timelineCards.map((card) => {
+		const heading = card.querySelector(".timeline-title-copy h2, h2");
+
+		return {
+			card,
+			heading: heading instanceof HTMLElement ? heading : card,
+		};
+	});
 
 	if (
 		timelineSection instanceof HTMLElement &&
@@ -3543,8 +4302,85 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		startLunchAutoAdvance();
 	}
 
+	{
+		let mobileActivationFrameRequested = false;
+
+		const clearMobileTimelineState = () => {
+			for (const card of timelineCards) {
+				card.removeAttribute("data-mobile-active");
+			}
+
+			if (postcardStack instanceof HTMLElement) {
+				postcardStack.removeAttribute("data-mobile-flipped");
+			}
+		};
+
+		const updateMobileTimelineState = () => {
+			mobileActivationFrameRequested = false;
+
+			if (!mobileTimelineQuery.matches) {
+				clearMobileTimelineState();
+				return;
+			}
+
+			const viewportThreshold = window.innerHeight * 0.5;
+			let activeCard = null;
+
+			for (const { card, heading } of timelineCardHeaders) {
+				if (heading.getBoundingClientRect().top <= viewportThreshold) {
+					activeCard = card;
+				}
+			}
+
+			for (const card of timelineCards) {
+				if (card === activeCard) {
+					card.setAttribute("data-mobile-active", "true");
+				} else {
+					card.removeAttribute("data-mobile-active");
+				}
+			}
+
+			if (postcardStack instanceof HTMLElement) {
+				const postcardRect = postcardStack.getBoundingClientRect();
+				const postcardMidpoint = postcardRect.top + postcardRect.height * 0.5;
+
+				if (postcardMidpoint <= viewportThreshold) {
+					postcardStack.setAttribute("data-mobile-flipped", "true");
+				} else {
+					postcardStack.removeAttribute("data-mobile-flipped");
+				}
+			}
+		};
+
+		const requestMobileTimelineStateUpdate = () => {
+			if (mobileActivationFrameRequested) {
+				return;
+			}
+
+			mobileActivationFrameRequested = true;
+			window.requestAnimationFrame(updateMobileTimelineState);
+		};
+
+		requestMobileTimelineStateUpdate();
+		window.addEventListener("scroll", requestMobileTimelineStateUpdate, {
+			passive: true,
+		});
+		window.addEventListener("resize", requestMobileTimelineStateUpdate);
+
+		if (typeof mobileTimelineQuery.addEventListener === "function") {
+			mobileTimelineQuery.addEventListener(
+				"change",
+				requestMobileTimelineStateUpdate,
+			);
+		}
+	}
+
 	for (const card of timelineCards) {
 		card.addEventListener("pointermove", (event) => {
+			if (mobileTimelineQuery.matches) {
+				return;
+			}
+
 			const rect = card.getBoundingClientRect();
 			const x = ((event.clientX - rect.left) / rect.width) * 100;
 			const y = ((event.clientY - rect.top) / rect.height) * 100;
