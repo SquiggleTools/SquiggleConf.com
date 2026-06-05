@@ -14,10 +14,10 @@ import timelineFish2 from "~/assets/design/timeline-fish-2.svg";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg";
 import timelineFish4 from "~/assets/design/timeline-fish-4.svg";
 import timelineFish5 from "~/assets/design/timeline-fish-5.svg";
-import group from "~/assets/stills/speakers-event-group.png";
+import harborwalk from "~/assets/2027/boston-harborwalk.jpg";
 import harbor from "~/assets/stills/boston-harbor.png";
 import networking from "~/assets/stills/attendees-networking.png";
-import presentingInsideVenue from "~/assets/stills/presenting-inside-venue.png";
+import simonsTheater from "~/assets/2027/simons-theater.jpg";
 import terminalShop from "~/assets/2027/terminal.shop.svg";
 import duck1 from "~/assets/2027/duck-1.jpg";
 import duck2 from "~/assets/2027/duck-2.jpg";
@@ -143,6 +143,12 @@ const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
 
 const lunchSpots = [
 	{
+		alt: "Boston & Maine Fish Company seafood plate",
+		image: lunchBostonChowda,
+		name: "Boston & Maine Fish Company",
+		url: "https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company",
+	},
+	{
 		alt: "Regina Pizzeria pizza slices",
 		image: lunchRegina,
 		name: "Regina Pizzeria",
@@ -153,12 +159,6 @@ const lunchSpots = [
 		image: lunchWickedLobsta,
 		name: "Wicked Lobsta",
 		url: "https://faneuilhallmarketplace.com/go/wicked-lobsta",
-	},
-	{
-		alt: "Boston & Maine Fish Company seafood plate",
-		image: lunchBostonChowda,
-		name: "Boston & Maine Fish Company",
-		url: "https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company",
 	},
 	{
 		alt: "The Berry Twist dessert cup",
@@ -336,7 +336,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<p>Boston, Massachusetts</p>
 				</div>
 
-				<div class="timeline-venue">
+				<div class="timeline-venue timeline-venue-last">
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
@@ -390,7 +390,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						<div class="launchparty-photo launchparty-photo-3">
 							<Image
 								alt="Speakers gathered together at the event"
-								src={group}
+								src={harborwalk}
 								loading="eager"
 							/>
 						</div>
@@ -560,7 +560,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					data-timeline-entry="simons-imax-theater"
 				>
 					<div class="timeline-heading-line">
-						<h2>Simons IMAX Theater</h2>
+						<h2>Talks in an IMAX Theater</h2>
 						<p
 							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
 						>
@@ -583,7 +583,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						>
 							<Image
 								alt="Presenter on stage inside the Simons IMAX Theater"
-								src={presentingInsideVenue}
+								src={simonsTheater}
 								loading="eager"
 							/>
 						</div>
@@ -913,6 +913,13 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 							<ul class="lunch-links">
 								<li>
 									<a
+										href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
+									>
+										Boston &amp; Maine Fish Company
+									</a>
+								</li>
+								<li>
+									<a
 										href="https://faneuilhallmarketplace.com/go/regina-pizzeria"
 									>
 										Regina Pizzeria
@@ -921,13 +928,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								<li>
 									<a href="https://faneuilhallmarketplace.com/go/wicked-lobsta">
 										Wicked Lobsta
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
-									>
-										Boston &amp; Maine Fish Company
 									</a>
 								</li>
 								<li>
@@ -1073,6 +1073,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 										the city in one shot with a classic Boston ride.
 									</p>
 								</div>
+								<div class="explore-spots-left">19 spots left</div>
 							</div>
 						</article>
 						<article class="explore-card">
@@ -1117,7 +1118,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 				</div>
 
 				<div
-					class="timeline-venue timeline-venue-urban timeline-cell-span-five"
+					class="timeline-venue timeline-venue-urban timeline-cell-span-five timeline-venue-last"
 				>
 					<div class="timeline-venue-stack">
 						<a
@@ -2048,12 +2049,16 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		font-weight: 600;
 		justify-content: flex-start;
 		line-height: 1.12;
-		padding: 0 1rem 0 0;
+		margin-right: -1px;
 		text-align: right;
 		transition:
 			color var(--timeline-hover-duration) ease,
 			opacity var(--timeline-hover-duration) ease,
 			transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-venue-last {
+		margin-bottom: 1rem;
 	}
 
 	.timeline-venue p {
@@ -2081,28 +2086,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		position: relative;
 	}
 
-	@keyframes timeline-venue-wiggle {
-		0% {
-			transform: translate3d(0, 0, 0) rotate(-0.4deg);
-		}
-
-		25% {
-			transform: translate3d(0.04rem, -0.02rem, 0) rotate(0.48deg);
-		}
-
-		50% {
-			transform: translate3d(-0.06rem, 0.03rem, 0) rotate(-0.55deg);
-		}
-
-		75% {
-			transform: translate3d(0.035rem, -0.015rem, 0) rotate(0.35deg);
-		}
-
-		100% {
-			transform: translate3d(0, 0, 0) rotate(-0.4deg);
-		}
-	}
-
 	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack::before {
 		color: var(--timeline-venue-at-color);
 		content: "@";
@@ -2123,11 +2106,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack {
-		animation: timeline-venue-wiggle 650ms ease-in-out infinite;
-		animation-play-state: paused;
 		backdrop-filter: blur(14px) saturate(140%);
-		background: var(--timeline-venue-stack-background);
-		border: 1px solid var(--timeline-venue-stack-border-color);
+		background: var(--timeline-rail-background);
+		border: 1px solid var(--timeline-rail-border-color);
 		border-radius: 0.9rem;
 		box-shadow: var(--timeline-venue-stack-shadow);
 		padding: 0.85rem 0.9rem 0.8rem 1.45rem;
@@ -2135,6 +2116,10 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		top: clamp(1rem, 4vw, 4.5rem);
 		transform-origin: top right;
 		z-index: 2;
+
+		border-right: none;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
 	}
 
 	:root[data-timeline-scrolling="true"]
@@ -2146,7 +2131,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	.timeline-venue-aquarium-afternoon .timeline-venue-stack {
 		margin-bottom: var(--timeline-venue-stop-offset, 6rem);
 		padding-bottom: 3.75rem;
-		padding-right: 3.85rem;
 	}
 
 	.timeline-venue-empty {
@@ -2857,7 +2841,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 
 	.timeline-venue-decoration-turtle {
 		top: 6rem;
-		right: -1rem;
+		right: 0;
 		transform: rotate(4deg) scale(0.94);
 		transform-origin: bottom right;
 	}
@@ -3291,6 +3275,20 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		line-height: 1.4;
 		margin: 0;
 		max-width: 48ch;
+	}
+
+	.explore-spots-left {
+		position: absolute;
+		top: -1em;
+		right: -1em;
+		color: var(--timeline-copy-color);
+		border: 1px solid var(--timeline-image-border-color);
+		background: var(--colorBlue3);
+		padding: 8px 10px;
+		border-radius: 6px;
+		text-transform: uppercase;
+		font-variant: tabular-nums;
+		font-size: 0.8em;
 	}
 
 	.event-body {
