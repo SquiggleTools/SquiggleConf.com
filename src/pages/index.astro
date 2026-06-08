@@ -190,7 +190,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		class="private-preview-banner"
 		aria-label="Private preview notice"
 	>
-		PRIVATE PREVIEW
+		Private Preview - Names are non-confirmed examples. Please do not share!
 	</div>
 	<Hero tall>
 		<div class="hero-intro">
@@ -1398,7 +1398,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			inset 0 -1px 0 rgba(109, 0, 53, 0.22);
 		color: #fff8fc;
 		font-family: var(--fontFamilyHeading);
-		font-size: 0.78rem;
+		font-size: 1rem;
 		font-weight: 800;
 		letter-spacing: 0.22em;
 		padding: 0.75rem 1rem;
@@ -2086,7 +2086,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		position: relative;
 	}
 
-	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack::before {
+	.timeline-venue .timeline-venue-stack::before {
 		color: var(--timeline-venue-at-color);
 		content: "@";
 		font-family: var(--fontFamilyHeading);
@@ -2101,11 +2101,11 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		text-shadow: 0 0.12rem 0.4rem rgba(4, 25, 48, 0.24);
 	}
 
-	.timeline-venue:not(.timeline-venue-empty) {
+	.timeline-venue {
 		align-self: stretch;
 	}
 
-	.timeline-venue:not(.timeline-venue-empty) .timeline-venue-stack {
+	.timeline-venue .timeline-venue-stack {
 		backdrop-filter: blur(14px) saturate(140%);
 		background: var(--timeline-rail-background);
 		border: 1px solid var(--timeline-rail-border-color);
@@ -2123,7 +2123,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	:root[data-timeline-scrolling="true"]
-		.timeline-venue:not(.timeline-venue-empty)
+		.timeline-venue
 		.timeline-venue-stack {
 		animation-play-state: running;
 	}
@@ -2133,17 +2133,8 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		padding-bottom: 3.75rem;
 	}
 
-	.timeline-venue-empty {
-		min-height: 0;
-		padding: 0;
-	}
-
 	.timeline-cell-span-two {
 		grid-row: span 2;
-	}
-
-	.timeline-cell-span-four {
-		grid-row: span 4;
 	}
 
 	.timeline-cell-span-five {
