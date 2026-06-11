@@ -225,7 +225,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								src: funrun2,
 							},
 						]}
-						slot="aside"
 					/>
 					<div class="funrun-body">
 						<TimelineCopy>
@@ -718,7 +717,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		--timeline-image-border-width: 2px;
 		--timeline-hover-duration: 220ms;
 		isolation: isolate;
-		padding: 2rem 1rem clamp(3rem, 7vw, 5rem);
+		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
 		position: relative;
 	}
 

@@ -48,73 +48,35 @@ const hasAside = Astro.slots.has("aside");
 	class:list={["timeline-content", ...variantClasses, className]}
 	data-timeline-entry={entryId}
 >
+	<div class="timeline-heading-line">
+		<h2>{heading}</h2>
+		<p
+			class:list={[
+				"timeline-subtitle",
+				"timeline-inline-time",
+				timeMode === "point" && "timeline-inline-time-point",
+			]}
+		>
+			{time}
+		</p>
+	</div>
+	{subtitle && <p class="timeline-subtitle">{subtitle}</p>}
 	{
-		hasAside ? (
-			<div class="timeline-title-row">
-				<div class="timeline-title-copy">
-					<div class="timeline-heading-line">
-						<h2>{heading}</h2>
-						<p
-							class:list={[
-								"timeline-subtitle",
-								"timeline-inline-time",
-								timeMode === "point" && "timeline-inline-time-point",
-							]}
-						>
-							{time}
-						</p>
-					</div>
-					{mobileLocation && (
-						<div class="timeline-mobile-meta">
-							{mobileLocationHref ? (
-								<a
-									class="timeline-mobile-location timeline-location-link"
-									href={mobileLocationHref}
-									rel="noreferrer"
-									target="_blank"
-								>
-									{mobileLocation}
-								</a>
-							) : (
-								<p class="timeline-mobile-location">{mobileLocation}</p>
-							)}
-						</div>
-					)}
-				</div>
-				<slot name="aside" />
-			</div>
-		) : (
-			<>
-				<div class="timeline-heading-line">
-					<h2>{heading}</h2>
-					<p
-						class:list={[
-							"timeline-subtitle",
-							"timeline-inline-time",
-							timeMode === "point" && "timeline-inline-time-point",
-						]}
+		mobileLocation && (
+			<div class="timeline-mobile-meta">
+				{mobileLocationHref ? (
+					<a
+						class="timeline-mobile-location timeline-location-link"
+						href={mobileLocationHref}
+						rel="noreferrer"
+						target="_blank"
 					>
-						{time}
-					</p>
-				</div>
-				{subtitle && <p class="timeline-subtitle">{subtitle}</p>}
-				{mobileLocation && (
-					<div class="timeline-mobile-meta">
-						{mobileLocationHref ? (
-							<a
-								class="timeline-mobile-location timeline-location-link"
-								href={mobileLocationHref}
-								rel="noreferrer"
-								target="_blank"
-							>
-								{mobileLocation}
-							</a>
-						) : (
-							<p class="timeline-mobile-location">{mobileLocation}</p>
-						)}
-					</div>
+						{mobileLocation}
+					</a>
+				) : (
+					<p class="timeline-mobile-location">{mobileLocation}</p>
 				)}
-			</>
+			</div>
 		)
 	}
 	<slot />
