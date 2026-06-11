@@ -1,0 +1,472 @@
+---
+import { Image } from "astro:assets";
+
+import type {
+	CollageLayout,
+	CollagePhoto,
+	CollageShape,
+} from "~/components/home/types";
+
+interface Props {
+	ariaLabel?: string;
+	class?: string;
+	decorative?: boolean;
+	layout?: CollageLayout;
+	photos: readonly CollagePhoto[];
+	shape?: CollageShape;
+}
+
+const {
+	ariaLabel,
+	class: className,
+	decorative = false,
+	layout = "auto",
+	photos,
+	shape = "photo",
+} = Astro.props;
+
+const resolvedLayout =
+	layout === "auto"
+		? shape === "avatar"
+			? photos.length === 2
+				? "avatar-duo"
+				: "avatar-trio"
+			: photos.length === 2
+				? "duo"
+				: photos.length === 5
+					? "feature-five"
+					: "trio"
+		: layout;
+---
+
+<div
+	aria-hidden={!ariaLabel && decorative ? "true" : undefined}
+	aria-label={ariaLabel}
+	class:list={[
+		"collage",
+		`collage-${resolvedLayout}`,
+		`collage-${shape}`,
+		className,
+	]}
+	role={ariaLabel ? "group" : undefined}
+>
+	{
+		photos.map((photo, index) => (
+			<div class:list={["collage-item", `collage-item-${index + 1}`]}>
+				<Image
+					alt={decorative || photo.decorative ? "" : photo.alt}
+					aria-hidden={decorative || photo.decorative ? "true" : undefined}
+					loading="lazy"
+					src={photo.src}
+					style={
+						photo.objectPosition
+							? `object-position: ${photo.objectPosition}`
+							: undefined
+					}
+				/>
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.collage {
+		--collage-height: 9rem;
+		--collage-width: min(100%, 31rem);
+		height: var(--collage-height);
+		position: relative;
+		width: var(--collage-width);
+	}
+
+	.collage-item {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+		position: absolute;
+		transform-origin: center;
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			scale var(--timeline-hover-duration) ease,
+			border-width var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		will-change: transform, scale;
+	}
+
+	.collage-avatar .collage-item {
+		border-radius: 999px;
+		transition: box-shadow var(--timeline-hover-duration) ease;
+		will-change: auto;
+	}
+
+	.collage-item :global(picture),
+	.collage-item :global(img) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.collage-item :global(img) {
+		border-radius: inherit;
+		object-fit: cover;
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(1);
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	.collage-photo .collage-item :global(img) {
+		transform: none;
+		will-change: auto;
+	}
+
+	.collage-duo {
+		--collage-height: 5rem;
+		--collage-width: 12rem;
+	}
+
+	.funrun-collage {
+		justify-self: start;
+		left: 14rem;
+		position: absolute;
+		top: 0.7rem;
+		transform: none;
+	}
+
+	.funrun-collage-mobile {
+		display: none;
+	}
+
+	.collage-duo .collage-item-1 {
+		height: 7rem;
+		left: 6rem;
+		top: -4rem;
+		transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		width: 5rem;
+	}
+
+	.collage-duo .collage-item-2 {
+		height: 8rem;
+		left: 1rem;
+		top: -4rem;
+		transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		width: 6rem;
+	}
+
+	.collage-trio .collage-item-1 {
+		height: var(--collage-trio-item-1-height, 6.5rem);
+		left: var(--collage-trio-item-1-left, 0.2rem);
+		top: var(--collage-trio-item-1-top, 1.15rem);
+		transform: rotate(var(--collage-trio-item-1-rotate, -12deg));
+		width: var(--collage-trio-item-1-width, 8.9rem);
+	}
+
+	.collage-trio .collage-item-2 {
+		height: var(--collage-trio-item-2-height, 6.3rem);
+		left: var(--collage-trio-item-2-left, 6.1rem);
+		top: var(--collage-trio-item-2-top, 0.1rem);
+		transform: rotate(var(--collage-trio-item-2-rotate, -2deg));
+		width: var(--collage-trio-item-2-width, 8.9rem);
+		z-index: var(--collage-trio-item-2-z-index, auto);
+	}
+
+	.collage-trio .collage-item-3 {
+		height: var(--collage-trio-item-3-height, 6.4rem);
+		left: var(--collage-trio-item-3-left, 13rem);
+		top: var(--collage-trio-item-3-top, 0.85rem);
+		transform: rotate(var(--collage-trio-item-3-rotate, 9deg));
+		width: var(--collage-trio-item-3-width, 8.9rem);
+	}
+
+	.launchparty-collage {
+		--collage-height: clamp(7.5rem, 14vw, 9.5rem);
+		--collage-width: min(100%, 31rem);
+		margin-bottom: 1rem;
+	}
+
+	.cookiesbreak-collage {
+		--collage-height: 8rem;
+		--collage-trio-item-1-height: 5.7rem;
+		--collage-trio-item-1-left: 0.25rem;
+		--collage-trio-item-1-rotate: -8deg;
+		--collage-trio-item-1-top: 1rem;
+		--collage-trio-item-1-width: 7.5rem;
+		--collage-trio-item-2-height: 5.8rem;
+		--collage-trio-item-2-left: 5.4rem;
+		--collage-trio-item-2-rotate: 2deg;
+		--collage-trio-item-2-top: 0.2rem;
+		--collage-trio-item-2-width: 7.5rem;
+		--collage-trio-item-2-z-index: 1;
+		--collage-trio-item-3-height: 5rem;
+		--collage-trio-item-3-left: 11rem;
+		--collage-trio-item-3-rotate: 10deg;
+		--collage-trio-item-3-top: 2rem;
+		--collage-trio-item-3-width: 6rem;
+		--collage-width: 18.6rem;
+	}
+
+	.collage-feature-five {
+		--collage-height: 16em;
+		--collage-width: min(100%, 38rem);
+	}
+
+	.afterparty-collage {
+		margin: 1.9rem 0 1.1rem;
+	}
+
+	.collage-feature-five .collage-item {
+		aspect-ratio: var(--collage-feature-photo-aspect, 16 / 9);
+		height: auto;
+		width: var(--collage-feature-photo-width, 20%);
+	}
+
+	.collage-feature-five .collage-item-1 {
+		--collage-feature-photo-aspect: 16 / 9;
+		--collage-feature-photo-width: 66%;
+		left: 0%;
+		top: 0%;
+		transform: rotate(-6deg);
+		z-index: 5;
+	}
+
+	.collage-feature-five .collage-item-2 {
+		--collage-feature-photo-aspect: 14 / 16;
+		--collage-feature-photo-width: 26%;
+		left: 65%;
+		top: 9%;
+		transform: rotate(8deg);
+		z-index: 4;
+	}
+
+	.collage-feature-five .collage-item-3 {
+		--collage-feature-photo-aspect: 16 / 9;
+		--collage-feature-photo-width: 33%;
+		left: 50%;
+		top: -8%;
+		transform: rotate(0deg);
+		z-index: 2;
+	}
+
+	.collage-feature-five .collage-item-4 {
+		--collage-feature-photo-aspect: 16 / 9;
+		--collage-feature-photo-width: 31%;
+		left: 76%;
+		top: 8%;
+		transform: rotate(19deg);
+		z-index: 1;
+	}
+
+	.collage-feature-five .collage-item-5 {
+		--collage-feature-photo-aspect: 16 / 9;
+		--collage-feature-photo-width: 30%;
+		left: 47%;
+		top: 49%;
+		transform: rotate(7deg);
+		z-index: 5;
+	}
+
+	.collage-avatar-duo {
+		--collage-height: 10rem;
+		--collage-width: 10rem;
+	}
+
+	.collage-avatar-duo .collage-item-1 {
+		height: 8rem;
+		left: -1rem;
+		top: 1rem;
+		width: 8rem;
+	}
+
+	.collage-avatar-duo .collage-item-2 {
+		height: 5rem;
+		left: 5rem;
+		top: 5rem;
+		transform: rotate(6deg);
+		width: 5rem;
+		z-index: 2;
+	}
+
+	.collage-avatar-trio {
+		--collage-height: 11rem;
+		--collage-width: 11.5rem;
+	}
+
+	.collage-avatar-trio .collage-item-1 {
+		height: 8rem;
+		left: 3rem;
+		top: 1.65rem;
+		width: 8rem;
+		z-index: 1;
+	}
+
+	.collage-avatar-trio .collage-item-2 {
+		height: 5rem;
+		left: 0;
+		top: 1rem;
+		transform: rotate(-7deg);
+		width: 5rem;
+		z-index: 2;
+	}
+
+	.collage-avatar-trio .collage-item-3 {
+		height: 5rem;
+		left: 0;
+		top: 5rem;
+		transform: rotate(7deg);
+		width: 5rem;
+		z-index: 2;
+	}
+
+	:global(.timeline-content:hover)
+		.collage-photo:not(.collage-duo)
+		.collage-item,
+	:global(.timeline-content:focus-within)
+		.collage-photo:not(.collage-duo)
+		.collage-item {
+		border-width: 1px;
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		scale: 1.25;
+	}
+
+	:global(.timeline-content:hover) .collage-duo .collage-item-1,
+	:global(.timeline-content:focus-within) .collage-duo .collage-item-1 {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
+	}
+
+	:global(.timeline-content:hover) .collage-duo .collage-item-2,
+	:global(.timeline-content:focus-within) .collage-duo .collage-item-2 {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
+	}
+
+	:global(.timeline-content:hover) .collage-avatar .collage-item,
+	:global(.timeline-content:focus-within) .collage-avatar .collage-item {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	:global(.timeline-content:hover) .collage-avatar .collage-item :global(img),
+	:global(.timeline-content:focus-within)
+		.collage-avatar
+		.collage-item
+		:global(img) {
+		transform: scale(1.1);
+	}
+
+	@media (width < 900px) {
+		.funrun-collage-desktop {
+			display: none;
+		}
+
+		.funrun-collage-mobile {
+			--collage-height: 7.6rem;
+			--collage-width: 8rem;
+			align-self: start;
+			display: block;
+			justify-self: end;
+			left: auto;
+			min-height: 7.6rem;
+			position: relative;
+			right: auto;
+			top: -1rem;
+		}
+
+		.funrun-collage-mobile .collage-item-1 {
+			height: 5.45rem;
+			left: 3.8rem;
+			top: 0.3rem;
+			width: 3.75rem;
+		}
+
+		.funrun-collage-mobile .collage-item-2 {
+			height: 6.1rem;
+			left: 0;
+			top: 0.7rem;
+			width: 4.35rem;
+		}
+
+		:global(.timeline-content:hover)
+			.collage-photo:not(.collage-duo)
+			.collage-item,
+		:global(.timeline-content:focus-within)
+			.collage-photo:not(.collage-duo)
+			.collage-item {
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
+		}
+
+		:global(.timeline-content:hover) .collage-duo .collage-item-1,
+		:global(.timeline-content:focus-within) .collage-duo .collage-item-1 {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		}
+
+		:global(.timeline-content:hover) .collage-duo .collage-item-2,
+		:global(.timeline-content:focus-within) .collage-duo .collage-item-2 {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		}
+
+		:global(.timeline-content:hover) .collage-avatar .collage-item,
+		:global(.timeline-content:focus-within) .collage-avatar .collage-item {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		}
+
+		:global(.timeline-content:hover) .collage-avatar .collage-item :global(img),
+		:global(.timeline-content:focus-within)
+			.collage-avatar
+			.collage-item
+			:global(img) {
+			transform: scale(1);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.collage-photo:not(.collage-duo)
+			.collage-item {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			scale: 1.12;
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.collage-avatar
+			.collage-item {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.collage-avatar
+			.collage-item
+			:global(img) {
+			transform: scale(1.07);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.collage-duo
+			.collage-item-1 {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.collage-duo
+			.collage-item-2 {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.collage,
+		.collage-item,
+		.collage-item :global(img) {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>

@@ -1,0 +1,12 @@
+---
+interface Props {
+	class?: string;
+	[key: string]: unknown;
+}
+
+const { class: className, ...attributes } = Astro.props;
+---
+
+<div {...attributes} class:list={["timeline-copy", className]}>
+	<slot />
+</div>

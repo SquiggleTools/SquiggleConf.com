@@ -1,0 +1,285 @@
+---
+import { Image } from "astro:assets";
+
+import type { LunchSpotData } from "~/components/home/types";
+
+interface Props {
+	spots: readonly LunchSpotData[];
+}
+
+const { spots } = Astro.props;
+---
+
+<div
+	class="lunch-carousel"
+	data-lunch-carousel
+	aria-label="Lunch options photo carousel"
+>
+	<div class="lunch-carousel-viewport">
+		<div class="lunch-carousel-track" data-lunch-track>
+			{
+				spots.map((spot, index) => (
+					<div
+						class="lunch-slide"
+						data-lunch-slide
+						aria-hidden={index === 0 ? "false" : "true"}
+					>
+						<div class="lunch-slide-image">
+							<Image
+								alt={spot.alt}
+								src={spot.image}
+								loading={index === 0 ? "eager" : "lazy"}
+							/>
+						</div>
+						<div class="lunch-slide-caption">
+							<strong>{spot.name}</strong>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+	<div class="lunch-carousel-dots" aria-label="Lunch image navigation">
+		{
+			spots.map((spot, index) => (
+				<button
+					type="button"
+					class="lunch-carousel-dot"
+					data-lunch-dot
+					data-lunch-index={index}
+					aria-label={`Show ${spot.name}`}
+					aria-pressed={index === 0 ? "true" : "false"}
+				/>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.lunch-carousel {
+		display: grid;
+		gap: 0.7rem;
+		margin: auto 0;
+		max-width: 10rem;
+		width: 100%;
+	}
+
+	.lunch-carousel-viewport {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.9rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.lunch-carousel-track {
+		display: flex;
+		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
+		transition: transform 320ms ease;
+		will-change: transform;
+	}
+
+	.lunch-slide {
+		flex: 0 0 100%;
+		position: relative;
+	}
+
+	.lunch-slide-image {
+		aspect-ratio: 1 / 1;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.16),
+			rgba(255, 255, 255, 0.03)
+		);
+	}
+
+	.lunch-slide-image :global(picture),
+	.lunch-slide-image :global(img) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.lunch-slide-image :global(img) {
+		object-fit: cover;
+	}
+
+	.lunch-slide-caption {
+		align-items: end;
+		background: linear-gradient(
+			180deg,
+			rgba(3, 13, 26, 0) 0%,
+			rgba(3, 13, 26, 0.72) 58%,
+			rgba(3, 13, 26, 0.88) 100%
+		);
+		bottom: 0;
+		color: #f7fbff;
+		display: grid;
+		gap: 0.12rem;
+		left: 0;
+		padding: 2rem 0.9rem 0.8rem;
+		position: absolute;
+		right: 0;
+		text-shadow: 0 0.15rem 0.35rem rgba(0, 0, 0, 0.28);
+	}
+
+	.lunch-slide-caption span {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		opacity: 0.76;
+		text-transform: uppercase;
+	}
+
+	.lunch-slide-caption strong {
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.08rem;
+		font-weight: 700;
+		line-height: 1.05;
+	}
+
+	.lunch-carousel-dots {
+		display: flex;
+		gap: 0.45rem;
+		justify-content: center;
+		padding-bottom: 0.15rem;
+	}
+
+	.lunch-carousel-dot {
+		appearance: none;
+		background: rgba(255, 255, 255, 0.24);
+		border: 1px solid rgba(188, 223, 233, 0.45);
+		border-radius: 999px;
+		cursor: pointer;
+		height: 0.65rem;
+		margin: 0;
+		padding: 0;
+		transition:
+			background-color 180ms ease,
+			transform 180ms ease,
+			width 180ms ease;
+		width: 0.65rem;
+	}
+
+	.lunch-carousel-dot[aria-pressed="true"] {
+		background: rgba(239, 248, 255, 0.96);
+		transform: scale(1.02);
+		width: 1.7rem;
+	}
+
+	.lunch-carousel-dot:hover,
+	.lunch-carousel-dot:focus-visible {
+		background: rgba(239, 248, 255, 0.72);
+		outline: none;
+	}
+
+	.lunch-carousel-dot:focus-visible {
+		box-shadow: 0 0 0 0.16rem rgba(239, 248, 255, 0.28);
+	}
+
+	@media (width < 900px) {
+		.lunch-carousel {
+			max-width: 21rem;
+		}
+
+		.lunch-slide-image {
+			aspect-ratio: 1.15 / 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.lunch-carousel-track,
+		.lunch-carousel-dot {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	// @ts-nocheck
+	const lunchReducedMotionQuery = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	);
+	const lunchCarousels = Array.from(
+		document.querySelectorAll("[data-lunch-carousel]"),
+	).filter((element) => element instanceof HTMLElement);
+
+	for (const carousel of lunchCarousels) {
+		const dots = Array.from(
+			carousel.querySelectorAll("[data-lunch-dot]"),
+		).filter((element) => element instanceof HTMLButtonElement);
+		const slides = Array.from(
+			carousel.querySelectorAll("[data-lunch-slide]"),
+		).filter((element) => element instanceof HTMLElement);
+		let activeIndex = 0;
+		let autoAdvanceTimer = 0;
+
+		const setLunchSlide = (index) => {
+			activeIndex = ((index % slides.length) + slides.length) % slides.length;
+			carousel.style.setProperty("--lunch-carousel-index", `${activeIndex}`);
+
+			for (const [slideIndex, slide] of slides.entries()) {
+				slide.setAttribute(
+					"aria-hidden",
+					slideIndex === activeIndex ? "false" : "true",
+				);
+			}
+
+			for (const [dotIndex, dot] of dots.entries()) {
+				dot.setAttribute(
+					"aria-pressed",
+					dotIndex === activeIndex ? "true" : "false",
+				);
+			}
+		};
+
+		const stopLunchAutoAdvance = () => {
+			window.clearInterval(autoAdvanceTimer);
+			autoAdvanceTimer = 0;
+		};
+
+		const startLunchAutoAdvance = () => {
+			if (lunchReducedMotionQuery.matches || slides.length < 2) {
+				return;
+			}
+
+			stopLunchAutoAdvance();
+			autoAdvanceTimer = window.setInterval(() => {
+				setLunchSlide(activeIndex + 1);
+			}, 3400);
+		};
+
+		for (const dot of dots) {
+			dot.addEventListener("click", () => {
+				const nextIndex = Number(dot.dataset.lunchIndex ?? activeIndex);
+				setLunchSlide(nextIndex);
+				startLunchAutoAdvance();
+
+				if (!dot.matches(":focus-visible")) {
+					dot.blur();
+				}
+			});
+		}
+
+		carousel.addEventListener("pointerenter", stopLunchAutoAdvance);
+		carousel.addEventListener("pointerleave", startLunchAutoAdvance);
+		carousel.addEventListener("focusin", stopLunchAutoAdvance);
+		carousel.addEventListener("focusout", () => {
+			const activeElement = document.activeElement;
+
+			if (
+				!(activeElement instanceof Node) ||
+				!carousel.contains(activeElement)
+			) {
+				startLunchAutoAdvance();
+			}
+		});
+
+		setLunchSlide(0);
+		startLunchAutoAdvance();
+	}
+</script>

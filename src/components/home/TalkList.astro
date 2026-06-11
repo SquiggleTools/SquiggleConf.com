@@ -1,0 +1,34 @@
+---
+import TalkCard from "~/components/home/TalkCard.astro";
+
+import type { TalkCardData } from "~/components/home/types";
+
+interface Props {
+	ariaLabel: string;
+	short?: boolean;
+	talks: readonly TalkCardData[];
+}
+
+const { ariaLabel, short = false, talks } = Astro.props;
+---
+
+<div
+	class:list={["talks-list", short && "talks-list-short"]}
+	aria-label={ariaLabel}
+>
+	{talks.map((talk) => <TalkCard talk={talk} />)}
+</div>
+
+<style>
+	.talks-list {
+		display: grid;
+		gap: 0.8rem;
+		margin-top: 0.8rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.talks-list-short {
+		max-width: 44rem;
+	}
+</style>

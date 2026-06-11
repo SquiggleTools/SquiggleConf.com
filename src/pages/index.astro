@@ -4,180 +4,51 @@ import "@fontsource/shantell-sans";
 import { Image } from "astro:assets";
 
 import Hero from "~/components/hero/Hero.astro";
+import {
+	bigRav,
+	dillonMulroy,
+	exploreChoices,
+	funrun1,
+	funrun2,
+	harbor,
+	harborwalk,
+	lunchSpots,
+	milkcookies1,
+	milkcookies2,
+	milkcookies3,
+	networking,
+	postcardBack,
+	postcardFront,
+	ryanDahl,
+	scottTolinski,
+	simonsTheater,
+	talkBlocks,
+	thePrimeagen,
+	timelineFish,
+	timelineMCs,
+	urbanwild1,
+	urbanwild2,
+	urbanwild3,
+	urbanwild4,
+	urbanwild5,
+	urbanwildLogo,
+	venues,
+	wesBos,
+} from "~/components/home/data";
+import Collage from "~/components/home/Collage.astro";
+import ExploreChoices from "~/components/home/ExploreChoices.astro";
+import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
+import HomePreviewBanner from "~/components/home/HomePreviewBanner.astro";
+import HostList from "~/components/home/HostList.astro";
+import LunchCarousel from "~/components/home/LunchCarousel.astro";
+import TalkList from "~/components/home/TalkList.astro";
+import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
+import TimelineCopy from "~/components/home/TimelineCopy.astro";
 import Registration from "~/components/Registration.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
-import { speakersBySlug } from "~/data/speakers";
-import timelineFish1 from "~/assets/design/timeline-fish-1.svg";
-import timelineFish2 from "~/assets/design/timeline-fish-2.svg";
-import timelineFish3 from "~/assets/design/timeline-fish-3.svg";
-import timelineFish4 from "~/assets/design/timeline-fish-4.svg";
-import timelineFish5 from "~/assets/design/timeline-fish-5.svg";
-import harborwalk from "~/assets/2027/boston-harborwalk.webp";
-import harbor from "~/assets/stills/boston-harbor.png";
-import networking from "~/assets/stills/attendees-networking.png";
-import simonsTheater from "~/assets/2027/simons-theater.webp";
-import terminalShop from "~/assets/2027/terminal.shop.svg";
-import duck1 from "~/assets/2027/duck-1.webp";
-import duck2 from "~/assets/2027/duck-2.webp";
-import bigRav from "~/assets/2027/bigrav.webp";
-import lunchBerryTwist from "~/assets/2027/lunch-berry-twist.webp";
-import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.webp";
-import lunchRegina from "~/assets/2027/lunch-regina.webp";
-import lunchSalad from "~/assets/2027/lunch-salad.webp";
-import lunchWickedLobsta from "~/assets/2027/lunch-wicked-lobsta.webp";
-import maddyPortrait from "~/assets/2027/maddy.webp";
-import placeholder1 from "~/assets/2027/placeholder-1.webp";
-import placeholder2 from "~/assets/2027/placeholder-2.webp";
-import placeholder3 from "~/assets/2027/placeholder-3.webp";
-import placeholder4 from "~/assets/2027/placeholder-4.webp";
-import placeholder5 from "~/assets/2027/placeholder-5.webp";
-import placeholder6 from "~/assets/2027/placeholder-6.webp";
-import placeholder7 from "~/assets/2027/placeholder-7.webp";
-import tannerPortrait from "~/assets/2027/tanner.webp";
-import postcardBack from "~/assets/2027/postcard-back.webp";
-import postcardFront from "~/assets/2027/postcard-front.webp";
-import funrun1 from "~/assets/2027/funrun-1.webp";
-import funrun2 from "~/assets/2027/funrun-2.webp";
-import milkcookies1 from "~/assets/2027/milkcookies-1.webp";
-import milkcookies2 from "~/assets/2027/milkcookies-2.webp";
-import milkcookies3 from "~/assets/2027/milkcookies-3.webp";
-import rest1 from "~/assets/2027/rest-1.webp";
-import ryanDahl from "~/assets/2027/ryandahl.webp";
-import scottTolinski from "~/assets/2027/scotttolinski.webp";
-import squiggleConfLogoRaw from "~/assets/2027/SquiggleConf-Logo.svg?raw";
-import thePrimeagen from "~/assets/2027/theprimagen.webp";
-import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
-import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
-import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
-import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
-import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
-import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
-import wesBos from "~/assets/2027/wesbos.webp";
-import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import PageLayout from "~/layouts/PageLayout.astro";
-
-const locationLinks = {
-	aquarium: "https://maps.app.goo.gl/FodmfsLGZYALV1Hh9",
-	nedDevines: "https://maps.app.goo.gl/rD3zWzuJ1U9VuSdN9",
-	quincyMarket: "https://maps.app.goo.gl/mQyHoaGZgip8pfux5",
-	urbanWild: "https://maps.app.goo.gl/ADbjjYdyB3AVstH67",
-};
-
-const talksSessions = [
-	{
-		image: tannerPortrait,
-		name: "Tanner Linsley",
-		qualification: "creator of all things TanStack",
-		title: "TanStack AI: Our Biggest Lessons Learned",
-	},
-	{
-		image: placeholder1,
-		isPlaceholder: true,
-		name: "Your Name Here",
-		qualification: "maintainer of a package in your lockfile",
-		title: "The Package You've Never Heard Of That Runs Half the Internet",
-	},
-	{
-		image: placeholder2,
-		isPlaceholder: true,
-		name: "Speaker Loading...",
-		qualification: "accidentally became a language designer",
-		title: "One Small Syntax Change, One Giant Migration Guide",
-	},
-];
-
-const lateTalksSessions = [
-	{
-		image: placeholder3,
-		isPlaceholder: true,
-		name: "Placeholder McPlaceholderface",
-		qualification: "TypeScript whisperer",
-		title: "Why Is This Type Slow?",
-	},
-	{
-		image: placeholder7,
-		isPlaceholder: true,
-		name: "Your Favorite Developer",
-		qualification: "local development maximalist",
-		title: "The 42-Second Dev Loop",
-	},
-];
-
-const afternoonTalksSessions = [
-	{
-		image: placeholder5,
-		isPlaceholder: true,
-		name: "Mysterious Industry Person",
-		qualification: "compiler engineer and standards enjoyer",
-		title: "The Runtime Is Lying To You",
-	},
-	{
-		image: placeholder6,
-		isPlaceholder: true,
-		name: "Anonymous Core Team Member",
-		qualification: "spends their days reading specification prose",
-		title: "The Feature Everyone Uses Incorrectly",
-	},
-	{
-		image: placeholder4,
-		isPlaceholder: true,
-		name: "Future Squiggle Speaker",
-		qualification: "creator of an unreasonable amount of tooling",
-		title: "Making Developers 3% Faster at Enormous Personal Cost",
-	},
-];
-
-const timelineMCs = (["tj-devries", "maddy-montaquila"] as const).map(
-	(slug) => {
-		const speaker = speakersBySlug[slug];
-
-		return {
-			image: slug === "maddy-montaquila" ? maddyPortrait : speaker.image,
-			name: speaker.name,
-			qualification: speaker.qualification,
-		};
-	},
-);
-
-const lunchSpots = [
-	{
-		alt: "Boston & Maine Fish Company seafood plate",
-		image: lunchBostonChowda,
-		name: "Boston & Maine Fish Company",
-		url: "https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company",
-	},
-	{
-		alt: "Regina Pizzeria pizza slices",
-		image: lunchRegina,
-		name: "Regina Pizzeria",
-		url: "https://faneuilhallmarketplace.com/go/regina-pizzeria",
-	},
-	{
-		alt: "Wicked Lobsta lobster roll",
-		image: lunchWickedLobsta,
-		name: "Wicked Lobsta",
-		url: "https://faneuilhallmarketplace.com/go/wicked-lobsta",
-	},
-	{
-		alt: "The Berry Twist dessert cup",
-		image: lunchBerryTwist,
-		name: "The Berry Twist",
-		url: "https://faneuilhallmarketplace.com/go/the-berry-twist",
-	},
-	{
-		alt: "Green Organic Bowl salad",
-		image: lunchSalad,
-		name: "Green Organic Bowl",
-		url: "https://faneuilhallmarketplace.com/go/green-organic-bowl",
-	},
-];
-
-const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
-	'fill="white"',
-	'fill="var(--hero-logo-fill, white)"',
-);
 ---
 
 <PageLayout
@@ -185,23 +56,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	hideHeaderLinks={["about", "shop"]}
 	hideHeaderLogo
 >
-	<div
-		slot="pageTop"
-		class="private-preview-banner"
-		aria-label="Private preview notice"
-	>
-		Private Preview - Names are non-confirmed examples. Please do not share!
-	</div>
+	<HomePreviewBanner slot="pageTop" />
 	<Hero tall>
-		<div class="hero-intro">
-			<div
-				class="hero-logo"
-				aria-label="SquiggleConf"
-				role="img"
-				set:html={squiggleConfLogoSvg}
-			/>
-			<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
-		</div>
+		<HomeHeroLockup />
 	</Hero>
 	<DeepSeaSurface>
 		<section class="timeline-section" aria-label="Timeline preview">
@@ -210,9 +67,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-fish-body">
 						<img
 							class="timeline-fish-image"
-							src={timelineFish1.src}
-							width={timelineFish1.width}
-							height={timelineFish1.height}
+							src={timelineFish[0].src}
+							width={timelineFish[0].width}
+							height={timelineFish[0].height}
 							alt=""
 							loading="lazy"
 							decoding="async"
@@ -223,9 +80,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-fish-body">
 						<img
 							class="timeline-fish-image"
-							src={timelineFish2.src}
-							width={timelineFish2.width}
-							height={timelineFish2.height}
+							src={timelineFish[1].src}
+							width={timelineFish[1].width}
+							height={timelineFish[1].height}
 							alt=""
 							loading="lazy"
 							decoding="async"
@@ -236,9 +93,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-fish-body">
 						<img
 							class="timeline-fish-image"
-							src={timelineFish3.src}
-							width={timelineFish3.width}
-							height={timelineFish3.height}
+							src={timelineFish[2].src}
+							width={timelineFish[2].width}
+							height={timelineFish[2].height}
 							alt=""
 							loading="lazy"
 							decoding="async"
@@ -249,9 +106,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-fish-body">
 						<img
 							class="timeline-fish-image"
-							src={timelineFish4.src}
-							width={timelineFish4.width}
-							height={timelineFish4.height}
+							src={timelineFish[3].src}
+							width={timelineFish[3].width}
+							height={timelineFish[3].height}
 							alt=""
 							loading="lazy"
 							decoding="async"
@@ -262,9 +119,9 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-fish-body">
 						<img
 							class="timeline-fish-image"
-							src={timelineFish5.src}
-							width={timelineFish5.width}
-							height={timelineFish5.height}
+							src={timelineFish[4].src}
+							width={timelineFish[4].width}
+							height={timelineFish[4].height}
 							alt=""
 							loading="lazy"
 							decoding="async"
@@ -340,7 +197,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
-							href={locationLinks.nedDevines}
+							href={venues.nedDevines.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -361,43 +218,33 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.nedDevines}
+							href={venues.nedDevines.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							Ned Devine's
 						</a>
 					</div>
-					<div class="launchparty-collage" aria-label="Launch party collage">
-						<div class="launchparty-photo launchparty-photo-1">
-							<Image
-								alt="People networking at SquiggleConf"
-								src={networking}
-								loading="eager"
-							/>
-						</div>
-						<div class="launchparty-photo launchparty-photo-2">
-							<Image
-								alt="Boston harbor near the venue"
-								src={harbor}
-								loading="eager"
-							/>
-						</div>
-						<div class="launchparty-photo launchparty-photo-3">
-							<Image
-								alt="Speakers gathered together at the event"
-								src={harborwalk}
-								loading="eager"
-							/>
-						</div>
-					</div>
-					<div class="timeline-copy">
+					<Collage
+						ariaLabel="Launch party collage"
+						class="launchparty-collage"
+						layout="trio"
+						photos={[
+							{ alt: "People networking at SquiggleConf", src: networking },
+							{ alt: "Boston harbor near the venue", src: harbor },
+							{
+								alt: "Speakers gathered together at the event",
+								src: harborwalk,
+							},
+						]}
+					/>
+					<TimelineCopy>
 						<p>
 							Kick off the weekend with snacks, drinks, and an easy room full of
 							tool-loving people. It is the place to settle in, say hi, and
 							start the conference with a little momentum.
 						</p>
-					</div>
+					</TimelineCopy>
 				</div>
 
 				<div class="timeline-cell-empty" aria-hidden="true"></div>
@@ -411,7 +258,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -438,7 +285,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 							<div class="timeline-mobile-meta">
 								<a
 									class="timeline-mobile-location timeline-location-link"
-									href={locationLinks.aquarium}
+									href={venues.aquarium.mapUrl}
 									rel="noreferrer"
 									target="_blank"
 								>
@@ -446,54 +293,50 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								</a>
 							</div>
 						</div>
-						<div
+						<Collage
+							ariaLabel="Fun run collage"
 							class="funrun-collage funrun-collage-desktop"
-							aria-label="Fun run collage"
-						>
-							<div class="funrun-photo funrun-photo-1">
-								<Image
-									alt="Fun Run route by the waterfront"
-									src={funrun1}
-									loading="eager"
-								/>
-							</div>
-							<div class="funrun-photo funrun-photo-2">
-								<Image
-									alt="Runners gathering before the Fun Run"
-									src={funrun2}
-									loading="eager"
-								/>
-							</div>
-						</div>
+							layout="duo"
+							photos={[
+								{
+									alt: "Fun Run route by the waterfront",
+									objectPosition: "10% 10%",
+									src: funrun1,
+								},
+								{
+									alt: "Runners gathering before the Fun Run",
+									objectPosition: "38% 50%",
+									src: funrun2,
+								},
+							]}
+						/>
 					</div>
 					<div class="funrun-body">
-						<div class="timeline-copy">
+						<TimelineCopy>
 							<p>
 								Optional for some, best way to start the day for others! It's an
 								casual yet eventful 5k through the Boston shoreline.
 							</p>
-						</div>
-						<div
+						</TimelineCopy>
+						<Collage
 							class="funrun-collage funrun-collage-mobile"
-							aria-hidden="true"
-						>
-							<div class="funrun-photo funrun-photo-1">
-								<Image
-									alt=""
-									aria-hidden="true"
-									src={funrun1}
-									loading="eager"
-								/>
-							</div>
-							<div class="funrun-photo funrun-photo-2">
-								<Image
-									alt=""
-									aria-hidden="true"
-									src={funrun2}
-									loading="eager"
-								/>
-							</div>
-						</div>
+							decorative
+							layout="duo"
+							photos={[
+								{
+									alt: "",
+									decorative: true,
+									objectPosition: "10% 10%",
+									src: funrun1,
+								},
+								{
+									alt: "",
+									decorative: true,
+									objectPosition: "38% 50%",
+									src: funrun2,
+								},
+							]}
+						/>
 					</div>
 				</div>
 
@@ -513,33 +356,20 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							New England Aquarium
 						</a>
 					</div>
-					<div class="timeline-copy">
+					<TimelineCopy>
 						<p>
 							Pick up your badge, settle in, and grab a terminal.shop coffee
 							before the first sessions start.
 						</p>
-						<a
-							class="timeline-checkin-button"
-							href="https://terminal.shop"
-							rel="noreferrer"
-							target="_blank"
-						>
-							<Image
-								alt=""
-								aria-hidden="true"
-								class="timeline-checkin-button-icon"
-								src={terminalShop}
-							/>
-							<span>terminal.shop coffee</span>
-						</a>
-					</div>
+						<TerminalShopButton />
+					</TimelineCopy>
 				</div>
 
 				<div
@@ -557,7 +387,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -574,13 +404,13 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								loading="eager"
 							/>
 						</div>
-						<div class="timeline-copy">
+						<TimelineCopy>
 							<p>
 								The talks take place in an IMAX theater. That means super
 								comfortable seats, great visibility, and a 60ft high screen.
 							</p>
 							<p>Also, a penguin exhibit next door.</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -603,28 +433,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							New England Aquarium
 						</a>
 					</div>
-					<div class="timeline-hosts-list" aria-label="Conference MCs">
-						{
-							timelineMCs.map((host) => (
-								<article class="timeline-host-card">
-									<div class="talk-avatar timeline-host-avatar">
-										<Image alt={host.name} src={host.image} loading="eager" />
-									</div>
-									<div class="timeline-host-copy">
-										<h3>{host.name}</h3>
-										<p class="timeline-host-role">{host.qualification}</p>
-									</div>
-								</article>
-							))
-						}
-					</div>
+					<HostList ariaLabel="Conference MCs" hosts={timelineMCs} />
 				</div>
 
 				<div
@@ -642,42 +458,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							New England Aquarium
 						</a>
 					</div>
-					<div class="talks-list" aria-label="Speaker talks">
-						{
-							talksSessions.map((talk) => (
-								<article class="talk-card">
-									<div
-										class:list={[
-											"talk-avatar",
-											talk.isPlaceholder && "talk-avatar-placeholder",
-										]}
-									>
-										<Image alt={talk.name} src={talk.image} />
-										{talk.isPlaceholder && (
-											<span
-												class="talk-avatar-placeholder-mark"
-												aria-hidden="true"
-											>
-												?
-											</span>
-										)}
-									</div>
-									<div class="talk-copy">
-										<h3>{talk.title}</h3>
-										<p class="talk-speaker">{talk.name}</p>
-										<p class="talk-role">{talk.qualification}</p>
-									</div>
-								</article>
-							))
-						}
-					</div>
+					<TalkList ariaLabel="Speaker talks" talks={talkBlocks.morning} />
 				</div>
 
 				<div class="timeline-rail">
@@ -699,7 +487,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -707,38 +495,26 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						</a>
 					</div>
 					<div class="break-body">
-						<div
+						<Collage
+							ariaLabel="Milk and Cookies break collage"
 							class="cookiesbreak-collage"
-							aria-label="Milk and Cookies break collage"
-						>
-							<div class="break-photo break-photo-1">
-								<Image
-									alt="Milk and cookies spread"
-									src={milkcookies3}
-									loading="eager"
-								/>
-							</div>
-							<div class="break-photo break-photo-2">
-								<Image
-									alt="Cookies at the break"
-									src={milkcookies1}
-									loading="eager"
-								/>
-							</div>
-							<div class="break-photo break-photo-3">
-								<Image
-									alt="Milk and cookies break crowd"
-									src={milkcookies2}
-									loading="eager"
-								/>
-							</div>
-						</div>
-						<div class="break-copy timeline-copy">
+							layout="trio"
+							photos={[
+								{ alt: "Milk and cookies spread", src: milkcookies3 },
+								{ alt: "Cookies at the break", src: milkcookies1 },
+								{
+									alt: "Milk and cookies break crowd",
+									objectPosition: "10% 0%",
+									src: milkcookies2,
+								},
+							]}
+						/>
+						<TimelineCopy class="break-copy">
 							<p>A SguiggleConf classic!</p><p>
 								Catch up with people you just met, and trade notes on the
 								morning’s talks.
 							</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -761,52 +537,25 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							New England Aquarium
 						</a>
 					</div>
-					<div
-						class="talks-list talks-list-short"
-						aria-label="Late morning talks"
-					>
-						{
-							lateTalksSessions.map((talk) => (
-								<article class="talk-card">
-									<div
-										class:list={[
-											"talk-avatar",
-											talk.isPlaceholder && "talk-avatar-placeholder",
-										]}
-									>
-										<Image alt={talk.name} src={talk.image} />
-										{talk.isPlaceholder && (
-											<span
-												class="talk-avatar-placeholder-mark"
-												aria-hidden="true"
-											>
-												?
-											</span>
-										)}
-									</div>
-									<div class="talk-copy">
-										<h3>{talk.title}</h3>
-										<p class="talk-speaker">{talk.name}</p>
-										<p class="talk-role">{talk.qualification}</p>
-									</div>
-								</article>
-							))
-						}
-					</div>
+					<TalkList
+						ariaLabel="Late morning talks"
+						short
+						talks={talkBlocks.lateMorning}
+					/>
 				</div>
 
 				<div class="timeline-venue">
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
-							href={locationLinks.quincyMarket}
+							href={venues.quincyMarket.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -834,7 +583,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.quincyMarket}
+							href={venues.quincyMarket.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -842,54 +591,8 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						</a>
 					</div>
 					<div class="lunch-body">
-						<div
-							class="lunch-carousel"
-							data-lunch-carousel
-							aria-label="Lunch options photo carousel"
-						>
-							<div class="lunch-carousel-viewport">
-								<div class="lunch-carousel-track" data-lunch-track>
-									{
-										lunchSpots.map((spot, index) => (
-											<div
-												class="lunch-slide"
-												data-lunch-slide
-												aria-hidden={index === 0 ? "false" : "true"}
-											>
-												<div class="lunch-slide-image">
-													<Image
-														alt={spot.alt}
-														src={spot.image}
-														loading={index === 0 ? "eager" : "lazy"}
-													/>
-												</div>
-												<div class="lunch-slide-caption">
-													<strong>{spot.name}</strong>
-												</div>
-											</div>
-										))
-									}
-								</div>
-							</div>
-							<div
-								class="lunch-carousel-dots"
-								aria-label="Lunch image navigation"
-							>
-								{
-									lunchSpots.map((spot, index) => (
-										<button
-											type="button"
-											class="lunch-carousel-dot"
-											data-lunch-dot
-											data-lunch-index={index}
-											aria-label={`Show ${spot.name}`}
-											aria-pressed={index === 0 ? "true" : "false"}
-										/>
-									))
-								}
-							</div>
-						</div>
-						<div class="lunch-copy timeline-copy">
+						<LunchCarousel spots={lunchSpots} />
+						<TimelineCopy class="lunch-copy">
 							<p>
 								Head out together into
 								<a href="https://faneuilhallmarketplace.com/dining">
@@ -937,7 +640,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								can grab something good before heading back for the afternoon
 								block.
 							</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -947,7 +650,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -982,42 +685,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.aquarium}
+							href={venues.aquarium.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							New England Aquarium
 						</a>
 					</div>
-					<div class="talks-list" aria-label="Afternoon talks">
-						{
-							afternoonTalksSessions.map((talk) => (
-								<article class="talk-card">
-									<div
-										class:list={[
-											"talk-avatar",
-											talk.isPlaceholder && "talk-avatar-placeholder",
-										]}
-									>
-										<Image alt={talk.name} src={talk.image} />
-										{talk.isPlaceholder && (
-											<span
-												class="talk-avatar-placeholder-mark"
-												aria-hidden="true"
-											>
-												?
-											</span>
-										)}
-									</div>
-									<div class="talk-copy">
-										<h3>{talk.title}</h3>
-										<p class="talk-speaker">{talk.name}</p>
-										<p class="talk-role">{talk.qualification}</p>
-									</div>
-								</article>
-							))
-						}
-					</div>
+					<TalkList ariaLabel="Afternoon talks" talks={talkBlocks.afternoon} />
 				</div>
 
 				<div class="timeline-rail">
@@ -1040,73 +715,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<p class="timeline-mobile-location">Boston</p>
 					</div>
-					<div class="explore-options" aria-label="Explore Boston options">
-						<article class="explore-card">
-							<div class="explore-choice" aria-hidden="true">
-								<span class="explore-radio"
-									><span class="explore-radio-dot"></span></span
-								>
-							</div>
-							<div class="explore-card-body">
-								<div class="explore-photo">
-									<Image alt="Duck boat on the water" src={duck2} />
-								</div>
-								<div class="explore-copy">
-									<h3>Duck Boat Tour</h3>
-									<p>
-										A SquiggleConf tradition: an amphibious boat! See more of
-										the city in one shot with a classic Boston ride.
-									</p>
-								</div>
-								<div class="explore-spots-left">19 spots left</div>
-							</div>
-						</article>
-						<article class="explore-card">
-							<div class="explore-choice" aria-hidden="true">
-								<span class="explore-radio"
-									><span class="explore-radio-dot"></span></span
-								>
-							</div>
-							<div class="explore-card-body">
-								<div class="explore-photo">
-									<Image alt="Scavenger hunt clue card" src={duck1} />
-								</div>
-								<div class="explore-copy">
-									<h3>Scavenger Hunt</h3>
-									<p>
-										A loose city walk with clues, checkpoints, and small teams
-										racing to win a big prize.
-									</p>
-								</div>
-							</div>
-						</article>
-						<article class="explore-card">
-							<div class="explore-choice" aria-hidden="true">
-								<span class="explore-radio"
-									><span class="explore-radio-dot"></span></span
-								>
-							</div>
-							<div class="explore-card-body">
-								<div class="explore-photo explore-photo-rest">
-									<Image alt="Quiet place to rest up" src={rest1} />
-								</div>
-								<div class="explore-copy">
-									<h3>Rest Up</h3>
-									<p>
-										Take a quiet block to recharge, reset, and come back ready
-										for the evening without over-scheduling the day.
-									</p>
-								</div>
-							</div>
-						</article>
-					</div>
+					<ExploreChoices choices={exploreChoices} />
 				</div>
 
 				<div class="timeline-venue timeline-cell-span-five timeline-venue-last">
 					<div class="timeline-venue-stack">
 						<a
 							class="timeline-location-link timeline-location-link-stack"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -1135,7 +751,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -1152,12 +768,12 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								loading="eager"
 							/>
 						</div>
-						<div class="timeline-copy">
+						<TimelineCopy>
 							<p>
 								The rest of the night takes place at Urban Wild Boston. Also the
 								last clue of the Scavenger Hunt may or may not be here.......
 							</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -1176,7 +792,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -1184,28 +800,18 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						</a>
 					</div>
 					<div class="event-body">
-						<div class="syntaxlive-avatars" aria-label="Syntax.fm live guests">
-							<div
-								class="event-hero-image event-hero-image-circle syntax-hero-image"
-							>
-								<Image
-									alt="ThePrimeagen portrait"
-									src={thePrimeagen}
-									loading="eager"
-								/>
-							</div>
-							<div class="syntax-avatar syntax-avatar-left">
-								<Image alt="Wes Bos portrait" src={wesBos} loading="eager" />
-							</div>
-							<div class="syntax-avatar syntax-avatar-right">
-								<Image
-									alt="Scott Tolinski portrait"
-									src={scottTolinski}
-									loading="eager"
-								/>
-							</div>
-						</div>
-						<div class="timeline-copy">
+						<Collage
+							ariaLabel="Syntax.fm live guests"
+							class="syntaxlive-avatars"
+							layout="avatar-trio"
+							photos={[
+								{ alt: "ThePrimeagen portrait", src: thePrimeagen },
+								{ alt: "Wes Bos portrait", src: wesBos },
+								{ alt: "Scott Tolinski portrait", src: scottTolinski },
+							]}
+							shape="avatar"
+						/>
+						<TimelineCopy>
 							<h3 class="fireside-topic">
 								How to Find Time to Learn After Work
 							</h3>
@@ -1213,7 +819,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								Join Wes and Scott in a live podcast recording of Syntax.fm
 								featuring ThePrimeagen.
 							</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -1236,7 +842,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -1244,25 +850,17 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						</a>
 					</div>
 					<div class="event-body">
-						<div class="firesidechat-avatars" aria-label="Fireside chat guests">
-							<div
-								class="event-hero-image event-hero-image-circle fireside-hero-image"
-							>
-								<Image
-									alt="Ryan Dahl portrait"
-									src={ryanDahl}
-									loading="eager"
-								/>
-							</div>
-							<div class="fireside-avatar fireside-avatar-corner">
-								<Image
-									alt="Dillon Mulroy portrait"
-									src={dillonMulroy}
-									loading="eager"
-								/>
-							</div>
-						</div>
-						<div class="timeline-copy">
+						<Collage
+							ariaLabel="Fireside chat guests"
+							class="firesidechat-avatars"
+							layout="avatar-duo"
+							photos={[
+								{ alt: "Ryan Dahl portrait", src: ryanDahl },
+								{ alt: "Dillon Mulroy portrait", src: dillonMulroy },
+							]}
+							shape="avatar"
+						/>
+						<TimelineCopy>
 							<h3 class="fireside-topic">
 								The Fight to Free the JavaScript Trademark
 							</h3>
@@ -1272,7 +870,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 								"JavaScript" trademark.
 							</p>
 							<p class="fireside-host">hosted by Dillon Mulroy</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 
@@ -1288,38 +886,33 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
 							Urban Wild Boston
 						</a>
 					</div>
-					<div class="afterparty-collage" aria-label="After party collage">
-						<div class="afterparty-photo afterparty-photo-1">
-							<Image alt="" src={urbanwild1} loading="eager" />
-						</div>
-						<div class="afterparty-photo afterparty-photo-2">
-							<Image alt="" src={urbanwild2} loading="eager" />
-						</div>
-						<div class="afterparty-photo afterparty-photo-3">
-							<Image alt="" src={urbanwild3} loading="eager" />
-						</div>
-						<div class="afterparty-photo afterparty-photo-4">
-							<Image alt="" src={urbanwild4} loading="eager" />
-						</div>
-						<div class="afterparty-photo afterparty-photo-5">
-							<Image alt="" src={urbanwild5} loading="eager" />
-						</div>
-					</div>
-					<div class="timeline-copy">
+					<Collage
+						ariaLabel="After party collage"
+						class="afterparty-collage"
+						layout="feature-five"
+						photos={[
+							{ alt: "", decorative: true, src: urbanwild1 },
+							{ alt: "", decorative: true, src: urbanwild2 },
+							{ alt: "", decorative: true, src: urbanwild3 },
+							{ alt: "", decorative: true, src: urbanwild4 },
+							{ alt: "", decorative: true, src: urbanwild5 },
+						]}
+					/>
+					<TimelineCopy>
 						<p>
 							After the podcast and fireside chat, we'll switch into party mode
 							at Urban Wild: video arcade bowling, lots of light bites and
 							refreshments, and most of all - a chance to hang with everyone you
 							just met at the conference!
 						</p>
-					</div>
+					</TimelineCopy>
 				</div>
 
 				<div class="timeline-content" data-timeline-entry="big-rav">
@@ -1334,7 +927,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 					<div class="timeline-mobile-meta">
 						<a
 							class="timeline-mobile-location timeline-location-link"
-							href={locationLinks.urbanWild}
+							href={venues.urbanWild.mapUrl}
 							rel="noreferrer"
 							target="_blank"
 						>
@@ -1345,7 +938,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 						<div class="event-hero-image event-hero-image-circle">
 							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
 						</div>
-						<div class="timeline-copy">
+						<TimelineCopy>
 							<p>
 								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
 								alternative, indie, and punk rock band that combines pop-punk vocals
@@ -1354,7 +947,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 									featuring SquiggleConf's own Maddy Montaquila on vocals.
 								</span>
 							</p>
-						</div>
+						</TimelineCopy>
 					</div>
 				</div>
 			</div>
@@ -1365,61 +958,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 </PageLayout>
 
 <style>
-	.private-preview-banner {
-		background: linear-gradient(90deg, #ff4fa3 0%, #ff0f87 100%);
-		box-shadow:
-			0 0.3rem 0.8rem rgba(255, 15, 135, 0.12),
-			inset 0 -1px 0 rgba(109, 0, 53, 0.22);
-		color: #fff8fc;
-		font-family: var(--fontFamilyHeading);
-		font-size: 1rem;
-		font-weight: 800;
-		letter-spacing: 0.22em;
-		padding: 0.75rem 1rem;
-		position: relative;
-		text-align: center;
-		text-transform: uppercase;
-		width: 100%;
-		z-index: 2;
-	}
-
-	.hero-intro {
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		gap: 1.1rem;
-		justify-content: center;
-		padding: 1.75rem 0 1.25rem;
-		text-align: center;
-	}
-
-	.hero-logo {
-		--hero-logo-fill: #2f3f50;
-		display: block;
-		height: auto;
-		max-width: 100%;
-		width: clamp(16rem, 43vw, 36rem);
-	}
-
-	:global(html.dark) .hero-logo {
-		--hero-logo-fill: white;
-	}
-
-	.hero-logo :global(svg) {
-		display: block;
-		height: auto;
-		width: 100%;
-	}
-
-	.hero-subtitle {
-		color: var(--colorBackground);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(0.95rem, 2vw, 1.45rem);
-		font-style: italic;
-		font-weight: var(--fontWeightMedium);
-		letter-spacing: 0.05em;
-		margin: 0 0 0.35rem;
-	}
 	.timeline-section {
 		--timeline-heading-color: #eef6ff;
 		--timeline-copy-color: rgba(233, 244, 255, 0.84);
@@ -2206,70 +1744,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		padding-top: 1.35rem;
 	}
 
-	.timeline-checkin-button {
-		align-items: center;
-		backdrop-filter: blur(16px) saturate(155%);
-		background: linear-gradient(
-			140deg,
-			rgba(255, 94, 0, 0.34) 0%,
-			rgba(255, 124, 24, 0.28) 38%,
-			rgba(255, 153, 51, 0.22) 68%,
-			rgba(255, 94, 0, 0.3) 100%
-		);
-		border: 1px solid #ff5e00;
-		border-radius: 0.9rem;
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.2),
-			0 1rem 2rem rgba(255, 94, 0, 0.16),
-			0 0 0 1px rgba(255, 94, 0, 0.12);
-		color: #f7fbff;
-		display: inline-flex;
-		gap: 0.7rem;
-		height: fit-content;
-		justify-self: start;
-		margin-top: 1rem;
-		padding: 0.75rem 1.1rem 0.75rem 0.9rem;
-		text-decoration: none;
-		text-wrap: balance;
-		transition:
-			background 180ms ease,
-			box-shadow 180ms ease,
-			opacity 180ms ease,
-			transform 180ms ease;
-		width: fit-content;
-	}
-
-	.timeline-checkin-button:hover,
-	.timeline-checkin-button:focus-visible {
-		background: linear-gradient(
-			140deg,
-			rgba(255, 94, 0, 0.56) 0%,
-			rgba(255, 124, 24, 0.48) 38%,
-			rgba(255, 153, 51, 0.42) 68%,
-			rgba(255, 94, 0, 0.52) 100%
-		);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.22),
-			0 1rem 2rem rgba(255, 94, 0, 0.22),
-			0 0 0 1px rgba(255, 94, 0, 0.18);
-		outline: none;
-		transform: translateY(-1px);
-	}
-
-	.timeline-checkin-button-icon {
-		display: block;
-		height: 1.5rem;
-		width: auto;
-	}
-
-	.timeline-checkin-button span {
-		font-family: var(--fontFamilyMonospace);
-		font-size: 0.95rem;
-		font-weight: var(--fontWeightSemibold);
-		letter-spacing: 0.03em;
-		line-height: 1;
-	}
-
 	.timeline-content-talks,
 	.timeline-content-break {
 		padding-top: 1.35rem;
@@ -2350,10 +1824,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		max-width: 50%;
 	}
 
-	.funrun-collage-mobile {
-		display: none;
-	}
-
 	.timeline-subtitle {
 		color: var(--timeline-muted-color);
 		display: block;
@@ -2395,13 +1865,7 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		color: rgba(255, 255, 255, 0.88);
 	}
 
-	.timeline-content
-		:is(
-			.launchparty-photo,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
-		) {
+	.timeline-content .event-hero-image:not(.event-hero-image-pinned) {
 		transform-origin: center;
 		transition:
 			scale var(--timeline-hover-duration) ease,
@@ -2413,67 +1877,23 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		transform-origin: top right;
 	}
 
-	.timeline-content:hover
-		:is(
-			.launchparty-photo,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
-		),
+	.timeline-content:hover .event-hero-image:not(.event-hero-image-pinned),
 	.timeline-content:focus-within
-		:is(
-			.launchparty-photo,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
-		) {
-		scale: 1.25;
+		.event-hero-image:not(.event-hero-image-pinned) {
 		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		scale: 1.25;
 	}
 
-	.timeline-content
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		) {
+	.timeline-content .event-hero-image-pinned {
 		transition: box-shadow var(--timeline-hover-duration) ease;
 	}
 
-	.timeline-content:hover
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		),
-	.timeline-content:focus-within
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		) {
+	.timeline-content:hover .event-hero-image-pinned,
+	.timeline-content:focus-within .event-hero-image-pinned {
 		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
 	}
 
-	.timeline-section
-		:is(
-			.funrun-photo,
-			.launchparty-photo,
-			.talk-avatar,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image,
-			.fireside-avatar,
-			.syntax-avatar,
-			.afterparty-photo,
-			.lunch-carousel-viewport
-		) {
+	.timeline-section .event-hero-image {
 		background: white;
 		border: var(--timeline-image-border-width) solid
 			var(--timeline-image-border-color);
@@ -2483,27 +1903,14 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.timeline-content
-		:is(
-			.launchparty-photo,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
-		)
+		.event-hero-image:not(.event-hero-image-pinned)
 		:is(img, :global(img)) {
 		transition: filter var(--timeline-hover-duration) ease;
 		transform: none;
 		will-change: auto;
 	}
 
-	.timeline-content
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		)
-		:is(img, :global(img)) {
+	.timeline-content .event-hero-image-pinned :is(img, :global(img)) {
 		transition:
 			transform var(--timeline-hover-duration) ease,
 			filter var(--timeline-hover-duration) ease;
@@ -2518,82 +1925,19 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	}
 
 	.timeline-content:hover
-		:is(
-			.launchparty-photo,
-			.break-photo,
-			.explore-photo,
-			.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
-		)
-		:is(img, :global(img)),
-	.timeline-content:hover
-		.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
+		.event-hero-image:not(.event-hero-image-pinned)
 		:is(img, :global(img)),
 	.timeline-content:focus-within
-		.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned)
+		.event-hero-image:not(.event-hero-image-pinned)
 		:is(img, :global(img)) {
 		transform: none;
 	}
 
-	.timeline-content:hover
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		)
-		:is(img, :global(img)),
+	.timeline-content:hover .event-hero-image-pinned :is(img, :global(img)),
 	.timeline-content:focus-within
-		:is(
-			.talk-avatar,
-			.fireside-avatar,
-			.syntax-avatar,
-			.syntax-hero-image,
-			.event-hero-image-pinned
-		)
+		.event-hero-image-pinned
 		:is(img, :global(img)) {
 		transform: scale(1.1);
-	}
-
-	.funrun-collage {
-		justify-self: start;
-		position: absolute;
-		left: 14rem;
-		top: 0.7rem;
-		transform: none;
-	}
-
-	.funrun-photo {
-		border-radius: 0.35rem;
-		position: absolute;
-	}
-
-	.funrun-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.funrun-photo-1 {
-		height: 7rem;
-		width: 5rem;
-		left: 6rem;
-		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
-	}
-
-	.timeline-content .funrun-photo-1,
-	.timeline-content .funrun-photo-2 {
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		will-change: transform;
-	}
-
-	.timeline-content:hover .funrun-photo-1,
-	.timeline-content:focus-within .funrun-photo-1 {
-		transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
 	}
 
 	.timeline-top {
@@ -2605,68 +1949,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 	.timeline-bottom {
 		border-bottom-right-radius: 8px;
 		border-bottom-left-radius: 8px;
-	}
-
-	.funrun-photo-1 :global(img) {
-		object-position: 10% 10%;
-	}
-
-	.funrun-photo-2 {
-		height: 8rem;
-		width: 6rem;
-		left: 1rem;
-		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
-	}
-
-	.timeline-content:hover .funrun-photo-2,
-	.timeline-content:focus-within .funrun-photo-2 {
-		transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
-	}
-
-	.funrun-photo-2 :global(img) {
-		object-position: 38% 50%;
-	}
-
-	.launchparty-collage {
-		height: clamp(7.5rem, 14vw, 9.5rem);
-		margin-bottom: 1rem;
-		position: relative;
-		width: min(100%, 31rem);
-	}
-
-	.launchparty-photo {
-		border-radius: 0.35rem;
-		position: absolute;
-		width: 8.9rem;
-	}
-
-	.launchparty-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.launchparty-photo-1 {
-		height: 6.5rem;
-		left: 0.2rem;
-		top: 1.15rem;
-		transform: rotate(-12deg);
-	}
-
-	.launchparty-photo-2 {
-		height: 6.3rem;
-		left: 6.1rem;
-		top: 0.1rem;
-		transform: rotate(-2deg);
-	}
-
-	.launchparty-photo-3 {
-		height: 6.4rem;
-		left: 13rem;
-		top: 0.85rem;
-		transform: rotate(9deg);
 	}
 
 	.timeline-copy {
@@ -2695,61 +1977,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		color: rgba(255, 255, 255, 0.9);
 	}
 
-	.talks-list {
-		display: grid;
-		gap: 0.8rem;
-		margin-top: 0.8rem;
-		position: relative;
-		z-index: 1;
-	}
-
-	.timeline-hosts-list {
-		display: grid;
-		gap: 0.9rem;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		margin-top: 0.8rem;
-		max-width: 44rem;
-	}
-
-	.timeline-host-card {
-		align-items: center;
-		display: grid;
-		gap: 0.8rem;
-		grid-template-columns: 5rem 1fr;
-	}
-
-	.timeline-host-avatar {
-		aspect-ratio: 1;
-	}
-
-	.timeline-host-copy {
-		display: grid;
-		gap: 0.28rem;
-		min-height: 5rem;
-		place-content: center start;
-	}
-
-	.timeline-host-copy h3 {
-		color: var(--timeline-heading-color);
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
-		line-height: 1.15;
-		margin: 0;
-	}
-
-	.timeline-host-role {
-		color: var(--timeline-muted-color);
-		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
-		font-weight: 300;
-		line-height: 1.25;
-		margin: 0;
-	}
-
-	.talks-list-short {
-		max-width: 44rem;
-	}
-
 	.timeline-venue-decoration {
 		pointer-events: none;
 		position: absolute;
@@ -2763,148 +1990,12 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		transform-origin: bottom right;
 	}
 
-	.talk-card {
-		align-items: stretch;
-		display: grid;
-		gap: 0.8rem;
-		grid-template-columns: 5rem 1fr;
-	}
-
-	.talk-avatar {
-		border-radius: 0.45rem;
-	}
-
-	.talk-avatar-placeholder {
-		isolation: isolate;
-		position: relative;
-	}
-
-	.talk-avatar-placeholder::before,
-	.talk-avatar-placeholder::after {
-		content: "";
-		inset: 0;
-		pointer-events: none;
-		position: absolute;
-	}
-
-	.talk-avatar-placeholder::before {
-		backdrop-filter: blur(2px) saturate(0.82);
-		background: rgba(232, 237, 244, 0.08);
-		z-index: 1;
-	}
-
-	.talk-avatar :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.talk-avatar :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.talk-avatar-placeholder-mark {
-		color: rgba(255, 255, 255, 0.92);
-		display: block;
-		font-family: var(--fontFamilyHeading);
-		font-size: 3rem;
-		font-weight: 700;
-		left: 50%;
-		line-height: 1;
-		pointer-events: none;
-		position: absolute;
-		text-shadow: 0 0.08rem 0.22rem rgba(4, 25, 48, 0.3);
-		top: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 3;
-	}
-
-	.talk-copy {
-		display: grid;
-		grid-template-rows: 2fr 1fr 1fr;
-		min-height: 5.75rem;
-	}
-
-	.talk-copy h3 {
-		color: var(--timeline-heading-color);
-		align-self: center;
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
-		line-height: 1.25;
-		margin: 0;
-	}
-
-	.talk-speaker {
-		color: var(--timeline-muted-color);
-		font-size: clamp(0.92rem, 1.2vw, 1rem);
-		font-weight: 600;
-	}
-
-	.talk-role {
-		color: var(--timeline-muted-color);
-		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
-		line-height: 1.25;
-		font-weight: 300;
-	}
-
 	.break-body {
 		display: grid;
 		align-items: start;
 		column-gap: 0.8rem;
 		grid-template-columns: auto minmax(0, 1fr);
 		margin-top: 0.8rem;
-	}
-
-	.cookiesbreak-collage {
-		height: 8rem;
-		position: relative;
-		width: 18.6rem;
-	}
-
-	.break-photo {
-		border-radius: 0.35rem;
-		position: absolute;
-	}
-
-	.break-photo :global(img) {
-		display: block;
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-	}
-
-	.break-photo-1 {
-		height: 5.7rem;
-		width: 7.5rem;
-		left: 0.25rem;
-		top: 1rem;
-		transform: rotate(-8deg);
-	}
-
-	.break-photo-2 {
-		height: 5.8rem;
-		width: 7.5rem;
-		left: 5.4rem;
-		top: 0.2rem;
-		z-index: 1;
-		transform: rotate(2deg);
-	}
-
-	.break-photo-3 {
-		height: 5rem;
-		width: 6rem;
-		left: 11rem;
-		top: 2rem;
-		transform: rotate(10deg);
-	}
-
-	.break-photo-3 :global(img) {
-		object-position: 10% 0%;
 	}
 
 	.break-copy {
@@ -2917,124 +2008,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		column-gap: 1rem;
 		grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
 		margin: 1rem 0 0.5rem;
-	}
-
-	.lunch-carousel {
-		display: grid;
-		gap: 0.7rem;
-		max-width: 10rem;
-		margin: auto 0;
-		width: 100%;
-	}
-
-	.lunch-carousel-viewport {
-		border-radius: 0.9rem;
-		position: relative;
-	}
-
-	.lunch-carousel-track {
-		display: flex;
-		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
-		transition: transform 320ms ease;
-		will-change: transform;
-	}
-
-	.lunch-slide {
-		flex: 0 0 100%;
-		position: relative;
-	}
-
-	.lunch-slide-image {
-		aspect-ratio: 1 / 1;
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0.16),
-			rgba(255, 255, 255, 0.03)
-		);
-	}
-
-	.lunch-slide-image :global(picture),
-	.lunch-slide-image :global(img) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.lunch-slide-image :global(img) {
-		object-fit: cover;
-	}
-
-	.lunch-slide-caption {
-		align-items: end;
-		background: linear-gradient(
-			180deg,
-			rgba(3, 13, 26, 0) 0%,
-			rgba(3, 13, 26, 0.72) 58%,
-			rgba(3, 13, 26, 0.88) 100%
-		);
-		bottom: 0;
-		color: #f7fbff;
-		display: grid;
-		gap: 0.12rem;
-		left: 0;
-		padding: 2rem 0.9rem 0.8rem;
-		position: absolute;
-		right: 0;
-		text-shadow: 0 0.15rem 0.35rem rgba(0, 0, 0, 0.28);
-	}
-
-	.lunch-slide-caption span {
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		opacity: 0.76;
-		text-transform: uppercase;
-	}
-
-	.lunch-slide-caption strong {
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.08rem;
-		font-weight: 700;
-		line-height: 1.05;
-	}
-
-	.lunch-carousel-dots {
-		display: flex;
-		gap: 0.45rem;
-		justify-content: center;
-		padding-bottom: 0.15rem;
-	}
-
-	.lunch-carousel-dot {
-		appearance: none;
-		background: rgba(255, 255, 255, 0.24);
-		border: 1px solid rgba(188, 223, 233, 0.45);
-		border-radius: 999px;
-		cursor: pointer;
-		height: 0.65rem;
-		margin: 0;
-		padding: 0;
-		transition:
-			background-color 180ms ease,
-			transform 180ms ease,
-			width 180ms ease;
-		width: 0.65rem;
-	}
-
-	.lunch-carousel-dot[aria-pressed="true"] {
-		background: rgba(239, 248, 255, 0.96);
-		transform: scale(1.02);
-		width: 1.7rem;
-	}
-
-	.lunch-carousel-dot:hover,
-	.lunch-carousel-dot:focus-visible {
-		background: rgba(239, 248, 255, 0.72);
-		outline: none;
-	}
-
-	.lunch-carousel-dot:focus-visible {
-		box-shadow: 0 0 0 0.16rem rgba(239, 248, 255, 0.28);
 	}
 
 	.lunch-copy {
@@ -3066,146 +2039,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		font-weight: 600;
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
-	}
-
-	.explore-options {
-		display: grid;
-		gap: 0.75rem;
-		margin-top: 0.8rem;
-		max-width: 42rem;
-	}
-
-	.explore-card {
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid var(--colorBlue3);
-		border-radius: 10px;
-		box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.14);
-		display: grid;
-		grid-template-columns: 3.5rem 1fr;
-		transition:
-			background-color var(--timeline-hover-duration) ease,
-			border-color var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-	}
-
-	.explore-card:hover {
-		background: rgba(255, 255, 255, 0.14);
-		border-color: rgba(255, 255, 255, 0.38);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-		transform: translateX(0.08rem);
-	}
-
-	.explore-choice {
-		align-items: center;
-		border-right: 1px solid var(--colorBlue3);
-		display: flex;
-		justify-content: center;
-		padding: 0.75rem 0.25rem;
-	}
-
-	.explore-radio {
-		align-items: center;
-		background: rgba(255, 255, 255, 0.08);
-		border: 2px solid rgba(239, 248, 255, 0.74);
-		border-radius: 999px;
-		display: inline-flex;
-		height: 1.45rem;
-		justify-content: center;
-		transition:
-			background-color var(--timeline-hover-duration) ease,
-			border-color var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		width: 1.45rem;
-	}
-
-	.explore-card:hover .explore-radio {
-		background: rgba(255, 255, 255, 0.12);
-		border-color: rgba(255, 255, 255, 0.95);
-		box-shadow: 0 0 0 0.18rem rgba(255, 255, 255, 0.12);
-	}
-
-	.explore-radio-dot {
-		background: var(--timeline-link-color);
-		border-radius: 999px;
-		display: block;
-		height: 0.46rem;
-		opacity: 0;
-		transform: scale(0.2);
-		transition:
-			opacity var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-		width: 0.46rem;
-	}
-
-	.explore-card:hover .explore-radio-dot {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	.explore-card-body {
-		align-items: start;
-		display: grid;
-		column-gap: 1rem;
-		grid-template-columns: 4.8rem minmax(0, 1fr);
-		min-width: 0;
-		padding: 0.85rem 1rem;
-	}
-
-	.explore-photo {
-		border-radius: 0.35rem;
-		display: block;
-		height: 4.8rem;
-		min-width: 4.8rem;
-		width: 4.8rem;
-	}
-
-	.explore-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.explore-photo-rest :global(img) {
-		object-position: 10% center;
-	}
-
-	.explore-copy {
-		display: grid;
-		gap: 0.3rem;
-		min-width: 0;
-	}
-
-	.explore-copy h3 {
-		color: var(--timeline-heading-color);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.2rem, 1.7vw, 1.45rem);
-		font-weight: 700;
-		line-height: 1.05;
-		margin: 0;
-	}
-
-	.explore-copy p {
-		color: var(--timeline-copy-color);
-		font-size: clamp(0.95rem, 1.25vw, 1rem);
-		line-height: 1.4;
-		margin: 0;
-		max-width: 48ch;
-	}
-
-	.explore-spots-left {
-		position: absolute;
-		top: -1em;
-		right: -1em;
-		color: var(--timeline-copy-color);
-		border: 1px solid var(--timeline-image-border-color);
-		background: var(--colorBlue3);
-		padding: 8px 10px;
-		border-radius: 6px;
-		text-transform: uppercase;
-		font-variant: tabular-nums;
-		font-size: 0.8em;
 	}
 
 	.event-body {
@@ -3245,97 +2078,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		width: 100%;
 	}
 
-	.firesidechat-avatars {
-		height: 10rem;
-		position: relative;
-		width: 10rem;
-	}
-
-	.fireside-avatar {
-		border-radius: 999px;
-		height: 4.9rem;
-		position: absolute;
-		width: 4.9rem;
-	}
-
-	.fireside-avatar :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.fireside-avatar :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.fireside-hero-image {
-		left: -1rem;
-		position: absolute;
-		top: 1rem;
-	}
-
-	.fireside-avatar-corner {
-		height: 5rem;
-		left: 5rem;
-		top: 5rem;
-		transform: rotate(6deg);
-		width: 5rem;
-		z-index: 2;
-	}
-
-	.syntaxlive-avatars {
-		height: 11rem;
-		position: relative;
-		width: 11.5rem;
-	}
-
-	.syntax-hero-image {
-		height: 8rem;
-		left: 3rem;
-		position: absolute;
-		top: 1.65rem;
-		width: 8rem;
-		z-index: 1;
-	}
-
-	.syntax-avatar {
-		border-radius: 999px;
-		height: 5rem;
-		position: absolute;
-		width: 5rem;
-		z-index: 2;
-	}
-
-	.syntax-avatar :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.syntax-avatar :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.syntax-avatar-left {
-		left: 0rem;
-		top: 1rem;
-		transform: rotate(-7deg);
-	}
-
-	.syntax-avatar-right {
-		left: 0rem;
-		top: 5rem;
-		transform: rotate(7deg);
-	}
-
 	.fireside-topic {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
@@ -3347,105 +2089,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 
 	.fireside-host {
 		font-style: italic;
-	}
-
-	.afterparty-collage {
-		height: 16em;
-		margin: 1.9rem 0 1.1rem;
-		position: relative;
-		width: min(100%, 38rem);
-	}
-
-	.afterparty-photo {
-		aspect-ratio: var(--afterparty-photo-aspect, 16 / 9);
-		border-radius: 0.35rem;
-		height: auto;
-		position: absolute;
-		width: var(--afterparty-photo-width, 20%);
-	}
-
-	.timeline-content .launchparty-photo,
-	.timeline-content .afterparty-photo {
-		transition:
-			scale var(--timeline-hover-duration) ease,
-			border-width var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		will-change: scale;
-	}
-
-	.timeline-content:hover :is(.launchparty-photo, .afterparty-photo),
-	.timeline-content:focus-within :is(.launchparty-photo, .afterparty-photo) {
-		scale: 1.25;
-		border-width: 1px;
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-	}
-
-	.timeline-content .launchparty-photo :is(img, :global(img)),
-	.timeline-content .afterparty-photo :is(img, :global(img)) {
-		transform: none;
-		transition: filter var(--timeline-hover-duration) ease;
-		will-change: auto;
-	}
-
-	.timeline-content:hover
-		:is(.launchparty-photo, .afterparty-photo)
-		:is(img, :global(img)),
-	.timeline-content:focus-within
-		:is(.launchparty-photo, .afterparty-photo)
-		:is(img, :global(img)) {
-		transform: none;
-	}
-
-	.afterparty-photo :global(img) {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-	}
-
-	.afterparty-photo-1 {
-		--afterparty-photo-aspect: 16 / 9;
-		--afterparty-photo-width: 66%;
-		left: 0%;
-		top: 0%;
-		transform: rotate(-6deg);
-		z-index: 5;
-	}
-
-	.afterparty-photo-2 {
-		--afterparty-photo-aspect: 14 / 16;
-		--afterparty-photo-width: 26%;
-		left: 65%;
-		top: 9%;
-		transform: rotate(8deg);
-		z-index: 4;
-	}
-
-	.afterparty-photo-3 {
-		--afterparty-photo-aspect: 16 / 9;
-		--afterparty-photo-width: 33%;
-		left: 50%;
-		top: -8%;
-		transform: rotate(0deg);
-		z-index: 2;
-	}
-
-	.afterparty-photo-4 {
-		--afterparty-photo-aspect: 16 / 9;
-		--afterparty-photo-width: 31%;
-		left: 76%;
-		top: 8%;
-		transform: rotate(19deg);
-		z-index: 1;
-	}
-
-	.afterparty-photo-5 {
-		--afterparty-photo-aspect: 16 / 9;
-		--afterparty-photo-width: 30%;
-		left: 47%;
-		top: 49%;
-		transform: rotate(7deg);
-		z-index: 5;
 	}
 
 	@media (width < 900px) {
@@ -3600,68 +2243,18 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			color: var(--timeline-copy-color);
 		}
 
-		.timeline-content:hover
-			:is(
-				.launchparty-photo,
-				.break-photo,
-				.explore-photo,
-				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned,
-				.launchparty-photo,
-				.afterparty-photo
-			),
-		.timeline-content:focus-within
-			:is(
-				.launchparty-photo,
-				.break-photo,
-				.explore-photo,
-				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned,
-				.launchparty-photo,
-				.afterparty-photo
-			) {
-			scale: 1;
+		.timeline-content:hover .event-hero-image,
+		.timeline-content:focus-within .event-hero-image {
 			border-width: var(--timeline-image-border-width);
 			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
 		}
 
-		.timeline-content:hover
-			:is(
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned
-			)
-			:is(img, :global(img)),
+		.timeline-content:hover .event-hero-image-pinned :is(img, :global(img)),
 		.timeline-content:focus-within
-			:is(
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned
-			)
+			.event-hero-image-pinned
 			:is(img, :global(img)) {
 			transform: scale(1);
-		}
-
-		.timeline-content:hover .funrun-photo-1,
-		.timeline-content:focus-within .funrun-photo-1 {
-			transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
-		}
-
-		.timeline-content:hover .funrun-photo-2,
-		.timeline-content:focus-within .funrun-photo-2 {
-			transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
 		}
 
 		.timeline-content[data-mobile-active="true"]::before {
@@ -3703,47 +2296,19 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		}
 
 		.timeline-content[data-mobile-active="true"]
-			:is(
-				.launchparty-photo,
-				.break-photo,
-				.explore-photo,
-				.event-hero-image:not(.syntax-hero-image, .event-hero-image-pinned),
-				.launchparty-photo,
-				.afterparty-photo
-			) {
+			.event-hero-image:not(.event-hero-image-pinned) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
 			scale: 1.12;
+		}
+
+		.timeline-content[data-mobile-active="true"] .event-hero-image-pinned {
 			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
 		}
 
 		.timeline-content[data-mobile-active="true"]
-			:is(
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned
-			) {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		}
-
-		.timeline-content[data-mobile-active="true"]
-			:is(
-				.talk-avatar,
-				.fireside-avatar,
-				.syntax-avatar,
-				.syntax-hero-image,
-				.event-hero-image-pinned
-			)
+			.event-hero-image-pinned
 			:is(img, :global(img)) {
 			transform: scale(1.07);
-		}
-
-		.timeline-content[data-mobile-active="true"] .funrun-photo-1 {
-			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
-		}
-
-		.timeline-content[data-mobile-active="true"] .funrun-photo-2 {
-			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
 		}
 
 		.break-body {
@@ -3755,45 +2320,8 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			row-gap: 0.9rem;
 		}
 
-		.lunch-carousel {
-			max-width: 21rem;
-		}
-
-		.private-preview-banner {
-			font-size: 0.66rem;
-			padding: 0.65rem 0.8rem;
-		}
-
-		.lunch-slide-image {
-			aspect-ratio: 1.15 / 1;
-		}
-
 		.lunch-copy {
 			padding-top: 0;
-		}
-
-		.explore-card {
-			grid-template-columns: 3rem minmax(0, 1fr);
-		}
-
-		.explore-choice {
-			padding: 0.65rem 0.2rem;
-		}
-
-		.explore-card-body {
-			column-gap: 0.7rem;
-			grid-template-columns: 4rem minmax(0, 1fr);
-			padding: 0.7rem 0.8rem;
-		}
-
-		.explore-photo {
-			height: 4rem;
-			min-width: 4rem;
-			width: 4rem;
-		}
-
-		.explore-copy h3 {
-			font-size: 1.15rem;
 		}
 
 		.timeline-title-row {
@@ -3814,45 +2342,11 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			max-width: none;
 		}
 
-		.funrun-collage-desktop {
-			display: none;
-		}
-
 		.funrun-body {
 			align-items: start;
 			column-gap: 0.9rem;
 			display: grid;
 			grid-template-columns: minmax(0, 1fr) 8rem;
-		}
-
-		.funrun-collage-mobile {
-			align-self: start;
-			display: block;
-			justify-self: end;
-			left: auto;
-			min-height: 7.6rem;
-			position: relative;
-			right: auto;
-			top: -1rem;
-			width: 8rem;
-		}
-
-		.funrun-collage-mobile .timeline-copy {
-			color: red;
-		}
-
-		.funrun-collage-mobile .funrun-photo-1 {
-			height: 5.45rem;
-			left: 3.8rem;
-			top: 0.3rem;
-			width: 3.75rem;
-		}
-
-		.funrun-collage-mobile .funrun-photo-2 {
-			height: 6.1rem;
-			left: 0;
-			top: 0.7rem;
-			width: 4.35rem;
 		}
 
 		.timeline-content[data-timeline-entry="simons-imax-theater"] .event-body {
@@ -3865,10 +2359,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 			justify-self: start;
 			max-width: 100%;
 			width: min(100%, 14rem);
-		}
-
-		.timeline-hosts-list {
-			grid-template-columns: 1fr;
 		}
 
 		.timeline-venue-decoration-turtle {
@@ -3914,9 +2404,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 		"(prefers-reduced-motion: reduce)",
 	);
 	const mobileTimelineQuery = window.matchMedia("(max-width: 899px)");
-	const lunchCarousels = Array.from(
-		document.querySelectorAll("[data-lunch-carousel]"),
-	).filter((element) => element instanceof HTMLElement);
 	const timelineCardHeaders = timelineCards.map((card) => {
 		const heading = card.querySelector(".timeline-title-copy h2, h2");
 
@@ -4113,81 +2600,6 @@ const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
 				requestTimelineFishUpdate();
 			});
 		}
-	}
-
-	for (const carousel of lunchCarousels) {
-		const dots = Array.from(
-			carousel.querySelectorAll("[data-lunch-dot]"),
-		).filter((element) => element instanceof HTMLButtonElement);
-		const slides = Array.from(
-			carousel.querySelectorAll("[data-lunch-slide]"),
-		).filter((element) => element instanceof HTMLElement);
-		let activeIndex = 0;
-		let autoAdvanceTimer = 0;
-
-		const setLunchSlide = (index) => {
-			activeIndex = ((index % slides.length) + slides.length) % slides.length;
-			carousel.style.setProperty("--lunch-carousel-index", `${activeIndex}`);
-
-			for (const [slideIndex, slide] of slides.entries()) {
-				slide.setAttribute(
-					"aria-hidden",
-					slideIndex === activeIndex ? "false" : "true",
-				);
-			}
-
-			for (const [dotIndex, dot] of dots.entries()) {
-				dot.setAttribute(
-					"aria-pressed",
-					dotIndex === activeIndex ? "true" : "false",
-				);
-			}
-		};
-
-		const stopLunchAutoAdvance = () => {
-			window.clearInterval(autoAdvanceTimer);
-			autoAdvanceTimer = 0;
-		};
-
-		const startLunchAutoAdvance = () => {
-			if (reducedMotionQuery.matches || slides.length < 2) {
-				return;
-			}
-
-			stopLunchAutoAdvance();
-			autoAdvanceTimer = window.setInterval(() => {
-				setLunchSlide(activeIndex + 1);
-			}, 3400);
-		};
-
-		for (const dot of dots) {
-			dot.addEventListener("click", () => {
-				const nextIndex = Number(dot.dataset.lunchIndex ?? activeIndex);
-				setLunchSlide(nextIndex);
-				startLunchAutoAdvance();
-
-				if (!dot.matches(":focus-visible")) {
-					dot.blur();
-				}
-			});
-		}
-
-		carousel.addEventListener("pointerenter", stopLunchAutoAdvance);
-		carousel.addEventListener("pointerleave", startLunchAutoAdvance);
-		carousel.addEventListener("focusin", stopLunchAutoAdvance);
-		carousel.addEventListener("focusout", () => {
-			const activeElement = document.activeElement;
-
-			if (
-				!(activeElement instanceof Node) ||
-				!carousel.contains(activeElement)
-			) {
-				startLunchAutoAdvance();
-			}
-		});
-
-		setLunchSlide(0);
-		startLunchAutoAdvance();
 	}
 
 	{

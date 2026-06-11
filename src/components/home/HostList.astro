@@ -1,0 +1,32 @@
+---
+import PersonCard from "~/components/home/PersonCard.astro";
+
+import type { PersonCardData } from "~/components/home/types";
+
+interface Props {
+	ariaLabel: string;
+	hosts: readonly PersonCardData[];
+}
+
+const { ariaLabel, hosts } = Astro.props;
+---
+
+<div class="timeline-hosts-list" aria-label={ariaLabel}>
+	{hosts.map((host) => <PersonCard person={host} />)}
+</div>
+
+<style>
+	.timeline-hosts-list {
+		display: grid;
+		gap: 0.9rem;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-top: 0.8rem;
+		max-width: 44rem;
+	}
+
+	@media (width < 900px) {
+		.timeline-hosts-list {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
