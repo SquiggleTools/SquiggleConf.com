@@ -211,7 +211,7 @@ const resolvedLayout =
 	}
 
 	.collage-feature-five {
-		--collage-height: 16em;
+		--collage-height: min(35vw, 16em);
 		--collage-width: min(100%, 38rem);
 	}
 
@@ -322,42 +322,6 @@ const resolvedLayout =
 		z-index: 2;
 	}
 
-	:global(.timeline-content:hover)
-		.collage-photo:not(.collage-duo)
-		.collage-item,
-	:global(.timeline-content:focus-within)
-		.collage-photo:not(.collage-duo)
-		.collage-item {
-		border-width: 1px;
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		scale: 1.25;
-	}
-
-	:global(.timeline-content:hover) .collage-duo .collage-item-1,
-	:global(.timeline-content:focus-within) .collage-duo .collage-item-1 {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
-	}
-
-	:global(.timeline-content:hover) .collage-duo .collage-item-2,
-	:global(.timeline-content:focus-within) .collage-duo .collage-item-2 {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
-	}
-
-	:global(.timeline-content:hover) .collage-avatar .collage-item,
-	:global(.timeline-content:focus-within) .collage-avatar .collage-item {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-	}
-
-	:global(.timeline-content:hover) .collage-avatar .collage-item :global(img),
-	:global(.timeline-content:focus-within)
-		.collage-avatar
-		.collage-item
-		:global(img) {
-		transform: scale(1.1);
-	}
-
 	@media (width < 900px) {
 		.funrun-collage-desktop {
 			display: none;
@@ -388,76 +352,6 @@ const resolvedLayout =
 			left: 0;
 			top: 0.7rem;
 			width: 4.35rem;
-		}
-
-		:global(.timeline-content:hover)
-			.collage-photo:not(.collage-duo)
-			.collage-item,
-		:global(.timeline-content:focus-within)
-			.collage-photo:not(.collage-duo)
-			.collage-item {
-			border-width: var(--timeline-image-border-width);
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			scale: 1;
-		}
-
-		:global(.timeline-content:hover) .collage-duo .collage-item-1,
-		:global(.timeline-content:focus-within) .collage-duo .collage-item-1 {
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
-		}
-
-		:global(.timeline-content:hover) .collage-duo .collage-item-2,
-		:global(.timeline-content:focus-within) .collage-duo .collage-item-2 {
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
-		}
-
-		:global(.timeline-content:hover) .collage-avatar .collage-item,
-		:global(.timeline-content:focus-within) .collage-avatar .collage-item {
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		}
-
-		:global(.timeline-content:hover) .collage-avatar .collage-item :global(img),
-		:global(.timeline-content:focus-within)
-			.collage-avatar
-			.collage-item
-			:global(img) {
-			transform: scale(1);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.collage-photo:not(.collage-duo)
-			.collage-item {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-			scale: 1.12;
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.collage-avatar
-			.collage-item {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.collage-avatar
-			.collage-item
-			:global(img) {
-			transform: scale(1.07);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.collage-duo
-			.collage-item-1 {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.collage-duo
-			.collage-item-2 {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
 		}
 	}
 

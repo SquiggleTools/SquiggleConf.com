@@ -83,7 +83,8 @@ export type TimelineEntryVariant =
 	| "lunch"
 	| "mcs"
 	| "syntax"
-	| "talks";
+	| "talks"
+	| "talksAfternoon";
 
 export type TimelineLocationRef = { label: string } | { venueId: VenueId };
 

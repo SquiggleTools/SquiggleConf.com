@@ -1,0 +1,687 @@
+---
+import type {
+	TimelineEntryId,
+	TimelineEntryVariant,
+	TimelineTimeMode,
+} from "~/components/home/types";
+
+interface Props {
+	class?: string;
+	entryId: TimelineEntryId;
+	heading: string;
+	mobileLocation?: string;
+	mobileLocationHref?: string;
+	subtitle?: string;
+	time: string;
+	timeMode?: TimelineTimeMode;
+	variant?: TimelineEntryVariant;
+}
+
+const {
+	class: className,
+	entryId,
+	heading,
+	mobileLocation,
+	mobileLocationHref,
+	subtitle,
+	time,
+	timeMode = "point",
+	variant,
+} = Astro.props;
+
+const variantClasses: string[] = [];
+if (variant === "funRun") {
+	variantClasses.push("timeline-content-funrun");
+} else if (variant === "talksAfternoon") {
+	variantClasses.push(
+		"timeline-content-talks",
+		"timeline-content-talks-afternoon",
+	);
+} else if (variant && variant !== "default") {
+	variantClasses.push(`timeline-content-${variant}`);
+}
+
+const hasAside = Astro.slots.has("aside");
+---
+
+<div
+	class:list={["timeline-content", ...variantClasses, className]}
+	data-timeline-entry={entryId}
+>
+	{
+		hasAside ? (
+			<div class="timeline-title-row">
+				<div class="timeline-title-copy">
+					<div class="timeline-heading-line">
+						<h2>{heading}</h2>
+						<p
+							class:list={[
+								"timeline-subtitle",
+								"timeline-inline-time",
+								timeMode === "point" && "timeline-inline-time-point",
+							]}
+						>
+							{time}
+						</p>
+					</div>
+					{mobileLocation && (
+						<div class="timeline-mobile-meta">
+							{mobileLocationHref ? (
+								<a
+									class="timeline-mobile-location timeline-location-link"
+									href={mobileLocationHref}
+									rel="noreferrer"
+									target="_blank"
+								>
+									{mobileLocation}
+								</a>
+							) : (
+								<p class="timeline-mobile-location">{mobileLocation}</p>
+							)}
+						</div>
+					)}
+				</div>
+				<slot name="aside" />
+			</div>
+		) : (
+			<>
+				<div class="timeline-heading-line">
+					<h2>{heading}</h2>
+					<p
+						class:list={[
+							"timeline-subtitle",
+							"timeline-inline-time",
+							timeMode === "point" && "timeline-inline-time-point",
+						]}
+					>
+						{time}
+					</p>
+				</div>
+				{subtitle && <p class="timeline-subtitle">{subtitle}</p>}
+				{mobileLocation && (
+					<div class="timeline-mobile-meta">
+						{mobileLocationHref ? (
+							<a
+								class="timeline-mobile-location timeline-location-link"
+								href={mobileLocationHref}
+								rel="noreferrer"
+								target="_blank"
+							>
+								{mobileLocation}
+							</a>
+						) : (
+							<p class="timeline-mobile-location">{mobileLocation}</p>
+						)}
+					</div>
+				)}
+			</>
+		)
+	}
+	<slot />
+</div>
+
+<style>
+	.timeline-content {
+		--timeline-card-pointer-x: 50%;
+		--timeline-card-pointer-y: 50%;
+		isolation: isolate;
+		margin: 1rem 0;
+		padding: 1.5rem 0.5rem 1.5rem 2rem;
+		position: relative;
+		transition: transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.timeline-content::before {
+		border: 1px solid rgba(255, 255, 255, 0.04);
+		border-radius: 1rem;
+		box-shadow: none;
+		content: "";
+		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
+		opacity: 0.22;
+		pointer-events: none;
+		position: absolute;
+		transform: scale(0.985);
+		z-index: 0;
+		transition:
+			opacity var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content::after {
+		background: radial-gradient(
+			circle 25rem at var(--timeline-card-pointer-x)
+				var(--timeline-card-pointer-y),
+			color-mix(in srgb, var(--colorBlue2) 92%, white 8%) 0,
+			color-mix(in srgb, var(--colorBlue2) 52%, transparent) 28%,
+			transparent 60%
+		);
+		border-radius: 1rem;
+		content: "";
+		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
+		opacity: 0;
+		padding: 3px;
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+		transition: opacity var(--timeline-hover-duration) ease;
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+	}
+
+	.timeline-content:hover,
+	.timeline-content:focus-within {
+		transform: translateX(0.3rem);
+	}
+
+	.timeline-content:hover::before,
+	.timeline-content:focus-within::before {
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.13),
+			rgba(255, 255, 255, 0.03)
+		);
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+			0 1rem 2rem rgba(7, 20, 38, 0.14);
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.timeline-content:hover::after,
+	.timeline-content:focus-within::after {
+		opacity: 1;
+	}
+
+	.timeline-content-funrun {
+		min-height: 10rem;
+		padding-top: 1.2rem;
+	}
+
+	.timeline-content-mcs {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-talks,
+	.timeline-content-break {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-break {
+		min-height: 14rem;
+	}
+
+	.timeline-content-lunch {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-talks-afternoon {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content-explore {
+		padding-top: 1.35rem;
+	}
+
+	.timeline-content h2 {
+		color: var(--timeline-heading-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
+		font-weight: 700;
+		line-height: 1;
+		margin: 0;
+		transition:
+			color var(--timeline-hover-duration) ease,
+			text-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-heading-line {
+		align-items: baseline;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.7rem;
+		margin-bottom: 1.1rem;
+	}
+
+	.timeline-content:hover h2,
+	.timeline-content:focus-within h2 {
+		color: white;
+		text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
+		transform: translateX(0.08rem);
+	}
+
+	.timeline-title-row {
+		align-items: start;
+		display: inline-flex;
+		gap: 0.6rem;
+		justify-content: flex-start;
+		min-height: 5.75rem;
+		width: fit-content;
+	}
+
+	.timeline-content-funrun .timeline-title-row {
+		position: relative;
+	}
+
+	.timeline-title-copy {
+		display: grid;
+		gap: 0.3rem;
+		justify-items: start;
+	}
+
+	.timeline-content-funrun .timeline-subtitle {
+		margin: 0;
+	}
+
+	.timeline-subtitle {
+		color: var(--timeline-muted-color);
+		display: block;
+		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
+		font-weight: 500;
+		margin: 0.32rem 0 1.1rem;
+		transition: color var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-inline-time {
+		display: inline-block;
+		margin: 0;
+	}
+
+	.timeline-inline-time-point {
+		display: none;
+	}
+
+	.timeline-mobile-meta {
+		display: none;
+	}
+
+	.timeline-mobile-meta :is(p, a) {
+		margin: 0;
+	}
+
+	.timeline-mobile-location {
+		color: var(--timeline-muted-color);
+		font-size: 0.95rem;
+		font-weight: 500;
+		line-height: 1.2;
+		transition: color var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover .timeline-subtitle,
+	.timeline-content:focus-within .timeline-subtitle,
+	.timeline-content:hover .timeline-mobile-location,
+	.timeline-content:focus-within .timeline-mobile-location {
+		color: rgba(255, 255, 255, 0.88);
+	}
+
+	.timeline-content :global(.event-hero-image:not(.event-hero-image-pinned)) {
+		transform-origin: center;
+		transition:
+			scale var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		will-change: scale;
+	}
+
+	.timeline-content :global(.event-hero-image) {
+		transform-origin: top right;
+	}
+
+	.timeline-content:hover
+		:global(.event-hero-image:not(.event-hero-image-pinned)),
+	.timeline-content:focus-within
+		:global(.event-hero-image:not(.event-hero-image-pinned)) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		scale: 1.25;
+	}
+
+	.timeline-content :global(.event-hero-image-pinned) {
+		transition: box-shadow var(--timeline-hover-duration) ease;
+	}
+
+	.timeline-content:hover :global(.event-hero-image-pinned),
+	.timeline-content:focus-within :global(.event-hero-image-pinned) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	.timeline-content
+		:global(.event-hero-image:not(.event-hero-image-pinned) :is(img)) {
+		transition: filter var(--timeline-hover-duration) ease;
+		transform: none;
+		will-change: auto;
+	}
+
+	.timeline-content :global(.event-hero-image-pinned :is(img)) {
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(1);
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	.timeline-content :global(.event-hero-image :is(img)) {
+		transform: none;
+		transform-origin: top right;
+	}
+
+	.timeline-content:hover
+		:global(.event-hero-image:not(.event-hero-image-pinned) :is(img)),
+	.timeline-content:focus-within
+		:global(.event-hero-image:not(.event-hero-image-pinned) :is(img)) {
+		transform: none;
+	}
+
+	.timeline-content:hover :global(.event-hero-image-pinned :is(img)),
+	.timeline-content:focus-within :global(.event-hero-image-pinned :is(img)) {
+		transform: scale(1.1);
+	}
+
+	.timeline-content-syntax :global(.timeline-copy),
+	.timeline-content-fireside :global(.timeline-copy) {
+		align-content: center;
+		align-self: center;
+	}
+
+	.timeline-content-funrun :global(.timeline-copy) {
+		max-width: 50%;
+	}
+
+	.timeline-content:hover :global(.timeline-copy p),
+	.timeline-content:focus-within :global(.timeline-copy p) {
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	/* Collage hover effects */
+	.timeline-content:hover
+		:global(.collage-photo:not(.collage-duo) .collage-item),
+	.timeline-content:focus-within
+		:global(.collage-photo:not(.collage-duo) .collage-item) {
+		border-width: 1px;
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		scale: 1.25;
+	}
+
+	.timeline-content:hover :global(.collage-duo .collage-item-1),
+	.timeline-content:focus-within :global(.collage-duo .collage-item-1) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
+	}
+
+	.timeline-content:hover :global(.collage-duo .collage-item-2),
+	.timeline-content:focus-within :global(.collage-duo .collage-item-2) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
+	}
+
+	.timeline-content:hover :global(.collage-avatar .collage-item),
+	.timeline-content:focus-within :global(.collage-avatar .collage-item) {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	.timeline-content:hover :global(.collage-avatar .collage-item img),
+	.timeline-content:focus-within :global(.collage-avatar .collage-item img) {
+		transform: scale(1.1);
+	}
+
+	@keyframes timeline-card-outline-flash {
+		0% {
+			opacity: 0;
+			transform: scale(0.992);
+		}
+
+		22% {
+			opacity: 0.48;
+		}
+
+		68% {
+			opacity: 0.22;
+		}
+
+		100% {
+			opacity: 0;
+			transform: scale(1.004);
+		}
+	}
+
+	@media (width < 900px) {
+		.timeline-content {
+			margin: 0.85rem 0;
+			padding-bottom: 1rem;
+			padding-left: 0.85rem;
+			padding-right: 0.75rem;
+		}
+
+		.timeline-mobile-meta {
+			display: grid;
+			gap: 0.15rem;
+			margin: -0.6rem 0 1rem;
+		}
+
+		.timeline-inline-time-point {
+			display: inline-block;
+		}
+
+		.timeline-title-copy .timeline-mobile-meta {
+			margin-top: -0.15rem;
+		}
+
+		.timeline-content::before {
+			inset: 0.15rem -0.02rem 0.28rem;
+		}
+
+		.timeline-content::after {
+			inset: 0.15rem -0.02rem 0.28rem;
+		}
+
+		.timeline-content:hover::before,
+		.timeline-content:focus-within::before {
+			background: none;
+			box-shadow: none;
+			opacity: 0.22;
+			transform: scale(0.985);
+		}
+
+		.timeline-content:hover::after,
+		.timeline-content:focus-within::after {
+			animation: none;
+			opacity: 0;
+			transform: none;
+		}
+
+		.timeline-content:hover h2,
+		.timeline-content:focus-within h2 {
+			color: var(--timeline-heading-color);
+			text-shadow: none;
+			transform: none;
+		}
+
+		.timeline-content:hover .timeline-subtitle,
+		.timeline-content:focus-within .timeline-subtitle,
+		.timeline-content:hover .timeline-mobile-location,
+		.timeline-content:focus-within .timeline-mobile-location {
+			color: var(--timeline-muted-color);
+		}
+
+		.timeline-content:hover :global(.timeline-copy p),
+		.timeline-content:focus-within :global(.timeline-copy p) {
+			color: var(--timeline-copy-color);
+		}
+
+		.timeline-content:hover :global(.event-hero-image),
+		.timeline-content:focus-within :global(.event-hero-image) {
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
+		}
+
+		.timeline-content:hover :global(.event-hero-image-pinned :is(img)),
+		.timeline-content:focus-within :global(.event-hero-image-pinned :is(img)) {
+			transform: scale(1);
+		}
+
+		/* Collage hover resets (mobile) */
+		.timeline-content:hover
+			:global(.collage-photo:not(.collage-duo) .collage-item),
+		.timeline-content:focus-within
+			:global(.collage-photo:not(.collage-duo) .collage-item) {
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
+		}
+
+		.timeline-content:hover :global(.collage-duo .collage-item-1),
+		.timeline-content:focus-within :global(.collage-duo .collage-item-1) {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		}
+
+		.timeline-content:hover :global(.collage-duo .collage-item-2),
+		.timeline-content:focus-within :global(.collage-duo .collage-item-2) {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		}
+
+		.timeline-content:hover :global(.collage-avatar .collage-item),
+		.timeline-content:focus-within :global(.collage-avatar .collage-item) {
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		}
+
+		.timeline-content:hover :global(.collage-avatar .collage-item img),
+		.timeline-content:focus-within :global(.collage-avatar .collage-item img) {
+			transform: scale(1);
+		}
+
+		/* Collage mobile-active states */
+		.timeline-content[data-mobile-active="true"]
+			:global(.collage-photo:not(.collage-duo) .collage-item) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			scale: 1.12;
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.collage-avatar .collage-item) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.collage-avatar .collage-item img) {
+			transform: scale(1.07);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.collage-duo .collage-item-1) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.collage-duo .collage-item-2) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
+		}
+
+		.timeline-title-row {
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.13),
+				rgba(255, 255, 255, 0.03)
+			);
+			box-shadow:
+				inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+				0 0.85rem 1.8rem rgba(7, 20, 38, 0.16);
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.timeline-content[data-mobile-active="true"]::after {
+			animation: timeline-card-outline-flash 1600ms
+				cubic-bezier(0.22, 1, 0.36, 1) 1;
+			background: linear-gradient(
+				135deg,
+				rgba(197, 237, 255, 0.5),
+				rgba(255, 255, 255, 0.42)
+			);
+			opacity: 0;
+			padding: 1.5px;
+			transform: scale(1);
+			transform-origin: center;
+		}
+
+		.timeline-content[data-mobile-active="true"] h2 {
+			color: white;
+			text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
+		}
+
+		.timeline-content[data-mobile-active="true"] .timeline-subtitle,
+		.timeline-content[data-mobile-active="true"] .timeline-mobile-location,
+		.timeline-content[data-mobile-active="true"] :global(.timeline-copy p) {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.event-hero-image:not(.event-hero-image-pinned)) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			scale: 1.12;
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.event-hero-image-pinned) {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		.timeline-content[data-mobile-active="true"]
+			:global(.event-hero-image-pinned :is(img)) {
+			transform: scale(1.07);
+		}
+
+		.timeline-title-row {
+			align-items: flex-start;
+			gap: 0.65rem;
+			display: flex;
+			flex-direction: column;
+			min-height: auto;
+			width: auto;
+		}
+
+		.timeline-title-copy {
+			justify-items: start;
+		}
+
+		.timeline-content-funrun :global(.timeline-copy) {
+			margin-top: 0.15rem;
+			max-width: none;
+		}
+
+		[data-timeline-entry="simons-imax-theater"] :global(.event-body) {
+			grid-template-columns: 1fr;
+			gap: 0.85rem;
+		}
+
+		[data-timeline-entry="simons-imax-theater"]
+			:global(.event-hero-image-wide) {
+			justify-self: start;
+			max-width: 100%;
+			width: min(100%, 14rem);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline-content,
+		.timeline-content::before,
+		.timeline-content::after,
+		.timeline-content h2,
+		.timeline-subtitle {
+			transition: none;
+			animation: none;
+		}
+	}
+</style>

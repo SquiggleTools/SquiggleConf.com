@@ -24,7 +24,6 @@ import {
 	simonsTheater,
 	talkBlocks,
 	thePrimeagen,
-	timelineFish,
 	timelineMCs,
 	urbanwild1,
 	urbanwild2,
@@ -44,6 +43,8 @@ import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import TalkList from "~/components/home/TalkList.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
+import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
+import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import Registration from "~/components/Registration.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
@@ -62,73 +63,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	</Hero>
 	<DeepSeaSurface>
 		<section class="timeline-section" aria-label="Timeline preview">
-			<div class="timeline-fish-layer" aria-hidden="true">
-				<div class="timeline-fish-shell timeline-fish-shell-1">
-					<div class="timeline-fish-body">
-						<img
-							class="timeline-fish-image"
-							src={timelineFish[0].src}
-							width={timelineFish[0].width}
-							height={timelineFish[0].height}
-							alt=""
-							loading="lazy"
-							decoding="async"
-						/>
-					</div>
-				</div>
-				<div class="timeline-fish-shell timeline-fish-shell-2">
-					<div class="timeline-fish-body">
-						<img
-							class="timeline-fish-image"
-							src={timelineFish[1].src}
-							width={timelineFish[1].width}
-							height={timelineFish[1].height}
-							alt=""
-							loading="lazy"
-							decoding="async"
-						/>
-					</div>
-				</div>
-				<div class="timeline-fish-shell timeline-fish-shell-3">
-					<div class="timeline-fish-body">
-						<img
-							class="timeline-fish-image"
-							src={timelineFish[2].src}
-							width={timelineFish[2].width}
-							height={timelineFish[2].height}
-							alt=""
-							loading="lazy"
-							decoding="async"
-						/>
-					</div>
-				</div>
-				<div class="timeline-fish-shell timeline-fish-shell-4">
-					<div class="timeline-fish-body">
-						<img
-							class="timeline-fish-image"
-							src={timelineFish[3].src}
-							width={timelineFish[3].width}
-							height={timelineFish[3].height}
-							alt=""
-							loading="lazy"
-							decoding="async"
-						/>
-					</div>
-				</div>
-				<div class="timeline-fish-shell timeline-fish-shell-5">
-					<div class="timeline-fish-body">
-						<img
-							class="timeline-fish-image"
-							src={timelineFish[4].src}
-							width={timelineFish[4].width}
-							height={timelineFish[4].height}
-							alt=""
-							loading="lazy"
-							decoding="async"
-						/>
-					</div>
-				</div>
-			</div>
+			<TimelineFishLayer />
 			<h2 class="postcard-heading">the devtools conference</h2>
 			<p class="postcard-intro">
 				SquiggleConf is a conference focused on software developer tools: AI
@@ -210,21 +145,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="timeline-time">6pm</p>
 				</div>
 
-				<div class="timeline-content" data-timeline-entry="launch">
-					<div class="timeline-heading-line">
-						<h2>Launch Party!</h2>
-						<p class="timeline-subtitle timeline-inline-time">6-9pm</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.nedDevines.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Ned Devine's
-						</a>
-					</div>
+				<TimelineEntry
+					entryId="launch"
+					heading="Launch Party!"
+					mobileLocation="Ned Devine's"
+					mobileLocationHref={venues.nedDevines.mapUrl}
+					time="6-9pm"
+					timeMode="range"
+				>
 					<Collage
 						ariaLabel="Launch party collage"
 						class="launchparty-collage"
@@ -245,7 +173,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							start the conference with a little momentum.
 						</p>
 					</TimelineCopy>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-cell-empty" aria-hidden="true"></div>
 				<div class="timeline-cap timeline-top">
@@ -272,45 +200,33 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="timeline-time">7am</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-funrun"
-					data-timeline-entry="fun-run"
+				<TimelineEntry
+					entryId="fun-run"
+					heading="Fun Run"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="7-7:30am"
+					timeMode="range"
+					variant="funRun"
 				>
-					<div class="timeline-title-row">
-						<div class="timeline-title-copy">
-							<div class="timeline-heading-line">
-								<h2>Fun Run</h2>
-								<p class="timeline-subtitle timeline-inline-time">7-7:30am</p>
-							</div>
-							<div class="timeline-mobile-meta">
-								<a
-									class="timeline-mobile-location timeline-location-link"
-									href={venues.aquarium.mapUrl}
-									rel="noreferrer"
-									target="_blank"
-								>
-									New England Aquarium
-								</a>
-							</div>
-						</div>
-						<Collage
-							ariaLabel="Fun run collage"
-							class="funrun-collage funrun-collage-desktop"
-							layout="duo"
-							photos={[
-								{
-									alt: "Fun Run route by the waterfront",
-									objectPosition: "10% 10%",
-									src: funrun1,
-								},
-								{
-									alt: "Runners gathering before the Fun Run",
-									objectPosition: "38% 50%",
-									src: funrun2,
-								},
-							]}
-						/>
-					</div>
+					<Collage
+						ariaLabel="Fun run collage"
+						class="funrun-collage funrun-collage-desktop"
+						layout="duo"
+						photos={[
+							{
+								alt: "Fun Run route by the waterfront",
+								objectPosition: "10% 10%",
+								src: funrun1,
+							},
+							{
+								alt: "Runners gathering before the Fun Run",
+								objectPosition: "38% 50%",
+								src: funrun2,
+							},
+						]}
+						slot="aside"
+					/>
 					<div class="funrun-body">
 						<TimelineCopy>
 							<p>
@@ -338,31 +254,19 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 						/>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail timeline-cell-span-two">
 					<p class="timeline-time">8am</p>
 				</div>
 
-				<div class="timeline-content" data-timeline-entry="check-in">
-					<div class="timeline-heading-line">
-						<h2>Check In</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							8am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
+				<TimelineEntry
+					entryId="check-in"
+					heading="Check In"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="8am"
+				>
 					<TimelineCopy>
 						<p>
 							Pick up your badge, settle in, and grab a terminal.shop coffee
@@ -370,30 +274,16 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						</p>
 						<TerminalShopButton />
 					</TimelineCopy>
-				</div>
+				</TimelineEntry>
 
-				<div
-					class="timeline-content timeline-content-mcs"
-					data-timeline-entry="simons-imax-theater"
+				<TimelineEntry
+					entryId="simons-imax-theater"
+					heading="Talks in an IMAX Theater"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="8am"
+					variant="mcs"
 				>
-					<div class="timeline-heading-line">
-						<h2>Talks in an IMAX Theater</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							8am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<div class="event-body">
 						<div
 							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
@@ -412,88 +302,46 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							<p>Also, a penguin exhibit next door.</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail timeline-cell-span-two">
 					<p class="timeline-time">9am</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-mcs"
-					data-timeline-entry="mcs"
+				<TimelineEntry
+					entryId="mcs"
+					heading="Meet your MCs!"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="9am"
+					variant="mcs"
 				>
-					<div class="timeline-heading-line">
-						<h2>Meet your MCs!</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							9am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<HostList ariaLabel="Conference MCs" hosts={timelineMCs} />
-				</div>
+				</TimelineEntry>
 
-				<div
-					class="timeline-content timeline-content-talks"
-					data-timeline-entry="talks-morning"
+				<TimelineEntry
+					entryId="talks-morning"
+					heading="Talks"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="9am"
+					variant="talks"
 				>
-					<div class="timeline-heading-line">
-						<h2>Talks</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							9am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<TalkList ariaLabel="Speaker talks" talks={talkBlocks.morning} />
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail">
 					<p class="timeline-time">10:30am</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-break"
-					data-timeline-entry="cookies-break"
+				<TimelineEntry
+					entryId="cookies-break"
+					heading="Milk & Cookies Break"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="10:30am"
+					variant="break"
 				>
-					<div class="timeline-heading-line">
-						<h2>Milk &amp; Cookies Break</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							10:30am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<div class="break-body">
 						<Collage
 							ariaLabel="Milk and Cookies break collage"
@@ -516,40 +364,26 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail">
 					<p class="timeline-time">11am</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-talks"
-					data-timeline-entry="talks-late"
+				<TimelineEntry
+					entryId="talks-late"
+					heading="Talks"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="11am"
+					variant="talks"
 				>
-					<div class="timeline-heading-line">
-						<h2>Talks</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							11am
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<TalkList
 						ariaLabel="Late morning talks"
 						short
 						talks={talkBlocks.lateMorning}
 					/>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-venue">
 					<div class="timeline-venue-stack">
@@ -568,28 +402,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="timeline-time">12pm</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-lunch"
-					data-timeline-entry="lunch"
+				<TimelineEntry
+					entryId="lunch"
+					heading="Lunch"
+					mobileLocation="Quincy Market"
+					mobileLocationHref={venues.quincyMarket.mapUrl}
+					time="12pm"
+					variant="lunch"
 				>
-					<div class="timeline-heading-line">
-						<h2>Lunch</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							12pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.quincyMarket.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Quincy Market
-						</a>
-					</div>
 					<div class="lunch-body">
 						<LunchCarousel spots={lunchSpots} />
 						<TimelineCopy class="lunch-copy">
@@ -642,7 +462,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div
 					class="timeline-venue timeline-venue-aquarium-afternoon timeline-cell-span-two"
@@ -670,53 +490,31 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="timeline-time">2pm</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-talks timeline-content-talks-afternoon"
-					data-timeline-entry="talks-afternoon"
+				<TimelineEntry
+					entryId="talks-afternoon"
+					heading="Talks"
+					mobileLocation="New England Aquarium"
+					mobileLocationHref={venues.aquarium.mapUrl}
+					time="2pm"
+					variant="talksAfternoon"
 				>
-					<div class="timeline-heading-line">
-						<h2>Talks</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							2pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							New England Aquarium
-						</a>
-					</div>
 					<TalkList ariaLabel="Afternoon talks" talks={talkBlocks.afternoon} />
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail">
 					<p class="timeline-time">3:30pm</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-explore"
-					data-timeline-entry="explore-boston"
+				<TimelineEntry
+					entryId="explore-boston"
+					heading="Explore Boston"
+					mobileLocation="Boston"
+					subtitle="choose your own adventure"
+					time="3:30pm"
+					variant="explore"
 				>
-					<div class="timeline-heading-line">
-						<h2>Explore Boston</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							3:30pm
-						</p>
-					</div>
-					<p class="timeline-subtitle">choose your own adventure</p>
-					<div class="timeline-mobile-meta">
-						<p class="timeline-mobile-location">Boston</p>
-					</div>
 					<ExploreChoices choices={exploreChoices} />
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-venue timeline-cell-span-five timeline-venue-last">
 					<div class="timeline-venue-stack">
@@ -736,28 +534,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="timeline-time">6pm</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-syntax"
-					data-timeline-entry="arrive-urban-wild"
+				<TimelineEntry
+					entryId="arrive-urban-wild"
+					heading="Arrive at Urban Wild"
+					mobileLocation="Urban Wild Boston"
+					mobileLocationHref={venues.urbanWild.mapUrl}
+					time="6pm"
+					variant="syntax"
 				>
-					<div class="timeline-heading-line">
-						<h2>Arrive at Urban Wild</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							6pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Urban Wild Boston
-						</a>
-					</div>
 					<div class="event-body">
 						<div
 							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
@@ -775,30 +559,16 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
-				<div
-					class="timeline-content timeline-content-syntax"
-					data-timeline-entry="syntax-live"
+				<TimelineEntry
+					entryId="syntax-live"
+					heading="Syntax.fm Live"
+					mobileLocation="Urban Wild Boston"
+					mobileLocationHref={venues.urbanWild.mapUrl}
+					time="6pm"
+					variant="syntax"
 				>
-					<div class="timeline-heading-line">
-						<h2>Syntax.fm Live</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							6pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Urban Wild Boston
-						</a>
-					</div>
 					<div class="event-body">
 						<Collage
 							ariaLabel="Syntax.fm live guests"
@@ -821,34 +591,20 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail">
 					<p class="timeline-time">7pm</p>
 				</div>
 
-				<div
-					class="timeline-content timeline-content-fireside"
-					data-timeline-entry="fireside-chat"
+				<TimelineEntry
+					entryId="fireside-chat"
+					heading="Fireside Chat"
+					mobileLocation="Urban Wild Boston"
+					mobileLocationHref={venues.urbanWild.mapUrl}
+					time="7pm"
+					variant="fireside"
 				>
-					<div class="timeline-heading-line">
-						<h2>Fireside Chat</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							7pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Urban Wild Boston
-						</a>
-					</div>
 					<div class="event-body">
 						<Collage
 							ariaLabel="Fireside chat guests"
@@ -872,27 +628,20 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							<p class="fireside-host">hosted by Dillon Mulroy</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 
 				<div class="timeline-rail timeline-bottom timeline-cell-span-two">
 					<p class="timeline-time">7:30pm</p>
 				</div>
 
-				<div class="timeline-content" data-timeline-entry="after-party">
-					<div class="timeline-heading-line">
-						<h2>After Party</h2>
-						<p class="timeline-subtitle timeline-inline-time">7:30-9pm</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Urban Wild Boston
-						</a>
-					</div>
+				<TimelineEntry
+					entryId="after-party"
+					heading="After Party"
+					mobileLocation="Urban Wild Boston"
+					mobileLocationHref={venues.urbanWild.mapUrl}
+					time="7:30-9pm"
+					timeMode="range"
+				>
 					<Collage
 						ariaLabel="After party collage"
 						class="afterparty-collage"
@@ -913,27 +662,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							just met at the conference!
 						</p>
 					</TimelineCopy>
-				</div>
+				</TimelineEntry>
 
-				<div class="timeline-content" data-timeline-entry="big-rav">
-					<div class="timeline-heading-line">
-						<h2>Big Rav</h2>
-						<p
-							class="timeline-subtitle timeline-inline-time timeline-inline-time-point"
-						>
-							9pm
-						</p>
-					</div>
-					<div class="timeline-mobile-meta">
-						<a
-							class="timeline-mobile-location timeline-location-link"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Urban Wild Boston
-						</a>
-					</div>
+				<TimelineEntry
+					entryId="big-rav"
+					heading="Big Rav"
+					mobileLocation="Urban Wild Boston"
+					mobileLocationHref={venues.urbanWild.mapUrl}
+					time="9pm"
+				>
 					<div class="event-body">
 						<div class="event-hero-image event-hero-image-circle">
 							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
@@ -949,7 +686,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 						</TimelineCopy>
 					</div>
-				</div>
+				</TimelineEntry>
 			</div>
 		</section>
 		<Registration />
@@ -1253,27 +990,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	.postcard-stack-flip:focus-within .postcard-note-back {
 		opacity: 1;
 	}
-
-	@keyframes timeline-card-outline-flash {
-		0% {
-			opacity: 0;
-			transform: scale(0.992);
-		}
-
-		22% {
-			opacity: 0.48;
-		}
-
-		68% {
-			opacity: 0.22;
-		}
-
-		100% {
-			opacity: 0;
-			transform: scale(1.004);
-		}
-	}
-
 	@media (max-width: 46rem) {
 		.postcard-gallery {
 			flex-direction: column;
@@ -1316,154 +1032,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
 			opacity: 1;
-		}
-	}
-
-	.timeline-fish-layer {
-		inset: clamp(0.65rem, 2vw, 1.65rem) 0 auto;
-		pointer-events: none;
-		position: absolute;
-		z-index: 1;
-		top: 50px;
-	}
-
-	.timeline-fish-shell {
-		top: 10px;
-		left: 0;
-		opacity: 0;
-		filter: drop-shadow(0 0.7rem 1.3rem rgba(6, 17, 33, 0.18));
-		pointer-events: none;
-		position: absolute;
-		transform: translate3d(-3rem, 0, 0);
-		transform-origin: center;
-		user-select: none;
-		will-change: opacity, transform;
-	}
-
-	.timeline-fish-body {
-		animation: timeline-fish-swim 2480ms cubic-bezier(0.45, 0.05, 0.55, 0.95)
-			infinite;
-		transform-origin: var(--fish-origin-x, 26%) 50%;
-		will-change: transform;
-	}
-
-	.timeline-fish-image {
-		display: block;
-		height: 100%;
-		max-width: none;
-		width: auto;
-	}
-
-	.timeline-fish-shell-1 {
-		--fish-base-opacity: 0.96;
-		--fish-origin-x: 24%;
-		height: clamp(0.42rem, 0.68vw, 0.6rem);
-		left: 0.05rem;
-		top: 0.03rem;
-	}
-
-	.timeline-fish-shell-2 {
-		--fish-base-opacity: 0.84;
-		--fish-origin-x: 28%;
-		height: clamp(0.38rem, 0.6vw, 0.5rem);
-		left: 0.05rem;
-		top: 0.4rem;
-	}
-
-	.timeline-fish-shell-3 {
-		--fish-base-opacity: 0.88;
-		--fish-origin-x: 25%;
-		height: clamp(0.4rem, 0.63vw, 0.53rem);
-		left: 0.05rem;
-		top: 0.65rem;
-	}
-
-	.timeline-fish-shell-4 {
-		--fish-base-opacity: 0.78;
-		--fish-origin-x: 23%;
-		height: clamp(0.5rem, 0.79vw, 0.69rem);
-		left: 0.08rem;
-		top: 0.19rem;
-	}
-
-	.timeline-fish-shell-5 {
-		--fish-base-opacity: 0.82;
-		--fish-origin-x: 27%;
-		height: clamp(0.52rem, 0.8vw, 0.72rem);
-		left: 0;
-		top: 0.55rem;
-	}
-
-	.timeline-fish-shell-2 .timeline-fish-body,
-	.timeline-fish-shell-5 .timeline-fish-body {
-		animation-delay: -1.1s;
-		animation-duration: 2760ms;
-		animation-name: timeline-fish-swim-wide;
-	}
-
-	.timeline-fish-shell-3 .timeline-fish-body {
-		animation-delay: -0.65s;
-		animation-duration: 2310ms;
-	}
-
-	.timeline-fish-shell-4 .timeline-fish-body {
-		animation-delay: -1.45s;
-		animation-duration: 2920ms;
-		animation-direction: reverse;
-	}
-
-	@keyframes timeline-fish-swim {
-		0% {
-			transform: rotate(-5deg) skewY(-2deg) scaleX(0.985) scaleY(1.02);
-		}
-
-		18% {
-			transform: translate3d(0.2rem, -0.08rem, 0) rotate(1deg) skewY(2deg)
-				scaleX(1.035) scaleY(0.98);
-		}
-
-		37% {
-			transform: translate3d(0, 0, 0) rotate(6deg) skewY(0deg) scaleX(0.995)
-				scaleY(1.01);
-		}
-
-		62% {
-			transform: translate3d(-0.14rem, 0.09rem, 0) rotate(0deg) skewY(-2deg)
-				scaleX(1.03) scaleY(0.982);
-		}
-
-		82% {
-			transform: translate3d(0.14rem, -0.05rem, 0) rotate(-6deg) skewY(1.5deg)
-				scaleX(0.99) scaleY(1.02);
-		}
-
-		100% {
-			transform: rotate(-5deg) skewY(-2deg) scaleX(0.985) scaleY(1.02);
-		}
-	}
-
-	@keyframes timeline-fish-swim-wide {
-		0% {
-			transform: rotate(-6deg) skewY(-2.5deg) scaleX(0.98) scaleY(1.025);
-		}
-
-		22% {
-			transform: translate3d(0.24rem, -0.11rem, 0) rotate(2deg) skewY(3deg)
-				scaleX(1.045) scaleY(0.975);
-		}
-
-		48% {
-			transform: translate3d(0, 0, 0) rotate(8deg) skewY(0deg) scaleX(0.995)
-				scaleY(1.01);
-		}
-
-		72% {
-			transform: translate3d(-0.18rem, 0.12rem, 0) rotate(-1deg) skewY(-2.5deg)
-				scaleX(1.04) scaleY(0.975);
-		}
-
-		100% {
-			transform: rotate(-6deg) skewY(-2.5deg) scaleX(0.98) scaleY(1.025);
 		}
 	}
 
@@ -1654,245 +1222,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		text-shadow: var(--timeline-time-shadow);
 		text-align: center;
 	}
-
-	.timeline-content {
-		--timeline-card-pointer-x: 50%;
-		--timeline-card-pointer-y: 50%;
-		isolation: isolate;
-		margin: 1rem 0;
-		padding: 1.5rem 0.5rem 1.5rem 2rem;
-		position: relative;
-		transition: transform var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-content > * {
-		position: relative;
-		z-index: 1;
-	}
-
-	.timeline-content::before {
-		border: 1px solid rgba(255, 255, 255, 0.04);
-		border-radius: 1rem;
-		box-shadow: none;
-		content: "";
-		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
-		opacity: 0.22;
-		pointer-events: none;
-		position: absolute;
-		transform: scale(0.985);
-		z-index: 0;
-		transition:
-			opacity var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease,
-			border-color var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-content::after {
-		background: radial-gradient(
-			circle 25rem at var(--timeline-card-pointer-x)
-				var(--timeline-card-pointer-y),
-			color-mix(in srgb, var(--colorBlue2) 92%, white 8%) 0,
-			color-mix(in srgb, var(--colorBlue2) 52%, transparent) 28%,
-			transparent 60%
-		);
-		border-radius: 1rem;
-		content: "";
-		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
-		opacity: 0;
-		padding: 3px;
-		pointer-events: none;
-		position: absolute;
-		z-index: 0;
-		transition: opacity var(--timeline-hover-duration) ease;
-		-webkit-mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-	}
-
-	.timeline-content:hover,
-	.timeline-content:focus-within {
-		transform: translateX(0.3rem);
-	}
-
-	.timeline-content:hover::before,
-	.timeline-content:focus-within::before {
-		background: linear-gradient(
-			135deg,
-			rgba(255, 255, 255, 0.13),
-			rgba(255, 255, 255, 0.03)
-		);
-		box-shadow:
-			inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-			0 1rem 2rem rgba(7, 20, 38, 0.14);
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	.timeline-content:hover::after,
-	.timeline-content:focus-within::after {
-		opacity: 1;
-	}
-
-	.timeline-content-funrun {
-		min-height: 10rem;
-		padding-top: 1.2rem;
-	}
-
-	.timeline-content-mcs {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content-talks,
-	.timeline-content-break {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content-break {
-		min-height: 14rem;
-	}
-
-	.timeline-content-lunch {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content-talks-afternoon {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content-explore {
-		padding-top: 1.35rem;
-	}
-
-	.timeline-content h2 {
-		color: var(--timeline-heading-color);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
-		font-weight: 700;
-		line-height: 1;
-		margin: 0;
-		transition:
-			color var(--timeline-hover-duration) ease,
-			text-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-heading-line {
-		align-items: baseline;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem 0.7rem;
-		margin-bottom: 1.1rem;
-	}
-
-	.timeline-content:hover h2,
-	.timeline-content:focus-within h2 {
-		color: white;
-		text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
-		transform: translateX(0.08rem);
-	}
-
-	.timeline-title-row {
-		align-items: start;
-		display: inline-flex;
-		gap: 0.6rem;
-		justify-content: flex-start;
-		min-height: 5.75rem;
-		width: fit-content;
-	}
-
-	.timeline-content-funrun .timeline-title-row {
-		position: relative;
-	}
-
-	.timeline-title-copy {
-		display: grid;
-		gap: 0.3rem;
-		justify-items: start;
-	}
-
-	.timeline-content-funrun .timeline-subtitle {
-		margin: 0;
-	}
-
 	.funrun-body {
 		position: relative;
 	}
-
-	.timeline-content-funrun .timeline-copy {
-		max-width: 50%;
-	}
-
-	.timeline-subtitle {
-		color: var(--timeline-muted-color);
-		display: block;
-		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
-		font-weight: 500;
-		margin: 0.32rem 0 1.1rem;
-		transition: color var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-inline-time {
-		display: inline-block;
-		margin: 0;
-	}
-
-	.timeline-inline-time-point {
-		display: none;
-	}
-
-	.timeline-mobile-meta {
-		display: none;
-	}
-
-	.timeline-mobile-meta :is(p, a) {
-		margin: 0;
-	}
-
-	.timeline-mobile-location {
-		color: var(--timeline-muted-color);
-		font-size: 0.95rem;
-		font-weight: 500;
-		line-height: 1.2;
-		transition: color var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-content:hover .timeline-subtitle,
-	.timeline-content:focus-within .timeline-subtitle,
-	.timeline-content:hover .timeline-mobile-location,
-	.timeline-content:focus-within .timeline-mobile-location {
-		color: rgba(255, 255, 255, 0.88);
-	}
-
-	.timeline-content .event-hero-image:not(.event-hero-image-pinned) {
-		transform-origin: center;
-		transition:
-			scale var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		will-change: scale;
-	}
-
-	.timeline-content .event-hero-image {
-		transform-origin: top right;
-	}
-
-	.timeline-content:hover .event-hero-image:not(.event-hero-image-pinned),
-	.timeline-content:focus-within
-		.event-hero-image:not(.event-hero-image-pinned) {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		scale: 1.25;
-	}
-
-	.timeline-content .event-hero-image-pinned {
-		transition: box-shadow var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-content:hover .event-hero-image-pinned,
-	.timeline-content:focus-within .event-hero-image-pinned {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-	}
-
 	.timeline-section .event-hero-image {
 		background: white;
 		border: var(--timeline-image-border-width) solid
@@ -1901,45 +1233,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		box-sizing: border-box;
 		overflow: hidden;
 	}
-
-	.timeline-content
-		.event-hero-image:not(.event-hero-image-pinned)
-		:is(img, :global(img)) {
-		transition: filter var(--timeline-hover-duration) ease;
-		transform: none;
-		will-change: auto;
-	}
-
-	.timeline-content .event-hero-image-pinned :is(img, :global(img)) {
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		transform: scale(1);
-		transform-origin: center;
-		will-change: transform;
-	}
-
-	.timeline-content .event-hero-image :is(img, :global(img)) {
-		transform: none;
-		transform-origin: top right;
-	}
-
-	.timeline-content:hover
-		.event-hero-image:not(.event-hero-image-pinned)
-		:is(img, :global(img)),
-	.timeline-content:focus-within
-		.event-hero-image:not(.event-hero-image-pinned)
-		:is(img, :global(img)) {
-		transform: none;
-	}
-
-	.timeline-content:hover .event-hero-image-pinned :is(img, :global(img)),
-	.timeline-content:focus-within
-		.event-hero-image-pinned
-		:is(img, :global(img)) {
-		transform: scale(1.1);
-	}
-
 	.timeline-top {
 		margin-top: 1rem;
 		border-top-right-radius: 8px;
@@ -1956,13 +1249,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		gap: 0.45rem;
 		max-width: 46rem;
 	}
-
-	.timeline-content-syntax .timeline-copy,
-	.timeline-content-fireside .timeline-copy {
-		align-content: center;
-		align-self: center;
-	}
-
 	.timeline-copy p {
 		color: var(--timeline-copy-color);
 		font-size: clamp(0.95rem, 1.35vw, 1rem);
@@ -1971,12 +1257,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		max-width: 62ch;
 		transition: color var(--timeline-hover-duration) ease;
 	}
-
-	.timeline-content:hover .timeline-copy p,
-	.timeline-content:focus-within .timeline-copy p {
-		color: rgba(255, 255, 255, 0.9);
-	}
-
 	.timeline-venue-decoration {
 		pointer-events: none;
 		position: absolute;
@@ -2092,6 +1372,11 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	@media (width < 900px) {
+		.event-body {
+			display: flex;
+			flex-direction: column;
+		}
+
 		.timeline-grid {
 			gap: 0.65rem;
 			grid-template-columns: 1fr;
@@ -2123,39 +1408,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.timeline-venue,
 		.timeline-rail {
 			display: none;
-		}
-
-		.timeline-fish-layer {
-			display: none;
-		}
-
-		.timeline-content {
-			margin: 0.85rem 0;
-			padding-bottom: 1rem;
-			padding-left: 0.85rem;
-			padding-right: 0.75rem;
-		}
-
-		.timeline-mobile-meta {
-			display: grid;
-			gap: 0.15rem;
-			margin: -0.6rem 0 1rem;
-		}
-
-		.timeline-inline-time-point {
-			display: inline-block;
-		}
-
-		.timeline-title-copy .timeline-mobile-meta {
-			margin-top: -0.15rem;
-		}
-
-		.timeline-content::before {
-			inset: 0.15rem -0.02rem 0.28rem;
-		}
-
-		.timeline-content::after {
-			inset: 0.15rem -0.02rem 0.28rem;
 		}
 
 		.postcard-stack-flip:hover,
@@ -2208,109 +1460,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
 			opacity: 1;
 		}
-
-		.timeline-content:hover::before,
-		.timeline-content:focus-within::before {
-			background: none;
-			box-shadow: none;
-			opacity: 0.22;
-			transform: scale(0.985);
-		}
-
-		.timeline-content:hover::after,
-		.timeline-content:focus-within::after {
-			animation: none;
-			opacity: 0;
-			transform: none;
-		}
-
-		.timeline-content:hover h2,
-		.timeline-content:focus-within h2 {
-			color: var(--timeline-heading-color);
-			text-shadow: none;
-			transform: none;
-		}
-
-		.timeline-content:hover .timeline-subtitle,
-		.timeline-content:focus-within .timeline-subtitle,
-		.timeline-content:hover .timeline-mobile-location,
-		.timeline-content:focus-within .timeline-mobile-location {
-			color: var(--timeline-muted-color);
-		}
-
-		.timeline-content:hover .timeline-copy p,
-		.timeline-content:focus-within .timeline-copy p {
-			color: var(--timeline-copy-color);
-		}
-
-		.timeline-content:hover .event-hero-image,
-		.timeline-content:focus-within .event-hero-image {
-			border-width: var(--timeline-image-border-width);
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			scale: 1;
-		}
-
-		.timeline-content:hover .event-hero-image-pinned :is(img, :global(img)),
-		.timeline-content:focus-within
-			.event-hero-image-pinned
-			:is(img, :global(img)) {
-			transform: scale(1);
-		}
-
-		.timeline-content[data-mobile-active="true"]::before {
-			background: linear-gradient(
-				135deg,
-				rgba(255, 255, 255, 0.13),
-				rgba(255, 255, 255, 0.03)
-			);
-			box-shadow:
-				inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-				0 0.85rem 1.8rem rgba(7, 20, 38, 0.16);
-			opacity: 1;
-			transform: scale(1);
-		}
-
-		.timeline-content[data-mobile-active="true"]::after {
-			animation: timeline-card-outline-flash 1600ms
-				cubic-bezier(0.22, 1, 0.36, 1) 1;
-			background: linear-gradient(
-				135deg,
-				rgba(197, 237, 255, 0.5),
-				rgba(255, 255, 255, 0.42)
-			);
-			opacity: 0;
-			padding: 1.5px;
-			transform: scale(1);
-			transform-origin: center;
-		}
-
-		.timeline-content[data-mobile-active="true"] h2 {
-			color: white;
-			text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
-		}
-
-		.timeline-content[data-mobile-active="true"] .timeline-subtitle,
-		.timeline-content[data-mobile-active="true"] .timeline-mobile-location,
-		.timeline-content[data-mobile-active="true"] .timeline-copy p {
-			color: rgba(255, 255, 255, 0.9);
-		}
-
-		.timeline-content[data-mobile-active="true"]
-			.event-hero-image:not(.event-hero-image-pinned) {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-			scale: 1.12;
-		}
-
-		.timeline-content[data-mobile-active="true"] .event-hero-image-pinned {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		}
-
-		.timeline-content[data-mobile-active="true"]
-			.event-hero-image-pinned
-			:is(img, :global(img)) {
-			transform: scale(1.07);
-		}
-
 		.break-body {
 			grid-template-columns: 1fr;
 		}
@@ -2323,44 +1472,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.lunch-copy {
 			padding-top: 0;
 		}
-
-		.timeline-title-row {
-			align-items: flex-start;
-			gap: 0.65rem;
-			display: flex;
-			flex-direction: column;
-			min-height: auto;
-			width: auto;
-		}
-
-		.timeline-title-copy {
-			justify-items: start;
-		}
-
-		.timeline-content-funrun .timeline-copy {
-			margin-top: 0.15rem;
-			max-width: none;
-		}
-
 		.funrun-body {
 			align-items: start;
 			column-gap: 0.9rem;
 			display: grid;
 			grid-template-columns: minmax(0, 1fr) 8rem;
 		}
-
-		.timeline-content[data-timeline-entry="simons-imax-theater"] .event-body {
-			grid-template-columns: 1fr;
-			gap: 0.85rem;
-		}
-
-		.timeline-content[data-timeline-entry="simons-imax-theater"]
-			.event-hero-image-wide {
-			justify-self: start;
-			max-width: 100%;
-			width: min(100%, 14rem);
-		}
-
 		.timeline-venue-decoration-turtle {
 			transform: scale(0.82) rotate(4deg);
 			transform-origin: bottom right;
@@ -2373,14 +1490,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.postcard-flip-inner,
 		.timeline-venue,
 		.timeline-venue-stack,
-		.timeline-venue-decoration,
-		.timeline-content,
-		.timeline-content::before,
-		.timeline-content::after,
-		.timeline-content h2,
-		.timeline-subtitle,
-		.timeline-copy p,
-		.timeline-fish-body {
+		.timeline-venue-decoration {
 			transition: none;
 			animation: none;
 		}
