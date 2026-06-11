@@ -36,7 +36,7 @@ import { terminalShop } from "~/components/home/data";
 			inset 0 1px 0 rgba(255, 255, 255, 0.2),
 			0 1rem 2rem rgba(255, 94, 0, 0.16),
 			0 0 0 1px rgba(255, 94, 0, 0.12);
-		color: #f7fbff;
+		color: var(--colorBlue5);
 		display: inline-flex;
 		gap: 0.7rem;
 		height: fit-content;
@@ -82,5 +82,9 @@ import { terminalShop } from "~/components/home/data";
 		font-weight: var(--fontWeightSemibold);
 		letter-spacing: 0.03em;
 		line-height: 1;
+	}
+
+	:global(html.dark) .timeline-checkin-button {
+		color: #f7fbff;
 	}
 </style>
