@@ -1,6 +1,7 @@
 <div class="private-preview-banner" aria-label="Private preview notice">
 	Private Preview - Names are non-confirmed examples. Please do not share!
 </div>
+<div class="private-preview-banner-holder"></div>
 
 <style>
 	.private-preview-banner {
@@ -10,10 +11,10 @@
 			inset 0 -1px 0 rgba(109, 0, 53, 0.22);
 		color: #fff8fc;
 		font-family: var(--fontFamilyHeading);
-		font-size: 1rem;
+		font-size: clamp(0.8rem, 2.5vw, 1.5rem);
 		font-weight: 800;
 		letter-spacing: 0.22em;
-		padding: 0.75rem 1rem;
+		padding: clamp(1rem, 1.5vw, 1.25rem) 1rem;
 		position: relative;
 		text-align: center;
 		text-transform: uppercase;
@@ -23,7 +24,6 @@
 
 	@media (width < 900px) {
 		.private-preview-banner {
-			font-size: 0.66rem;
 			padding: 0.65rem 0.8rem;
 		}
 	}
