@@ -1371,12 +1371,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		font-style: italic;
 	}
 
-	@media (width < 900px) {
+	@media (width < 630px) {
 		.event-body {
 			display: flex;
 			flex-direction: column;
 		}
+	}
 
+	@media (width < 900px) {
 		.timeline-grid {
 			gap: 0.65rem;
 			grid-template-columns: 1fr;

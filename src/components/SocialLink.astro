@@ -28,7 +28,12 @@ const {
 	href={href}
 	target="_blank"
 >
-	<Image alt={alt} class:list={["social-image", size]} src={src} />
+	<Image
+		alt={alt}
+		class:list={["social-image", size]}
+		fit="contain"
+		src={src}
+	/>
 </a>
 
 <style>
