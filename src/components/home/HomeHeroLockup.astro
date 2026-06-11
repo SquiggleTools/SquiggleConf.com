@@ -1,19 +1,9 @@
 ---
-import squiggleConfLogoRaw from "~/assets/2027/SquiggleConf-Logo.svg?raw";
-
-const squiggleConfLogoSvg = squiggleConfLogoRaw.replace(
-	'fill="white"',
-	'fill="var(--hero-logo-fill, white)"',
-);
+import LogoBold from "../LogoBold.astro";
 ---
 
 <div class="hero-intro">
-	<div
-		class="hero-logo"
-		aria-label="SquiggleConf"
-		role="img"
-		set:html={squiggleConfLogoSvg}
-	/>
+	<LogoBold size="large" />
 	<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
 </div>
 

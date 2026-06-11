@@ -7,15 +7,7 @@ import { timelineFish } from "~/components/home/data";
 		timelineFish.map((fish, index) => (
 			<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
 				<div class="timeline-fish-body">
-					<img
-						class="timeline-fish-image"
-						src={fish.src}
-						width={fish.width}
-						height={fish.height}
-						alt=""
-						loading="lazy"
-						decoding="async"
-					/>
+					<span class="timeline-fish-image" set:html={fish} />
 				</div>
 			</div>
 		))
@@ -24,11 +16,26 @@ import { timelineFish } from "~/components/home/data";
 
 <style>
 	.timeline-fish-layer {
+		--timeline-fish-body: #116d9a;
+		--timeline-fish-body-alt: #1f7fab;
+		--timeline-fish-detail: #38ced6;
+		--timeline-fish-eye: #041930;
+		--timeline-fish-fin: #063052;
+		--timeline-fish-opacity: 0.78;
 		inset: clamp(0.65rem, 2vw, 1.65rem) 0 auto;
 		pointer-events: none;
 		position: absolute;
 		z-index: 1;
 		top: 50px;
+	}
+
+	:global(html.dark) .timeline-fish-layer {
+		--timeline-fish-body: #f5f4f2;
+		--timeline-fish-body-alt: #c5e2d6;
+		--timeline-fish-detail: #8ac0cc;
+		--timeline-fish-eye: #274238;
+		--timeline-fish-fin: #6a8b91;
+		--timeline-fish-opacity: 1;
 	}
 
 	.timeline-fish-shell {
@@ -55,7 +62,35 @@ import { timelineFish } from "~/components/home/data";
 		display: block;
 		height: 100%;
 		max-width: none;
+		opacity: var(--timeline-fish-opacity);
+		width: max-content;
+	}
+
+	.timeline-fish-image :global(svg) {
+		display: block;
+		height: 100%;
+		overflow: visible;
 		width: auto;
+	}
+
+	.timeline-fish-image :global([fill="#F5F4F2"]) {
+		fill: var(--timeline-fish-body);
+	}
+
+	.timeline-fish-image :global([fill="#C5E2D6"]) {
+		fill: var(--timeline-fish-body-alt);
+	}
+
+	.timeline-fish-image :global([fill="#6A8B91"]) {
+		fill: var(--timeline-fish-fin);
+	}
+
+	.timeline-fish-image :global([fill="#8AC0CC"]) {
+		fill: var(--timeline-fish-detail);
+	}
+
+	.timeline-fish-image :global([fill="#274238"]) {
+		fill: var(--timeline-fish-eye);
 	}
 
 	.timeline-fish-shell-1 {

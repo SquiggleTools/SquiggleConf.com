@@ -15,7 +15,7 @@ const yearPairs =
 		? years
 				.filter((year) => year !== currentYear)
 				.map((year) => [`/${year}`, year] as const)
-		: ([["/", 2025]] as const);
+		: ([["/", currentYear]] as const);
 ---
 
 <footer>

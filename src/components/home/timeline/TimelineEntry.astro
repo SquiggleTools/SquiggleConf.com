@@ -254,7 +254,7 @@ const hasAside = Astro.slots.has("aside");
 
 	.timeline-content:hover h2,
 	.timeline-content:focus-within h2 {
-		color: white;
+		color: var(--timeline-heading-hover-color, white);
 		text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
 		transform: translateX(0.08rem);
 	}
@@ -320,7 +320,7 @@ const hasAside = Astro.slots.has("aside");
 	.timeline-content:focus-within .timeline-subtitle,
 	.timeline-content:hover .timeline-mobile-location,
 	.timeline-content:focus-within .timeline-mobile-location {
-		color: rgba(255, 255, 255, 0.88);
+		color: var(--timeline-muted-hover-color, rgba(255, 255, 255, 0.88));
 	}
 
 	.timeline-content :global(.event-hero-image:not(.event-hero-image-pinned)) {
@@ -397,7 +397,7 @@ const hasAside = Astro.slots.has("aside");
 
 	.timeline-content:hover :global(.timeline-copy p),
 	.timeline-content:focus-within :global(.timeline-copy p) {
-		color: rgba(255, 255, 255, 0.9);
+		color: var(--timeline-copy-hover-color, rgba(255, 255, 255, 0.9));
 	}
 
 	/* Collage hover effects */
@@ -617,14 +617,17 @@ const hasAside = Astro.slots.has("aside");
 		}
 
 		.timeline-content[data-mobile-active="true"] h2 {
-			color: white;
+			color: var(--timeline-heading-hover-color, white);
 			text-shadow: 0 0.3rem 1rem rgba(6, 17, 33, 0.24);
 		}
 
 		.timeline-content[data-mobile-active="true"] .timeline-subtitle,
-		.timeline-content[data-mobile-active="true"] .timeline-mobile-location,
+		.timeline-content[data-mobile-active="true"] .timeline-mobile-location {
+			color: var(--timeline-muted-hover-color, rgba(255, 255, 255, 0.9));
+		}
+
 		.timeline-content[data-mobile-active="true"] :global(.timeline-copy p) {
-			color: rgba(255, 255, 255, 0.9);
+			color: var(--timeline-copy-hover-color, rgba(255, 255, 255, 0.9));
 		}
 
 		.timeline-content[data-mobile-active="true"]
