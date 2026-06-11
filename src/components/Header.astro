@@ -4,6 +4,7 @@ import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
 import { currentYear } from "~/data/years";
+import ThemeToggle from "./ThemeToggle.astro";
 
 function hrefProps(pathname: string) {
 	return {
@@ -64,19 +65,22 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 			)
 		}
 		<div class="header-links">
-			{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
-			<a {...hrefProps("/articles")}>Articles</a>
-			{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
-			{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
-			{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
-			{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
-			<Button
-				as="a"
-				class="header-button"
-				href={links.tickets}
-				target="_blank"
-				variant="accent">2027 Tickets</Button
-			>
+			<ThemeToggle placement="inline" />
+			<div class="header-links-inner">
+				{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
+				<a {...hrefProps("/articles")}>Articles</a>
+				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
+				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
+				{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
+				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
+				<Button
+					as="a"
+					class="header-button"
+					href={links.tickets}
+					target="_blank"
+					variant="accent">2027 Tickets</Button
+				>
+			</div>
 		</div>
 	</ContentArea>
 </header>
@@ -210,10 +214,18 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 	}
 
 	.header-links {
-		display: flex;
 		align-items: center;
+		display: flex;
+		width: 100%;
+	}
+
+	.header-links-inner {
+		align-items: center;
+		display: flex;
 		font-weight: var(--fontWeightLight);
 		gap: clamp(0.55rem, 1.25vw, 2rem);
+		justify-content: flex-end;
+		width: 100%;
 	}
 
 	.header-links a,
