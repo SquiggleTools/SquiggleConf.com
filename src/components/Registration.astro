@@ -45,10 +45,14 @@ import Arrow from "./Arrow.astro";
 	.squiggle-thick-wide {
 		height: 100%;
 		left: 0;
-		opacity: 0.22;
+		opacity: 0.2;
 		top: 0%;
 		width: 100%;
 		z-index: 0;
+	}
+
+	:global(html.dark) .squiggle-thick-wide {
+		opacity: 0.035;
 	}
 
 	.manta-down {
