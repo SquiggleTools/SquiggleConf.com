@@ -91,7 +91,6 @@ export type TimelineLocationRef = { label: string } | { venueId: VenueId };
 export type TimelineTimeMode = "point" | "range";
 
 export interface VenueData {
-	addressLines?: readonly string[];
 	id: VenueId;
 	mapUrl: string;
 	mobileLabel?: string;

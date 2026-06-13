@@ -1,3 +1,9 @@
+---
+import { Image } from "astro:assets";
+
+import { postcardBack, postcardFront } from "~/components/home/data";
+---
+
 <div
 	class="postcard-gallery"
 	style="--postcard-back-width: 21rem; --postcard-front-scale: 1.5;"
@@ -285,6 +291,7 @@
 	.postcard-stack-flip:focus-within .postcard-note-back {
 		opacity: 1;
 	}
+
 	@media (max-width: 46rem) {
 		.postcard-gallery {
 			flex-direction: column;

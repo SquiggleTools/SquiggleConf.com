@@ -194,12 +194,6 @@ export const exploreChoices = [
 
 export const venues = {
 	aquarium: {
-		addressLines: [
-			"New England Aquarium",
-			"Simons Theater",
-			"1 Central Wharf",
-			"Boston, MA 02110",
-		],
 		id: "aquarium",
 		mapUrl: "https://maps.app.goo.gl/FodmfsLGZYALV1Hh9",
 		name: "New England Aquarium",
