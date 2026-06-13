@@ -5,8 +5,7 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 <button
 	aria-label="Theme toggle (enable JavaScript to use)"
-	class="theme-button"
-	id="themeToggle"
+	class="theme-toggle"
 >
 	<img alt="" class="moon" src={themeMoon.src} />
 	<img alt="" class="sun" src={themeSun.src} />
@@ -14,7 +13,7 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 <script>
 	const html = () => document.documentElement!;
-	const toggle = () => document.getElementById("themeToggle")!;
+	const toggles = () => document.querySelectorAll(".theme-toggle")!;
 
 	function getThemePreference() {
 		return matchMedia("(prefers-color-scheme: dark)").matches
@@ -29,7 +28,9 @@ import themeSun from "~/assets/design/theme-sun.svg";
 			html().classList.add("dark");
 		}
 
-		toggle().setAttribute("aria-label", `Theme toggle (current: ${newTheme})`);
+		for (const toggle of toggles()) {
+			toggle.setAttribute("aria-label", `Theme toggle (current: ${newTheme})`);
+		}
 	}
 
 	function initialize() {
@@ -42,11 +43,13 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 		updateElementsForTheme(theme);
 
-		toggle().addEventListener("click", () => {
-			const newTheme = html().classList.contains("dark") ? "light" : "dark";
-			updateElementsForTheme(newTheme);
-			localStorage.setItem("theme", newTheme);
-		});
+		for (const toggle of toggles()) {
+			toggle.addEventListener("click", () => {
+				const newTheme = html().classList.contains("dark") ? "light" : "dark";
+				updateElementsForTheme(newTheme);
+				localStorage.setItem("theme", newTheme);
+			});
+		}
 	}
 
 	initialize();
@@ -56,20 +59,20 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 <style>
 	.theme-toggle {
-		opacity: 0.9;
-	}
-
-	.theme-button {
 		background: none;
 		border: transparent;
 		cursor: pointer;
-	}
-
-	#themeToggle {
 		font-size: 1.5rem;
 		height: 2rem;
+		opacity: 0.7;
 		position: relative;
+		transition: var(--transitionFast) opacity;
 		width: 2.25rem;
+	}
+
+	.theme-toggle:focus-within,
+	.theme-toggle:hover {
+		opacity: 1;
 	}
 
 	img {

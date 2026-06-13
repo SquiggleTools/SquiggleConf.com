@@ -71,6 +71,7 @@
 	--sizeContentAreaWide: 75rem;
 	--sizeScrollMarginTop: 2rem;
 
+	--transitionFast: 140ms;
 	--transitionMedium: 280ms;
 
 	color-scheme: light;
