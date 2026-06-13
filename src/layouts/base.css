@@ -73,6 +73,7 @@
 
 	--transitionFast: 140ms;
 	--transitionMedium: 280ms;
+	--transitionBackground: var(--transitionFast);
 
 	color-scheme: light;
 }

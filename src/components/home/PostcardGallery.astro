@@ -36,10 +36,10 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 							</span>
 						</span>
 						<span class="postcard-back-address">
-							<span>New England Aquarium</span>
-							<span>Simons Theater</span>
-							<span>1 Central Wharf</span>
-							<span>Boston, MA 02110</span>
+							<span class="postcard-back-line">New England Aquarium</span>
+							<span class="postcard-back-line">Simons Theater</span>
+							<span class="postcard-back-line">1 Central Wharf</span>
+							<span class="postcard-back-line">Boston, MA 02110</span>
 						</span>
 					</span>
 					<span class="postcard-note postcard-note-back"
@@ -258,11 +258,27 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		text-align: left;
 	}
 
-	.postcard-back-address span {
+	.postcard-back-line {
+		display: inline-block;
+		position: relative;
 		font-family: "Shantell Sans", cursive;
 		font-size: 0.8rem;
 		font-weight: 400;
-		line-height: 1.7;
+		line-height: 1.1;
+		padding-bottom: 0.35rem;
+		margin-top: 0.5rem;
+	}
+
+	.postcard-back-line::after {
+		border-bottom: 1px solid #585858;
+		content: " ";
+		display: block;
+		filter: blur(0.75px);
+		left: -5%;
+		bottom: 0.3rem;
+		height: 2px;
+		position: absolute;
+		width: 140%;
 	}
 
 	.postcard-note {
