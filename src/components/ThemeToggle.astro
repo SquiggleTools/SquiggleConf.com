@@ -12,9 +12,9 @@ import themeSun from "~/assets/design/theme-sun.svg";
 	<img alt="" class="sun" src={themeSun.src} />
 </button>
 
-<script is:inline>
-	const html = () => document.documentElement;
-	const toggle = () => document.getElementById("themeToggle");
+<script>
+	const html = () => document.documentElement!;
+	const toggle = () => document.getElementById("themeToggle")!;
 
 	function getThemePreference() {
 		return matchMedia("(prefers-color-scheme: dark)").matches
@@ -22,11 +22,8 @@ import themeSun from "~/assets/design/theme-sun.svg";
 			: "light";
 	}
 
-	/**
-	 * @param {string} newTheme
-	 */
-	function updateElementsForTheme(newTheme) {
-		if (newTheme === "light") {
+	function updateElementsForTheme(newTheme: string | string) {
+		if (!newTheme || newTheme === "light") {
 			html().classList.remove("dark");
 		} else {
 			html().classList.add("dark");
@@ -37,7 +34,9 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 	function initialize() {
 		const startingTheme =
-			typeof localStorage !== "undefined" && localStorage.getItem("theme");
+			typeof localStorage !== "undefined"
+				? (localStorage.getItem("theme") as string)
+				: undefined;
 
 		const theme = startingTheme ?? getThemePreference();
 

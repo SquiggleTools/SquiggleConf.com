@@ -19,6 +19,8 @@
 	--colorRed1: #ffbfc2;
 	--colorSandDark: #2c2a29;
 	--colorSandLight: #f7f4f1;
+	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
+	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
 	--colorWhiteIsh: #eaeaf7;
 
 	--colorAccentDark: var(--colorBlue4);
@@ -33,6 +35,7 @@
 	--colorSandBackground: var(--colorSandLight);
 	--colorSandForeground: var(--colorBlackIsh);
 	--colorUnhappy: var(--colorRed1);
+	--colorTextShadow: var(--colorTextShadowLight);
 
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
@@ -101,6 +104,7 @@ html.dark {
 	--colorSandBackground: var(--colorBlue4);
 	--colorSandForeground: var(--colorSandLight);
 	--colorUnhappy: var(--colorRed1);
+	--colorTextShadow: var(--colorTextShadowDark);
 }
 
 @media (prefers-reduced-motion: no-preference) {
