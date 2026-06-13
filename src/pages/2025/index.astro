@@ -1,0 +1,22 @@
+---
+import HeroLocators from "~/components/hero/HeroLocators.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+
+const description = "September 18-19 2025 · Boston New England Aquarium";
+---
+
+<PageLayout description={description} year={2025}>
+	<div class="index-contents">
+		<HeroLocators />
+	</div>
+</PageLayout>
+
+<style>
+	.index-contents {
+		align-items: center;
+		display: flex;
+		gap: 7rem;
+		flex-direction: column;
+		padding: 3.5rem 0;
+	}
+</style>
