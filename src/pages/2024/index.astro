@@ -1,26 +1,18 @@
 ---
-import FunInfo from "~/components/2024/FunInfo.astro";
-import MCs from "~/components/2024/MCs.astro";
-import Partners from "~/components/2024/Partners.astro";
-import PrimaryInfo from "~/components/2024/PrimaryInfo.astro";
 import SpeakersContent from "~/components/2024/SpeakersContent.astro";
 import Sponsors from "~/components/2024/Sponsors.astro";
-import PageLayout2024 from "~/layouts/2024/PageLayout2024.astro";
+import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
 import "~/styles/2024.css";
 
 const description = "October 3-4, 2024 · Boston New England Aquarium";
 ---
 
-<PageLayout2024 description={description}>
+<PageLayoutHistorical description={description}>
 	<div class="index-contents">
-		<PrimaryInfo />
 		<SpeakersContent />
-		<MCs />
 		<Sponsors />
-		<Partners />
-		<FunInfo />
 	</div>
-</PageLayout2024>
+</PageLayoutHistorical>
 
 <style>
 	.index-contents {
@@ -28,7 +20,6 @@ const description = "October 3-4, 2024 · Boston New England Aquarium";
 		display: flex;
 		gap: 7rem;
 		flex-direction: column;
-		padding: 3.5rem 0;
 	}
 
 	.newsletter {

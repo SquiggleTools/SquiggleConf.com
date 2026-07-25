@@ -1,6 +1,6 @@
-<h1 align="center">SquiggleConf 2025</h1>
+<h1 align="center">SquiggleConf</h1>
 
-<p align="center">Website for SquiggleConf 2025: a conference for excellent web dev tooling</p>
+<p align="center">Website for SquiggleConf: a conference for excellent web dev tooling</p>
 
 <p align="center">
 	<!-- prettier-ignore-start -->

@@ -36,8 +36,7 @@ const { heading, squiggly = "medium" }: Props = Astro.props;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		margin-bottom: 2rem;
-		padding: 3.5rem 0 5rem;
+		padding: 1.5rem 0 3.5rem;
 		text-align: center;
 	}
 
@@ -54,11 +53,5 @@ const { heading, squiggly = "medium" }: Props = Astro.props;
 		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightLight);
 		max-width: 35rem;
-	}
-
-	@media (width >= 1117px) {
-		.hero-contents-standard {
-			padding: 5rem;
-		}
 	}
 </style>

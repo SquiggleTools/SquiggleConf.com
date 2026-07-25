@@ -11,11 +11,13 @@ import { days } from "~/data/2024/schedule";
 interface Props {
 	class?: string;
 	talk: TalkInfo;
+	year: number;
 }
 
 const {
 	class: className,
 	talk: { title, people, tags, description, slug },
+	year,
 	...rest
 } = Astro.props;
 
@@ -46,7 +48,7 @@ const schedule = days
 					people.map((person) => (
 						<SpeakerSmall
 							as="li"
-							href={`/speakers#${person.slug}`}
+							href={`/${year}/speakers#${person.slug}`}
 							person={person}
 						/>
 					))

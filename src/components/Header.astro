@@ -16,70 +16,60 @@ function hrefProps(pathname: string) {
 
 interface Props {
 	hideLogo?: boolean;
-	hideTopLinks?: string[];
 	year?: number;
 }
 
-const { hideLogo = false, hideTopLinks = [], year } = Astro.props;
+const { hideLogo, year } = Astro.props;
 const logoHref = year === currentYear ? "/" : `/${year}`;
-const shouldShowAbout = !hideTopLinks.includes("about");
-const shouldShowShop = !hideTopLinks.includes("shop");
 ---
 
 <header>
 	<ContentArea class="header-content-area-mobile">
+		<ThemeToggle placement="inline" />
 		{
 			!hideLogo && (
 				<a class="logo" href={logoHref}>
-					<Logo year={year} />
+					<Logo />
 				</a>
 			)
 		}
-
-		<ThemeToggle placement="inline" />
 		<details id="details">
 			<summary aria-label="Toggle header">≡</summary>
 			<div class="header-contents-mobile">
-				{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 				<a {...hrefProps("/articles")}>Articles</a>
-				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
-				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
-				{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
+				<a {...hrefProps("https://shop.squiggle.tools")}>Shop</a>
 				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 				<Button
 					as="a"
 					class="header-button"
 					href={links.tickets}
 					target="_blank"
-					variant="accent">2027 Tickets</Button
+					variant="accent">{currentYear} Tickets</Button
 				>
 			</div>
 		</details>
 	</ContentArea>
 
 	<ContentArea class="header-content-area-wide" width="wide">
-		{
-			!hideLogo && (
-				<a class="logo" href={logoHref}>
-					<Logo year={year} />
-				</a>
-			)
-		}
 		<div class="header-links">
 			<ThemeToggle placement="inline" />
+			{
+				!hideLogo && (
+					<a class="logo" href={logoHref}>
+						<Logo />
+					</a>
+				)
+			}
 			<div class="header-links-inner">
-				{shouldShowAbout && <a {...hrefProps("/about")}>About</a>}
 				<a {...hrefProps("/articles")}>Articles</a>
-				{year === currentYear && <a {...hrefProps("/sessions")}>Sessions</a>}
-				{year === currentYear && <a {...hrefProps("/speakers")}>Speakers</a>}
-				{shouldShowShop && <a {...hrefProps(links.shop)}>Shop</a>}
+				<a {...hrefProps("https://shop.squiggle.tools")}>Shop</a>
 				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
 				<Button
 					as="a"
 					class="header-button"
 					href={links.tickets}
 					target="_blank"
-					variant="accent">2027 Tickets</Button
+					variant="accent">{currentYear} Tickets</Button
 				>
 			</div>
 		</div>
@@ -217,6 +207,7 @@ const shouldShowShop = !hideTopLinks.includes("shop");
 	.header-links {
 		align-items: center;
 		display: flex;
+		gap: 1rem;
 		width: 100%;
 	}
 

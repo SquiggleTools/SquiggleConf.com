@@ -12,11 +12,13 @@ import { publicSchedule } from "~/data/public";
 interface Props {
 	class?: string;
 	session: SessionInfo;
+	year: number;
 }
 
 const {
 	class: className,
 	session: { channel, description, qualification, slug, speakers, tags, title },
+	year,
 	...props
 } = Astro.props;
 
@@ -55,7 +57,7 @@ function approximateAt(at: string) {
 			<div class="speakers">
 				{
 					speakers.map((speaker) => (
-						<a href={`/speakers#${speaker.slug}`} class="speaker-link">
+						<a href={`/${year}/speakers#${speaker.slug}`} class="speaker-link">
 							<SpeakerImage src={speaker.image} size="medium" />
 							<div class="speaker-bio">
 								<div class="speaker-name">{speaker.name}</div>

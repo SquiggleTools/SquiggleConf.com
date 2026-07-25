@@ -6,9 +6,8 @@ import { Props as HeadProps } from "~/components/Head.astro";
 import Header from "~/components/Header.astro";
 import BodyArea from "~/components/BodyArea.astro";
 import Footer from "~/components/Footer.astro";
-import ThemeToggle from "~/components/ThemeToggle.astro";
 
-import BaseLayout from "../BaseLayout.astro";
+import BaseLayout from "./BaseLayout.astro";
 
 type Props = Omit<HeadProps, "year">;
 ---
@@ -18,7 +17,6 @@ type Props = Omit<HeadProps, "year">;
 	<NextYearNotice />
 	<BodyArea class="page-layout-2024">
 		<slot />
-		<ThemeToggle />
 	</BodyArea>
 	<Footer year={2024} />
 </BaseLayout>

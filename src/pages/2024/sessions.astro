@@ -4,7 +4,7 @@ import HeadingFlanked from "~/components/2024/HeadingFlanked.astro";
 import HeroForPage from "~/components/2024/HeroForPage.astro";
 import Session from "~/components/2024/Session.astro";
 import { talks } from "~/data/2024/talks";
-import PageLayout2024 from "~/layouts/2024/PageLayout2024.astro";
+import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
 import "~/styles/2024.css";
 
 const sections = [
@@ -32,24 +32,10 @@ const sections = [
 ] as const;
 ---
 
-<PageLayout2024
+<PageLayoutHistorical
 	description="Sessions at SquiggleConf: a Boston conference focused on excellent web dev tooling."
 	title="Sessions"
 >
-	<HeroForPage slot="hero">Sessions</HeroForPage>
-
-	<BodyText class="sessions-top" size="large" width="full">
-		SquiggleConf 2024 consisted of two days:
-		<ul>
-			<li>
-				Thursday, October 3rd: A full-day single-track series of full-length and
-				lightning talks
-			</li>
-			<li>Friday, October 4th: Free 1-2 hour morning workshops</li>
-		</ul>
-		See speaker details on <a href="/2024/speakers">Speakers</a>.
-	</BodyText>
-
 	{
 		sections.map(({ talkFormat, name, description }) => (
 			<>
@@ -64,18 +50,13 @@ const sections = [
 					{talks
 						.filter((t) => t.talkFormat === talkFormat)
 						.map((talk) => (
-							<Session talk={talk} />
+							<Session talk={talk} year={2024} />
 						))}
 				</ul>
 			</>
 		))
 	}
-
-	<BodyText as="p" class="talks-body-text" size="large" width="lean">
-		You’ll emerge with the best techniques to supercharge your projects —
-		whether you’re already a tooling wizard or trying to become one.
-	</BodyText>
-</PageLayout2024>
+</PageLayoutHistorical>
 
 <style>
 	ul {

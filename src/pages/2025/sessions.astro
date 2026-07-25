@@ -57,7 +57,7 @@ const description = "Every talk to be given in SquiggleConf 2025.";
 									: a.slug.localeCompare(b.slug),
 						)
 						.map((session) => (
-							<Session session={session} class="session" />
+							<Session session={session} class="session" year={2025} />
 						))}
 				</ul>
 			</CommonContent>

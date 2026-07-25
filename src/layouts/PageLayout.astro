@@ -7,7 +7,6 @@ import BaseLayout from "./BaseLayout.astro";
 import { currentYear } from "~/data/years";
 
 type Props = HeadProps & {
-	hideHeaderLinks?: string[];
 	hideHeaderLogo?: boolean;
 };
 
@@ -15,11 +14,7 @@ const year = Astro.props.year ?? currentYear;
 ---
 
 <BaseLayout {...Astro.props} year={year}>
-	<Header
-		hideLogo={Astro.props.hideHeaderLogo}
-		hideTopLinks={Astro.props.hideHeaderLinks}
-		year={year}
-	/>
+	<Header hideLogo={Astro.props.hideHeaderLogo} year={year} />
 	<BodyArea>
 		<slot />
 	</BodyArea>
