@@ -31,7 +31,7 @@ const {
 
 const variantClasses: string[] = [];
 if (variant === "funRun") {
-	variantClasses.push("timeline-content-funrun");
+	variantClasses.push("timeline-content-fun-run");
 } else if (variant === "talksAfternoon") {
 	variantClasses.push(
 		"timeline-content-talks",
@@ -191,7 +191,7 @@ const hasAside = Astro.slots.has("aside");
 		text-shadow: none;
 	}
 
-	.timeline-content-funrun {
+	.timeline-content-fun-run {
 		min-height: 10rem;
 		padding-top: 1.2rem;
 	}
@@ -258,7 +258,7 @@ const hasAside = Astro.slots.has("aside");
 		width: fit-content;
 	}
 
-	.timeline-content-funrun .timeline-title-row {
+	.timeline-content-fun-run .timeline-title-row {
 		position: relative;
 	}
 
@@ -268,7 +268,7 @@ const hasAside = Astro.slots.has("aside");
 		justify-items: start;
 	}
 
-	.timeline-content-funrun .timeline-subtitle {
+	.timeline-content-fun-run .timeline-subtitle {
 		margin: 0;
 	}
 
@@ -381,7 +381,7 @@ const hasAside = Astro.slots.has("aside");
 		align-self: center;
 	}
 
-	.timeline-content-funrun :global(.timeline-copy) {
+	.timeline-content-fun-run :global(.timeline-copy) {
 		max-width: 50%;
 	}
 
@@ -649,7 +649,7 @@ const hasAside = Astro.slots.has("aside");
 			justify-items: start;
 		}
 
-		.timeline-content-funrun :global(.timeline-copy) {
+		.timeline-content-fun-run :global(.timeline-copy) {
 			margin-top: 0.15rem;
 			max-width: none;
 		}

@@ -13,6 +13,9 @@ const { person } = Astro.props;
 <article class="timeline-host-card">
 	<div class="talk-avatar timeline-host-avatar">
 		<Image
+			class={person.placeholder
+				? "timeline-host-avatar-placeholder"
+				: undefined}
 			alt={person.imageAlt ?? person.name}
 			src={person.image}
 			loading="eager"
@@ -47,6 +50,10 @@ const { person } = Astro.props;
 		aspect-ratio: 1;
 	}
 
+	.timeline-host-avatar-placeholder {
+		filter: blur(2px);
+	}
+
 	.talk-avatar :global(picture) {
 		display: block;
 		height: 100%;
@@ -63,6 +70,7 @@ const { person } = Astro.props;
 			filter var(--timeline-hover-duration) ease;
 		transform: scale(1);
 		transform-origin: center;
+		user-select: none;
 		width: 100%;
 		will-change: transform;
 	}

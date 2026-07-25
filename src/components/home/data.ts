@@ -2,8 +2,8 @@ import bigRav from "~/assets/2027/bigrav.webp";
 import harborwalk from "~/assets/2027/boston-harborwalk.webp";
 import duck1 from "~/assets/2027/duck-1.webp";
 import duck2 from "~/assets/2027/duck-2.webp";
-import funrun1 from "~/assets/2027/funrun-1.webp";
-import funrun2 from "~/assets/2027/funrun-2.webp";
+import funrun1 from "~/assets/2027/fun-run-1.webp";
+import funrun2 from "~/assets/2027/fun-run-2.webp";
 import lunchBerryTwist from "~/assets/2027/lunch-berry-twist.webp";
 import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.webp";
 import lunchRegina from "~/assets/2027/lunch-regina.webp";
@@ -23,19 +23,14 @@ import placeholder7 from "~/assets/2027/placeholder-7.webp";
 import postcardBack from "~/assets/2027/postcard-back.webp";
 import postcardFront from "~/assets/2027/postcard-front.webp";
 import rest1 from "~/assets/2027/rest-1.webp";
-import ryanDahl from "~/assets/2027/ryandahl.webp";
-import scottTolinski from "~/assets/2027/scotttolinski.webp";
 import simonsTheater from "~/assets/2027/simons-theater.webp";
-import tannerPortrait from "~/assets/2027/tanner.webp";
 import terminalShop from "~/assets/2027/terminal.shop.svg";
-import thePrimeagen from "~/assets/2027/theprimagen.webp";
 import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
 import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
 import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
 import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
 import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
 import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
-import wesBos from "~/assets/2027/wesbos.webp";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg?raw";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg?raw";
@@ -44,12 +39,10 @@ import timelineFish4 from "~/assets/design/timeline-fish-4.svg?raw";
 import timelineFish5 from "~/assets/design/timeline-fish-5.svg?raw";
 import networking from "~/assets/stills/attendees-networking.png";
 import harbor from "~/assets/stills/boston-harbor.png";
-import { speakersBySlug } from "~/data/speakers";
 
 import type {
 	ExploreChoiceData,
 	LunchSpotData,
-	PersonCardData,
 	TalkCardData,
 	TimelineEntryData,
 	TimelineEntryId,
@@ -59,22 +52,23 @@ import type {
 
 const talksSessions = [
 	{
-		image: tannerPortrait,
-		name: "Tanner Linsley",
-		qualification: "creator of all things TanStack",
-		title: "TanStack AI: Our Biggest Lessons Learned",
+		image: placeholder1,
+		name: "To Be Announced",
+		placeholder: true,
+		qualification: "slipped and fell into developer tooling",
+		title: "Bugs Hate This: One Simple Trick to make AI Less Sloppy",
 	},
 	{
-		image: placeholder1,
-		isPlaceholder: true,
+		image: placeholder2,
 		name: "Your Name Here",
+		placeholder: true,
 		qualification: "maintainer of a package in your lockfile",
 		title: "The Package You've Never Heard Of That Runs Half the Internet",
 	},
 	{
-		image: placeholder2,
-		isPlaceholder: true,
+		image: placeholder3,
 		name: "Speaker Loading...",
+		placeholder: true,
 		qualification: "accidentally became a language designer",
 		title: "One Small Syntax Change, One Giant Migration Guide",
 	},
@@ -83,15 +77,15 @@ const talksSessions = [
 const lateTalksSessions = [
 	{
 		image: placeholder3,
-		isPlaceholder: true,
 		name: "Placeholder McPlaceholderface",
+		placeholder: true,
 		qualification: "TypeScript whisperer",
 		title: "Why Is This Type Slow?",
 	},
 	{
 		image: placeholder7,
-		isPlaceholder: true,
 		name: "Your Favorite Developer",
+		placeholder: true,
 		qualification: "local development maximalist",
 		title: "The 42-Second Dev Loop",
 	},
@@ -100,38 +94,26 @@ const lateTalksSessions = [
 const afternoonTalksSessions = [
 	{
 		image: placeholder5,
-		isPlaceholder: true,
 		name: "Mysterious Industry Person",
+		placeholder: true,
 		qualification: "compiler engineer and standards enjoyer",
 		title: "The Runtime Is Lying To You",
 	},
 	{
 		image: placeholder6,
-		isPlaceholder: true,
 		name: "Anonymous Core Team Member",
+		placeholder: true,
 		qualification: "spends their days reading specification prose",
 		title: "The Feature Everyone Uses Incorrectly",
 	},
 	{
 		image: placeholder4,
-		isPlaceholder: true,
 		name: "Future Squiggle Speaker",
+		placeholder: true,
 		qualification: "creator of an unreasonable amount of tooling",
 		title: "Making Developers 3% Faster at Enormous Personal Cost",
 	},
 ];
-
-const timelineMCsFromSpeakers = (
-	["tj-devries", "maddy-montaquila"] as const
-).map((slug) => {
-	const speaker = speakersBySlug[slug];
-
-	return {
-		image: slug === "maddy-montaquila" ? maddyPortrait : speaker.image,
-		name: speaker.name,
-		qualification: speaker.qualification,
-	};
-});
 
 const lunchSpotOptions = [
 	{
@@ -229,8 +211,20 @@ export const talkBlocks = {
 	readonly TalkCardData[]
 >;
 
-export const timelineMCs =
-	timelineMCsFromSpeakers satisfies readonly PersonCardData[];
+export const timelineMCs = [
+	{
+		image: maddyPortrait,
+		name: "Maddy Montaquila",
+		qualification: "product lead for Aspire at Microsoft",
+	},
+	{
+		image: placeholder7,
+		name: "To Be Announced",
+		placeholder: true,
+		qualification: "awesome community friend",
+	},
+];
+
 export const lunchSpots = lunchSpotOptions satisfies readonly LunchSpotData[];
 export const timelineFish = [
 	timelineFish1,
@@ -254,7 +248,7 @@ export const timelineEntries = {
 		timeLabel: "6pm",
 		timeMode: "point",
 		title: "Arrive at Urban Wild",
-		variant: "syntax",
+		variant: "podcast",
 	},
 	"big-rav": {
 		id: "big-rav",
@@ -326,6 +320,14 @@ export const timelineEntries = {
 		title: "Meet your MCs!",
 		variant: "mcs",
 	},
+	"podcast-live": {
+		id: "podcast-live",
+		location: { venueId: "urbanWild" },
+		timeLabel: "6pm",
+		timeMode: "point",
+		title: "Live Podcast Recording",
+		variant: "podcast",
+	},
 	"simons-imax-theater": {
 		id: "simons-imax-theater",
 		location: { venueId: "aquarium" },
@@ -333,14 +335,6 @@ export const timelineEntries = {
 		timeMode: "point",
 		title: "Talks in an IMAX Theater",
 		variant: "mcs",
-	},
-	"syntax-live": {
-		id: "syntax-live",
-		location: { venueId: "urbanWild" },
-		timeLabel: "6pm",
-		timeMode: "point",
-		title: "Syntax.fm Live",
-		variant: "syntax",
 	},
 	"talks-afternoon": {
 		id: "talks-afternoon",
@@ -389,16 +383,12 @@ export {
 	postcardBack,
 	postcardFront,
 	rest1,
-	ryanDahl,
-	scottTolinski,
 	simonsTheater,
 	terminalShop,
-	thePrimeagen,
 	urbanwild1,
 	urbanwild2,
 	urbanwild3,
 	urbanwild4,
 	urbanwild5,
 	urbanwildLogo,
-	wesBos,
 };

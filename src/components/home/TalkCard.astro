@@ -12,14 +12,11 @@ const { talk } = Astro.props;
 
 <article class="talk-card">
 	<div
-		class:list={[
-			"talk-avatar",
-			talk.isPlaceholder && "talk-avatar-placeholder",
-		]}
+		class:list={["talk-avatar", talk.placeholder && "talk-avatar-placeholder"]}
 	>
 		<Image alt={talk.name} src={talk.image} />
 		{
-			talk.isPlaceholder && (
+			talk.placeholder && (
 				<span class="talk-avatar-placeholder-mark" aria-hidden="true">
 					?
 				</span>

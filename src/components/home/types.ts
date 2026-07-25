@@ -12,6 +12,7 @@ export interface CollagePhoto {
 	alt: string;
 	decorative?: boolean;
 	objectPosition?: string;
+	placeholder?: boolean;
 	src: ImageMetadata;
 }
 
@@ -37,12 +38,13 @@ export interface PersonCardData {
 	image: ImageMetadata;
 	imageAlt?: string;
 	name: string;
+	placeholder?: boolean;
 	qualification: string;
 	slug?: string;
 }
 
 export interface TalkCardData extends PersonCardData {
-	isPlaceholder?: boolean;
+	placeholder?: boolean;
 	title: string;
 }
 
@@ -68,8 +70,8 @@ export type TimelineEntryId =
 	| "launch"
 	| "lunch"
 	| "mcs"
+	| "podcast-live"
 	| "simons-imax-theater"
-	| "syntax-live"
 	| "talks-afternoon"
 	| "talks-late"
 	| "talks-morning";
@@ -82,7 +84,7 @@ export type TimelineEntryVariant =
 	| "funRun"
 	| "lunch"
 	| "mcs"
-	| "syntax"
+	| "podcast"
 	| "talks"
 	| "talksAfternoon";
 

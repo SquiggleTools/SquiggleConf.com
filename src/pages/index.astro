@@ -3,6 +3,10 @@ import "@fontsource/shantell-sans";
 
 import { Image } from "astro:assets";
 
+import placeholder8 from "~/assets/2027/placeholder-8.webp";
+import placeholder9 from "~/assets/2027/placeholder-9.webp";
+import placeholder12 from "~/assets/2027/placeholder-12.webp";
+import placeholder13 from "~/assets/2027/placeholder-13.webp";
 import Hero from "~/components/hero/Hero.astro";
 import {
 	bigRav,
@@ -17,11 +21,8 @@ import {
 	milkcookies2,
 	milkcookies3,
 	networking,
-	ryanDahl,
-	scottTolinski,
 	simonsTheater,
 	talkBlocks,
-	thePrimeagen,
 	timelineMCs,
 	urbanwild1,
 	urbanwild2,
@@ -30,12 +31,10 @@ import {
 	urbanwild5,
 	urbanwildLogo,
 	venues,
-	wesBos,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
 import ExploreChoices from "~/components/home/ExploreChoices.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
-import HomePreviewBanner from "~/components/home/HomePreviewBanner.astro";
 import HostList from "~/components/home/HostList.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import TalkList from "~/components/home/TalkList.astro";
@@ -56,7 +55,6 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 	hideHeaderLinks={["about", "shop"]}
 	hideHeaderLogo
 >
-	<HomePreviewBanner slot="pageTop" />
 	<Hero tall>
 		<HomeHeroLockup />
 	</Hero>
@@ -109,7 +107,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 				>
 					<Collage
 						ariaLabel="Launch party collage"
-						class="launchparty-collage"
+						class="launch-party-collage"
 						layout="trio"
 						photos={[
 							{ alt: "People networking at SquiggleConf", src: networking },
@@ -165,7 +163,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 				>
 					<Collage
 						ariaLabel="Fun run collage"
-						class="funrun-collage funrun-collage-desktop"
+						class="fun-run-collage fun-run-collage-desktop"
 						layout="duo"
 						photos={[
 							{
@@ -180,7 +178,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							},
 						]}
 					/>
-					<div class="funrun-body">
+					<div class="fun-run-body">
 						<TimelineCopy>
 							<p>
 								Optional for some, best way to start the day for others! It's an
@@ -188,7 +186,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							</p>
 						</TimelineCopy>
 						<Collage
-							class="funrun-collage funrun-collage-mobile"
+							class="fun-run-collage fun-run-collage-mobile"
 							decorative
 							layout="duo"
 							photos={[
@@ -493,7 +491,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 					mobileLocation="Urban Wild Boston"
 					mobileLocationHref={venues.urbanWild.mapUrl}
 					time="6pm"
-					variant="syntax"
+					variant="podcast"
 				>
 					<div class="event-body">
 						<div
@@ -515,22 +513,33 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 				</TimelineEntry>
 
 				<TimelineEntry
-					entryId="syntax-live"
-					heading="Syntax.fm Live"
+					entryId="podcast-live"
+					heading="Live Podcast Recording"
 					mobileLocation="Urban Wild Boston"
 					mobileLocationHref={venues.urbanWild.mapUrl}
 					time="6pm"
-					variant="syntax"
+					variant="podcast"
 				>
 					<div class="event-body">
 						<Collage
-							ariaLabel="Syntax.fm live guests"
-							class="syntaxlive-avatars"
+							ariaLabel="Podcast recording live guests"
 							layout="avatar-trio"
 							photos={[
-								{ alt: "ThePrimeagen portrait", src: thePrimeagen },
-								{ alt: "Wes Bos portrait", src: wesBos },
-								{ alt: "Scott Tolinski portrait", src: scottTolinski },
+								{
+									alt: "Placeholder portrait",
+									placeholder: true,
+									src: placeholder12,
+								},
+								{
+									alt: "Placeholder portrait",
+									placeholder: true,
+									src: placeholder13,
+								},
+								{
+									alt: "Placeholder portrait",
+									placeholder: true,
+									src: placeholder8,
+								},
 							]}
 							shape="avatar"
 						/>
@@ -539,9 +548,11 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 								How to Find Time to Learn After Work
 							</h3>
 							<p>
-								Join Wes and Scott in a live podcast recording of Syntax.fm
-								featuring ThePrimeagen.
+								Join our hosts in a live podcast recording discussing the ins
+								and outs of how to succeed and be happy in today's tech
+								industry.
 							</p>
+							<p class="fireside-host">host to be announced</p>
 						</TimelineCopy>
 					</div>
 				</TimelineEntry>
@@ -564,19 +575,20 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							class="firesidechat-avatars"
 							layout="avatar-duo"
 							photos={[
-								{ alt: "Ryan Dahl portrait", src: ryanDahl },
+								{
+									alt: "Placeholder portrait",
+									placeholder: true,
+									src: placeholder9,
+								},
 								{ alt: "Dillon Mulroy portrait", src: dillonMulroy },
 							]}
 							shape="avatar"
 						/>
 						<TimelineCopy>
-							<h3 class="fireside-topic">
-								The Fight to Free the JavaScript Trademark
-							</h3>
+							<h3 class="fireside-topic">Topic To Be Announced</h3>
 							<p>
-								Node.js and Deno creator Ryan Dahl takes the stage to break down
-								Deno's ongoing legal crusade against Oracle to free the
-								"JavaScript" trademark.
+								Join us for a fireside chat with a notable JavaScript-y friend
+								about a pressing issue in the technical space.
 							</p>
 							<p class="fireside-host">hosted by Dillon Mulroy</p>
 						</TimelineCopy>
@@ -927,7 +939,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 		text-shadow: var(--timeline-time-shadow);
 		text-align: center;
 	}
-	.funrun-body {
+	.fun-run-body {
 		position: relative;
 	}
 	.timeline-section .event-hero-image {
@@ -1061,15 +1073,16 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 		height: 100%;
 		object-fit: cover;
 		width: 100%;
+		user-select: none;
 	}
 
 	.fireside-topic {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
-		font-size: 1.6rem;
+		font-size: 1.2rem;
 		font-weight: 700;
 		line-height: 1.05;
-		margin: 0 0 0.65rem;
+		margin: 0 0 0.25rem;
 	}
 
 	.fireside-host {
@@ -1129,7 +1142,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 		.lunch-copy {
 			padding-top: 0;
 		}
-		.funrun-body {
+		.fun-run-body {
 			align-items: start;
 			column-gap: 0.9rem;
 			display: grid;

@@ -11,6 +11,7 @@ interface Props {
 	ariaLabel?: string;
 	class?: string;
 	decorative?: boolean;
+	placeholder?: boolean;
 	layout?: CollageLayout;
 	photos: readonly CollagePhoto[];
 	shape?: CollageShape;
@@ -19,7 +20,8 @@ interface Props {
 const {
 	ariaLabel,
 	class: className,
-	decorative = false,
+	decorative,
+	placeholder,
 	layout = "auto",
 	photos,
 	shape = "photo",
@@ -52,7 +54,13 @@ const resolvedLayout =
 >
 	{
 		photos.map((photo, index) => (
-			<div class:list={["collage-item", `collage-item-${index + 1}`]}>
+			<div
+				class:list={[
+					"collage-item",
+					`collage-item-${index + 1}`,
+					photo.placeholder && "collage-item-placeholder",
+				]}
+			>
 				<Image
 					alt={decorative || photo.decorative ? "" : photo.alt}
 					aria-hidden={decorative || photo.decorative ? "true" : undefined}
@@ -76,6 +84,7 @@ const resolvedLayout =
 		height: var(--collage-height);
 		position: relative;
 		width: var(--collage-width);
+		z-index: 1;
 	}
 
 	.collage-item {
@@ -107,6 +116,11 @@ const resolvedLayout =
 		display: block;
 		height: 100%;
 		width: 100%;
+		user-select: none;
+	}
+
+	.collage-item.collage-item-placeholder :global(img) {
+		filter: blur(2px);
 	}
 
 	.collage-item :global(img) {
@@ -130,15 +144,15 @@ const resolvedLayout =
 		--collage-width: 12rem;
 	}
 
-	.funrun-collage {
+	.fun-run-collage {
 		justify-self: start;
-		left: 14rem;
+		left: 15rem;
 		position: absolute;
-		top: 0.7rem;
+		top: 0;
 		transform: none;
 	}
 
-	.funrun-collage-mobile {
+	.fun-run-collage-mobile {
 		display: none;
 	}
 
@@ -183,9 +197,7 @@ const resolvedLayout =
 		width: var(--collage-trio-item-3-width, 8.9rem);
 	}
 
-	.launchparty-collage {
-		--collage-height: clamp(8.4rem, 14vw, 9.5rem);
-		--collage-width: min(100%, 31rem);
+	.launch-party-collage {
 		margin-bottom: 1rem;
 	}
 
@@ -323,11 +335,11 @@ const resolvedLayout =
 	}
 
 	@media (width < 900px) {
-		.funrun-collage-desktop {
+		.fun-run-collage-desktop {
 			display: none;
 		}
 
-		.funrun-collage-mobile {
+		.fun-run-collage-mobile {
 			--collage-height: 7.6rem;
 			--collage-width: 8rem;
 			align-self: start;
@@ -340,14 +352,14 @@ const resolvedLayout =
 			top: -1rem;
 		}
 
-		.funrun-collage-mobile .collage-item-1 {
+		.fun-run-collage-mobile .collage-item-1 {
 			height: 5.45rem;
 			left: 3.8rem;
 			top: 0.3rem;
 			width: 3.75rem;
 		}
 
-		.funrun-collage-mobile .collage-item-2 {
+		.fun-run-collage-mobile .collage-item-2 {
 			height: 6.1rem;
 			left: 0;
 			top: 0.7rem;
