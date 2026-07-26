@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
-
 import type { PersonCardData } from "~/components/home/types";
+import Avatar from "./Avatar.astro";
 
 interface Props {
 	person: PersonCardData;
@@ -11,16 +10,7 @@ const { person } = Astro.props;
 ---
 
 <article class="timeline-host-card">
-	<div class="talk-avatar timeline-host-avatar">
-		<Image
-			class={person.placeholder
-				? "timeline-host-avatar-placeholder"
-				: undefined}
-			alt={person.imageAlt ?? person.name}
-			src={person.image}
-			loading="eager"
-		/>
-	</div>
+	<Avatar alt={person.name} image={person.image} />
 	<div class="timeline-host-copy">
 		<h3>{person.name}</h3>
 		<p class="timeline-host-role">{person.qualification}</p>
@@ -33,46 +23,6 @@ const { person } = Astro.props;
 		display: grid;
 		gap: 0.8rem;
 		grid-template-columns: 5rem 1fr;
-	}
-
-	.talk-avatar {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
-		border-radius: 0.45rem;
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		box-sizing: border-box;
-		overflow: hidden;
-		transition: box-shadow var(--timeline-hover-duration) ease;
-	}
-
-	.timeline-host-avatar {
-		aspect-ratio: 1;
-	}
-
-	.timeline-host-avatar-placeholder {
-		filter: blur(2px);
-	}
-
-	.talk-avatar :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.talk-avatar :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		transform: scale(1);
-		transform-origin: center;
-		user-select: none;
-		width: 100%;
-		will-change: transform;
 	}
 
 	.timeline-host-copy {
@@ -97,47 +47,5 @@ const { person } = Astro.props;
 		font-weight: 300;
 		line-height: 1.25;
 		margin: 0;
-	}
-
-	:global(.timeline-content:hover) .talk-avatar,
-	:global(.timeline-content:focus-within) .talk-avatar {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-	}
-
-	:global(.timeline-content:hover) .talk-avatar :global(img),
-	:global(.timeline-content:focus-within) .talk-avatar :global(img) {
-		transform: scale(1.1);
-	}
-
-	@media (width < 900px) {
-		:global(.timeline-content:hover) .talk-avatar,
-		:global(.timeline-content:focus-within) .talk-avatar {
-			border-width: var(--timeline-image-border-width);
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			scale: 1;
-		}
-
-		:global(.timeline-content:hover) .talk-avatar :global(img),
-		:global(.timeline-content:focus-within) .talk-avatar :global(img) {
-			transform: scale(1);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"]) .talk-avatar {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"])
-			.talk-avatar
-			:global(img) {
-			transform: scale(1.07);
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.talk-avatar,
-		.talk-avatar :global(img) {
-			animation: none;
-			transition: none;
-		}
 	}
 </style>

@@ -6,6 +6,7 @@ import type {
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
+import PlaceholderMark from "./PlaceholderMark.astro";
 
 interface Props {
 	ariaLabel?: string;
@@ -71,6 +72,7 @@ const resolvedLayout =
 							: undefined
 					}
 				/>
+				{photo.placeholder && <PlaceholderMark />}
 			</div>
 		))
 	}
@@ -120,11 +122,6 @@ const resolvedLayout =
 
 	.collage-item.collage-item-placeholder :global(img) {
 		filter: blur(2px);
-	}
-
-	.collage-item.collage-item-placeholder::after {
-		/* TODO */
-		content: "?";
 	}
 
 	.collage-item :global(img) {

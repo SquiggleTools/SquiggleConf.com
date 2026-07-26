@@ -34,7 +34,7 @@ interface Props {
 						/>
 						{activity.within &&
 							activity.within.map((inner) =>
-								inner.type === "between" ? null : ( // todo
+								inner.type === "between" ? null : (
 									<ScheduledActivitySession activity={inner} />
 								),
 							)}

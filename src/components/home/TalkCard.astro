@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import type { TalkCardData } from "~/components/home/types";
+import PlaceholderMark from "./PlaceholderMark.astro";
 
 interface Props {
 	talk: TalkCardData;
@@ -15,13 +16,7 @@ const { talk } = Astro.props;
 		class:list={["talk-avatar", talk.placeholder && "talk-avatar-placeholder"]}
 	>
 		<Image alt={talk.name} src={talk.image} />
-		{
-			talk.placeholder && (
-				<span class="talk-avatar-placeholder-mark" aria-hidden="true">
-					?
-				</span>
-			)
-		}
+		{talk.placeholder && <PlaceholderMark />}
 	</div>
 	<div class="talk-copy">
 		<h3>{talk.title}</h3>
@@ -86,22 +81,6 @@ const { talk } = Astro.props;
 		transform-origin: center;
 		width: 100%;
 		will-change: transform;
-	}
-
-	.talk-avatar-placeholder-mark {
-		color: rgba(255, 255, 255, 0.92);
-		display: block;
-		font-family: var(--fontFamilyHeading);
-		font-size: 3rem;
-		font-weight: 700;
-		left: 50%;
-		line-height: 1;
-		pointer-events: none;
-		position: absolute;
-		text-shadow: 0 0.08rem 0.22rem rgba(4, 25, 48, 0.3);
-		top: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 3;
 	}
 
 	.talk-copy {

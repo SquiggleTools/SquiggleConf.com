@@ -49,6 +49,7 @@ import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
+import Avatar from "~/components/home/Avatar.astro";
 ---
 
 <PageLayout
@@ -118,15 +119,22 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							},
 						]}
 					/>
-					<Image alt="Tanner Linsley" src={tanner} />
-					{/* TODO */}
 					<TimelineCopy>
-						<p>
-							Kick off the weekend with snacks, drinks, and an easy room full of
-							tool-loving people. It is the place to settle in, say hi, and
-							start the conference with a little momentum.
-						</p>
-						<p class="fireside-host">hosted by Tanner Linsley</p>
+						<div class="launch-party-details">
+							<div>
+								<p>
+									Kick off the weekend with snacks, drinks, and an easy room
+									full of tool-loving people. It is the place to settle in, say
+									hi, and start the conference with a little momentum.
+								</p>
+								<p class="fireside-host">hosted by Tanner Linsley</p>
+							</div>
+							<Avatar
+								alt="Tanner Linsley"
+								image={tanner}
+								class="launch-party-host"
+							/>
+						</div>
 					</TimelineCopy>
 				</TimelineEntry>
 
@@ -999,6 +1007,17 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 
 	.break-copy {
 		align-content: start;
+	}
+
+	.launch-party-details {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.launch-party-host {
+		float: right;
+		height: 7rem;
+		width: 7rem;
 	}
 
 	.lunch-body {

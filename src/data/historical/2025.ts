@@ -459,7 +459,6 @@ The segment will start by showing that SemVer and lockfiles go much deeper than 
 Although this talk won’t provide a PhD education, it can perhaps bring some humility -- and hope -- to a widely misunderstood topic.`,
 		people: [peopleBySlug["pete-gonzalez"]],
 		slug: "the-lockfiles-phd-you-never-got",
-		// TODO: Fill in tags
 		tags: ["Dependency Management", "Package Managers"],
 		title: "The Lockfiles PhD You Never Got",
 	},
