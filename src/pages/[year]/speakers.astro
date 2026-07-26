@@ -33,6 +33,7 @@ const historicalData =
 						talks={Object.values(historicalData.sessionsBySlug).filter((talk) =>
 							talk.people.includes(person),
 						)}
+						year={year}
 					>
 						<div class="bio" slot="center">
 							<SafeMarkdown of={person.biography} />
