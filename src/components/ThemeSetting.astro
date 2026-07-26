@@ -1,6 +1,7 @@
 <script>
 	const html = () => document.documentElement!;
-	const toggles = () => document.querySelectorAll(".theme-toggle")!;
+	const toggles = () => document.querySelectorAll(".theme-toggle");
+	const initializedToggles = new Set<Element>();
 
 	function getThemePreference() {
 		return matchMedia("(prefers-color-scheme: dark)").matches
@@ -31,6 +32,11 @@
 		updateElementsForTheme(theme);
 
 		for (const toggle of toggles()) {
+			if (initializedToggles.has(toggle)) {
+				return;
+			}
+
+			initializedToggles.add(toggle);
 			toggle.addEventListener("click", () => {
 				const newTheme = html().classList.contains("dark") ? "light" : "dark";
 				updateElementsForTheme(newTheme);

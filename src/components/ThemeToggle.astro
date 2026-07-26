@@ -1,11 +1,17 @@
 ---
 import themeMoon from "~/assets/design/theme-moon.svg";
 import themeSun from "~/assets/design/theme-sun.svg";
+
+interface Props {
+	size: "normal" | "small";
+}
+
+const { size } = Astro.props;
 ---
 
 <button
 	aria-label="Theme toggle (enable JavaScript to use)"
-	class="theme-toggle"
+	class:list={["theme-toggle", `theme-toggle-${size}`]}
 >
 	<img alt="" class="moon" src={themeMoon.src} />
 	<img alt="" class="sun" src={themeSun.src} />
@@ -22,6 +28,16 @@ import themeSun from "~/assets/design/theme-sun.svg";
 		position: relative;
 		transition: var(--transitionFast) opacity;
 		width: 2.25rem;
+	}
+
+	.theme-toggle-normal {
+		height: 2rem;
+		width: 2.25rem;
+	}
+
+	.theme-toggle-small {
+		height: 1.5rem;
+		width: 1.6875;
 	}
 
 	.theme-toggle:focus-within,

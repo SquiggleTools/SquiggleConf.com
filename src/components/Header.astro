@@ -27,7 +27,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 	<ContentArea class="header-content-area-mobile">
 		{
 			hideLogo ? (
-				<ThemeToggle placement="inline" />
+				<ThemeToggle size="normal" />
 			) : (
 				<a class="logo" href={logoHref}>
 					<Logo />
@@ -55,7 +55,7 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 		<div class="header-links">
 			{
 				hideLogo ? (
-					<ThemeToggle placement="inline" />
+					<ThemeToggle size="normal" />
 				) : (
 					<a class="logo" href={logoHref}>
 						<Logo />
