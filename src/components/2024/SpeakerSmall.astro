@@ -1,6 +1,5 @@
 ---
-import { type Person } from "~/data/2024/notion-data";
-
+import { PersonInfo } from "~/data/historical/types";
 import SafeMarkdown from "../SafeMarkdown.astro";
 import SpeakerImage from "./SpeakerImage.astro";
 
@@ -8,7 +7,7 @@ interface Props {
 	as: "div" | "li";
 	class?: string;
 	href?: string;
-	person: Person;
+	person: PersonInfo;
 }
 
 const {
@@ -22,7 +21,7 @@ const {
 
 <As class:list={["speaker-small", className]} {...rest}>
 	<div class="speaker-image-container">
-		<SpeakerImage name={speaker.name} slug={speaker.slug} />
+		<SpeakerImage image={speaker.image} name={speaker.name} size={96} />
 	</div>
 	<div class="speaker-text">
 		{
@@ -36,13 +35,6 @@ const {
 				speaker.qualification && (
 					<div>
 						<SafeMarkdown of={speaker.qualification} />
-					</div>
-				)
-			}
-			{
-				speaker.role && (
-					<div>
-						<SafeMarkdown of={speaker.role} />
 					</div>
 				)
 			}
@@ -62,6 +54,7 @@ const {
 
 	.speaker-text {
 		display: flex;
+		flex-basis: fit-content;
 		flex-direction: column;
 		gap: 0.5rem;
 	}

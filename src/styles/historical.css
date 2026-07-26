@@ -1,0 +1,93 @@
+@layer past {
+	:root {
+		color-scheme: light;
+
+		--colorCream: #edebe4;
+		--colorBlueLight: #c9e6f3;
+		--colorDull: #b6c1c6;
+		--colorOffWhite: #eaeaff;
+		--colorBlueDarkDull: #3a5a6e;
+		--colorBlueLightDull: #85a7bc;
+		--colorRedDark: #7f3a5c;
+		--colorRedLight: #ffbfc2;
+		--colorWhite: #ffffff;
+
+		--colorBackdropDark: var(--colorBlueLight);
+		--colorBackdropLight: var(--colorCream);
+		--colorBackdropOff: var(--colorOffWhite);
+		--colorDull: var(--colorBlueDarkDull);
+		--colorEmphasized: #1b80a1;
+		--colorEmphasizedBackground: #085e7a;
+		--colorInverted: var(--colorCream);
+		--colorInvertedMild: #78c1d9;
+		--colorInvertedDull: rgb(165, 204, 218);
+		--colorForeground: #1f3840;
+		--colorForegroundBody: #203238;
+		--colorSubtleLight: #a5e2fc;
+		--colorSubtle: var(--colorSubtleLight);
+		--colorHeroShadow: #002547;
+		--colorTextShadow: rgba(35, 49, 70, 0.75);
+		--colorUnhappy: var(--colorRedDark);
+
+		--fontFamilyBody: "Urbanist";
+		--fontFamilyHeading: "Josefin Sans Variable";
+
+		--fontSizeBody: 1.2rem;
+		--fontSizeBodyLarge: 1.5rem;
+		--fontSizeBodySmall: 1rem;
+		--fontSizeBodySmaller: 1rem;
+		--fontSizeHero: clamp(4rem, 15vw, 6rem);
+		--fontSizeHeroSmall: clamp(2.5rem, 12vw, 4rem);
+		--fontSizeH2: clamp(1.75rem, 5vw, 2rem);
+		--fontSizeH3: clamp(1.5rem, 3.5vw, 1.75rem);
+		--fontSizeH4: clamp(1.15rem, 2.5vw, 1.35rem);
+
+		--fontWeightLight: 300;
+		--fontWeightBody: 300;
+		--fontWeightSemibold: 500;
+		--fontWeightBold: 700;
+
+		--letterSpacingHeading: -0.04em;
+
+		--lineHeightBody: 1.4;
+		--lineHeightSecondary: 1.1;
+
+		--transitionFast: 117ms;
+		--transitionMedium: 280ms;
+		--transitionSlow: 700ms;
+
+		--widthBodyFull: 70rem;
+		--widthBodyLean: 50rem;
+		--widthBodyPadding: clamp(1rem, 5vw, 2rem);
+	}
+
+	html {
+		min-height: 100%;
+	}
+
+	html.dark {
+		color-scheme: dark;
+
+		--colorBackdropDark: var(--colorSubtle);
+		--colorBackdropLight: var(--colorInverted);
+		--colorBackdropOff: var(--colorSubtle);
+		--colorDull: var(--colorBlueLightDull);
+		--colorEmphasized: #0685af;
+		--colorForeground: #bcdfe9;
+		--colorForegroundBody: #d2ebf1;
+		--colorInverted: #10141b;
+		--colorSubtle: #062430;
+		--colorTextShadow: var(--colorEmphasized);
+		--colorUnhappy: var(--colorRedLight);
+
+		--lineHeightBody: 1.5;
+		--lineHeightSecondary: 1.1;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		html,
+		body {
+			scroll-behavior: smooth;
+		}
+	}
+}

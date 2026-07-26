@@ -1,56 +1,64 @@
 ---
-import { talks } from "~/data/2024/talks";
-
 import BodyText from "./BodyText.astro";
 import CardsList from "./CardsList.astro";
 import FullSection from "./FullSection.astro";
 import SpeakerSmall from "./SpeakerSmall.astro";
 import SubtleCard from "./SubtleCard.astro";
-import TagLine from "./TagLine.astro";
 import BioLinks from "./BioLinks.astro";
+import { PersonInfo, SessionInfo } from "~/data/historical/types";
+
+interface Props {
+	talks: SessionInfo[];
+	year: number;
+}
+
+const { talks, year } = Astro.props;
+
+const seen = new Set<PersonInfo>();
 ---
 
 <FullSection>
-	<TagLine />
-	<br />
 	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
-		See full details on <a href="/2024/sessions">Sessions</a> and <a
-			href="/2024/speakers">Speakers</a
-		>.
+		See {year}'s full details on <a href={`/${year}/sessions`}
+			>{year} Sessions</a
+		> and
+		<a href={`/${year}/speakers`}>{year} Speakers</a>.
 	</BodyText>
 
 	<CardsList class="speakers-list">
 		{
-			talks.flatMap((talk) =>
-				talk.people.map((person) => (
-					<SubtleCard class="speaker-card" renderAs="li">
-						<SpeakerSmall href={`/2024/sessions#${talk.slug}`} person={person}>
-							<BioLinks
-								class="speaker-bio-links"
-								name={person.name}
-								links={person.links}
-							/>
-						</SpeakerSmall>
-					</SubtleCard>
-				)),
+			talks.map((talk) =>
+				talk.people
+					.filter((person) => {
+						if (seen.has(person)) {
+							return false;
+						}
+
+						seen.add(person);
+						return true;
+					})
+					.map((person) => (
+						<SubtleCard class="speaker-card" renderAs="li">
+							<SpeakerSmall
+								href={`/${year}/sessions#${talk.slug}`}
+								person={person}
+							>
+								<BioLinks
+									class="speaker-bio-links"
+									name={person.name}
+									links={person.links}
+								/>
+							</SpeakerSmall>
+						</SubtleCard>
+					)),
 			)
 		}
 	</CardsList>
-
-	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
-		You’ll emerge with the best techniques to supercharge your projects —
-		whether you’re already a tooling wizard or trying to become one.
-		<br />
-		<br />
-		See full details on <a href="/2024/sessions">Sessions</a> and <a
-			href="/2024/speakers">Speakers</a
-		>.
-	</BodyText>
 </FullSection>
 
 <style>
 	.speakers-body-text {
-		margin: auto;
+		margin: 0 auto 1rem;
 	}
 
 	@media (min-width: 700px) {

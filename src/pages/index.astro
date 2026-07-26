@@ -3,6 +3,7 @@ import "@fontsource/shantell-sans";
 
 import { Image } from "astro:assets";
 
+import tanner from "~/assets/2027/tanner.webp";
 import placeholder8 from "~/assets/2027/placeholder-8.webp";
 import placeholder9 from "~/assets/2027/placeholder-9.webp";
 import placeholder12 from "~/assets/2027/placeholder-12.webp";
@@ -117,12 +118,15 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							},
 						]}
 					/>
+					<Image alt="Tanner Linsley" src={tanner} />
+					{/* TODO */}
 					<TimelineCopy>
 						<p>
 							Kick off the weekend with snacks, drinks, and an easy room full of
 							tool-loving people. It is the place to settle in, say hi, and
 							start the conference with a little momentum.
 						</p>
+						<p class="fireside-host">hosted by Tanner Linsley</p>
 					</TimelineCopy>
 				</TimelineEntry>
 
@@ -543,9 +547,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 							shape="avatar"
 						/>
 						<TimelineCopy>
-							<h3 class="fireside-topic">
-								How to Find Time to Learn After Work
-							</h3>
+							<h3 class="fireside-topic">Subjects To Be Announced</h3>
 							<p>
 								Join our hosts in a live podcast recording discussing the ins
 								and outs of how to succeed and be happy in today's tech
@@ -905,6 +907,7 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 		border: 1px solid var(--timeline-rail-border-color);
 		display: flex;
 		flex-direction: column;
+		margin-bottom: -1px;
 		overflow: hidden;
 		position: relative;
 	}

@@ -1,47 +1,46 @@
 ---
-import HeroForPage from "~/components/2024/HeroForPage.astro";
-import { peopleBySlug, talksBySlug } from "~/data/2024/notion-data";
-import Speaker from "~/components/2024/Speaker.astro";
-import BodyText from "~/components/2024/BodyText.astro";
+import Speaker from "~/components/historical/Speaker.astro";
 import SafeMarkdown from "~/components/SafeMarkdown.astro";
 import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
-import "~/styles/2024.css";
+import "~/styles/historical.css";
+import {
+	getStaticPathsHistorical,
+	historicalDataByYear,
+} from "~/data/historical/data";
+
+export const getStaticPaths = getStaticPathsHistorical;
+
+const { year } = Astro.params;
+
+const historicalData =
+	historicalDataByYear[year as keyof typeof historicalDataByYear];
 ---
 
 <PageLayoutHistorical
 	description="Speakers at SquiggleConf: a Boston conference focused on excellent web dev tooling."
 	title="Speakers"
+	year={year}
 >
-	<HeroForPage slot="hero">Speakers</HeroForPage>
-
-	<BodyText class="speakers-top" size="large" width="full">
-		See talk and workshop details on <a href="/2024/sessions">2024 Sessions</a>.
-	</BodyText>
-
 	<ul class="speakers-list">
 		{
-			Object.values(peopleBySlug)
+			Object.values(historicalData.peopleBySlug)
 				.sort((a, b) =>
 					!!a.bio === !!b.bio ? a.name.localeCompare(b.name) : a.bio ? -1 : 1,
 				)
 				.map((person) => (
 					<Speaker
 						speaker={person}
-						talks={Object.values(talksBySlug).filter((talk) =>
+						talks={Object.values(historicalData.sessionsBySlug).filter((talk) =>
 							talk.people.includes(person),
 						)}
 					>
 						<div class="bio" slot="center">
-							<SafeMarkdown of={person.bio!} />
+							<SafeMarkdown of={person.biography} />
 						</div>
 					</Speaker>
 				))
 		}
 	</ul>
-
-	<BodyText class="speakers-bottom" size="large" width="full">
-		See talk and workshop details on <a href="/2024/sessions">Sessions</a>.
-	</BodyText>
 </PageLayoutHistorical>
 
 <style>
@@ -63,10 +62,6 @@ import "~/styles/2024.css";
 		line-height: 1.25;
 		padding-top: 0.5rem;
 		transition: var(--transitionMedium) line-height;
-	}
-
-	.speakers-bottom {
-		margin-top: 3.5rem;
 	}
 
 	@media (min-width: 1017px) {

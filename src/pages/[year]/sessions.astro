@@ -1,0 +1,40 @@
+---
+import Session from "~/components/historical/Session.astro";
+import {
+	getStaticPathsHistorical,
+	historicalDataByYear,
+} from "~/data/historical/data";
+import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
+import "~/styles/historical.css";
+
+export const getStaticPaths = getStaticPathsHistorical;
+
+const { year } = Astro.params;
+
+const historicalData =
+	historicalDataByYear[year as keyof typeof historicalDataByYear];
+---
+
+<PageLayoutHistorical
+	description="Sessions at SquiggleConf: a Boston conference focused on excellent web dev tooling."
+	title="Sessions"
+	year={year}
+>
+	<ul class="talks-list">
+		{
+			Object.values(historicalData.sessionsBySlug)
+				.toSorted((a, b) => a.title.localeCompare(b.title))
+				.map((session) => <Session session={session} year={year} />)
+		}
+	</ul>
+</PageLayoutHistorical>
+
+<style>
+	.talks-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		list-style: none;
+		padding: 0 var(--widthBodyPadding);
+	}
+</style>

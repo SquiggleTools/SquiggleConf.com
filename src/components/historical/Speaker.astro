@@ -1,23 +1,22 @@
 ---
-import { Person, TalkInfo } from "~/data/2024/notion-data";
-
-import BioLinks from "./BioLinks.astro";
+import BioLinks from "../2024/BioLinks.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
-import SessionDiscord from "./SessionDiscord.astro";
-import SpeakerImage from "./SpeakerImage.astro";
-import SubtleCard from "./SubtleCard.astro";
+import SpeakerImage from "../2024/SpeakerImage.astro";
+import SubtleCard from "../2024/SubtleCard.astro";
+import { SpeakerInfo } from "~/data/speakers";
+import { SessionInfo } from "~/data/historical/types";
 
 interface Props {
 	class?: string;
 	showBioLinkText?: boolean;
-	speaker: Person;
-	talks: TalkInfo[];
+	speaker: SpeakerInfo;
+	talks: SessionInfo[];
 }
 
 const {
 	class: className,
 	showBioLinkText,
-	speaker: { links, qualification, name, role, slug },
+	speaker: { image, links, name, qualification, slug },
 	talks,
 	...rest
 } = Astro.props;
@@ -28,7 +27,7 @@ const {
 		<div class="speaker-top">
 			<div class="speaker-top-content">
 				<div class="speaker-image-container">
-					<SpeakerImage name={name} />
+					<SpeakerImage image={image} name={name} />
 				</div>
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
@@ -37,13 +36,6 @@ const {
 							qualification && (
 								<div>
 									<SafeMarkdown of={qualification} />
-								</div>
-							)
-						}
-						{
-							role && (
-								<div>
-									<SafeMarkdown of={role} />
 								</div>
 							)
 						}
@@ -72,11 +64,6 @@ const {
 				size="large"
 				showText={showBioLinkText}
 			/>
-			{
-				talks.length
-					? talks.map((talk) => <SessionDiscord discord={talk.slug} />)
-					: "MC 🎤"
-			}
 		</div>
 	</SubtleCard>
 </li>

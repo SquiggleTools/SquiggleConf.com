@@ -1,0 +1,142 @@
+---
+import SafeMarkdown from "../SafeMarkdown.astro";
+import SpeakerSmall from "../2024/SpeakerSmall.astro";
+import SubtleCard from "../2024/SubtleCard.astro";
+import SessionTags from "../2024/SessionTags.astro";
+import { SessionInfo } from "~/data/historical/types";
+
+interface Props {
+	class?: string;
+	session: SessionInfo;
+	year: number;
+}
+
+const {
+	class: className,
+	session: { title, people, tags, description, slug },
+	year,
+	...rest
+} = Astro.props;
+---
+
+<li class:list={["talk", className]} id={slug} {...rest}>
+	<SubtleCard>
+		<div class="talk-top">
+			<a class="title" href={`#${slug}`}>{title}</a>
+			<div class="talk-description">
+				<SafeMarkdown of={description} />
+			</div>
+			<SessionTags tags={tags} />
+		</div>
+
+		<div class="talk-details">
+			<ul class="speakers">
+				{
+					people.map((person) => (
+						<SpeakerSmall
+							as="li"
+							href={`/${year}/speakers#${person.slug}`}
+							person={person}
+						/>
+					))
+				}
+			</ul>
+		</div>
+		<div class="talk-details-links"></div>
+	</SubtleCard>
+</li>
+
+<style>
+	.talk {
+		--fontSize: var(--fontSizeBodySmaller);
+		--imageSize: clamp(3.5rem, 10vw, 6rem);
+		display: flex;
+		flex-basis: 0;
+		flex-direction: column;
+		font-family: var(--fontFamilyBody);
+		justify-content: space-between;
+		scroll-margin-top: 1rem;
+	}
+
+	.talk-top {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.title {
+		color: var(--colorForegroundBody);
+		font-size: var(--fontSizeH3);
+		font-weight: var(--fontWeightBold);
+		text-align: left;
+		margin-bottom: 0.5rem;
+		text-decoration: none;
+	}
+
+	.title::after {
+		content: " 🔗";
+		opacity: 0;
+		transition: var(--transitionMedium) opacity;
+	}
+
+	:is(.talk:hover, .talk:focus-within) .title::after {
+		opacity: 1;
+	}
+
+	.talk-description {
+		color: var(--colorForegroundBody);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		line-height: 1.25;
+		overflow: hidden;
+		text-align: left;
+		transition: var(--transitionMedium) line-height;
+	}
+
+	html.dark .talk-description {
+		line-height: 1.4;
+	}
+
+	.talk-details {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.talk-details-links {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.speakers {
+		align-items: flex-start;
+		display: flex;
+		font-family: var(--fontFamilyBody);
+		gap: 1rem 4rem;
+		flex-wrap: wrap;
+		margin-top: 1.5rem;
+		padding-left: 0;
+	}
+
+	p {
+		margin: 1rem !important;
+	}
+
+	@media (min-width: 700px) {
+		.talk-details {
+			align-items: flex-end;
+			flex-direction: row;
+		}
+	}
+
+	@media (min-width: 1017px) {
+		.talk {
+			max-width: var(--widthBodyFull);
+		}
+	}
+</style>

@@ -1,7 +1,7 @@
 ---
 import "@fontsource-variable/urbanist";
 
-import NextYearNotice from "~/components/2024/NextYearNotice.astro";
+import NextYearNotice from "~/components/historical/NextYearNotice.astro";
 import { Props as HeadProps } from "~/components/Head.astro";
 import Header from "~/components/Header.astro";
 import BodyArea from "~/components/BodyArea.astro";
@@ -9,20 +9,24 @@ import Footer from "~/components/Footer.astro";
 
 import BaseLayout from "./BaseLayout.astro";
 
-type Props = Omit<HeadProps, "year">;
+interface Props extends HeadProps {
+	year: number;
+}
+
+const { year } = Astro.props;
 ---
 
-<BaseLayout {...Astro.props} year={2024}>
-	<Header year={2024} />
-	<NextYearNotice />
-	<BodyArea class="page-layout-2024">
+<BaseLayout {...Astro.props} year={year}>
+	<Header year={year} />
+	<NextYearNotice year={year} />
+	<BodyArea class="page-layout-historical">
 		<slot />
 	</BodyArea>
-	<Footer year={2024} />
+	<Footer year={year} />
 </BaseLayout>
 
 <style>
-	.page-layout-2024 {
+	.page-layout-historical {
 		--fontFamilyBody: "Urbanist Variable", sans-serif;
 
 		display: flex;

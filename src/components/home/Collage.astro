@@ -21,7 +21,6 @@ const {
 	ariaLabel,
 	class: className,
 	decorative,
-	placeholder,
 	layout = "auto",
 	photos,
 	shape = "photo",
@@ -123,6 +122,11 @@ const resolvedLayout =
 		filter: blur(2px);
 	}
 
+	.collage-item.collage-item-placeholder::after {
+		/* TODO */
+		content: "?";
+	}
+
 	.collage-item :global(img) {
 		border-radius: inherit;
 		object-fit: cover;
@@ -146,7 +150,7 @@ const resolvedLayout =
 
 	.fun-run-collage {
 		justify-self: start;
-		left: 15rem;
+		left: 17rem;
 		position: absolute;
 		top: 0;
 		transform: none;

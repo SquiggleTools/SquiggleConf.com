@@ -2,17 +2,16 @@
 import { Image } from "astro:assets";
 
 interface Props {
-	slug: string;
+	image: ImageMetadata;
 	name: string;
 	size?: number;
 }
 
-const image = import(`../../assets/avatars/${Astro.props.slug}.jpg`);
-const { size = 128 } = Astro.props;
+const { image, name, size = 128 } = Astro.props;
 ---
 
 <Image
-	alt={`${Astro.props.name} Avatar`}
+	alt={`${name} Avatar`}
 	class="speaker-image"
 	src={image}
 	width={size}

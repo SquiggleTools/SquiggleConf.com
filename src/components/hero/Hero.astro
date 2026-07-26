@@ -1,15 +1,17 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
 import HeroCityscape from "./HeroCityscape.astro";
-import ThemeToggle from "../ThemeToggle.astro";
 
 interface Props {
+	class?: string;
 	tall?: boolean;
 	scrollNotice?: boolean;
 }
+
+const { class: className, scrollNotice, tall, ...props } = Astro.props;
 ---
 
-<section class:list={["hero", Astro.props.tall ? "tall" : "common"]}>
+<section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
 	<div class="hero-decorations">
 		<div class="hero-decorations-inner">
 			<HeroCityscape />

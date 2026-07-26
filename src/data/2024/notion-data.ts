@@ -406,14 +406,11 @@ export const peopleBySlug: Record<string, Person> = {
 	},
 };
 
-export type TalkFormat = "Full" | "Lightning" | "Workshop";
-
 export interface TalkInfo {
 	description: string;
 	people: Person[];
 	slug: string;
 	tags: string[];
-	talkFormat: TalkFormat;
 	title: string;
 }
 
@@ -424,7 +421,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["aakansha-doshi"]],
 		slug: "talk-aakansha-doshi",
 		tags: ["Canvas", "SVG", "Performance"],
-		talkFormat: "Full",
 		title: "Excalidraw: Canvas All The Way Down",
 	},
 	"talk-chris-griffing": {
@@ -433,7 +429,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["chris-griffing"]],
 		slug: "talk-chris-griffing",
 		tags: ["WebAssembly", "Cross-Language", "Open Source", "Language Soup"],
-		talkFormat: "Lightning",
 		title: "Creating a WASM-Powered Plugin System For Your App",
 	},
 	"talk-corina-murg": {
@@ -447,7 +442,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"Chrome DevTools",
 			"Inclusive Design",
 		],
-		talkFormat: "Lightning",
 		title: "Harnessing the Accessibility Tree: Debugging with this Hidden Gem",
 	},
 	"talk-dan-vanderkam": {
@@ -456,7 +450,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["dan-vanderkam"]],
 		slug: "talk-dan-vanderkam",
 		tags: ["ASTs", "Parsing", "Source Code"],
-		talkFormat: "Full",
 		title: "The Battle for Source Code: Why Text Always Wins",
 	},
 	"talk-don-isaac": {
@@ -465,7 +458,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["don-isaac"]],
 		slug: "talk-don-isaac",
 		tags: ["Rust", "CLIs", "Performance", "TypeScript"],
-		talkFormat: "Full",
 		title: "Oxc: Pluggable Next-Gen Tooling At Rust Speed",
 	},
 	"talk-jess-lin": {
@@ -479,7 +471,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"Community Building",
 			"Technical Writing",
 		],
-		talkFormat: "Full",
 		title: "How To Write About Software",
 	},
 	"talk-laurynas-keturakis": {
@@ -488,7 +479,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["laurynas-keturakis"]],
 		slug: "talk-laurynas-keturakis",
 		tags: ["Tracing", "Debugging", "Open Telemetry"],
-		talkFormat: "Lightning",
 		title: "Tracing: Start On Day Zero",
 	},
 	"talk-loris-cro": {
@@ -497,7 +487,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["loris-cro"]],
 		slug: "talk-loris-cro",
 		tags: ["Zig", "Language Server Protocol", "TreeSitter", "Parsing"],
-		talkFormat: "Full",
 		title: "Building an LSP Server from Scratch in Zig",
 	},
 	"talk-rachel-nabors": {
@@ -511,7 +500,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"Design",
 			"CSS Animations Panel",
 		],
-		talkFormat: "Lightning",
 		title: "Web Animations: Tools and Techniques",
 	},
 	"talk-rick-viscomi": {
@@ -520,7 +508,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["rick-viscomi"]],
 		slug: "talk-rick-viscomi",
 		tags: ["Chrome DevTools", "Performance", "Core Web Vitals"],
-		talkFormat: "Full",
 		title: "Diving Into The Chrome DevTools Performance Panel",
 	},
 	"talk-rizel-scarlett": {
@@ -529,7 +516,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["rizel-scarlett"]],
 		slug: "talk-rizel-scarlett",
 		tags: ["Developer Relations", "Community Building", "Documentation"],
-		talkFormat: "Full",
 		title: "Escaping the Curse of Outdated Docs",
 	},
 	"talk-robby-russell": {
@@ -543,7 +529,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"Launching Software Products",
 			"Open Source",
 		],
-		talkFormat: "Full",
 		title: "Oh My Zsh: Learnings Over 15 Years of CLI Innovation",
 	},
 	"talk-titian-cernicova-dragomir": {
@@ -552,7 +537,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["titian-cernicova-dragomir"]],
 		slug: "talk-titian-cernicova-dragomir",
 		tags: ["TypeScript", "Monorepo Tooling", "Debugging", "Build Optimization"],
-		talkFormat: "Full",
 		title: "The Road to Faster Builds: Developing Isolated Declarations",
 	},
 	"talk-yagiz-nizipli": {
@@ -561,7 +545,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 		people: [peopleBySlug["yagiz-nizipli"]],
 		slug: "talk-yagiz-nizipli",
 		tags: ["Node.js", "Performance", "C++", "JavaScript"],
-		talkFormat: "Lightning",
 		title: "Node.js Core Performance Optimizations, Revealed",
 	},
 	"workshop-dan-and-aaron": {
@@ -576,7 +559,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"Task Management",
 			"Tracing",
 		],
-		talkFormat: "Workshop",
 		title: "Building Resilient Applications with Durable Execution",
 	},
 	"workshop-katerina-and-max": {
@@ -592,7 +574,6 @@ export const talksBySlug: Record<string, TalkInfo> = {
 			"VS Code",
 			"JetBrains",
 		],
-		talkFormat: "Workshop",
 		title: "Build Editor Extensions with the Makers of Nx Console",
 	},
 };
