@@ -1,10 +1,10 @@
-import vercel from "@astrojs/vercel";
+import cloudflare from "@astrojs/cloudflare";
 import { konamiEmojiBlast } from "@konami-emoji-blast/astro";
 import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
-	adapter: vercel({
-		webAnalytics: { enabled: true },
+	adapter: cloudflare({
+		imageService: "passthrough",
 	}),
 	env: {
 		schema: {
@@ -21,11 +21,18 @@ export default defineConfig({
 		},
 	},
 	image: {
+		endpoint: {
+			entrypoint: "src/pages/_image.ts",
+			route: "/_image",
+		},
 		layout: "constrained",
 		responsiveStyles: true,
 	},
 	integrations: [konamiEmojiBlast()],
 	output: "server",
+	session: {
+		driver: "memory",
+	},
 	redirects: {
 		"/2024/about": "/about",
 		"/2024/code-of-conduct": "/code-of-conduct",

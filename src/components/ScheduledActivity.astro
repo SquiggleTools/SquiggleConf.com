@@ -1,5 +1,5 @@
 ---
-import { markdown } from "@astropub/md";
+import { marked } from "marked";
 
 import { ActivityDataWithin, ActivityLocation } from "~/data/schedule";
 
@@ -35,7 +35,7 @@ const {
 } = Astro.props;
 
 const descriptionLines = await Promise.all(
-	description.map(async (p) => await markdown(p)),
+	description.map(async (p) => await marked.parse(p)),
 );
 ---
 
@@ -68,7 +68,7 @@ const descriptionLines = await Promise.all(
 		}
 	</div>
 	<div class="activity-description">
-		{descriptionLines}
+		{descriptionLines.map((line) => <Fragment set:html={line} />)}
 	</div>
 </div>
 

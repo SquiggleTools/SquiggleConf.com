@@ -25,6 +25,41 @@ pnpm dev
 To get the newsletter API running, copy `.env.template` to an `.env` file and fill in the Brevo API key value from our password manager.
 This is not necessary unless you want to work on the newsletter API.
 
+## Cloudflare Deployment
+
+This project deploys to Cloudflare Workers and does not use GitHub Actions.
+Day-to-day development stays the same: `pnpm dev`.
+
+### One-Time Setup
+
+1. Connect this GitHub repository to a Cloudflare Worker in the Cloudflare dashboard.
+2. Use the `main` branch as production.
+3. Let Cloudflare create the preview deployment flow for other branches.
+4. Set the newsletter values in the Cloudflare dashboard:
+
+- `BREVO_API_KEY` as a secret
+- `BREVO_LIST_ID` as a variable
+
+### Immediate Manual Deploy
+
+If you need to cut over production immediately, deploy directly from this repo:
+
+```shell
+npx wrangler deploy
+```
+
+This uses the worker config in `wrangler.toml`.
+
+### CI Behavior
+
+- Pushes to `main` deploy the production worker.
+- Pushes to other branches create preview deployments in Cloudflare.
+
+### Why No Local Deploy Command
+
+The old Vercel flow centered on pushing to the repo and letting the platform handle deployment.
+This setup keeps the same feel: you develop locally with Astro, then push to GitHub and let Cloudflare handle deployment.
+
 ## Contributors
 
 <!-- spellchecker: disable -->

@@ -1,6 +1,7 @@
 .astro
 .env
 .vercel
+.wrangler
 .worktrees
 /dist
 /node_modules
