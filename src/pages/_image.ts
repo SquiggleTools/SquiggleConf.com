@@ -14,7 +14,11 @@ export const GET: APIRoute = async ({ url }) => {
 	}
 
 	const pathname = target.pathname;
-	if (!pathname.startsWith("/_astro/") && !pathname.startsWith("/favicon")) {
+	if (
+		!pathname.startsWith("/_astro/") &&
+		!pathname.startsWith("/@fs/") &&
+		!pathname.startsWith("/favicon")
+	) {
 		return new Response("Forbidden", { status: 403 });
 	}
 
