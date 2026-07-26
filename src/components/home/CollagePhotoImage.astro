@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	alt: string | null;
+	class?: string;
+	src: ImageMetadata;
+	objectPosition?: string | undefined;
+}
+
+const { alt, class: className, objectPosition, src, ...props } = Astro.props;
+---
+
+<Image
+	alt={alt}
+	aria-hidden={alt ? undefined : "true"}
+	class:list={["collage-photo-image", className]}
+	loading="lazy"
+	src={src}
+	style={objectPosition ? `object-position: ${objectPosition}` : undefined}
+	{...props}
+/>
+
+<style>
+	.collage-photo-image {
+		display: block;
+		height: 100%;
+		width: 100%;
+		user-select: none;
+	}
+
+	.collage-photo-image {
+		border-radius: inherit;
+		object-fit: cover;
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(1);
+		transform-origin: center;
+		will-change: transform;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.collage-item {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>

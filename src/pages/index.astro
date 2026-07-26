@@ -34,10 +34,13 @@ import {
 	venues,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
+import CollagePhotoImage from "~/components/home/CollagePhotoImage.astro";
+import CollageItem from "~/components/home/CollageItem.astro";
 import ExploreChoices from "~/components/home/ExploreChoices.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import HostList from "~/components/home/HostList.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
+import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TalkList from "~/components/home/TalkList.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
@@ -48,8 +51,6 @@ import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
-import PostcardGallery from "~/components/home/PostcardGallery.astro";
-import Avatar from "~/components/home/Avatar.astro";
 ---
 
 <PageLayout
@@ -111,8 +112,8 @@ import Avatar from "~/components/home/Avatar.astro";
 						class="launch-party-collage"
 						layout="trio"
 						photos={[
-							{ alt: "People networking at SquiggleConf", src: networking },
 							{ alt: "Boston harbor near the venue", src: harbor },
+							{ alt: "People networking at SquiggleConf", src: networking },
 							{
 								alt: "Speakers gathered together at the event",
 								src: harborwalk,
@@ -120,20 +121,22 @@ import Avatar from "~/components/home/Avatar.astro";
 						]}
 					/>
 					<TimelineCopy>
-						<div class="launch-party-details">
-							<div>
+						<div class="event-body">
+							<CollageItem>
+								<CollagePhotoImage
+									class="launch-party-host"
+									src={tanner}
+									alt="Tanner Linsley portrait"
+								/>
+							</CollageItem>
+							<TimelineCopy>
 								<p>
 									Kick off the weekend with snacks, drinks, and an easy room
 									full of tool-loving people. It is the place to settle in, say
 									hi, and start the conference with a little momentum.
 								</p>
 								<p class="fireside-host">hosted by Tanner Linsley</p>
-							</div>
-							<Avatar
-								alt="Tanner Linsley"
-								image={tanner}
-								class="launch-party-host"
-							/>
+							</TimelineCopy>
 						</div>
 					</TimelineCopy>
 				</TimelineEntry>
@@ -581,7 +584,6 @@ import Avatar from "~/components/home/Avatar.astro";
 					<div class="event-body">
 						<Collage
 							ariaLabel="Fireside chat guests"
-							class="firesidechat-avatars"
 							layout="avatar-duo"
 							photos={[
 								{
@@ -1009,13 +1011,7 @@ import Avatar from "~/components/home/Avatar.astro";
 		align-content: start;
 	}
 
-	.launch-party-details {
-		display: flex;
-		flex-direction: row;
-	}
-
 	.launch-party-host {
-		float: right;
 		height: 7rem;
 		width: 7rem;
 	}

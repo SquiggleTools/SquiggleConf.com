@@ -1,12 +1,12 @@
 ---
-import { Image } from "astro:assets";
-
 import type {
 	CollageLayout,
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
 import PlaceholderMark from "./PlaceholderMark.astro";
+import CollagePhotoImage from "./CollagePhotoImage.astro";
+import CollageItem from "./CollageItem.astro";
 
 interface Props {
 	ariaLabel?: string;
@@ -54,26 +54,20 @@ const resolvedLayout =
 >
 	{
 		photos.map((photo, index) => (
-			<div
+			<CollageItem
 				class:list={[
 					"collage-item",
 					`collage-item-${index + 1}`,
 					photo.placeholder && "collage-item-placeholder",
 				]}
 			>
-				<Image
+				<CollagePhotoImage
 					alt={decorative || photo.decorative ? "" : photo.alt}
-					aria-hidden={decorative || photo.decorative ? "true" : undefined}
-					loading="lazy"
 					src={photo.src}
-					style={
-						photo.objectPosition
-							? `object-position: ${photo.objectPosition}`
-							: undefined
-					}
+					objectPosition={photo.objectPosition}
 				/>
 				{photo.placeholder && <PlaceholderMark />}
-			</div>
+			</CollageItem>
 		))
 	}
 </div>
@@ -89,21 +83,7 @@ const resolvedLayout =
 	}
 
 	.collage-item {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
-		border-radius: 0.35rem;
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		box-sizing: border-box;
-		overflow: hidden;
 		position: absolute;
-		transform-origin: center;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			scale var(--timeline-hover-duration) ease,
-			border-width var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
-		will-change: transform, scale;
 	}
 
 	.collage-avatar .collage-item {
@@ -112,32 +92,8 @@ const resolvedLayout =
 		will-change: auto;
 	}
 
-	.collage-item :global(picture),
-	.collage-item :global(img) {
-		display: block;
-		height: 100%;
-		width: 100%;
-		user-select: none;
-	}
-
 	.collage-item.collage-item-placeholder :global(img) {
 		filter: blur(2px);
-	}
-
-	.collage-item :global(img) {
-		border-radius: inherit;
-		object-fit: cover;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		transform: scale(1);
-		transform-origin: center;
-		will-change: transform;
-	}
-
-	.collage-photo .collage-item :global(img) {
-		transform: none;
-		will-change: auto;
 	}
 
 	.collage-duo {
@@ -370,8 +326,7 @@ const resolvedLayout =
 
 	@media (prefers-reduced-motion: reduce) {
 		.collage,
-		.collage-item,
-		.collage-item :global(img) {
+		.collage-item {
 			animation: none;
 			transition: none;
 		}
