@@ -21,7 +21,7 @@ const yearPairs =
 <footer>
 	<ContentArea class="footer-content-area" width="wide">
 		<div class="left">
-			<Logo />
+			<Logo invert />
 			<div class="footer-date-location">
 				<InlineBlock>May 7th, 2027 ·</InlineBlock>
 				<InlineBlock>Boston, Massachusetts</InlineBlock>
@@ -41,14 +41,14 @@ const yearPairs =
 				}
 				<ThemeToggle size="small" />
 			</div>
-			<Socials class="footer-socials" />
+			<Socials class="footer-socials" inverted />
 		</div>
 	</ContentArea>
 </footer>
 
 <style>
 	footer {
-		background: var(--colorForeground);
+		background: var(--colorAccent);
 		color: var(--colorForegroundEmphasized);
 		font-family: var(--fontFamilyHeading);
 		padding: 3.5rem 0;
@@ -63,7 +63,6 @@ const yearPairs =
 	}
 
 	.left {
-		color: var(--colorBlue1);
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
@@ -74,7 +73,6 @@ const yearPairs =
 	}
 
 	.right {
-		color: var(--colorBlue1);
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;

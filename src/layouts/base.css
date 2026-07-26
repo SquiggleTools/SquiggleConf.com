@@ -100,7 +100,7 @@ html.dark {
 	--colorAccentDark: var(--colorBlue2);
 	--colorBackground: var(--colorWhiteIsh);
 	--colorBackgroundEmphasized: var(--colorBlue4);
-	--colorForeground: var(--colorBlue4);
+	--colorForeground: var(--colorBlue);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
 	--colorSandBackground: var(--colorBlue4);
