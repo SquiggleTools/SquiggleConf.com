@@ -1,5 +1,5 @@
 {
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
-	"ignoreDependencies": ["sharp"],
+	"ignoreDependencies": ["printf", "sharp", "wrangler"],
 	"ignoreExportsUsedInFile": { "interface": true, "type": true }
 }
