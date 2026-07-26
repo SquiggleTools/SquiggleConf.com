@@ -1,5 +1,5 @@
 ---
-import { markdown } from "@astropub/md";
+import { marked } from "marked";
 import { Image } from "astro:assets";
 
 import dropdown from "~/assets/glyphs/dropdown.svg";
@@ -13,7 +13,7 @@ export interface Props {
 
 const pairs = await Promise.all(
 	Astro.props.pairs.map(async ([question, answer]) => {
-		const parsedAnswer = await markdown(answer);
+		const parsedAnswer = await marked.parse(answer);
 		return [question, parsedAnswer];
 	}),
 );
@@ -30,7 +30,7 @@ const pairs = await Promise.all(
 					<Image alt="" src={dropdown} />
 					<span>{question}</span>
 				</summary>
-				<div class="faq-answer">{answer}</div>
+				<div class="faq-answer" set:html={answer} />
 			</details>
 		))
 	}
