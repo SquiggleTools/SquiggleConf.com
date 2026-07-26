@@ -25,9 +25,10 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 
 <header>
 	<ContentArea class="header-content-area-mobile">
-		<ThemeToggle placement="inline" />
 		{
-			!hideLogo && (
+			hideLogo ? (
+				<ThemeToggle placement="inline" />
+			) : (
 				<a class="logo" href={logoHref}>
 					<Logo />
 				</a>
@@ -52,9 +53,10 @@ const logoHref = year === currentYear ? "/" : `/${year}`;
 
 	<ContentArea class="header-content-area-wide" width="wide">
 		<div class="header-links">
-			<ThemeToggle placement="inline" />
 			{
-				!hideLogo && (
+				hideLogo ? (
+					<ThemeToggle placement="inline" />
+				) : (
 					<a class="logo" href={logoHref}>
 						<Logo />
 					</a>

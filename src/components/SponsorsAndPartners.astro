@@ -1,38 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { links } from "~/data/links";
-import { sponsorsByPlacement } from "~/data/sponsors";
-import { sponsorsBySlug as sponsorsBySlug2024 } from "~/data/2024/sponsors";
 import Button from "./Button.astro";
-import LogoGroups from "./LogoGroups.astro";
 
-// Flatten 2025 sponsors and index by slug (each item carries a `slug` prop from _.groupBy)
-const bySlug2025 = Object.fromEntries(
-	(Object.values(sponsorsByPlacement).flat() as any[]).map((s: any) => [
-		s.slug,
-		s,
-	]),
-) as Record<string, any>;
-
-// bloomberg 4 · mintlify 3 · igalia/datastax/inngest/openjs/prisma/elastic 2 · void0/rush/nx/progress 1
-const sponsorGroups = {
-	tier4: [sponsorsBySlug2024.bloomberg],
-	tier3: [bySlug2025.mintlify],
-	tier2: [
-		sponsorsBySlug2024.igalia,
-		sponsorsBySlug2024.datastax,
-		sponsorsBySlug2024.inngest,
-		sponsorsBySlug2024["openjs-foundation"],
-		sponsorsBySlug2024.prisma,
-		bySlug2025.elastic,
-	],
-	tier1: [
-		bySlug2025.void0,
-		bySlug2025.rush,
-		{ ...sponsorsBySlug2024.nx, title: "Nx" },
-		bySlug2025.progress,
-	],
-};
 import BodyText from "./BodyText.astro";
 
 import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
@@ -135,13 +105,6 @@ const sponsors = [
 	},
 ];
 
-const logoSizes: Record<number, string> = {
-	4: "15rem",
-	3: "11rem",
-	2: "9rem",
-	1: "7rem",
-};
-
 const tiers = [
 	sponsors.filter((s) => s.prominence >= 3),
 	sponsors.filter((s) => s.prominence === 2),
@@ -166,12 +129,14 @@ const tiers = [
 					<div class="past-sponsors-tier">
 						{tier.map((sponsor) => (
 							<a
-								class="sponsor-logo"
+								class:list={[
+									"sponsor-logo",
+									`sponsor-logo-size-${sponsor.prominence}`,
+								]}
 								href={sponsor.href}
 								rel="noreferrer"
 								target="_blank"
 								title={sponsor.title}
-								style={`--logo-size: ${logoSizes[sponsor.prominence]}`}
 							>
 								<Image
 									alt=""
@@ -391,7 +356,7 @@ const tiers = [
 		flex-direction: column;
 		gap: 1.5rem;
 		margin: 0 auto;
-		max-width: min(100%, 82rem);
+		max-width: min(100%, var(--sizeContentAreaWide));
 		padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2.5rem)
 			clamp(4.5rem, 8vw, 6.5rem);
 		position: relative;
@@ -499,6 +464,22 @@ const tiers = [
 		background: var(--past-sponsors-logo-hover-background);
 		box-shadow: var(--past-sponsors-logo-hover-shadow);
 		transform: translateY(-1px);
+	}
+
+	.sponsor-logo-size-1 {
+		--logo-size: 6rem;
+	}
+
+	.sponsor-logo-size-2 {
+		--logo-size: 8rem;
+	}
+
+	.sponsor-logo-size-3 {
+		--logo-size: 10rem;
+	}
+
+	.sponsor-logo-size-4 {
+		--logo-size: 14rem;
 	}
 
 	.sponsor-logo img {

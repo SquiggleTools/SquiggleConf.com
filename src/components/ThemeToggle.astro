@@ -11,52 +11,6 @@ import themeSun from "~/assets/design/theme-sun.svg";
 	<img alt="" class="sun" src={themeSun.src} />
 </button>
 
-<script>
-	const html = () => document.documentElement!;
-	const toggles = () => document.querySelectorAll(".theme-toggle")!;
-
-	function getThemePreference() {
-		return matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
-	}
-
-	function updateElementsForTheme(newTheme: string | string) {
-		if (!newTheme || newTheme === "light") {
-			html().classList.remove("dark");
-		} else {
-			html().classList.add("dark");
-		}
-
-		for (const toggle of toggles()) {
-			toggle.setAttribute("aria-label", `Theme toggle (current: ${newTheme})`);
-		}
-	}
-
-	function initialize() {
-		const startingTheme =
-			typeof localStorage !== "undefined"
-				? (localStorage.getItem("theme") as string)
-				: undefined;
-
-		const theme = startingTheme ?? getThemePreference();
-
-		updateElementsForTheme(theme);
-
-		for (const toggle of toggles()) {
-			toggle.addEventListener("click", () => {
-				const newTheme = html().classList.contains("dark") ? "light" : "dark";
-				updateElementsForTheme(newTheme);
-				localStorage.setItem("theme", newTheme);
-			});
-		}
-	}
-
-	initialize();
-
-	document.addEventListener("astro:after-swap", initialize);
-</script>
-
 <style>
 	.theme-toggle {
 		background: none;
