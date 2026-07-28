@@ -5,10 +5,10 @@ import { Image } from "astro:assets";
 
 import tanner from "~/assets/2027/tanner.webp";
 import placeholder8 from "~/assets/2027/placeholder-8.webp";
-import placeholder9 from "~/assets/2027/placeholder-9.webp";
 import placeholder12 from "~/assets/2027/placeholder-12.webp";
 import placeholder13 from "~/assets/2027/placeholder-13.webp";
 import Hero from "~/components/hero/Hero.astro";
+import ryanDahl from "~/assets/avatars/ryan-dahl.webp";
 import {
 	bigRav,
 	dillonMulroy,
@@ -591,19 +591,21 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							layout="avatar-duo"
 							photos={[
 								{
-									alt: "Placeholder portrait",
-									placeholder: true,
-									src: placeholder9,
+									alt: "Ryan Dahl portrait",
+									src: ryanDahl,
 								},
 								{ alt: "Dillon Mulroy portrait", src: dillonMulroy },
 							]}
 							shape="avatar"
 						/>
 						<TimelineCopy>
-							<h3 class="fireside-topic">Topic To Be Announced</h3>
+							<h3 class="fireside-topic">
+								The Fight to Free the JavaScript Trademark
+							</h3>
 							<p>
-								Join us for a fireside chat with a notable JavaScript-y friend
-								about a pressing issue in the technical space.
+								Node.js and Deno creator Ryan Dahl takes the stage to break down
+								Deno's ongoing legal crusade against Oracle to free the
+								"JavaScript" trademark.
 							</p>
 							<p class="fireside-host">hosted by Dillon Mulroy</p>
 						</TimelineCopy>
