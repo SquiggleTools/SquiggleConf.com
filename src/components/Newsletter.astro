@@ -118,23 +118,10 @@ import Heading from "./Heading.astro";
 
 <style>
 	.newsletter {
-		color: var(--colorForeground);
 		padding: 0 0 3rem;
 		overflow: hidden;
 		position: relative;
 		text-align: center;
-	}
-
-	.ocean-floor-left {
-		bottom: 0;
-		height: 90%;
-		right: -10%;
-	}
-
-	.ocean-floor-right {
-		bottom: 0;
-		height: 90%;
-		left: 50%;
 	}
 
 	.newsletter-contents {
@@ -191,20 +178,25 @@ import Heading from "./Heading.astro";
 		color: var(--colorUnhappy);
 	}
 
-	@media (width >= 819px) {
-		.ocean-floor-left {
-			right: clamp(10%, 40vw, 50%);
-		}
+	.ocean-floor-left {
+		bottom: -10%;
+		height: 90%;
+		left: -50%;
+	}
+
+	.ocean-floor-right {
+		bottom: 0;
+		height: 90%;
+		right: -50%;
 	}
 
 	@media (width >= 1117px) {
 		.ocean-floor-left {
-			right: auto;
-			left: -20%;
+			bottom: 0;
+			left: -25%;
 		}
 
 		.ocean-floor-right {
-			left: auto;
 			right: -10%;
 		}
 	}
