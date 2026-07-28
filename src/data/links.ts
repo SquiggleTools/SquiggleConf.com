@@ -17,7 +17,8 @@ export const links = {
 		"https://spothero.com/search?kind=address&latitude=42.3592478&longitude=-71.0491475&search_string=New+England+Aquarium%2C+Central+Wharf%2C+Boston%2C+MA%2C+USA&ends=2025-09-19T20%3A30&starts=2025-09-18T17%3A30&view=dl",
 	partner: "https://partner.squiggleconf.com",
 	shop: "https://shop.squiggle.tools",
-	sponsor: "https://sponsor.squiggleconf.com",
+	sponsor:
+		"https://drive.google.com/file/d/1vAGOuh8Y4UJ117Cl_sUizSqfmMt4z2oa/view?usp=drive_link",
 	tickets: "https://buytickets.at/squiggleconf/2332803",
 	volunteer: "https://volunteer.squiggleconf.com",
 	x: "https://x.com/SquiggleConf",
