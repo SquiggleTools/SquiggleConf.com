@@ -178,16 +178,28 @@ import Heading from "./Heading.astro";
 		color: var(--colorUnhappy);
 	}
 
-	.ocean-floor-left {
-		bottom: -10%;
-		height: 90%;
-		left: -50%;
+	.ocean-floor-left,
+	.ocean-floor-right {
+		display: none;
 	}
 
-	.ocean-floor-right {
-		bottom: 0;
-		height: 90%;
-		right: -50%;
+	@media (width >= 490px) {
+		.ocean-floor-left,
+		.ocean-floor-right {
+			display: initial;
+		}
+
+		.ocean-floor-left {
+			bottom: -12%;
+			height: 90%;
+			left: -50%;
+		}
+
+		.ocean-floor-right {
+			bottom: 0;
+			height: 90%;
+			right: -50%;
+		}
 	}
 
 	@media (width >= 1117px) {
