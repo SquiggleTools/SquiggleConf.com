@@ -63,14 +63,18 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	<DeepSeaSurface>
 		<section class="timeline-section" aria-label="Timeline preview">
 			<TimelineFishLayer />
-			<h2 class="top-heading">the devtools conference</h2>
-			<p class="top-intro">
-				SquiggleConf is a conference focused on software developer tools: AI
-				tools, linters, code editors, performance and security tools, debuggers,
-				and more. We mix heavy talks with fun events.<br />Think of it like your
-				devtools fieldtrip.
-			</p>
-			<PostcardGallery />
+			<div class="top-side-by-side">
+				<div class="top-side-left">
+					<h2 class="top-heading">the devtools conference</h2>
+					<p class="top-intro">
+						SquiggleConf is a conference focused on software developer tools: AI
+						tools, linters, code editors, performance and security tools,
+						debuggers, and more. We mix heavy talks with fun events.<br />Think
+						of it like your devtools fieldtrip.
+					</p>
+				</div>
+				<PostcardGallery />
+			</div>
 			<div class="timeline-grid">
 				<div class="timeline-cell-empty" aria-hidden="true"></div>
 				<div class="timeline-cap timeline-top">
@@ -745,10 +749,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		font-weight: 700;
 		line-height: 1;
 		padding-top: 1rem;
-		margin: 0 auto;
-		max-width: fit-content;
 		position: relative;
-		text-align: center;
 		z-index: 1;
 	}
 
@@ -756,11 +757,29 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		color: var(--timeline-copy-color);
 		font-size: clamp(1rem, 1.35vw, 1.12rem);
 		line-height: 1.6;
-		margin: 0.85rem auto 0;
-		padding: 0 1rem;
+		padding: 0 0 0 2rem;
+		margin: 1rem auto 0;
 		max-width: 39rem;
-		text-align: center;
 		text-wrap: pretty;
+	}
+
+	.top-side-by-side {
+		max-width: 70rem;
+		margin: auto;
+		gap: 5rem;
+		align-items: center;
+		display: flex;
+		flex-direction: row;
+		text-align: right;
+	}
+
+	.top-side-left {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		text-align: right;
+		width: 100%;
+		margin-bottom: 2.5rem;
 	}
 
 	.timeline-grid {
@@ -1115,6 +1134,20 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	@media (width < 900px) {
+		.top-side-by-side {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.top-heading {
+			margin: auto;
+		}
+
+		.top-side-left {
+			margin-bottom: 0;
+			text-align: center;
+		}
+
 		.timeline-grid {
 			gap: 0.65rem;
 			grid-template-columns: 1fr;
