@@ -2,8 +2,11 @@ name = "squiggleconf-com"
 main = "./dist/_worker.js/index.js"
 compatibility_date = "2026-07-25"
 compatibility_flags = ["nodejs_compat"]
-workers_dev = true
-routes = ["squiggleconf.com/*", "www.squiggleconf.com/*"]
+preview_urls = true
+
+[[routes]]  
+pattern = "squiggleconf.com"
+custom_domain = true
 
 [vars]
 BREVO_LIST_ID = "3"
