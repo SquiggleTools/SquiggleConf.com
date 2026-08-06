@@ -30,9 +30,6 @@ export default defineConfig({
 	},
 	integrations: [konamiEmojiBlast()],
 	output: "server",
-	session: {
-		driver: "memory",
-	},
 	redirects: {
 		"/2024/about": "/about",
 		"/2024/code-of-conduct": "/code-of-conduct",
@@ -45,6 +42,9 @@ export default defineConfig({
 		"/sessions": "/2025/sessions",
 		"/speakers": "/2025/speakers",
 		"/travel": "/articles/travel",
+	},
+	session: {
+		driver: "memory",
 	},
 	site: "https://squiggleconf.com",
 });
