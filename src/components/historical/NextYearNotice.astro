@@ -1,0 +1,59 @@
+---
+import LinkOut from "~/assets/glyphs/link-out.svg";
+import { currentYear } from "~/data/years";
+import { Image } from "astro:assets";
+import Hero from "../hero/Hero.astro";
+
+interface Props {
+	year: number;
+}
+
+const { year } = Astro.props;
+---
+
+<Hero class="next-year-notice">
+	<h2 class="primary-h2">
+		Thank you to everyone who made SquiggleConf {year} wonderful!
+	</h2>
+
+	<p class="byline">
+		<strong class="next-year">
+			<a href="/">
+				SquiggleConf {currentYear}
+				<Image alt="" class="link-out" src={LinkOut} />
+			</a>
+		</strong>
+	</p>
+</Hero>
+
+<style>
+	.next-year-notice {
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+
+	.primary-h2 {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH4);
+		padding: 1rem var(--widthBodyPadding) 2rem;
+		text-align: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.byline {
+		font-family: var(--fontFamilyBody);
+		font-weight: var(--fontWeightBody);
+		line-height: var(--lineHeightBody);
+	}
+
+	.next-year {
+		font-weight: 600;
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeH2);
+	}
+
+	html:not(.dark) .link-out {
+		filter: hue-rotate(180deg) invert(0.7);
+	}
+</style>

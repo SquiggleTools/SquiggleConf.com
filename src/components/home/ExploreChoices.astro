@@ -1,0 +1,24 @@
+---
+import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
+
+import type { ExploreChoiceData } from "~/components/home/types";
+
+interface Props {
+	choices: readonly ExploreChoiceData[];
+}
+
+const { choices } = Astro.props;
+---
+
+<div class="explore-options" aria-label="Explore Boston options">
+	{choices.map((choice) => <ExploreChoiceCard choice={choice} />)}
+</div>
+
+<style>
+	.explore-options {
+		display: grid;
+		gap: 0.75rem;
+		margin-top: 0.8rem;
+		max-width: 42rem;
+	}
+</style>

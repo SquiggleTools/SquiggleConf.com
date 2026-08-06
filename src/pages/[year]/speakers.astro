@@ -1,0 +1,73 @@
+---
+import Speaker from "~/components/historical/Speaker.astro";
+import SafeMarkdown from "~/components/SafeMarkdown.astro";
+import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
+import "~/styles/historical.css";
+import {
+	getStaticPathsHistorical,
+	historicalDataByYear,
+} from "~/data/historical/data";
+
+export const getStaticPaths = getStaticPathsHistorical;
+
+const { year } = Astro.params;
+
+const historicalData =
+	historicalDataByYear[year as keyof typeof historicalDataByYear];
+---
+
+<PageLayoutHistorical
+	description="Speakers at SquiggleConf: a Boston conference focused on excellent web dev tooling."
+	title="Speakers"
+	year={year}
+>
+	<ul class="speakers-list">
+		{
+			Object.values(historicalData.peopleBySlug)
+				.sort((a, b) =>
+					!!a.bio === !!b.bio ? a.name.localeCompare(b.name) : a.bio ? -1 : 1,
+				)
+				.map((person) => (
+					<Speaker
+						speaker={person}
+						talks={Object.values(historicalData.sessionsBySlug).filter((talk) =>
+							talk.people.includes(person),
+						)}
+						year={year}
+					>
+						<div class="bio" slot="center">
+							<SafeMarkdown of={person.biography} />
+						</div>
+					</Speaker>
+				))
+		}
+	</ul>
+</PageLayoutHistorical>
+
+<style>
+	.speakers-top {
+		margin-bottom: 2rem;
+	}
+
+	.speakers-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		flex-wrap: wrap;
+		list-style-type: none;
+		margin: 2rem;
+		padding: 0 var(--widthBodyPadding);
+	}
+
+	.bio {
+		line-height: 1.25;
+		padding-top: 0.5rem;
+		transition: var(--transitionMedium) line-height;
+	}
+
+	@media (min-width: 1017px) {
+		.speakers-list {
+			width: var(--widthBodyLean);
+		}
+	}
+</style>

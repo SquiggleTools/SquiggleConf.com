@@ -28,7 +28,12 @@ const {
 	href={href}
 	target="_blank"
 >
-	<Image alt={alt} class:list={["social-image", size]} src={src} />
+	<Image
+		alt={alt}
+		class:list={["social-image", size]}
+		fit="contain"
+		src={src}
+	/>
 </a>
 
 <style>
@@ -54,10 +59,12 @@ const {
 
 	.social-image {
 		height: var(--sizeSocialImage);
+		user-select: none;
 		width: var(--sizeSocialImage);
 	}
 
 	html:not(.dark) .social-link-inverted {
 		filter: hue-rotate(180deg) invert();
+		opacity: 0.9;
 	}
 </style>

@@ -1,0 +1,51 @@
+---
+import type { PersonCardData } from "~/components/home/types";
+import Avatar from "./Avatar.astro";
+
+interface Props {
+	person: PersonCardData;
+}
+
+const { person } = Astro.props;
+---
+
+<article class="timeline-host-card">
+	<Avatar alt={person.name} image={person.image} />
+	<div class="timeline-host-copy">
+		<h3>{person.name}</h3>
+		<p class="timeline-host-role">{person.qualification}</p>
+	</div>
+</article>
+
+<style>
+	.timeline-host-card {
+		align-items: center;
+		display: grid;
+		gap: 0.8rem;
+		grid-template-columns: 5rem 1fr;
+	}
+
+	.timeline-host-copy {
+		display: grid;
+		gap: 0.28rem;
+		min-height: 5rem;
+		place-content: center start;
+	}
+
+	.timeline-host-copy h3 {
+		color: var(--timeline-heading-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.1rem;
+		font-weight: 700;
+		line-height: 1.15;
+		margin: 0;
+	}
+
+	.timeline-host-role {
+		color: var(--timeline-muted-color);
+		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+		font-weight: 300;
+		line-height: 1.25;
+		margin: 0;
+	}
+</style>

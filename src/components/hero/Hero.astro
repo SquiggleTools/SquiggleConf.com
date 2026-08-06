@@ -3,12 +3,15 @@ import ContentArea from "~/components/ContentArea.astro";
 import HeroCityscape from "./HeroCityscape.astro";
 
 interface Props {
+	class?: string;
 	tall?: boolean;
 	scrollNotice?: boolean;
 }
+
+const { class: className, scrollNotice, tall, ...props } = Astro.props;
 ---
 
-<section class:list={["hero", Astro.props.tall ? "tall" : "common"]}>
+<section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
 	<div class="hero-decorations">
 		<div class="hero-decorations-inner">
 			<HeroCityscape />
@@ -30,26 +33,27 @@ interface Props {
 
 <style>
 	.hero {
-		background: linear-gradient(
-			180deg,
-			var(--colorBlueBright1) 0%,
-			var(--colorBlueBright2) 100%
-		);
+		background: linear-gradient(180deg, #e9f9ff 0%, #f3fcff 50%, #fffdde 100%);
+		z-index: 1;
 		color: var(--colorBackground);
 		padding-bottom: var(--cityscapeHeightArea);
 		position: relative;
 	}
 
+	:global(html.dark) .hero {
+		background: #04142d;
+	}
+
 	.hero.common {
-		--cityscapeHeightArea: 16rem;
+		--cityscapeHeightArea: 10rem;
 	}
 
 	.hero.tall {
-		--cityscapeHeightArea: 20rem;
+		--cityscapeHeightArea: 8rem;
 	}
 
 	.hero-decorations {
-		bottom: -2.5rem;
+		bottom: -1.5rem;
 		pointer-events: none;
 		position: absolute;
 		height: 100%;

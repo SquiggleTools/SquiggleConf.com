@@ -1,11 +1,13 @@
 ---
+import { currentYear } from "~/data/years";
+
 export interface Props {
 	description: string;
 	title?: string;
 	year?: number;
 }
 
-const { description, year = 2025 } = Astro.props;
+const { description, year = currentYear } = Astro.props;
 
 const banner = new URL("banner.png", Astro.site).toString();
 const favicon = new URL("favicon.png", Astro.site).toString();

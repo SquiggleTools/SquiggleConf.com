@@ -1,30 +1,164 @@
 ---
+import { Image } from "astro:assets";
 import { links } from "~/data/links";
-import { sponsorsByPlacement } from "~/data/sponsors";
-import BodyText from "./BodyText.astro";
 import Button from "./Button.astro";
-import LogoGroups from "./LogoGroups.astro";
-import ExplainerHeading from "./explainers/ExplainerHeading.astro";
-import { partnersByPlacement } from "~/data/partners";
+
+import BodyText from "./BodyText.astro";
+
+import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
+import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
+import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
+import igaliaBlack from "~/assets/logos/igalia-black.svg";
+import igaliaWhite from "~/assets/logos/igalia-white.svg";
+import datastaxBlack from "~/assets/logos/datastax-black.svg";
+import datastaxWhite from "~/assets/logos/datastax-white.svg";
+import inngestBlack from "~/assets/logos/inngest-black.svg";
+import inngestNew from "~/assets/logos/inngest-wordmark-2026.svg";
+import openjsFoundationColor from "~/assets/logos/openjs-foundation-color.svg";
+import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
+import prismaBlack from "~/assets/logos/prisma-black.svg";
+import prismaWhite from "~/assets/logos/prisma-white.svg";
+import elasticWhite from "~/assets/logos/elastic-black.svg";
+import elasticBlack from "~/assets/logos/elastic-white.svg";
+import voidZeroBlack from "~/assets/logos/voidzero-black.svg";
+import voidZeroWhite from "~/assets/logos/voidzero-white.svg";
+import rushStackDark from "~/assets/logos/rushstack-dark.svg";
+import rushStackLite from "~/assets/logos/rushstack-lite.svg";
+import nxDarkBlue from "~/assets/logos/nx-dark-blue.svg";
+import nxWhite from "~/assets/logos/nx-white.svg";
+import progressGray from "~/assets/logos/progress-gray.svg";
+import progressWhite from "~/assets/logos/progress-white.svg";
+import Newsletter from "./Newsletter.astro";
+
+const sponsors = [
+	{
+		href: "https://www.bloomberg.com/company/values/tech-at-bloomberg/javascript?utm_source=squiggleconf",
+		logos: { dark: bloombergWhite, light: bloombergBlack },
+		prominence: 4,
+		title: "Bloomberg",
+	},
+	{
+		href: "https://mintlify.com?utm_source=squiggleconf",
+		logos: { dark: mintlifyWhite, light: mintlifyBlack },
+		prominence: 3,
+		title: "Mintlify",
+	},
+	{
+		href: "https://igalia.com?utm_source=squiggleconf",
+		logos: { dark: igaliaWhite, light: igaliaBlack },
+		prominence: 2,
+		title: "Igalia",
+	},
+	{
+		href: "https://www.datastax.com?utm_source=squiggleconf",
+		logos: { dark: datastaxWhite, light: datastaxBlack },
+		prominence: 2,
+		title: "Datastax",
+	},
+	{
+		href: "https://inngest.com?utm_source=squiggleconf",
+		logos: { dark: inngestNew, light: inngestBlack },
+		prominence: 2,
+		title: "Inngest",
+	},
+	{
+		href: "https://openjsf.org?utm_source=squiggleconf",
+		logos: { dark: openjsFoundationLight, light: openjsFoundationColor },
+		prominence: 2,
+		title: "OpenJS Foundation",
+	},
+	{
+		href: "https://www.prisma.io/?utm_source=squiggleconf",
+		logos: { dark: prismaWhite, light: prismaBlack },
+		prominence: 2,
+		title: "Prisma",
+	},
+	{
+		href: "https://elastic.co?utm_source=squiggleconf",
+		logos: { dark: elasticWhite, light: elasticBlack },
+		prominence: 2,
+		title: "Elastic",
+	},
+	{
+		href: "https://voidzero.dev?utm_source=squiggleconf",
+		logos: { dark: voidZeroWhite, light: voidZeroBlack },
+		prominence: 1,
+		title: "VoidZero",
+	},
+	{
+		href: "https://rushstack.io?utm_source=squiggleconf",
+		logos: { dark: rushStackDark, light: rushStackLite },
+		prominence: 1,
+		title: "Rush Stack",
+	},
+	{
+		href: "https://nx.dev?utm_source=squiggleconf",
+		logos: { dark: nxWhite, light: nxDarkBlue },
+		prominence: 1,
+		title: "Nx",
+	},
+	{
+		href: "https://progress.com?utm_source=squiggleconf",
+		logos: { dark: progressWhite, light: progressGray },
+		prominence: 1,
+		title: "Progress",
+	},
+];
+
+const tiers = [
+	sponsors.filter((s) => s.prominence >= 3),
+	sponsors.filter((s) => s.prominence === 2),
+	sponsors.filter((s) => s.prominence === 1),
+];
 ---
 
-<div class="sponsors-and-partners">
-	<div class="sponsors">
-		<ExplainerHeading heading="Sponsors" />
-		<BodyText class="caption-text">
-			The support of our generous sponsors help make SquiggleConf possible. They
-			have our sincere appreciation and thanks.
-		</BodyText>
-		<LogoGroups
-			class="sponsors-and-partners-groups"
-			groups={sponsorsByPlacement}
-		/>
-		<div class="pitch-area">
-			<BodyText class="caption-text caption-text-bottom">
-				Interested in having your logo here and sponsoring SquiggleConf? We'd
-				love to work with you.
-				<br />
+<section class="past-sponsors" aria-labelledby="past-sponsors-heading">
+	<div class="past-sponsors-shell">
+		<div class="past-sponsors-intro">
+			<p class="past-sponsors-kicker">Leaders in developer tooling</p>
+			<h2 id="past-sponsors-heading">Past Sponsors</h2>
+			<BodyText class="past-sponsors-copy">
+				These teams are some of the sharpest leaders in developer tools, and
+				they helped make SquiggleConf possible.
 			</BodyText>
+		</div>
+
+		<div class="past-sponsors-panel">
+			{
+				tiers.map((tier) => (
+					<div class="past-sponsors-tier">
+						{tier.map((sponsor) => (
+							<a
+								class:list={[
+									"sponsor-logo",
+									`sponsor-logo-size-${sponsor.prominence}`,
+								]}
+								href={sponsor.href}
+								rel="noreferrer"
+								target="_blank"
+								title={sponsor.title}
+							>
+								<Image
+									alt=""
+									class="logo-dark"
+									src={sponsor.logos.dark}
+									height={128}
+								/>
+								<Image
+									alt=""
+									class="logo-light"
+									src={sponsor.logos.light}
+									height={128}
+								/>
+							</a>
+						))}
+					</div>
+				))
+			}
+		</div>
+
+		<div class="past-sponsors-cta">
 			<Button
 				as="a"
 				size="large"
@@ -37,90 +171,361 @@ import { partnersByPlacement } from "~/data/partners";
 		</div>
 	</div>
 
-	<div class="partners">
-		<ExplainerHeading heading="Partners" />
-		<BodyText class="caption-text">
-			Our partners are lovely friends in the industry who also work to better
-			the world around them.
-		</BodyText>
-		<LogoGroups
-			class="sponsors-and-partners-groups"
-			groups={partnersByPlacement}
-		/>
-		<div class="pitch-area">
-			<BodyText class="caption-text caption-text-bottom">
-				Are you a local company or organization to Boston and want to
-				cross-promote and partner with us? Let's get something going!
-				<br />
-			</BodyText>
-			<Button
-				as="a"
-				size="large"
-				variant="emphasized"
-				href={links.partner}
-				target="_blank"
-			>
-				Partnerships Prospectus
-			</Button>
-		</div>
-	</div>
-</div>
+	<Newsletter />
+</section>
 
 <style>
-	.sponsors-and-partners {
-		--areaPaddingBottom: 3rem;
-		display: grid;
-		text-align: center;
-	}
-
-	.partners {
-		background: var(--colorBlueBright3);
-		padding-bottom: var(--areaPaddingBottom);
-	}
-
-	.caption-text {
-		padding: 0 2rem;
-		max-width: 42rem;
-		margin: 0 auto;
-	}
-
-	.caption-text-bottom {
-		margin-top: 1rem;
-	}
-
-	.sponsors-and-partners-groups {
-		padding-top: 2rem;
-	}
-
-	.pitch-area {
-		flex-grow: 1;
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		margin: 1.5rem 0 var(--areaPaddingBottom);
+	.past-sponsors {
+		--past-sponsors-background:
+			radial-gradient(
+				circle at 18% 16%,
+				rgba(17, 127, 171, 0.18),
+				transparent 24%
+			),
+			radial-gradient(
+				circle at 84% 14%,
+				rgba(56, 206, 214, 0.16),
+				transparent 18%
+			),
+			radial-gradient(
+				circle at 52% 100%,
+				rgba(144, 198, 222, 0.66),
+				transparent 42%
+			),
+			linear-gradient(
+				180deg,
+				#eaf7fc 0%,
+				#d8eff8 28%,
+				#c3e2ef 64%,
+				#add4e6 100%
+			);
+		--past-sponsors-texture:
+			repeating-linear-gradient(
+				114deg,
+				rgba(17, 109, 154, 0.06) 0,
+				rgba(17, 109, 154, 0.06) 2px,
+				transparent 2px,
+				transparent 28px
+			),
+			radial-gradient(
+				circle at 12% 20%,
+				rgba(255, 255, 255, 0.36) 0 1px,
+				transparent 1px
+			),
+			radial-gradient(
+				circle at 74% 36%,
+				rgba(255, 255, 255, 0.26) 0 1.5px,
+				transparent 1.5px
+			),
+			radial-gradient(
+				circle at 48% 72%,
+				rgba(255, 255, 255, 0.24) 0 1px,
+				transparent 1px
+			);
+		--past-sponsors-overlay:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 18%),
+			linear-gradient(0deg, rgba(12, 71, 103, 0.14), transparent 24%);
+		--past-sponsors-kicker-background: rgba(255, 255, 255, 0.6);
+		--past-sponsors-kicker-border: rgba(17, 109, 154, 0.18);
+		--past-sponsors-kicker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+		--past-sponsors-kicker-color: #0a577d;
+		--past-sponsors-heading-color: #08314f;
+		--past-sponsors-copy-color: rgba(7, 49, 79, 0.78);
+		--past-sponsors-panel-background:
+			linear-gradient(
+				180deg,
+				rgba(255, 255, 255, 0.72),
+				rgba(223, 242, 250, 0.58)
+			),
+			rgba(184, 224, 240, 0.52);
+		--past-sponsors-panel-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.7),
+			0 1.1rem 2.4rem rgba(47, 109, 143, 0.14);
+		--past-sponsors-panel-copy-color: rgba(7, 49, 79, 0.76);
+		--past-sponsors-year-background: rgba(255, 255, 255, 0.52);
+		--past-sponsors-year-border: rgba(17, 109, 154, 0.12);
+		--past-sponsors-year-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.65),
+			0 0.8rem 1.7rem rgba(47, 109, 143, 0.1);
+		--past-sponsors-year-copy-color: rgba(7, 49, 79, 0.72);
+		--past-sponsors-year-kicker-color: #0d638d;
+		--past-sponsors-year-heading-color: #08314f;
+		--past-sponsors-logo-hover-background: rgba(17, 109, 154, 0.06);
+		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px rgba(17, 109, 154, 0.14);
+		background: var(--past-sponsors-background);
+		overflow: clip;
+		position: relative;
 		width: 100%;
 	}
 
-	@media (width >= 819px) {
-		.sponsors {
-			grid-area: 1 / 1;
+	:global(html.dark) .past-sponsors {
+		--past-sponsors-background:
+			radial-gradient(
+				circle at 20% 18%,
+				rgba(79, 200, 255, 0.16),
+				transparent 24%
+			),
+			radial-gradient(
+				circle at 82% 12%,
+				rgba(113, 255, 227, 0.12),
+				transparent 18%
+			),
+			radial-gradient(
+				circle at 50% 100%,
+				rgba(10, 77, 145, 0.54),
+				transparent 44%
+			),
+			linear-gradient(
+				180deg,
+				#082647 0%,
+				#07315b 30%,
+				#062448 62%,
+				#04172f 100%
+			);
+		--past-sponsors-texture:
+			repeating-linear-gradient(
+				114deg,
+				rgba(188, 227, 255, 0.04) 0,
+				rgba(188, 227, 255, 0.04) 2px,
+				transparent 2px,
+				transparent 28px
+			),
+			radial-gradient(
+				circle at 12% 20%,
+				rgba(255, 255, 255, 0.13) 0 1px,
+				transparent 1px
+			),
+			radial-gradient(
+				circle at 74% 36%,
+				rgba(255, 255, 255, 0.1) 0 1.5px,
+				transparent 1.5px
+			),
+			radial-gradient(
+				circle at 48% 72%,
+				rgba(255, 255, 255, 0.08) 0 1px,
+				transparent 1px
+			);
+		--past-sponsors-overlay:
+			linear-gradient(180deg, rgba(196, 237, 255, 0.14), transparent 18%),
+			linear-gradient(0deg, rgba(2, 14, 31, 0.48), transparent 24%);
+		--past-sponsors-kicker-background: rgba(231, 246, 255, 0.09);
+		--past-sponsors-kicker-border: rgba(188, 227, 255, 0.2);
+		--past-sponsors-kicker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+		--past-sponsors-kicker-color: #d8f4ff;
+		--past-sponsors-heading-color: #f2fbff;
+		--past-sponsors-copy-color: rgba(221, 240, 255, 0.84);
+		--past-sponsors-panel-background:
+			linear-gradient(
+				180deg,
+				rgba(194, 235, 255, 0.12),
+				rgba(194, 235, 255, 0.03)
+			),
+			rgba(3, 21, 43, 0.42);
+		--past-sponsors-panel-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.1),
+			0 1.5rem 3rem rgba(3, 12, 28, 0.34);
+		--past-sponsors-panel-copy-color: rgba(219, 238, 255, 0.8);
+		--past-sponsors-year-background: rgba(6, 28, 55, 0.34);
+		--past-sponsors-year-border: rgba(195, 236, 255, 0.12);
+		--past-sponsors-year-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.06),
+			0 0.85rem 1.8rem rgba(2, 14, 31, 0.16);
+		--past-sponsors-year-copy-color: rgba(219, 238, 255, 0.76);
+		--past-sponsors-year-kicker-color: #d7f5ff;
+		--past-sponsors-year-heading-color: white;
+		--past-sponsors-logo-hover-background: rgba(218, 242, 255, 0.08);
+		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px rgba(195, 236, 255, 0.16);
+	}
+
+	.past-sponsors::before,
+	.past-sponsors::after {
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.past-sponsors::before {
+		background: var(--past-sponsors-texture);
+		opacity: 0.9;
+	}
+
+	.past-sponsors::after {
+		background: var(--past-sponsors-overlay);
+	}
+
+	.past-sponsors-shell {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin: 0 auto;
+		max-width: min(100%, var(--sizeContentAreaWide));
+		padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2.5rem)
+			clamp(4.5rem, 8vw, 6.5rem);
+		position: relative;
+		z-index: 1;
+	}
+
+	.past-sponsors-intro {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+		max-width: 46rem;
+	}
+
+	.past-sponsors-kicker {
+		background: var(--past-sponsors-kicker-background);
+		border: 1px solid var(--past-sponsors-kicker-border);
+		border-radius: 999px;
+		box-shadow: var(--past-sponsors-kicker-shadow);
+		color: var(--past-sponsors-kicker-color);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		line-height: 1;
+		margin: 0;
+		padding: 0.7rem 1rem;
+		text-transform: uppercase;
+	}
+
+	.past-sponsors h2 {
+		color: var(--past-sponsors-heading-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(2.4rem, 5.4vw, 4.7rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 0.92;
+		margin: 0;
+		text-wrap: balance;
+	}
+
+	.past-sponsors-copy {
+		color: var(--past-sponsors-copy-color);
+		margin: 0;
+		max-width: 42rem;
+		padding: 0;
+	}
+
+	.past-sponsors-panel {
+		backdrop-filter: blur(18px) saturate(135%);
+		background: var(--past-sponsors-panel-background);
+		border-radius: 1.9rem;
+		box-shadow: var(--past-sponsors-panel-shadow);
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		overflow: hidden;
+		padding: clamp(1.4rem, 3vw, 2rem);
+		position: relative;
+	}
+
+	.past-sponsors-panel::before {
+		background: radial-gradient(
+			circle at top left,
+			rgba(133, 220, 255, 0.18),
+			transparent 28%
+		);
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.past-sponsors-tier {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		justify-content: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.past-sponsors-tier + .past-sponsors-tier {
+		margin-top: 0.5rem;
+		padding-top: 0.5rem;
+	}
+
+	.sponsor-logo {
+		align-items: center;
+		border-radius: 1rem;
+		display: flex;
+		justify-content: center;
+		min-height: 5rem;
+		padding: 0.7rem 1rem;
+		transition:
+			background 180ms ease,
+			transform 180ms ease,
+			box-shadow 180ms ease;
+		user-select: none;
+	}
+
+	.sponsor-logo:hover,
+	.sponsor-logo:focus-visible {
+		background: var(--past-sponsors-logo-hover-background);
+		box-shadow: var(--past-sponsors-logo-hover-shadow);
+		transform: translateY(-1px);
+	}
+
+	.sponsor-logo-size-1 {
+		--logo-size: 6rem;
+	}
+
+	.sponsor-logo-size-2 {
+		--logo-size: 8rem;
+	}
+
+	.sponsor-logo-size-3 {
+		--logo-size: 10rem;
+	}
+
+	.sponsor-logo-size-4 {
+		--logo-size: 14rem;
+	}
+
+	.sponsor-logo img {
+		max-height: var(--logo-size);
+		max-width: var(--logo-size);
+	}
+
+	:global(html.dark) .logo-light {
+		display: none;
+	}
+
+	:global(html:not(.dark)) .logo-dark {
+		display: none;
+	}
+
+	.past-sponsors-cta {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+
+	@media (width >= 900px) {
+		.past-sponsors-cta {
+			justify-content: flex-start;
+		}
+	}
+
+	@media (width < 700px) {
+		.past-sponsors-shell {
+			gap: 1.5rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
 		}
 
-		.partners {
-			grid-area: 1 / 2;
+		.past-sponsors-kicker {
+			font-size: 0.7rem;
+			padding: 0.62rem 0.9rem;
 		}
 
-		.sponsors,
-		.partners {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-		}
-
-		.sponsors-and-partners-groups {
-			display: flex;
-			flex-direction: column;
+		.past-sponsors-panel {
+			border-radius: 1.45rem;
+			padding: 1.1rem 0.9rem;
 		}
 	}
 </style>

@@ -1,0 +1,274 @@
+---
+import { Image } from "astro:assets";
+
+import type { ExploreChoiceData } from "~/components/home/types";
+
+interface Props {
+	choice: ExploreChoiceData;
+}
+
+const { choice } = Astro.props;
+---
+
+<article class="explore-card">
+	<div class="explore-choice" aria-hidden="true">
+		<span class="explore-radio"><span class="explore-radio-dot"></span></span>
+	</div>
+	<div class="explore-card-body">
+		<div
+			class:list={[
+				"explore-photo",
+				choice.imageVariant === "rest" && "explore-photo-rest",
+			]}
+		>
+			<Image alt={choice.alt} src={choice.image} />
+		</div>
+		<div class="explore-copy">
+			<h3>{choice.title}</h3>
+			<p>{choice.description}</p>
+		</div>
+		{
+			choice.badgeLabel && (
+				<div class="explore-spots-left">{choice.badgeLabel}</div>
+			)
+		}
+	</div>
+</article>
+
+<style>
+	.explore-card {
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid var(--colorBlue3);
+		border-radius: 10px;
+		box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.14);
+		display: grid;
+		grid-template-columns: 3.5rem 1fr;
+		position: relative;
+		transition:
+			background-color var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	.explore-card:hover {
+		background: rgba(255, 255, 255, 0.14);
+		border-color: rgba(255, 255, 255, 0.38);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+		transform: translateX(0.08rem);
+	}
+
+	.explore-choice {
+		align-items: center;
+		border-right: 1px solid var(--colorBlue3);
+		display: flex;
+		justify-content: center;
+		padding: 0.75rem 0.25rem;
+	}
+
+	.explore-radio {
+		align-items: center;
+		background: rgba(255, 255, 255, 0.08);
+		border: 2px solid rgba(239, 248, 255, 0.74);
+		border-radius: 999px;
+		display: inline-flex;
+		height: 1.45rem;
+		justify-content: center;
+		transition:
+			background-color var(--timeline-hover-duration) ease,
+			border-color var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		width: 1.45rem;
+	}
+
+	.explore-card:hover .explore-radio {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 0 0 0.18rem rgba(255, 255, 255, 0.12);
+	}
+
+	.explore-radio-dot {
+		background: var(--timeline-link-color);
+		border-radius: 999px;
+		display: block;
+		height: 0.46rem;
+		opacity: 0;
+		transform: scale(0.2);
+		transition:
+			opacity var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+		width: 0.46rem;
+	}
+
+	.explore-card:hover .explore-radio-dot {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.explore-card-body {
+		align-items: start;
+		display: grid;
+		column-gap: 1rem;
+		grid-template-columns: 4.8rem minmax(0, 1fr);
+		min-width: 0;
+		padding: 0.85rem 1rem;
+	}
+
+	.explore-photo {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		display: block;
+		height: 4.8rem;
+		min-width: 4.8rem;
+		overflow: hidden;
+		transform-origin: center;
+		transition:
+			scale var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		width: 4.8rem;
+		will-change: scale;
+	}
+
+	.explore-photo :global(picture),
+	.explore-photo :global(img) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.explore-photo :global(img) {
+		object-fit: cover;
+		transition: filter var(--timeline-hover-duration) ease;
+		transform: none;
+		will-change: auto;
+	}
+
+	.explore-photo-rest :global(img) {
+		object-position: 10% center;
+	}
+
+	.explore-copy {
+		display: grid;
+		gap: 0.3rem;
+		min-width: 0;
+	}
+
+	.explore-copy h3 {
+		color: var(--timeline-heading-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+		font-weight: 700;
+		line-height: 1.05;
+		margin: 0;
+	}
+
+	.explore-copy p {
+		color: var(--timeline-copy-color);
+		font-size: clamp(0.95rem, 1.25vw, 1rem);
+		line-height: 1.4;
+		margin: 0;
+		max-width: 48ch;
+	}
+
+	.explore-spots-left {
+		background: var(--colorBlue3);
+		border: 1px solid var(--timeline-image-border-color);
+		border-radius: 6px;
+		color: var(--timeline-copy-color);
+		font-size: 0.8em;
+		font-variant: tabular-nums;
+		padding: 8px 10px;
+		position: absolute;
+		right: -1em;
+		text-transform: uppercase;
+		top: -1em;
+	}
+
+	:global(.timeline-content:hover) .explore-photo,
+	:global(.timeline-content:focus-within) .explore-photo {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		scale: 1.25;
+	}
+
+	:global(.timeline-content:hover) .explore-photo :global(img),
+	:global(.timeline-content:focus-within) .explore-photo :global(img) {
+		transform: none;
+	}
+
+	@media (width < 900px) {
+		.explore-card {
+			grid-template-columns: 3rem minmax(0, 1fr);
+		}
+
+		.explore-choice {
+			padding: 0.65rem 0.2rem;
+		}
+
+		.explore-card-body {
+			column-gap: 0.7rem;
+			grid-template-columns: 4rem minmax(0, 1fr);
+			padding: 0.7rem 0.8rem;
+		}
+
+		.explore-photo {
+			height: 4rem;
+			min-width: 4rem;
+			width: 4rem;
+		}
+
+		.explore-copy h3 {
+			font-size: 1.15rem;
+		}
+
+		:global(.timeline-content:hover) .explore-photo,
+		:global(.timeline-content:focus-within) .explore-photo {
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
+		}
+
+		:global(.timeline-content[data-mobile-active="true"]) .explore-photo {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+			scale: 1.12;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.explore-card,
+		.explore-photo,
+		.explore-photo :global(img),
+		.explore-radio,
+		.explore-radio-dot {
+			animation: none;
+			transition: none;
+		}
+	}
+
+	/* Light mode overrides */
+	:global(html:not(.dark)) .explore-spots-left {
+		background: var(--colorBlueBright1);
+		border-color: rgba(6, 48, 82, 0.18);
+		color: var(--colorBlue4);
+	}
+
+	:global(html:not(.dark)) .explore-radio {
+		background: rgba(4, 25, 48, 0.04);
+		border-color: rgba(6, 48, 82, 0.45);
+	}
+
+	:global(html:not(.dark)) .explore-card:hover .explore-radio {
+		background: rgba(4, 25, 48, 0.08);
+		border-color: rgba(6, 48, 82, 0.85);
+		box-shadow: 0 0 0 0.18rem rgba(4, 25, 48, 0.08);
+	}
+
+	:global(html:not(.dark)) .explore-card:hover {
+		background: rgba(4, 25, 48, 0.04);
+		border-color: var(--colorBlue3);
+		box-shadow: inset 0 0 0 1px rgba(6, 48, 82, 0.06);
+	}
+</style>

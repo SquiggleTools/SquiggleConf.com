@@ -2,31 +2,30 @@
 import mantaDown from "~/assets/design/manta-down.svg";
 import mantaUp from "~/assets/design/manta-up.svg";
 import squiggleThickWide from "~/assets/design/squiggle-thick-wide.svg";
-import { links } from "~/data/links";
 
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import DecorativeImage from "./DecorativeImage.astro";
-import Heading from "./Heading.astro";
-import TextSquiggly from "./TextSquiggly.astro";
 import Arrow from "./Arrow.astro";
 ---
 
 <div class="registration">
-	<DecorativeImage class="squiggle-thick-wide" src={squiggleThickWide} />
-	<ContentArea as="section" class="registration-contents">
-		<DecorativeImage class="manta manta-down" src={mantaDown} />
-		<DecorativeImage class="manta manta-up" src={mantaUp} />
-		<TextSquiggly renderAs="strong" width="wide">
-			<Fragment slot="inside">
-				<Heading level="h2">Returning Spring 2027</Heading>
-			</Fragment>
-		</TextSquiggly>
+	<DecorativeImage
+		class="squiggle-thick-wide"
+		fit="fill"
+		src={squiggleThickWide}
+	/>
+	<ContentArea
+		as="section"
+		class="registration-contents"
+		aria-label="Registration"
+	>
+		<DecorativeImage class="manta manta-down" fit="contain" src={mantaDown} />
+		<DecorativeImage class="manta manta-up" fit="contain" src={mantaUp} />
 		<Button
 			as="a"
 			class="tickets-link"
 			href="/#newsletter"
-			target="_blank"
 			size="large"
 			variant="emphasized"
 		>
@@ -38,7 +37,6 @@ import Arrow from "./Arrow.astro";
 
 <style>
 	.registration {
-		background: var(--colorBlue4);
 		color: var(--colorWhiteIsh);
 		overflow: hidden;
 		position: relative;
@@ -47,14 +45,21 @@ import Arrow from "./Arrow.astro";
 	.squiggle-thick-wide {
 		height: 100%;
 		left: 0;
+		opacity: 0.2;
 		top: 0%;
 		width: 100%;
+		z-index: 0;
+	}
+
+	:global(html.dark) .squiggle-thick-wide {
+		opacity: 0.035;
 	}
 
 	.manta-down {
 		height: 6rem;
 		right: -12rem;
 		top: 0.5rem;
+		transform: rotate(-5deg);
 	}
 
 	.manta-up {
@@ -65,18 +70,13 @@ import Arrow from "./Arrow.astro";
 
 	section.registration-contents {
 		align-items: center;
-		gap: 2.5rem;
 		display: flex;
-		position: relative;
 		flex-direction: column;
+		justify-content: center;
+		min-height: 14rem;
 		padding: 3.5rem;
-	}
-
-	h2 {
-		font-family: var(--fontFamilyHeading);
-		font-size: var(--fontSizeLarge);
-		font-weight: var(--fontWeightMedium);
-		margin-bottom: 0.5rem;
+		position: relative;
+		z-index: 1;
 	}
 
 	.tickets-link {

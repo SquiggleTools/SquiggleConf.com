@@ -1,0 +1,41 @@
+---
+import SpeakersContent from "~/components/historical/SpeakersContent.astro";
+import Sponsors from "~/components/historical/Sponsors.astro";
+import {
+	getStaticPathsHistorical,
+	historicalDataByYear,
+} from "~/data/historical/data";
+import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
+import "~/styles/historical.css";
+
+export const getStaticPaths = getStaticPathsHistorical;
+
+const { year } = Astro.params;
+
+const historicalData =
+	historicalDataByYear[year as keyof typeof historicalDataByYear];
+const description = `${historicalData.date} · Boston New England Aquarium`;
+---
+
+<PageLayoutHistorical description={description} year={year}>
+	<div class="index-contents">
+		<SpeakersContent
+			talks={Object.values(historicalData.sessionsBySlug)}
+			year={year}
+		/>
+		<Sponsors />
+	</div>
+</PageLayoutHistorical>
+
+<style>
+	.index-contents {
+		align-items: center;
+		display: flex;
+		gap: 7rem;
+		flex-direction: column;
+	}
+
+	.newsletter {
+		max-width: fit-content;
+	}
+</style>

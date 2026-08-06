@@ -1,11 +1,6 @@
 {
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
-	"ignoreDependencies": [
-		"@fontsource-variable/inter",
-		"@fontsource-variable/josefin-sans",
-		"@fontsource-variable/urbanist",
-		"sharp"
-	],
-	"ignoreExportsUsedInFile": { "interface": true, "type": true },
-	"project": ["src/**/*.ts!"]
+	"ignoreBinaries": ["printf"],
+	"ignoreDependencies": ["sharp", "wrangler"],
+	"ignoreExportsUsedInFile": { "interface": true, "type": true }
 }

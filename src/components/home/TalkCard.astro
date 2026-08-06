@@ -1,0 +1,156 @@
+---
+import { Image } from "astro:assets";
+
+import type { TalkCardData } from "~/components/home/types";
+import PlaceholderMark from "./PlaceholderMark.astro";
+
+interface Props {
+	talk: TalkCardData;
+}
+
+const { talk } = Astro.props;
+---
+
+<article class="talk-card">
+	<div
+		class:list={["talk-avatar", talk.placeholder && "talk-avatar-placeholder"]}
+	>
+		<Image alt={talk.name} src={talk.image} />
+		{talk.placeholder && <PlaceholderMark />}
+	</div>
+	<div class="talk-copy">
+		<h3>{talk.title}</h3>
+		<p class="talk-speaker">{talk.name}</p>
+		<p class="talk-role">{talk.qualification}</p>
+	</div>
+</article>
+
+<style>
+	.talk-card {
+		align-items: stretch;
+		display: grid;
+		gap: 0.8rem;
+		grid-template-columns: 5rem 1fr;
+	}
+
+	.talk-avatar {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.45rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+		transition: box-shadow var(--timeline-hover-duration) ease;
+	}
+
+	.talk-avatar-placeholder {
+		isolation: isolate;
+		position: relative;
+	}
+
+	.talk-avatar-placeholder::before,
+	.talk-avatar-placeholder::after {
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.talk-avatar-placeholder::before {
+		backdrop-filter: blur(2px) saturate(0.82);
+		background: rgba(232, 237, 244, 0.08);
+		z-index: 1;
+	}
+
+	.talk-avatar :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.talk-avatar :global(img) {
+		border-radius: inherit;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			filter var(--timeline-hover-duration) ease;
+		transform: scale(1);
+		transform-origin: center;
+		width: 100%;
+		will-change: transform;
+	}
+
+	.talk-copy {
+		display: grid;
+		grid-template-rows: 2fr 1fr 1fr;
+		min-height: 5.75rem;
+	}
+
+	.talk-copy h3 {
+		align-self: center;
+		color: var(--timeline-heading-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.1rem;
+		font-weight: 700;
+		line-height: 1.25;
+		margin: 0;
+	}
+
+	.talk-speaker {
+		color: var(--timeline-muted-color);
+		font-size: clamp(0.92rem, 1.2vw, 1rem);
+		font-weight: 600;
+	}
+
+	.talk-role {
+		color: var(--timeline-muted-color);
+		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+		font-weight: 300;
+		line-height: 1.25;
+	}
+
+	:global(.timeline-content:hover) .talk-avatar,
+	:global(.timeline-content:focus-within) .talk-avatar {
+		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+	}
+
+	:global(.timeline-content:hover) .talk-avatar :global(img),
+	:global(.timeline-content:focus-within) .talk-avatar :global(img) {
+		transform: scale(1.1);
+	}
+
+	@media (width < 900px) {
+		:global(.timeline-content:hover) .talk-avatar,
+		:global(.timeline-content:focus-within) .talk-avatar {
+			border-width: var(--timeline-image-border-width);
+			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+			scale: 1;
+		}
+
+		:global(.timeline-content:hover) .talk-avatar :global(img),
+		:global(.timeline-content:focus-within) .talk-avatar :global(img) {
+			transform: scale(1);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"]) .talk-avatar {
+			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
+		}
+
+		:global(.timeline-content[data-mobile-active="true"])
+			.talk-avatar
+			:global(img) {
+			transform: scale(1.07);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.talk-avatar,
+		.talk-avatar :global(img) {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>

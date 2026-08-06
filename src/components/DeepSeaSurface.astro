@@ -1,0 +1,182 @@
+<div class="deep-sea-surface">
+	<slot />
+</div>
+
+<style>
+	/* Main gradient stops — light mode initial values */
+	@property --dss-grad-1 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #f8fcff;
+	}
+	@property --dss-grad-2 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #effaff;
+	}
+	@property --dss-grad-3 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #e6f7fe;
+	}
+	@property --dss-grad-4 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #d8f3ff;
+	}
+	@property --dss-grad-5 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #c8edfb;
+	}
+	@property --dss-grad-6 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #c9effd;
+	}
+	@property --dss-grad-7 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #c8efff;
+	}
+	@property --dss-grad-8 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: #aedff5;
+	}
+
+	/* ::after overlay colors — light mode initial values */
+	@property --dss-after-radial-1 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(201, 226, 252, 0.49);
+	}
+	@property --dss-after-radial-2 {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(245, 245, 255, 0.7);
+	}
+	@property --dss-after-r1-a {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(4, 25, 48, 0.05);
+	}
+	@property --dss-after-r1-b {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(17, 109, 154, 0.1);
+	}
+	@property --dss-after-r2-a {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(4, 25, 48, 0.03);
+	}
+	@property --dss-after-r2-b {
+		syntax: "<color>";
+		inherits: false;
+		initial-value: rgba(31, 127, 171, 0.04);
+	}
+
+	.deep-sea-surface {
+		--dss-grad-1: #f8fcff;
+		--dss-grad-2: #effaff;
+		--dss-grad-3: #e6f7fe;
+		--dss-grad-4: #d8f3ff;
+		--dss-grad-5: #c8edfb;
+		--dss-grad-6: #c9effd;
+		--dss-grad-7: #c8efff;
+		--dss-grad-8: #aedff5;
+		background: linear-gradient(
+				to bottom,
+				var(--dss-grad-1),
+				var(--dss-grad-2),
+				var(--dss-grad-3),
+				var(--dss-grad-4),
+				var(--dss-grad-5),
+				var(--dss-grad-6),
+				var(--dss-grad-7),
+				var(--dss-grad-8)
+			)
+			var(--colorBlueBright2);
+		color: var(--colorForegroundEmphasized);
+		isolation: isolate;
+		overflow: clip;
+		position: relative;
+		transition:
+			--dss-grad-1 var(--transitionBackground),
+			--dss-grad-2 var(--transitionBackground),
+			--dss-grad-3 var(--transitionBackground),
+			--dss-grad-4 var(--transitionBackground),
+			--dss-grad-5 var(--transitionBackground),
+			--dss-grad-6 var(--transitionBackground),
+			--dss-grad-7 var(--transitionBackground),
+			--dss-grad-8 var(--transitionBackground);
+	}
+
+	:global(html.dark) .deep-sea-surface {
+		--dss-grad-1: #004077;
+		--dss-grad-2: #013a6c;
+		--dss-grad-3: #032e56;
+		--dss-grad-4: #042446;
+		--dss-grad-5: #042140;
+		--dss-grad-6: #041b37;
+		--dss-grad-7: #041630;
+		--dss-grad-8: #04142d;
+		color: var(--colorForegroundEmphasized);
+	}
+
+	.deep-sea-surface::after {
+		--dss-after-radial-1: rgba(201, 226, 252, 0.49);
+		--dss-after-radial-2: rgba(245, 245, 255, 0.7);
+		--dss-after-r1-a: rgba(4, 25, 48, 0.05);
+		--dss-after-r1-b: rgba(17, 109, 154, 0.1);
+		--dss-after-r2-a: rgba(4, 25, 48, 0.03);
+		--dss-after-r2-b: rgba(31, 127, 171, 0.04);
+		background:
+			radial-gradient(
+				circle at top,
+				var(--dss-after-radial-1) 50%,
+				var(--dss-after-radial-2) 70%
+			),
+			repeating-linear-gradient(
+				116deg,
+				var(--dss-after-r1-a) 0 2px,
+				transparent 2px 18px,
+				var(--dss-after-r1-b) 18px 20px,
+				transparent 20px 34px
+			),
+			repeating-linear-gradient(
+				-64deg,
+				var(--dss-after-r2-a) 0 1px,
+				transparent 1px 15px,
+				var(--dss-after-r2-b) 15px 17px,
+				transparent 17px 31px
+			);
+		content: "";
+		inset: 0;
+		mix-blend-mode: multiply;
+		opacity: 0.58;
+		pointer-events: none;
+		position: absolute;
+		transition:
+			--dss-after-radial-1 var(--transitionBackground),
+			--dss-after-radial-2 var(--transitionBackground),
+			--dss-after-r1-a var(--transitionBackground),
+			--dss-after-r1-b var(--transitionBackground),
+			--dss-after-r2-a var(--transitionBackground),
+			--dss-after-r2-b var(--transitionBackground),
+			opacity var(--transitionBackground);
+		z-index: 0;
+	}
+
+	:global(html.dark) .deep-sea-surface::after {
+		--dss-after-radial-1: transparent;
+		--dss-after-radial-2: transparent;
+		--dss-after-r1-a: rgba(255, 255, 255, 0.042);
+		--dss-after-r1-b: rgba(118, 217, 255, 0.028);
+		--dss-after-r2-a: rgba(255, 255, 255, 0.018);
+		--dss-after-r2-b: rgba(56, 173, 223, 0.026);
+		mix-blend-mode: screen;
+		opacity: 0.31;
+	}
+</style>

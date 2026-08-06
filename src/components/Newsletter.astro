@@ -2,30 +2,18 @@
 import oceanFloorLeft from "~/assets/design/ocean-floor-left.svg";
 import oceanFloorRight from "~/assets/design/ocean-floor-right.svg";
 
-import DecorativeImage from "./DecorativeImage.astro";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
+import DecorativeImage from "./DecorativeImage.astro";
 import Heading from "./Heading.astro";
 ---
 
 <div class="newsletter" id="newsletter">
-	<svg
-		class="light-beam"
-		fill="none"
-		height="681"
-		preserveAspectRatio="none"
-		viewBox="0 0 1637 681"
-		width="1637"
-		xmlns="http://www.w3.org/2000/svg"
-	>
-		<path
-			d="M1410.6 -435.752L-90.8221 681.162L187.092 841.197L925.996 768.169L1636.02 -450.454L1410.6 -435.752Z"
-			fill="var(--colorBlueBright5)"
-		>
-		</path>
-	</svg>
-
-	<DecorativeImage class="ocean-floor-left" src={oceanFloorLeft} />
+	<DecorativeImage
+		class="ocean-floor-left"
+		fit="contain"
+		src={oceanFloorLeft}
+	/>
 	<DecorativeImage class="ocean-floor-right" src={oceanFloorRight} />
 	<ContentArea as="section" class="newsletter-contents">
 		<Heading level="h2">
@@ -130,32 +118,10 @@ import Heading from "./Heading.astro";
 
 <style>
 	.newsletter {
-		background: var(--colorBlueBright6);
-		color: var(--colorWhiteIsh);
-		padding: 3rem 0;
+		padding: 0 0 3rem;
 		overflow: hidden;
 		position: relative;
 		text-align: center;
-	}
-
-	.light-beam {
-		position: absolute;
-		left: 10%;
-		width: 75%;
-		height: 100%;
-		top: 0;
-	}
-
-	.ocean-floor-left {
-		bottom: 0;
-		height: 90%;
-		right: -10%;
-	}
-
-	.ocean-floor-right {
-		bottom: 0;
-		height: 90%;
-		left: 50%;
 	}
 
 	.newsletter-contents {
@@ -212,9 +178,38 @@ import Heading from "./Heading.astro";
 		color: var(--colorUnhappy);
 	}
 
-	@media (width >= 819px) {
+	.ocean-floor-left,
+	.ocean-floor-right {
+		display: none;
+	}
+
+	@media (width >= 490px) {
+		.ocean-floor-left,
+		.ocean-floor-right {
+			display: initial;
+		}
+
 		.ocean-floor-left {
-			right: clamp(10%, 40vw, 50%);
+			bottom: -12%;
+			height: 90%;
+			left: -50%;
+		}
+
+		.ocean-floor-right {
+			bottom: 0;
+			height: 90%;
+			right: -50%;
+		}
+	}
+
+	@media (width >= 1117px) {
+		.ocean-floor-left {
+			bottom: 0;
+			left: -25%;
+		}
+
+		.ocean-floor-right {
+			right: -10%;
 		}
 	}
 </style>

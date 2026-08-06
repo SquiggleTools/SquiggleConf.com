@@ -8,8 +8,16 @@ export default defineConfig({
 	}),
 	env: {
 		schema: {
-			BREVO_API_KEY: envField.string({ access: "secret", context: "server" }),
-			BREVO_LIST_ID: envField.number({ access: "public", context: "server" }),
+			BREVO_API_KEY: envField.string({
+				access: "secret",
+				context: "server",
+				optional: true,
+			}),
+			BREVO_LIST_ID: envField.number({
+				access: "public",
+				context: "server",
+				optional: true,
+			}),
 		},
 	},
 	image: {
@@ -22,15 +30,11 @@ export default defineConfig({
 	},
 	integrations: [konamiEmojiBlast()],
 	output: "server",
-	session: {
-		driver: "memory",
-	},
 	redirects: {
 		"/2024/about": "/about",
 		"/2024/code-of-conduct": "/code-of-conduct",
 		"/2024/faqs": "/faqs",
 		"/2024/travel": "/travel",
-		"/2025": "/",
 		"/faqs": "/articles/faqs",
 		"/how-to-attend-squiggleconf-for-free":
 			"/articles/how-to-attend-squiggleconf-for-free",
@@ -38,6 +42,9 @@ export default defineConfig({
 		"/sessions": "/2025/sessions",
 		"/speakers": "/2025/speakers",
 		"/travel": "/articles/travel",
+	},
+	session: {
+		driver: "memory",
 	},
 	site: "https://squiggleconf.com",
 });

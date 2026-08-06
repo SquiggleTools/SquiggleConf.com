@@ -18,7 +18,7 @@ export const links = {
 	partner: "https://partner.squiggleconf.com",
 	shop: "https://shop.squiggle.tools",
 	sponsor: "https://sponsor.squiggleconf.com",
-	tickets: "https://buytickets.at/squiggleconf/1488622",
+	tickets: "https://buytickets.at/squiggleconf/2332803",
 	volunteer: "https://volunteer.squiggleconf.com",
 	x: "https://x.com/SquiggleConf",
 	youtube: "https://www.youtube.com/@SquiggleConf",

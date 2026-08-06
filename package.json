@@ -1,7 +1,7 @@
 {
 	"name": "squiggleconf.com",
 	"version": "0.0.0",
-	"description": "Website for SquiggleConf 2025: a conference for excellent web dev tooling",
+	"description": "Website for SquiggleConf: a conference for excellent web dev tooling",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/SquiggleTools/SquiggleConf.com"
@@ -34,6 +34,8 @@
 		"@fontsource-variable/inter": "^5.2.8",
 		"@fontsource-variable/josefin-sans": "^5.2.8",
 		"@fontsource-variable/urbanist": "^5.2.7",
+		"@fontsource/geist-mono": "^5.2.8",
+		"@fontsource/shantell-sans": "^5.2.7",
 		"@konami-emoji-blast/astro": "^0.2.0",
 		"astro": "5.16.15",
 		"konami-emoji-blast": "^0.6.0",
@@ -41,8 +43,6 @@
 		"marked": "^18.0.7",
 		"sharp": "^0.34.5",
 		"temporal-polyfill": "^0.3.0",
-		"uqr": "^0.1.2",
-		"wifi-share-link": "^0.1.2",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
@@ -74,8 +74,9 @@
 		"typescript-eslint": "^8.53.1",
 		"wrangler": "^4.114.0"
 	},
+	"packageManager": "pnpm@10.34.2",
 	"engines": {
-		"node": "24.12.0"
+		"node": "24.x"
 	},
 	"publishConfig": {
 		"provenance": true

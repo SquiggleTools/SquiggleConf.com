@@ -6,13 +6,11 @@ import ContentArea from "~/components/ContentArea.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import ScheduledActivities from "~/components/ScheduledActivities.astro";
 import { links } from "~/data/links";
-import { sponsorSchedule } from "~/data/sponsoring.js";
 import PageLayout from "~/layouts/PageLayout.astro";
 
 const description =
-	"All the information you'd need to know as a SquiggleConf 2025 sponsor.";
+	"All the information you'd need to know as a SquiggleConf sponsor.";
 
 const title = "Sponsor Guide";
 ---
@@ -27,7 +25,7 @@ const title = "Sponsor Guide";
 	<ContentArea width="thin">
 		<BodyText class="body-text-top">
 			This page has the high-level information you need to know as a sponsor at
-			SquiggleConf 2025.
+			SquiggleConf.
 		</BodyText>
 
 		<BodyText>That includes:</BodyText>
@@ -84,12 +82,9 @@ const title = "Sponsor Guide";
 
 	<CommonContent heading="Sponsor Schedule">
 		<BodyText>
-			Sponsors are invited to all public conference listed on <a
-				href="/schedule">Schedule</a
-			>. This list also shows the private events you have access to.
+			Sponsors are invited to all public conference events. We'll post the full
+			schedule closer to May 2027.
 		</BodyText>
-
-		<ScheduledActivities days={sponsorSchedule} />
 	</CommonContent>
 
 	<CommonContent heading="FAQs">

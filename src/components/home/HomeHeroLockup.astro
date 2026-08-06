@@ -1,0 +1,48 @@
+---
+import LogoBold from "../LogoBold.astro";
+---
+
+<div class="hero-intro">
+	<LogoBold size="large" />
+	<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
+</div>
+
+<style>
+	.hero-intro {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+		justify-content: center;
+		padding: clamp(0.35rem, 1vw, 1.75rem) 0;
+		text-align: center;
+	}
+
+	.hero-logo {
+		--hero-logo-fill: #2f3f50;
+		display: block;
+		height: auto;
+		max-width: 100%;
+		width: clamp(16rem, 43vw, 36rem);
+	}
+
+	:global(html.dark) .hero-logo {
+		--hero-logo-fill: white;
+	}
+
+	.hero-logo :global(svg) {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.hero-subtitle {
+		color: var(--colorBackground);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(0.95rem, 2vw, 1.45rem);
+		font-style: italic;
+		font-weight: var(--fontWeightMedium);
+		letter-spacing: 0.05em;
+		margin: 0 0 0.35rem;
+	}
+</style>

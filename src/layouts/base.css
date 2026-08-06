@@ -19,6 +19,8 @@
 	--colorRed1: #ffbfc2;
 	--colorSandDark: #2c2a29;
 	--colorSandLight: #f7f4f1;
+	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
+	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
 	--colorWhiteIsh: #eaeaf7;
 
 	--colorAccentDark: var(--colorBlue4);
@@ -33,10 +35,12 @@
 	--colorSandBackground: var(--colorSandLight);
 	--colorSandForeground: var(--colorBlackIsh);
 	--colorUnhappy: var(--colorRed1);
+	--colorTextShadow: var(--colorTextShadowLight);
 
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
+	--fontFamilyMonospace: "Geist Mono", monospace;
 
 	--fontSizeSmallest: clamp(0.7rem, 1.9vw, 0.9rem);
 	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
@@ -47,6 +51,7 @@
 	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
 	--fontSizeLogoLarge: clamp(2.5rem, 5.25vw, 3rem);
+	--fontSizeLogoLarger: clamp(2.8rem, 7vw, 4.9rem);
 
 	--fontWeightLight: 200;
 	--fontWeightMedium: 300;
@@ -66,7 +71,9 @@
 	--sizeContentAreaWide: 75rem;
 	--sizeScrollMarginTop: 2rem;
 
+	--transitionFast: 140ms;
 	--transitionMedium: 280ms;
+	--transitionBackground: var(--transitionFast);
 
 	color-scheme: light;
 }
@@ -93,12 +100,13 @@ html.dark {
 	--colorAccentDark: var(--colorBlue2);
 	--colorBackground: var(--colorWhiteIsh);
 	--colorBackgroundEmphasized: var(--colorBlue4);
-	--colorForeground: var(--colorBlue4);
+	--colorForeground: var(--colorBlue);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
 	--colorSandBackground: var(--colorBlue4);
 	--colorSandForeground: var(--colorSandLight);
 	--colorUnhappy: var(--colorRed1);
+	--colorTextShadow: var(--colorTextShadowDark);
 }
 
 @media (prefers-reduced-motion: no-preference) {

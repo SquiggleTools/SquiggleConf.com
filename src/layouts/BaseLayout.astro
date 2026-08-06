@@ -1,10 +1,12 @@
 ---
 import "@fontsource-variable/inter";
+import "@fontsource/geist-mono";
 import "@fontsource-variable/josefin-sans";
 import "@fontsource-variable/urbanist";
 import "@fontsource-variable/urbanist/wght-italic.css";
 
 import Head, { Props as HeadProps } from "~/components/Head.astro";
+import ThemeSetting from "~/components/ThemeSetting.astro";
 
 import "./base.css";
 import "./normalize.css";
@@ -13,6 +15,7 @@ type Props = HeadProps;
 ---
 
 <html lang="en">
+	<ThemeSetting />
 	<Head {...Astro.props} />
 	<slot />
 </html>

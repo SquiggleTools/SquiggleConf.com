@@ -1,0 +1,30 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["collage-item", className]} {...props}>
+	<slot />
+</div>
+
+<style>
+	.collage-item {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+		transform-origin: center;
+		transition:
+			transform var(--timeline-hover-duration) ease,
+			scale var(--timeline-hover-duration) ease,
+			border-width var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease;
+		will-change: transform, scale;
+	}
+</style>

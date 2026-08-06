@@ -7,7 +7,7 @@ import datastaxWhite from "~/assets/logos/datastax-white.svg";
 import igaliaBlack from "~/assets/logos/igalia-black.svg";
 import igaliaWhite from "~/assets/logos/igalia-white.svg";
 import inngestBlack from "~/assets/logos/inngest-black.svg";
-import inngest from "~/assets/logos/inngest.svg";
+import inngest from "~/assets/logos/inngest-wordmark-2026.svg";
 import nxDarkBlue from "~/assets/logos/nx-dark-blue.svg";
 import nxWhite from "~/assets/logos/nx-white.svg";
 import openjsFoundationColor from "~/assets/logos/openjs-foundation-color.svg";

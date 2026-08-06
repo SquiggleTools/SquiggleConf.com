@@ -1,0 +1,75 @@
+---
+import BodyText from "./BodyText.astro";
+import CardsList from "./CardsList.astro";
+import FullSection from "./FullSection.astro";
+import SpeakerSmall from "./SpeakerSmall.astro";
+import SubtleCard from "./SubtleCard.astro";
+import BioLinks from "./BioLinks.astro";
+import { PersonInfo, SessionInfo } from "~/data/historical/types";
+
+interface Props {
+	talks: SessionInfo[];
+	year: number;
+}
+
+const { talks, year } = Astro.props;
+
+const seen = new Set<PersonInfo>();
+---
+
+<FullSection>
+	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
+		See {year}'s full details on <a href={`/${year}/sessions`}
+			>{year} Sessions</a
+		> and
+		<a href={`/${year}/speakers`}>{year} Speakers</a>.
+	</BodyText>
+
+	<CardsList class="speakers-list">
+		{
+			talks.map((talk) =>
+				talk.people
+					.filter((person) => {
+						if (seen.has(person)) {
+							return false;
+						}
+
+						seen.add(person);
+						return true;
+					})
+					.map((person) => (
+						<SubtleCard class="speaker-card" renderAs="li">
+							<SpeakerSmall
+								href={`/${year}/sessions#${talk.slug}`}
+								person={person}
+							>
+								<BioLinks
+									class="speaker-bio-links"
+									name={person.name}
+									links={person.links}
+								/>
+							</SpeakerSmall>
+						</SubtleCard>
+					)),
+			)
+		}
+	</CardsList>
+</FullSection>
+
+<style>
+	.speakers-body-text {
+		margin: 1rem auto;
+	}
+
+	@media (min-width: 700px) {
+		.speaker-card {
+			width: 47%;
+		}
+	}
+
+	@media (min-width: 1017px) {
+		.speaker-card {
+			width: 31%;
+		}
+	}
+</style>

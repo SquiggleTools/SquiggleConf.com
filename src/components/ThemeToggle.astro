@@ -1,82 +1,48 @@
 ---
 import themeMoon from "~/assets/design/theme-moon.svg";
 import themeSun from "~/assets/design/theme-sun.svg";
+
+interface Props {
+	size: "normal" | "small";
+}
+
+const { size } = Astro.props;
 ---
 
-<div class="theme-toggle">
-	<button
-		aria-label="Theme toggle (enable JavaScript to use)"
-		class="theme-button"
-		id="themeToggle"
-	>
-		<img alt="" class="moon" src={themeMoon.src} />
-		<img alt="" class="sun" src={themeSun.src} />
-	</button>
-</div>
-
-<script is:inline>
-	const html = () => document.documentElement;
-	const toggle = () => document.getElementById("themeToggle");
-
-	function getThemePreference() {
-		return matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
-	}
-
-	/**
-	 * @param {string} newTheme
-	 */
-	function updateElementsForTheme(newTheme) {
-		if (newTheme === "light") {
-			html().classList.remove("dark");
-		} else {
-			html().classList.add("dark");
-		}
-
-		toggle().setAttribute("aria-label", `Theme toggle (current: ${newTheme})`);
-	}
-
-	function initialize() {
-		const startingTheme =
-			typeof localStorage !== "undefined" && localStorage.getItem("theme");
-
-		const theme = startingTheme ?? getThemePreference();
-
-		updateElementsForTheme(theme);
-
-		toggle().addEventListener("click", () => {
-			const newTheme = html().classList.contains("dark") ? "light" : "dark";
-			updateElementsForTheme(newTheme);
-			localStorage.setItem("theme", newTheme);
-		});
-	}
-
-	initialize();
-
-	document.addEventListener("astro:after-swap", initialize);
-</script>
+<button
+	aria-label="Theme toggle (enable JavaScript to use)"
+	class:list={["theme-toggle", `theme-toggle-${size}`]}
+>
+	<img alt="" class="moon" src={themeMoon.src} />
+	<img alt="" class="sun" src={themeSun.src} />
+</button>
 
 <style>
 	.theme-toggle {
-		opacity: 0.9;
-		position: absolute;
-		right: 2.5rem;
-		top: 2.5rem;
-		z-index: 1;
-	}
-
-	.theme-button {
 		background: none;
 		border: transparent;
 		cursor: pointer;
-	}
-
-	#themeToggle {
 		font-size: 1.5rem;
 		height: 2rem;
+		opacity: 0.7;
 		position: relative;
+		transition: var(--transitionFast) opacity;
 		width: 2.25rem;
+	}
+
+	.theme-toggle-normal {
+		height: 2rem;
+		width: 2.25rem;
+	}
+
+	.theme-toggle-small {
+		height: 1.5rem;
+		width: 1.6875;
+	}
+
+	.theme-toggle:focus-within,
+	.theme-toggle:hover {
+		opacity: 1;
 	}
 
 	img {
