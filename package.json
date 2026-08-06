@@ -43,8 +43,6 @@
 		"marked": "^18.0.7",
 		"sharp": "^0.34.5",
 		"temporal-polyfill": "^0.3.0",
-		"uqr": "^0.1.2",
-		"wifi-share-link": "^0.1.2",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
