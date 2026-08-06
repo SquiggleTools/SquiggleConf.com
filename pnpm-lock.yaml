@@ -50,12 +50,6 @@ importers:
       temporal-polyfill:
         specifier: ^0.3.0
         version: 0.3.2
-      uqr:
-        specifier: ^0.1.2
-        version: 0.1.3
-      wifi-share-link:
-        specifier: ^0.1.2
-        version: 0.1.2
       zod:
         specifier: ^4.3.6
         version: 4.4.3
@@ -4020,9 +4014,6 @@ packages:
       uploadthing:
         optional: true
 
-  uqr@0.1.3:
-    resolution: {integrity: sha512-0rjE8iEJe4YmT9TOhwsZtqCMRLc5DXZUI2UEYUUg63ikBkqqE5EYWaI0etFe/5KUcmcYwLih2RND1kq+hrUJXA==}
-
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -4211,10 +4202,6 @@ packages:
   widest-line@5.0.0:
     resolution: {integrity: sha512-c9bZp7b5YtRj2wOe6dlj32MK+Bx/M/d+9VB2SHM1OtsUHR0aV0tdP6DWh/iMt0kWi1t5g1Iudu6hQRNd1A4PVA==}
     engines: {node: '>=18'}
-
-  wifi-share-link@0.1.2:
-    resolution: {integrity: sha512-MsEJVIHrzLQ1iS0byrn4apS2NfmubbD3ezUOffKyPLlFlK0C+RB51BOkVeeL0HUmejNxdgjjVdD8HjB5HE3emQ==}
-    engines: {node: '>=20.19.0'}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -8355,8 +8342,6 @@ snapshots:
     optionalDependencies:
       '@vercel/functions': 2.2.13
 
-  uqr@0.1.3: {}
-
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
@@ -8520,8 +8505,6 @@ snapshots:
   widest-line@5.0.0:
     dependencies:
       string-width: 7.2.0
-
-  wifi-share-link@0.1.2: {}
 
   word-wrap@1.2.5: {}
 
