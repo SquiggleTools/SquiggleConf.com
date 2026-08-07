@@ -3,12 +3,6 @@
 	const toggles = () => document.querySelectorAll(".theme-toggle");
 	const initializedToggles = new Set<Element>();
 
-	function getThemePreference() {
-		return matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
-	}
-
 	function updateElementsForTheme(newTheme: string | string) {
 		if (!newTheme || newTheme === "light") {
 			html().classList.remove("dark");
@@ -27,7 +21,7 @@
 				? (localStorage.getItem("theme") as string)
 				: undefined;
 
-		const theme = startingTheme ?? getThemePreference();
+		const theme = startingTheme ?? "dark";
 
 		updateElementsForTheme(theme);
 
