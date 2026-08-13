@@ -1,6 +1,7 @@
 ---
 import type { PersonCardData } from "~/components/home/types";
 import Avatar from "./Avatar.astro";
+import PlaceholderMark from "./PlaceholderMark.astro";
 
 interface Props {
 	person: PersonCardData;
@@ -10,7 +11,11 @@ const { person } = Astro.props;
 ---
 
 <article class="timeline-host-card">
-	<Avatar alt={person.name} image={person.image} />
+	<Avatar
+		alt={person.name}
+		image={person.image}
+		placeholder={person.placeholder}
+	/>
 	<div class="timeline-host-copy">
 		<h3>{person.name}</h3>
 		<p class="timeline-host-role">{person.qualification}</p>

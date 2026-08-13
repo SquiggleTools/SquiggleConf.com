@@ -50,35 +50,37 @@ const hasAside = Astro.slots.has("aside");
 >
 	<div class="timeline-heading-line">
 		<h2>{heading}</h2>
-		<p
-			class:list={[
-				"timeline-subtitle",
-				"timeline-inline-time",
-				timeMode === "point" && "timeline-inline-time-point",
-			]}
-		>
+	</div>
+	<div
+		class:list={[
+			"timeline-subtitle",
+			"timeline-inline-time",
+			timeMode === "point" && "timeline-inline-time-point",
+		]}
+	>
+		<div>
 			{time}
-		</p>
+		</div>
+		{
+			mobileLocation && (
+				<div class="timeline-mobile-meta">
+					{mobileLocationHref ? (
+						<a
+							class="timeline-mobile-location timeline-location-link"
+							href={mobileLocationHref}
+							rel="noreferrer"
+							target="_blank"
+						>
+							{mobileLocation}
+						</a>
+					) : (
+						<p class="timeline-mobile-location">{mobileLocation}</p>
+					)}
+				</div>
+			)
+		}
 	</div>
 	{subtitle && <p class="timeline-subtitle">{subtitle}</p>}
-	{
-		mobileLocation && (
-			<div class="timeline-mobile-meta">
-				{mobileLocationHref ? (
-					<a
-						class="timeline-mobile-location timeline-location-link"
-						href={mobileLocationHref}
-						rel="noreferrer"
-						target="_blank"
-					>
-						{mobileLocation}
-					</a>
-				) : (
-					<p class="timeline-mobile-location">{mobileLocation}</p>
-				)}
-			</div>
-		)
-	}
 	<slot />
 </div>
 
@@ -268,22 +270,17 @@ const hasAside = Astro.slots.has("aside");
 		justify-items: start;
 	}
 
-	.timeline-content-fun-run .timeline-subtitle {
-		margin: 0;
-	}
-
 	.timeline-subtitle {
 		color: var(--timeline-muted-color);
 		display: block;
 		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
 		font-weight: 500;
-		margin: 0.32rem 0 1.1rem;
+		margin: -0.5rem 0 0.5rem;
 		transition: color var(--timeline-hover-duration) ease;
 	}
 
 	.timeline-inline-time {
 		display: inline-block;
-		margin: 0;
 	}
 
 	.timeline-inline-time-point {
@@ -451,12 +448,18 @@ const hasAside = Astro.slots.has("aside");
 		}
 
 		.timeline-mobile-meta {
-			display: grid;
-			gap: 0.15rem;
-			margin: -0.6rem 0 1rem;
+			display: flex;
 		}
 
-		.timeline-inline-time-point {
+		.timeline-inline-time {
+			display: flex;
+			flex-direction: row;
+			gap: 0.25rem;
+		}
+
+		.timeline-inline-time > :first-child::after {
+			content: " • ";
+			margin: 0 0.15rem;
 			display: inline-block;
 		}
 
