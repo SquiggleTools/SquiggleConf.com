@@ -3,10 +3,8 @@ import "@fontsource/shantell-sans";
 
 import { Image } from "astro:assets";
 
-import tanner from "~/assets/2027/tanner.webp";
 import placeholder8 from "~/assets/2027/placeholder-8.webp";
 import placeholder9 from "~/assets/2027/placeholder-9.webp";
-import placeholder12 from "~/assets/2027/placeholder-12.webp";
 import placeholder13 from "~/assets/2027/placeholder-13.webp";
 import Hero from "~/components/hero/Hero.astro";
 import {
@@ -24,6 +22,7 @@ import {
 	networking,
 	simonsTheater,
 	talkBlocks,
+	thePrimeagen,
 	timelineMCs,
 	urbanwild1,
 	urbanwild2,
@@ -34,8 +33,6 @@ import {
 	venues,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
-import CollagePhotoImage from "~/components/home/CollagePhotoImage.astro";
-import CollageItem from "~/components/home/CollageItem.astro";
 import ExploreChoices from "~/components/home/ExploreChoices.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import HostList from "~/components/home/HostList.astro";
@@ -534,9 +531,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							layout="avatar-trio"
 							photos={[
 								{
-									alt: "Placeholder portrait",
-									placeholder: true,
-									src: placeholder12,
+									alt: "ThePrimeagen portrait",
+									src: thePrimeagen,
 								},
 								{
 									alt: "Placeholder portrait",
@@ -552,13 +548,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							shape="avatar"
 						/>
 						<TimelineCopy>
-							<h3 class="fireside-topic">Subjects To Be Announced</h3>
+							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
 							<p>
-								Join our hosts in a live podcast recording discussing the ins
+								Join ThePrimeagen in a live podcast recording discussing the ins
 								and outs of how to succeed and be happy in today's tech
 								industry.
 							</p>
-							<p class="fireside-host">host to be announced</p>
+							<p class="fireside-host">hosts to be announced</p>
 						</TimelineCopy>
 					</div>
 				</TimelineEntry>

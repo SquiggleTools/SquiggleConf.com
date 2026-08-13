@@ -9,7 +9,7 @@ import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.webp";
 import lunchRegina from "~/assets/2027/lunch-regina.webp";
 import lunchSalad from "~/assets/2027/lunch-salad.webp";
 import lunchWickedLobsta from "~/assets/2027/lunch-wicked-lobsta.webp";
-import maddyPortrait from "~/assets/2027/maddy.webp";
+import maddyMontaquila from "~/assets/2027/maddy.webp";
 import milkcookies1 from "~/assets/2027/milkcookies-1.webp";
 import milkcookies2 from "~/assets/2027/milkcookies-2.webp";
 import milkcookies3 from "~/assets/2027/milkcookies-3.webp";
@@ -32,6 +32,8 @@ import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
 import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
 import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
+import thePrimeagen from "~/assets/avatars/theprimeagen.webp";
+import tjDevries from "~/assets/avatars/tj-devries.webp";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg?raw";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg?raw";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg?raw";
@@ -213,15 +215,14 @@ export const talkBlocks = {
 
 export const timelineMCs = [
 	{
-		image: maddyPortrait,
+		image: maddyMontaquila,
 		name: "Maddy Montaquila",
 		qualification: "product lead for Aspire at Microsoft",
 	},
 	{
-		image: placeholder7,
-		name: "To Be Announced",
-		placeholder: true,
-		qualification: "awesome community friend",
+		image: tjDevries,
+		name: "TJ DeVries",
+		qualification: "neovim core team",
 	},
 ];
 
@@ -385,6 +386,7 @@ export {
 	rest1,
 	simonsTheater,
 	terminalShop,
+	thePrimeagen,
 	urbanwild1,
 	urbanwild2,
 	urbanwild3,

@@ -66,6 +66,7 @@
 		"Placeholderface",
 		"plone",
 		"prakash",
+		"Primeagen",
 		"Rolldown",
 		"rushstack",
 		"sahana",
@@ -74,16 +75,17 @@
 		"Simons",
 		"squiggleconf",
 		"Tauri",
+		"theprimeagen",
 		"urbanwild",
 		"vitullo",
 		"vohr",
 		"voidzero",
-		"workerd",
-		"worktrees",
 		"Wasmer",
 		"Wasmtime",
 		"WCAG",
+		"wght",
 		"wordmark",
-		"wght"
+		"workerd",
+		"worktrees"
 	]
 }
