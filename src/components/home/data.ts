@@ -298,12 +298,20 @@ export const timelineEntries = {
 		title: "Fun Run",
 		variant: "funRun",
 	},
-	launch: {
-		id: "launch",
+	"launch-party": {
+		id: "launch-party",
 		location: { venueId: "nedDevines" },
 		timeLabel: "6-9pm",
 		timeMode: "range",
 		title: "Launch Party!",
+	},
+	"live-podcast-recording": {
+		id: "live-podcast-recording",
+		location: { venueId: "urbanWild" },
+		timeLabel: "6pm",
+		timeMode: "point",
+		title: "Live Podcast Recording",
+		variant: "podcast",
 	},
 	lunch: {
 		id: "lunch",
@@ -313,21 +321,13 @@ export const timelineEntries = {
 		title: "Lunch",
 		variant: "lunch",
 	},
-	mcs: {
-		id: "mcs",
+	"meet-your-mcs": {
+		id: "meet-your-mcs",
 		location: { venueId: "aquarium" },
 		timeLabel: "9am",
 		timeMode: "point",
 		title: "Meet your MCs!",
 		variant: "mcs",
-	},
-	"podcast-live": {
-		id: "podcast-live",
-		location: { venueId: "urbanWild" },
-		timeLabel: "6pm",
-		timeMode: "point",
-		title: "Live Podcast Recording",
-		variant: "podcast",
 	},
 	"simons-imax-theater": {
 		id: "simons-imax-theater",

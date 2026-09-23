@@ -4,6 +4,7 @@ import type {
 	TimelineEntryVariant,
 	TimelineTimeMode,
 } from "~/components/home/types";
+import Heading from "~/components/Heading.astro";
 
 interface Props {
 	class?: string;
@@ -49,7 +50,7 @@ const hasAside = Astro.slots.has("aside");
 	data-timeline-entry={entryId}
 >
 	<div class="timeline-heading-line">
-		<h2>{heading}</h2>
+		<Heading id={entryId} level="h2" link>{heading}</Heading>
 	</div>
 	<div
 		class:list={[
