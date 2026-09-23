@@ -4,11 +4,14 @@ import type {
 	TimelineEntryVariant,
 	TimelineTimeMode,
 } from "~/components/home/types";
+import Heading from "~/components/Heading.astro";
+import { slugify } from "~/utils/id";
 
 interface Props {
 	class?: string;
 	entryId: TimelineEntryId;
 	heading: string;
+	headingId?: string;
 	mobileLocation?: string;
 	mobileLocationHref?: string;
 	subtitle?: string;
@@ -21,6 +24,7 @@ const {
 	class: className,
 	entryId,
 	heading,
+	headingId = slugify(heading),
 	mobileLocation,
 	mobileLocationHref,
 	subtitle,
@@ -49,7 +53,7 @@ const hasAside = Astro.slots.has("aside");
 	data-timeline-entry={entryId}
 >
 	<div class="timeline-heading-line">
-		<h2>{heading}</h2>
+		<Heading id={headingId} level="h2" link>{heading}</Heading>
 	</div>
 	<div
 		class:list={[
