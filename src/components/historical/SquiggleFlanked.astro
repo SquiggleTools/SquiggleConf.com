@@ -1,26 +1,17 @@
 ---
 import { Image } from "astro:assets";
 
-import squiggleFlankingFull from "~/assets/2024/squiggle-flanking-full.svg";
 import squiggleFlankingLean from "~/assets/2024/squiggle-flanking-lean.svg";
 
 interface Props {
 	class?: string;
-	width: "full" | "lean";
 }
 
-const { class: className, width, ...rest } = Astro.props;
-const src = width === "full" ? squiggleFlankingFull : squiggleFlankingLean;
+const { class: className, ...rest } = Astro.props;
+const src = squiggleFlankingLean;
 ---
 
-<div
-	class:list={[
-		className,
-		"squiggle-flanked",
-		width === "full" ? "squiggle-flanked-full" : "squiggle-flanked-lean",
-	]}
-	{...rest}
->
+<div class:list={[className, "squiggle-flanked"]} {...rest}>
 	<Image alt="" class="squiggle" src={src} />
 	<slot />
 	<Image alt="" class="squiggle squiggle-right" src={src} />
@@ -35,14 +26,6 @@ const src = width === "full" ? squiggleFlankingFull : squiggleFlankingLean;
 		margin-left: auto;
 		margin-right: auto;
 		width: 100%;
-	}
-
-	.squiggle-flanked-full {
-		max-width: var(--widthBodyFull);
-		justify-content: space-between;
-	}
-
-	.squiggle-flanked-lean {
 		justify-content: center;
 		max-width: var(--widthBodyLean);
 	}

@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 interface Props {
-	alt: string | null;
+	alt: string;
 	class?: string;
 	src: ImageMetadata;
 	objectPosition?: string | undefined;
@@ -27,9 +27,6 @@ const { alt, class: className, objectPosition, src, ...props } = Astro.props;
 		height: 100%;
 		width: 100%;
 		user-select: none;
-	}
-
-	.collage-photo-image {
 		border-radius: inherit;
 		object-fit: cover;
 		transition:
@@ -38,12 +35,5 @@ const { alt, class: className, objectPosition, src, ...props } = Astro.props;
 		transform: scale(1);
 		transform-origin: center;
 		will-change: transform;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.collage-item {
-			animation: none;
-			transition: none;
-		}
 	}
 </style>

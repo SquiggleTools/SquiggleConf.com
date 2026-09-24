@@ -12,8 +12,7 @@ interface Props {
 	ariaLabel?: string;
 	class?: string;
 	decorative?: boolean;
-	placeholder?: boolean;
-	layout?: CollageLayout;
+	layout: CollageLayout;
 	photos: readonly CollagePhoto[];
 	shape?: CollageShape;
 }
@@ -22,41 +21,22 @@ const {
 	ariaLabel,
 	class: className,
 	decorative,
-	layout = "auto",
+	layout,
 	photos,
 	shape = "photo",
 } = Astro.props;
-
-const resolvedLayout =
-	layout === "auto"
-		? shape === "avatar"
-			? photos.length === 2
-				? "avatar-duo"
-				: "avatar-trio"
-			: photos.length === 2
-				? "duo"
-				: photos.length === 5
-					? "feature-five"
-					: "trio"
-		: layout;
 ---
 
 <div
 	aria-hidden={!ariaLabel && decorative ? "true" : undefined}
 	aria-label={ariaLabel}
-	class:list={[
-		"collage",
-		`collage-${resolvedLayout}`,
-		`collage-${shape}`,
-		className,
-	]}
+	class:list={["collage", `collage-${layout}`, `collage-${shape}`, className]}
 	role={ariaLabel ? "group" : undefined}
 >
 	{
 		photos.map((photo, index) => (
 			<CollageItem
 				class:list={[
-					"collage-item",
 					`collage-item-${index + 1}`,
 					photo.placeholder && "collage-item-placeholder",
 				]}

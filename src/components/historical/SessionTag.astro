@@ -151,21 +151,14 @@ const images: Record<string, ImageMetadata> = {
 
 interface Props {
 	tag: string;
-	scale?: number;
-	size?: SessionTagSize;
 }
 
-export type SessionTagSize = "normal" | "large";
-
-const { tag, scale, size } = Astro.props;
+const { tag } = Astro.props;
 const image = images[tag];
 const isLight = whiteStrokeIcons.includes(image);
 ---
 
-<div
-	class:list={["tag-chip", size === "large" ? "tag-large" : "tag-normal"]}
-	style={{ zoom: scale, alignSelf: "end" }}
->
+<div class="tag-chip" style={{ alignSelf: "end" }}>
 	{
 		image && (
 			<Image
@@ -188,16 +181,8 @@ const isLight = whiteStrokeIcons.includes(image);
 		border-radius: 0.25rem;
 		white-space: nowrap;
 		cursor: default;
-	}
-
-	.tag-normal {
 		font-size: 1rem;
 		padding: 0.125rem 0.25rem 0.125rem 0.125rem;
-	}
-
-	.tag-large {
-		font-size: 2.5rem;
-		padding: 0.5rem 0.5rem 0.35rem;
 	}
 
 	.light-icon {

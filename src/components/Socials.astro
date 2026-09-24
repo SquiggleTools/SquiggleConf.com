@@ -1,57 +1,23 @@
 ---
 import { socials } from "~/data/socials";
 
-import SocialLink, { SocialLinkSize } from "./SocialLink.astro";
-
-export type SocialsPadding = "dense" | "normal";
+import SocialLink from "./SocialLink.astro";
 
 interface Props {
 	class?: string;
-	inverted?: boolean;
-	padding?: SocialsPadding;
-	size?: SocialLinkSize;
 }
 
-const {
-	class: className,
-	inverted,
-	padding = "normal",
-	size,
-	...props
-} = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<div
-	class:list={[
-		"socials",
-		className,
-		padding === "dense" ? "socials-dense" : "socials-normal",
-	]}
-	{...props}
->
-	{
-		socials.map((social) => (
-			<SocialLink
-				class="social-link"
-				inverted={inverted}
-				{...social}
-				size={size}
-			/>
-		))
-	}
+<div class:list={["socials", className]} {...props}>
+	{socials.map((social) => <SocialLink class="social-link" {...social} />)}
 </div>
 
 <style>
 	.socials {
 		display: flex;
 		flex-wrap: wrap;
-	}
-
-	.socials-dense {
-		gap: 0.5rem;
-	}
-
-	.socials-normal {
 		gap: 2rem;
 	}
 

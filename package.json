@@ -42,7 +42,6 @@
 		"lodash": "^4.17.23",
 		"marked": "^18.0.7",
 		"sharp": "^0.34.5",
-		"temporal-polyfill": "^0.3.0",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {

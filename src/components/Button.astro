@@ -5,7 +5,7 @@ type Props<Tag extends HTMLTag> = Polymorphic<{
 	as: Tag;
 	class?: string;
 	size?: "normal" | "large";
-	variant: "accent" | "emphasized" | "light" | "none";
+	variant: "accent" | "emphasized" | "light";
 }>;
 
 const {
@@ -75,7 +75,6 @@ const {
 
 	.button-variant-light {
 		--colorButtonBackground: var(--colorWhiteIsh);
-		--colorButtonCorder: 2px solid var(--colorBlue1);
 		--colorButtonBackgroundHover: var(--colorBlue2);
 		--colorButtonBorderHover: var(--colorBlue1);
 		color: var(--colorBlackIsh);

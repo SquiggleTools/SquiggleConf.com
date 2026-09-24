@@ -677,8 +677,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.46);
 		--timeline-venue-color: rgba(4, 25, 48, 0.9);
 		--timeline-venue-at-color: rgba(17, 109, 154, 0.68);
-		--timeline-venue-stack-background: rgba(255, 255, 255, 0.48);
-		--timeline-venue-stack-border-color: rgba(6, 48, 82, 0.18);
 		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.1);
 		--timeline-image-border-color: rgba(4, 25, 48, 0.18);
 		--timeline-image-border-width: 2px;
@@ -712,19 +710,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
 		--timeline-venue-color: var(--timeline-heading-color);
 		--timeline-venue-at-color: rgba(125, 207, 226, 0.7);
-		--timeline-venue-stack-background: rgba(5, 23, 43, 0.72);
-		--timeline-venue-stack-border-color: rgba(125, 207, 226, 0.22);
 		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
-	}
-
-	.timeline-section::before {
-		content: "";
-		inset: 0;
-		opacity: 1;
-		pointer-events: none;
-		position: absolute;
-		transition: opacity var(--timeline-hover-duration) ease;
-		z-index: 0;
 	}
 
 	.top-heading {
@@ -825,10 +811,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		line-height: 1.12;
 		margin-right: -1px;
 		text-align: right;
-		transition:
-			color var(--timeline-hover-duration) ease,
-			opacity var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
 	}
 
 	.timeline-venue-last {
@@ -896,12 +878,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		border-bottom-right-radius: 0px;
 	}
 
-	:root[data-timeline-scrolling="true"] .timeline-venue .timeline-venue-stack {
-		animation-play-state: running;
-	}
-
 	.timeline-venue-aquarium-afternoon .timeline-venue-stack {
-		margin-bottom: var(--timeline-venue-stop-offset, 6rem);
+		margin-bottom: 6rem;
 		padding-bottom: 3.75rem;
 	}
 
@@ -1014,11 +992,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.break-copy {
 		align-content: start;
-	}
-
-	.launch-party-host {
-		height: 7rem;
-		width: 7rem;
 	}
 
 	.lunch-body {
@@ -1145,12 +1118,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			display: none;
 		}
 
-		.timeline-cell-span-two,
-		.timeline-cell-span-five,
-		.timeline-cell-span-seven {
-			grid-row: auto;
-		}
-
 		.timeline-cap {
 			border-radius: 8px;
 			grid-column: auto;
@@ -1190,16 +1157,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			transform-origin: bottom right;
 		}
 	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.timeline-section::before,
-		.timeline-venue,
-		.timeline-venue-stack,
-		.timeline-venue-decoration {
-			transition: none;
-			animation: none;
-		}
-	}
 </style>
 
 <script>
@@ -1220,7 +1177,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	);
 	const mobileTimelineQuery = window.matchMedia("(max-width: 899px)");
 	const timelineCardHeaders = timelineCards.map((card) => {
-		const heading = card.querySelector(".timeline-title-copy h2, h2");
+		const heading = card.querySelector("h2");
 
 		return {
 			card,
@@ -1234,8 +1191,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		morningTalksEntry instanceof HTMLElement
 	) {
 		let frameRequested = false;
-		let scrollIdleTimer = 0;
-		const scrollingAttribute = "data-timeline-scrolling";
 		const fishConfigs = [
 			{
 				baseRotate: -8,
@@ -1245,7 +1200,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				end: 1.1,
 				exitOffset: 26,
 				finAmplitude: 4,
-				opacity: 1,
 				phase: 0.2,
 				rotateAmplitude: 5,
 				scale: 0.48,
@@ -1259,7 +1213,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				end: 1.16,
 				exitOffset: 22,
 				finAmplitude: 5,
-				opacity: 1,
 				phase: 1.1,
 				rotateAmplitude: 7,
 				scale: 0.41,
@@ -1273,7 +1226,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				end: 1.22,
 				exitOffset: 20,
 				finAmplitude: 6,
-				opacity: 1,
 				phase: 2.2,
 				rotateAmplitude: 5,
 				scale: 0.43,
@@ -1287,7 +1239,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				end: 1.12,
 				exitOffset: 24,
 				finAmplitude: 4,
-				opacity: 1,
 				phase: 0.8,
 				rotateAmplitude: 6,
 				scale: 0.46,
@@ -1301,7 +1252,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				end: 1.28,
 				exitOffset: 18,
 				finAmplitude: 6,
-				opacity: 1,
 				phase: 2.75,
 				rotateAmplitude: 8,
 				scale: 0.44,
@@ -1382,38 +1332,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			window.requestAnimationFrame(updateTimelineFish);
 		};
 
-		const setTimelineScrolling = () => {
-			if (reducedMotionQuery.matches) {
-				document.documentElement.removeAttribute(scrollingAttribute);
-				return;
-			}
-
-			document.documentElement.setAttribute(scrollingAttribute, "true");
-			window.clearTimeout(scrollIdleTimer);
-			scrollIdleTimer = window.setTimeout(() => {
-				document.documentElement.removeAttribute(scrollingAttribute);
-			}, 140);
-		};
-
-		const handleTimelineScroll = () => {
-			setTimelineScrolling();
-			requestTimelineFishUpdate();
-		};
-
 		updateTimelineFish();
-		window.addEventListener("scroll", handleTimelineScroll, {
+		window.addEventListener("scroll", requestTimelineFishUpdate, {
 			passive: true,
 		});
 		window.addEventListener("resize", requestTimelineFishUpdate);
 		if (typeof reducedMotionQuery.addEventListener === "function") {
-			reducedMotionQuery.addEventListener("change", () => {
-				if (reducedMotionQuery.matches) {
-					window.clearTimeout(scrollIdleTimer);
-					document.documentElement.removeAttribute(scrollingAttribute);
-				}
-
-				requestTimelineFishUpdate();
-			});
+			reducedMotionQuery.addEventListener("change", requestTimelineFishUpdate);
 		}
 	}
 

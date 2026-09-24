@@ -3,7 +3,6 @@ import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface Props {
-	light?: boolean;
 	sponsorGroups: Record<string, SponsorLogoData[]>;
 }
 
@@ -17,7 +16,7 @@ export interface SponsorLogoData {
 	title: string;
 }
 
-const { light, sponsorGroups } = Astro.props;
+const { sponsorGroups } = Astro.props;
 ---
 
 <div class="sponsor-logos">
@@ -47,7 +46,7 @@ const { light, sponsorGroups } = Astro.props;
 						<Image
 							alt=""
 							class="sponsor-logo-light"
-							src={light ? sponsor.logos.dark : sponsor.logos.light}
+							src={sponsor.logos.light}
 							height={128}
 						/>
 					</a>
@@ -68,10 +67,6 @@ const { light, sponsorGroups } = Astro.props;
 		--sponsorSpacing1: 10rem;
 		--sponsorSpacing2: 12.5rem;
 		--sponsorSpacingVertical: 1.5rem;
-	}
-
-	.sponsors-blurb {
-		margin: auto;
 	}
 
 	.sponsor-group {

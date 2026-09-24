@@ -10,11 +10,7 @@ interface Props {
 const { class: className, id, ...rest } = Astro.props;
 ---
 
-<SquiggleFlanked
-	class:list={["squiggle-flanked", className]}
-	width="lean"
-	{...rest}
->
+<SquiggleFlanked class:list={["squiggle-flanked", className]} {...rest}>
 	<Heading class="heading" id={id} level="h2" link>
 		<slot />
 	</Heading>
