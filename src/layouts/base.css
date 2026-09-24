@@ -75,6 +75,8 @@
 	--sizeContentAreaWide: 75rem;
 	--sizeScrollMarginTop: 2rem;
 
+	--backdropFrosted: blur(16px) saturate(145%);
+
 	--transitionFast: 140ms;
 	--transitionNormal: 220ms;
 	--transitionMedium: 280ms;
