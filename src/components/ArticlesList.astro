@@ -1,26 +1,19 @@
 ---
 import BodyText from "~/components/BodyText.astro";
+import { Article, articles } from "~/data/articles";
 import Heading from "./Heading.astro";
 import ContentArea from "./ContentArea.astro";
 
-export interface ArticleListInfo {
-	title: string;
-	slug: string;
-	description: string;
-}
-
-interface Props {
-	articles: ArticleListInfo[];
-}
+const entries = Object.entries<Article>(articles);
 ---
 
 <ContentArea class="articles-list">
 	<ul>
 		{
-			Astro.props.articles.map((article) => (
+			entries.map(([slug, article]) => (
 				<li>
-					<a href={article.slug}>
-						<Heading level="h2">{article.title}</Heading>
+					<a href={`/articles/${slug}`}>
+						<Heading level="h2">{article.listTitle ?? article.title}</Heading>
 					</a>
 					<BodyText>{article.description}</BodyText>
 				</li>

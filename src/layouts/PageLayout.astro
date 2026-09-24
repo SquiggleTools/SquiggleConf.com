@@ -1,22 +1,46 @@
 ---
 import { Props as HeadProps } from "~/components/Head.astro";
-import Header from "~/components/Header.astro";
-import BodyArea from "~/components/BodyArea.astro";
 import Footer from "~/components/Footer.astro";
-import BaseLayout from "./BaseLayout.astro";
+import Header from "~/components/Header.astro";
+import NextYearNotice from "~/components/historical/NextYearNotice.astro";
 import { currentYear } from "~/data/years";
+import BaseLayout from "./BaseLayout.astro";
 
 type Props = HeadProps & {
 	hideHeaderLogo?: boolean;
 };
 
-const year = Astro.props.year ?? currentYear;
+const { hideHeaderLogo, year = currentYear, ...props } = Astro.props;
+const historical = year !== currentYear;
 ---
 
-<BaseLayout {...Astro.props} year={year}>
-	<Header hideLogo={Astro.props.hideHeaderLogo} year={year} />
-	<BodyArea>
+<BaseLayout {...props} year={year}>
+	<Header hideLogo={hideHeaderLogo} year={year} />
+	{historical && <NextYearNotice year={year} />}
+	<div class:list={["body-area", { "page-layout-historical": historical }]}>
 		<slot />
-	</BodyArea>
+	</div>
 	<Footer year={year} />
 </BaseLayout>
+
+<style>
+	.body-area {
+		background: linear-gradient(
+			180deg,
+			var(--colorBlueBright2) 50%,
+			var(--colorBlueBright1) 100%
+		);
+		height: 100%;
+		position: relative;
+		transition: var(--transitionBackground) background;
+	}
+
+	.page-layout-historical {
+		--fontFamilyBody: "Urbanist Variable", sans-serif;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1.5rem 0 3.5rem;
+	}
+</style>

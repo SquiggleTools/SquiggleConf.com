@@ -5,7 +5,7 @@ import {
 	getStaticPathsHistorical,
 	historicalDataByYear,
 } from "~/data/historical/data";
-import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
 import "~/styles/historical.css";
 
 export const getStaticPaths = getStaticPathsHistorical;
@@ -17,7 +17,7 @@ const historicalData =
 const description = `${historicalData.date} · Boston New England Aquarium`;
 ---
 
-<PageLayoutHistorical description={description} year={year}>
+<PageLayout description={description} year={year}>
 	<div class="index-contents">
 		<SpeakersContent
 			talks={Object.values(historicalData.sessionsBySlug)}
@@ -25,7 +25,7 @@ const description = `${historicalData.date} · Boston New England Aquarium`;
 		/>
 		<Sponsors />
 	</div>
-</PageLayoutHistorical>
+</PageLayout>
 
 <style>
 	.index-contents {

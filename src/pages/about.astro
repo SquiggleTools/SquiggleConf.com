@@ -8,9 +8,7 @@ import michiganTypeScript from "~/assets/logos/michigan-typescript.png";
 import { Props as BioProps } from "~/components/Bio.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 import Bios from "~/components/Bios.astro";
 import Arrow from "~/components/Arrow.astro";
 import Button from "~/components/Button.astro";
@@ -72,17 +70,15 @@ const biosStaff: BioProps[] = [
 		photo: katharineMitropoulos,
 	},
 ];
-
-const description = "The SquiggleConf mission and team";
 ---
 
-<PageLayout description={description} title="About">
-	<Hero>
-		<HeroContentsStandard heading="About">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout
+	article={{
+		description: "The SquiggleConf mission and team",
+		title: "About",
+	}}
+	squiggly="medium"
+>
 	<CommonContent heading="A Web Dev Tooling Conference">
 		<BodyText>
 			Our goal with SquiggleConf is to create an enriching conference
@@ -130,7 +126,7 @@ const description = "The SquiggleConf mission and team";
 
 		<Bios bios={biosStaff} />
 	</CommonContent>
-</PageLayout>
+</ArticleLayout>
 
 <style>
 	.about-bios {
