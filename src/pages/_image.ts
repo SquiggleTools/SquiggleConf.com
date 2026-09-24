@@ -2,8 +2,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = ({ url }) => {
 	const href = url.searchParams.get("href");
 	if (!href) {
 		return new Response("Missing 'href' query parameter", { status: 400 });

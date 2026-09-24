@@ -1,4 +1,5 @@
 ---
+import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 // import LogomarkTransparent from "~/assets/2027/logomark-transparent.svg";
 // import LogoWith2027 from "~/assets/2027/logo-with-2027.svg";
@@ -9,7 +10,7 @@ import { Image } from "astro:assets";
 // import PosterVerticalTickets from "~/assets/2027/poster-vertical-tickets.png";
 // import LogomarkOnBackground from "~/assets/2027/logomark-on-background.svg";
 
-const assets = [
+const assets: { alt: string; name: string; src: ImageMetadata }[] = [
 	// TODO
 	// {
 	// 	name: "Logomark Transparent",
