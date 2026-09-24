@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import _ from "lodash";
 
 import { SponsorInfo } from "~/data/historical/types";
 
@@ -9,7 +8,7 @@ interface Props {
 }
 
 const { sponsors } = Astro.props;
-const sponsorGroups = _.groupBy(sponsors, (sponsor) => sponsor.placement);
+const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 ---
 
 <div class="sponsor-logos">
@@ -22,7 +21,7 @@ const sponsorGroups = _.groupBy(sponsors, (sponsor) => sponsor.placement);
 					`sponsor-group-${placement}`,
 				]}
 			>
-				{sponsors.map((sponsor) => (
+				{sponsors?.map((sponsor) => (
 					<a
 						class="sponsor"
 						href={sponsor.href}
