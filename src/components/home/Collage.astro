@@ -1,73 +1,75 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
 import type {
+	CollageFrame,
 	CollageLayout,
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
-import PlaceholderMark from "./PlaceholderMark.astro";
-import CollagePhotoImage from "./CollagePhotoImage.astro";
-import CollageItem from "./CollageItem.astro";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
 	ariaLabel?: string;
-	class?: string;
 	decorative?: boolean;
-	placeholder?: boolean;
-	layout?: CollageLayout;
+	layout: CollageLayout;
 	photos: readonly CollagePhoto[];
 	shape?: CollageShape;
+	/** Overrides the layout's default dimensions. */
+	size?: { height?: string; width?: string };
 }
 
 const {
 	ariaLabel,
 	class: className,
 	decorative,
-	layout = "auto",
+	layout,
 	photos,
 	shape = "photo",
+	size,
+	...rest
 } = Astro.props;
 
-const resolvedLayout =
-	layout === "auto"
-		? shape === "avatar"
-			? photos.length === 2
-				? "avatar-duo"
-				: "avatar-trio"
-			: photos.length === 2
-				? "duo"
-				: photos.length === 5
-					? "feature-five"
-					: "trio"
-		: layout;
+const toStyle = (frame: CollageFrame | undefined) =>
+	frame && {
+		height: frame.height,
+		left: frame.left,
+		rotate: frame.rotate,
+		top: frame.top,
+		width: frame.width,
+		"z-index": frame.zIndex,
+	};
 ---
 
 <div
 	aria-hidden={!ariaLabel && decorative ? "true" : undefined}
 	aria-label={ariaLabel}
-	class:list={[
-		"collage",
-		`collage-${resolvedLayout}`,
-		`collage-${shape}`,
-		className,
-	]}
+	class:list={["collage", `collage-${layout}`, `collage-${shape}`, className]}
 	role={ariaLabel ? "group" : undefined}
+	style={size && {
+		"--collage-height": size.height,
+		"--collage-width": size.width,
+	}}
+	{...rest}
 >
 	{
 		photos.map((photo, index) => (
-			<CollageItem
-				class:list={[
-					"collage-item",
-					`collage-item-${index + 1}`,
-					photo.placeholder && "collage-item-placeholder",
-				]}
+			<div
+				class={`collage-item collage-item-${index + 1}`}
+				style={toStyle(photo.frame)}
 			>
-				<CollagePhotoImage
+				<TimelineImage
 					alt={decorative || photo.decorative ? "" : photo.alt}
-					src={photo.src}
+					effect={
+						shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
+					}
+					loading="lazy"
 					objectPosition={photo.objectPosition}
+					placeholder={photo.placeholder}
+					radius={shape === "avatar" ? "var(--radiusPill)" : undefined}
+					src={photo.src}
 				/>
-				{photo.placeholder && <PlaceholderMark />}
-			</CollageItem>
+			</div>
 		))
 	}
 </div>
@@ -83,17 +85,9 @@ const resolvedLayout =
 	}
 
 	.collage-item {
+		display: grid;
 		position: absolute;
-	}
-
-	.collage-avatar .collage-item {
-		border-radius: 999px;
-		transition: box-shadow var(--timeline-hover-duration) ease;
-		will-change: auto;
-	}
-
-	.collage-item.collage-item-placeholder :global(img) {
-		filter: blur(2px);
+		transition: transform var(--transitionNormal) ease;
 	}
 
 	.collage-duo {
@@ -101,23 +95,11 @@ const resolvedLayout =
 		--collage-width: 12rem;
 	}
 
-	.fun-run-collage {
-		justify-self: start;
-		left: 17rem;
-		position: absolute;
-		top: 1rem;
-		transform: none;
-	}
-
-	.fun-run-collage-mobile {
-		display: none;
-	}
-
 	.collage-duo .collage-item-1 {
 		height: 7rem;
 		left: 6rem;
 		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		transform: var(--timeline-collage-duo-1) rotate(35deg);
 		width: 5rem;
 	}
 
@@ -125,58 +107,33 @@ const resolvedLayout =
 		height: 8rem;
 		left: 1rem;
 		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		transform: var(--timeline-collage-duo-2) rotate(-10deg);
 		width: 6rem;
 	}
 
+	.collage-trio .collage-item {
+		height: 6.4rem;
+		width: 8.9rem;
+	}
+
 	.collage-trio .collage-item-1 {
-		height: var(--collage-trio-item-1-height, 6.5rem);
-		left: var(--collage-trio-item-1-left, 0.2rem);
-		top: var(--collage-trio-item-1-top, 1.15rem);
-		transform: rotate(var(--collage-trio-item-1-rotate, -12deg));
-		width: var(--collage-trio-item-1-width, 8.9rem);
+		height: 6.5rem;
+		left: 0.2rem;
+		rotate: -12deg;
+		top: 1.15rem;
 	}
 
 	.collage-trio .collage-item-2 {
-		height: var(--collage-trio-item-2-height, 6.3rem);
-		left: var(--collage-trio-item-2-left, 6.1rem);
-		top: var(--collage-trio-item-2-top, 0.1rem);
-		transform: rotate(var(--collage-trio-item-2-rotate, -2deg));
-		width: var(--collage-trio-item-2-width, 8.9rem);
-		z-index: var(--collage-trio-item-2-z-index, auto);
+		height: 6.3rem;
+		left: 6.1rem;
+		rotate: -2deg;
+		top: 0.1rem;
 	}
 
 	.collage-trio .collage-item-3 {
-		height: var(--collage-trio-item-3-height, 6.4rem);
-		left: var(--collage-trio-item-3-left, 13rem);
-		top: var(--collage-trio-item-3-top, 0.85rem);
-		transform: rotate(var(--collage-trio-item-3-rotate, 9deg));
-		width: var(--collage-trio-item-3-width, 8.9rem);
-	}
-
-	.launch-party-collage {
-		margin-bottom: 1rem;
-	}
-
-	.cookiesbreak-collage {
-		--collage-height: 8rem;
-		--collage-trio-item-1-height: 5.7rem;
-		--collage-trio-item-1-left: 0.25rem;
-		--collage-trio-item-1-rotate: -8deg;
-		--collage-trio-item-1-top: 1rem;
-		--collage-trio-item-1-width: 7.5rem;
-		--collage-trio-item-2-height: 5.8rem;
-		--collage-trio-item-2-left: 5.4rem;
-		--collage-trio-item-2-rotate: 2deg;
-		--collage-trio-item-2-top: 0.2rem;
-		--collage-trio-item-2-width: 7.5rem;
-		--collage-trio-item-2-z-index: 1;
-		--collage-trio-item-3-height: 5rem;
-		--collage-trio-item-3-left: 11rem;
-		--collage-trio-item-3-rotate: 10deg;
-		--collage-trio-item-3-top: 2rem;
-		--collage-trio-item-3-width: 6rem;
-		--collage-width: 18.6rem;
+		left: 13rem;
+		rotate: 9deg;
+		top: 0.85rem;
 	}
 
 	.collage-feature-five {
@@ -184,58 +141,48 @@ const resolvedLayout =
 		--collage-width: min(100%, 38rem);
 	}
 
-	.afterparty-collage {
-		margin: 1.9rem 0 1.1rem;
-	}
-
 	.collage-feature-five .collage-item {
-		aspect-ratio: var(--collage-feature-photo-aspect, 16 / 9);
+		aspect-ratio: 16 / 9;
 		height: auto;
-		width: var(--collage-feature-photo-width, 20%);
 	}
 
 	.collage-feature-five .collage-item-1 {
-		--collage-feature-photo-aspect: 16 / 9;
-		--collage-feature-photo-width: 66%;
 		left: 0%;
+		rotate: -6deg;
 		top: 0%;
-		transform: rotate(-6deg);
+		width: 66%;
 		z-index: 5;
 	}
 
 	.collage-feature-five .collage-item-2 {
-		--collage-feature-photo-aspect: 14 / 16;
-		--collage-feature-photo-width: 26%;
+		aspect-ratio: 14 / 16;
 		left: 65%;
+		rotate: 8deg;
 		top: 9%;
-		transform: rotate(8deg);
+		width: 26%;
 		z-index: 4;
 	}
 
 	.collage-feature-five .collage-item-3 {
-		--collage-feature-photo-aspect: 16 / 9;
-		--collage-feature-photo-width: 33%;
 		left: 50%;
 		top: -8%;
-		transform: rotate(0deg);
+		width: 33%;
 		z-index: 2;
 	}
 
 	.collage-feature-five .collage-item-4 {
-		--collage-feature-photo-aspect: 16 / 9;
-		--collage-feature-photo-width: 31%;
 		left: 76%;
+		rotate: 19deg;
 		top: 8%;
-		transform: rotate(19deg);
+		width: 31%;
 		z-index: 1;
 	}
 
 	.collage-feature-five .collage-item-5 {
-		--collage-feature-photo-aspect: 16 / 9;
-		--collage-feature-photo-width: 30%;
 		left: 47%;
+		rotate: 7deg;
 		top: 49%;
-		transform: rotate(7deg);
+		width: 30%;
 		z-index: 5;
 	}
 
@@ -254,8 +201,8 @@ const resolvedLayout =
 	.collage-avatar-duo .collage-item-2 {
 		height: 5rem;
 		left: 5rem;
+		rotate: 6deg;
 		top: 5rem;
-		transform: rotate(6deg);
 		width: 5rem;
 		z-index: 2;
 	}
@@ -263,6 +210,13 @@ const resolvedLayout =
 	.collage-avatar-trio {
 		--collage-height: 11rem;
 		--collage-width: 11.5rem;
+	}
+
+	.collage-avatar-trio .collage-item {
+		height: 5rem;
+		left: 0;
+		width: 5rem;
+		z-index: 2;
 	}
 
 	.collage-avatar-trio .collage-item-1 {
@@ -274,60 +228,12 @@ const resolvedLayout =
 	}
 
 	.collage-avatar-trio .collage-item-2 {
-		height: 5rem;
-		left: 0;
+		rotate: -7deg;
 		top: 1rem;
-		transform: rotate(-7deg);
-		width: 5rem;
-		z-index: 2;
 	}
 
 	.collage-avatar-trio .collage-item-3 {
-		height: 5rem;
-		left: 0;
+		rotate: 7deg;
 		top: 5rem;
-		transform: rotate(7deg);
-		width: 5rem;
-		z-index: 2;
-	}
-
-	@media (width < 900px) {
-		.fun-run-collage-desktop {
-			display: none;
-		}
-
-		.fun-run-collage-mobile {
-			--collage-height: 7.6rem;
-			--collage-width: 8rem;
-			align-self: start;
-			display: block;
-			justify-self: end;
-			left: auto;
-			min-height: 7.6rem;
-			position: relative;
-			right: auto;
-		}
-
-		.fun-run-collage-mobile .collage-item-1 {
-			height: 5.45rem;
-			left: 3.8rem;
-			top: 0.3rem;
-			width: 3.75rem;
-		}
-
-		.fun-run-collage-mobile .collage-item-2 {
-			height: 6.1rem;
-			left: 0;
-			top: 0.7rem;
-			width: 4.35rem;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.collage,
-		.collage-item {
-			animation: none;
-			transition: none;
-		}
 	}
 </style>

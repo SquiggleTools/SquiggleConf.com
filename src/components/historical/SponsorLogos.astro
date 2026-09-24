@@ -1,23 +1,14 @@
 ---
-import { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { SponsorInfo } from "~/data/historical/types";
+
+import ThemedImage from "../ThemedImage.astro";
 
 interface Props {
-	light?: boolean;
-	sponsorGroups: Record<string, SponsorLogoData[]>;
+	sponsors: SponsorInfo[];
 }
 
-export interface SponsorLogoData {
-	href: string;
-	logos: {
-		dark: ImageMetadata;
-		light: ImageMetadata;
-	};
-	placement: number;
-	title: string;
-}
-
-const { light, sponsorGroups } = Astro.props;
+const { sponsors } = Astro.props;
+const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 ---
 
 <div class="sponsor-logos">
@@ -30,7 +21,7 @@ const { light, sponsorGroups } = Astro.props;
 					`sponsor-group-${placement}`,
 				]}
 			>
-				{sponsors.map((sponsor) => (
+				{sponsors?.map((sponsor) => (
 					<a
 						class="sponsor"
 						href={sponsor.href}
@@ -38,18 +29,7 @@ const { light, sponsorGroups } = Astro.props;
 						target="_blank"
 						title={sponsor.title}
 					>
-						<Image
-							alt=""
-							class="sponsor-logo-dark"
-							src={sponsor.logos.dark}
-							height={128}
-						/>
-						<Image
-							alt=""
-							class="sponsor-logo-light"
-							src={light ? sponsor.logos.dark : sponsor.logos.light}
-							height={128}
-						/>
+						<ThemedImage alt="" height={128} sources={sponsor.logos} />
 					</a>
 				))}
 			</div>
@@ -68,10 +48,6 @@ const { light, sponsorGroups } = Astro.props;
 		--sponsorSpacing1: 10rem;
 		--sponsorSpacing2: 12.5rem;
 		--sponsorSpacingVertical: 1.5rem;
-	}
-
-	.sponsors-blurb {
-		margin: auto;
 	}
 
 	.sponsor-group {
@@ -102,12 +78,7 @@ const { light, sponsorGroups } = Astro.props;
 		max-width: var(--sponsorSize);
 	}
 
-	html.dark .sponsor-logo-light,
-	html:not(.dark) .sponsor-logo-dark {
-		display: none;
-	}
-
-	@media (min-width: 819px) {
+	@media (width >= 819px) {
 		.sponsor-group {
 			flex-direction: row;
 			flex-wrap: wrap;

@@ -1,54 +1,87 @@
 ---
-import type { PersonCardData } from "~/components/home/types";
-import Avatar from "./Avatar.astro";
-import PlaceholderMark from "./PlaceholderMark.astro";
+import type { PersonCardData, TalkCardData } from "~/components/home/types";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
-	person: PersonCardData;
+	/** With a talk title, the title leads and the name moves under it. */
+	person: PersonCardData | TalkCardData;
 }
 
 const { person } = Astro.props;
+const title = "title" in person ? person.title : undefined;
 ---
 
-<article class="timeline-host-card">
-	<Avatar
+<article class:list={["person-card", title && "person-card-talk"]}>
+	<TimelineImage
 		alt={person.name}
-		image={person.image}
+		effect="zoom"
 		placeholder={person.placeholder}
+		src={person.image}
 	/>
-	<div class="timeline-host-copy">
-		<h3>{person.name}</h3>
-		<p class="timeline-host-role">{person.qualification}</p>
+	<div class="person-card-copy">
+		{
+			title ? (
+				<>
+					<h3>{title}</h3>
+					<p class="person-card-name">{person.name}</p>
+				</>
+			) : (
+				<h3>{person.name}</h3>
+			)
+		}
+		<p class="person-card-role">{person.qualification}</p>
 	</div>
 </article>
 
 <style>
-	.timeline-host-card {
+	.person-card {
 		align-items: center;
 		display: grid;
 		gap: 0.8rem;
 		grid-template-columns: 5rem 1fr;
 	}
 
-	.timeline-host-copy {
+	.person-card-talk {
+		align-items: stretch;
+	}
+
+	.person-card-copy {
 		display: grid;
 		gap: 0.28rem;
 		min-height: 5rem;
 		place-content: center start;
 	}
 
-	.timeline-host-copy h3 {
-		color: var(--timeline-heading-color);
+	.person-card-talk .person-card-copy {
+		gap: normal;
+		grid-template-rows: 2fr 1fr 1fr;
+		min-height: 5.75rem;
+		place-content: normal;
+	}
+
+	.person-card-copy h3 {
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
+		font-size: var(--fontSizeCardTitle);
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.15;
 		margin: 0;
 	}
 
-	.timeline-host-role {
-		color: var(--timeline-muted-color);
-		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+	.person-card-talk h3 {
+		align-self: center;
+		line-height: 1.25;
+	}
+
+	.person-card-name {
+		color: var(--colorMuted);
+		font-size: clamp(0.92rem, 1.2vw, 1rem);
+		font-weight: var(--fontWeightBolder);
+	}
+
+	.person-card-role {
+		color: var(--colorMuted);
+		font-size: var(--fontSizeCaption);
 		font-weight: 300;
 		line-height: 1.25;
 		margin: 0;

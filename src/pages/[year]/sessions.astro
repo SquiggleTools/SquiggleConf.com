@@ -4,8 +4,7 @@ import {
 	getStaticPathsHistorical,
 	historicalDataByYear,
 } from "~/data/historical/data";
-import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
-import "~/styles/historical.css";
+import PageLayout from "~/layouts/PageLayout.astro";
 
 export const getStaticPaths = getStaticPathsHistorical;
 
@@ -15,7 +14,7 @@ const historicalData =
 	historicalDataByYear[year as keyof typeof historicalDataByYear];
 ---
 
-<PageLayoutHistorical
+<PageLayout
 	description="Sessions at SquiggleConf: a Boston conference focused on excellent web dev tooling."
 	title="Sessions"
 	year={year}
@@ -27,7 +26,7 @@ const historicalData =
 				.map((session) => <Session session={session} year={year} />)
 		}
 	</ul>
-</PageLayoutHistorical>
+</PageLayout>
 
 <style>
 	.talks-list {

@@ -1,0 +1,49 @@
+---
+import BodyText from "~/components/BodyText.astro";
+import ContentArea from "~/components/ContentArea.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard, {
+	Props as HeroContentsStandardProps,
+} from "~/components/hero/HeroContentsStandard.astro";
+import type { Article } from "~/data/articles";
+import PageLayout from "./PageLayout.astro";
+
+interface Props {
+	article: Article;
+	introWidth?: "normal" | "thin";
+	squiggly?: HeroContentsStandardProps["squiggly"];
+}
+
+const {
+	article: { description, title },
+	introWidth = "thin",
+	squiggly = "none",
+} = Astro.props;
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly={squiggly}>
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	{
+		Astro.slots.has("lead") && (
+			<ContentArea width={introWidth}>
+				<BodyText class="article-lead">
+					<slot name="lead" />
+				</BodyText>
+				<slot name="intro" />
+			</ContentArea>
+		)
+	}
+
+	<slot />
+</PageLayout>
+
+<style>
+	.article-lead {
+		margin: 5rem auto 1.5rem;
+	}
+</style>

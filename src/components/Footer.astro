@@ -1,9 +1,9 @@
 ---
 import { currentYear, years } from "~/data/years";
+import { socials } from "~/data/socials";
 import ContentArea from "./ContentArea.astro";
-import InlineBlock from "./InlineBlock.astro";
+import IconLinks from "./IconLinks.astro";
 import Logo from "./Logo.astro";
-import Socials from "./Socials.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
@@ -21,10 +21,10 @@ const yearPairs =
 <footer>
 	<ContentArea class="footer-content-area" width="wide">
 		<div class="left">
-			<Logo invert />
+			<Logo />
 			<div class="footer-date-location">
-				<InlineBlock>May 7th, 2027 ·</InlineBlock>
-				<InlineBlock>Boston, Massachusetts</InlineBlock>
+				<span>May 7th, 2027 ·</span>
+				<span>Boston, Massachusetts</span>
 			</div>
 		</div>
 		<div class="right">
@@ -39,16 +39,15 @@ const yearPairs =
 						</a>
 					))
 				}
-				<ThemeToggle size="small" />
+				<ThemeToggle />
 			</div>
-			<Socials class="footer-socials" inverted />
+			<IconLinks class="footer-socials" links={socials} />
 		</div>
 	</ContentArea>
 </footer>
 
 <style>
 	footer {
-		background: var(--colorAccent);
 		color: var(--colorForegroundEmphasized);
 		font-family: var(--fontFamilyHeading);
 		padding: 3.5rem 0;
@@ -72,6 +71,10 @@ const yearPairs =
 		line-height: 1.3;
 	}
 
+	.footer-date-location span {
+		display: inline-block;
+	}
+
 	.right {
 		display: flex;
 		flex-direction: column;
@@ -90,12 +93,20 @@ const yearPairs =
 	}
 
 	.footer-socials {
+		--iconLinkPadding: 0rem;
+		--iconLinkSize: 2rem;
+		--iconLinksGap: 2rem;
 		margin-top: 2rem;
 		max-width: 15rem;
 	}
 
+	:global(html:not(.dark)) .footer-socials {
+		opacity: 0.9;
+	}
+
 	@media (width >= 490px) {
 		.footer-socials {
+			--iconLinksGap: 1rem;
 			margin-top: 0;
 			max-width: none;
 		}

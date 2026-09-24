@@ -1,23 +1,38 @@
 import alexanderLichter from "~/assets/avatars/alexander-lichter.jpg";
-import amyDutton from "~/assets/avatars/amy-dutton.jpg";
-import anthonyFu from "~/assets/avatars/anthony-fu.jpg";
-import davidSherret from "~/assets/avatars/david-sherret.jpg";
-import dominicNguyen from "~/assets/avatars/dominic-nguyen.jpg";
-import dylanGoings from "~/assets/avatars/dylan-goings.png";
+import amyDutton from "~/assets/avatars/amy-dutton.webp";
+import anthonyFu from "~/assets/avatars/anthony-fu.webp";
+import davidSherret from "~/assets/avatars/david-sherret.webp";
+import dominicNguyen from "~/assets/avatars/dominic-nguyen.webp";
+import dylanGoings from "~/assets/avatars/dylan-goings.webp";
 import giacomoCavalieri from "~/assets/avatars/giacomo-cavalieri.jpg";
 import jakeBailey from "~/assets/avatars/jake-bailey.jpg";
 import jessicaGarson from "~/assets/avatars/jessica-garson.jpg";
-import maddyMontaquila from "~/assets/avatars/maddy-montaquila.png";
+import maddyMontaquila from "~/assets/avatars/maddy-montaquila.webp";
 import mattiaManzati from "~/assets/avatars/mattia-manzati.jpg";
-import michelleBakels from "~/assets/avatars/michelle-bakels.jpg";
+import michelleBakels from "~/assets/avatars/michelle-bakels.webp";
 import nicoloRibaudo from "~/assets/avatars/nicolo-ribaudo.jpg";
-import oliverDunk from "~/assets/avatars/oliver-dunk.png";
-import oliverMedhurst from "~/assets/avatars/oliver-medhurst.jpg";
-import peteGonzalez from "~/assets/avatars/pete-gonzalez.jpg";
+import oliverDunk from "~/assets/avatars/oliver-dunk.webp";
+import oliverMedhurst from "~/assets/avatars/oliver-medhurst.webp";
+import peteGonzalez from "~/assets/avatars/pete-gonzalez.webp";
 import shelleyVohr from "~/assets/avatars/shelley-vohr.jpg";
-import tJDeVries from "~/assets/avatars/tj-devries.jpg";
+import tJDeVries from "~/assets/avatars/tj-devries.webp";
+import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
+import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+// These two files are named inversely to their wordmark colors.
+import elasticWhite from "~/assets/logos/elastic-black.svg";
+import elasticBlack from "~/assets/logos/elastic-white.svg";
+import igaliaBlack from "~/assets/logos/igalia-black.svg";
+import igaliaWhite from "~/assets/logos/igalia-white.svg";
+import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
+import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
+import progressGray from "~/assets/logos/progress-gray.svg";
+import progressWhite from "~/assets/logos/progress-white.svg";
+import rushStackDark from "~/assets/logos/rushstack-dark.svg";
+import rushStackLite from "~/assets/logos/rushstack-lite.svg";
+import voidZeroBlack from "~/assets/logos/voidzero-black.svg";
+import voidZeroWhite from "~/assets/logos/voidzero-white.svg";
 
-import { PersonInfo, SessionInfo } from "./types";
+import { PersonInfo, SessionInfo, SponsorInfo } from "./types";
 
 export const peopleBySlug = {
 	"alexander-lichter": {
@@ -518,3 +533,48 @@ Instead, we'll start from scratch and step-by-step understand our tools better..
 		title: "Zero to Squiggle with the Language Server Protocol",
 	},
 };
+
+export const sponsors: SponsorInfo[] = [
+	{
+		href: "https://www.bloomberg.com/company/values/tech-at-bloomberg/javascript?utm_source=squiggleconf",
+		logos: { dark: bloombergWhite, light: bloombergBlack },
+		placement: 1,
+		title: "Bloomberg",
+	},
+	{
+		href: "https://elastic.co?utm_source=squiggleconf",
+		logos: { dark: elasticWhite, light: elasticBlack },
+		placement: 1,
+		title: "Elastic",
+	},
+	{
+		href: "https://igalia.com?utm_source=squiggleconf",
+		logos: { dark: igaliaWhite, light: igaliaBlack },
+		placement: 2,
+		title: "Igalia",
+	},
+	{
+		href: "https://mintlify.com?utm_source=squiggleconf",
+		logos: { dark: mintlifyWhite, light: mintlifyBlack },
+		placement: 0,
+		title: "Mintlify",
+	},
+	{
+		href: "https://progress.com?utm_source=squiggleconf",
+		logos: { dark: progressWhite, light: progressGray },
+		placement: 1,
+		title: "Progress",
+	},
+	{
+		href: "https://rushstack.io?utm_source=squiggleconf",
+		logos: { dark: rushStackDark, light: rushStackLite },
+		placement: 1,
+		title: "Rush Stack",
+	},
+	{
+		href: "https://voidzero.dev?utm_source=squiggleconf",
+		logos: { dark: voidZeroWhite, light: voidZeroBlack },
+		placement: 2,
+		title: "VoidZero",
+	},
+];

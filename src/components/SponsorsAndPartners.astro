@@ -1,116 +1,47 @@
 ---
-import { Image } from "astro:assets";
+import { historicalDataByYear } from "~/data/historical/data";
 import { links } from "~/data/links";
-import Button from "./Button.astro";
 
 import BodyText from "./BodyText.astro";
-
-import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
-import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
-import mintlifyBlack from "~/assets/logos/mintlify-black.svg";
-import mintlifyWhite from "~/assets/logos/mintlify-white.svg";
-import igaliaBlack from "~/assets/logos/igalia-black.svg";
-import igaliaWhite from "~/assets/logos/igalia-white.svg";
-import datastaxBlack from "~/assets/logos/datastax-black.svg";
-import datastaxWhite from "~/assets/logos/datastax-white.svg";
-import inngestBlack from "~/assets/logos/inngest-black.svg";
-import inngestNew from "~/assets/logos/inngest-wordmark-2026.svg";
-import openjsFoundationColor from "~/assets/logos/openjs-foundation-color.svg";
-import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
-import prismaBlack from "~/assets/logos/prisma-black.svg";
-import prismaWhite from "~/assets/logos/prisma-white.svg";
-import elasticWhite from "~/assets/logos/elastic-black.svg";
-import elasticBlack from "~/assets/logos/elastic-white.svg";
-import voidZeroBlack from "~/assets/logos/voidzero-black.svg";
-import voidZeroWhite from "~/assets/logos/voidzero-white.svg";
-import rushStackDark from "~/assets/logos/rushstack-dark.svg";
-import rushStackLite from "~/assets/logos/rushstack-lite.svg";
-import nxDarkBlue from "~/assets/logos/nx-dark-blue.svg";
-import nxWhite from "~/assets/logos/nx-white.svg";
-import progressGray from "~/assets/logos/progress-gray.svg";
-import progressWhite from "~/assets/logos/progress-white.svg";
+import Button from "./Button.astro";
 import Newsletter from "./Newsletter.astro";
+import ThemedImage from "./ThemedImage.astro";
 
-const sponsors = [
-	{
-		href: "https://www.bloomberg.com/company/values/tech-at-bloomberg/javascript?utm_source=squiggleconf",
-		logos: { dark: bloombergWhite, light: bloombergBlack },
-		prominence: 4,
-		title: "Bloomberg",
-	},
-	{
-		href: "https://mintlify.com?utm_source=squiggleconf",
-		logos: { dark: mintlifyWhite, light: mintlifyBlack },
-		prominence: 3,
-		title: "Mintlify",
-	},
-	{
-		href: "https://igalia.com?utm_source=squiggleconf",
-		logos: { dark: igaliaWhite, light: igaliaBlack },
-		prominence: 2,
-		title: "Igalia",
-	},
-	{
-		href: "https://www.datastax.com?utm_source=squiggleconf",
-		logos: { dark: datastaxWhite, light: datastaxBlack },
-		prominence: 2,
-		title: "Datastax",
-	},
-	{
-		href: "https://inngest.com?utm_source=squiggleconf",
-		logos: { dark: inngestNew, light: inngestBlack },
-		prominence: 2,
-		title: "Inngest",
-	},
-	{
-		href: "https://openjsf.org?utm_source=squiggleconf",
-		logos: { dark: openjsFoundationLight, light: openjsFoundationColor },
-		prominence: 2,
-		title: "OpenJS Foundation",
-	},
-	{
-		href: "https://www.prisma.io/?utm_source=squiggleconf",
-		logos: { dark: prismaWhite, light: prismaBlack },
-		prominence: 2,
-		title: "Prisma",
-	},
-	{
-		href: "https://elastic.co?utm_source=squiggleconf",
-		logos: { dark: elasticWhite, light: elasticBlack },
-		prominence: 2,
-		title: "Elastic",
-	},
-	{
-		href: "https://voidzero.dev?utm_source=squiggleconf",
-		logos: { dark: voidZeroWhite, light: voidZeroBlack },
-		prominence: 1,
-		title: "VoidZero",
-	},
-	{
-		href: "https://rushstack.io?utm_source=squiggleconf",
-		logos: { dark: rushStackDark, light: rushStackLite },
-		prominence: 1,
-		title: "Rush Stack",
-	},
-	{
-		href: "https://nx.dev?utm_source=squiggleconf",
-		logos: { dark: nxWhite, light: nxDarkBlue },
-		prominence: 1,
-		title: "Nx",
-	},
-	{
-		href: "https://progress.com?utm_source=squiggleconf",
-		logos: { dark: progressWhite, light: progressGray },
-		prominence: 1,
-		title: "Progress",
-	},
-];
+const pastSponsors = Object.values(historicalDataByYear).flatMap(
+	({ sponsors }) => sponsors,
+);
 
 const tiers = [
-	sponsors.filter((s) => s.prominence >= 3),
-	sponsors.filter((s) => s.prominence === 2),
-	sponsors.filter((s) => s.prominence === 1),
-];
+	[
+		{ size: "14rem", titles: ["Bloomberg"] },
+		{ size: "10rem", titles: ["Mintlify"] },
+	],
+	[
+		{
+			size: "8rem",
+			titles: [
+				"Igalia",
+				"Datastax",
+				"Inngest",
+				"OpenJS Foundation",
+				"Prisma",
+				"Elastic",
+			],
+		},
+	],
+	[{ size: "6rem", titles: ["VoidZero", "Rush Stack", "Nx", "Progress"] }],
+].map((groups) =>
+	groups.flatMap(({ size, titles }) =>
+		titles.map((title) => {
+			const sponsor = pastSponsors.find((sponsor) => sponsor.title === title);
+			if (!sponsor) {
+				throw new Error(`Unknown past sponsor: ${title}`);
+			}
+
+			return { ...sponsor, size };
+		}),
+	),
+);
 ---
 
 <section class="past-sponsors" aria-labelledby="past-sponsors-heading">
@@ -130,27 +61,14 @@ const tiers = [
 					<div class="past-sponsors-tier">
 						{tier.map((sponsor) => (
 							<a
-								class:list={[
-									"sponsor-logo",
-									`sponsor-logo-size-${sponsor.prominence}`,
-								]}
+								class="sponsor-logo"
 								href={sponsor.href}
 								rel="noreferrer"
+								style={{ "--logo-size": sponsor.size }}
 								target="_blank"
 								title={sponsor.title}
 							>
-								<Image
-									alt=""
-									class="logo-dark"
-									src={sponsor.logos.dark}
-									height={128}
-								/>
-								<Image
-									alt=""
-									class="logo-light"
-									src={sponsor.logos.light}
-									height={128}
-								/>
+								<ThemedImage alt="" height={128} sources={sponsor.logos} />
 							</a>
 						))}
 					</div>
@@ -176,7 +94,25 @@ const tiers = [
 
 <style>
 	.past-sponsors {
-		--past-sponsors-background:
+		--texture-stripe: rgb(from var(--colorBlue3) r g b / 6%);
+		--texture-dot-1: rgba(255, 255, 255, 0.36);
+		--texture-dot-2: rgba(255, 255, 255, 0.26);
+		--texture-dot-3: rgba(255, 255, 255, 0.24);
+		--overlay-top: rgba(255, 255, 255, 0.42);
+		--overlay-bottom: rgba(12, 71, 103, 0.14);
+		--highlight: rgba(255, 255, 255, 0.7);
+		--kicker-background: rgba(255, 255, 255, 0.6);
+		--kicker-border: rgb(from var(--colorBlue3) r g b / 18%);
+		--kicker-color: #0a577d;
+		--heading-color: var(--colorBlue4);
+		--copy-color: rgb(from var(--colorBlue4) r g b / 78%);
+		--panel-top: rgba(255, 255, 255, 0.72);
+		--panel-bottom: rgba(223, 242, 250, 0.58);
+		--panel-base: rgba(184, 224, 240, 0.52);
+		--panel-shadow: 0 1.1rem 2.4rem rgba(47, 109, 143, 0.14);
+		--logo-hover-background: rgb(from var(--colorBlue3) r g b / 6%);
+		--logo-hover-ring: rgb(from var(--colorBlue3) r g b / 14%);
+		background:
 			radial-gradient(
 				circle at 18% 16%,
 				rgba(17, 127, 171, 0.18),
@@ -184,7 +120,7 @@ const tiers = [
 			),
 			radial-gradient(
 				circle at 84% 14%,
-				rgba(56, 206, 214, 0.16),
+				rgb(from var(--colorBlue2) r g b / 16%),
 				transparent 18%
 			),
 			radial-gradient(
@@ -194,72 +130,37 @@ const tiers = [
 			),
 			linear-gradient(
 				180deg,
-				#eaf7fc 0%,
+				var(--colorBlueBright2) 0%,
 				#d8eff8 28%,
 				#c3e2ef 64%,
 				#add4e6 100%
 			);
-		--past-sponsors-texture:
-			repeating-linear-gradient(
-				114deg,
-				rgba(17, 109, 154, 0.06) 0,
-				rgba(17, 109, 154, 0.06) 2px,
-				transparent 2px,
-				transparent 28px
-			),
-			radial-gradient(
-				circle at 12% 20%,
-				rgba(255, 255, 255, 0.36) 0 1px,
-				transparent 1px
-			),
-			radial-gradient(
-				circle at 74% 36%,
-				rgba(255, 255, 255, 0.26) 0 1.5px,
-				transparent 1.5px
-			),
-			radial-gradient(
-				circle at 48% 72%,
-				rgba(255, 255, 255, 0.24) 0 1px,
-				transparent 1px
-			);
-		--past-sponsors-overlay:
-			linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 18%),
-			linear-gradient(0deg, rgba(12, 71, 103, 0.14), transparent 24%);
-		--past-sponsors-kicker-background: rgba(255, 255, 255, 0.6);
-		--past-sponsors-kicker-border: rgba(17, 109, 154, 0.18);
-		--past-sponsors-kicker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-		--past-sponsors-kicker-color: #0a577d;
-		--past-sponsors-heading-color: #08314f;
-		--past-sponsors-copy-color: rgba(7, 49, 79, 0.78);
-		--past-sponsors-panel-background:
-			linear-gradient(
-				180deg,
-				rgba(255, 255, 255, 0.72),
-				rgba(223, 242, 250, 0.58)
-			),
-			rgba(184, 224, 240, 0.52);
-		--past-sponsors-panel-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.7),
-			0 1.1rem 2.4rem rgba(47, 109, 143, 0.14);
-		--past-sponsors-panel-copy-color: rgba(7, 49, 79, 0.76);
-		--past-sponsors-year-background: rgba(255, 255, 255, 0.52);
-		--past-sponsors-year-border: rgba(17, 109, 154, 0.12);
-		--past-sponsors-year-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.65),
-			0 0.8rem 1.7rem rgba(47, 109, 143, 0.1);
-		--past-sponsors-year-copy-color: rgba(7, 49, 79, 0.72);
-		--past-sponsors-year-kicker-color: #0d638d;
-		--past-sponsors-year-heading-color: #08314f;
-		--past-sponsors-logo-hover-background: rgba(17, 109, 154, 0.06);
-		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px rgba(17, 109, 154, 0.14);
-		background: var(--past-sponsors-background);
 		overflow: clip;
 		position: relative;
 		width: 100%;
 	}
 
 	:global(html.dark) .past-sponsors {
-		--past-sponsors-background:
+		--texture-stripe: rgba(188, 227, 255, 0.04);
+		--texture-dot-1: rgba(255, 255, 255, 0.13);
+		--texture-dot-2: rgba(255, 255, 255, 0.1);
+		--texture-dot-3: rgba(255, 255, 255, 0.08);
+		--overlay-top: rgba(196, 237, 255, 0.14);
+		--overlay-bottom: rgba(2, 14, 31, 0.48);
+		--highlight: rgba(255, 255, 255, 0.12);
+		--kicker-background: rgba(231, 246, 255, 0.09);
+		--kicker-border: rgba(188, 227, 255, 0.2);
+		--kicker-color: #d8f4ff;
+		--heading-color: #f2fbff;
+		--copy-color: rgba(221, 240, 255, 0.84);
+		--panel-top: rgba(194, 235, 255, 0.12);
+		--panel-bottom: rgba(194, 235, 255, 0.03);
+		--panel-base: rgb(from var(--colorBlue6) r g b / 42%);
+		--panel-highlight: rgba(255, 255, 255, 0.1);
+		--panel-shadow: 0 1.5rem 3rem rgba(3, 12, 28, 0.34);
+		--logo-hover-background: rgba(218, 242, 255, 0.08);
+		--logo-hover-ring: rgba(195, 236, 255, 0.16);
+		background:
 			radial-gradient(
 				circle at 20% 18%,
 				rgba(79, 200, 255, 0.16),
@@ -280,65 +181,13 @@ const tiers = [
 				#082647 0%,
 				#07315b 30%,
 				#062448 62%,
-				#04172f 100%
+				var(--colorBlue5) 100%
 			);
-		--past-sponsors-texture:
-			repeating-linear-gradient(
-				114deg,
-				rgba(188, 227, 255, 0.04) 0,
-				rgba(188, 227, 255, 0.04) 2px,
-				transparent 2px,
-				transparent 28px
-			),
-			radial-gradient(
-				circle at 12% 20%,
-				rgba(255, 255, 255, 0.13) 0 1px,
-				transparent 1px
-			),
-			radial-gradient(
-				circle at 74% 36%,
-				rgba(255, 255, 255, 0.1) 0 1.5px,
-				transparent 1.5px
-			),
-			radial-gradient(
-				circle at 48% 72%,
-				rgba(255, 255, 255, 0.08) 0 1px,
-				transparent 1px
-			);
-		--past-sponsors-overlay:
-			linear-gradient(180deg, rgba(196, 237, 255, 0.14), transparent 18%),
-			linear-gradient(0deg, rgba(2, 14, 31, 0.48), transparent 24%);
-		--past-sponsors-kicker-background: rgba(231, 246, 255, 0.09);
-		--past-sponsors-kicker-border: rgba(188, 227, 255, 0.2);
-		--past-sponsors-kicker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-		--past-sponsors-kicker-color: #d8f4ff;
-		--past-sponsors-heading-color: #f2fbff;
-		--past-sponsors-copy-color: rgba(221, 240, 255, 0.84);
-		--past-sponsors-panel-background:
-			linear-gradient(
-				180deg,
-				rgba(194, 235, 255, 0.12),
-				rgba(194, 235, 255, 0.03)
-			),
-			rgba(3, 21, 43, 0.42);
-		--past-sponsors-panel-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.1),
-			0 1.5rem 3rem rgba(3, 12, 28, 0.34);
-		--past-sponsors-panel-copy-color: rgba(219, 238, 255, 0.8);
-		--past-sponsors-year-background: rgba(6, 28, 55, 0.34);
-		--past-sponsors-year-border: rgba(195, 236, 255, 0.12);
-		--past-sponsors-year-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.06),
-			0 0.85rem 1.8rem rgba(2, 14, 31, 0.16);
-		--past-sponsors-year-copy-color: rgba(219, 238, 255, 0.76);
-		--past-sponsors-year-kicker-color: #d7f5ff;
-		--past-sponsors-year-heading-color: white;
-		--past-sponsors-logo-hover-background: rgba(218, 242, 255, 0.08);
-		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px rgba(195, 236, 255, 0.16);
 	}
 
 	.past-sponsors::before,
-	.past-sponsors::after {
+	.past-sponsors::after,
+	.past-sponsors-panel::before {
 		content: "";
 		inset: 0;
 		pointer-events: none;
@@ -346,12 +195,34 @@ const tiers = [
 	}
 
 	.past-sponsors::before {
-		background: var(--past-sponsors-texture);
+		background:
+			repeating-linear-gradient(
+				114deg,
+				var(--texture-stripe) 0 2px,
+				transparent 2px 28px
+			),
+			radial-gradient(
+				circle at 12% 20%,
+				var(--texture-dot-1) 0 1px,
+				transparent 1px
+			),
+			radial-gradient(
+				circle at 74% 36%,
+				var(--texture-dot-2) 0 1.5px,
+				transparent 1.5px
+			),
+			radial-gradient(
+				circle at 48% 72%,
+				var(--texture-dot-3) 0 1px,
+				transparent 1px
+			);
 		opacity: 0.9;
 	}
 
 	.past-sponsors::after {
-		background: var(--past-sponsors-overlay);
+		background:
+			linear-gradient(180deg, var(--overlay-top), transparent 18%),
+			linear-gradient(0deg, var(--overlay-bottom), transparent 24%);
 	}
 
 	.past-sponsors-shell {
@@ -359,7 +230,7 @@ const tiers = [
 		flex-direction: column;
 		gap: 1.5rem;
 		margin: 0 auto;
-		max-width: min(100%, var(--sizeContentAreaWide));
+		max-width: var(--sizeContentAreaWide);
 		padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2.5rem)
 			clamp(4.5rem, 8vw, 6.5rem);
 		position: relative;
@@ -375,47 +246,47 @@ const tiers = [
 	}
 
 	.past-sponsors-kicker {
-		background: var(--past-sponsors-kicker-background);
-		border: 1px solid var(--past-sponsors-kicker-border);
-		border-radius: 999px;
-		box-shadow: var(--past-sponsors-kicker-shadow);
-		color: var(--past-sponsors-kicker-color);
+		background: var(--kicker-background);
+		border: 1px solid var(--kicker-border);
+		border-radius: var(--radiusPill);
+		box-shadow: inset 0 1px 0 var(--highlight);
+		color: var(--kicker-color);
 		font-family: var(--fontFamilyMonospace);
 		font-size: 0.78rem;
-		font-weight: 600;
+		font-weight: var(--fontWeightBolder);
 		letter-spacing: 0.16em;
 		line-height: 1;
-		margin: 0;
 		padding: 0.7rem 1rem;
 		text-transform: uppercase;
 	}
 
 	.past-sponsors h2 {
-		color: var(--past-sponsors-heading-color);
+		color: var(--heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(2.4rem, 5.4vw, 4.7rem);
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		letter-spacing: -0.03em;
 		line-height: 0.92;
-		margin: 0;
 		text-wrap: balance;
 	}
 
 	.past-sponsors-copy {
-		color: var(--past-sponsors-copy-color);
-		margin: 0;
+		color: var(--copy-color);
 		max-width: 42rem;
-		padding: 0;
 	}
 
 	.past-sponsors-panel {
-		backdrop-filter: blur(18px) saturate(135%);
-		background: var(--past-sponsors-panel-background);
-		border-radius: 1.9rem;
-		box-shadow: var(--past-sponsors-panel-shadow);
+		backdrop-filter: var(--backdropFrosted);
+		background:
+			linear-gradient(180deg, var(--panel-top), var(--panel-bottom)),
+			var(--panel-base);
+		border-radius: var(--radiusXLarge);
+		box-shadow:
+			inset 0 1px 0 var(--panel-highlight, var(--highlight)),
+			var(--panel-shadow);
 		display: flex;
 		flex-direction: column;
-		gap: 0;
+		gap: 1rem;
 		overflow: hidden;
 		padding: clamp(1.4rem, 3vw, 2rem);
 		position: relative;
@@ -427,10 +298,6 @@ const tiers = [
 			rgba(133, 220, 255, 0.18),
 			transparent 28%
 		);
-		content: "";
-		inset: 0;
-		pointer-events: none;
-		position: absolute;
 	}
 
 	.past-sponsors-tier {
@@ -443,46 +310,25 @@ const tiers = [
 		z-index: 1;
 	}
 
-	.past-sponsors-tier + .past-sponsors-tier {
-		margin-top: 0.5rem;
-		padding-top: 0.5rem;
-	}
-
 	.sponsor-logo {
 		align-items: center;
-		border-radius: 1rem;
+		border-radius: var(--radiusLarge);
 		display: flex;
 		justify-content: center;
 		min-height: 5rem;
 		padding: 0.7rem 1rem;
 		transition:
-			background 180ms ease,
-			transform 180ms ease,
-			box-shadow 180ms ease;
+			background var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease,
+			box-shadow var(--transitionNormal) ease;
 		user-select: none;
 	}
 
 	.sponsor-logo:hover,
 	.sponsor-logo:focus-visible {
-		background: var(--past-sponsors-logo-hover-background);
-		box-shadow: var(--past-sponsors-logo-hover-shadow);
+		background: var(--logo-hover-background);
+		box-shadow: inset 0 0 0 1px var(--logo-hover-ring);
 		transform: translateY(-1px);
-	}
-
-	.sponsor-logo-size-1 {
-		--logo-size: 6rem;
-	}
-
-	.sponsor-logo-size-2 {
-		--logo-size: 8rem;
-	}
-
-	.sponsor-logo-size-3 {
-		--logo-size: 10rem;
-	}
-
-	.sponsor-logo-size-4 {
-		--logo-size: 14rem;
 	}
 
 	.sponsor-logo img {
@@ -490,19 +336,10 @@ const tiers = [
 		max-width: var(--logo-size);
 	}
 
-	:global(html.dark) .logo-light {
-		display: none;
-	}
-
-	:global(html:not(.dark)) .logo-dark {
-		display: none;
-	}
-
 	.past-sponsors-cta {
 		align-items: center;
 		display: flex;
 		justify-content: center;
-		width: 100%;
 	}
 
 	@media (width >= 900px) {
@@ -513,7 +350,6 @@ const tiers = [
 
 	@media (width < 700px) {
 		.past-sponsors-shell {
-			gap: 1.5rem;
 			padding-left: 1rem;
 			padding-right: 1rem;
 		}
@@ -524,7 +360,7 @@ const tiers = [
 		}
 
 		.past-sponsors-panel {
-			border-radius: 1.45rem;
+			border-radius: var(--radiusLarge);
 			padding: 1.1rem 0.9rem;
 		}
 	}

@@ -1,10 +1,9 @@
 ---
-import BodyText from "./BodyText.astro";
-import CardsList from "./CardsList.astro";
-import FullSection from "./FullSection.astro";
+import BioLinks from "../BioLinks.astro";
+import BodyText from "../BodyText.astro";
+import SectionWrapper from "./SectionWrapper.astro";
 import SpeakerSmall from "./SpeakerSmall.astro";
 import SubtleCard from "./SubtleCard.astro";
-import BioLinks from "./BioLinks.astro";
 import { PersonInfo, SessionInfo } from "~/data/historical/types";
 
 interface Props {
@@ -17,15 +16,15 @@ const { talks, year } = Astro.props;
 const seen = new Set<PersonInfo>();
 ---
 
-<FullSection>
-	<BodyText as="p" class="speakers-body-text" size="large" width="lean">
+<SectionWrapper>
+	<BodyText class="speakers-body-text" historical>
 		See {year}'s full details on <a href={`/${year}/sessions`}
 			>{year} Sessions</a
 		> and
 		<a href={`/${year}/speakers`}>{year} Speakers</a>.
 	</BodyText>
 
-	<CardsList class="speakers-list">
+	<ul class="speakers-list">
 		{
 			talks.map((talk) =>
 				talk.people
@@ -53,21 +52,44 @@ const seen = new Set<PersonInfo>();
 					)),
 			)
 		}
-	</CardsList>
-</FullSection>
+	</ul>
+</SectionWrapper>
 
 <style>
 	.speakers-body-text {
 		margin: 1rem auto;
 	}
 
-	@media (min-width: 700px) {
+	.speakers-list {
+		display: flex;
+		flex-direction: column;
+		font-family: var(--fontFamilyBody);
+		gap: 2rem;
+		margin: auto;
+		max-width: 30rem;
+		justify-content: center;
+		padding: 2rem var(--widthBodyPadding);
+	}
+
+	@media (width >= 700px) {
+		.speakers-list {
+			align-items: center;
+			flex-direction: row;
+			flex-wrap: wrap;
+			max-width: calc(var(--widthBodyLean) + 4rem);
+		}
+
 		.speaker-card {
 			width: 47%;
 		}
 	}
 
-	@media (min-width: 1017px) {
+	@media (width >= 1117px) {
+		.speakers-list {
+			padding: 2rem 0;
+			max-width: calc(var(--widthBodyFull) + 2rem);
+		}
+
 		.speaker-card {
 			width: 31%;
 		}

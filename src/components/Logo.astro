@@ -2,28 +2,22 @@
 import TextSquiggly from "./TextSquiggly.astro";
 
 interface Props {
+	bold?: boolean;
 	class?: string;
-	invert?: boolean;
-	year?: number;
 }
 
-const { class: className, invert, year, ...props } = Astro.props;
+const { bold, class: className, ...props } = Astro.props;
 ---
 
-<div
-	class:list={["logo", Astro.props.invert ? "invert" : "regular", className]}
-	{...props}
->
+<div class:list={["logo", bold && "logo-bold", className]} {...props}>
 	<TextSquiggly width="medium">
 		<Fragment slot="inside">Squiggle</Fragment>
 		<Fragment slot="after">Conf</Fragment>
 	</TextSquiggly>
-	{Astro.props.year && <span class="year">{Astro.props.year}</span>}
 </div>
 
 <style>
 	.logo {
-		color: var(--colorLogoText);
 		display: flex;
 		font-family: var(--fontFamilyLogo);
 		font-size: var(--fontSizeLogo);
@@ -32,19 +26,14 @@ const { class: className, invert, year, ...props } = Astro.props;
 		user-select: none;
 	}
 
-	.logo.invert {
-		--colorLogoText: var(--accentDark);
-		--colorLogoYear: var(--colorBlue3);
+	.logo-bold {
+		font-size: var(--fontSizeLogoLarger);
+		letter-spacing: -2px;
+		text-shadow: 0px 1.5px 3px var(--colorTextShadow);
+		white-space: nowrap;
 	}
 
-	.logo.regular {
-		--colorLogoText: var(--colorWhiteIsh);
-		--colorLogoYear: var(--colorBlue2);
-		text-shadow: 0px 1.5px 1.5px rgba(0, 0, 0, 0.25);
-	}
-
-	.year {
-		color: var(--colorLogoYear);
-		font-family: var(--fontFamilyHeading);
+	:global(html.dark) .logo-bold {
+		color: var(--colorWhiteIsh);
 	}
 </style>

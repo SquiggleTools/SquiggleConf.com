@@ -36,9 +36,7 @@ export default defineConfig({
 		"/2024/faqs": "/faqs",
 		"/2024/travel": "/travel",
 		"/faqs": "/articles/faqs",
-		"/how-to-attend-squiggleconf-for-free":
-			"/articles/how-to-attend-squiggleconf-for-free",
-		"/schedule": "/2025/schedule",
+		"/schedule": "/",
 		"/sessions": "/2025/sessions",
 		"/speakers": "/2025/speakers",
 		"/travel": "/articles/travel",

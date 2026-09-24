@@ -1,8 +1,16 @@
 ---
-const { class: className, ...rest } = Astro.props;
+interface Props {
+	class?: string;
+	historical?: boolean;
+}
+
+const { class: className, historical, ...rest } = Astro.props;
 ---
 
-<p class:list={[className, "body-text"]} {...rest}>
+<p
+	class:list={[className, "body-text", historical && "body-text-historical"]}
+	{...rest}
+>
 	<slot />
 </p>
 
@@ -10,5 +18,17 @@ const { class: className, ...rest } = Astro.props;
 	.body-text {
 		font-size: var(--fontSizeSmall);
 		font-weight: var(--fontWeightMedium);
+	}
+
+	.body-text-historical {
+		color: var(--colorForegroundBody);
+		font-family: var(--fontFamilyBody);
+		font-size: var(--fontSizeBodyLarge);
+		font-weight: var(--fontWeightBody);
+		line-height: var(--lineHeightBody);
+		max-width: var(--widthBodyLean);
+		padding: 0 var(--widthBodyPadding);
+		text-align: center;
+		transition: var(--transitionMedium) line-height;
 	}
 </style>

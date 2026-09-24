@@ -7,7 +7,7 @@
 >
 	<path
 		d="M1 1.22876L15 15.2288L29 1.22876"
-		stroke="#a7735b"
+		stroke="currentColor"
 		stroke-width="2"
 	/>
 </svg>

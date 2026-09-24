@@ -39,17 +39,14 @@
 		"@konami-emoji-blast/astro": "^0.2.0",
 		"astro": "5.16.15",
 		"konami-emoji-blast": "^0.6.0",
-		"lodash": "^4.17.23",
 		"marked": "^18.0.7",
 		"sharp": "^0.34.5",
-		"temporal-polyfill": "^0.3.0",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
 		"@eslint-community/eslint-plugin-eslint-comments": "^4.6.0",
 		"@eslint/js": "^9.39.2",
 		"@eslint/markdown": "^7.5.1",
-		"@types/lodash": "^4.17.23",
 		"@types/node": "^25.0.10",
 		"cspell": "^9.6.0",
 		"eslint": "^9.39.2",
@@ -69,7 +66,6 @@
 		"prettier-plugin-curly": "^0.4.1",
 		"prettier-plugin-packagejson": "^3.0.0",
 		"prettier-plugin-sentences-per-line": "^0.2.0",
-		"tsup": "^8.5.1",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.53.1",
 		"wrangler": "^4.114.0"

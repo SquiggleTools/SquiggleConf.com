@@ -1,8 +1,7 @@
 ---
 import { marked } from "marked";
-import { Image } from "astro:assets";
 
-import dropdown from "~/assets/glyphs/dropdown.svg";
+import Dropdown from "~/assets/glyphs/dropdown.svg";
 
 import Heading from "./Heading.astro";
 
@@ -27,7 +26,11 @@ const pairs = await Promise.all(
 		pairs.map(([question, answer]) => (
 			<details>
 				<summary>
-					<Image alt="" src={dropdown} />
+					<Dropdown
+						aria-hidden="true"
+						class="faq-dropdown"
+						preserveAspectRatio="none"
+					/>
 					<span>{question}</span>
 				</summary>
 				<div class="faq-answer" set:html={answer} />
@@ -42,16 +45,7 @@ const pairs = await Promise.all(
 		font-weight: var(--fontWeightMedium);
 	}
 
-	html.dark summary img {
-		filter: invert();
-	}
-
-	html:not(.dark) summary img {
-		filter: hue-rotate(180deg);
-	}
-
 	details {
-		font-size: var(--fontSizeBody);
 		font-weight: var(--fontWeightLight);
 		margin-bottom: 2rem;
 		text-align: left;
@@ -78,17 +72,17 @@ const pairs = await Promise.all(
 		margin-bottom: 1rem;
 	}
 
-	details summary img {
+	.faq-dropdown {
 		transition: var(--transitionMedium) transform;
 		user-select: none;
 		height: 0.75rem;
 	}
 
-	details[open] summary img {
+	details[open] .faq-dropdown {
 		transform: rotate(180deg);
 	}
 
-	@media (min-width: 819px) {
+	@media (width >= 819px) {
 		.faq-answer {
 			padding: 0 2rem 0 2.5rem;
 		}

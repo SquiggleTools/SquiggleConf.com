@@ -1,25 +1,21 @@
 ---
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"Advice and general information for submitting talks to SquiggleConf";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title="Call for Proposals">
-	<Hero>
-		<HeroContentsStandard heading="Call for Proposals" squiggly="wide">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout
+	article={{
+		description:
+			"Advice and general information for submitting talks to SquiggleConf",
+		title: "Call for Proposals",
+	}}
+	squiggly="wide"
+>
 	<CommonContent heading="Coming Soon">
 		<BodyText>
 			The SquiggleConf 2027 CFP will open later this year. We look forward to
 			seeing your submissions!
 		</BodyText>
 	</CommonContent>
-</PageLayout>
+</ArticleLayout>

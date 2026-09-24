@@ -1,0 +1,54 @@
+<section class="timeline-section" aria-label="Timeline preview">
+	<slot />
+</section>
+
+<style>
+	.timeline-section {
+		--timeline-rail-background: rgb(from white r g b / 42%);
+		--timeline-rail-border-color: rgb(from var(--colorBlue4) r g b / 18%);
+		--timeline-cap-background: rgb(from var(--colorBlueBright1) r g b / 62%);
+		--timeline-cap-color: var(--colorBlue5);
+		--timeline-time-color: var(--colorBlue5);
+		--timeline-time-shadow: 0 1px 0 rgb(from white r g b / 46%);
+		--timeline-venue-color: rgb(from var(--colorBlue5) r g b / 90%);
+		--timeline-venue-at-color: rgb(from var(--colorBlue3) r g b / 68%);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
+			rgb(from var(--colorBlue5) r g b / 10%);
+		--timeline-card-hover-background: linear-gradient(
+			135deg,
+			rgb(from var(--colorBlue5) r g b / 5%),
+			rgb(from var(--colorBlue5) r g b / 2%)
+		);
+		--timeline-card-hover-shadow:
+			inset 0 0 0 1px rgb(from var(--colorBlue4) r g b / 10%),
+			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 8%);
+		--timeline-card-glow-inner: rgb(from var(--colorBlue4) r g b / 55%);
+		--timeline-card-glow-outer: rgb(from var(--colorBlue4) r g b / 25%);
+		isolation: isolate;
+		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
+		position: relative;
+	}
+
+	:global(html.dark) .timeline-section {
+		--timeline-rail-background: var(--colorBlueBright1);
+		--timeline-rail-border-color: var(--colorBlue3);
+		--timeline-cap-background: rgb(from var(--colorBlue2) r g b / 60%);
+		--timeline-cap-color: rgb(from var(--colorBackground) r g b / 85%);
+		--timeline-time-color: var(--colorBackground);
+		--timeline-time-shadow: 0 1px 0 rgb(from white r g b / 22%);
+		--timeline-venue-color: var(--colorHeading);
+		--timeline-venue-at-color: rgb(from var(--colorBlue2) r g b / 70%);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
+			rgb(from var(--colorBlue5) r g b / 18%);
+		--timeline-card-hover-background: linear-gradient(
+			135deg,
+			rgb(from white r g b / 13%),
+			rgb(from white r g b / 3%)
+		);
+		--timeline-card-hover-shadow:
+			inset 0 0 0 1px rgb(from white r g b / 8%),
+			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 14%);
+		--timeline-card-glow-inner: color-mix(in srgb, var(--colorBlue2), white 8%);
+		--timeline-card-glow-outer: rgb(from var(--colorBlue2) r g b / 52%);
+	}
+</style>

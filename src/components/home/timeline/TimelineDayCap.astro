@@ -1,0 +1,56 @@
+---
+interface Props {
+	date: string;
+	day: string;
+}
+
+const { date, day } = Astro.props;
+---
+
+<div class="timeline-cell-empty" aria-hidden="true"></div>
+<div class="timeline-cap timeline-top">
+	<p>{day}</p>
+	<p>{date}</p>
+</div>
+<slot><div class="timeline-cell-empty" aria-hidden="true"></div></slot>
+
+<style>
+	.timeline-cell-empty {
+		min-height: 0;
+	}
+
+	.timeline-cap {
+		background: var(--timeline-cap-background);
+		color: var(--timeline-cap-color);
+
+		border: 1px solid var(--timeline-rail-border-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeCardTitle);
+		font-weight: var(--fontWeightHeavy);
+		line-height: 1.1;
+		grid-column: 2;
+		padding: 0.8rem 0.55rem;
+		text-align: center;
+	}
+
+	.timeline-cap p {
+		margin: 0;
+	}
+
+	.timeline-top {
+		margin-top: 1rem;
+		border-top-right-radius: var(--radiusMedium);
+		border-top-left-radius: var(--radiusMedium);
+	}
+
+	@media (width < 900px) {
+		.timeline-cell-empty {
+			display: none;
+		}
+
+		.timeline-cap {
+			border-radius: var(--radiusMedium);
+			grid-column: auto;
+		}
+	}
+</style>

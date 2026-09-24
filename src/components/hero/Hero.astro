@@ -5,10 +5,9 @@ import HeroCityscape from "./HeroCityscape.astro";
 interface Props {
 	class?: string;
 	tall?: boolean;
-	scrollNotice?: boolean;
 }
 
-const { class: className, scrollNotice, tall, ...props } = Astro.props;
+const { class: className, tall, ...props } = Astro.props;
 ---
 
 <section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
@@ -21,19 +20,16 @@ const { class: className, scrollNotice, tall, ...props } = Astro.props;
 	<ContentArea class="hero-contents">
 		<slot />
 	</ContentArea>
-
-	{
-		Astro.props.scrollNotice && (
-			<div class="hero-scroll-notice">
-				Scroll to explore the depths of SquiggleConf
-			</div>
-		)
-	}
 </section>
 
 <style>
 	.hero {
-		background: linear-gradient(180deg, #e9f9ff 0%, #f3fcff 50%, #fffdde 100%);
+		background: linear-gradient(
+			180deg,
+			var(--colorBlueBright2) 0%,
+			#f3fcff 50%,
+			#fffdde 100%
+		);
 		z-index: 1;
 		color: var(--colorBackground);
 		padding-bottom: var(--cityscapeHeightArea);
@@ -41,7 +37,7 @@ const { class: className, scrollNotice, tall, ...props } = Astro.props;
 	}
 
 	:global(html.dark) .hero {
-		background: #04142d;
+		background: var(--colorBlue6);
 	}
 
 	.hero.common {
@@ -72,16 +68,5 @@ const { class: className, scrollNotice, tall, ...props } = Astro.props;
 	.hero-contents {
 		z-index: 1;
 		position: relative;
-	}
-
-	.hero-scroll-notice {
-		color: var(--colorBlue1);
-		font-family: var(--fontFamilyHeading);
-		font-weight: var(--fontWeightSemibold);
-		font-style: italic;
-		bottom: 2rem;
-		position: absolute;
-		text-align: center;
-		width: 100%;
 	}
 </style>

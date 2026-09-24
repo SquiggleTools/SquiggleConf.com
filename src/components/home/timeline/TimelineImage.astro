@@ -1,0 +1,108 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+
+import PlaceholderMark from "../PlaceholderMark.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+	alt?: string;
+	/** How the image responds while its timeline entry is active. */
+	effect?: "grow" | "zoom";
+	loading?: "eager" | "lazy";
+	objectPosition?: string;
+	placeholder?: boolean;
+	radius?: string;
+	/** Without a src, the frame wraps its slotted content instead. */
+	src?: ImageMetadata;
+	zoomOrigin?: string;
+}
+
+const {
+	alt = "",
+	class: className,
+	effect,
+	loading,
+	objectPosition,
+	placeholder,
+	radius,
+	src,
+	zoomOrigin,
+	...rest
+} = Astro.props;
+
+const imageStyle = [
+	objectPosition && `object-position: ${objectPosition}`,
+	zoomOrigin && `transform-origin: ${zoomOrigin}`,
+]
+	.filter(Boolean)
+	.join("; ");
+---
+
+<div
+	class:list={[
+		"timeline-image",
+		effect && `timeline-image-${effect}`,
+		className,
+	]}
+	style={radius && `border-radius: ${radius}`}
+	{...rest}
+>
+	{
+		src ? (
+			<Image
+				alt={alt}
+				aria-hidden={alt ? undefined : "true"}
+				class:list={[placeholder && "timeline-image-placeholder"]}
+				loading={loading}
+				src={src}
+				style={imageStyle || undefined}
+			/>
+		) : (
+			<slot />
+		)
+	}
+	{placeholder && <PlaceholderMark />}
+</div>
+
+<style>
+	.timeline-image {
+		background: white;
+		border: var(--sizeImageBorder) solid var(--colorImageBorder);
+		border-radius: var(--radiusSmall);
+		box-shadow: var(--timeline-image-shadow);
+		box-sizing: border-box;
+		overflow: hidden;
+		position: relative;
+		transform-origin: center;
+		transition:
+			border-width var(--transitionNormal) ease,
+			box-shadow var(--transitionNormal) ease,
+			scale var(--transitionNormal) ease;
+	}
+
+	.timeline-image-grow {
+		border-width: var(--timeline-image-grow-border-width);
+		scale: var(--timeline-image-scale);
+	}
+
+	img {
+		border-radius: inherit;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		transform-origin: center;
+		transition:
+			filter var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease;
+		user-select: none;
+		width: 100%;
+	}
+
+	.timeline-image-zoom img {
+		transform: scale(var(--timeline-image-zoom));
+	}
+
+	.timeline-image-placeholder {
+		filter: blur(2px);
+	}
+</style>

@@ -2,24 +2,13 @@
 import BodyText from "~/components/BodyText.astro";
 import Branding from "~/components/Branding.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import Heading from "~/components/Heading.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"Brand asset downloads, usage guidelines, and pitch templates to help you share the word about SquiggleConf.";
-
-const title = "Media Guide";
+import SubHeading from "~/components/SubHeading.astro";
+import SubList from "~/components/SubList.astro";
+import { articles } from "~/data/articles";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout article={articles["media-guide"]}>
 	<CommonContent heading="Branding">
 		<BodyText>
 			When referring to us in announcements, social media posts, or other broad
@@ -48,9 +37,9 @@ const title = "Media Guide";
 			can help resonate with our target audiences.
 		</BodyText>
 
-		<Heading class="sub-heading" level="h3">Social Media Sharing</Heading>
+		<SubHeading>Social Media Sharing</SubHeading>
 
-		<ul class="sub-list">
+		<SubList>
 			<li>
 				<strong>&lt;120 characters:</strong>
 				I'm going to @SquiggleConf on May 7th! It's a web dev tooling conference at
@@ -58,22 +47,22 @@ const title = "Media Guide";
 			</li>
 			<li>
 				<strong>&lt;200 characters:</strong>
-				PSA: there's a Boston web dev conference! @SquiggleConf is happening on September
-				18th & 19th at the New England Aquarium (!) and covers a bunch of awesome
-				dev tooling topics. I'm going!
+				PSA: there's a Boston web dev conference! @SquiggleConf is happening on May
+				7th at the New England Aquarium (!) and covers a bunch of awesome dev tooling
+				topics. I'm going!
 			</li>
 			<li>
 				<strong>&lt;280 characters:</strong>
 				TIL 'squiggly' is the official term for the little helpers you get in editors.
-				And I'm going to learn a bunch more about them at @SquiggleConf, September
-				18th & 19th in the New England Aquarium. Join me to learn about the latest
-				& greatest in modern web dev tooling!
+				And I'm going to learn a bunch more about them at @SquiggleConf, May 7th at
+				the New England Aquarium. Join me to learn about the latest & greatest in
+				modern web dev tooling!
 			</li>
-		</ul>
+		</SubList>
 
-		<Heading class="sub-heading" level="h3">Ticket Sharing Groups</Heading>
+		<SubHeading>Ticket Sharing Groups</SubHeading>
 
-		<ul class="sub-list">
+		<SubList>
 			<li>
 				<strong>Message Sized:</strong>
 				Hey (group)! I'm interested in sending a few of our members to SquiggleConf:
@@ -93,7 +82,7 @@ const title = "Media Guide";
 				<br />
 				A few talks that look particularly useful for us are:
 				<br />
-				<ul>
+				<ul class="talks-list">
 					<li>
 						<em>
 							<a
@@ -125,31 +114,12 @@ const title = "Media Guide";
 
 				We have 3 tickets to distribute - let me know if you're interested!
 			</li>
-		</ul>
+		</SubList>
 	</CommonContent>
-</PageLayout>
+</ArticleLayout>
 
 <style>
-	.body-text-top {
-		margin: 5rem auto 1.5rem;
-	}
-
-	.sub-heading {
-		font-size: var(--fontSizeMedium);
-		text-align: center;
-		margin: 3rem 0 1rem;
-	}
-
-	.sub-list {
-		display: flex;
-		gap: 0.5rem;
-		flex-direction: column;
-		line-height: 1.35;
-		font-weight: var(--fontWeightMedium);
-		margin: 1rem 1.5rem;
-	}
-
-	.sub-list ul {
+	.talks-list {
 		margin-left: 1rem;
 	}
 </style>

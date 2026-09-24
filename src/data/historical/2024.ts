@@ -18,8 +18,22 @@ import rizelScarlett from "~/assets/avatars/rizel-scarlett.webp";
 import robbyRussell from "~/assets/avatars/robby-russell.webp";
 import titianCernicovaDragomir from "~/assets/avatars/titian-cernicova-dragomir.webp";
 import yagizNizipli from "~/assets/avatars/yagiz-nizipli.webp";
+import bloombergBlack from "~/assets/logos/bloomberg-black.svg";
+import bloombergWhite from "~/assets/logos/bloomberg-white.svg";
+import datastaxBlack from "~/assets/logos/datastax-black.svg";
+import datastaxWhite from "~/assets/logos/datastax-white.svg";
+import igaliaBlack from "~/assets/logos/igalia-black.svg";
+import igaliaWhite from "~/assets/logos/igalia-white.svg";
+import inngestBlack from "~/assets/logos/inngest-black.svg";
+import inngest from "~/assets/logos/inngest-wordmark-2026.svg";
+import nxDarkBlue from "~/assets/logos/nx-dark-blue.svg";
+import nxWhite from "~/assets/logos/nx-white.svg";
+import openjsFoundationColor from "~/assets/logos/openjs-foundation-color.svg";
+import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
+import prismaBlack from "~/assets/logos/prisma-black.svg";
+import prismaWhite from "~/assets/logos/prisma-white.svg";
 
-import { PersonInfo, SessionInfo } from "./types";
+import { PersonInfo, SessionInfo, SponsorInfo } from "./types";
 
 export const peopleBySlug: Record<string, PersonInfo> = {
 	"aakansha-doshi": {
@@ -599,3 +613,48 @@ export const talksBySlug: Record<string, SessionInfo> = {
 		title: "Build Editor Extensions with the Makers of Nx Console",
 	},
 };
+
+export const sponsors: SponsorInfo[] = [
+	{
+		href: "https://www.bloomberg.com/company/values/tech-at-bloomberg/javascript?utm_source=squiggleconf",
+		logos: { dark: bloombergWhite, light: bloombergBlack },
+		placement: 0,
+		title: "Bloomberg",
+	},
+	{
+		href: "https://www.datastax.com?utm_source=squiggleconf",
+		logos: { dark: datastaxWhite, light: datastaxBlack },
+		placement: 0,
+		title: "Datastax",
+	},
+	{
+		href: "https://igalia.com?utm_source=squiggleconf",
+		logos: { dark: igaliaWhite, light: igaliaBlack },
+		placement: 1,
+		title: "Igalia",
+	},
+	{
+		href: "https://inngest.com?utm_source=squiggleconf",
+		logos: { dark: inngest, light: inngestBlack },
+		placement: 0,
+		title: "Inngest",
+	},
+	{
+		href: "https://nx.dev?utm_source=squiggleconf",
+		logos: { dark: nxWhite, light: nxDarkBlue },
+		placement: 1,
+		title: "Nx",
+	},
+	{
+		href: "https://openjsf.org?utm_source=squiggleconf",
+		logos: { dark: openjsFoundationLight, light: openjsFoundationColor },
+		placement: 0,
+		title: "OpenJS Foundation",
+	},
+	{
+		href: "https://www.prisma.io/?utm_source=squiggleconf",
+		logos: { dark: prismaWhite, light: prismaBlack },
+		placement: 0,
+		title: "Prisma",
+	},
+];

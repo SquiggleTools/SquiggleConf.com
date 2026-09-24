@@ -1,8 +1,7 @@
 ---
 import Speaker from "~/components/historical/Speaker.astro";
 import SafeMarkdown from "~/components/SafeMarkdown.astro";
-import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
-import "~/styles/historical.css";
+import PageLayout from "~/layouts/PageLayout.astro";
 import {
 	getStaticPathsHistorical,
 	historicalDataByYear,
@@ -16,7 +15,7 @@ const historicalData =
 	historicalDataByYear[year as keyof typeof historicalDataByYear];
 ---
 
-<PageLayoutHistorical
+<PageLayout
 	description="Speakers at SquiggleConf: a Boston conference focused on excellent web dev tooling."
 	title="Speakers"
 	year={year}
@@ -25,7 +24,11 @@ const historicalData =
 		{
 			Object.values(historicalData.peopleBySlug)
 				.sort((a, b) =>
-					!!a.bio === !!b.bio ? a.name.localeCompare(b.name) : a.bio ? -1 : 1,
+					!!a.biography === !!b.biography
+						? a.name.localeCompare(b.name)
+						: a.biography
+							? -1
+							: 1,
 				)
 				.map((person) => (
 					<Speaker
@@ -42,13 +45,9 @@ const historicalData =
 				))
 		}
 	</ul>
-</PageLayoutHistorical>
+</PageLayout>
 
 <style>
-	.speakers-top {
-		margin-bottom: 2rem;
-	}
-
 	.speakers-list {
 		display: flex;
 		flex-direction: column;
@@ -65,7 +64,7 @@ const historicalData =
 		transition: var(--transitionMedium) line-height;
 	}
 
-	@media (min-width: 1017px) {
+	@media (width >= 1117px) {
 		.speakers-list {
 			width: var(--widthBodyLean);
 		}

@@ -1,14 +1,15 @@
 ---
+import { Polymorphic } from "astro/types";
 import { PersonInfo } from "~/data/historical/types";
 import SafeMarkdown from "../SafeMarkdown.astro";
 import SpeakerImage from "./SpeakerImage.astro";
 
-interface Props {
-	as: "div" | "li";
+type Props<Tag extends "div" | "li"> = Polymorphic<{
+	as: Tag;
 	class?: string;
 	href?: string;
 	person: PersonInfo;
-}
+}>;
 
 const {
 	as: As = "div",
@@ -90,9 +91,5 @@ const {
 		gap: 0.25rem;
 		position: relative;
 		flex-direction: column;
-	}
-
-	.speaker-bio-links {
-		z-index: 1;
 	}
 </style>

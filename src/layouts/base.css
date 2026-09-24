@@ -2,47 +2,51 @@
 	color-scheme: light;
 
 	--colorBlackIsh: #041930;
-	--colorBlueBright0: #e2eff4;
 	--colorBlueBright1: #d8f3ff;
 	--colorBlueBright2: #e6f7fe;
-	--colorBlueBright3: #98d8f3;
-	--colorBlueBright4: #5aa2c2;
-	--colorBlueBright5: #1f7fab;
-	--colorBlueBright6: #196d9a;
-	--colorBlueDull3: #b0ccd7;
-	--colorBlueDull6: #58646b;
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
+	--colorBlue6: #04142d;
 	--colorRed1: #ffbfc2;
-	--colorSandDark: #2c2a29;
-	--colorSandLight: #f7f4f1;
 	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
 	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
 	--colorWhiteIsh: #eaeaf7;
 
-	--colorAccentDark: var(--colorBlue4);
 	--colorAccentLight: var(--colorBlue1);
 	--colorAccentMedium: var(--colorBlue3);
 	--colorAccentSecond: var(--colorBlue2);
 	--colorBackground: var(--colorBlackIsh);
-	--colorBackgroundEmphasized: var(--colorBlueBright3);
 	--colorForeground: var(--colorBlue4);
 	--colorForegroundAccent: var(--colorWhiteIsh);
 	--colorForegroundEmphasized: var(--colorBlue5);
-	--colorSandBackground: var(--colorSandLight);
-	--colorSandForeground: var(--colorBlackIsh);
 	--colorUnhappy: var(--colorRed1);
 	--colorTextShadow: var(--colorTextShadowLight);
+
+	--colorHeading: var(--colorBlue5);
+	--colorHeadingHover: var(--colorBlue5);
+	--colorCopy: rgb(from var(--colorBlue5) r g b / 84%);
+	--colorCopyHover: rgb(from var(--colorBlue5) r g b / 92%);
+	--colorMuted: rgb(from var(--colorBlue4) r g b / 76%);
+	--colorMutedHover: rgb(from var(--colorBlue4) r g b / 86%);
+	--colorLink: var(--colorBlue4);
+	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
+
+	--colorCream: #edebe4;
+	--colorBackdropLight: var(--colorCream);
+	--colorBackdropOff: var(--colorWhiteIsh);
+	--colorInverted: var(--colorCream);
+	--colorForegroundBody: #203238;
+	--colorSubtleLight: #a5e2fc;
+	--colorSubtle: var(--colorSubtleLight);
 
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
 	--fontFamilyMonospace: "Geist Mono", monospace;
 
-	--fontSizeSmallest: clamp(0.7rem, 1.9vw, 0.9rem);
 	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
 	--fontSizeMedium: clamp(1.25rem, 3.25vw, 1.5rem);
@@ -50,32 +54,55 @@
 	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
 	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
-	--fontSizeLogoLarge: clamp(2.5rem, 5.25vw, 3rem);
 	--fontSizeLogoLarger: clamp(2.8rem, 7vw, 4.9rem);
+	--fontSizeDisplay: clamp(1.8rem, 2.8vw, 2.45rem);
+	--fontSizeCardTitle: 1.1rem;
+	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
+	--fontSizeBody: 1.2rem;
+	--fontSizeBodyLarge: 1.5rem;
+	--fontSizeBodySmaller: 1rem;
+	--fontSizeH2: clamp(1.75rem, 5vw, 2rem);
+	--fontSizeH3: clamp(1.5rem, 3.5vw, 1.75rem);
+	--fontSizeH4: clamp(1.15rem, 2.5vw, 1.35rem);
 
 	--fontWeightLight: 200;
 	--fontWeightMedium: 300;
 	--fontWeightSemibold: 350;
 	--fontWeightBold: 500;
-	--fontWeightLogo: 600;
+	--fontWeightBolder: 600;
+	--fontWeightHeavy: 700;
+	--fontWeightBody: 300;
 
-	--letterSpacingLoose: 1px;
-	--letterSpacingLogo: -1px;
-	--letterSpacingTight: -0.5px;
+	--lineHeightBody: 1.4;
 
-	--lineHeightLarge: 1.25;
+	--radiusXSmall: 0.25rem;
+	--radiusSmall: 0.375rem;
+	--radiusMedium: 0.5rem;
+	--radiusLarge: 1rem;
+	--radiusXLarge: 2rem;
+	--radiusPill: 999px;
 
-	--sizeContentAreaEmphasized: 43rem;
+	--shadowHeadingHover: none;
+	--shadowImage: 0 0.25rem 0.7rem rgb(from var(--colorBlue5) r g b / 12%);
+	--shadowImageActive: 0 0.55rem 1rem rgb(from var(--colorBlue5) r g b / 18%);
+	--sizeImageBorder: 2px;
+
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
 	--sizeScrollMarginTop: 2rem;
+	--widthBodyFull: 70rem;
+	--widthBodyLean: 50rem;
+	--widthBodyPadding: clamp(1rem, 5vw, 2rem);
+
+	--backdropFrosted: blur(16px) saturate(145%);
 
 	--transitionFast: 140ms;
+	--transitionNormal: 220ms;
 	--transitionMedium: 280ms;
+	--transitionSlow: 480ms;
+	--transitionEaseOut: cubic-bezier(0.22, 1, 0.36, 1);
 	--transitionBackground: var(--transitionFast);
-
-	color-scheme: light;
 }
 
 html {
@@ -86,27 +113,44 @@ html {
 html.dark {
 	color-scheme: dark;
 
-	--colorBlueBright0: #030f1c;
 	--colorBlueBright1: #051b32;
 	--colorBlueBright2: var(--colorBlue5);
-	--colorBlueBright3: var(--colorBlue4);
-	--colorBlueBright4: var(--colorBlue4);
-	--colorBlueBright5: #196d9a;
-	--colorBlueBright6: #1f7fab;
 
 	--colorAccentLight: var(--colorBlue5);
 	--colorAccentSecond: var(--colorBlue4);
 	--colorAccentMedium: var(--colorBlue2);
-	--colorAccentDark: var(--colorBlue2);
 	--colorBackground: var(--colorWhiteIsh);
-	--colorBackgroundEmphasized: var(--colorBlue4);
-	--colorForeground: var(--colorBlue);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
-	--colorSandBackground: var(--colorBlue4);
-	--colorSandForeground: var(--colorSandLight);
 	--colorUnhappy: var(--colorRed1);
 	--colorTextShadow: var(--colorTextShadowDark);
+
+	--colorHeading: var(--colorWhiteIsh);
+	--colorHeadingHover: white;
+	--colorCopy: rgb(from var(--colorWhiteIsh) r g b / 84%);
+	--colorCopyHover: rgb(from white r g b / 90%);
+	--colorMuted: rgb(from var(--colorBlue1) r g b / 82%);
+	--colorMutedHover: rgb(from white r g b / 88%);
+	--colorLink: white;
+
+	--colorBackdropLight: var(--colorInverted);
+	--colorBackdropOff: var(--colorSubtle);
+	--colorForegroundBody: #d2ebf1;
+	--colorInverted: #10141b;
+	--colorSubtle: #062430;
+
+	--lineHeightBody: 1.5;
+
+	--shadowHeadingHover: 0 0.3rem 1rem rgb(from var(--colorBlue5) r g b / 24%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
 }
 
 @media (prefers-reduced-motion: no-preference) {

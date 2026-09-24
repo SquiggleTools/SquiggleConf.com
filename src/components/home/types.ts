@@ -1,7 +1,15 @@
 import type { ImageMetadata } from "astro";
 
+export interface CollageFrame {
+	height?: string;
+	left?: string;
+	rotate?: string;
+	top?: string;
+	width?: string;
+	zIndex?: number;
+}
+
 export type CollageLayout =
-	| "auto"
 	| "avatar-duo"
 	| "avatar-trio"
 	| "duo"
@@ -11,6 +19,8 @@ export type CollageLayout =
 export interface CollagePhoto {
 	alt: string;
 	decorative?: boolean;
+	/** Overrides the layout's default placement for this photo. */
+	frame?: CollageFrame;
 	objectPosition?: string;
 	placeholder?: boolean;
 	src: ImageMetadata;
@@ -23,7 +33,7 @@ export interface ExploreChoiceData {
 	badgeLabel?: string;
 	description: string;
 	image: ImageMetadata;
-	imageVariant?: "default" | "rest";
+	objectPosition?: string;
 	title: string;
 }
 
@@ -36,26 +46,13 @@ export interface LunchSpotData {
 
 export interface PersonCardData {
 	image: ImageMetadata;
-	imageAlt?: string;
 	name: string;
 	placeholder?: boolean;
 	qualification: string;
-	slug?: string;
 }
 
 export interface TalkCardData extends PersonCardData {
-	placeholder?: boolean;
 	title: string;
-}
-
-export interface TimelineEntryData {
-	id: TimelineEntryId;
-	location: TimelineLocationRef;
-	subtitle?: string;
-	timeLabel: string;
-	timeMode: TimelineTimeMode;
-	title: string;
-	variant?: TimelineEntryVariant;
 }
 
 export type TimelineEntryId =
@@ -76,28 +73,13 @@ export type TimelineEntryId =
 	| "talks-late"
 	| "talks-morning";
 
-export type TimelineEntryVariant =
-	| "break"
-	| "default"
-	| "explore"
-	| "fireside"
-	| "funRun"
-	| "lunch"
-	| "mcs"
-	| "podcast"
-	| "talks"
-	| "talksAfternoon";
-
-export type TimelineLocationRef = { label: string } | { venueId: VenueId };
+export type TimelineEntryVariant = "break" | "fun-run";
 
 export type TimelineTimeMode = "point" | "range";
 
 export interface VenueData {
-	id: VenueId;
 	mapUrl: string;
-	mobileLabel?: string;
 	name: string;
-	railLines: readonly string[];
 }
 
 export type VenueId = "aquarium" | "nedDevines" | "quincyMarket" | "urbanWild";
