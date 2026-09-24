@@ -68,7 +68,6 @@ html.dark {
 	--colorAccentSecond: var(--colorBlue4);
 	--colorAccentMedium: var(--colorBlue2);
 	--colorBackground: var(--colorWhiteIsh);
-	--colorForeground: var(--colorBlue);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
 	--colorUnhappy: var(--colorRed1);

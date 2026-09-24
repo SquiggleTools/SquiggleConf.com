@@ -86,6 +86,10 @@ const {
 		--colorButtonColor: var(--colorForeground);
 	}
 
+	:global(html.dark) .button:active {
+		--colorButtonColor: inherit;
+	}
+
 	.button:focus:not(:active, [disabled]),
 	.button:hover:not(:active, [disabled]) {
 		background: var(--colorButtonBackgroundHover);

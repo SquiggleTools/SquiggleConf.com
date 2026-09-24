@@ -3,7 +3,7 @@
 	const toggles = () => document.querySelectorAll(".theme-toggle");
 	const initializedToggles = new Set<Element>();
 
-	function updateElementsForTheme(newTheme: string | string) {
+	function updateElementsForTheme(newTheme: string) {
 		if (!newTheme || newTheme === "light") {
 			html().classList.remove("dark");
 		} else {
@@ -27,7 +27,7 @@
 
 		for (const toggle of toggles()) {
 			if (initializedToggles.has(toggle)) {
-				return;
+				continue;
 			}
 
 			initializedToggles.add(toggle);
