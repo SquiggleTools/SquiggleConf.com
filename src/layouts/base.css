@@ -14,31 +14,46 @@
 	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
 	--colorWhiteIsh: #eaeaf7;
 
-	--colorAccentLight: var(--colorBlue1);
-	--colorAccentMedium: var(--colorBlue3);
-	--colorAccentSecond: var(--colorBlue2);
+	--colorAccentLight: light-dark(var(--colorBlue1), var(--colorBlue5));
+	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
+	--colorAccentSecond: light-dark(var(--colorBlue2), var(--colorBlue4));
 	--colorForeground: var(--colorBlue4);
-	--colorForegroundAccent: var(--colorWhiteIsh);
-	--colorForegroundEmphasized: var(--colorBlue5);
+	--colorForegroundAccent: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
+	--colorForegroundEmphasized: light-dark(var(--colorBlue5), var(--colorBlue1));
 	--colorUnhappy: var(--colorRed1);
-	--colorTextShadow: var(--colorTextShadowLight);
+	--colorTextShadow: light-dark(
+		var(--colorTextShadowLight),
+		var(--colorTextShadowDark)
+	);
 
-	--colorHeading: var(--colorBlue5);
-	--colorHeadingHover: var(--colorBlue5);
-	--colorCopy: rgb(from var(--colorBlue5) r g b / 84%);
-	--colorCopyHover: rgb(from var(--colorBlue5) r g b / 92%);
-	--colorMuted: rgb(from var(--colorBlue4) r g b / 76%);
-	--colorMutedHover: rgb(from var(--colorBlue4) r g b / 86%);
-	--colorLink: var(--colorBlue4);
+	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
+	--colorHeadingHover: light-dark(var(--colorBlue5), white);
+	--colorCopy: light-dark(
+		rgb(from var(--colorBlue5) r g b / 84%),
+		rgb(from var(--colorWhiteIsh) r g b / 84%)
+	);
+	--colorCopyHover: light-dark(
+		rgb(from var(--colorBlue5) r g b / 92%),
+		rgb(from white r g b / 90%)
+	);
+	--colorMuted: light-dark(
+		rgb(from var(--colorBlue4) r g b / 76%),
+		rgb(from var(--colorBlue1) r g b / 82%)
+	);
+	--colorMutedHover: light-dark(
+		rgb(from var(--colorBlue4) r g b / 86%),
+		rgb(from white r g b / 88%)
+	);
+	--colorLink: light-dark(var(--colorBlue4), white);
 	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
 
 	--colorCream: #edebe4;
-	--colorBackdropLight: var(--colorCream);
-	--colorBackdropOff: var(--colorWhiteIsh);
-	--colorInverted: var(--colorCream);
-	--colorForegroundBody: #203238;
+	--colorBackdropLight: var(--colorInverted);
+	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorSubtle));
+	--colorInverted: light-dark(var(--colorCream), #10141b);
+	--colorForegroundBody: light-dark(#203238, #d2ebf1);
 	--colorSubtleLight: #a5e2fc;
-	--colorSubtle: var(--colorSubtleLight);
+	--colorSubtle: light-dark(var(--colorSubtleLight), #062430);
 
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
@@ -112,27 +127,6 @@ html.dark {
 
 	--colorBlueBright1: #051b32;
 	--colorBlueBright2: var(--colorBlue5);
-
-	--colorAccentLight: var(--colorBlue5);
-	--colorAccentSecond: var(--colorBlue4);
-	--colorAccentMedium: var(--colorBlue2);
-	--colorForegroundAccent: var(--colorBlue5);
-	--colorForegroundEmphasized: var(--colorBlue1);
-	--colorTextShadow: var(--colorTextShadowDark);
-
-	--colorHeading: var(--colorWhiteIsh);
-	--colorHeadingHover: white;
-	--colorCopy: rgb(from var(--colorWhiteIsh) r g b / 84%);
-	--colorCopyHover: rgb(from white r g b / 90%);
-	--colorMuted: rgb(from var(--colorBlue1) r g b / 82%);
-	--colorMutedHover: rgb(from white r g b / 88%);
-	--colorLink: white;
-
-	--colorBackdropLight: var(--colorInverted);
-	--colorBackdropOff: var(--colorSubtle);
-	--colorForegroundBody: #d2ebf1;
-	--colorInverted: #10141b;
-	--colorSubtle: #062430;
 
 	--lineHeightBody: 1.5;
 

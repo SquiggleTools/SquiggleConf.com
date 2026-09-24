@@ -24,8 +24,8 @@ const { class: className, sources, ...rest } = Astro.props;
 }
 
 <style>
-	:global(html.dark) .themed-image-light,
-	:global(html:not(.dark)) .themed-image-dark {
+	html.dark .themed-image-light,
+	html:not(.dark) .themed-image-dark {
 		display: none;
 	}
 </style>

@@ -301,7 +301,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			transform-origin: center;
 		}
 
-		:global(html.dark) .timeline-content[data-mobile-active]::after {
+		html.dark .timeline-content[data-mobile-active]::after {
 			background: linear-gradient(
 				135deg,
 				rgb(from var(--colorBlue1) r g b / 50%),

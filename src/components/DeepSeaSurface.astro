@@ -4,24 +4,16 @@
 
 <style>
 	.deep-sea-surface {
-		--dss-grad-1: #f8fcff;
-		--dss-grad-2: #effaff;
-		--dss-grad-3: #e6f7fe;
-		--dss-grad-4: #d8f3ff;
-		--dss-grad-5: #c8edfb;
-		--dss-grad-6: #c9effd;
-		--dss-grad-7: #c8efff;
-		--dss-grad-8: #aedff5;
 		background: linear-gradient(
 				to bottom,
-				var(--dss-grad-1),
-				var(--dss-grad-2),
-				var(--dss-grad-3),
-				var(--dss-grad-4),
-				var(--dss-grad-5),
-				var(--dss-grad-6),
-				var(--dss-grad-7),
-				var(--dss-grad-8)
+				light-dark(#f8fcff, #004077),
+				light-dark(#effaff, #013a6c),
+				light-dark(#e6f7fe, var(--colorBlue4)),
+				light-dark(#d8f3ff, #042446),
+				light-dark(#c8edfb, #042140),
+				light-dark(#c9effd, #041b37),
+				light-dark(#c8efff, var(--colorBlue5)),
+				light-dark(#aedff5, var(--colorBlue6))
 			)
 			var(--colorBlueBright2);
 		color: var(--colorForegroundEmphasized);
@@ -30,42 +22,27 @@
 		position: relative;
 	}
 
-	:global(html.dark) .deep-sea-surface {
-		--dss-grad-1: #004077;
-		--dss-grad-2: #013a6c;
-		--dss-grad-3: var(--colorBlue4);
-		--dss-grad-4: #042446;
-		--dss-grad-5: #042140;
-		--dss-grad-6: #041b37;
-		--dss-grad-7: var(--colorBlue5);
-		--dss-grad-8: var(--colorBlue6);
-	}
-
 	.deep-sea-surface::after {
-		--dss-after-radial-1: rgba(201, 226, 252, 0.49);
-		--dss-after-radial-2: rgba(245, 245, 255, 0.7);
-		--dss-after-r1-a: rgba(4, 25, 48, 0.05);
-		--dss-after-r1-b: rgba(17, 109, 154, 0.1);
-		--dss-after-r2-a: rgba(4, 25, 48, 0.03);
-		--dss-after-r2-b: rgba(31, 127, 171, 0.04);
 		background:
 			radial-gradient(
 				circle at top,
-				var(--dss-after-radial-1) 50%,
-				var(--dss-after-radial-2) 70%
+				light-dark(rgba(201, 226, 252, 0.49), transparent) 50%,
+				light-dark(rgba(245, 245, 255, 0.7), transparent) 70%
 			),
 			repeating-linear-gradient(
 				116deg,
-				var(--dss-after-r1-a) 0 2px,
+				light-dark(rgba(4, 25, 48, 0.05), rgba(255, 255, 255, 0.042)) 0 2px,
 				transparent 2px 18px,
-				var(--dss-after-r1-b) 18px 20px,
+				light-dark(rgba(17, 109, 154, 0.1), rgba(118, 217, 255, 0.028)) 18px
+					20px,
 				transparent 20px 34px
 			),
 			repeating-linear-gradient(
 				-64deg,
-				var(--dss-after-r2-a) 0 1px,
+				light-dark(rgba(4, 25, 48, 0.03), rgba(255, 255, 255, 0.018)) 0 1px,
 				transparent 1px 15px,
-				var(--dss-after-r2-b) 15px 17px,
+				light-dark(rgba(31, 127, 171, 0.04), rgba(56, 173, 223, 0.026)) 15px
+					17px,
 				transparent 17px 31px
 			);
 		content: "";
@@ -77,13 +54,7 @@
 		z-index: 0;
 	}
 
-	:global(html.dark) .deep-sea-surface::after {
-		--dss-after-radial-1: transparent;
-		--dss-after-radial-2: transparent;
-		--dss-after-r1-a: rgba(255, 255, 255, 0.042);
-		--dss-after-r1-b: rgba(118, 217, 255, 0.028);
-		--dss-after-r2-a: rgba(255, 255, 255, 0.018);
-		--dss-after-r2-b: rgba(56, 173, 223, 0.026);
+	html.dark .deep-sea-surface::after {
 		mix-blend-mode: screen;
 		opacity: 0.31;
 	}
