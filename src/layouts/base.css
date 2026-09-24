@@ -100,7 +100,6 @@
 	--transitionMedium: 280ms;
 	--transitionSlow: 480ms;
 	--transitionEaseOut: cubic-bezier(0.22, 1, 0.36, 1);
-	--transitionBackground: var(--transitionFast);
 }
 
 html {

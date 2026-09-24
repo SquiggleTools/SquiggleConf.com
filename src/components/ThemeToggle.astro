@@ -44,6 +44,7 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 <script>
 	const html = document.documentElement;
+	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
 
 	for (const toggle of document.querySelectorAll(".theme-toggle")) {
 		const updateLabel = () => {
@@ -51,12 +52,21 @@ import themeSun from "~/assets/design/theme-sun.svg";
 			toggle.setAttribute("aria-label", `Theme toggle (current: ${theme})`);
 		};
 
-		updateLabel();
-
-		toggle.addEventListener("click", () => {
+		const toggleTheme = () => {
 			const dark = html.classList.toggle("dark");
 			localStorage.setItem("theme", dark ? "dark" : "light");
 			updateLabel();
+		};
+
+		updateLabel();
+
+		// A view transition cross-fades the whole page between themes.
+		toggle.addEventListener("click", () => {
+			if (reducedMotionQuery.matches || !document.startViewTransition) {
+				toggleTheme();
+			} else {
+				document.startViewTransition(toggleTheme);
+			}
 		});
 	}
 </script>
