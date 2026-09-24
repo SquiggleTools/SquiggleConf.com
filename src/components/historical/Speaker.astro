@@ -1,5 +1,5 @@
 ---
-import BioLinks from "./BioLinks.astro";
+import BioLinks from "../BioLinks.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
 import SpeakerImage from "./SpeakerImage.astro";
 import SubtleCard from "./SubtleCard.astro";
@@ -57,6 +57,7 @@ const {
 		<div class="speaker-links">
 			<BioLinks
 				class="speaker-bio-links"
+				historical
 				links={links}
 				name={name}
 				size="large"
