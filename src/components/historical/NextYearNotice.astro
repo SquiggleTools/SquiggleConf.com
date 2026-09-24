@@ -1,7 +1,6 @@
 ---
 import LinkOut from "~/assets/glyphs/link-out.svg";
 import { currentYear } from "~/data/years";
-import { Image } from "astro:assets";
 import Hero from "../hero/Hero.astro";
 
 interface Props {
@@ -20,7 +19,7 @@ const { year } = Astro.props;
 		<strong class="next-year">
 			<a href="/">
 				SquiggleConf {currentYear}
-				<Image alt="" class="link-out" src={LinkOut} />
+				<LinkOut aria-hidden="true" />
 			</a>
 		</strong>
 	</p>
@@ -51,9 +50,5 @@ const { year } = Astro.props;
 		font-weight: 600;
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeH2);
-	}
-
-	html:not(.dark) .link-out {
-		filter: hue-rotate(180deg) invert(0.7);
 	}
 </style>
