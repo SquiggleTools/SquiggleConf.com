@@ -15,7 +15,7 @@ import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
 import prismaBlack from "~/assets/logos/prisma-black.svg";
 import prismaWhite from "~/assets/logos/prisma-white.svg";
 
-export const sponsorsBySlug = {
+const sponsorsBySlug = {
 	bloomberg: {
 		href: "https://www.bloomberg.com/company/values/tech-at-bloomberg/javascript?utm_source=squiggleconf",
 		logos: {
