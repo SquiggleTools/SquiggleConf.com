@@ -1,32 +1,38 @@
 ---
+import { venues } from "~/components/home/data";
 import type {
 	TimelineEntryId,
 	TimelineEntryVariant,
 	TimelineTimeMode,
+	VenueId,
 } from "~/components/home/types";
 import Heading from "~/components/Heading.astro";
 
 interface Props {
 	entryId: TimelineEntryId;
 	heading: string;
-	mobileLocation?: string;
-	mobileLocationHref?: string;
+	/** Plain-text location, for entries not at a venue. */
+	location?: string;
 	subtitle?: string;
 	time: string;
 	timeMode?: TimelineTimeMode;
 	variant?: TimelineEntryVariant;
+	venue?: VenueId;
 }
 
 const {
 	entryId,
 	heading,
-	mobileLocation,
-	mobileLocationHref,
+	location,
 	subtitle,
 	time,
 	timeMode = "point",
 	variant,
+	venue,
 } = Astro.props;
+
+const mobileLocation = venue ? venues[venue].name : location;
+const mobileLocationHref = venue && venues[venue].mapUrl;
 
 const variantClasses: string[] = [];
 if (variant === "funRun") {

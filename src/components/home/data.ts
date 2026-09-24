@@ -177,15 +177,19 @@ export const exploreChoices = [
 export const venues = {
 	aquarium: {
 		mapUrl: "https://maps.app.goo.gl/FodmfsLGZYALV1Hh9",
+		name: "New England Aquarium",
 	},
 	nedDevines: {
 		mapUrl: "https://maps.app.goo.gl/rD3zWzuJ1U9VuSdN9",
+		name: "Ned Devine's",
 	},
 	quincyMarket: {
 		mapUrl: "https://maps.app.goo.gl/mQyHoaGZgip8pfux5",
+		name: "Quincy Market",
 	},
 	urbanWild: {
 		mapUrl: "https://maps.app.goo.gl/ADbjjYdyB3AVstH67",
+		name: "Urban Wild Boston",
 	},
 } satisfies Record<VenueId, VenueData>;
 

@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	alt: string;
+	pinned?: boolean;
+	shape: "circle" | "wide";
+	src: ImageMetadata;
+}
+
+const { alt, pinned, shape, src } = Astro.props;
+---
+
+<div
+	class:list={[
+		"event-hero-image",
+		`event-hero-image-${shape}`,
+		pinned && "event-hero-image-pinned",
+	]}
+>
+	<Image alt={alt} src={src} loading="eager" />
+</div>
+
+<style>
+	.event-hero-image {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.35rem;
+		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+
+	.event-hero-image-wide {
+		height: 8rem;
+		width: 14rem;
+	}
+
+	.event-hero-image-circle {
+		border-radius: 999px;
+		height: 8rem;
+		width: 8rem;
+	}
+
+	.event-hero-image :global(picture) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	.event-hero-image :global(img) {
+		border-radius: inherit;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+		user-select: none;
+	}
+</style>

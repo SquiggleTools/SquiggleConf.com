@@ -77,6 +77,7 @@ export type TimelineTimeMode = "point" | "range";
 
 export interface VenueData {
 	mapUrl: string;
+	name: string;
 }
 
 export type VenueId = "aquarium" | "nedDevines" | "quincyMarket" | "urbanWild";

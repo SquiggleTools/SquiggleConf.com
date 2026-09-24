@@ -1,8 +1,6 @@
 ---
 import "@fontsource/shantell-sans";
 
-import { Image } from "astro:assets";
-
 import placeholder8 from "~/assets/2027/placeholder-8.webp";
 import placeholder9 from "~/assets/2027/placeholder-9.webp";
 import placeholder13 from "~/assets/2027/placeholder-13.webp";
@@ -30,7 +28,6 @@ import {
 	urbanwild4,
 	urbanwild5,
 	urbanwildLogo,
-	venues,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
 import ExploreChoices from "~/components/home/ExploreChoices.astro";
@@ -41,8 +38,14 @@ import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TalkList from "~/components/home/TalkList.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
+import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
+import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
+import TimelineHeroImage from "~/components/home/timeline/TimelineHeroImage.astro";
+import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
+import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
+import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
@@ -55,7 +58,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		<HomeHeroLockup />
 	</Hero>
 	<DeepSeaSurface>
-		<section class="timeline-section" aria-label="Timeline preview">
+		<TimelineSection>
 			<TimelineFishLayer />
 			<div class="top-side-by-side">
 				<div class="top-side-left">
@@ -69,39 +72,21 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				</div>
 				<PostcardGallery />
 			</div>
-			<div class="timeline-grid">
-				<div class="timeline-cell-empty" aria-hidden="true"></div>
-				<div class="timeline-cap timeline-top">
-					<p>Thursday</p>
-					<p>May 6th</p>
-				</div>
-				<div class="timeline-grid-intro">
-					<h3>SquiggleConf 2027</h3>
-					<p>Boston, Massachusetts</p>
-				</div>
-
-				<div class="timeline-venue timeline-venue-last">
-					<div class="timeline-venue-stack">
-						<a
-							class="timeline-location-link timeline-location-link-stack"
-							href={venues.nedDevines.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							<p>Ned</p>
-							<p>Devine's</p>
-						</a>
+			<TimelineGrid>
+				<TimelineDayCap date="May 6th" day="Thursday">
+					<div class="timeline-grid-intro">
+						<h3>SquiggleConf 2027</h3>
+						<p>Boston, Massachusetts</p>
 					</div>
-				</div>
-				<div class="timeline-rail timeline-bottom">
-					<p class="timeline-time">6pm</p>
-				</div>
+				</TimelineDayCap>
+
+				<TimelineVenue last venue="nedDevines" />
+				<TimelineRail bottom time="6pm" />
 
 				<TimelineEntry
 					entryId="launch-party"
 					heading="Launch Party!"
-					mobileLocation="Ned Devine's"
-					mobileLocationHref={venues.nedDevines.mapUrl}
+					venue="nedDevines"
 					time="6-9pm"
 					timeMode="range"
 				>
@@ -131,36 +116,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</TimelineCopy>
 				</TimelineEntry>
 
-				<div class="timeline-cell-empty" aria-hidden="true"></div>
-				<div class="timeline-cap timeline-top">
-					<p>Friday</p>
-					<p>May 7th</p>
-				</div>
-				<div class="timeline-cell-empty" aria-hidden="true"></div>
+				<TimelineDayCap date="May 7th" day="Friday" />
 
-				<div class="timeline-venue timeline-cell-span-seven">
-					<div class="timeline-venue-stack">
-						<a
-							class="timeline-location-link timeline-location-link-stack"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							<p>New</p>
-							<p>England</p>
-							<p>Aquarium</p>
-						</a>
-					</div>
-				</div>
-				<div class="timeline-rail">
-					<p class="timeline-time">7am</p>
-				</div>
+				<TimelineVenue span={7} venue="aquarium" />
+				<TimelineRail time="7am" />
 
 				<TimelineEntry
 					entryId="fun-run"
 					heading="Fun Run"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="7-7:30am"
 					timeMode="range"
 					variant="funRun"
@@ -212,15 +176,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div class="timeline-rail timeline-cell-span-two">
-					<p class="timeline-time">8am</p>
-				</div>
+				<TimelineRail span={2} time="8am" />
 
 				<TimelineEntry
 					entryId="check-in"
 					heading="Check In"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="8am"
 				>
 					<TimelineCopy>
@@ -235,21 +196,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="simons-imax-theater"
 					heading="Talks in an IMAX Theater"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="8am"
 					variant="mcs"
 				>
 					<div class="event-body">
-						<div
-							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
-						>
-							<Image
-								alt="Presenter on stage inside the Simons IMAX Theater"
-								src={simonsTheater}
-								loading="eager"
-							/>
-						</div>
+						<TimelineHeroImage
+							alt="Presenter on stage inside the Simons IMAX Theater"
+							pinned
+							shape="wide"
+							src={simonsTheater}
+						/>
 						<TimelineCopy>
 							<p>
 								The talks take place in an IMAX theater. That means super
@@ -260,15 +217,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div class="timeline-rail timeline-cell-span-two">
-					<p class="timeline-time">9am</p>
-				</div>
+				<TimelineRail span={2} time="9am" />
 
 				<TimelineEntry
 					entryId="meet-your-mcs"
 					heading="Meet your MCs!"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="9am"
 					variant="mcs"
 				>
@@ -278,23 +232,19 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-morning"
 					heading="Talks"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="9am"
 					variant="talks"
 				>
 					<TalkList ariaLabel="Speaker talks" talks={talkBlocks.morning} />
 				</TimelineEntry>
 
-				<div class="timeline-rail">
-					<p class="timeline-time">10:30am</p>
-				</div>
+				<TimelineRail time="10:30am" />
 
 				<TimelineEntry
 					entryId="cookies-break"
 					heading="Milk & Cookies Break"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="10:30am"
 					variant="break"
 				>
@@ -322,15 +272,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div class="timeline-rail">
-					<p class="timeline-time">11am</p>
-				</div>
+				<TimelineRail time="11am" />
 
 				<TimelineEntry
 					entryId="talks-late"
 					heading="Talks"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="11am"
 					variant="talks"
 				>
@@ -341,28 +288,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					/>
 				</TimelineEntry>
 
-				<div class="timeline-venue">
-					<div class="timeline-venue-stack">
-						<a
-							class="timeline-location-link timeline-location-link-stack"
-							href={venues.quincyMarket.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							<p>Quincy</p>
-							<p>Market</p>
-						</a>
-					</div>
-				</div>
-				<div class="timeline-rail">
-					<p class="timeline-time">12pm</p>
-				</div>
+				<TimelineVenue venue="quincyMarket" />
+				<TimelineRail time="12pm" />
 
 				<TimelineEntry
 					entryId="lunch"
 					heading="Lunch"
-					mobileLocation="Quincy Market"
-					mobileLocationHref={venues.quincyMarket.mapUrl}
+					venue="quincyMarket"
 					time="12pm"
 					variant="lunch"
 				>
@@ -377,39 +309,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								of the day like your devtools field trip lunch break.
 							</p>
 							<ul class="lunch-links">
-								<li>
-									<a
-										href="https://faneuilhallmarketplace.com/go/boston-and-maine-fish-company"
-									>
-										Boston &amp; Maine Fish Company
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://faneuilhallmarketplace.com/go/regina-pizzeria"
-									>
-										Regina Pizzeria
-									</a>
-								</li>
-								<li>
-									<a href="https://faneuilhallmarketplace.com/go/wicked-lobsta">
-										Wicked Lobsta
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://faneuilhallmarketplace.com/go/the-berry-twist"
-									>
-										The Berry Twist
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://faneuilhallmarketplace.com/go/green-organic-bowl"
-									>
-										Green Organic Bowl
-									</a>
-								</li>
+								{
+									lunchSpots.map((spot) => (
+										<li>
+											<a href={spot.url}>{spot.name}</a>
+										</li>
+									))
+								}
 							</ul>
 							<p>
 								Fast options, easy wandering, and enough variety that everyone
@@ -420,51 +326,32 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div
-					class="timeline-venue timeline-venue-aquarium-afternoon timeline-cell-span-two"
-				>
-					<div class="timeline-venue-stack">
-						<a
-							class="timeline-location-link timeline-location-link-stack"
-							href={venues.aquarium.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							<p>New</p>
-							<p>England</p>
-							<p>Aquarium</p>
-						</a>
-						<div
-							class="timeline-venue-decoration timeline-venue-decoration-turtle"
-							aria-hidden="true"
-						>
-							<TimelineTalksTurtle />
-						</div>
+				<TimelineVenue span={2} venue="aquarium">
+					<div
+						class="timeline-venue-decoration timeline-venue-decoration-turtle"
+						aria-hidden="true"
+					>
+						<TimelineTalksTurtle />
 					</div>
-				</div>
-				<div class="timeline-rail">
-					<p class="timeline-time">2pm</p>
-				</div>
+				</TimelineVenue>
+				<TimelineRail time="2pm" />
 
 				<TimelineEntry
 					entryId="talks-afternoon"
 					heading="Talks"
-					mobileLocation="New England Aquarium"
-					mobileLocationHref={venues.aquarium.mapUrl}
+					venue="aquarium"
 					time="2pm"
 					variant="talksAfternoon"
 				>
 					<TalkList ariaLabel="Afternoon talks" talks={talkBlocks.afternoon} />
 				</TimelineEntry>
 
-				<div class="timeline-rail">
-					<p class="timeline-time">3:30pm</p>
-				</div>
+				<TimelineRail time="3:30pm" />
 
 				<TimelineEntry
 					entryId="explore-boston"
 					heading="Explore Boston"
-					mobileLocation="Boston"
+					location="Boston"
 					subtitle="choose your own adventure"
 					time="3:30pm"
 					variant="explore"
@@ -472,42 +359,23 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<ExploreChoices choices={exploreChoices} />
 				</TimelineEntry>
 
-				<div class="timeline-venue timeline-cell-span-five timeline-venue-last">
-					<div class="timeline-venue-stack">
-						<a
-							class="timeline-location-link timeline-location-link-stack"
-							href={venues.urbanWild.mapUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							<p>Urban</p>
-							<p>Wild</p>
-							<p>Boston</p>
-						</a>
-					</div>
-				</div>
-				<div class="timeline-rail timeline-cell-span-two">
-					<p class="timeline-time">6pm</p>
-				</div>
+				<TimelineVenue last span={5} venue="urbanWild" />
+				<TimelineRail span={2} time="6pm" />
 
 				<TimelineEntry
 					entryId="arrive-urban-wild"
 					heading="Arrive at Urban Wild"
-					mobileLocation="Urban Wild Boston"
-					mobileLocationHref={venues.urbanWild.mapUrl}
+					venue="urbanWild"
 					time="6pm"
 					variant="podcast"
 				>
 					<div class="event-body">
-						<div
-							class="event-hero-image event-hero-image-wide event-hero-image-pinned"
-						>
-							<Image
-								alt="Urban Wild Boston logo"
-								src={urbanwildLogo}
-								loading="eager"
-							/>
-						</div>
+						<TimelineHeroImage
+							alt="Urban Wild Boston logo"
+							pinned
+							shape="wide"
+							src={urbanwildLogo}
+						/>
 						<TimelineCopy>
 							<p>
 								The rest of the night takes place at Urban Wild Boston. Also the
@@ -520,8 +388,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="live-podcast-recording"
 					heading="Live Podcast Recording"
-					mobileLocation="Urban Wild Boston"
-					mobileLocationHref={venues.urbanWild.mapUrl}
+					venue="urbanWild"
 					time="6pm"
 					variant="podcast"
 				>
@@ -559,15 +426,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div class="timeline-rail">
-					<p class="timeline-time">7pm</p>
-				</div>
+				<TimelineRail time="7pm" />
 
 				<TimelineEntry
 					entryId="fireside-chat"
 					heading="Fireside Chat"
-					mobileLocation="Urban Wild Boston"
-					mobileLocationHref={venues.urbanWild.mapUrl}
+					venue="urbanWild"
 					time="7pm"
 					variant="fireside"
 				>
@@ -596,15 +460,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</div>
 				</TimelineEntry>
 
-				<div class="timeline-rail timeline-bottom timeline-cell-span-two">
-					<p class="timeline-time">7:30pm</p>
-				</div>
+				<TimelineRail bottom span={2} time="7:30pm" />
 
 				<TimelineEntry
 					entryId="after-party"
 					heading="After Party"
-					mobileLocation="Urban Wild Boston"
-					mobileLocationHref={venues.urbanWild.mapUrl}
+					venue="urbanWild"
 					time="7:30-9pm"
 					timeMode="range"
 				>
@@ -633,14 +494,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="big-rav"
 					heading="Big Rav"
-					mobileLocation="Urban Wild Boston"
-					mobileLocationHref={venues.urbanWild.mapUrl}
+					venue="urbanWild"
 					time="9pm"
 				>
 					<div class="event-body">
-						<div class="event-hero-image event-hero-image-circle">
-							<Image alt="Big Rav band portrait" src={bigRav} loading="eager" />
-						</div>
+						<TimelineHeroImage
+							alt="Big Rav band portrait"
+							shape="circle"
+							src={bigRav}
+						/>
 						<TimelineCopy>
 							<p>
 								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
@@ -653,66 +515,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						</TimelineCopy>
 					</div>
 				</TimelineEntry>
-			</div>
-		</section>
+			</TimelineGrid>
+		</TimelineSection>
 		<Registration />
 	</DeepSeaSurface>
 	<SponsorsAndPartners />
 </PageLayout>
 
 <style>
-	.timeline-section {
-		--timeline-heading-color: var(--colorBlue5);
-		--timeline-heading-hover-color: var(--colorBlue5);
-		--timeline-copy-color: rgba(4, 25, 48, 0.84);
-		--timeline-copy-hover-color: rgba(4, 25, 48, 0.92);
-		--timeline-muted-color: rgba(6, 48, 82, 0.76);
-		--timeline-muted-hover-color: rgba(6, 48, 82, 0.86);
-		--timeline-link-color: var(--colorBlue4);
-		--timeline-rail-background: rgba(255, 255, 255, 0.42);
-		--timeline-rail-border-color: rgba(6, 48, 82, 0.18);
-		--timeline-cap-background: rgba(216, 243, 255, 0.62);
-		--timeline-cap-color: var(--colorBlue5);
-		--timeline-time-color: var(--colorBlue5);
-		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.46);
-		--timeline-venue-color: rgba(4, 25, 48, 0.9);
-		--timeline-venue-at-color: rgba(17, 109, 154, 0.68);
-		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.1);
-		--timeline-image-border-color: rgba(4, 25, 48, 0.18);
-		--timeline-image-border-width: 2px;
-		--timeline-hover-duration: 220ms;
-		isolation: isolate;
-		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
-		position: relative;
-	}
-
-	:global(html.dark) .timeline-section {
-		--timeline-heading-color: #eef6ff;
-		--timeline-heading-hover-color: white;
-		--timeline-copy-color: rgba(233, 244, 255, 0.84);
-		--timeline-copy-hover-color: rgba(255, 255, 255, 0.9);
-		--timeline-muted-color: rgba(198, 225, 244, 0.82);
-		--timeline-muted-hover-color: rgba(255, 255, 255, 0.88);
-		--timeline-link-color: #f7fbff;
-		--timeline-rail-background: var(--colorBlueBright1);
-		--timeline-rail-border-color: var(--colorBlue3);
-		--timeline-cap-background: color-mix(
-			in srgb,
-			var(--colorBlue2) 60%,
-			transparent
-		);
-		--timeline-cap-color: color-mix(
-			in srgb,
-			var(--colorBackground) 85%,
-			transparent
-		);
-		--timeline-time-color: var(--colorBackground);
-		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
-		--timeline-venue-color: var(--timeline-heading-color);
-		--timeline-venue-at-color: rgba(125, 207, 226, 0.7);
-		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
-	}
-
 	.top-heading {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
@@ -754,22 +564,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		margin-bottom: 2.5rem;
 	}
 
-	.timeline-grid {
-		display: grid;
-		grid-template-rows: auto 1fr;
-		grid-template-columns: 15% 10% 75%;
-		margin: 0 auto;
-		max-width: min(100%, var(--sizeContentAreaWide));
-		padding-top: 1rem;
-		position: relative;
-		padding-right: 1rem;
-		z-index: 1;
-	}
-
-	.timeline-cell-empty {
-		min-height: 0;
-	}
-
 	.timeline-grid-intro {
 		align-content: center;
 		display: grid;
@@ -799,161 +593,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		line-height: 1.2;
 	}
 
-	.timeline-venue {
-		align-items: flex-end;
-		color: var(--timeline-venue-color);
-		display: flex;
-		flex-direction: column;
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.25rem;
-		font-weight: 600;
-		justify-content: flex-start;
-		line-height: 1.12;
-		margin-right: -1px;
-		text-align: right;
-	}
-
-	.timeline-venue-last {
-		margin-bottom: 1rem;
-	}
-
-	.timeline-venue p {
-		margin: 0;
-	}
-
-	.timeline-location-link {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	.timeline-location-link:hover,
-	.timeline-location-link:focus-visible {
-		text-decoration: underline;
-	}
-
-	.timeline-location-link-stack {
-		display: grid;
-		justify-items: end;
-	}
-
-	.timeline-venue-stack {
-		display: grid;
-		justify-items: end;
-		position: relative;
-	}
-
-	.timeline-venue .timeline-venue-stack::before {
-		color: var(--timeline-venue-at-color);
-		content: "@";
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.5rem;
-		font-weight: 700;
-		left: -0.15rem;
-		line-height: 1;
-		opacity: 0.72;
-		position: absolute;
-		top: -0.5rem;
-		transform: rotate(-10deg);
-		text-shadow: 0 0.12rem 0.4rem rgba(4, 25, 48, 0.24);
-	}
-
-	.timeline-venue {
-		align-self: stretch;
-	}
-
-	.timeline-venue .timeline-venue-stack {
-		backdrop-filter: blur(14px) saturate(140%);
-		background: var(--timeline-rail-background);
-		border: 1px solid var(--timeline-rail-border-color);
-		border-radius: 0.9rem;
-		box-shadow: var(--timeline-venue-stack-shadow);
-		padding: 0.85rem 0.9rem 0.8rem 1.45rem;
-		position: sticky;
-		top: clamp(1rem, 4vw, 4.5rem);
-		transform-origin: top right;
-		z-index: 2;
-
-		border-right: none;
-		border-top-right-radius: 0px;
-		border-bottom-right-radius: 0px;
-	}
-
-	.timeline-venue-aquarium-afternoon .timeline-venue-stack {
-		margin-bottom: 6rem;
-		padding-bottom: 3.75rem;
-	}
-
-	.timeline-cell-span-two {
-		grid-row: span 2;
-	}
-
-	.timeline-cell-span-five {
-		grid-row: span 5;
-	}
-
-	.timeline-cell-span-seven {
-		grid-row: span 7;
-	}
-
-	.timeline-rail {
-		background: var(--timeline-rail-background);
-		border: 1px solid var(--timeline-rail-border-color);
-		display: flex;
-		flex-direction: column;
-		margin-bottom: -1px;
-		overflow: hidden;
-		position: relative;
-	}
-
-	.timeline-cap {
-		background: var(--timeline-cap-background);
-		color: var(--timeline-cap-color);
-
-		border: 1px solid var(--timeline-rail-border-color);
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
-		line-height: 1.1;
-		grid-column: 2;
-		padding: 0.8rem 0.55rem;
-		text-align: center;
-	}
-
-	.timeline-cap p,
-	.timeline-time {
-		margin: 0;
-	}
-
-	.timeline-time {
-		color: var(--timeline-time-color);
-		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.3rem, 2vw, 1.6rem);
-		font-weight: 700;
-		margin-top: 1rem;
-		padding-top: 1.15rem;
-		text-shadow: var(--timeline-time-shadow);
-		text-align: center;
-	}
 	.fun-run-body {
 		position: relative;
-	}
-	.timeline-section .event-hero-image {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		box-sizing: border-box;
-		overflow: hidden;
-	}
-	.timeline-top {
-		margin-top: 1rem;
-		border-top-right-radius: 8px;
-		border-top-left-radius: 8px;
-	}
-
-	.timeline-bottom {
-		border-bottom-right-radius: 8px;
-		border-bottom-left-radius: 8px;
 	}
 
 	.timeline-copy {
@@ -961,6 +602,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		gap: 0.45rem;
 		max-width: 46rem;
 	}
+
 	.timeline-copy p {
 		color: var(--timeline-copy-color);
 		font-size: clamp(0.95rem, 1.35vw, 1rem);
@@ -969,6 +611,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		max-width: 62ch;
 		transition: color var(--timeline-hover-duration) ease;
 	}
+
 	.timeline-venue-decoration {
 		pointer-events: none;
 		position: absolute;
@@ -1041,36 +684,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		max-width: 48rem;
 	}
 
-	.event-hero-image {
-		border-radius: 0.35rem;
-	}
-
-	.event-hero-image-wide {
-		height: 8rem;
-		width: 14rem;
-	}
-
-	.event-hero-image-circle {
-		border-radius: 999px;
-		height: 8rem;
-		width: 8rem;
-	}
-
-	.event-hero-image :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.event-hero-image :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		width: 100%;
-		user-select: none;
-	}
-
 	.fireside-topic {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
@@ -1107,31 +720,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			text-align: center;
 		}
 
-		.timeline-grid {
-			gap: 0.65rem;
-			grid-template-columns: 1fr;
-			grid-template-rows: auto;
-			padding-inline: 0.35rem;
-		}
-
-		.timeline-cell-empty {
-			display: none;
-		}
-
-		.timeline-cap {
-			border-radius: 8px;
-			grid-column: auto;
-		}
-
 		.timeline-grid-intro {
 			margin-top: 0;
 			order: -1;
 			padding: 0 0.15rem 0.2rem;
-		}
-
-		.timeline-venue,
-		.timeline-rail {
-			display: none;
 		}
 
 		.break-body {
@@ -1146,298 +738,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.lunch-copy {
 			padding-top: 0;
 		}
+
 		.fun-run-body {
 			align-items: start;
 			column-gap: 0.9rem;
 			display: grid;
 			grid-template-columns: minmax(0, 1fr) 8rem;
 		}
+
 		.timeline-venue-decoration-turtle {
 			transform: scale(0.82) rotate(4deg);
 			transform-origin: bottom right;
 		}
 	}
 </style>
-
-<script>
-	// @ts-nocheck
-	const timelineCards = Array.from(
-		document.querySelectorAll(".timeline-content"),
-	).filter((element) => element instanceof HTMLElement);
-	const timelineSection = document.querySelector(".timeline-section");
-	const timelineFish = Array.from(
-		document.querySelectorAll(".timeline-fish-shell"),
-	).filter((element) => element instanceof HTMLElement);
-	const morningTalksEntry = document.querySelector(
-		'[data-timeline-entry="talks-morning"]',
-	);
-	const postcardStack = document.querySelector(".postcard-stack-flip");
-	const reducedMotionQuery = window.matchMedia(
-		"(prefers-reduced-motion: reduce)",
-	);
-	const mobileTimelineQuery = window.matchMedia("(max-width: 899px)");
-	const timelineCardHeaders = timelineCards.map((card) => {
-		const heading = card.querySelector("h2");
-
-		return {
-			card,
-			heading: heading instanceof HTMLElement ? heading : card,
-		};
-	});
-
-	if (
-		timelineSection instanceof HTMLElement &&
-		timelineFish.length > 0 &&
-		morningTalksEntry instanceof HTMLElement
-	) {
-		let frameRequested = false;
-		const fishConfigs = [
-			{
-				baseRotate: -8,
-				bobAmplitude: 6,
-				bobFrequency: 1.12,
-				driftY: -6,
-				end: 1.1,
-				exitOffset: 26,
-				finAmplitude: 4,
-				phase: 0.2,
-				rotateAmplitude: 5,
-				scale: 0.48,
-				start: -0.18,
-			},
-			{
-				baseRotate: 4,
-				bobAmplitude: 9,
-				bobFrequency: 1.5,
-				driftY: 5,
-				end: 1.16,
-				exitOffset: 22,
-				finAmplitude: 5,
-				phase: 1.1,
-				rotateAmplitude: 7,
-				scale: 0.41,
-				start: -0.08,
-			},
-			{
-				baseRotate: -3,
-				bobAmplitude: 10,
-				bobFrequency: 1.35,
-				driftY: -2,
-				end: 1.22,
-				exitOffset: 20,
-				finAmplitude: 6,
-				phase: 2.2,
-				rotateAmplitude: 5,
-				scale: 0.43,
-				start: -0.02,
-			},
-			{
-				baseRotate: 7,
-				bobAmplitude: 8,
-				bobFrequency: 0.95,
-				driftY: 7,
-				end: 1.12,
-				exitOffset: 24,
-				finAmplitude: 4,
-				phase: 0.8,
-				rotateAmplitude: 6,
-				scale: 0.46,
-				start: -0.22,
-			},
-			{
-				baseRotate: 2,
-				bobAmplitude: 11,
-				bobFrequency: 1.25,
-				driftY: -8,
-				end: 1.28,
-				exitOffset: 18,
-				finAmplitude: 6,
-				phase: 2.75,
-				rotateAmplitude: 8,
-				scale: 0.44,
-				start: -0.14,
-			},
-		];
-
-		const getPageTop = (element) =>
-			element.getBoundingClientRect().top + window.scrollY;
-
-		const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-		const easeInOutSine = (value) => 0.5 - Math.cos(value * Math.PI) / 2;
-
-		const updateTimelineFish = () => {
-			frameRequested = false;
-			const viewportTravel = timelineSection.offsetWidth;
-
-			if (reducedMotionQuery.matches) {
-				for (const [index, fish] of timelineFish.entries()) {
-					const config = fishConfigs[index];
-					const visibleX = 1.8 + index * 8.25;
-					fish.style.opacity = "1";
-					fish.style.transform = `translate3d(${visibleX}rem, 0, 0) rotate(${config.baseRotate}deg) scale(${config.scale})`;
-				}
-
-				return;
-			}
-
-			const start = getPageTop(timelineSection) - window.innerHeight * 0.34;
-			const end =
-				getPageTop(morningTalksEntry) +
-				morningTalksEntry.offsetHeight +
-				window.innerHeight * 0.75;
-			const scrollAnchor = window.scrollY + window.innerHeight * 0.28;
-			const rawProgress = (scrollAnchor - start) / Math.max(end - start, 1);
-			const clampedProgress = clamp(rawProgress, 0, 1);
-
-			for (const [index, fish] of timelineFish.entries()) {
-				const config = fishConfigs[index];
-				const entryOffset = fish.offsetWidth + 10;
-				const exitOffset = fish.offsetWidth + config.exitOffset;
-				const localProgress = clamp(
-					(clampedProgress - config.start) / (config.end - config.start),
-					0,
-					1,
-				);
-				const easedProgress = easeInOutSine(localProgress);
-				const bodyWave = Math.sin(
-					localProgress * Math.PI * 2 * config.bobFrequency + config.phase,
-				);
-				const finWave = Math.sin(
-					localProgress * Math.PI * 4.2 + config.phase * 1.7,
-				);
-				const translateX =
-					-entryOffset +
-					easedProgress * (viewportTravel + entryOffset + exitOffset);
-				const translateY =
-					bodyWave * config.bobAmplitude +
-					finWave * config.finAmplitude +
-					easedProgress * config.driftY;
-				const rotate =
-					config.baseRotate +
-					bodyWave * config.rotateAmplitude +
-					finWave * (config.rotateAmplitude * 0.4);
-
-				fish.style.opacity = "1";
-				fish.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${config.scale})`;
-			}
-		};
-
-		const requestTimelineFishUpdate = () => {
-			if (frameRequested) {
-				return;
-			}
-
-			frameRequested = true;
-			window.requestAnimationFrame(updateTimelineFish);
-		};
-
-		updateTimelineFish();
-		window.addEventListener("scroll", requestTimelineFishUpdate, {
-			passive: true,
-		});
-		window.addEventListener("resize", requestTimelineFishUpdate);
-		if (typeof reducedMotionQuery.addEventListener === "function") {
-			reducedMotionQuery.addEventListener("change", requestTimelineFishUpdate);
-		}
-	}
-
-	{
-		let mobileActivationFrameRequested = false;
-
-		const clearMobileTimelineState = () => {
-			for (const card of timelineCards) {
-				card.removeAttribute("data-mobile-active");
-			}
-
-			if (postcardStack instanceof HTMLElement) {
-				postcardStack.removeAttribute("data-mobile-flipped");
-			}
-		};
-
-		const updateMobileTimelineState = () => {
-			mobileActivationFrameRequested = false;
-
-			if (!mobileTimelineQuery.matches) {
-				clearMobileTimelineState();
-				return;
-			}
-
-			const viewportThreshold = window.innerHeight * 0.5;
-			let activeCard = null;
-
-			for (const { card, heading } of timelineCardHeaders) {
-				if (heading.getBoundingClientRect().top <= viewportThreshold) {
-					activeCard = card;
-				}
-			}
-
-			for (const card of timelineCards) {
-				if (card === activeCard) {
-					card.setAttribute("data-mobile-active", "true");
-				} else {
-					card.removeAttribute("data-mobile-active");
-				}
-			}
-
-			if (postcardStack instanceof HTMLElement) {
-				const postcardRect = postcardStack.getBoundingClientRect();
-				const postcardMidpoint = postcardRect.top + postcardRect.height * 0.5;
-
-				if (postcardMidpoint <= viewportThreshold) {
-					postcardStack.setAttribute("data-mobile-flipped", "true");
-				} else {
-					postcardStack.removeAttribute("data-mobile-flipped");
-				}
-			}
-		};
-
-		const requestMobileTimelineStateUpdate = () => {
-			if (mobileActivationFrameRequested) {
-				return;
-			}
-
-			mobileActivationFrameRequested = true;
-			window.requestAnimationFrame(updateMobileTimelineState);
-		};
-
-		requestMobileTimelineStateUpdate();
-		window.addEventListener("scroll", requestMobileTimelineStateUpdate, {
-			passive: true,
-		});
-		window.addEventListener("resize", requestMobileTimelineStateUpdate);
-
-		if (typeof mobileTimelineQuery.addEventListener === "function") {
-			mobileTimelineQuery.addEventListener(
-				"change",
-				requestMobileTimelineStateUpdate,
-			);
-		}
-	}
-
-	for (const card of timelineCards) {
-		card.addEventListener("pointermove", (event) => {
-			if (mobileTimelineQuery.matches) {
-				return;
-			}
-
-			const rect = card.getBoundingClientRect();
-			const x = ((event.clientX - rect.left) / rect.width) * 100;
-			const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-			card.style.setProperty(
-				"--timeline-card-pointer-x",
-				`${Math.min(Math.max(x, 0), 100).toFixed(2)}%`,
-			);
-			card.style.setProperty(
-				"--timeline-card-pointer-y",
-				`${Math.min(Math.max(y, 0), 100).toFixed(2)}%`,
-			);
-		});
-
-		card.addEventListener("pointerleave", () => {
-			card.style.setProperty("--timeline-card-pointer-x", "50%");
-			card.style.setProperty("--timeline-card-pointer-y", "50%");
-		});
-	}
-</script>
