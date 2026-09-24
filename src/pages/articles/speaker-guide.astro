@@ -3,7 +3,8 @@ import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import FAQSections from "~/components/FAQSections.astro";
-import Heading from "~/components/Heading.astro";
+import SubHeading from "~/components/SubHeading.astro";
+import SubList from "~/components/SubList.astro";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
@@ -94,14 +95,14 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 			can ask you questions during the conference.
 		</BodyText>
 
-		<Heading class="sub-heading" level="h3">Audience Personas</Heading>
+		<SubHeading>Audience Personas</SubHeading>
 
 		<BodyText>
 			We believe most attendees align to at least one of the following three
 			personas:
 		</BodyText>
 
-		<ul class="sub-list">
+		<SubList>
 			<li>
 				<strong>Developer</strong>: They work on a standard software team for
 				web development. They use web dev tooling every day and might not be
@@ -123,7 +124,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				deeply. But they of course recognize it's important to both learn and
 				share.
 			</li>
-		</ul>
+		</SubList>
 
 		<BodyText>
 			We recommend trying to position your talks to appeal to at least two, if

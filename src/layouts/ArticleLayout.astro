@@ -42,24 +42,4 @@ const { description, title } =
 	.article-intro > :global(:first-child) {
 		margin: 5rem auto 1.5rem;
 	}
-
-	/* Slotted page content keeps its page's scope, so these must be global. */
-	:global(.sub-heading) {
-		font-size: var(--fontSizeMedium);
-		text-align: center;
-		margin: 3rem 0 1rem;
-	}
-
-	:global(.sub-list) {
-		display: flex;
-		gap: 0.5rem;
-		flex-direction: column;
-		line-height: 1.35;
-		font-weight: var(--fontWeightMedium);
-		margin: 1rem 1.5rem;
-	}
-
-	:global(.sub-list ul) {
-		margin-left: 1rem;
-	}
 </style>

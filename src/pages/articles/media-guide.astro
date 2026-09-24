@@ -2,7 +2,8 @@
 import BodyText from "~/components/BodyText.astro";
 import Branding from "~/components/Branding.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import Heading from "~/components/Heading.astro";
+import SubHeading from "~/components/SubHeading.astro";
+import SubList from "~/components/SubList.astro";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
@@ -35,9 +36,9 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 			can help resonate with our target audiences.
 		</BodyText>
 
-		<Heading class="sub-heading" level="h3">Social Media Sharing</Heading>
+		<SubHeading>Social Media Sharing</SubHeading>
 
-		<ul class="sub-list">
+		<SubList>
 			<li>
 				<strong>&lt;120 characters:</strong>
 				I'm going to @SquiggleConf on May 7th! It's a web dev tooling conference at
@@ -56,11 +57,11 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				the New England Aquarium. Join me to learn about the latest & greatest in
 				modern web dev tooling!
 			</li>
-		</ul>
+		</SubList>
 
-		<Heading class="sub-heading" level="h3">Ticket Sharing Groups</Heading>
+		<SubHeading>Ticket Sharing Groups</SubHeading>
 
-		<ul class="sub-list">
+		<SubList>
 			<li>
 				<strong>Message Sized:</strong>
 				Hey (group)! I'm interested in sending a few of our members to SquiggleConf:
@@ -80,7 +81,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				<br />
 				A few talks that look particularly useful for us are:
 				<br />
-				<ul>
+				<ul class="talks-list">
 					<li>
 						<em>
 							<a
@@ -112,6 +113,12 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 				We have 3 tickets to distribute - let me know if you're interested!
 			</li>
-		</ul>
+		</SubList>
 	</CommonContent>
 </ArticleLayout>
+
+<style>
+	.talks-list {
+		margin-left: 1rem;
+	}
+</style>
