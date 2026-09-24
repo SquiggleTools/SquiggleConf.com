@@ -1,7 +1,7 @@
 ---
 import { SponsorInfo } from "~/data/historical/types";
 
-import ThemedImage from "../ThemedImage.astro";
+import SponsorLogo from "../SponsorLogo.astro";
 
 interface Props {
 	sponsors: SponsorInfo[];
@@ -22,15 +22,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 				]}
 			>
 				{sponsors?.map((sponsor) => (
-					<a
-						class="sponsor"
-						href={sponsor.href}
-						rel="noreferrer"
-						target="_blank"
-						title={sponsor.title}
-					>
-						<ThemedImage alt="" height={128} sources={sponsor.logos} />
-					</a>
+					<SponsorLogo class="sponsor" sponsor={sponsor} />
 				))}
 			</div>
 		))
@@ -74,7 +66,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 		--sponsorSpacing: var(--sponsorSpacing2);
 	}
 
-	.sponsor-group img {
+	.sponsor-group :global(img) {
 		max-width: var(--sponsorSize);
 	}
 
