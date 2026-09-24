@@ -1,12 +1,11 @@
 ---
-import { Image } from "astro:assets";
-
 import { historicalDataByYear } from "~/data/historical/data";
 import { links } from "~/data/links";
 
 import BodyText from "./BodyText.astro";
 import Button from "./Button.astro";
 import Newsletter from "./Newsletter.astro";
+import ThemedImage from "./ThemedImage.astro";
 
 const pastSponsors = Object.values(historicalDataByYear).flatMap(
 	({ sponsors }) => sponsors,
@@ -69,14 +68,7 @@ const tiers = [
 								target="_blank"
 								title={sponsor.title}
 							>
-								{(["dark", "light"] as const).map((theme) => (
-									<Image
-										alt=""
-										class={`logo-${theme}`}
-										src={sponsor.logos[theme]}
-										height={128}
-									/>
-								))}
+								<ThemedImage alt="" height={128} sources={sponsor.logos} />
 							</a>
 						))}
 					</div>
@@ -342,11 +334,6 @@ const tiers = [
 	.sponsor-logo img {
 		max-height: var(--logo-size);
 		max-width: var(--logo-size);
-	}
-
-	:global(html.dark) .logo-light,
-	:global(html:not(.dark)) .logo-dark {
-		display: none;
 	}
 
 	.past-sponsors-cta {

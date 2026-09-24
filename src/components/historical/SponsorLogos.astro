@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
-
 import { SponsorInfo } from "~/data/historical/types";
+
+import ThemedImage from "../ThemedImage.astro";
 
 interface Props {
 	sponsors: SponsorInfo[];
@@ -29,18 +29,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 						target="_blank"
 						title={sponsor.title}
 					>
-						<Image
-							alt=""
-							class="sponsor-logo-dark"
-							src={sponsor.logos.dark}
-							height={128}
-						/>
-						<Image
-							alt=""
-							class="sponsor-logo-light"
-							src={sponsor.logos.light}
-							height={128}
-						/>
+						<ThemedImage alt="" height={128} sources={sponsor.logos} />
 					</a>
 				))}
 			</div>
@@ -87,11 +76,6 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 
 	.sponsor-group img {
 		max-width: var(--sponsorSize);
-	}
-
-	html.dark .sponsor-logo-light,
-	html:not(.dark) .sponsor-logo-dark {
-		display: none;
 	}
 
 	@media (width >= 819px) {
