@@ -5,35 +5,38 @@ import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
 import { currentYear } from "~/data/years";
 
-function hrefProps(pathname: string) {
-	return {
-		class: Astro.url.pathname === pathname ? "" : "header-link-inactive",
-		href: pathname,
-		target: pathname.startsWith("https") ? "_blank" : undefined,
-	};
-}
-
 interface Props {
 	hideLogo?: boolean;
 	year?: number;
 }
 
 const { hideLogo, year } = Astro.props;
+
+const navLinks = [
+	{ href: "/articles", text: "Articles" },
+	{ href: "https://shop.squiggle.tools", text: "Shop" },
+	...(year === currentYear ? [] : [{ href: "/", text: currentYear }]),
+].map(({ href, text }) => ({
+	class: Astro.url.pathname === href ? "" : "header-link-inactive",
+	href,
+	target: href.startsWith("https") ? "_blank" : undefined,
+	text,
+}));
+
+const ticketsButton = {
+	as: "a",
+	class: "header-button",
+	href: links.tickets,
+	target: "_blank",
+	variant: "accent",
+} as const;
 ---
 
 <header>
-	<ContentArea class="header-content-area-mobile">
+	<ContentArea class="header-content-area" width="wide">
 		{
 			hideLogo ? (
-				<Button
-					as="a"
-					class="header-button"
-					href={links.tickets}
-					target="_blank"
-					variant="accent"
-				>
-					{currentYear} Tickets
-				</Button>
+				<Button {...ticketsButton}>{currentYear} Tickets</Button>
 			) : (
 				<a class="logo" href="/">
 					<Logo />
@@ -43,60 +46,20 @@ const { hideLogo, year } = Astro.props;
 		<details id="details">
 			<summary aria-label="Toggle header">≡</summary>
 			<div class="header-contents-mobile">
-				<a {...hrefProps("/articles")}>Articles</a>
-				<a {...hrefProps("https://shop.squiggle.tools")}>Shop</a>
-				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
+				{navLinks.map(({ text, ...props }) => <a {...props}>{text}</a>)}
 			</div>
 		</details>
-	</ContentArea>
-
-	<ContentArea class="header-content-area-wide" width="wide">
 		<div class="header-links">
-			{
-				hideLogo ? (
-					<Button
-						as="a"
-						class="header-button"
-						href={links.tickets}
-						target="_blank"
-						variant="accent"
-					>
-						{currentYear} Tickets
-					</Button>
-				) : (
-					<a class="logo" href="/">
-						<Logo />
-					</a>
-				)
-			}
-			<div class="header-links-inner">
-				<a {...hrefProps("/articles")}>Articles</a>
-				<a {...hrefProps("https://shop.squiggle.tools")}>Shop</a>
-				{year !== currentYear && <a {...hrefProps("/")}>{currentYear}</a>}
-				{
-					hideLogo ? null : (
-						<Button
-							as="a"
-							class="header-button"
-							href={links.tickets}
-							target="_blank"
-							variant="accent"
-						>
-							{currentYear} Tickets
-						</Button>
-					)
-				}
-			</div>
+			{navLinks.map(({ text, ...props }) => <a {...props}>{text}</a>)}
+			{!hideLogo && <Button {...ticketsButton}>{currentYear} Tickets</Button>}
 		</div>
 	</ContentArea>
 </header>
 
 <script>
-	const details = document.querySelector(
-		"details#details",
-	) as HTMLDetailsElement;
-	details.addEventListener("click", (event) => {
-		if ((event.target as Partial<HTMLElement>).tagName === "A") {
+	const details = document.getElementById("details");
+	details?.addEventListener("click", (event) => {
+		if (event.target instanceof HTMLAnchorElement) {
 			details.removeAttribute("open");
 		}
 	});
@@ -108,19 +71,18 @@ const { hideLogo, year } = Astro.props;
 		--header-foreground: var(--colorBlue5);
 		--header-button-background: rgba(255, 255, 255, 0.08);
 		--header-button-border: rgb(from var(--colorBlue5) r g b / 22%);
-		--header-button-foreground: var(--colorBlue5);
 		--header-button-hover-background: rgb(from var(--colorBlue5) r g b / 14%);
 		--header-button-hover-border: rgb(from var(--colorBlue5) r g b / 30%);
-		--header-button-hover-foreground: var(--colorBlue5);
-		--header-button-glow: 0 0.1rem 0.1rem
-			rgb(from var(--colorBlue5) r g b / 12%);
-		--header-button-ring: 0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
-		border-bottom: 0;
+		--header-button-shadow:
+			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
+			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
+		--header-button-hover-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.22),
+			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
 		color: var(--header-foreground);
 		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
 		padding: 1.5rem 0;
-		width: 100%;
 	}
 
 	:global(html.dark) header {
@@ -128,41 +90,36 @@ const { hideLogo, year } = Astro.props;
 		--header-foreground: var(--colorWhiteIsh);
 		--header-button-background: transparent;
 		--header-button-border: rgba(125, 207, 226, 0.34);
-		--header-button-foreground: var(--colorWhiteIsh);
-		--header-button-hover-background: color-mix(
-			in srgb,
-			var(--colorBlue2) 78%,
-			transparent
-		);
+		--header-button-hover-background: rgb(from var(--colorBlue2) r g b / 78%);
 		--header-button-hover-border: rgba(125, 207, 226, 0.46);
-		--header-button-hover-foreground: var(--colorWhiteIsh);
-		--header-button-glow: 0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%);
-		--header-button-ring: 0 0 0 1px rgba(125, 207, 226, 0.18);
+		--header-button-shadow:
+			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
+			0 0 0 1px rgba(125, 207, 226, 0.18);
+		--header-button-hover-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.18),
+			0 0.25rem 0.5rem rgb(from var(--colorBlue2) r g b / 22%);
 	}
 
 	.logo {
 		text-decoration: none;
 	}
 
-	.header-content-area-mobile {
+	.header-content-area {
 		align-items: center;
 		display: flex;
-		justify-content: space-between;
+		gap: 1rem;
 		min-height: 2.5rem;
 		position: relative;
 	}
 
 	details {
+		inset: 0 0 auto;
 		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
 		z-index: 2;
 		text-align: right;
 	}
 
 	summary {
-		color: inherit;
 		display: inline-block;
 		cursor: pointer;
 		font-size: 4rem;
@@ -180,7 +137,6 @@ const { hideLogo, year } = Astro.props;
 	}
 
 	.header-contents-mobile {
-		--offsetTop: 4.5rem;
 		background: var(--header-background);
 		box-shadow: 0 0 1rem var(--colorTextShadow);
 		display: flex;
@@ -190,43 +146,21 @@ const { hideLogo, year } = Astro.props;
 		font-weight: bold;
 		gap: 0.5rem;
 		line-height: 1.5;
-		margin-top: 0;
 		min-width: 20rem;
-		padding: var(--offsetTop) 1rem 1.5rem;
+		padding: 4.5rem 1rem 1.5rem;
 		position: absolute;
 		right: 0;
-		text-align: right;
 		width: 50%;
 		z-index: 1;
 	}
 
-	.header-content-area-mobile .header-button {
-		box-shadow: none;
-	}
-
-	.header-content-area-wide {
-		display: none;
-	}
-
 	.header-links {
 		align-items: center;
-		display: flex;
-		gap: 1rem;
-		width: 100%;
-	}
-
-	.header-links-inner {
-		align-items: center;
-		display: flex;
+		display: none;
 		font-weight: var(--fontWeightLight);
 		gap: clamp(0.55rem, 1.25vw, 2rem);
 		justify-content: flex-end;
 		width: 100%;
-	}
-
-	.header-links a,
-	.header-contents-mobile a {
-		color: inherit;
 	}
 
 	.header-link-inactive {
@@ -237,16 +171,11 @@ const { hideLogo, year } = Astro.props;
 		--colorButtonBackground: var(--header-button-background);
 		--colorButtonBorderHover: var(--header-button-hover-border);
 		--colorButtonBackgroundHover: var(--header-button-hover-background);
-		--colorButtonColor: var(--header-button-foreground);
-		--colorButtonColorHover: var(--header-button-hover-foreground);
+		--colorButtonColor: var(--header-foreground);
+		--colorButtonColorHover: var(--header-foreground);
 		border: 2px solid var(--header-button-border);
 		border-radius: 0.85rem;
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.16),
-			var(--header-button-glow),
-			var(--header-button-ring);
 		font-weight: var(--fontWeightBold);
-		justify-content: center;
 		margin-left: 0.35rem;
 		text-wrap: nowrap;
 		transition:
@@ -259,29 +188,24 @@ const { hideLogo, year } = Astro.props;
 	.header-button:hover,
 	.header-button:focus-visible {
 		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.22),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%),
+			var(--header-button-hover-shadow),
 			0 0 0 1px var(--header-button-hover-border);
 		transform: translateY(-1px);
 	}
 
-	:global(html.dark) .header-button:hover,
-	:global(html.dark) .header-button:focus-visible {
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.18),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue2) r g b / 22%),
-			0 0 0 1px var(--header-button-hover-border);
-	}
-
 	@media (width >= 1117px) {
-		.header-content-area-mobile {
+		details {
 			display: none;
 		}
 
-		.header-content-area-wide {
-			align-items: center;
+		.header-links {
 			display: flex;
-			justify-content: flex-end;
+		}
+
+		.header-button:not(:hover, :focus-visible) {
+			box-shadow:
+				inset 0 1px 0 rgba(255, 255, 255, 0.16),
+				var(--header-button-shadow);
 		}
 	}
 </style>
