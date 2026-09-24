@@ -1,86 +1,65 @@
 ---
 import bluesky from "~/assets/logos/bluesky.svg";
 import github from "~/assets/logos/github.svg";
+import gitlab from "~/assets/logos/gitlab.svg";
 import linkedin from "~/assets/logos/linkedin.svg";
 import mastodon from "~/assets/logos/mastodon.svg";
+import medium from "~/assets/logos/medium.svg";
+import twitch from "~/assets/logos/twitch.svg";
 import website from "~/assets/logos/website.svg";
 import x from "~/assets/logos/x.svg";
 import youtube from "~/assets/logos/youtube.svg";
 
+import IconLinks from "./IconLinks.astro";
+
 interface Props {
 	class?: string;
+	historical?: boolean;
 	links: BioLinksPlatforms;
 	name: string;
+	size?: "large";
 }
 
 export interface BioLinksPlatforms {
 	bluesky?: string | null;
 	github?: string | null;
+	gitlab?: string | null;
 	linkedin?: string | null;
 	mastodon?: string | null;
+	medium?: string | null;
+	twitch?: string | null;
 	website?: string | null;
 	x?: string | null;
 	youtube?: string | null;
 }
 
-const { class: className, links, name, ...rest } = Astro.props;
+const { class: className, links, name, size, ...rest } = Astro.props;
 
 const aliases = [
-	["bluesky", "on bluesky", bluesky],
-	["github", "on GitHub", github],
-	["linkedin", "on LinkedIn", linkedin],
-	["mastodon", "on Mastodon", mastodon],
-	["x", "on X", x],
-	["youtube", "on YouTube", youtube],
+	["bluesky", " on bluesky", bluesky],
+	["github", " on GitHub", github],
+	["gitlab", " on GitLab", gitlab],
+	["linkedin", " on LinkedIn", linkedin],
+	["mastodon", " on Mastodon", mastodon],
+	["medium", " on Medium", medium],
+	["twitch", " on Twitch", twitch],
+	["x", " on X", x],
+	["youtube", " on YouTube", youtube],
 	["website", "'s website", website],
 ] as const;
 ---
 
-<div class:list={["bio-links", className]} {...rest}>
-	{
-		aliases
-			.map(
-				([link, platform, src]) =>
-					links[link] && (
-						<a
-							class="bio-link"
-							href={links[link]}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img alt={`${name} on ${platform}`} class="link" src={src.src} />
-						</a>
-					),
-			)
-			.filter(Boolean)
-	}
-</div>
+<IconLinks
+	class:list={[className, size === "large" && "bio-links-large"]}
+	links={aliases.flatMap(([platform, suffix, src]) => {
+		const href = links[platform];
+		return href ? [{ alt: `${name}${suffix}`, href, src }] : [];
+	})}
+	{...rest}
+/>
 
 <style>
-	.bio-links {
-		--bioLinkImageSize: 1.2rem;
-		--bioLinkPadding: 0.25rem;
-		align-items: center;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0 var(--bioLinkPadding);
-		margin-left: calc(-1 * var(--bioLinkPadding));
-	}
-
-	.bio-link {
-		display: flex;
-		gap: var(--bioLinkPadding);
-		padding: var(--bioLinkPadding);
-		text-decoration: none;
-	}
-
-	.link {
-		height: var(--bioLinkImageSize);
-		width: var(--bioLinkImageSize);
-		user-select: none;
-	}
-
-	html:not(.dark) .link {
-		filter: hue-rotate(180deg) invert();
+	.bio-links-large {
+		--iconLinkSize: 1.35rem;
 	}
 </style>
