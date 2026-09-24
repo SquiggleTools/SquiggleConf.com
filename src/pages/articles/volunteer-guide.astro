@@ -1,6 +1,4 @@
 ---
-import BodyList from "~/components/BodyList.astro";
-import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import { articles } from "~/data/articles";
 import { links } from "~/data/links";
@@ -14,9 +12,9 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 	</Fragment>
 
 	<Fragment slot="intro">
-		<BodyText>That includes:</BodyText>
+		<p>That includes:</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				<a href="#volunteer-expectations">Volunteer Expectations</a>: what we
 				need from you before and during
@@ -25,13 +23,13 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				<a href="#volunteer-schedule">Volunteer Schedule</a>: the schedule of
 				activities common to all volunteers
 			</li>
-		</BodyList>
+		</ul>
 	</Fragment>
 
 	<CommonContent heading="Volunteer Expectations">
-		<BodyText>Volunteers are required to:</BodyText>
+		<p>Volunteers are required to:</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				Attend a volunteer training and orientation in-person Thursday evening
 			</li>
@@ -41,38 +39,32 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 					target="_blank">SquiggleConf Discord</a
 				> for the duration of the two conference days
 			</li>
-		</BodyList>
+		</ul>
 
-		<BodyText>
+		<p>
 			We generally assign an equal number of task hours to each volunteer,
 			roughly (number of hours of work) / (number of volunteers). Those tasks
 			will generally be in-person work such as operating the help desk, guiding
 			attendees to lunch spots, and helping set up and take down equipment.
-		</BodyText>
+		</p>
 
-		<br />
+		<p>We'll also need the following information from you:</p>
 
-		<BodyText>We'll also need the following information from you:</BodyText>
-
-		<BodyList as="ul">
+		<ul>
 			<li>Preferred first and last name</li>
 			<li>Preferred time availabilities midday Wednesday through Friday</li>
 			<li>Photo: at least 512x512px</li>
 			<li>Specifics on any accessibility, dietary, or other needs</li>
 			<li>Which talks you most want to be free to attend</li>
-		</BodyList>
+		</ul>
 
-		<br />
-
-		<BodyText
-			>Volunteers must be in-person for the duration of the conference.</BodyText
-		>
+		<p>Volunteers must be in-person for the duration of the conference.</p>
 	</CommonContent>
 
 	<CommonContent heading="Volunteer Schedule">
-		<BodyText>
+		<p>
 			Volunteers are invited to all public conference events. We'll post the
 			full schedule closer to May 2027.
-		</BodyText>
+		</p>
 	</CommonContent>
 </ArticleLayout>

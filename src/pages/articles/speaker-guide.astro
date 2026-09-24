@@ -1,10 +1,6 @@
 ---
-import BodyList from "~/components/BodyList.astro";
-import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import FAQSections from "~/components/FAQSections.astro";
-import SubHeading from "~/components/SubHeading.astro";
-import SubList from "~/components/SubList.astro";
 import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
@@ -17,9 +13,9 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 	</Fragment>
 
 	<Fragment slot="intro">
-		<BodyText>That includes:</BodyText>
+		<p>That includes:</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				<a href="#speaker-expectations">Speaker Expectations</a>: what we need
 				from you before and during
@@ -34,19 +30,19 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 			<li>
 				<a href="#faqs">FAQs</a>: all other common questions you might have
 			</li>
-		</BodyList>
+		</ul>
 
-		<BodyText>
+		<p>
 			Every speaker will be given access to a private "hotline" channel in the
 			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
 			Please reach out to us there if you have any questions.
-		</BodyText>
+		</p>
 	</Fragment>
 
 	<CommonContent heading="Speaker Expectations">
-		<BodyText> This is what we'll need from you as a speaker: </BodyText>
+		<p>This is what we'll need from you as a speaker:</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				Your information:
 				<ul>
@@ -65,20 +61,20 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				Joining the <a href={links.discord}>SquiggleConf Discord</a> and responding
 				to questions during the conference
 			</li>
-		</BodyList>
+		</ul>
 	</CommonContent>
 
 	<CommonContent heading="Speaker Schedule">
-		<BodyText>
+		<p>
 			Speakers are invited to all public conference events. We'll post the full
 			schedule closer to May 2027.
-		</BodyText>
+		</p>
 	</CommonContent>
 
 	<CommonContent heading="Talk">
-		<BodyText> This is what will happen around your talk on its day. </BodyText>
+		<p>This is what will happen around your talk on its day.</p>
 
-		<BodyList as="ol">
+		<ol>
 			<li>20 minutes prior: we'll have a designated space for you to wait</li>
 			<li>10 minutes prior: an A/V volunteer will place a microphone on you</li>
 			<li>
@@ -89,21 +85,21 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				An MC will walk you to the other side of the stage and run a live Q&A
 				with you
 			</li>
-		</BodyList>
+		</ol>
 
-		<BodyText>
+		<p>
 			We'll have a dedicated channel set up for you in Discord where attendees
 			can ask you questions during the conference.
-		</BodyText>
+		</p>
 
-		<SubHeading>Audience Personas</SubHeading>
+		<h3>Audience Personas</h3>
 
-		<BodyText>
+		<p>
 			We believe most attendees align to at least one of the following three
 			personas:
-		</BodyText>
+		</p>
 
-		<SubList>
+		<ul>
 			<li>
 				<strong>Developer</strong>: They work on a standard software team for
 				web development. They use web dev tooling every day and might not be
@@ -125,19 +121,19 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				deeply. But they of course recognize it's important to both learn and
 				share.
 			</li>
-		</SubList>
+		</ul>
 
-		<BodyText>
+		<p>
 			We recommend trying to position your talks to appeal to at least two, if
 			not all three of those personas.
-		</BodyText>
+		</p>
 	</CommonContent>
 
 	<CommonContent heading="FAQs">
-		<BodyText>
+		<p>
 			These are the most common questions we get from speakers. If you have any
 			other questions, please reach out to us in your hotline channel.
-		</BodyText>
+		</p>
 
 		<FAQSections
 			sections={[

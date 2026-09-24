@@ -1,45 +1,40 @@
 ---
-import BodyText from "~/components/BodyText.astro";
 import Branding from "~/components/Branding.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import SubHeading from "~/components/SubHeading.astro";
-import SubList from "~/components/SubList.astro";
 import { articles } from "~/data/articles";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
 <ArticleLayout article={articles["media-guide"]}>
 	<CommonContent heading="Branding">
-		<BodyText>
+		<p>
 			When referring to us in announcements, social media posts, or other broad
 			communications, please use <em>"SquiggleConf"</em>. That's
 			<em>"Squiggle"</em> and <em>"Conf"</em>, no space. We are not
 			<em>"Squiggle Conf"</em>,
 			<em>"Squiggle Conference"</em>, or
 			<em>"SquiggleCon"</em>.
-			<br />
-			<br />
+		</p>
+		<p>
 			Please include alt text with any images [<a
 				href="https://www.linkedin.com/help/linkedin/answer/a519856/adding-alternative-text-to-images-for-accessibility?lang=en"
 				>LinkedIn alt text help</a
 			>] and follow platform accessibility guidelines. We can only share posts
 			that are inclusive to all potential recipients.
-			<br />
-			<br />
-			<Branding />
-		</BodyText>
+		</p>
+		<Branding />
 	</CommonContent>
 
 	<CommonContent heading="Pitches">
-		<BodyText>
+		<p>
 			Here are some starting pitch templates you can use to share SquiggleConf.
 			We of course recommend rewording to your own tone, but we've found these
 			can help resonate with our target audiences.
-		</BodyText>
+		</p>
 
-		<SubHeading>Social Media Sharing</SubHeading>
+		<h3>Social Media Sharing</h3>
 
-		<SubList>
+		<ul>
 			<li>
 				<strong>&lt;120 characters:</strong>
 				I'm going to @SquiggleConf on May 7th! It's a web dev tooling conference at
@@ -58,11 +53,11 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				the New England Aquarium. Join me to learn about the latest & greatest in
 				modern web dev tooling!
 			</li>
-		</SubList>
+		</ul>
 
-		<SubHeading>Ticket Sharing Groups</SubHeading>
+		<h3>Ticket Sharing Groups</h3>
 
-		<SubList>
+		<ul>
 			<li>
 				<strong>Message Sized:</strong>
 				Hey (group)! I'm interested in sending a few of our members to SquiggleConf:
@@ -114,7 +109,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 				We have 3 tickets to distribute - let me know if you're interested!
 			</li>
-		</SubList>
+		</ul>
 	</CommonContent>
 </ArticleLayout>
 

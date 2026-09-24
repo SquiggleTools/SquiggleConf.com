@@ -6,7 +6,6 @@ import katharineMitropoulos from "~/assets/avatars/katharine-mitropoulos.webp";
 import bostonTSClub from "~/assets/logos/boston-ts-club.svg";
 import michiganTypeScript from "~/assets/logos/michigan-typescript.png";
 import { Props as BioProps } from "~/components/Bio.astro";
-import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 import Bios from "~/components/Bios.astro";
@@ -80,28 +79,28 @@ const biosStaff: BioProps[] = [
 	squiggly="medium"
 >
 	<CommonContent heading="A Web Dev Tooling Conference">
-		<BodyText>
+		<p>
 			Our goal with SquiggleConf is to create an enriching conference
 			environment to talk about the latest and greatest in web developer
 			tooling. We aim to include everyone from newcomers to the space and web
 			platform team members to authors & maintainers of open source tools.
-		</BodyText>
+		</p>
 	</CommonContent>
 
 	<CommonContent heading="Branding">
-		<BodyText>
+		<p>
 			See <a href="/articles/media-guide">Articles &gt; Media Guide</a> for media
 			asset downloads and usage guidelines for the SquiggleConf brand.
-		</BodyText>
+		</p>
 	</CommonContent>
 
 	<CommonContent heading="Squiggle.Tools">
-		<BodyText>
+		<p>
 			SquiggleConf is a production of Squiggle.Tools, a 501(c)(3) nonprofit
 			organization offering ongoing learning opportunities that enable
 			participants to engage, learn, and advance their careers—regardless of
 			their background or resources.
-		</BodyText>
+		</p>
 
 		<Bios class="about-bios" bios={biosSquiggleTools} />
 
@@ -119,10 +118,10 @@ const biosStaff: BioProps[] = [
 	</CommonContent>
 
 	<CommonContent heading="Staff Members">
-		<BodyText>
+		<p>
 			SquiggleConf is run by a year-long volunteer team passionate about the
 			conference and surrounding developer community.
-		</BodyText>
+		</p>
 
 		<Bios bios={biosStaff} />
 	</CommonContent>

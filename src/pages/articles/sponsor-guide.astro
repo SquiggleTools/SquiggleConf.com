@@ -1,6 +1,4 @@
 ---
-import BodyList from "~/components/BodyList.astro";
-import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import { articles } from "~/data/articles";
@@ -15,9 +13,9 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 	</Fragment>
 
 	<Fragment slot="intro">
-		<BodyText>That includes:</BodyText>
+		<p>That includes:</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				<a href="#sponsor-onboarding">Sponsor Onboarding</a>: what we'll work
 				with you on before the conference
@@ -29,22 +27,22 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 			<li>
 				<a href="#faqs">FAQs</a>: all other common questions you might have
 			</li>
-		</BodyList>
+		</ul>
 
-		<BodyText>
+		<p>
 			Every sponsor will be given access to a private channel in the
 			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
 			Please reach out to us there if you have any questions.
-		</BodyText>
+		</p>
 	</Fragment>
 
 	<CommonContent heading="Sponsor Onboarding">
-		<BodyText>
+		<p>
 			Once an agreement is signed, we'll this is what we'll need from you as a
 			sponsor:
-		</BodyText>
+		</p>
 
-		<BodyList as="ul">
+		<ul>
 			<li>
 				Your information:
 				<ul>
@@ -64,21 +62,21 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				Joining the <a href={links.discord}>SquiggleConf Discord</a> and responding
 				to questions during the conference
 			</li>
-		</BodyList>
+		</ul>
 	</CommonContent>
 
 	<CommonContent heading="Sponsor Schedule">
-		<BodyText>
+		<p>
 			Sponsors are invited to all public conference events. We'll post the full
 			schedule closer to May 2027.
-		</BodyText>
+		</p>
 	</CommonContent>
 
 	<CommonContent heading="FAQs">
-		<BodyText>
+		<p>
 			These are the most common questions we get from sponsors. If you have any
 			other questions, please reach out to us in your private Discord channel.
-		</BodyText>
+		</p>
 
 		<FAQSections
 			sections={[
