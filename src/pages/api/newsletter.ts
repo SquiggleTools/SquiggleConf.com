@@ -16,10 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
 	const formData = Object.fromEntries(await request.formData());
 	const body = bodySchema.safeParse(formData);
 	if (body.error) {
-		return new Response("Invalid body", {
-			status: 400,
-			statusText: body.error.message,
-		});
+		return new Response("Invalid body", { status: 400 });
 	}
 
 	const { email } = body.data;
