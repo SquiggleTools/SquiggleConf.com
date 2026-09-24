@@ -129,24 +129,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					timeMode="range"
 					variant="fun-run"
 				>
-					<div class="fun-run-collage-desktop">
-						<Collage
-							ariaLabel="Fun run collage"
-							layout="duo"
-							photos={[
-								{
-									alt: "Fun Run route by the waterfront",
-									objectPosition: "10% 10%",
-									src: funrun1,
-								},
-								{
-									alt: "Runners gathering before the Fun Run",
-									objectPosition: "38% 50%",
-									src: funrun2,
-								},
-							]}
-						/>
-					</div>
 					<div class="fun-run-body">
 						<TimelineCopy>
 							<p>
@@ -155,35 +137,22 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								Boston shoreline.
 							</p>
 						</TimelineCopy>
-						<div class="fun-run-collage-mobile">
+						<div class="fun-run-collage">
 							<Collage
-								decorative
+								ariaLabel="Fun run collage"
 								layout="duo"
 								photos={[
 									{
-										alt: "",
-										frame: {
-											height: "5.45rem",
-											left: "3.8rem",
-											top: "0.3rem",
-											width: "3.75rem",
-										},
+										alt: "Fun Run route by the waterfront",
 										objectPosition: "10% 10%",
 										src: funrun1,
 									},
 									{
-										alt: "",
-										frame: {
-											height: "6.1rem",
-											left: "0",
-											top: "0.7rem",
-											width: "4.35rem",
-										},
+										alt: "Runners gathering before the Fun Run",
 										objectPosition: "38% 50%",
 										src: funrun2,
 									},
 								]}
-								size={{ height: "7.6rem", width: "8rem" }}
 							/>
 						</div>
 					</div>
@@ -644,10 +613,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		line-height: 1.2;
 	}
 
-	.fun-run-body {
-		position: relative;
-	}
-
 	.timeline-copy {
 		display: grid;
 		gap: 0.45rem;
@@ -748,18 +713,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		margin: 1.9rem 0 1.1rem;
 	}
 
-	.fun-run-collage-desktop {
+	.fun-run-collage {
 		left: 17rem;
 		position: absolute;
 		top: 1rem;
 	}
 
-	.fun-run-collage-mobile {
-		display: none;
-	}
-
 	.fun-run-body .timeline-copy {
 		max-width: 50%;
+		position: relative;
 	}
 
 	.fireside-copy {
@@ -853,17 +815,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			max-width: none;
 		}
 
-		.fun-run-collage-desktop {
-			display: none;
-		}
-
-		.fun-run-collage-mobile {
-			align-self: start;
-			display: block;
+		.fun-run-collage {
 			justify-self: end;
-			min-height: 7.6rem;
+			left: auto;
+			padding-top: 4rem;
 			position: relative;
-			top: 1rem;
+			top: 0;
+			zoom: 0.75;
 		}
 
 		.imax-body {
