@@ -7,17 +7,17 @@ interface Props {
 	class?: string;
 	height?: number;
 	/** One image per theme; only the current theme's is displayed. */
-	srcs: Record<"dark" | "light", ImageMetadata>;
+	sources: Record<"dark" | "light", ImageMetadata>;
 }
 
-const { class: className, srcs, ...rest } = Astro.props;
+const { class: className, sources, ...rest } = Astro.props;
 ---
 
 {
 	(["dark", "light"] as const).map((theme) => (
 		<Image
 			class:list={[className, `themed-image-${theme}`]}
-			src={srcs[theme]}
+			src={sources[theme]}
 			{...rest}
 		/>
 	))
