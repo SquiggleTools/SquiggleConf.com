@@ -1,19 +1,15 @@
 {
 	"compilerOptions": {
 		"baseUrl": ".",
-		"declaration": true,
-		"declarationMap": true,
 		"esModuleInterop": true,
 		"module": "Preserve",
 		"moduleResolution": "Bundler",
 		"noEmit": true,
-		"outDir": "lib",
 		"paths": {
 			"~/*": ["src/*"]
 		},
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"sourceMap": true,
 		"strict": true,
 		"target": "ESNext"
 	},

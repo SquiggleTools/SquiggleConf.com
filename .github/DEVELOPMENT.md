@@ -23,20 +23,6 @@ All Astro commands are run from the root of the project, from a terminal:
 | `pnpm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `pnpm run astro --help` | Get help using the Astro CLI                     |
 
-## Building
-
-Run [**tsup**](https://tsup.egoist.dev) locally to build source files from `src/` into output files in `lib/`:
-
-```shell
-pnpm build
-```
-
-Add `--watch` to run the builder in a watch mode that continuously cleans and recreates `lib/` as you save files:
-
-```shell
-pnpm build --watch
-```
-
 ## Formatting
 
 [Prettier](https://prettier.io) is used to format code.
@@ -65,8 +51,6 @@ For example, ESLint can be run with `--fix` to auto-fix some lint rule complaint
 ```shell
 pnpm run lint --fix
 ```
-
-Note that you'll likely need to run `pnpm build` before `pnpm lint` so that lint rules which check the file system can pick up on any built files.
 
 ## Type Checking
 
