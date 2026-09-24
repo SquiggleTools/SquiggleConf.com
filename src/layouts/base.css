@@ -78,13 +78,15 @@
 	--fontSizeH3: clamp(1.5rem, 3.5vw, 1.75rem);
 	--fontSizeH4: clamp(1.15rem, 2.5vw, 1.35rem);
 
-	--fontWeightLight: 200;
-	--fontWeightMedium: 300;
-	--fontWeightSemibold: 350;
-	--fontWeightBold: 500;
-	--fontWeightBolder: 600;
-	--fontWeightHeavy: 700;
-	--fontWeightBody: 300;
+	--fontWeightExtraLight: 200;
+	--fontWeightLight: 300;
+	--fontWeightSemiLight: 350;
+	--fontWeightRegular: 400;
+	--fontWeightMedium: 500;
+	--fontWeightSemibold: 600;
+	--fontWeightBold: 700;
+	--fontWeightExtraBold: 800;
+	--fontWeightBody: var(--fontWeightLight);
 
 	--lineHeightBody: 1.4;
 
