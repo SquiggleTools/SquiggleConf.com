@@ -302,7 +302,10 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		.postcard-stack-flip:focus-within .postcard-flip-scene {
 			transform: translateY(-0.08rem);
 		}
+	}
 
+	/* Matches the (max-width: 899px) query that sets data-mobile-flipped */
+	@media (width < 900px) {
 		.postcard-stack-flip[data-mobile-flipped="true"] {
 			animation: none;
 		}
@@ -324,6 +327,18 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 
 		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
 			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.postcard,
+		.postcard-stack,
+		.postcard-stack-flip,
+		.postcard-flip-scene,
+		.postcard-flip-inner,
+		.postcard-note-back {
+			animation: none;
+			transition: none;
 		}
 	}
 </style>
