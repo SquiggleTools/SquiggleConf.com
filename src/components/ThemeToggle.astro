@@ -41,3 +41,22 @@ import themeSun from "~/assets/design/theme-sun.svg";
 		display: none;
 	}
 </style>
+
+<script>
+	const html = document.documentElement;
+
+	for (const toggle of document.querySelectorAll(".theme-toggle")) {
+		const updateLabel = () => {
+			const theme = html.classList.contains("dark") ? "dark" : "light";
+			toggle.setAttribute("aria-label", `Theme toggle (current: ${theme})`);
+		};
+
+		updateLabel();
+
+		toggle.addEventListener("click", () => {
+			const dark = html.classList.toggle("dark");
+			localStorage.setItem("theme", dark ? "dark" : "light");
+			updateLabel();
+		});
+	}
+</script>

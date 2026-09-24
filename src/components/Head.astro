@@ -1,5 +1,6 @@
 ---
 import { currentYear } from "~/data/years";
+import ThemeSetting from "./ThemeSetting.astro";
 
 export interface Props {
 	description: string;
@@ -100,6 +101,7 @@ const metaPairs = [
 
 <head>
 	<meta charset="utf-8" />
+	<ThemeSetting />
 	<link href="/favicon.png" rel="icon" type="image/png" />
 	<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 	{metaPairs.map((meta) => <meta {...meta} />)}
