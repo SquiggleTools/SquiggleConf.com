@@ -72,7 +72,7 @@ const seen = new Set<PersonInfo>();
 		padding: 2rem var(--widthBodyPadding);
 	}
 
-	@media (min-width: 700px) {
+	@media (width >= 700px) {
 		.speakers-list {
 			align-items: center;
 			flex-direction: row;
@@ -85,7 +85,7 @@ const seen = new Set<PersonInfo>();
 		}
 	}
 
-	@media (min-width: 1017px) {
+	@media (width >= 1117px) {
 		.speakers-list {
 			padding: 2rem 0;
 			max-width: calc(var(--widthBodyFull) + 2rem);

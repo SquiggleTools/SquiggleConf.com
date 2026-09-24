@@ -104,10 +104,10 @@ const { hideLogo, year } = Astro.props;
 
 <style>
 	header {
-		--header-background: #e9f9ff;
+		--header-background: var(--colorBlueBright2);
 		--header-foreground: var(--colorBlue5);
 		--header-button-background: rgba(255, 255, 255, 0.08);
-		--header-button-border: rgba(4, 25, 48, 0.22);
+		--header-button-border: rgb(from var(--colorBlue5) r g b / 22%);
 		--header-button-foreground: var(--colorBlue5);
 		--header-button-hover-background: rgb(from var(--colorBlue5) r g b / 14%);
 		--header-button-hover-border: rgb(from var(--colorBlue5) r g b / 30%);
@@ -124,7 +124,7 @@ const { hideLogo, year } = Astro.props;
 	}
 
 	:global(html.dark) header {
-		--header-background: #04142d;
+		--header-background: var(--colorBlue6);
 		--header-foreground: var(--colorWhiteIsh);
 		--header-button-background: transparent;
 		--header-button-border: rgba(125, 207, 226, 0.34);
