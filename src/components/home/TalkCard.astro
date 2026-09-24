@@ -39,23 +39,23 @@ const { talk } = Astro.props;
 
 	.talk-copy h3 {
 		align-self: center;
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
+		font-size: var(--fontSizeCardTitle);
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.25;
 		margin: 0;
 	}
 
 	.talk-speaker {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		font-size: clamp(0.92rem, 1.2vw, 1rem);
-		font-weight: 600;
+		font-weight: var(--fontWeightBolder);
 	}
 
 	.talk-role {
-		color: var(--timeline-muted-color);
-		font-size: clamp(0.84rem, 1.1vw, 0.94rem);
+		color: var(--colorMuted);
+		font-size: var(--fontSizeCaption);
 		font-weight: 300;
 		line-height: 1.25;
 	}

@@ -25,8 +25,8 @@ const { date, day } = Astro.props;
 
 		border: 1px solid var(--timeline-rail-border-color);
 		font-family: var(--fontFamilyHeading);
-		font-size: 1.1rem;
-		font-weight: 700;
+		font-size: var(--fontSizeCardTitle);
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.1;
 		grid-column: 2;
 		padding: 0.8rem 0.55rem;
@@ -39,8 +39,8 @@ const { date, day } = Astro.props;
 
 	.timeline-top {
 		margin-top: 1rem;
-		border-top-right-radius: 8px;
-		border-top-left-radius: 8px;
+		border-top-right-radius: var(--radiusMedium);
+		border-top-left-radius: var(--radiusMedium);
 	}
 
 	@media (width < 900px) {
@@ -49,7 +49,7 @@ const { date, day } = Astro.props;
 		}
 
 		.timeline-cap {
-			border-radius: 8px;
+			border-radius: var(--radiusMedium);
 			grid-column: auto;
 		}
 	}
