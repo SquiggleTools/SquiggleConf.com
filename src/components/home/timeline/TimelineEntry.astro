@@ -322,6 +322,8 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 </style>
 
 <script>
+	import { timelineCollapsedQuery } from "~/utils/breakpoints";
+
 	import { onScrollFrame } from "./onScrollFrame";
 
 	const cards = [
@@ -330,7 +332,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	const headings = cards.map(
 		(card) => card.querySelector(".timeline-heading") ?? card,
 	);
-	const mobileQuery = matchMedia("(width < 900px)");
+	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	onScrollFrame(() => {
 		const threshold = innerHeight / 2;

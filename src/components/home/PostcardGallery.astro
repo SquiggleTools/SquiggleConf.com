@@ -287,10 +287,12 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 </style>
 
 <script>
+	import { timelineCollapsedQuery } from "~/utils/breakpoints";
+
 	import { onScrollFrame } from "./timeline/onScrollFrame";
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-stack-flip");
-	const mobileQuery = matchMedia("(width < 900px)");
+	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard) {
 		onScrollFrame(() => {
