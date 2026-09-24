@@ -70,15 +70,6 @@
 	--shadowImageActive: 0 0.55rem 1rem rgb(from var(--colorBlue5) r g b / 18%);
 	--sizeImageBorder: 2px;
 
-	/*
-	 * Breakpoints, which media queries can't read from custom properties:
-	 * - 490px: footer and newsletter decorations appear
-	 * - 700px: compact layouts expand (sponsors, timeline media, historical)
-	 * - 819px: footer, FAQ, and hero switch to their wide layouts
-	 * - 900px: the homepage timeline expands from one column to its grid
-	 *   (also in src/utils/breakpoints.ts, for scripts)
-	 * - 1117px: header links and full content area padding appear
-	 */
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
