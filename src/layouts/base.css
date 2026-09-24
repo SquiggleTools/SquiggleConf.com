@@ -1,8 +1,3 @@
-/*
- * Breakpoints (media queries can't use custom properties), in range syntax:
- * 490px, 700px, 819px, 900px, 1117px
- */
-
 :root {
 	color-scheme: light;
 
