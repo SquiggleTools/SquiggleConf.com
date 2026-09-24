@@ -59,7 +59,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	</Hero>
 	<DeepSeaSurface>
 		<TimelineSection>
-			<TimelineFishLayer />
+			<TimelineFishLayer swimUntil="talks-morning" />
 			<div class="top-side-by-side">
 				<div class="top-side-left">
 					<h2 class="top-heading">the devtools conference</h2>
@@ -129,23 +129,24 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					timeMode="range"
 					variant="fun-run"
 				>
-					<Collage
-						ariaLabel="Fun run collage"
-						class="fun-run-collage fun-run-collage-desktop"
-						layout="duo"
-						photos={[
-							{
-								alt: "Fun Run route by the waterfront",
-								objectPosition: "10% 10%",
-								src: funrun1,
-							},
-							{
-								alt: "Runners gathering before the Fun Run",
-								objectPosition: "38% 50%",
-								src: funrun2,
-							},
-						]}
-					/>
+					<div class="fun-run-collage-desktop">
+						<Collage
+							ariaLabel="Fun run collage"
+							layout="duo"
+							photos={[
+								{
+									alt: "Fun Run route by the waterfront",
+									objectPosition: "10% 10%",
+									src: funrun1,
+								},
+								{
+									alt: "Runners gathering before the Fun Run",
+									objectPosition: "38% 50%",
+									src: funrun2,
+								},
+							]}
+						/>
+					</div>
 					<div class="fun-run-body">
 						<TimelineCopy>
 							<p>
@@ -154,25 +155,37 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								Boston shoreline.
 							</p>
 						</TimelineCopy>
-						<Collage
-							class="fun-run-collage fun-run-collage-mobile"
-							decorative
-							layout="duo"
-							photos={[
-								{
-									alt: "",
-									decorative: true,
-									objectPosition: "10% 10%",
-									src: funrun1,
-								},
-								{
-									alt: "",
-									decorative: true,
-									objectPosition: "38% 50%",
-									src: funrun2,
-								},
-							]}
-						/>
+						<div class="fun-run-collage-mobile">
+							<Collage
+								decorative
+								layout="duo"
+								photos={[
+									{
+										alt: "",
+										frame: {
+											height: "5.45rem",
+											left: "3.8rem",
+											top: "0.3rem",
+											width: "3.75rem",
+										},
+										objectPosition: "10% 10%",
+										src: funrun1,
+									},
+									{
+										alt: "",
+										frame: {
+											height: "6.1rem",
+											left: "0",
+											top: "0.7rem",
+											width: "4.35rem",
+										},
+										objectPosition: "38% 50%",
+										src: funrun2,
+									},
+								]}
+								size={{ height: "7.6rem", width: "8rem" }}
+							/>
+						</div>
 					</div>
 				</TimelineEntry>
 
@@ -257,17 +270,45 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<div class="break-body">
 						<Collage
 							ariaLabel="Milk and Cookies break collage"
-							class="cookiesbreak-collage"
 							layout="trio"
 							photos={[
-								{ alt: "Milk and cookies spread", src: milkcookies3 },
-								{ alt: "Cookies at the break", src: milkcookies1 },
+								{
+									alt: "Milk and cookies spread",
+									frame: {
+										height: "5.7rem",
+										left: "0.25rem",
+										rotate: "-8deg",
+										top: "1rem",
+										width: "7.5rem",
+									},
+									src: milkcookies3,
+								},
+								{
+									alt: "Cookies at the break",
+									frame: {
+										height: "5.8rem",
+										left: "5.4rem",
+										rotate: "2deg",
+										top: "0.2rem",
+										width: "7.5rem",
+										zIndex: 1,
+									},
+									src: milkcookies1,
+								},
 								{
 									alt: "Milk and cookies break crowd",
+									frame: {
+										height: "5rem",
+										left: "11rem",
+										rotate: "10deg",
+										top: "2rem",
+										width: "6rem",
+									},
 									objectPosition: "10% 0%",
 									src: milkcookies2,
 								},
 							]}
+							size={{ height: "8rem", width: "18.6rem" }}
 						/>
 						<TimelineCopy class="break-copy">
 							<p>A SquiggleConf classic!</p><p>
@@ -699,6 +740,24 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
+	.launch-party-collage {
+		margin-bottom: 1rem;
+	}
+
+	.afterparty-collage {
+		margin: 1.9rem 0 1.1rem;
+	}
+
+	.fun-run-collage-desktop {
+		left: 17rem;
+		position: absolute;
+		top: 1rem;
+	}
+
+	.fun-run-collage-mobile {
+		display: none;
+	}
+
 	.fun-run-body .timeline-copy {
 		max-width: 50%;
 	}
@@ -792,6 +851,19 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		.fun-run-body .timeline-copy {
 			margin-top: 0.15rem;
 			max-width: none;
+		}
+
+		.fun-run-collage-desktop {
+			display: none;
+		}
+
+		.fun-run-collage-mobile {
+			align-self: start;
+			display: block;
+			justify-self: end;
+			min-height: 7.6rem;
+			position: relative;
+			top: 1rem;
 		}
 
 		.imax-body {

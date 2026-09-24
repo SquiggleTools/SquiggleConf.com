@@ -1,11 +1,11 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
 
 import PlaceholderMark from "../PlaceholderMark.astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
 	alt?: string;
-	class?: string;
 	/** How the image responds while its timeline entry is active. */
 	effect?: "grow" | "zoom";
 	loading?: "eager" | "lazy";

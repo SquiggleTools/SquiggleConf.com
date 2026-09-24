@@ -40,7 +40,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	data-timeline-entry={entryId}
 >
 	<div class="timeline-heading-line">
-		<Heading id={entryId} level="h2" link>{heading}</Heading>
+		<Heading class="timeline-heading" id={entryId} level="h2" link
+			>{heading}</Heading
+		>
 	</div>
 	<div
 		class:list={[
@@ -149,7 +151,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		min-height: 14rem;
 	}
 
-	.timeline-content h2 {
+	.timeline-heading {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
@@ -223,7 +225,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			opacity: 1;
 		}
 
-		.timeline-content:is(:hover, :focus-within) h2 {
+		.timeline-content:is(:hover, :focus-within) .timeline-heading {
 			color: var(--timeline-heading-hover-color);
 			text-shadow: var(--timeline-heading-hover-shadow);
 			transform: translateX(0.08rem);
@@ -308,7 +310,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			);
 		}
 
-		.timeline-content[data-mobile-active] h2 {
+		.timeline-content[data-mobile-active] .timeline-heading {
 			color: var(--timeline-heading-hover-color);
 			text-shadow: var(--timeline-heading-hover-shadow);
 		}
@@ -319,3 +321,52 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 	}
 </style>
+
+<script>
+	import { onScrollFrame } from "./onScrollFrame";
+
+	const cards = [
+		...document.querySelectorAll<HTMLElement>(".timeline-content"),
+	];
+	const headings = cards.map(
+		(card) => card.querySelector(".timeline-heading") ?? card,
+	);
+	const mobileQuery = matchMedia("(width < 900px)");
+
+	onScrollFrame(() => {
+		const threshold = innerHeight / 2;
+		const activeCard =
+			mobileQuery.matches &&
+			cards.findLast(
+				(_, index) => headings[index].getBoundingClientRect().top <= threshold,
+			);
+
+		for (const card of cards) {
+			card.toggleAttribute("data-mobile-active", card === activeCard);
+		}
+	}, mobileQuery);
+
+	const toPercent = (fraction: number) =>
+		`${(Math.min(Math.max(fraction, 0), 1) * 100).toFixed(2)}%`;
+
+	for (const card of cards) {
+		card.addEventListener("pointermove", (event) => {
+			if (!mobileQuery.matches) {
+				const rect = card.getBoundingClientRect();
+				card.style.setProperty(
+					"--timeline-card-pointer-x",
+					toPercent((event.clientX - rect.left) / rect.width),
+				);
+				card.style.setProperty(
+					"--timeline-card-pointer-y",
+					toPercent((event.clientY - rect.top) / rect.height),
+				);
+			}
+		});
+
+		card.addEventListener("pointerleave", () => {
+			card.style.removeProperty("--timeline-card-pointer-x");
+			card.style.removeProperty("--timeline-card-pointer-y");
+		});
+	}
+</script>

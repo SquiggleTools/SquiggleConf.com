@@ -1,8 +1,16 @@
 ---
 import { timelineFish } from "~/components/home/data";
+import type { TimelineEntryId } from "~/components/home/types";
+
+interface Props {
+	/** The fish finish swimming once this entry scrolls past. */
+	swimUntil: TimelineEntryId;
+}
+
+const { swimUntil } = Astro.props;
 ---
 
-<div class="timeline-fish-layer" aria-hidden="true">
+<div class="timeline-fish-layer" aria-hidden="true" data-swim-until={swimUntil}>
 	{
 		timelineFish.map((fish, index) => (
 			<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
@@ -199,12 +207,13 @@ import { timelineFish } from "~/components/home/data";
 <script>
 	import { onScrollFrame } from "./onScrollFrame";
 
-	const section = document.querySelector<HTMLElement>(".timeline-section");
+	const layer = document.querySelector<HTMLElement>(".timeline-fish-layer");
+	const section = layer?.offsetParent;
 	const talks = document.querySelector<HTMLElement>(
-		'[data-timeline-entry="talks-morning"]',
+		`[data-timeline-entry="${layer?.dataset.swimUntil}"]`,
 	);
 	const fishes = [
-		...document.querySelectorAll<HTMLElement>(".timeline-fish-shell"),
+		...(layer?.querySelectorAll<HTMLElement>(".timeline-fish-shell") ?? []),
 	];
 	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -222,7 +231,7 @@ import { timelineFish } from "~/components/home/data";
 	const pageTop = (element: HTMLElement) =>
 		element.getBoundingClientRect().top + scrollY;
 
-	if (section && talks) {
+	if (section instanceof HTMLElement && talks) {
 		onScrollFrame(() => {
 			const start = pageTop(section) - innerHeight * 0.34;
 			const end = pageTop(talks) + talks.offsetHeight + innerHeight * 0.75;

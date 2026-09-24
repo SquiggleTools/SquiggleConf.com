@@ -1,5 +1,14 @@
 import type { ImageMetadata } from "astro";
 
+export interface CollageFrame {
+	height?: string;
+	left?: string;
+	rotate?: string;
+	top?: string;
+	width?: string;
+	zIndex?: number;
+}
+
 export type CollageLayout =
 	| "avatar-duo"
 	| "avatar-trio"
@@ -10,6 +19,8 @@ export type CollageLayout =
 export interface CollagePhoto {
 	alt: string;
 	decorative?: boolean;
+	/** Overrides the layout's default placement for this photo. */
+	frame?: CollageFrame;
 	objectPosition?: string;
 	placeholder?: boolean;
 	src: ImageMetadata;

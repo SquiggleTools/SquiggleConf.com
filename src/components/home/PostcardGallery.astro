@@ -285,3 +285,20 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		}
 	}
 </style>
+
+<script>
+	import { onScrollFrame } from "./timeline/onScrollFrame";
+
+	const postcard = document.querySelector<HTMLElement>(".postcard-stack-flip");
+	const mobileQuery = matchMedia("(width < 900px)");
+
+	if (postcard) {
+		onScrollFrame(() => {
+			const { height, top } = postcard.getBoundingClientRect();
+			postcard.toggleAttribute(
+				"data-mobile-flipped",
+				mobileQuery.matches && top + height / 2 <= innerHeight / 2,
+			);
+		}, mobileQuery);
+	}
+</script>
