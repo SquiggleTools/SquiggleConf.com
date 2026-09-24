@@ -643,7 +643,7 @@ export const sponsors: SponsorInfo[] = [
 		href: "https://nx.dev?utm_source=squiggleconf",
 		logos: { dark: nxWhite, light: nxDarkBlue },
 		placement: 1,
-		title: "OpenJS Foundation",
+		title: "Nx",
 	},
 	{
 		href: "https://openjsf.org?utm_source=squiggleconf",
