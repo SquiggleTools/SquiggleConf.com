@@ -2,11 +2,17 @@
 import { Image } from "astro:assets";
 
 import squiggleFlankingLean from "~/assets/2024/squiggle-flanking-lean.svg";
-import { sponsorsByPlacement } from "~/data/2024/sponsors";
+import { SponsorInfo } from "~/data/historical/types";
 import BodyText from "../BodyText.astro";
 import Heading from "../Heading.astro";
 import SectionWrapper from "./SectionWrapper.astro";
 import SponsorLogos from "./SponsorLogos.astro";
+
+interface Props {
+	sponsors: SponsorInfo[];
+}
+
+const { sponsors } = Astro.props;
 ---
 
 <SectionWrapper>
@@ -20,7 +26,7 @@ import SponsorLogos from "./SponsorLogos.astro";
 		have our sincere appreciation and thanks.
 	</BodyText>
 
-	<SponsorLogos sponsorGroups={sponsorsByPlacement} />
+	<SponsorLogos sponsors={sponsors} />
 </SectionWrapper>
 
 <style>

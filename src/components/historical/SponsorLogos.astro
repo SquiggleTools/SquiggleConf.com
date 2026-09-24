@@ -1,22 +1,15 @@
 ---
-import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
+import _ from "lodash";
+
+import { SponsorInfo } from "~/data/historical/types";
 
 interface Props {
-	sponsorGroups: Record<string, SponsorLogoData[]>;
+	sponsors: SponsorInfo[];
 }
 
-export interface SponsorLogoData {
-	href: string;
-	logos: {
-		dark: ImageMetadata;
-		light: ImageMetadata;
-	};
-	placement: number;
-	title: string;
-}
-
-const { sponsorGroups } = Astro.props;
+const { sponsors } = Astro.props;
+const sponsorGroups = _.groupBy(sponsors, (sponsor) => sponsor.placement);
 ---
 
 <div class="sponsor-logos">

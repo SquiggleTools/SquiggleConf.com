@@ -7,11 +7,13 @@ export const historicalDataByYear = {
 		date: "October 3-4, 2024",
 		peopleBySlug: data2024.peopleBySlug,
 		sessionsBySlug: data2024.talksBySlug,
+		sponsors: data2024.sponsors,
 	},
 	2025: {
 		date: "September 18-19, 2025",
 		peopleBySlug: data2025.peopleBySlug,
 		sessionsBySlug: data2025.sessionsBySlug,
+		sponsors: data2025.sponsors,
 	},
 } satisfies Record<string, HistoricalDataForYear>;
 
