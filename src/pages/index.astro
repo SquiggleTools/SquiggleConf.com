@@ -520,7 +520,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							class="event-image-circle"
 							effect="grow"
 							loading="eager"
-							radius="999px"
+							radius="var(--radiusPill)"
 							src={bigRav}
 						/>
 						<TimelineCopy>
@@ -544,11 +544,11 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top-heading {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
+		font-size: var(--fontSizeDisplay);
 		font-style: italic;
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1;
 		padding-top: 1rem;
 		position: relative;
@@ -556,7 +556,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-intro {
-		color: var(--timeline-copy-color);
+		color: var(--colorCopy);
 		font-size: clamp(1rem, 1.35vw, 1.12rem);
 		line-height: 1.6;
 		padding: 0 0 0 2rem;
@@ -600,15 +600,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.timeline-grid-intro h3 {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 0.98;
 	}
 
 	.timeline-grid-intro p {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		font-size: clamp(0.92rem, 1.3vw, 1rem);
 		line-height: 1.2;
 	}
@@ -625,7 +625,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		line-height: 1.45;
 		margin: 0;
 		max-width: 62ch;
-		transition: color var(--timeline-hover-duration) ease;
+		transition: color var(--transitionNormal) ease;
 	}
 
 	.timeline-venue-decoration {
@@ -667,14 +667,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.lunch-copy a {
-		color: var(--timeline-link-color);
-		font-weight: 700;
+		color: var(--colorLink);
+		font-weight: var(--fontWeightHeavy);
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
 	}
 
 	.lunch-links {
-		color: var(--timeline-link-color);
+		color: var(--colorLink);
 		display: grid;
 		gap: 0.42rem;
 		margin: 0;
@@ -682,12 +682,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.lunch-links li::marker {
-		color: var(--timeline-link-color);
+		color: var(--colorLink);
 	}
 
 	.lunch-links a {
-		color: var(--timeline-link-color);
-		font-weight: 600;
+		color: var(--colorLink);
+		font-weight: var(--fontWeightBolder);
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
 	}
@@ -748,10 +748,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.fireside-topic {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.2rem;
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.05;
 		margin: 0 0 0.25rem;
 	}
