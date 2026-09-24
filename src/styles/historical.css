@@ -1,10 +1,9 @@
 @layer past {
 	:root {
 		--colorCream: #edebe4;
-		--colorOffWhite: #eaeaff;
 
 		--colorBackdropLight: var(--colorCream);
-		--colorBackdropOff: var(--colorOffWhite);
+		--colorBackdropOff: var(--colorWhiteIsh);
 		--colorInverted: var(--colorCream);
 		--colorForegroundBody: #203238;
 		--colorSubtleLight: #a5e2fc;

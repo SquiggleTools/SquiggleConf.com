@@ -1,3 +1,8 @@
+/*
+ * Breakpoints (media queries can't use custom properties), in range syntax:
+ * 490px, 700px, 819px, 900px, 1117px
+ */
+
 :root {
 	color-scheme: light;
 
@@ -9,6 +14,7 @@
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
+	--colorBlue6: #04142d;
 	--colorRed1: #ffbfc2;
 	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
 	--colorTextShadowDark: rgba(0, 0, 7, 0.25);

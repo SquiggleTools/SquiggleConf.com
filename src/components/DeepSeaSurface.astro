@@ -3,7 +3,7 @@
 </div>
 
 <style>
-	/* Main gradient stops — light mode initial values */
+	/* Main gradient stops: initial-values are the light mode colors (they can't use var()) */
 	@property --dss-grad-1 {
 		syntax: "<color>";
 		inherits: false;
@@ -45,7 +45,7 @@
 		initial-value: #aedff5;
 	}
 
-	/* ::after overlay colors — light mode initial values */
+	/* ::after overlay colors: initial-values are the light mode colors */
 	@property --dss-after-radial-1 {
 		syntax: "<color>";
 		inherits: false;
@@ -78,14 +78,6 @@
 	}
 
 	.deep-sea-surface {
-		--dss-grad-1: #f8fcff;
-		--dss-grad-2: #effaff;
-		--dss-grad-3: #e6f7fe;
-		--dss-grad-4: #d8f3ff;
-		--dss-grad-5: #c8edfb;
-		--dss-grad-6: #c9effd;
-		--dss-grad-7: #c8efff;
-		--dss-grad-8: #aedff5;
 		background: linear-gradient(
 				to bottom,
 				var(--dss-grad-1),
@@ -116,22 +108,15 @@
 	:global(html.dark) .deep-sea-surface {
 		--dss-grad-1: #004077;
 		--dss-grad-2: #013a6c;
-		--dss-grad-3: #032e56;
+		--dss-grad-3: var(--colorBlue4);
 		--dss-grad-4: #042446;
 		--dss-grad-5: #042140;
 		--dss-grad-6: #041b37;
-		--dss-grad-7: #041630;
-		--dss-grad-8: #04142d;
-		color: var(--colorForegroundEmphasized);
+		--dss-grad-7: var(--colorBlue5);
+		--dss-grad-8: var(--colorBlue6);
 	}
 
 	.deep-sea-surface::after {
-		--dss-after-radial-1: rgba(201, 226, 252, 0.49);
-		--dss-after-radial-2: rgba(245, 245, 255, 0.7);
-		--dss-after-r1-a: rgba(4, 25, 48, 0.05);
-		--dss-after-r1-b: rgba(17, 109, 154, 0.1);
-		--dss-after-r2-a: rgba(4, 25, 48, 0.03);
-		--dss-after-r2-b: rgba(31, 127, 171, 0.04);
 		background:
 			radial-gradient(
 				circle at top,
