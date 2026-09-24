@@ -1,6 +1,6 @@
 ---
 import type { PersonCardData } from "~/components/home/types";
-import Avatar from "./Avatar.astro";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
 	person: PersonCardData;
@@ -10,10 +10,11 @@ const { person } = Astro.props;
 ---
 
 <article class="timeline-host-card">
-	<Avatar
+	<TimelineImage
 		alt={person.name}
-		image={person.image}
+		effect="zoom"
 		placeholder={person.placeholder}
+		src={person.image}
 	/>
 	<div class="timeline-host-copy">
 		<h3>{person.name}</h3>

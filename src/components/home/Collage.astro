@@ -4,9 +4,7 @@ import type {
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
-import { Image } from "astro:assets";
-
-import PlaceholderMark from "./PlaceholderMark.astro";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
 	ariaLabel?: string;
@@ -25,11 +23,6 @@ const {
 	photos,
 	shape = "photo",
 } = Astro.props;
-
-const effect =
-	shape === "avatar"
-		? "timeline-image-zoom"
-		: layout !== "duo" && "timeline-image-grow";
 ---
 
 <div
@@ -40,26 +33,18 @@ const effect =
 >
 	{
 		photos.map((photo, index) => (
-			<div
-				class:list={[
-					"collage-item",
-					"timeline-image",
-					effect,
-					`collage-item-${index + 1}`,
-					photo.placeholder && "collage-item-placeholder",
-				]}
-			>
-				<Image
+			<div class={`collage-item collage-item-${index + 1}`}>
+				<TimelineImage
 					alt={decorative || photo.decorative ? "" : photo.alt}
-					aria-hidden={decorative || photo.decorative ? "true" : undefined}
-					class="collage-photo-image"
-					loading="lazy"
-					src={photo.src}
-					style={
-						photo.objectPosition && `object-position: ${photo.objectPosition}`
+					effect={
+						shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
 					}
+					loading="lazy"
+					objectPosition={photo.objectPosition}
+					placeholder={photo.placeholder}
+					radius={shape === "avatar" ? "999px" : undefined}
+					src={photo.src}
 				/>
-				{photo.placeholder && <PlaceholderMark />}
 			</div>
 		))
 	}
@@ -76,15 +61,9 @@ const effect =
 	}
 
 	.collage-item {
+		display: grid;
 		position: absolute;
-	}
-
-	.collage-avatar .collage-item {
-		border-radius: 999px;
-	}
-
-	.collage-item.collage-item-placeholder :global(img) {
-		filter: blur(2px);
+		transition: transform var(--timeline-hover-duration) ease;
 	}
 
 	.collage-duo {
@@ -108,7 +87,7 @@ const effect =
 		height: 7rem;
 		left: 6rem;
 		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(35deg) scale(1);
+		transform: var(--timeline-collage-duo-1) rotate(35deg);
 		width: 5rem;
 	}
 
@@ -116,7 +95,7 @@ const effect =
 		height: 8rem;
 		left: 1rem;
 		top: -4rem;
-		transform: translate3d(0, 0, 0) rotate(-10deg) scale(1);
+		transform: var(--timeline-collage-duo-2) rotate(-10deg);
 		width: 6rem;
 	}
 

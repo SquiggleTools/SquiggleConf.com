@@ -22,7 +22,7 @@ export interface ExploreChoiceData {
 	badgeLabel?: string;
 	description: string;
 	image: ImageMetadata;
-	imageVariant?: "rest";
+	objectPosition?: string;
 	title: string;
 }
 
@@ -62,7 +62,7 @@ export type TimelineEntryId =
 	| "talks-late"
 	| "talks-morning";
 
-export type TimelineEntryVariant = "break" | "fireside" | "fun-run";
+export type TimelineEntryVariant = "break" | "fun-run";
 
 export type TimelineTimeMode = "point" | "range";
 

@@ -76,9 +76,17 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 </div>
 
 <style>
+	/* Active-state variables that images and copy inside the entry read. */
 	.timeline-content {
 		--timeline-card-pointer-x: 50%;
 		--timeline-card-pointer-y: 50%;
+		--timeline-collage-duo-1: translate3d(0, 0, 0);
+		--timeline-collage-duo-2: translate3d(0, 0, 0);
+		--timeline-entry-copy-color: var(--timeline-copy-color);
+		--timeline-image-grow-border-width: var(--timeline-image-border-width);
+		--timeline-image-scale: 1;
+		--timeline-image-shadow: var(--timeline-image-shadow-rest);
+		--timeline-image-zoom: 1;
 		isolation: isolate;
 		margin: 1rem 0;
 		padding: 1.35rem 0.5rem 1.5rem 2rem;
@@ -141,15 +149,6 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		min-height: 14rem;
 	}
 
-	.timeline-content-fireside :global(.timeline-copy) {
-		align-content: center;
-		align-self: center;
-	}
-
-	.timeline-content-fun-run :global(.timeline-copy) {
-		max-width: 50%;
-	}
-
 	.timeline-content h2 {
 		color: var(--timeline-heading-color);
 		font-family: var(--fontFamilyHeading);
@@ -204,8 +203,12 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
 	@media (width >= 900px) {
 		.timeline-content:is(:hover, :focus-within) {
-			--timeline-image-shadow: var(--timeline-image-shadow-active);
+			--timeline-collage-duo-1: translate3d(1rem, -1rem, 0) scale(1.18);
+			--timeline-collage-duo-2: translate3d(-0.25rem, -2rem, 0) scale(1.18);
+			--timeline-entry-copy-color: var(--timeline-copy-hover-color);
+			--timeline-image-grow-border-width: 1px;
 			--timeline-image-scale: 1.25;
+			--timeline-image-shadow: var(--timeline-image-shadow-active);
 			--timeline-image-zoom: 1.1;
 		}
 
@@ -226,27 +229,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			transform: translateX(0.08rem);
 		}
 
-		.timeline-content:is(:hover, :focus-within) :global(.timeline-image-grow) {
-			border-width: 1px;
-		}
-
-		.timeline-content:is(:hover, :focus-within)
-			:global(.collage-duo .collage-item-1) {
-			transform: translate3d(1rem, -1rem, 0) rotate(35deg) scale(1.18);
-		}
-
-		.timeline-content:is(:hover, :focus-within)
-			:global(.collage-duo .collage-item-2) {
-			transform: translate3d(-0.25rem, -2rem, 0) rotate(-10deg) scale(1.18);
-		}
-
 		.timeline-content:is(:hover, :focus-within)
 			:is(.timeline-subtitle, .timeline-mobile-location) {
 			color: var(--timeline-muted-hover-color);
-		}
-
-		.timeline-content:is(:hover, :focus-within) :global(.timeline-copy p) {
-			color: var(--timeline-copy-hover-color);
 		}
 	}
 
@@ -300,8 +285,11 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-content[data-mobile-active] {
-			--timeline-image-shadow: var(--timeline-image-shadow-active);
+			--timeline-collage-duo-1: translate3d(0.28rem, -0.3rem, 0) scale(1.06);
+			--timeline-collage-duo-2: translate3d(-0.08rem, -0.42rem, 0) scale(1.06);
+			--timeline-entry-copy-color: var(--timeline-copy-hover-color);
 			--timeline-image-scale: 1.12;
+			--timeline-image-shadow: var(--timeline-image-shadow-active);
 			--timeline-image-zoom: 1.07;
 		}
 
@@ -328,37 +316,6 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		.timeline-content[data-mobile-active]
 			:is(.timeline-subtitle, .timeline-mobile-location) {
 			color: var(--timeline-muted-hover-color);
-		}
-
-		.timeline-content[data-mobile-active] :global(.timeline-copy p) {
-			color: var(--timeline-copy-hover-color);
-		}
-
-		.timeline-content[data-mobile-active]
-			:global(.collage-duo .collage-item-1) {
-			transform: translate3d(0.28rem, -0.3rem, 0) rotate(35deg) scale(1.06);
-		}
-
-		.timeline-content[data-mobile-active]
-			:global(.collage-duo .collage-item-2) {
-			transform: translate3d(-0.08rem, -0.42rem, 0) rotate(-10deg) scale(1.06);
-		}
-
-		.timeline-content-fun-run :global(.timeline-copy) {
-			margin-top: 0.15rem;
-			max-width: none;
-		}
-
-		[data-timeline-entry="simons-imax-theater"] :global(.event-body) {
-			grid-template-columns: 1fr;
-			gap: 0.85rem;
-		}
-
-		[data-timeline-entry="simons-imax-theater"]
-			:global(.event-hero-image-wide) {
-			justify-self: start;
-			max-width: 100%;
-			width: min(100%, 14rem);
 		}
 	}
 </style>

@@ -1,6 +1,6 @@
 ---
 import type { TalkCardData } from "~/components/home/types";
-import Avatar from "./Avatar.astro";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
 	talk: TalkCardData;
@@ -10,7 +10,12 @@ const { talk } = Astro.props;
 ---
 
 <article class="talk-card">
-	<Avatar alt={talk.name} image={talk.image} placeholder={talk.placeholder} />
+	<TimelineImage
+		alt={talk.name}
+		effect="zoom"
+		placeholder={talk.placeholder}
+		src={talk.image}
+	/>
 	<div class="talk-copy">
 		<h3>{talk.title}</h3>
 		<p class="talk-speaker">{talk.name}</p>

@@ -74,6 +74,15 @@ html.dark {
 	--colorTextShadow: var(--colorTextShadowDark);
 }
 
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	html,
 	body {

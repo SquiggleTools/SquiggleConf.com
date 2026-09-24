@@ -42,7 +42,7 @@ import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
-import TimelineHeroImage from "~/components/home/timeline/TimelineHeroImage.astro";
+import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
 import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
@@ -199,12 +199,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="8am"
 				>
-					<div class="event-body">
-						<TimelineHeroImage
+					<div class="event-body imax-body">
+						<TimelineImage
 							alt="Presenter on stage inside the Simons IMAX Theater"
-							pinned
-							shape="wide"
+							class="event-image-wide imax-image"
+							effect="zoom"
+							loading="eager"
 							src={simonsTheater}
+							zoomOrigin="top right"
 						/>
 						<TimelineCopy>
 							<p>
@@ -375,11 +377,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="6pm"
 				>
 					<div class="event-body">
-						<TimelineHeroImage
+						<TimelineImage
 							alt="Urban Wild Boston logo"
-							pinned
-							shape="wide"
+							class="event-image-wide"
+							effect="zoom"
+							loading="eager"
 							src={urbanwildLogo}
+							zoomOrigin="top right"
 						/>
 						<TimelineCopy>
 							<p>
@@ -437,7 +441,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Fireside Chat"
 					venue="urbanWild"
 					time="7pm"
-					variant="fireside"
 				>
 					<div class="event-body">
 						<Collage
@@ -453,7 +456,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy>
+						<TimelineCopy class="fireside-copy">
 							<h3 class="fireside-topic">Topic To Be Announced</h3>
 							<p>
 								Join us for a fireside chat with a notable JavaScript-y friend
@@ -502,9 +505,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="9pm"
 				>
 					<div class="event-body">
-						<TimelineHeroImage
+						<TimelineImage
 							alt="Big Rav band portrait"
-							shape="circle"
+							class="event-image-circle"
+							effect="grow"
+							loading="eager"
+							radius="999px"
 							src={bigRav}
 						/>
 						<TimelineCopy>
@@ -608,7 +614,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.timeline-copy p {
-		color: var(--timeline-copy-color);
+		color: var(--timeline-entry-copy-color);
 		font-size: clamp(0.95rem, 1.35vw, 1rem);
 		line-height: 1.45;
 		margin: 0;
@@ -693,6 +699,25 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
+	.fun-run-body .timeline-copy {
+		max-width: 50%;
+	}
+
+	.fireside-copy {
+		align-content: center;
+		align-self: center;
+	}
+
+	.event-image-wide {
+		height: 8rem;
+		width: 14rem;
+	}
+
+	.event-image-circle {
+		height: 8rem;
+		width: 8rem;
+	}
+
 	.event-body {
 		display: grid;
 		gap: 1rem;
@@ -762,6 +787,22 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			column-gap: 0.9rem;
 			display: grid;
 			grid-template-columns: minmax(0, 1fr) 8rem;
+		}
+
+		.fun-run-body .timeline-copy {
+			margin-top: 0.15rem;
+			max-width: none;
+		}
+
+		.imax-body {
+			gap: 0.85rem;
+			grid-template-columns: 1fr;
+		}
+
+		.imax-image {
+			justify-self: start;
+			max-width: 100%;
+			width: min(100%, 14rem);
 		}
 
 		.timeline-venue-decoration-turtle {

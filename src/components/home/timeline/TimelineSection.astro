@@ -38,9 +38,6 @@
 			rgb(from var(--colorBlue5) r g b / 12%);
 		--timeline-image-shadow-active: 0 0.55rem 1rem
 			rgb(from var(--colorBlue5) r g b / 18%);
-		--timeline-image-shadow: var(--timeline-image-shadow-rest);
-		--timeline-image-scale: 1;
-		--timeline-image-zoom: 1;
 		--timeline-hover-duration: 220ms;
 		isolation: isolate;
 		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
@@ -77,58 +74,6 @@
 			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 14%);
 		--timeline-card-glow-inner: color-mix(in srgb, var(--colorBlue2), white 8%);
 		--timeline-card-glow-outer: rgb(from var(--colorBlue2) r g b / 52%);
-	}
-
-	/* Shared frame for timeline images; :where() lets components override it. */
-	:global(:where(.timeline-image)) {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
-		border-radius: 0.35rem;
-		box-shadow: var(--timeline-image-shadow);
-		box-sizing: border-box;
-		overflow: hidden;
-		transform-origin: center;
-		transition:
-			border-width var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease,
-			scale var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-	}
-
-	:global(:where(.timeline-image) :is(picture, img)) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	:global(:where(.timeline-image) img) {
-		border-radius: inherit;
-		object-fit: cover;
-		transform-origin: center;
-		transition:
-			filter var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
-		user-select: none;
-	}
-
-	/* Frames that grow, or whose images zoom, while their entry is active. */
-	:global(:where(.timeline-image-grow)) {
-		scale: var(--timeline-image-scale);
-	}
-
-	:global(:where(.timeline-image-zoom) img) {
-		transform: scale(var(--timeline-image-zoom));
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.timeline-section,
-		.timeline-section :global(*),
-		.timeline-section :global(*::before),
-		.timeline-section :global(*::after) {
-			animation: none !important;
-			transition: none !important;
-		}
 	}
 </style>
 

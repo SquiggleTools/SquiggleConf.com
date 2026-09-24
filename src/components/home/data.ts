@@ -169,7 +169,7 @@ export const exploreChoices = [
 		description:
 			"Take a quiet block to recharge, reset, and come back ready for the evening without over-scheduling the day.",
 		image: rest1,
-		imageVariant: "rest",
+		objectPosition: "10% center",
 		title: "Rest Up",
 	},
 ] satisfies readonly ExploreChoiceData[];

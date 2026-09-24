@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
-
 import type { ExploreChoiceData } from "~/components/home/types";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
 	choice: ExploreChoiceData;
@@ -15,16 +14,13 @@ const { choice } = Astro.props;
 		<span class="explore-radio"><span class="explore-radio-dot"></span></span>
 	</div>
 	<div class="explore-card-body">
-		<div
-			class:list={[
-				"explore-photo",
-				"timeline-image",
-				"timeline-image-grow",
-				choice.imageVariant === "rest" && "explore-photo-rest",
-			]}
-		>
-			<Image alt={choice.alt} src={choice.image} />
-		</div>
+		<TimelineImage
+			alt={choice.alt}
+			class="explore-photo"
+			effect="grow"
+			objectPosition={choice.objectPosition}
+			src={choice.image}
+		/>
 		<div class="explore-copy">
 			<h3>{choice.title}</h3>
 			<p>{choice.description}</p>
@@ -120,10 +116,6 @@ const { choice } = Astro.props;
 		height: 4.8rem;
 		min-width: 4.8rem;
 		width: 4.8rem;
-	}
-
-	.explore-photo-rest :global(img) {
-		object-position: 10% center;
 	}
 
 	.explore-copy {

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import type { LunchSpotData } from "~/components/home/types";
+import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
 	spots: readonly LunchSpotData[];
@@ -15,7 +16,7 @@ const { spots } = Astro.props;
 	data-lunch-carousel
 	aria-label="Lunch options photo carousel"
 >
-	<div class="lunch-carousel-viewport timeline-image">
+	<TimelineImage radius="0.9rem">
 		<div class="lunch-carousel-track" data-lunch-track>
 			{
 				spots.map((spot, index) => (
@@ -38,7 +39,7 @@ const { spots } = Astro.props;
 				))
 			}
 		</div>
-	</div>
+	</TimelineImage>
 	<div class="lunch-carousel-dots" aria-label="Lunch image navigation">
 		{
 			spots.map((spot, index) => (
@@ -63,11 +64,6 @@ const { spots } = Astro.props;
 		width: 100%;
 	}
 
-	.lunch-carousel-viewport {
-		border-radius: 0.9rem;
-		position: relative;
-	}
-
 	.lunch-carousel-track {
 		display: flex;
 		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
@@ -88,6 +84,13 @@ const { spots } = Astro.props;
 			rgb(from white r g b / 3%)
 		);
 		user-select: none;
+	}
+
+	.lunch-slide-image img {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
 	}
 
 	.lunch-slide-caption {
