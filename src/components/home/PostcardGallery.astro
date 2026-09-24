@@ -51,7 +51,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 <style>
 	.postcard {
 		aspect-ratio: 6 / 4;
-		border-radius: 0.45rem;
+		border-radius: var(--radiusSmall);
 		box-shadow:
 			0 0.08rem 0 rgb(from white r g b / 50%),
 			0 0.35rem 0.75rem rgb(from var(--colorBlue5) r g b / 14%),
@@ -60,8 +60,8 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		overflow: hidden;
 		position: relative;
 		transition:
-			box-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
+			box-shadow var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease;
 		width: 100%;
 	}
 
@@ -89,7 +89,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		gap: 0.5rem;
 		justify-items: center;
 		width: min(100%, 100vw - 2rem);
-		transition: transform var(--timeline-hover-duration) ease;
+		transition: transform var(--transitionNormal) ease;
 	}
 
 	@keyframes postcard-idle-wiggle {
@@ -126,7 +126,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 	.postcard-flip-scene {
 		overflow: visible;
 		perspective: 1200px;
-		transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition: transform var(--transitionMedium) var(--transitionEaseOut);
 		width: 100%;
 	}
 
@@ -140,7 +140,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		pointer-events: none;
 		position: relative;
 		transform-style: preserve-3d;
-		transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition: transform var(--transitionSlow) var(--transitionEaseOut);
 		width: 100%;
 	}
 
@@ -249,7 +249,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 	}
 
 	.postcard-note {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		font-size: clamp(0.82rem, 1.15vw, 0.92rem);
 		line-height: 1.3;
 		margin: 0;
@@ -266,7 +266,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		position: absolute;
 		top: calc(100% + 0.55rem);
 		transform: translateX(-50%);
-		transition: opacity 240ms ease;
+		transition: opacity var(--transitionNormal) ease;
 		width: min(100%, 20rem);
 	}
 

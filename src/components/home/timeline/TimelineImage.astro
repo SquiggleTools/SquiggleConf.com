@@ -67,18 +67,17 @@ const imageStyle = [
 <style>
 	.timeline-image {
 		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
-		border-radius: 0.35rem;
+		border: var(--sizeImageBorder) solid var(--colorImageBorder);
+		border-radius: var(--radiusSmall);
 		box-shadow: var(--timeline-image-shadow);
 		box-sizing: border-box;
 		overflow: hidden;
 		position: relative;
 		transform-origin: center;
 		transition:
-			border-width var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease,
-			scale var(--timeline-hover-duration) ease;
+			border-width var(--transitionNormal) ease,
+			box-shadow var(--transitionNormal) ease,
+			scale var(--transitionNormal) ease;
 	}
 
 	.timeline-image-grow {
@@ -93,8 +92,8 @@ const imageStyle = [
 		object-fit: cover;
 		transform-origin: center;
 		transition:
-			filter var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
+			filter var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease;
 		user-select: none;
 		width: 100%;
 	}
