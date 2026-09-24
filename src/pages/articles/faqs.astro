@@ -1,5 +1,4 @@
 ---
-import BodyText from "~/components/BodyText.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
@@ -104,12 +103,12 @@ Note that talk tickets _do not_ include:
 ---
 
 <ArticleLayout article="faqs" introWidth="normal">
-	<Fragment slot="intro">
-		<BodyText>
-			Got questions not covered here? Reach out, we'd be happy to talk!
-			<a href="mailto:questions@squiggleconf.com">questions@squiggleconf.com</a>
-		</BodyText>
+	<Fragment slot="lead">
+		Got questions not covered here? Reach out, we'd be happy to talk!
+		<a href="mailto:questions@squiggleconf.com">questions@squiggleconf.com</a>
+	</Fragment>
 
+	<Fragment slot="intro">
 		<FAQSections sections={faqs.map(([title, pairs]) => ({ title, pairs }))} />
 	</Fragment>
 </ArticleLayout>

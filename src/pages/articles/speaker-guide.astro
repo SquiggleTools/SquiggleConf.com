@@ -10,12 +10,12 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
 <ArticleLayout article="speaker-guide">
-	<Fragment slot="intro">
-		<BodyText>
-			This page has the high-level information you need to know as a speaker at
-			SquiggleConf.
-		</BodyText>
+	<Fragment slot="lead">
+		This page has the high-level information you need to know as a speaker at
+		SquiggleConf.
+	</Fragment>
 
+	<Fragment slot="intro">
 		<BodyText>That includes:</BodyText>
 
 		<BodyList as="ul">

@@ -1,4 +1,5 @@
 ---
+import BodyText from "~/components/BodyText.astro";
 import ContentArea from "~/components/ContentArea.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard, {
@@ -28,8 +29,11 @@ const { description, title } =
 	</Hero>
 
 	{
-		Astro.slots.has("intro") && (
-			<ContentArea class="article-intro" width={introWidth}>
+		Astro.slots.has("lead") && (
+			<ContentArea width={introWidth}>
+				<BodyText class="article-lead">
+					<slot name="lead" />
+				</BodyText>
 				<slot name="intro" />
 			</ContentArea>
 		)
@@ -39,7 +43,7 @@ const { description, title } =
 </PageLayout>
 
 <style>
-	.article-intro > :global(:first-child) {
+	.article-lead {
 		margin: 5rem auto 1.5rem;
 	}
 </style>
