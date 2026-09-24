@@ -11,6 +11,7 @@ export interface CollageFrame {
 
 export type CollageLayout =
 	| "avatar-duo"
+	| "avatar-pair"
 	| "avatar-trio"
 	| "duo"
 	| "feature-five"

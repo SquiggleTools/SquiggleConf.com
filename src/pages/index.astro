@@ -1,9 +1,7 @@
 ---
 import "@fontsource/shantell-sans";
 
-import placeholder8 from "~/assets/2027/placeholder-8.webp";
 import placeholder9 from "~/assets/2027/placeholder-9.webp";
-import placeholder13 from "~/assets/2027/placeholder-13.webp";
 import Hero from "~/components/hero/Hero.astro";
 import {
 	bigRav,
@@ -18,7 +16,9 @@ import {
 	milkcookies2,
 	milkcookies3,
 	networking,
+	scottTolinski,
 	simonsTheater,
+	syntax,
 	talkBlocks,
 	thePrimeagen,
 	timelineMCs,
@@ -28,6 +28,7 @@ import {
 	urbanwild4,
 	urbanwild5,
 	urbanwildLogo,
+	wesBos,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
@@ -407,33 +408,37 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<TimelineMedia>
 						<Collage
 							ariaLabel="Podcast recording live guests"
-							layout="avatar-trio"
+							layout="avatar-pair"
 							photos={[
-								{
-									alt: "ThePrimeagen portrait",
-									src: thePrimeagen,
-								},
-								{
-									alt: "Placeholder portrait",
-									placeholder: true,
-									src: placeholder13,
-								},
-								{
-									alt: "Placeholder portrait",
-									placeholder: true,
-									src: placeholder8,
-								},
+								{ alt: "Syntax logo", src: syntax },
+								{ alt: "ThePrimeagen portrait", src: thePrimeagen },
 							]}
 							shape="avatar"
 						/>
 						<TimelineCopy>
 							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
 							<p>
-								Join ThePrimeagen in a live podcast recording discussing the ins
-								and outs of how to succeed and be happy in today's tech
-								industry.
+								Join Syntax.fm and ThePrimeagen in a live podcast recording
+								discussing the ins and outs of how to succeed and be happy in
+								today's tech industry.
 							</p>
-							<p class="fireside-host">hosts to be announced</p>
+							<div class="podcast-hosts">
+								<TimelineImage
+									alt="Wes Bos portrait"
+									class="podcast-host-image"
+									radius="var(--radiusPill)"
+									src={wesBos}
+								/>
+								<TimelineImage
+									alt="Scott Tolinski portrait"
+									class="podcast-host-image"
+									radius="var(--radiusPill)"
+									src={scottTolinski}
+								/>
+								<p class="fireside-host">
+									Hosted by Wes Bos and Scott Tolinski
+								</p>
+							</div>
 						</TimelineCopy>
 					</TimelineMedia>
 				</TimelineEntry>
@@ -696,6 +701,23 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.fireside-host {
 		font-style: italic;
+	}
+
+	.podcast-hosts {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+	}
+
+	.podcast-host-image {
+		height: 2.75rem;
+		width: 2.75rem;
+	}
+
+	.podcast-hosts .fireside-host {
+		margin: 0 0 0 0.5rem;
 	}
 
 	@media (width < 900px) {
