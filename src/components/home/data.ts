@@ -32,8 +32,10 @@ import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
 import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
 import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
+import scottTolinski from "~/assets/avatars/scott-tolinski.webp";
 import thePrimeagen from "~/assets/avatars/theprimeagen.webp";
 import tjDevries from "~/assets/avatars/tj-devries.webp";
+import wesBos from "~/assets/avatars/wes-bos.webp";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg?raw";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg?raw";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg?raw";
@@ -384,6 +386,7 @@ export {
 	postcardBack,
 	postcardFront,
 	rest1,
+	scottTolinski,
 	simonsTheater,
 	terminalShop,
 	thePrimeagen,
@@ -393,4 +396,5 @@ export {
 	urbanwild4,
 	urbanwild5,
 	urbanwildLogo,
+	wesBos,
 };
