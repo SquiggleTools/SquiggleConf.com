@@ -1,0 +1,31 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+	alt: string;
+	class?: string;
+	height?: number;
+	/** One image per theme; only the current theme's is displayed. */
+	srcs: Record<"dark" | "light", ImageMetadata>;
+}
+
+const { class: className, srcs, ...rest } = Astro.props;
+---
+
+{
+	(["dark", "light"] as const).map((theme) => (
+		<Image
+			class:list={[className, `themed-image-${theme}`]}
+			src={srcs[theme]}
+			{...rest}
+		/>
+	))
+}
+
+<style>
+	:global(html.dark) .themed-image-light,
+	:global(html:not(.dark)) .themed-image-dark {
+		display: none;
+	}
+</style>
