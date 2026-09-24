@@ -95,27 +95,27 @@ const tiers = [
 <style>
 	.past-sponsors {
 		--texture-stripe: rgb(from var(--colorBlue3) r g b / 6%);
-		--texture-dot-1: rgba(255, 255, 255, 0.36);
-		--texture-dot-2: rgba(255, 255, 255, 0.26);
-		--texture-dot-3: rgba(255, 255, 255, 0.24);
-		--overlay-top: rgba(255, 255, 255, 0.42);
-		--overlay-bottom: rgba(12, 71, 103, 0.14);
-		--highlight: rgba(255, 255, 255, 0.7);
-		--kicker-background: rgba(255, 255, 255, 0.6);
+		--texture-dot-1: rgb(from white r g b / 36%);
+		--texture-dot-2: rgb(from white r g b / 26%);
+		--texture-dot-3: rgb(from white r g b / 24%);
+		--overlay-top: rgb(from white r g b / 42%);
+		--overlay-bottom: rgb(from var(--colorBlue4) r g b / 14%);
+		--highlight: rgb(from white r g b / 70%);
+		--kicker-background: rgb(from white r g b / 60%);
 		--kicker-border: rgb(from var(--colorBlue3) r g b / 18%);
-		--kicker-color: #0a577d;
+		--kicker-color: var(--colorBlue3);
 		--heading-color: var(--colorBlue4);
 		--copy-color: rgb(from var(--colorBlue4) r g b / 78%);
-		--panel-top: rgba(255, 255, 255, 0.72);
-		--panel-bottom: rgba(223, 242, 250, 0.58);
-		--panel-base: rgba(184, 224, 240, 0.52);
-		--panel-shadow: 0 1.1rem 2.4rem rgba(47, 109, 143, 0.14);
+		--panel-top: rgb(from white r g b / 72%);
+		--panel-bottom: rgb(from var(--colorBlueBright1) r g b / 58%);
+		--panel-base: rgb(from var(--colorBlue1) r g b / 52%);
+		--panel-shadow: 0 1.1rem 2.4rem rgb(from var(--colorBlue3) r g b / 14%);
 		--logo-hover-background: rgb(from var(--colorBlue3) r g b / 6%);
 		--logo-hover-ring: rgb(from var(--colorBlue3) r g b / 14%);
 		background:
 			radial-gradient(
 				circle at 18% 16%,
-				rgba(17, 127, 171, 0.18),
+				rgb(from var(--colorBlue3) r g b / 18%),
 				transparent 24%
 			),
 			radial-gradient(
@@ -125,15 +125,18 @@ const tiers = [
 			),
 			radial-gradient(
 				circle at 52% 100%,
-				rgba(144, 198, 222, 0.66),
+				rgb(
+					from color-mix(in srgb, var(--colorBlue1), var(--colorBlue3) 25%) r g
+						b / 66%
+				),
 				transparent 42%
 			),
 			linear-gradient(
 				180deg,
 				var(--colorBlueBright2) 0%,
-				#d8eff8 28%,
-				#c3e2ef 64%,
-				#add4e6 100%
+				var(--colorBlueBright1) 28%,
+				var(--colorBlue1) 64%,
+				color-mix(in srgb, var(--colorBlue1), var(--colorBlue3) 10%) 100%
 			);
 		overflow: clip;
 		position: relative;
@@ -141,46 +144,46 @@ const tiers = [
 	}
 
 	:global(html.dark) .past-sponsors {
-		--texture-stripe: rgba(188, 227, 255, 0.04);
-		--texture-dot-1: rgba(255, 255, 255, 0.13);
-		--texture-dot-2: rgba(255, 255, 255, 0.1);
-		--texture-dot-3: rgba(255, 255, 255, 0.08);
-		--overlay-top: rgba(196, 237, 255, 0.14);
-		--overlay-bottom: rgba(2, 14, 31, 0.48);
-		--highlight: rgba(255, 255, 255, 0.12);
-		--kicker-background: rgba(231, 246, 255, 0.09);
-		--kicker-border: rgba(188, 227, 255, 0.2);
-		--kicker-color: #d8f4ff;
-		--heading-color: #f2fbff;
-		--copy-color: rgba(221, 240, 255, 0.84);
-		--panel-top: rgba(194, 235, 255, 0.12);
-		--panel-bottom: rgba(194, 235, 255, 0.03);
+		--texture-stripe: rgb(from var(--colorBlue1) r g b / 4%);
+		--texture-dot-1: rgb(from white r g b / 13%);
+		--texture-dot-2: rgb(from white r g b / 10%);
+		--texture-dot-3: rgb(from white r g b / 8%);
+		--overlay-top: rgb(from var(--colorBlue1) r g b / 14%);
+		--overlay-bottom: rgb(from var(--colorBlue6) r g b / 48%);
+		--highlight: rgb(from white r g b / 12%);
+		--kicker-background: rgb(from var(--colorWhiteIsh) r g b / 9%);
+		--kicker-border: rgb(from var(--colorBlue1) r g b / 20%);
+		--kicker-color: var(--colorWhiteIsh);
+		--heading-color: white;
+		--copy-color: rgb(from var(--colorWhiteIsh) r g b / 84%);
+		--panel-top: rgb(from var(--colorBlue1) r g b / 12%);
+		--panel-bottom: rgb(from var(--colorBlue1) r g b / 3%);
 		--panel-base: rgb(from var(--colorBlue6) r g b / 42%);
-		--panel-highlight: rgba(255, 255, 255, 0.1);
-		--panel-shadow: 0 1.5rem 3rem rgba(3, 12, 28, 0.34);
-		--logo-hover-background: rgba(218, 242, 255, 0.08);
-		--logo-hover-ring: rgba(195, 236, 255, 0.16);
+		--panel-highlight: rgb(from white r g b / 10%);
+		--panel-shadow: 0 1.5rem 3rem rgb(from var(--colorBlue6) r g b / 34%);
+		--logo-hover-background: rgb(from var(--colorWhiteIsh) r g b / 8%);
+		--logo-hover-ring: rgb(from var(--colorBlue1) r g b / 16%);
 		background:
 			radial-gradient(
 				circle at 20% 18%,
-				rgba(79, 200, 255, 0.16),
+				rgb(from var(--colorBlue2) r g b / 16%),
 				transparent 24%
 			),
 			radial-gradient(
 				circle at 82% 12%,
-				rgba(113, 255, 227, 0.12),
+				rgb(from var(--colorBlue2) r g b / 12%),
 				transparent 18%
 			),
 			radial-gradient(
 				circle at 50% 100%,
-				rgba(10, 77, 145, 0.54),
+				rgb(from var(--colorBlue3) r g b / 54%),
 				transparent 44%
 			),
 			linear-gradient(
 				180deg,
-				#082647 0%,
-				#07315b 30%,
-				#062448 62%,
+				color-mix(in srgb, var(--colorBlue4), var(--colorBlue5)) 0%,
+				var(--colorBlue4) 30%,
+				color-mix(in srgb, var(--colorBlue4), var(--colorBlue5)) 62%,
 				var(--colorBlue5) 100%
 			);
 	}
@@ -295,7 +298,7 @@ const tiers = [
 	.past-sponsors-panel::before {
 		background: radial-gradient(
 			circle at top left,
-			rgba(133, 220, 255, 0.18),
+			rgb(from var(--colorBlue1) r g b / 18%),
 			transparent 28%
 		);
 	}
