@@ -2,28 +2,14 @@
 import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import ContentArea from "~/components/ContentArea.astro";
 import FAQSections from "~/components/FAQSections.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"All the information you'd need to know as a SquiggleConf sponsor.";
-
-const title = "Sponsor Guide";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
-	<ContentArea width="thin">
-		<BodyText class="body-text-top">
+<ArticleLayout article="sponsor-guide">
+	<Fragment slot="intro">
+		<BodyText>
 			This page has the high-level information you need to know as a sponsor at
 			SquiggleConf.
 		</BodyText>
@@ -49,7 +35,7 @@ const title = "Sponsor Guide";
 			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
 			Please reach out to us there if you have any questions.
 		</BodyText>
-	</ContentArea>
+	</Fragment>
 
 	<CommonContent heading="Sponsor Onboarding">
 		<BodyText>
@@ -116,10 +102,4 @@ const title = "Sponsor Guide";
 			]}
 		/>
 	</CommonContent>
-</PageLayout>
-
-<style>
-	.body-text-top {
-		margin: 5rem auto 1.5rem;
-	}
-</style>
+</ArticleLayout>

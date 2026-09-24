@@ -1,0 +1,65 @@
+---
+import ContentArea from "~/components/ContentArea.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard, {
+	Props as HeroContentsStandardProps,
+} from "~/components/hero/HeroContentsStandard.astro";
+import { articles } from "~/data/articles";
+import PageLayout from "./PageLayout.astro";
+
+type Props = (
+	| { article: keyof typeof articles }
+	| { description: string; title: string }
+) & {
+	introWidth?: "normal" | "thin";
+	squiggly?: HeroContentsStandardProps["squiggly"];
+};
+
+const { introWidth = "thin", squiggly = "none" } = Astro.props;
+const { description, title } =
+	"article" in Astro.props ? articles[Astro.props.article] : Astro.props;
+---
+
+<PageLayout description={description} title={title}>
+	<Hero>
+		<HeroContentsStandard heading={title} squiggly={squiggly}>
+			{description}
+		</HeroContentsStandard>
+	</Hero>
+
+	{
+		Astro.slots.has("intro") && (
+			<ContentArea class="article-intro" width={introWidth}>
+				<slot name="intro" />
+			</ContentArea>
+		)
+	}
+
+	<slot />
+</PageLayout>
+
+<style>
+	.article-intro > :global(:first-child) {
+		margin: 5rem auto 1.5rem;
+	}
+
+	/* Slotted page content keeps its page's scope, so these must be global. */
+	:global(.sub-heading) {
+		font-size: var(--fontSizeMedium);
+		text-align: center;
+		margin: 3rem 0 1rem;
+	}
+
+	:global(.sub-list) {
+		display: flex;
+		gap: 0.5rem;
+		flex-direction: column;
+		line-height: 1.35;
+		font-weight: var(--fontWeightMedium);
+		margin: 1rem 1.5rem;
+	}
+
+	:global(.sub-list ul) {
+		margin-left: 1rem;
+	}
+</style>

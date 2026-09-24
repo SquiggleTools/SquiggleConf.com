@@ -1,16 +1,8 @@
 ---
 import BodyText from "~/components/BodyText.astro";
-import ContentArea from "~/components/ContentArea.astro";
 import FAQSections from "~/components/FAQSections.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"Common questions and answers around attending, speaking at, and sponsoring SquiggleConf.";
-
-const title = "Frequently Asked Questions";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 type FAQSection = [string, [string, string][]];
 
@@ -111,25 +103,13 @@ Note that talk tickets _do not_ include:
 ] as const;
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
-	<ContentArea>
-		<BodyText class="body-text-top">
+<ArticleLayout article="faqs" introWidth="normal">
+	<Fragment slot="intro">
+		<BodyText>
 			Got questions not covered here? Reach out, we'd be happy to talk!
 			<a href="mailto:questions@squiggleconf.com">questions@squiggleconf.com</a>
 		</BodyText>
 
 		<FAQSections sections={faqs.map(([title, pairs]) => ({ title, pairs }))} />
-	</ContentArea>
-</PageLayout>
-
-<style>
-	.body-text-top {
-		margin: 5rem auto 0;
-	}
-</style>
+	</Fragment>
+</ArticleLayout>

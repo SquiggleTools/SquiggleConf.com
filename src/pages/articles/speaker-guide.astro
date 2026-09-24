@@ -2,29 +2,15 @@
 import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import ContentArea from "~/components/ContentArea.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import Heading from "~/components/Heading.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"All the information you'd need to know as a SquiggleConf speaker.";
-
-const title = "Speaker Guide";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
-	<ContentArea width="thin">
-		<BodyText class="body-text-top">
+<ArticleLayout article="speaker-guide">
+	<Fragment slot="intro">
+		<BodyText>
 			This page has the high-level information you need to know as a speaker at
 			SquiggleConf.
 		</BodyText>
@@ -53,7 +39,7 @@ const title = "Speaker Guide";
 			<a href={links.discord}>SquiggleConf Discord</a> with the MCs and organizers.
 			Please reach out to us there if you have any questions.
 		</BodyText>
-	</ContentArea>
+	</Fragment>
 
 	<CommonContent heading="Speaker Expectations">
 		<BodyText> This is what we'll need from you as a speaker: </BodyText>
@@ -293,25 +279,4 @@ const title = "Speaker Guide";
 			]}
 		/>
 	</CommonContent>
-</PageLayout>
-
-<style>
-	.body-text-top {
-		margin: 5rem auto 1.5rem;
-	}
-
-	.sub-heading {
-		font-size: var(--fontSizeMedium);
-		text-align: center;
-		margin: 3rem 0 1rem;
-	}
-
-	.sub-list {
-		display: flex;
-		gap: 0.5rem;
-		flex-direction: column;
-		line-height: 1.35;
-		font-weight: var(--fontWeightMedium);
-		margin: 1rem 1.5rem;
-	}
-</style>
+</ArticleLayout>

@@ -1,7 +1,7 @@
 ---
 import Speaker from "~/components/historical/Speaker.astro";
 import SafeMarkdown from "~/components/SafeMarkdown.astro";
-import PageLayoutHistorical from "~/layouts/PageLayoutHistorical.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
 import "~/styles/historical.css";
 import {
 	getStaticPathsHistorical,
@@ -16,7 +16,7 @@ const historicalData =
 	historicalDataByYear[year as keyof typeof historicalDataByYear];
 ---
 
-<PageLayoutHistorical
+<PageLayout
 	description="Speakers at SquiggleConf: a Boston conference focused on excellent web dev tooling."
 	title="Speakers"
 	year={year}
@@ -42,7 +42,7 @@ const historicalData =
 				))
 		}
 	</ul>
-</PageLayoutHistorical>
+</PageLayout>
 
 <style>
 	.speakers-list {

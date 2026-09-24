@@ -2,27 +2,13 @@
 import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import ContentArea from "~/components/ContentArea.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"All the information you'd need to know as a SquiggleConf volunteer.";
-
-const title = "Volunteer Guide";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
-	<ContentArea width="thin">
-		<BodyText class="body-text-top">
+<ArticleLayout article="volunteer-guide">
+	<Fragment slot="intro">
+		<BodyText>
 			This page has the high-level information you need to know as a volunteer
 			at SquiggleConf.
 		</BodyText>
@@ -39,7 +25,7 @@ const title = "Volunteer Guide";
 				activities common to all volunteers
 			</li>
 		</BodyList>
-	</ContentArea>
+	</Fragment>
 
 	<CommonContent heading="Volunteer Expectations">
 		<BodyText>Volunteers are required to:</BodyText>
@@ -88,10 +74,4 @@ const title = "Volunteer Guide";
 			full schedule closer to May 2027.
 		</BodyText>
 	</CommonContent>
-</PageLayout>
-
-<style>
-	.body-text-top {
-		margin: 5rem auto 1.5rem;
-	}
-</style>
+</ArticleLayout>

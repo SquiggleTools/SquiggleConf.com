@@ -3,24 +3,13 @@ import clockTower from "~/assets/stills/clock-tower.png";
 import duckBoatTourAfter from "~/assets/stills/duck-boat-tour-after.png";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
 import ImagesAndTextTwoColumn from "~/components/ImagesAndTextTwoColumn.astro";
 import Registration from "~/components/Registration.astro";
 import { links } from "~/data/links";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"How to get to and around Boston when you’re attending SquiggleConf";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title="Travel">
-	<Hero>
-		<HeroContentsStandard heading="Travel" squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout article="travel">
 	<CommonContent heading="Location">
 		<BodyText>
 			SquiggleConf 2027 will be held at the New England Aquarium Simons Theatre
@@ -177,7 +166,7 @@ const description =
 		</BodyText>
 	</ImagesAndTextTwoColumn>
 	<Registration />
-</PageLayout>
+</ArticleLayout>
 
 <style>
 	iframe {

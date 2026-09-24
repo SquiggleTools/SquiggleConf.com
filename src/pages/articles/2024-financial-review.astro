@@ -3,23 +3,10 @@ import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import ContentArea from "~/components/ContentArea.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"What it's like to start a new in-person tech conference, from a financial perspective.";
-
-const title = "SquiggleConf 2024 Financial Review";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout article="2024-financial-review">
 	<ContentArea>
 		<BodyText class="body-text-top">
 			SquiggleConf is a community-oriented local conference run by
@@ -142,7 +129,7 @@ const title = "SquiggleConf 2024 Financial Review";
 			>.
 		</aside>
 	</CommonContent>
-</PageLayout>
+</ArticleLayout>
 
 <style>
 	.body-text-top {

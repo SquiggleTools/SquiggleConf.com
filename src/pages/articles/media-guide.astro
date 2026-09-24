@@ -3,23 +3,10 @@ import BodyText from "~/components/BodyText.astro";
 import Branding from "~/components/Branding.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import Heading from "~/components/Heading.astro";
-import Hero from "~/components/hero/Hero.astro";
-import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
-
-const description =
-	"Brand asset downloads, usage guidelines, and pitch templates to help you share the word about SquiggleConf.";
-
-const title = "Media Guide";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout description={description} title={title}>
-	<Hero>
-		<HeroContentsStandard heading={title} squiggly="none">
-			{description}
-		</HeroContentsStandard>
-	</Hero>
-
+<ArticleLayout article="media-guide">
 	<CommonContent heading="Branding">
 		<BodyText>
 			When referring to us in announcements, social media posts, or other broad
@@ -127,25 +114,4 @@ const title = "Media Guide";
 			</li>
 		</ul>
 	</CommonContent>
-</PageLayout>
-
-<style>
-	.sub-heading {
-		font-size: var(--fontSizeMedium);
-		text-align: center;
-		margin: 3rem 0 1rem;
-	}
-
-	.sub-list {
-		display: flex;
-		gap: 0.5rem;
-		flex-direction: column;
-		line-height: 1.35;
-		font-weight: var(--fontWeightMedium);
-		margin: 1rem 1.5rem;
-	}
-
-	.sub-list ul {
-		margin-left: 1rem;
-	}
-</style>
+</ArticleLayout>
