@@ -1,22 +1,62 @@
 ---
+import { Image } from "astro:assets";
+
+import squiggleFlankingLean from "~/assets/2024/squiggle-flanking-lean.svg";
 import { sponsorsByPlacement } from "~/data/2024/sponsors";
-import BodyText from "./BodyText.astro";
-import FullSection from "./FullSection.astro";
-import HeadingFlanked from "./HeadingFlanked.astro";
+import BodyText from "../BodyText.astro";
+import Heading from "../Heading.astro";
+import SectionWrapper from "./SectionWrapper.astro";
 import SponsorLogos from "./SponsorLogos.astro";
 ---
 
-<FullSection>
-	<HeadingFlanked id="sponsors">Sponsors</HeadingFlanked>
-	<BodyText class="sponsors-blurb">
+<SectionWrapper>
+	<div class="squiggle-flanked">
+		<Image alt="" class="squiggle" src={squiggleFlankingLean} />
+		<Heading class="heading" id="sponsors" level="h2" link>Sponsors</Heading>
+		<Image alt="" class="squiggle squiggle-right" src={squiggleFlankingLean} />
+	</div>
+	<BodyText class="sponsors-blurb" historical>
 		The support of our generous sponsors help make SquiggleConf possible. They
 		have our sincere appreciation and thanks.
 	</BodyText>
 
 	<SponsorLogos sponsorGroups={sponsorsByPlacement} />
-</FullSection>
+</SectionWrapper>
 
 <style>
+	.squiggle-flanked {
+		align-items: center;
+		display: flex;
+		gap: clamp(0.25rem, 2.5vw, 2.5rem);
+		justify-content: center;
+		line-height: 1.2;
+		margin: 0 auto 3rem;
+		max-width: var(--widthBodyLean);
+		width: 100%;
+	}
+
+	.squiggle {
+		max-width: 11vw;
+		object-fit: cover;
+		object-position: right;
+		user-select: none;
+	}
+
+	.squiggle-right {
+		transform: scaleX(-1);
+	}
+
+	@media (min-width: 1017px) {
+		.squiggle {
+			max-width: none;
+		}
+	}
+
+	.heading {
+		font-size: var(--fontSizeH2);
+		text-align: center;
+	}
+
 	.sponsors-blurb {
 		margin: auto;
 		padding-bottom: 3.5rem;
