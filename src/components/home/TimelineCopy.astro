@@ -25,4 +25,30 @@ const { class: className, ...attributes } = Astro.props;
 		max-width: 62ch;
 		transition: color var(--transitionNormal);
 	}
+
+	.timeline-copy :global(h3) {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.2rem;
+		font-weight: var(--fontWeightBold);
+		line-height: 1.05;
+		margin: 0 0 0.25rem;
+	}
+
+	.timeline-copy :global(ul) {
+		color: var(--colorLink);
+		display: grid;
+		gap: 0.42rem;
+		margin: 0;
+		padding-left: 1.2rem;
+	}
+
+	.timeline-copy :global(:is(p, li) a) {
+		color: var(--colorLink);
+		font-weight: var(--fontWeightBold);
+	}
+
+	.timeline-copy :global(li a) {
+		font-weight: var(--fontWeightSemibold);
+	}
 </style>
