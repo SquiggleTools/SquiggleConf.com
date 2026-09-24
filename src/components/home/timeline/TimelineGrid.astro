@@ -1,0 +1,26 @@
+<div class="timeline-grid">
+	<slot />
+</div>
+
+<style>
+	.timeline-grid {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 15% 10% 75%;
+		margin: 0 auto;
+		max-width: min(100%, var(--sizeContentAreaWide));
+		padding-top: 1rem;
+		position: relative;
+		padding-right: 1rem;
+		z-index: 1;
+	}
+
+	@media (width < 900px) {
+		.timeline-grid {
+			gap: 0.65rem;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+			padding-inline: 0.35rem;
+		}
+	}
+</style>

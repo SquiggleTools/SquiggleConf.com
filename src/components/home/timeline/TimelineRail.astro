@@ -1,0 +1,50 @@
+---
+interface Props {
+	bottom?: boolean;
+	span?: 2;
+	time: string;
+}
+
+const { bottom, span, time } = Astro.props;
+---
+
+<div
+	class:list={["timeline-rail", bottom && "timeline-bottom"]}
+	style={span && `grid-row: span ${span}`}
+>
+	<p class="timeline-time">{time}</p>
+</div>
+
+<style>
+	.timeline-rail {
+		background: var(--timeline-rail-background);
+		border: 1px solid var(--timeline-rail-border-color);
+		display: flex;
+		flex-direction: column;
+		margin-bottom: -1px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.timeline-bottom {
+		border-bottom-right-radius: 8px;
+		border-bottom-left-radius: 8px;
+	}
+
+	.timeline-time {
+		color: var(--timeline-time-color);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(1.3rem, 2vw, 1.6rem);
+		font-weight: 700;
+		margin: 1rem 0 0;
+		padding-top: 1.15rem;
+		text-shadow: var(--timeline-time-shadow);
+		text-align: center;
+	}
+
+	@media (width < 900px) {
+		.timeline-rail {
+			display: none;
+		}
+	}
+</style>

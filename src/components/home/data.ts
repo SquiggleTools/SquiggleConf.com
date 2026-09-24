@@ -169,7 +169,7 @@ export const exploreChoices = [
 		description:
 			"Take a quiet block to recharge, reset, and come back ready for the evening without over-scheduling the day.",
 		image: rest1,
-		imageVariant: "rest",
+		objectPosition: "10% center",
 		title: "Rest Up",
 	},
 ] satisfies readonly ExploreChoiceData[];
@@ -177,15 +177,19 @@ export const exploreChoices = [
 export const venues = {
 	aquarium: {
 		mapUrl: "https://maps.app.goo.gl/FodmfsLGZYALV1Hh9",
+		name: "New England Aquarium",
 	},
 	nedDevines: {
 		mapUrl: "https://maps.app.goo.gl/rD3zWzuJ1U9VuSdN9",
+		name: "Ned Devine's",
 	},
 	quincyMarket: {
 		mapUrl: "https://maps.app.goo.gl/mQyHoaGZgip8pfux5",
+		name: "Quincy Market",
 	},
 	urbanWild: {
 		mapUrl: "https://maps.app.goo.gl/ADbjjYdyB3AVstH67",
+		name: "Urban Wild Boston",
 	},
 } satisfies Record<VenueId, VenueData>;
 

@@ -1,5 +1,14 @@
 import type { ImageMetadata } from "astro";
 
+export interface CollageFrame {
+	height?: string;
+	left?: string;
+	rotate?: string;
+	top?: string;
+	width?: string;
+	zIndex?: number;
+}
+
 export type CollageLayout =
 	| "avatar-duo"
 	| "avatar-trio"
@@ -10,6 +19,8 @@ export type CollageLayout =
 export interface CollagePhoto {
 	alt: string;
 	decorative?: boolean;
+	/** Overrides the layout's default placement for this photo. */
+	frame?: CollageFrame;
 	objectPosition?: string;
 	placeholder?: boolean;
 	src: ImageMetadata;
@@ -22,7 +33,7 @@ export interface ExploreChoiceData {
 	badgeLabel?: string;
 	description: string;
 	image: ImageMetadata;
-	imageVariant?: "rest";
+	objectPosition?: string;
 	title: string;
 }
 
@@ -62,21 +73,13 @@ export type TimelineEntryId =
 	| "talks-late"
 	| "talks-morning";
 
-export type TimelineEntryVariant =
-	| "break"
-	| "explore"
-	| "fireside"
-	| "funRun"
-	| "lunch"
-	| "mcs"
-	| "podcast"
-	| "talks"
-	| "talksAfternoon";
+export type TimelineEntryVariant = "break" | "fun-run";
 
 export type TimelineTimeMode = "point" | "range";
 
 export interface VenueData {
 	mapUrl: string;
+	name: string;
 }
 
 export type VenueId = "aquarium" | "nedDevines" | "quincyMarket" | "urbanWild";

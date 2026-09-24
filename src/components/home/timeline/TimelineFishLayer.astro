@@ -1,8 +1,16 @@
 ---
 import { timelineFish } from "~/components/home/data";
+import type { TimelineEntryId } from "~/components/home/types";
+
+interface Props {
+	/** The fish finish swimming once this entry scrolls past. */
+	swimUntil: TimelineEntryId;
+}
+
+const { swimUntil } = Astro.props;
 ---
 
-<div class="timeline-fish-layer" aria-hidden="true">
+<div class="timeline-fish-layer" aria-hidden="true" data-swim-until={swimUntil}>
 	{
 		timelineFish.map((fish, index) => (
 			<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
@@ -16,33 +24,17 @@ import { timelineFish } from "~/components/home/data";
 
 <style>
 	.timeline-fish-layer {
-		--timeline-fish-body: #116d9a;
-		--timeline-fish-body-alt: #1f7fab;
-		--timeline-fish-detail: #38ced6;
-		--timeline-fish-eye: #041930;
-		--timeline-fish-fin: #063052;
-		--timeline-fish-opacity: 0.78;
-		inset: clamp(0.65rem, 2vw, 1.65rem) 0 auto;
+		inset: 50px 0 auto;
 		pointer-events: none;
 		position: absolute;
 		z-index: 1;
-		top: 50px;
-	}
-
-	:global(html.dark) .timeline-fish-layer {
-		--timeline-fish-body: #f5f4f2;
-		--timeline-fish-body-alt: #c5e2d6;
-		--timeline-fish-detail: #8ac0cc;
-		--timeline-fish-eye: #274238;
-		--timeline-fish-fin: #6a8b91;
-		--timeline-fish-opacity: 1;
 	}
 
 	.timeline-fish-shell {
-		top: 10px;
-		left: 0;
 		opacity: 0;
-		filter: drop-shadow(0 0.7rem 1.3rem rgba(6, 17, 33, 0.18));
+		filter: drop-shadow(
+			0 0.7rem 1.3rem rgb(from var(--colorBlue5) r g b / 18%)
+		);
 		pointer-events: none;
 		position: absolute;
 		transform: translate3d(-3rem, 0, 0);
@@ -62,7 +54,6 @@ import { timelineFish } from "~/components/home/data";
 		display: block;
 		height: 100%;
 		max-width: none;
-		opacity: var(--timeline-fish-opacity);
 		width: max-content;
 	}
 
@@ -73,24 +64,29 @@ import { timelineFish } from "~/components/home/data";
 		width: auto;
 	}
 
-	.timeline-fish-image :global([fill="#F5F4F2"]) {
-		fill: var(--timeline-fish-body);
+	/* The fish SVGs' own fills are their dark theme colors. */
+	:global(html:not(.dark)) .timeline-fish-image {
+		opacity: 0.78;
 	}
 
-	.timeline-fish-image :global([fill="#C5E2D6"]) {
-		fill: var(--timeline-fish-body-alt);
+	:global(html:not(.dark)) .timeline-fish-image :global([fill="#F5F4F2"]) {
+		fill: var(--colorBlue3);
 	}
 
-	.timeline-fish-image :global([fill="#6A8B91"]) {
-		fill: var(--timeline-fish-fin);
+	:global(html:not(.dark)) .timeline-fish-image :global([fill="#C5E2D6"]) {
+		fill: #1f7fab;
 	}
 
-	.timeline-fish-image :global([fill="#8AC0CC"]) {
-		fill: var(--timeline-fish-detail);
+	:global(html:not(.dark)) .timeline-fish-image :global([fill="#6A8B91"]) {
+		fill: var(--colorBlue4);
 	}
 
-	.timeline-fish-image :global([fill="#274238"]) {
-		fill: var(--timeline-fish-eye);
+	:global(html:not(.dark)) .timeline-fish-image :global([fill="#8AC0CC"]) {
+		fill: var(--colorBlue2);
+	}
+
+	:global(html:not(.dark)) .timeline-fish-image :global([fill="#274238"]) {
+		fill: var(--colorBlue5);
 	}
 
 	.timeline-fish-shell-1 {
@@ -206,11 +202,81 @@ import { timelineFish } from "~/components/home/data";
 			display: none;
 		}
 	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.timeline-fish-body {
-			transition: none;
-			animation: none;
-		}
-	}
 </style>
+
+<script>
+	import { onScrollFrame } from "./onScrollFrame";
+
+	const layer = document.querySelector<HTMLElement>(".timeline-fish-layer");
+	const section = layer?.offsetParent;
+	const talks = document.querySelector<HTMLElement>(
+		`[data-timeline-entry="${layer?.dataset.swimUntil}"]`,
+	);
+	const fishes = [
+		...(layer?.querySelectorAll<HTMLElement>(".timeline-fish-shell") ?? []),
+	];
+	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+
+	// [start, end, scale, baseRotate, rotateAmplitude, bobAmplitude,
+	//  bobFrequency, finAmplitude, driftY, exitOffset, phase]
+	const fishConfigs = [
+		[-0.18, 1.1, 0.48, -8, 5, 6, 1.12, 4, -6, 26, 0.2],
+		[-0.08, 1.16, 0.41, 4, 7, 9, 1.5, 5, 5, 22, 1.1],
+		[-0.02, 1.22, 0.43, -3, 5, 10, 1.35, 6, -2, 20, 2.2],
+		[-0.22, 1.12, 0.46, 7, 6, 8, 0.95, 4, 7, 24, 0.8],
+		[-0.14, 1.28, 0.44, 2, 8, 11, 1.25, 6, -8, 18, 2.75],
+	] as const;
+
+	const clamp01 = (value: number) => Math.min(Math.max(value, 0), 1);
+	const pageTop = (element: HTMLElement) =>
+		element.getBoundingClientRect().top + scrollY;
+
+	if (section instanceof HTMLElement && talks) {
+		onScrollFrame(() => {
+			const start = pageTop(section) - innerHeight * 0.34;
+			const end = pageTop(talks) + talks.offsetHeight + innerHeight * 0.75;
+			const progress = clamp01(
+				(scrollY + innerHeight * 0.28 - start) / Math.max(end - start, 1),
+			);
+
+			for (const [index, fish] of fishes.entries()) {
+				const [
+					fishStart,
+					fishEnd,
+					scale,
+					baseRotate,
+					rotateAmplitude,
+					bobAmplitude,
+					bobFrequency,
+					finAmplitude,
+					driftY,
+					exitOffset,
+					phase,
+				] = fishConfigs[index];
+
+				fish.style.opacity = "1";
+
+				if (reducedMotionQuery.matches) {
+					fish.style.transform = `translate3d(${1.8 + index * 8.25}rem, 0, 0) rotate(${baseRotate}deg) scale(${scale})`;
+					continue;
+				}
+
+				const local = clamp01((progress - fishStart) / (fishEnd - fishStart));
+				const eased = 0.5 - Math.cos(local * Math.PI) / 2;
+				const bodyWave = Math.sin(local * Math.PI * 2 * bobFrequency + phase);
+				const finWave = Math.sin(local * Math.PI * 4.2 + phase * 1.7);
+				const entryOffset = fish.offsetWidth + 10;
+				const x =
+					-entryOffset +
+					eased *
+						(section.offsetWidth + entryOffset + fish.offsetWidth + exitOffset);
+				const y =
+					bodyWave * bobAmplitude + finWave * finAmplitude + eased * driftY;
+				const rotate =
+					baseRotate + (bodyWave + finWave * 0.4) * rotateAmplitude;
+
+				fish.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
+			}
+		}, reducedMotionQuery);
+	}
+</script>
