@@ -1,7 +1,6 @@
 :root {
 	color-scheme: light;
 
-	--colorBlackIsh: #041930;
 	--colorBlueBright1: #d8f3ff;
 	--colorBlueBright2: #e6f7fe;
 	--colorBlue1: #bcdfe9;
@@ -18,7 +17,6 @@
 	--colorAccentLight: var(--colorBlue1);
 	--colorAccentMedium: var(--colorBlue3);
 	--colorAccentSecond: var(--colorBlue2);
-	--colorBackground: var(--colorBlackIsh);
 	--colorForeground: var(--colorBlue4);
 	--colorForegroundAccent: var(--colorWhiteIsh);
 	--colorForegroundEmphasized: var(--colorBlue5);
@@ -119,10 +117,8 @@ html.dark {
 	--colorAccentLight: var(--colorBlue5);
 	--colorAccentSecond: var(--colorBlue4);
 	--colorAccentMedium: var(--colorBlue2);
-	--colorBackground: var(--colorWhiteIsh);
-	--colorForegroundAccent: var(--colorBlackIsh);
+	--colorForegroundAccent: var(--colorBlue5);
 	--colorForegroundEmphasized: var(--colorBlue1);
-	--colorUnhappy: var(--colorRed1);
 	--colorTextShadow: var(--colorTextShadowDark);
 
 	--colorHeading: var(--colorWhiteIsh);
