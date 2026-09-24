@@ -60,7 +60,6 @@ import themeSun from "~/assets/design/theme-sun.svg";
 
 		updateLabel();
 
-		// A view transition cross-fades the whole page between themes.
 		toggle.addEventListener("click", () => {
 			if (reducedMotionQuery.matches || !document.startViewTransition) {
 				toggleTheme();
