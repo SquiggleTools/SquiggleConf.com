@@ -184,7 +184,7 @@ const tiers = [
 			),
 			radial-gradient(
 				circle at 84% 14%,
-				rgba(56, 206, 214, 0.16),
+				rgb(from var(--colorBlue2) r g b / 16%),
 				transparent 18%
 			),
 			radial-gradient(
@@ -194,7 +194,7 @@ const tiers = [
 			),
 			linear-gradient(
 				180deg,
-				#eaf7fc 0%,
+				var(--colorBlueBright2) 0%,
 				#d8eff8 28%,
 				#c3e2ef 64%,
 				#add4e6 100%
@@ -202,8 +202,7 @@ const tiers = [
 		--past-sponsors-texture:
 			repeating-linear-gradient(
 				114deg,
-				rgba(17, 109, 154, 0.06) 0,
-				rgba(17, 109, 154, 0.06) 2px,
+				rgb(from var(--colorBlue3) r g b / 6%) 0 2px,
 				transparent 2px,
 				transparent 28px
 			),
@@ -226,11 +225,11 @@ const tiers = [
 			linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 18%),
 			linear-gradient(0deg, rgba(12, 71, 103, 0.14), transparent 24%);
 		--past-sponsors-kicker-background: rgba(255, 255, 255, 0.6);
-		--past-sponsors-kicker-border: rgba(17, 109, 154, 0.18);
+		--past-sponsors-kicker-border: rgb(from var(--colorBlue3) r g b / 18%);
 		--past-sponsors-kicker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 		--past-sponsors-kicker-color: #0a577d;
-		--past-sponsors-heading-color: #08314f;
-		--past-sponsors-copy-color: rgba(7, 49, 79, 0.78);
+		--past-sponsors-heading-color: var(--colorBlue4);
+		--past-sponsors-copy-color: rgb(from var(--colorBlue4) r g b / 78%);
 		--past-sponsors-panel-background:
 			linear-gradient(
 				180deg,
@@ -241,8 +240,11 @@ const tiers = [
 		--past-sponsors-panel-shadow:
 			inset 0 1px 0 rgba(255, 255, 255, 0.7),
 			0 1.1rem 2.4rem rgba(47, 109, 143, 0.14);
-		--past-sponsors-logo-hover-background: rgba(17, 109, 154, 0.06);
-		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px rgba(17, 109, 154, 0.14);
+		--past-sponsors-logo-hover-background: rgb(
+			from var(--colorBlue3) r g b / 6%
+		);
+		--past-sponsors-logo-hover-shadow: inset 0 0 0 1px
+			rgb(from var(--colorBlue3) r g b / 14%);
 		background: var(--past-sponsors-background);
 		overflow: clip;
 		position: relative;
@@ -271,7 +273,7 @@ const tiers = [
 				#082647 0%,
 				#07315b 30%,
 				#062448 62%,
-				#04172f 100%
+				var(--colorBlue5) 100%
 			);
 		--past-sponsors-texture:
 			repeating-linear-gradient(
@@ -311,7 +313,7 @@ const tiers = [
 				rgba(194, 235, 255, 0.12),
 				rgba(194, 235, 255, 0.03)
 			),
-			rgba(3, 21, 43, 0.42);
+			rgb(from var(--colorBlue6) r g b / 42%);
 		--past-sponsors-panel-shadow:
 			inset 0 1px 0 rgba(255, 255, 255, 0.1),
 			0 1.5rem 3rem rgba(3, 12, 28, 0.34);
@@ -495,7 +497,6 @@ const tiers = [
 
 	@media (width < 700px) {
 		.past-sponsors-shell {
-			gap: 1.5rem;
 			padding-left: 1rem;
 			padding-right: 1rem;
 		}
