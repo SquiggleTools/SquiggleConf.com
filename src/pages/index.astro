@@ -35,7 +35,6 @@ import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
-import TalkCard from "~/components/home/TalkCard.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
@@ -218,7 +217,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="9am"
 				>
 					<TimelineList aria-label="Speaker talks">
-						{talkBlocks.morning.map((talk) => <TalkCard talk={talk} />)}
+						{talkBlocks.morning.map((talk) => <PersonCard person={talk} />)}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -292,7 +291,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="11am"
 				>
 					<TimelineList aria-label="Late morning talks">
-						{talkBlocks.lateMorning.map((talk) => <TalkCard talk={talk} />)}
+						{talkBlocks.lateMorning.map((talk) => <PersonCard person={talk} />)}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -350,7 +349,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="2pm"
 				>
 					<TimelineList aria-label="Afternoon talks">
-						{talkBlocks.afternoon.map((talk) => <TalkCard talk={talk} />)}
+						{talkBlocks.afternoon.map((talk) => <PersonCard person={talk} />)}
 					</TimelineList>
 				</TimelineEntry>
 
