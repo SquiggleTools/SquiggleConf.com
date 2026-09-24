@@ -52,12 +52,12 @@
 	--fontSizeMedium: clamp(1.25rem, 3.25vw, 1.5rem);
 	--fontSizeLarge: clamp(1.5rem, 3.75vw, 2rem);
 	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
-	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
 	--fontSizeLogoLarger: clamp(2.8rem, 7vw, 4.9rem);
 	--fontSizeDisplay: clamp(1.8rem, 2.8vw, 2.45rem);
 	--fontSizeCardTitle: 1.1rem;
 	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
+	--fontSizeCopySmall: clamp(0.95rem, 1.35vw, 1rem);
 	--fontSizeBody: 1.2rem;
 	--fontSizeBodyLarge: 1.5rem;
 	--fontSizeBodySmaller: 1rem;

@@ -19,7 +19,7 @@ const { class: className, ...attributes } = Astro.props;
 
 	.timeline-copy :global(p) {
 		color: var(--timeline-entry-copy-color);
-		font-size: clamp(0.95rem, 1.35vw, 1rem);
+		font-size: var(--fontSizeCopySmall);
 		line-height: 1.45;
 		margin: 0;
 		max-width: 62ch;
