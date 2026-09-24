@@ -27,15 +27,15 @@ const { bottom, span, time } = Astro.props;
 	}
 
 	.timeline-bottom {
-		border-bottom-right-radius: 8px;
-		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: var(--radiusMedium);
+		border-bottom-left-radius: var(--radiusMedium);
 	}
 
 	.timeline-time {
 		color: var(--timeline-time-color);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.3rem, 2vw, 1.6rem);
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		margin: 1rem 0 0;
 		padding-top: 1.15rem;
 		text-shadow: var(--timeline-time-shadow);

@@ -4,14 +4,6 @@
 
 <style>
 	.timeline-section {
-		--timeline-heading-color: var(--colorBlue5);
-		--timeline-heading-hover-color: var(--colorBlue5);
-		--timeline-heading-hover-shadow: none;
-		--timeline-copy-color: rgb(from var(--colorBlue5) r g b / 84%);
-		--timeline-copy-hover-color: rgb(from var(--colorBlue5) r g b / 92%);
-		--timeline-muted-color: rgb(from var(--colorBlue4) r g b / 76%);
-		--timeline-muted-hover-color: rgb(from var(--colorBlue4) r g b / 86%);
-		--timeline-link-color: var(--colorBlue4);
 		--timeline-rail-background: rgb(from white r g b / 42%);
 		--timeline-rail-border-color: rgb(from var(--colorBlue4) r g b / 18%);
 		--timeline-cap-background: rgb(from var(--colorBlueBright1) r g b / 62%);
@@ -32,35 +24,19 @@
 			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 8%);
 		--timeline-card-glow-inner: rgb(from var(--colorBlue4) r g b / 55%);
 		--timeline-card-glow-outer: rgb(from var(--colorBlue4) r g b / 25%);
-		--timeline-image-border-color: rgb(from var(--colorBlue5) r g b / 18%);
-		--timeline-image-border-width: 2px;
-		--timeline-image-shadow-rest: 0 0.25rem 0.7rem
-			rgb(from var(--colorBlue5) r g b / 12%);
-		--timeline-image-shadow-active: 0 0.55rem 1rem
-			rgb(from var(--colorBlue5) r g b / 18%);
-		--timeline-hover-duration: 220ms;
 		isolation: isolate;
 		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
 		position: relative;
 	}
 
 	:global(html.dark) .timeline-section {
-		--timeline-heading-color: var(--colorWhiteIsh);
-		--timeline-heading-hover-color: white;
-		--timeline-heading-hover-shadow: 0 0.3rem 1rem
-			rgb(from var(--colorBlue5) r g b / 24%);
-		--timeline-copy-color: rgb(from var(--colorWhiteIsh) r g b / 84%);
-		--timeline-copy-hover-color: rgb(from white r g b / 90%);
-		--timeline-muted-color: rgb(from var(--colorBlue1) r g b / 82%);
-		--timeline-muted-hover-color: rgb(from white r g b / 88%);
-		--timeline-link-color: white;
 		--timeline-rail-background: var(--colorBlueBright1);
 		--timeline-rail-border-color: var(--colorBlue3);
 		--timeline-cap-background: rgb(from var(--colorBlue2) r g b / 60%);
 		--timeline-cap-color: rgb(from var(--colorBackground) r g b / 85%);
 		--timeline-time-color: var(--colorBackground);
 		--timeline-time-shadow: 0 1px 0 rgb(from white r g b / 22%);
-		--timeline-venue-color: var(--timeline-heading-color);
+		--timeline-venue-color: var(--colorHeading);
 		--timeline-venue-at-color: rgb(from var(--colorBlue2) r g b / 70%);
 		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
 			rgb(from var(--colorBlue5) r g b / 18%);

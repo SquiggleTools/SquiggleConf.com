@@ -42,6 +42,7 @@ import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
+import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
 import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
@@ -103,15 +104,11 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						]}
 					/>
 					<TimelineCopy>
-						<div class="event-body">
-							<TimelineCopy>
-								<p>
-									Kick off the weekend with snacks, drinks, and an easy room
-									full of tool-loving people. It is the place to settle in, say
-									hi, and start the conference with a little momentum.
-								</p>
-							</TimelineCopy>
-						</div>
+						<p>
+							Kick off the weekend with snacks, drinks, and an easy room full of
+							tool-loving people. It is the place to settle in, say hi, and
+							start the conference with a little momentum.
+						</p>
 					</TimelineCopy>
 				</TimelineEntry>
 
@@ -180,10 +177,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="8am"
 				>
-					<div class="event-body imax-body">
+					<TimelineMedia stackBelow={900}>
 						<TimelineImage
 							alt="Presenter on stage inside the Simons IMAX Theater"
-							class="event-image-wide imax-image"
+							class="event-image-wide"
 							effect="zoom"
 							loading="eager"
 							src={simonsTheater}
@@ -196,7 +193,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 							<p>Also, a penguin exhibit next door.</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineRail span={2} time="9am" />
@@ -235,7 +232,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="10:30am"
 					variant="break"
 				>
-					<div class="break-body">
+					<TimelineMedia stackBelow={900}>
 						<Collage
 							ariaLabel="Milk and Cookies break collage"
 							layout="trio"
@@ -284,7 +281,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								morning’s talks.
 							</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineRail time="11am" />
@@ -309,7 +306,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="quincyMarket"
 					time="12pm"
 				>
-					<div class="lunch-body">
+					<TimelineMedia mediaWidth="10rem" stackBelow={900}>
 						<LunchCarousel spots={lunchSpots} />
 						<TimelineCopy class="lunch-copy">
 							<p>
@@ -334,7 +331,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								block.
 							</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineVenue span={2} venue="aquarium">
@@ -385,7 +382,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="urbanWild"
 					time="6pm"
 				>
-					<div class="event-body">
+					<TimelineMedia>
 						<TimelineImage
 							alt="Urban Wild Boston logo"
 							class="event-image-wide"
@@ -400,7 +397,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								last clue of the Scavenger Hunt may or may not be here.......
 							</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineEntry
@@ -409,7 +406,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="urbanWild"
 					time="6pm"
 				>
-					<div class="event-body">
+					<TimelineMedia>
 						<Collage
 							ariaLabel="Podcast recording live guests"
 							layout="avatar-trio"
@@ -440,7 +437,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 							<p class="fireside-host">hosts to be announced</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineRail time="7pm" />
@@ -451,7 +448,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="urbanWild"
 					time="7pm"
 				>
-					<div class="event-body">
+					<TimelineMedia>
 						<Collage
 							ariaLabel="Fireside chat guests"
 							layout="avatar-duo"
@@ -473,7 +470,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							</p>
 							<p class="fireside-host">hosted by Dillon Mulroy</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 
 				<TimelineRail bottom span={2} time="7:30pm" />
@@ -513,13 +510,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="urbanWild"
 					time="9pm"
 				>
-					<div class="event-body">
+					<TimelineMedia>
 						<TimelineImage
 							alt="Big Rav band portrait"
 							class="event-image-circle"
 							effect="grow"
 							loading="eager"
-							radius="999px"
+							radius="var(--radiusPill)"
 							src={bigRav}
 						/>
 						<TimelineCopy>
@@ -532,7 +529,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								</span>
 							</p>
 						</TimelineCopy>
-					</div>
+					</TimelineMedia>
 				</TimelineEntry>
 			</TimelineGrid>
 		</TimelineSection>
@@ -543,11 +540,11 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top-heading {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
+		font-size: var(--fontSizeDisplay);
 		font-style: italic;
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1;
 		padding-top: 1rem;
 		position: relative;
@@ -555,7 +552,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-intro {
-		color: var(--timeline-copy-color);
+		color: var(--colorCopy);
 		font-size: clamp(1rem, 1.35vw, 1.12rem);
 		line-height: 1.6;
 		padding: 0 0 0 2rem;
@@ -599,32 +596,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.timeline-grid-intro h3 {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 0.98;
 	}
 
 	.timeline-grid-intro p {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		font-size: clamp(0.92rem, 1.3vw, 1rem);
 		line-height: 1.2;
-	}
-
-	.timeline-copy {
-		display: grid;
-		gap: 0.45rem;
-		max-width: 46rem;
-	}
-
-	.timeline-copy p {
-		color: var(--timeline-entry-copy-color);
-		font-size: clamp(0.95rem, 1.35vw, 1rem);
-		line-height: 1.45;
-		margin: 0;
-		max-width: 62ch;
-		transition: color var(--timeline-hover-duration) ease;
 	}
 
 	.timeline-venue-decoration {
@@ -640,24 +622,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		transform-origin: bottom right;
 	}
 
-	.break-body {
-		display: grid;
-		align-items: start;
-		column-gap: 0.8rem;
-		grid-template-columns: auto minmax(0, 1fr);
-		margin-top: 0.8rem;
-	}
-
 	.break-copy {
 		align-content: start;
-	}
-
-	.lunch-body {
-		align-items: start;
-		display: grid;
-		column-gap: 1rem;
-		grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
-		margin: 1rem 0 0.5rem;
 	}
 
 	.lunch-copy {
@@ -666,14 +632,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.lunch-copy a {
-		color: var(--timeline-link-color);
-		font-weight: 700;
+		color: var(--colorLink);
+		font-weight: var(--fontWeightHeavy);
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
 	}
 
 	.lunch-links {
-		color: var(--timeline-link-color);
+		color: var(--colorLink);
 		display: grid;
 		gap: 0.42rem;
 		margin: 0;
@@ -681,12 +647,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.lunch-links li::marker {
-		color: var(--timeline-link-color);
+		color: var(--colorLink);
 	}
 
 	.lunch-links a {
-		color: var(--timeline-link-color);
-		font-weight: 600;
+		color: var(--colorLink);
+		font-weight: var(--fontWeightBolder);
 		text-decoration-thickness: 0.08em;
 		text-underline-offset: 0.14em;
 	}
@@ -738,33 +704,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		width: 8rem;
 	}
 
-	.event-body {
-		display: grid;
-		gap: 1rem;
-		grid-template-columns: auto minmax(0, 1fr);
-		margin-top: 0.85rem;
-		max-width: 48rem;
-	}
-
 	.fireside-topic {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.2rem;
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.05;
 		margin: 0 0 0.25rem;
 	}
 
 	.fireside-host {
 		font-style: italic;
-	}
-
-	@media (width < 700px) {
-		.event-body {
-			align-items: flex-start;
-			display: flex;
-			flex-direction: column;
-		}
 	}
 
 	@media (width < 900px) {
@@ -788,14 +738,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			padding: 0 0.15rem 0.2rem;
 		}
 
-		.break-body,
 		.timeline-list-pair {
 			grid-template-columns: 1fr;
-		}
-
-		.lunch-body {
-			grid-template-columns: 1fr;
-			row-gap: 0.9rem;
 		}
 
 		.lunch-copy {
@@ -821,17 +765,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			position: relative;
 			top: 0;
 			zoom: 0.75;
-		}
-
-		.imax-body {
-			gap: 0.85rem;
-			grid-template-columns: 1fr;
-		}
-
-		.imax-image {
-			justify-self: start;
-			max-width: 100%;
-			width: min(100%, 14rem);
 		}
 
 		.timeline-venue-decoration-turtle {
