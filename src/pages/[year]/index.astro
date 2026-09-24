@@ -23,7 +23,7 @@ const description = `${historicalData.date} · Boston New England Aquarium`;
 			talks={Object.values(historicalData.sessionsBySlug)}
 			year={year}
 		/>
-		<Sponsors />
+		<Sponsors sponsors={historicalData.sponsors} />
 	</div>
 </PageLayout>
 

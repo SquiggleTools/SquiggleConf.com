@@ -25,7 +25,11 @@ const historicalData =
 		{
 			Object.values(historicalData.peopleBySlug)
 				.sort((a, b) =>
-					!!a.bio === !!b.bio ? a.name.localeCompare(b.name) : a.bio ? -1 : 1,
+					!!a.biography === !!b.biography
+						? a.name.localeCompare(b.name)
+						: a.biography
+							? -1
+							: 1,
 				)
 				.map((person) => (
 					<Speaker
