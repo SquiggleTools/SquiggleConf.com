@@ -28,7 +28,7 @@ const ticketsButton = {
 	class: "header-button",
 	href: links.tickets,
 	target: "_blank",
-	variant: "accent",
+	variant: "ghost",
 } as const;
 ---
 
@@ -69,16 +69,6 @@ const ticketsButton = {
 	header {
 		--header-background: var(--colorBlueBright2);
 		--header-foreground: var(--colorBlue5);
-		--header-button-background: rgba(255, 255, 255, 0.08);
-		--header-button-border: rgb(from var(--colorBlue5) r g b / 22%);
-		--header-button-hover-background: rgb(from var(--colorBlue5) r g b / 14%);
-		--header-button-hover-border: rgb(from var(--colorBlue5) r g b / 30%);
-		--header-button-shadow:
-			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
-			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
-		--header-button-hover-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.22),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
 		color: var(--header-foreground);
 		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
@@ -88,16 +78,6 @@ const ticketsButton = {
 	:global(html.dark) header {
 		--header-background: var(--colorBlue6);
 		--header-foreground: var(--colorWhiteIsh);
-		--header-button-background: transparent;
-		--header-button-border: rgba(125, 207, 226, 0.34);
-		--header-button-hover-background: rgb(from var(--colorBlue2) r g b / 78%);
-		--header-button-hover-border: rgba(125, 207, 226, 0.46);
-		--header-button-shadow:
-			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
-			0 0 0 1px rgba(125, 207, 226, 0.18);
-		--header-button-hover-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.18),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue2) r g b / 22%);
 	}
 
 	.logo {
@@ -168,29 +148,7 @@ const ticketsButton = {
 	}
 
 	.header-button {
-		--colorButtonBackground: var(--header-button-background);
-		--colorButtonBorderHover: var(--header-button-hover-border);
-		--colorButtonBackgroundHover: var(--header-button-hover-background);
-		--colorButtonColor: var(--header-foreground);
-		--colorButtonColorHover: var(--header-foreground);
-		border: 2px solid var(--header-button-border);
-		border-radius: 0.85rem;
-		font-weight: var(--fontWeightBold);
 		margin-left: 0.35rem;
-		text-wrap: nowrap;
-		transition:
-			background var(--transitionBackground) ease,
-			border-color var(--transitionFast) ease,
-			box-shadow var(--transitionFast) ease,
-			transform var(--transitionFast) ease;
-	}
-
-	.header-button:hover,
-	.header-button:focus-visible {
-		box-shadow:
-			var(--header-button-hover-shadow),
-			0 0 0 1px var(--header-button-hover-border);
-		transform: translateY(-1px);
 	}
 
 	@media (width >= 1117px) {
@@ -200,12 +158,6 @@ const ticketsButton = {
 
 		.header-links {
 			display: flex;
-		}
-
-		.header-button:not(:hover, :focus-visible) {
-			box-shadow:
-				inset 0 1px 0 rgba(255, 255, 255, 0.16),
-				var(--header-button-shadow);
 		}
 	}
 </style>
