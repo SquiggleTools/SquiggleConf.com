@@ -84,16 +84,16 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		--timeline-card-pointer-y: 50%;
 		--timeline-collage-duo-1: translate3d(0, 0, 0);
 		--timeline-collage-duo-2: translate3d(0, 0, 0);
-		--timeline-entry-copy-color: var(--timeline-copy-color);
-		--timeline-image-grow-border-width: var(--timeline-image-border-width);
+		--timeline-entry-copy-color: var(--colorCopy);
+		--timeline-image-grow-border-width: var(--sizeImageBorder);
 		--timeline-image-scale: 1;
-		--timeline-image-shadow: var(--timeline-image-shadow-rest);
+		--timeline-image-shadow: var(--shadowImage);
 		--timeline-image-zoom: 1;
 		isolation: isolate;
 		margin: 1rem 0;
 		padding: 1.35rem 0.5rem 1.5rem 2rem;
 		position: relative;
-		transition: transform var(--timeline-hover-duration) ease;
+		transition: transform var(--transitionNormal) ease;
 	}
 
 	.timeline-content > * {
@@ -103,7 +103,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 
 	.timeline-content::before,
 	.timeline-content::after {
-		border-radius: 1rem;
+		border-radius: var(--radiusLarge);
 		content: "";
 		inset: 0.35rem -0.8rem 0.45rem 0.85rem;
 		pointer-events: none;
@@ -116,10 +116,10 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		opacity: 0.22;
 		transform: scale(0.985);
 		transition:
-			opacity var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease,
-			border-color var(--timeline-hover-duration) ease,
-			box-shadow var(--timeline-hover-duration) ease;
+			opacity var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease,
+			border-color var(--transitionNormal) ease,
+			box-shadow var(--transitionNormal) ease;
 	}
 
 	.timeline-content::after {
@@ -132,7 +132,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		);
 		opacity: 0;
 		padding: 3px;
-		transition: opacity var(--timeline-hover-duration) ease;
+		transition: opacity var(--transitionNormal) ease;
 		mask:
 			linear-gradient(#fff 0 0) content-box exclude,
 			linear-gradient(#fff 0 0);
@@ -152,16 +152,16 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	}
 
 	.timeline-heading {
-		color: var(--timeline-heading-color);
+		color: var(--colorHeading);
 		font-family: var(--fontFamilyHeading);
-		font-size: clamp(1.8rem, 2.8vw, 2.45rem);
-		font-weight: 700;
+		font-size: var(--fontSizeDisplay);
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1;
 		margin: 0;
 		transition:
-			color var(--timeline-hover-duration) ease,
-			text-shadow var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease;
+			color var(--transitionNormal) ease,
+			text-shadow var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease;
 	}
 
 	.timeline-heading-line {
@@ -173,12 +173,12 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	}
 
 	.timeline-subtitle {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		display: block;
 		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
 		font-weight: 500;
 		margin: -0.5rem 0 0.5rem;
-		transition: color var(--timeline-hover-duration) ease;
+		transition: color var(--transitionNormal) ease;
 	}
 
 	.timeline-inline-time {
@@ -195,11 +195,11 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	}
 
 	.timeline-mobile-location {
-		color: var(--timeline-muted-color);
+		color: var(--colorMuted);
 		font-size: 0.95rem;
 		font-weight: 500;
 		line-height: 1.2;
-		transition: color var(--timeline-hover-duration) ease;
+		transition: color var(--transitionNormal) ease;
 	}
 
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
@@ -207,10 +207,10 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		.timeline-content:is(:hover, :focus-within) {
 			--timeline-collage-duo-1: translate3d(1rem, -1rem, 0) scale(1.18);
 			--timeline-collage-duo-2: translate3d(-0.25rem, -2rem, 0) scale(1.18);
-			--timeline-entry-copy-color: var(--timeline-copy-hover-color);
+			--timeline-entry-copy-color: var(--colorCopyHover);
 			--timeline-image-grow-border-width: 1px;
 			--timeline-image-scale: 1.25;
-			--timeline-image-shadow: var(--timeline-image-shadow-active);
+			--timeline-image-shadow: var(--shadowImageActive);
 			--timeline-image-zoom: 1.1;
 		}
 
@@ -226,14 +226,14 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-content:is(:hover, :focus-within) .timeline-heading {
-			color: var(--timeline-heading-hover-color);
-			text-shadow: var(--timeline-heading-hover-shadow);
+			color: var(--colorHeadingHover);
+			text-shadow: var(--shadowHeadingHover);
 			transform: translateX(0.08rem);
 		}
 
 		.timeline-content:is(:hover, :focus-within)
 			:is(.timeline-subtitle, .timeline-mobile-location) {
-			color: var(--timeline-muted-hover-color);
+			color: var(--colorMutedHover);
 		}
 	}
 
@@ -289,15 +289,14 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		.timeline-content[data-mobile-active] {
 			--timeline-collage-duo-1: translate3d(0.28rem, -0.3rem, 0) scale(1.06);
 			--timeline-collage-duo-2: translate3d(-0.08rem, -0.42rem, 0) scale(1.06);
-			--timeline-entry-copy-color: var(--timeline-copy-hover-color);
+			--timeline-entry-copy-color: var(--colorCopyHover);
 			--timeline-image-scale: 1.12;
-			--timeline-image-shadow: var(--timeline-image-shadow-active);
+			--timeline-image-shadow: var(--shadowImageActive);
 			--timeline-image-zoom: 1.07;
 		}
 
 		.timeline-content[data-mobile-active]::after {
-			animation: timeline-card-outline-flash 1600ms
-				cubic-bezier(0.22, 1, 0.36, 1) 1;
+			animation: timeline-card-outline-flash 1600ms var(--transitionEaseOut) 1;
 			padding: 1.5px;
 			transform-origin: center;
 		}
@@ -311,13 +310,13 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-content[data-mobile-active] .timeline-heading {
-			color: var(--timeline-heading-hover-color);
-			text-shadow: var(--timeline-heading-hover-shadow);
+			color: var(--colorHeadingHover);
+			text-shadow: var(--shadowHeadingHover);
 		}
 
 		.timeline-content[data-mobile-active]
 			:is(.timeline-subtitle, .timeline-mobile-location) {
-			color: var(--timeline-muted-hover-color);
+			color: var(--colorMutedHover);
 		}
 	}
 </style>
