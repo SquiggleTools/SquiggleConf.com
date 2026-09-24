@@ -127,7 +127,6 @@ html {
 	font-family: var(--fontFamilyBody);
 }
 
-/* Theme-dependent values that aren't plain colors, and palette colors that other colors are derived from. */
 html.dark {
 	color-scheme: dark;
 
