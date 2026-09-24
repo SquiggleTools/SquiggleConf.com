@@ -2,11 +2,13 @@
 import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
-import BioLinks, { BioLinksPlatforms } from "./BioLinks.astro";
+import type { PersonLinks } from "~/data/historical/types";
+
+import BioLinks from "./BioLinks.astro";
 
 export interface Props {
 	class?: string;
-	links: BioLinksPlatforms;
+	links: PersonLinks;
 	name: string;
 	photo: ImageMetadata;
 }
