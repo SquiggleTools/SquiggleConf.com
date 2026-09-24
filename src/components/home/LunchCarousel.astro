@@ -15,7 +15,7 @@ const { spots } = Astro.props;
 	data-lunch-carousel
 	aria-label="Lunch options photo carousel"
 >
-	<div class="lunch-carousel-viewport">
+	<div class="lunch-carousel-viewport timeline-image">
 		<div class="lunch-carousel-track" data-lunch-track>
 			{
 				spots.map((spot, index) => (
@@ -46,7 +46,6 @@ const { spots } = Astro.props;
 					type="button"
 					class="lunch-carousel-dot"
 					data-lunch-dot
-					data-lunch-index={index}
 					aria-label={`Show ${spot.name}`}
 					aria-pressed={index === 0 ? "true" : "false"}
 				/>
@@ -65,13 +64,7 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-viewport {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
 		border-radius: 0.9rem;
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		box-sizing: border-box;
-		overflow: hidden;
 		position: relative;
 	}
 
@@ -91,40 +84,28 @@ const { spots } = Astro.props;
 		aspect-ratio: 1 / 1;
 		background: linear-gradient(
 			180deg,
-			rgba(255, 255, 255, 0.16),
-			rgba(255, 255, 255, 0.03)
+			rgb(from white r g b / 16%),
+			rgb(from white r g b / 3%)
 		);
 		user-select: none;
-	}
-
-	.lunch-slide-image :global(picture),
-	.lunch-slide-image :global(img) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.lunch-slide-image :global(img) {
-		object-fit: cover;
 	}
 
 	.lunch-slide-caption {
 		align-items: end;
 		background: linear-gradient(
 			180deg,
-			rgba(3, 13, 26, 0) 0%,
-			rgba(3, 13, 26, 0.72) 58%,
-			rgba(3, 13, 26, 0.88) 100%
+			transparent 0%,
+			rgb(from var(--colorBlue5) r g b / 72%) 58%,
+			rgb(from var(--colorBlue5) r g b / 88%) 100%
 		);
 		bottom: 0;
-		color: #f7fbff;
+		color: white;
 		display: grid;
-		gap: 0.12rem;
 		left: 0;
 		padding: 2rem 0.9rem 0.8rem;
 		position: absolute;
 		right: 0;
-		text-shadow: 0 0.15rem 0.35rem rgba(0, 0, 0, 0.28);
+		text-shadow: 0 0.15rem 0.35rem rgb(from black r g b / 28%);
 	}
 
 	.lunch-slide-caption strong {
@@ -143,34 +124,34 @@ const { spots } = Astro.props;
 
 	.lunch-carousel-dot {
 		appearance: none;
-		background: rgba(255, 255, 255, 0.24);
-		border: 1px solid rgba(188, 223, 233, 0.45);
+		background: rgb(from white r g b / 24%);
+		border: 1px solid rgb(from var(--colorBlue1) r g b / 45%);
 		border-radius: 999px;
 		cursor: pointer;
 		height: 0.65rem;
 		margin: 0;
 		padding: 0;
 		transition:
-			background-color 180ms ease,
-			transform 180ms ease,
-			width 180ms ease;
+			background-color var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease,
+			width var(--timeline-hover-duration) ease;
 		width: 0.65rem;
 	}
 
 	.lunch-carousel-dot[aria-pressed="true"] {
-		background: rgba(239, 248, 255, 0.96);
+		background: rgb(from white r g b / 96%);
 		transform: scale(1.02);
 		width: 1.7rem;
 	}
 
 	.lunch-carousel-dot:hover,
 	.lunch-carousel-dot:focus-visible {
-		background: rgba(239, 248, 255, 0.72);
+		background: rgb(from white r g b / 72%);
 		outline: none;
 	}
 
 	.lunch-carousel-dot:focus-visible {
-		box-shadow: 0 0 0 0.16rem rgba(239, 248, 255, 0.28);
+		box-shadow: 0 0 0 0.16rem rgb(from white r g b / 28%);
 	}
 
 	@media (width < 900px) {
@@ -182,97 +163,67 @@ const { spots } = Astro.props;
 			aspect-ratio: 1.15 / 1;
 		}
 	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.lunch-carousel-track,
-		.lunch-carousel-dot {
-			animation: none;
-			transition: none;
-		}
-	}
 </style>
 
 <script>
-	// @ts-nocheck
-	const lunchReducedMotionQuery = window.matchMedia(
-		"(prefers-reduced-motion: reduce)",
-	);
-	const lunchCarousels = Array.from(
-		document.querySelectorAll("[data-lunch-carousel]"),
-	).filter((element) => element instanceof HTMLElement);
+	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
 
-	for (const carousel of lunchCarousels) {
-		const dots = Array.from(
-			carousel.querySelectorAll("[data-lunch-dot]"),
-		).filter((element) => element instanceof HTMLButtonElement);
-		const slides = Array.from(
-			carousel.querySelectorAll("[data-lunch-slide]"),
-		).filter((element) => element instanceof HTMLElement);
+	for (const carousel of document.querySelectorAll<HTMLElement>(
+		"[data-lunch-carousel]",
+	)) {
+		const dots = [
+			...carousel.querySelectorAll<HTMLButtonElement>("[data-lunch-dot]"),
+		];
+		const slides = [...carousel.querySelectorAll("[data-lunch-slide]")];
 		let activeIndex = 0;
-		let autoAdvanceTimer = 0;
+		let autoAdvanceTimer: number | undefined;
 
-		const setLunchSlide = (index) => {
-			activeIndex = ((index % slides.length) + slides.length) % slides.length;
+		const setSlide = (index: number) => {
+			activeIndex = index % slides.length;
 			carousel.style.setProperty("--lunch-carousel-index", `${activeIndex}`);
-
 			for (const [slideIndex, slide] of slides.entries()) {
-				slide.setAttribute(
-					"aria-hidden",
-					slideIndex === activeIndex ? "false" : "true",
-				);
+				slide.setAttribute("aria-hidden", `${slideIndex !== activeIndex}`);
 			}
-
 			for (const [dotIndex, dot] of dots.entries()) {
-				dot.setAttribute(
-					"aria-pressed",
-					dotIndex === activeIndex ? "true" : "false",
+				dot.setAttribute("aria-pressed", `${dotIndex === activeIndex}`);
+			}
+		};
+
+		const stopAutoAdvance = () => window.clearInterval(autoAdvanceTimer);
+
+		const startAutoAdvance = () => {
+			stopAutoAdvance();
+			if (!reducedMotionQuery.matches && slides.length > 1) {
+				autoAdvanceTimer = window.setInterval(
+					() => setSlide(activeIndex + 1),
+					3400,
 				);
 			}
 		};
 
-		const stopLunchAutoAdvance = () => {
-			window.clearInterval(autoAdvanceTimer);
-			autoAdvanceTimer = 0;
-		};
-
-		const startLunchAutoAdvance = () => {
-			if (lunchReducedMotionQuery.matches || slides.length < 2) {
-				return;
-			}
-
-			stopLunchAutoAdvance();
-			autoAdvanceTimer = window.setInterval(() => {
-				setLunchSlide(activeIndex + 1);
-			}, 3400);
-		};
-
-		for (const dot of dots) {
+		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {
-				const nextIndex = Number(dot.dataset.lunchIndex ?? activeIndex);
-				setLunchSlide(nextIndex);
-				startLunchAutoAdvance();
-
+				setSlide(index);
+				startAutoAdvance();
 				if (!dot.matches(":focus-visible")) {
 					dot.blur();
 				}
 			});
 		}
 
-		carousel.addEventListener("pointerenter", stopLunchAutoAdvance);
-		carousel.addEventListener("pointerleave", startLunchAutoAdvance);
-		carousel.addEventListener("focusin", stopLunchAutoAdvance);
-		carousel.addEventListener("focusout", () => {
-			const activeElement = document.activeElement;
-
+		carousel.addEventListener("pointerenter", stopAutoAdvance);
+		carousel.addEventListener("pointerleave", startAutoAdvance);
+		carousel.addEventListener("focusin", stopAutoAdvance);
+		carousel.addEventListener("focusout", (event) => {
 			if (
-				!(activeElement instanceof Node) ||
-				!carousel.contains(activeElement)
+				!(event.relatedTarget instanceof Node) ||
+				!carousel.contains(event.relatedTarget)
 			) {
-				startLunchAutoAdvance();
+				startAutoAdvance();
 			}
 		});
 
-		setLunchSlide(0);
-		startLunchAutoAdvance();
+		setSlide(0);
+		startAutoAdvance();
 	}
 </script>

@@ -9,11 +9,8 @@ const { bottom, span, time } = Astro.props;
 ---
 
 <div
-	class:list={[
-		"timeline-rail",
-		bottom && "timeline-bottom",
-		span === 2 && "timeline-cell-span-two",
-	]}
+	class:list={["timeline-rail", bottom && "timeline-bottom"]}
+	style={span && `grid-row: span ${span}`}
 >
 	<p class="timeline-time">{time}</p>
 </div>
@@ -32,10 +29,6 @@ const { bottom, span, time } = Astro.props;
 	.timeline-bottom {
 		border-bottom-right-radius: 8px;
 		border-bottom-left-radius: 8px;
-	}
-
-	.timeline-cell-span-two {
-		grid-row: span 2;
 	}
 
 	.timeline-time {

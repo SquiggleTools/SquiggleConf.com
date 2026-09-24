@@ -4,10 +4,7 @@ import { Image } from "astro:assets";
 import { postcardBack, postcardFront } from "~/components/home/data";
 ---
 
-<div
-	class="postcard-gallery"
-	style="--postcard-back-width: 21rem; --postcard-front-scale: 1.5;"
->
+<div class="postcard-gallery">
 	<div class="postcard-stack postcard-stack-flip">
 		<div class="postcard-flip-scene">
 			<div class="postcard-flip-inner">
@@ -56,9 +53,9 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		aspect-ratio: 6 / 4;
 		border-radius: 0.45rem;
 		box-shadow:
-			0 0.08rem 0 rgba(255, 255, 255, 0.5),
-			0 0.35rem 0.75rem rgba(2, 14, 31, 0.14),
-			0 1.35rem 2.6rem rgba(2, 14, 31, 0.24);
+			0 0.08rem 0 rgb(from white r g b / 50%),
+			0 0.35rem 0.75rem rgb(from var(--colorBlue5) r g b / 14%),
+			0 1.35rem 2.6rem rgb(from var(--colorBlue5) r g b / 24%);
 		display: block;
 		overflow: hidden;
 		position: relative;
@@ -119,14 +116,10 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		animation: postcard-idle-wiggle 5s ease-in-out infinite;
 		padding-bottom: 2.2rem;
 		transform: rotate(-4deg);
-		width: min(
-			100%,
-			calc(var(--postcard-back-width, 21rem) * var(--postcard-front-scale, 1.5))
-		);
+		width: min(100%, 31.5rem);
 	}
 
-	.postcard-stack-flip:hover,
-	.postcard-stack-flip:focus-within {
+	.postcard-stack-flip:is(:hover, :focus-within, [data-mobile-flipped]) {
 		animation: none;
 	}
 
@@ -151,22 +144,28 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		width: 100%;
 	}
 
-	.postcard-stack-flip:hover .postcard-flip-inner,
-	.postcard-stack-flip:focus-within .postcard-flip-inner {
+	/* data-mobile-flipped is only set on mobile, when scrolled past */
+	.postcard-stack-flip[data-mobile-flipped] .postcard-flip-scene {
+		transform: translateY(-0.08rem);
+	}
+
+	.postcard-stack-flip:is(:hover, :focus-within, [data-mobile-flipped])
+		.postcard-flip-inner {
 		transform: rotateY(180deg);
 	}
 
-	.postcard-stack-flip:hover .postcard,
-	.postcard-stack-flip:focus-within .postcard {
+	.postcard-stack-flip:is(:hover, :focus-within, [data-mobile-flipped])
+		.postcard {
 		box-shadow:
-			0 0.08rem 0 rgba(255, 255, 255, 0.56),
-			0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
-			0 1.65rem 3rem rgba(2, 14, 31, 0.28);
+			0 0.08rem 0 rgb(from white r g b / 56%),
+			0 0.45rem 0.95rem rgb(from var(--colorBlue5) r g b / 16%),
+			0 1.65rem 3rem rgb(from var(--colorBlue5) r g b / 28%);
 	}
 
 	.postcard-face {
 		backface-visibility: hidden;
 		display: block;
+		height: 100%;
 		inset: 0;
 		overflow: visible;
 		pointer-events: none;
@@ -178,16 +177,9 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		transform: rotateY(180deg);
 	}
 
-	.postcard-face-front,
-	.postcard-face-back {
-		height: 100%;
-	}
-
-	.postcard-face-front .postcard,
-	.postcard-face-back .postcard {
+	.postcard-face .postcard {
 		height: 100%;
 		pointer-events: none;
-		width: 100%;
 	}
 
 	.postcard-front {
@@ -278,67 +270,18 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		width: min(100%, 20rem);
 	}
 
-	.postcard-stack-flip:hover .postcard-note-back,
-	.postcard-stack-flip:focus-within .postcard-note-back {
+	.postcard-stack-flip:is(:hover, :focus-within, [data-mobile-flipped])
+		.postcard-note-back {
 		opacity: 1;
 	}
 
-	@media (max-width: 46rem) {
-		.postcard-gallery {
-			flex-direction: column;
-		}
-
+	@media (width <= 46rem) {
 		.postcard-stack-flip {
-			animation: postcard-idle-wiggle 5s ease-in-out infinite;
 			transform: none;
 		}
 
-		.postcard-stack-flip:hover,
-		.postcard-stack-flip:focus-within {
-			animation: none;
-		}
-
-		.postcard-stack-flip:hover .postcard-flip-scene,
-		.postcard-stack-flip:focus-within .postcard-flip-scene {
+		.postcard-stack-flip:is(:hover, :focus-within) .postcard-flip-scene {
 			transform: translateY(-0.08rem);
-		}
-	}
-
-	/* Matches the (max-width: 899px) query that sets data-mobile-flipped */
-	@media (width < 900px) {
-		.postcard-stack-flip[data-mobile-flipped="true"] {
-			animation: none;
-		}
-
-		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-scene {
-			transform: translateY(-0.08rem);
-		}
-
-		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-flip-inner {
-			transform: rotateY(180deg);
-		}
-
-		.postcard-stack-flip[data-mobile-flipped="true"] .postcard {
-			box-shadow:
-				0 0.08rem 0 rgba(255, 255, 255, 0.56),
-				0 0.45rem 0.95rem rgba(2, 14, 31, 0.16),
-				0 1.65rem 3rem rgba(2, 14, 31, 0.28);
-		}
-
-		.postcard-stack-flip[data-mobile-flipped="true"] .postcard-note-back {
-			opacity: 1;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.postcard,
-		.postcard-stack,
-		.postcard-stack-flip,
-		.postcard-flip-scene,
-		.postcard-flip-inner,
-		.postcard-note-back {
-			animation: none;
-			transition: none;
 		}
 	}
 </style>

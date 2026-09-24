@@ -8,94 +8,25 @@ interface Props {
 	placeholder?: boolean;
 }
 
-const { alt, image, placeholder, ...props } = Astro.props;
+const { alt, image, placeholder } = Astro.props;
 ---
 
-<div class="avatar" {...props}>
+<div class="avatar timeline-image timeline-image-zoom">
 	<Image
 		class={placeholder ? "avatar-placeholder" : undefined}
 		alt={alt}
 		src={image}
-		loading="eager"
 	/>
 	{placeholder && <PlaceholderMark />}
 </div>
 
 <style>
 	.avatar {
-		background: white;
-		border: var(--timeline-image-border-width) solid
-			var(--timeline-image-border-color);
 		border-radius: 0.45rem;
-		box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-		box-sizing: border-box;
-		overflow: hidden;
 		position: relative;
-		transition: box-shadow var(--timeline-hover-duration) ease;
 	}
 
 	.avatar-placeholder {
 		filter: blur(2px);
-	}
-
-	.avatar :global(picture) {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-
-	.avatar :global(img) {
-		border-radius: inherit;
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		transition:
-			transform var(--timeline-hover-duration) ease,
-			filter var(--timeline-hover-duration) ease;
-		transform: scale(1);
-		transform-origin: center;
-		user-select: none;
-		width: 100%;
-		will-change: transform;
-	}
-
-	:global(.timeline-content:hover) .avatar,
-	:global(.timeline-content:focus-within) .avatar {
-		box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-	}
-
-	:global(.timeline-content:hover) .avatar :global(img),
-	:global(.timeline-content:focus-within) .avatar :global(img) {
-		transform: scale(1.1);
-	}
-
-	@media (width < 900px) {
-		:global(.timeline-content:hover) .avatar,
-		:global(.timeline-content:focus-within) .avatar {
-			border-width: var(--timeline-image-border-width);
-			box-shadow: 0 0.25rem 0.7rem rgba(4, 25, 48, 0.12);
-			scale: 1;
-		}
-
-		:global(.timeline-content:hover) .avatar :global(img),
-		:global(.timeline-content:focus-within) .avatar :global(img) {
-			transform: scale(1);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"]) .avatar {
-			box-shadow: 0 0.55rem 1rem rgba(4, 25, 48, 0.18);
-		}
-
-		:global(.timeline-content[data-mobile-active="true"]) .avatar :global(img) {
-			transform: scale(1.07);
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.avatar,
-		.avatar :global(img) {
-			animation: none;
-			transition: none;
-		}
 	}
 </style>

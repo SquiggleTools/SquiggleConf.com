@@ -62,16 +62,7 @@ export type TimelineEntryId =
 	| "talks-late"
 	| "talks-morning";
 
-export type TimelineEntryVariant =
-	| "break"
-	| "explore"
-	| "fireside"
-	| "funRun"
-	| "lunch"
-	| "mcs"
-	| "podcast"
-	| "talks"
-	| "talksAfternoon";
+export type TimelineEntryVariant = "break" | "fireside" | "fun-run";
 
 export type TimelineTimeMode = "point" | "range";
 

@@ -6,22 +6,41 @@
 	.timeline-section {
 		--timeline-heading-color: var(--colorBlue5);
 		--timeline-heading-hover-color: var(--colorBlue5);
-		--timeline-copy-color: rgba(4, 25, 48, 0.84);
-		--timeline-copy-hover-color: rgba(4, 25, 48, 0.92);
-		--timeline-muted-color: rgba(6, 48, 82, 0.76);
-		--timeline-muted-hover-color: rgba(6, 48, 82, 0.86);
+		--timeline-heading-hover-shadow: none;
+		--timeline-copy-color: rgb(from var(--colorBlue5) r g b / 84%);
+		--timeline-copy-hover-color: rgb(from var(--colorBlue5) r g b / 92%);
+		--timeline-muted-color: rgb(from var(--colorBlue4) r g b / 76%);
+		--timeline-muted-hover-color: rgb(from var(--colorBlue4) r g b / 86%);
 		--timeline-link-color: var(--colorBlue4);
-		--timeline-rail-background: rgba(255, 255, 255, 0.42);
-		--timeline-rail-border-color: rgba(6, 48, 82, 0.18);
-		--timeline-cap-background: rgba(216, 243, 255, 0.62);
+		--timeline-rail-background: rgb(from white r g b / 42%);
+		--timeline-rail-border-color: rgb(from var(--colorBlue4) r g b / 18%);
+		--timeline-cap-background: rgb(from var(--colorBlueBright1) r g b / 62%);
 		--timeline-cap-color: var(--colorBlue5);
 		--timeline-time-color: var(--colorBlue5);
-		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.46);
-		--timeline-venue-color: rgba(4, 25, 48, 0.9);
-		--timeline-venue-at-color: rgba(17, 109, 154, 0.68);
-		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.1);
-		--timeline-image-border-color: rgba(4, 25, 48, 0.18);
+		--timeline-time-shadow: 0 1px 0 rgb(from white r g b / 46%);
+		--timeline-venue-color: rgb(from var(--colorBlue5) r g b / 90%);
+		--timeline-venue-at-color: rgb(from var(--colorBlue3) r g b / 68%);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
+			rgb(from var(--colorBlue5) r g b / 10%);
+		--timeline-card-hover-background: linear-gradient(
+			135deg,
+			rgb(from var(--colorBlue5) r g b / 5%),
+			rgb(from var(--colorBlue5) r g b / 2%)
+		);
+		--timeline-card-hover-shadow:
+			inset 0 0 0 1px rgb(from var(--colorBlue4) r g b / 10%),
+			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 8%);
+		--timeline-card-glow-inner: rgb(from var(--colorBlue4) r g b / 55%);
+		--timeline-card-glow-outer: rgb(from var(--colorBlue4) r g b / 25%);
+		--timeline-image-border-color: rgb(from var(--colorBlue5) r g b / 18%);
 		--timeline-image-border-width: 2px;
+		--timeline-image-shadow-rest: 0 0.25rem 0.7rem
+			rgb(from var(--colorBlue5) r g b / 12%);
+		--timeline-image-shadow-active: 0 0.55rem 1rem
+			rgb(from var(--colorBlue5) r g b / 18%);
+		--timeline-image-shadow: var(--timeline-image-shadow-rest);
+		--timeline-image-scale: 1;
+		--timeline-image-zoom: 1;
 		--timeline-hover-duration: 220ms;
 		isolation: isolate;
 		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
@@ -29,145 +48,144 @@
 	}
 
 	:global(html.dark) .timeline-section {
-		--timeline-heading-color: #eef6ff;
+		--timeline-heading-color: var(--colorWhiteIsh);
 		--timeline-heading-hover-color: white;
-		--timeline-copy-color: rgba(233, 244, 255, 0.84);
-		--timeline-copy-hover-color: rgba(255, 255, 255, 0.9);
-		--timeline-muted-color: rgba(198, 225, 244, 0.82);
-		--timeline-muted-hover-color: rgba(255, 255, 255, 0.88);
-		--timeline-link-color: #f7fbff;
+		--timeline-heading-hover-shadow: 0 0.3rem 1rem
+			rgb(from var(--colorBlue5) r g b / 24%);
+		--timeline-copy-color: rgb(from var(--colorWhiteIsh) r g b / 84%);
+		--timeline-copy-hover-color: rgb(from white r g b / 90%);
+		--timeline-muted-color: rgb(from var(--colorBlue1) r g b / 82%);
+		--timeline-muted-hover-color: rgb(from white r g b / 88%);
+		--timeline-link-color: white;
 		--timeline-rail-background: var(--colorBlueBright1);
 		--timeline-rail-border-color: var(--colorBlue3);
-		--timeline-cap-background: color-mix(
-			in srgb,
-			var(--colorBlue2) 60%,
-			transparent
-		);
-		--timeline-cap-color: color-mix(
-			in srgb,
-			var(--colorBackground) 85%,
-			transparent
-		);
+		--timeline-cap-background: rgb(from var(--colorBlue2) r g b / 60%);
+		--timeline-cap-color: rgb(from var(--colorBackground) r g b / 85%);
 		--timeline-time-color: var(--colorBackground);
-		--timeline-time-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+		--timeline-time-shadow: 0 1px 0 rgb(from white r g b / 22%);
 		--timeline-venue-color: var(--timeline-heading-color);
-		--timeline-venue-at-color: rgba(125, 207, 226, 0.7);
-		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem rgba(4, 25, 48, 0.18);
+		--timeline-venue-at-color: rgb(from var(--colorBlue2) r g b / 70%);
+		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
+			rgb(from var(--colorBlue5) r g b / 18%);
+		--timeline-card-hover-background: linear-gradient(
+			135deg,
+			rgb(from white r g b / 13%),
+			rgb(from white r g b / 3%)
+		);
+		--timeline-card-hover-shadow:
+			inset 0 0 0 1px rgb(from white r g b / 8%),
+			0 1rem 2rem rgb(from var(--colorBlue5) r g b / 14%);
+		--timeline-card-glow-inner: color-mix(in srgb, var(--colorBlue2), white 8%);
+		--timeline-card-glow-outer: rgb(from var(--colorBlue2) r g b / 52%);
+	}
+
+	/* Shared frame for timeline images; :where() lets components override it. */
+	:global(:where(.timeline-image)) {
+		background: white;
+		border: var(--timeline-image-border-width) solid
+			var(--timeline-image-border-color);
+		border-radius: 0.35rem;
+		box-shadow: var(--timeline-image-shadow);
+		box-sizing: border-box;
+		overflow: hidden;
+		transform-origin: center;
+		transition:
+			border-width var(--timeline-hover-duration) ease,
+			box-shadow var(--timeline-hover-duration) ease,
+			scale var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+	}
+
+	:global(:where(.timeline-image) :is(picture, img)) {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	:global(:where(.timeline-image) img) {
+		border-radius: inherit;
+		object-fit: cover;
+		transform-origin: center;
+		transition:
+			filter var(--timeline-hover-duration) ease,
+			transform var(--timeline-hover-duration) ease;
+		user-select: none;
+	}
+
+	/* Frames that grow, or whose images zoom, while their entry is active. */
+	:global(:where(.timeline-image-grow)) {
+		scale: var(--timeline-image-scale);
+	}
+
+	:global(:where(.timeline-image-zoom) img) {
+		transform: scale(var(--timeline-image-zoom));
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline-section,
+		.timeline-section :global(*),
+		.timeline-section :global(*::before),
+		.timeline-section :global(*::after) {
+			animation: none !important;
+			transition: none !important;
+		}
 	}
 </style>
 
 <script>
-	// @ts-nocheck
-	const timelineCards = Array.from(
-		document.querySelectorAll(".timeline-content"),
-	).filter((element) => element instanceof HTMLElement);
-	const postcardStack = document.querySelector(".postcard-stack-flip");
-	const mobileTimelineQuery = window.matchMedia("(max-width: 899px)");
-	const timelineCardHeaders = timelineCards.map((card) => {
-		const heading = card.querySelector("h2");
+	import { onScrollFrame } from "./onScrollFrame";
 
-		return {
-			card,
-			heading: heading instanceof HTMLElement ? heading : card,
-		};
-	});
+	const cards = [
+		...document.querySelectorAll<HTMLElement>(".timeline-content"),
+	];
+	const headings = cards.map((card) => card.querySelector("h2") ?? card);
+	const postcard = document.querySelector<HTMLElement>(".postcard-stack-flip");
+	const mobileQuery = matchMedia("(max-width: 899px)");
 
-	{
-		let mobileActivationFrameRequested = false;
+	onScrollFrame(() => {
+		const mobile = mobileQuery.matches;
+		const threshold = innerHeight / 2;
+		const activeCard = mobile
+			? cards.findLast(
+					(_, index) =>
+						headings[index].getBoundingClientRect().top <= threshold,
+				)
+			: undefined;
 
-		const clearMobileTimelineState = () => {
-			for (const card of timelineCards) {
-				card.removeAttribute("data-mobile-active");
-			}
+		for (const card of cards) {
+			card.toggleAttribute("data-mobile-active", card === activeCard);
+		}
 
-			if (postcardStack instanceof HTMLElement) {
-				postcardStack.removeAttribute("data-mobile-flipped");
-			}
-		};
-
-		const updateMobileTimelineState = () => {
-			mobileActivationFrameRequested = false;
-
-			if (!mobileTimelineQuery.matches) {
-				clearMobileTimelineState();
-				return;
-			}
-
-			const viewportThreshold = window.innerHeight * 0.5;
-			let activeCard = null;
-
-			for (const { card, heading } of timelineCardHeaders) {
-				if (heading.getBoundingClientRect().top <= viewportThreshold) {
-					activeCard = card;
-				}
-			}
-
-			for (const card of timelineCards) {
-				if (card === activeCard) {
-					card.setAttribute("data-mobile-active", "true");
-				} else {
-					card.removeAttribute("data-mobile-active");
-				}
-			}
-
-			if (postcardStack instanceof HTMLElement) {
-				const postcardRect = postcardStack.getBoundingClientRect();
-				const postcardMidpoint = postcardRect.top + postcardRect.height * 0.5;
-
-				if (postcardMidpoint <= viewportThreshold) {
-					postcardStack.setAttribute("data-mobile-flipped", "true");
-				} else {
-					postcardStack.removeAttribute("data-mobile-flipped");
-				}
-			}
-		};
-
-		const requestMobileTimelineStateUpdate = () => {
-			if (mobileActivationFrameRequested) {
-				return;
-			}
-
-			mobileActivationFrameRequested = true;
-			window.requestAnimationFrame(updateMobileTimelineState);
-		};
-
-		requestMobileTimelineStateUpdate();
-		window.addEventListener("scroll", requestMobileTimelineStateUpdate, {
-			passive: true,
-		});
-		window.addEventListener("resize", requestMobileTimelineStateUpdate);
-
-		if (typeof mobileTimelineQuery.addEventListener === "function") {
-			mobileTimelineQuery.addEventListener(
-				"change",
-				requestMobileTimelineStateUpdate,
+		if (postcard) {
+			const { height, top } = postcard.getBoundingClientRect();
+			postcard.toggleAttribute(
+				"data-mobile-flipped",
+				mobile && top + height / 2 <= threshold,
 			);
 		}
-	}
+	}, mobileQuery);
 
-	for (const card of timelineCards) {
+	const toPercent = (fraction: number) =>
+		`${(Math.min(Math.max(fraction, 0), 1) * 100).toFixed(2)}%`;
+
+	for (const card of cards) {
 		card.addEventListener("pointermove", (event) => {
-			if (mobileTimelineQuery.matches) {
-				return;
+			if (!mobileQuery.matches) {
+				const rect = card.getBoundingClientRect();
+				card.style.setProperty(
+					"--timeline-card-pointer-x",
+					toPercent((event.clientX - rect.left) / rect.width),
+				);
+				card.style.setProperty(
+					"--timeline-card-pointer-y",
+					toPercent((event.clientY - rect.top) / rect.height),
+				);
 			}
-
-			const rect = card.getBoundingClientRect();
-			const x = ((event.clientX - rect.left) / rect.width) * 100;
-			const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-			card.style.setProperty(
-				"--timeline-card-pointer-x",
-				`${Math.min(Math.max(x, 0), 100).toFixed(2)}%`,
-			);
-			card.style.setProperty(
-				"--timeline-card-pointer-y",
-				`${Math.min(Math.max(y, 0), 100).toFixed(2)}%`,
-			);
 		});
 
 		card.addEventListener("pointerleave", () => {
-			card.style.setProperty("--timeline-card-pointer-x", "50%");
-			card.style.setProperty("--timeline-card-pointer-y", "50%");
+			card.style.removeProperty("--timeline-card-pointer-x");
+			card.style.removeProperty("--timeline-card-pointer-y");
 		});
 	}
 </script>

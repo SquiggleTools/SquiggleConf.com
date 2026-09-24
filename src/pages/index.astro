@@ -30,12 +30,12 @@ import {
 	urbanwildLogo,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
-import ExploreChoices from "~/components/home/ExploreChoices.astro";
+import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
-import HostList from "~/components/home/HostList.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
+import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
-import TalkList from "~/components/home/TalkList.astro";
+import TalkCard from "~/components/home/TalkCard.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
@@ -127,7 +127,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="7-7:30am"
 					timeMode="range"
-					variant="funRun"
+					variant="fun-run"
 				>
 					<Collage
 						ariaLabel="Fun run collage"
@@ -198,7 +198,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Talks in an IMAX Theater"
 					venue="aquarium"
 					time="8am"
-					variant="mcs"
 				>
 					<div class="event-body">
 						<TimelineHeroImage
@@ -224,9 +223,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Meet your MCs!"
 					venue="aquarium"
 					time="9am"
-					variant="mcs"
 				>
-					<HostList ariaLabel="Conference MCs" hosts={timelineMCs} />
+					<div
+						class="timeline-list timeline-list-pair"
+						aria-label="Conference MCs"
+					>
+						{timelineMCs.map((host) => <PersonCard person={host} />)}
+					</div>
 				</TimelineEntry>
 
 				<TimelineEntry
@@ -234,9 +237,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Talks"
 					venue="aquarium"
 					time="9am"
-					variant="talks"
 				>
-					<TalkList ariaLabel="Speaker talks" talks={talkBlocks.morning} />
+					<div class="timeline-list" aria-label="Speaker talks">
+						{talkBlocks.morning.map((talk) => <TalkCard talk={talk} />)}
+					</div>
 				</TimelineEntry>
 
 				<TimelineRail time="10:30am" />
@@ -279,13 +283,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Talks"
 					venue="aquarium"
 					time="11am"
-					variant="talks"
 				>
-					<TalkList
-						ariaLabel="Late morning talks"
-						short
-						talks={talkBlocks.lateMorning}
-					/>
+					<div class="timeline-list" aria-label="Late morning talks">
+						{talkBlocks.lateMorning.map((talk) => <TalkCard talk={talk} />)}
+					</div>
 				</TimelineEntry>
 
 				<TimelineVenue venue="quincyMarket" />
@@ -296,7 +297,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Lunch"
 					venue="quincyMarket"
 					time="12pm"
-					variant="lunch"
 				>
 					<div class="lunch-body">
 						<LunchCarousel spots={lunchSpots} />
@@ -341,9 +341,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Talks"
 					venue="aquarium"
 					time="2pm"
-					variant="talksAfternoon"
 				>
-					<TalkList ariaLabel="Afternoon talks" talks={talkBlocks.afternoon} />
+					<div class="timeline-list" aria-label="Afternoon talks">
+						{talkBlocks.afternoon.map((talk) => <TalkCard talk={talk} />)}
+					</div>
 				</TimelineEntry>
 
 				<TimelineRail time="3:30pm" />
@@ -354,9 +355,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					location="Boston"
 					subtitle="choose your own adventure"
 					time="3:30pm"
-					variant="explore"
 				>
-					<ExploreChoices choices={exploreChoices} />
+					<div class="timeline-list" aria-label="Explore Boston options">
+						{
+							exploreChoices.map((choice) => (
+								<ExploreChoiceCard choice={choice} />
+							))
+						}
+					</div>
 				</TimelineEntry>
 
 				<TimelineVenue last span={5} venue="urbanWild" />
@@ -367,7 +373,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Arrive at Urban Wild"
 					venue="urbanWild"
 					time="6pm"
-					variant="podcast"
 				>
 					<div class="event-body">
 						<TimelineHeroImage
@@ -390,7 +395,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					heading="Live Podcast Recording"
 					venue="urbanWild"
 					time="6pm"
-					variant="podcast"
 				>
 					<div class="event-body">
 						<Collage
@@ -676,6 +680,19 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		text-underline-offset: 0.14em;
 	}
 
+	.timeline-list {
+		display: grid;
+		gap: 0.8rem;
+		margin-top: 0.8rem;
+		max-width: 44rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.timeline-list-pair {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
 	.event-body {
 		display: grid;
 		gap: 1rem;
@@ -726,7 +743,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			padding: 0 0.15rem 0.2rem;
 		}
 
-		.break-body {
+		.break-body,
+		.timeline-list-pair {
 			grid-template-columns: 1fr;
 		}
 

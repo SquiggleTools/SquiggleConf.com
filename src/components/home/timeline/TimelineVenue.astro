@@ -10,7 +10,6 @@ interface Props {
 
 const { last, span, venue } = Astro.props;
 const { mapUrl, name } = venues[venue];
-const spanClasses = { 2: "two", 5: "five", 7: "seven" } as const;
 const decorated = Astro.slots.has("default");
 ---
 
@@ -18,13 +17,13 @@ const decorated = Astro.slots.has("default");
 	class:list={[
 		"timeline-venue",
 		decorated && "timeline-venue-decorated",
-		span && `timeline-cell-span-${spanClasses[span]}`,
 		last && "timeline-venue-last",
 	]}
+	style={span && `grid-row: span ${span}`}
 >
 	<div class="timeline-venue-stack">
 		<a
-			class="timeline-location-link timeline-location-link-stack"
+			class="timeline-location-link"
 			href={mapUrl}
 			rel="noreferrer"
 			target="_blank"
@@ -61,17 +60,14 @@ const decorated = Astro.slots.has("default");
 
 	.timeline-location-link {
 		color: inherit;
+		display: grid;
+		justify-items: end;
 		text-decoration: none;
 	}
 
 	.timeline-location-link:hover,
 	.timeline-location-link:focus-visible {
 		text-decoration: underline;
-	}
-
-	.timeline-location-link-stack {
-		display: grid;
-		justify-items: end;
 	}
 
 	.timeline-venue-stack {
@@ -105,24 +101,12 @@ const decorated = Astro.slots.has("default");
 		position: absolute;
 		top: -0.5rem;
 		transform: rotate(-10deg);
-		text-shadow: 0 0.12rem 0.4rem rgba(4, 25, 48, 0.24);
+		text-shadow: 0 0.12rem 0.4rem rgb(from var(--colorBlue5) r g b / 24%);
 	}
 
 	.timeline-venue-decorated .timeline-venue-stack {
 		margin-bottom: 6rem;
 		padding-bottom: 3.75rem;
-	}
-
-	.timeline-cell-span-two {
-		grid-row: span 2;
-	}
-
-	.timeline-cell-span-five {
-		grid-row: span 5;
-	}
-
-	.timeline-cell-span-seven {
-		grid-row: span 7;
 	}
 
 	@media (width < 900px) {

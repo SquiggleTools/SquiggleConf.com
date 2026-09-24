@@ -4,9 +4,9 @@ import type {
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
+import { Image } from "astro:assets";
+
 import PlaceholderMark from "./PlaceholderMark.astro";
-import CollagePhotoImage from "./CollagePhotoImage.astro";
-import CollageItem from "./CollageItem.astro";
 
 interface Props {
 	ariaLabel?: string;
@@ -25,6 +25,11 @@ const {
 	photos,
 	shape = "photo",
 } = Astro.props;
+
+const effect =
+	shape === "avatar"
+		? "timeline-image-zoom"
+		: layout !== "duo" && "timeline-image-grow";
 ---
 
 <div
@@ -35,19 +40,27 @@ const {
 >
 	{
 		photos.map((photo, index) => (
-			<CollageItem
+			<div
 				class:list={[
+					"collage-item",
+					"timeline-image",
+					effect,
 					`collage-item-${index + 1}`,
 					photo.placeholder && "collage-item-placeholder",
 				]}
 			>
-				<CollagePhotoImage
+				<Image
 					alt={decorative || photo.decorative ? "" : photo.alt}
+					aria-hidden={decorative || photo.decorative ? "true" : undefined}
+					class="collage-photo-image"
+					loading="lazy"
 					src={photo.src}
-					objectPosition={photo.objectPosition}
+					style={
+						photo.objectPosition && `object-position: ${photo.objectPosition}`
+					}
 				/>
 				{photo.placeholder && <PlaceholderMark />}
-			</CollageItem>
+			</div>
 		))
 	}
 </div>
@@ -68,8 +81,6 @@ const {
 
 	.collage-avatar .collage-item {
 		border-radius: 999px;
-		transition: box-shadow var(--timeline-hover-duration) ease;
-		will-change: auto;
 	}
 
 	.collage-item.collage-item-placeholder :global(img) {
@@ -300,14 +311,6 @@ const {
 			left: 0;
 			top: 0.7rem;
 			width: 4.35rem;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.collage,
-		.collage-item {
-			animation: none;
-			transition: none;
 		}
 	}
 </style>
