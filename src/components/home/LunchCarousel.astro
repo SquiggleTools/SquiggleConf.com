@@ -67,7 +67,7 @@ const { spots } = Astro.props;
 	.lunch-carousel-track {
 		display: flex;
 		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
-		transition: transform var(--transitionMedium) ease;
+		transition: transform var(--transitionMedium);
 		will-change: transform;
 	}
 
@@ -135,9 +135,9 @@ const { spots } = Astro.props;
 		margin: 0;
 		padding: 0;
 		transition:
-			background-color var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease,
-			width var(--transitionNormal) ease;
+			background-color var(--transitionNormal),
+			transform var(--transitionNormal),
+			width var(--transitionNormal);
 		width: 0.65rem;
 	}
 

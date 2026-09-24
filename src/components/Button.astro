@@ -127,9 +127,9 @@ const {
 		gap: 0.7rem;
 		padding: 0.75rem 1.1rem 0.75rem 0.9rem;
 		transition:
-			background var(--transitionNormal) ease,
-			box-shadow var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease;
+			background var(--transitionNormal),
+			box-shadow var(--transitionNormal),
+			transform var(--transitionNormal);
 	}
 
 	.button-variant-terminal:focus:not(:active, [disabled]),
@@ -163,10 +163,10 @@ const {
 		font-weight: var(--fontWeightBold);
 		text-wrap: nowrap;
 		transition:
-			background var(--transitionBackground) ease,
-			border-color var(--transitionFast) ease,
-			box-shadow var(--transitionFast) ease,
-			transform var(--transitionFast) ease;
+			background var(--transitionBackground),
+			border-color var(--transitionFast),
+			box-shadow var(--transitionFast),
+			transform var(--transitionFast);
 	}
 
 	:global(html.dark) .button-variant-ghost {

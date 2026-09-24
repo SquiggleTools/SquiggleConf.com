@@ -75,9 +75,9 @@ const imageStyle = [
 		position: relative;
 		transform-origin: center;
 		transition:
-			border-width var(--transitionNormal) ease,
-			box-shadow var(--transitionNormal) ease,
-			scale var(--transitionNormal) ease;
+			border-width var(--transitionNormal),
+			box-shadow var(--transitionNormal),
+			scale var(--transitionNormal);
 	}
 
 	.timeline-image-grow {
@@ -92,8 +92,8 @@ const imageStyle = [
 		object-fit: cover;
 		transform-origin: center;
 		transition:
-			filter var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease;
+			filter var(--transitionNormal),
+			transform var(--transitionNormal);
 		user-select: none;
 		width: 100%;
 	}

@@ -60,8 +60,8 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		overflow: hidden;
 		position: relative;
 		transition:
-			box-shadow var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease;
+			box-shadow var(--transitionNormal),
+			transform var(--transitionNormal);
 		width: 100%;
 	}
 
@@ -89,7 +89,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		gap: 0.5rem;
 		justify-items: center;
 		width: min(100%, 100vw - 2rem);
-		transition: transform var(--transitionNormal) ease;
+		transition: transform var(--transitionNormal);
 	}
 
 	@keyframes postcard-idle-wiggle {
@@ -266,7 +266,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		position: absolute;
 		top: calc(100% + 0.55rem);
 		transform: translateX(-50%);
-		transition: opacity var(--transitionNormal) ease;
+		transition: opacity var(--transitionNormal);
 		width: min(100%, 20rem);
 	}
 

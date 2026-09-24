@@ -93,7 +93,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		margin: 1rem 0;
 		padding: 1.35rem 0.5rem 1.5rem 2rem;
 		position: relative;
-		transition: transform var(--transitionNormal) ease;
+		transition: transform var(--transitionNormal);
 	}
 
 	.timeline-content > * {
@@ -116,10 +116,10 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		opacity: 0.22;
 		transform: scale(0.985);
 		transition:
-			opacity var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease,
-			border-color var(--transitionNormal) ease,
-			box-shadow var(--transitionNormal) ease;
+			opacity var(--transitionNormal),
+			transform var(--transitionNormal),
+			border-color var(--transitionNormal),
+			box-shadow var(--transitionNormal);
 	}
 
 	.timeline-content::after {
@@ -132,7 +132,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		);
 		opacity: 0;
 		padding: 3px;
-		transition: opacity var(--transitionNormal) ease;
+		transition: opacity var(--transitionNormal);
 		mask:
 			linear-gradient(#fff 0 0) content-box exclude,
 			linear-gradient(#fff 0 0);
@@ -159,9 +159,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		line-height: 1;
 		margin: 0;
 		transition:
-			color var(--transitionNormal) ease,
-			text-shadow var(--transitionNormal) ease,
-			transform var(--transitionNormal) ease;
+			color var(--transitionNormal),
+			text-shadow var(--transitionNormal),
+			transform var(--transitionNormal);
 	}
 
 	.timeline-heading-line {
@@ -178,7 +178,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		font-size: clamp(0.95rem, 1.45vw, 1.05rem);
 		font-weight: 500;
 		margin: -0.5rem 0 0.5rem;
-		transition: color var(--transitionNormal) ease;
+		transition: color var(--transitionNormal);
 	}
 
 	.timeline-inline-time {
@@ -199,7 +199,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		font-size: 0.95rem;
 		font-weight: 500;
 		line-height: 1.2;
-		transition: color var(--transitionNormal) ease;
+		transition: color var(--transitionNormal);
 	}
 
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
