@@ -67,17 +67,12 @@ const ticketsButton = {
 
 <style>
 	header {
-		--header-background: var(--colorBlueBright2);
-		--header-foreground: var(--colorBlue5);
+		--header-background: light-dark(var(--colorBlueBright2), var(--colorBlue6));
+		--header-foreground: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
 		color: var(--header-foreground);
 		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
 		padding: 1.5rem 0;
-	}
-
-	:global(html.dark) header {
-		--header-background: var(--colorBlue6);
-		--header-foreground: var(--colorWhiteIsh);
 	}
 
 	.logo {

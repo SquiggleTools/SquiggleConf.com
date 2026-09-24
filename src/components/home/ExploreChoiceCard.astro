@@ -35,16 +35,6 @@ const { choice } = Astro.props;
 
 <style>
 	.explore-card {
-		--explore-card-hover-background: rgb(from var(--colorBlue5) r g b / 4%);
-		--explore-card-hover-border: var(--colorBlue3);
-		--explore-card-hover-ring: rgb(from var(--colorBlue4) r g b / 6%);
-		--explore-radio-background: rgb(from var(--colorBlue5) r g b / 4%);
-		--explore-radio-border: rgb(from var(--colorBlue4) r g b / 45%);
-		--explore-radio-hover-background: rgb(from var(--colorBlue5) r g b / 8%);
-		--explore-radio-hover-border: rgb(from var(--colorBlue4) r g b / 85%);
-		--explore-radio-hover-ring: rgb(from var(--colorBlue5) r g b / 8%);
-		--explore-spots-background: var(--colorBlueBright1);
-		--explore-spots-color: var(--colorBlue4);
 		background: rgb(from white r g b / 8%);
 		border: 1px solid var(--colorBlue3);
 		border-radius: var(--radiusMedium);
@@ -59,23 +49,17 @@ const { choice } = Astro.props;
 			transform var(--transitionNormal) ease;
 	}
 
-	:global(html.dark) .explore-card {
-		--explore-card-hover-background: rgb(from white r g b / 14%);
-		--explore-card-hover-border: rgb(from white r g b / 38%);
-		--explore-card-hover-ring: rgb(from white r g b / 12%);
-		--explore-radio-background: rgb(from white r g b / 8%);
-		--explore-radio-border: rgb(from white r g b / 74%);
-		--explore-radio-hover-background: rgb(from white r g b / 12%);
-		--explore-radio-hover-border: rgb(from white r g b / 95%);
-		--explore-radio-hover-ring: rgb(from white r g b / 12%);
-		--explore-spots-background: var(--colorBlue3);
-		--explore-spots-color: var(--colorCopy);
-	}
-
 	.explore-card:hover {
-		background: var(--explore-card-hover-background);
-		border-color: var(--explore-card-hover-border);
-		box-shadow: inset 0 0 0 1px var(--explore-card-hover-ring);
+		background: light-dark(
+			rgb(from var(--colorBlue5) r g b / 4%),
+			rgb(from white r g b / 14%)
+		);
+		border-color: light-dark(var(--colorBlue3), rgb(from white r g b / 38%));
+		box-shadow: inset 0 0 0 1px
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 6%),
+				rgb(from white r g b / 12%)
+			);
 		transform: translateX(0.08rem);
 	}
 
@@ -89,8 +73,15 @@ const { choice } = Astro.props;
 
 	.explore-radio {
 		align-items: center;
-		background: var(--explore-radio-background);
-		border: 2px solid var(--explore-radio-border);
+		background: light-dark(
+			rgb(from var(--colorBlue5) r g b / 4%),
+			rgb(from white r g b / 8%)
+		);
+		border: 2px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 45%),
+				rgb(from white r g b / 74%)
+			);
 		border-radius: var(--radiusPill);
 		display: inline-flex;
 		height: 1.45rem;
@@ -103,9 +94,19 @@ const { choice } = Astro.props;
 	}
 
 	.explore-card:hover .explore-radio {
-		background: var(--explore-radio-hover-background);
-		border-color: var(--explore-radio-hover-border);
-		box-shadow: 0 0 0 0.18rem var(--explore-radio-hover-ring);
+		background: light-dark(
+			rgb(from var(--colorBlue5) r g b / 8%),
+			rgb(from white r g b / 12%)
+		);
+		border-color: light-dark(
+			rgb(from var(--colorBlue4) r g b / 85%),
+			rgb(from white r g b / 95%)
+		);
+		box-shadow: 0 0 0 0.18rem
+			light-dark(
+				rgb(from var(--colorBlue5) r g b / 8%),
+				rgb(from white r g b / 12%)
+			);
 	}
 
 	.explore-radio-dot {
@@ -165,10 +166,10 @@ const { choice } = Astro.props;
 	}
 
 	.explore-spots-left {
-		background: var(--explore-spots-background);
+		background: light-dark(var(--colorBlueBright1), var(--colorBlue3));
 		border: 1px solid var(--colorImageBorder);
 		border-radius: var(--radiusSmall);
-		color: var(--explore-spots-color);
+		color: light-dark(var(--colorBlue4), var(--colorCopy));
 		font-size: 0.8em;
 		font-variant: tabular-nums;
 		padding: 8px 10px;

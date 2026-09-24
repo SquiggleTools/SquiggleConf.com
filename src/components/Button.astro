@@ -86,7 +86,7 @@ const {
 		--colorButtonColor: var(--colorForeground);
 	}
 
-	:global(html.dark) .button:active {
+	html.dark .button:active {
 		--colorButtonColor: inherit;
 	}
 
@@ -144,10 +144,22 @@ const {
 
 	/* A translucent outline that takes its text color from its surroundings. */
 	.button-variant-ghost {
-		--colorButtonBackground: rgb(from white r g b / 8%);
-		--colorButtonBackgroundHover: rgb(from var(--colorBlue5) r g b / 14%);
-		--colorButtonBorder: rgb(from var(--colorBlue5) r g b / 22%);
-		--colorButtonBorderHover: rgb(from var(--colorBlue5) r g b / 30%);
+		--colorButtonBackground: light-dark(
+			rgb(from white r g b / 8%),
+			transparent
+		);
+		--colorButtonBackgroundHover: light-dark(
+			rgb(from var(--colorBlue5) r g b / 14%),
+			rgb(from var(--colorBlue2) r g b / 78%)
+		);
+		--colorButtonBorder: light-dark(
+			rgb(from var(--colorBlue5) r g b / 22%),
+			rgb(from var(--colorBlue1) r g b / 34%)
+		);
+		--colorButtonBorderHover: light-dark(
+			rgb(from var(--colorBlue5) r g b / 30%),
+			rgb(from var(--colorBlue1) r g b / 46%)
+		);
 		--colorButtonColor: currentColor;
 		--colorButtonColorHover: currentColor;
 		--shadowButton:
@@ -169,11 +181,7 @@ const {
 			transform var(--transitionFast) ease;
 	}
 
-	:global(html.dark) .button-variant-ghost {
-		--colorButtonBackground: transparent;
-		--colorButtonBackgroundHover: rgb(from var(--colorBlue2) r g b / 78%);
-		--colorButtonBorder: rgb(from var(--colorBlue1) r g b / 34%);
-		--colorButtonBorderHover: rgb(from var(--colorBlue1) r g b / 46%);
+	html.dark .button-variant-ghost {
 		--shadowButton:
 			inset 0 1px 0 rgb(from white r g b / 16%),
 			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
