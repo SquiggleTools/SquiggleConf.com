@@ -1,4 +1,5 @@
 ---
+import { eventDate } from "~/data/event";
 import { currentYear } from "~/data/years";
 import ThemeSetting from "./ThemeSetting.astro";
 
@@ -26,7 +27,7 @@ const keywords = [
 const title = [
 	Astro.props.title,
 	`SquiggleConf`,
-	"May 7th 2027: Your Boston devtools field trip.",
+	`${eventDate} ${currentYear}: Your Boston devtools field trip.`,
 ]
 	.filter(Boolean)
 	.join(" | ");

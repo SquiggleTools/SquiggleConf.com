@@ -49,6 +49,7 @@ import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
+import { eventDate, eventLocation } from "~/data/event";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
@@ -78,7 +79,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineDayCap date="May 6th" day="Thursday">
 					<div class="timeline-grid-intro">
 						<h3>SquiggleConf 2027</h3>
-						<p>Boston, Massachusetts</p>
+						<p>{eventLocation}</p>
 					</div>
 				</TimelineDayCap>
 
@@ -114,7 +115,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</TimelineCopy>
 				</TimelineEntry>
 
-				<TimelineDayCap date="May 7th" day="Friday" />
+				<TimelineDayCap date={eventDate} day="Friday" />
 
 				<TimelineVenue span={7} venue="aquarium" />
 				<TimelineRail time="7am" />
