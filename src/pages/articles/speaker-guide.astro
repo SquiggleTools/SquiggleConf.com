@@ -5,11 +5,12 @@ import CommonContent from "~/components/CommonContent.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import SubHeading from "~/components/SubHeading.astro";
 import SubList from "~/components/SubList.astro";
+import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="speaker-guide">
+<ArticleLayout article={articles["speaker-guide"]}>
 	<Fragment slot="lead">
 		This page has the high-level information you need to know as a speaker at
 		SquiggleConf.

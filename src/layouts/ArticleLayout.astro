@@ -5,20 +5,20 @@ import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard, {
 	Props as HeroContentsStandardProps,
 } from "~/components/hero/HeroContentsStandard.astro";
-import { articles } from "~/data/articles";
+import type { Article } from "~/data/articles";
 import PageLayout from "./PageLayout.astro";
 
-type Props = (
-	| { article: keyof typeof articles }
-	| { description: string; title: string }
-) & {
+interface Props {
+	article: Article;
 	introWidth?: "normal" | "thin";
 	squiggly?: HeroContentsStandardProps["squiggly"];
-};
+}
 
-const { introWidth = "thin", squiggly = "none" } = Astro.props;
-const { description, title } =
-	"article" in Astro.props ? articles[Astro.props.article] : Astro.props;
+const {
+	article: { description, title },
+	introWidth = "thin",
+	squiggly = "none",
+} = Astro.props;
 ---
 
 <PageLayout description={description} title={title}>

@@ -3,10 +3,11 @@ import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import ContentArea from "~/components/ContentArea.astro";
+import { articles } from "~/data/articles";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="2024-financial-review">
+<ArticleLayout article={articles["2024-financial-review"]}>
 	<ContentArea>
 		<BodyText class="body-text-top">
 			SquiggleConf is a community-oriented local conference run by

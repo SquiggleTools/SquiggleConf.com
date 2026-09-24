@@ -3,11 +3,12 @@ import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import FAQSections from "~/components/FAQSections.astro";
+import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="sponsor-guide">
+<ArticleLayout article={articles["sponsor-guide"]}>
 	<Fragment slot="lead">
 		This page has the high-level information you need to know as a sponsor at
 		SquiggleConf.

@@ -5,11 +5,12 @@ import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import ImagesAndTextTwoColumn from "~/components/ImagesAndTextTwoColumn.astro";
 import Registration from "~/components/Registration.astro";
+import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="travel">
+<ArticleLayout article={articles.travel}>
 	<CommonContent heading="Location">
 		<BodyText>
 			SquiggleConf 2027 will be held at the New England Aquarium Simons Theatre

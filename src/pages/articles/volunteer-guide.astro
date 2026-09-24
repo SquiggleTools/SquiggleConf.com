@@ -2,11 +2,12 @@
 import BodyList from "~/components/BodyList.astro";
 import BodyText from "~/components/BodyText.astro";
 import CommonContent from "~/components/CommonContent.astro";
+import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="volunteer-guide">
+<ArticleLayout article={articles["volunteer-guide"]}>
 	<Fragment slot="lead">
 		This page has the high-level information you need to know as a volunteer at
 		SquiggleConf.

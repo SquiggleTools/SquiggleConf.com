@@ -4,9 +4,12 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
 <ArticleLayout
-	description="Assorted guides, information, updates, and other useful articles from the SquiggleConf team."
+	article={{
+		description:
+			"Assorted guides, information, updates, and other useful articles from the SquiggleConf team.",
+		title: "Articles",
+	}}
 	squiggly="medium"
-	title="Articles"
 >
 	<ArticlesList />
 </ArticleLayout>

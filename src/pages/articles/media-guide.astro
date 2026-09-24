@@ -4,10 +4,11 @@ import Branding from "~/components/Branding.astro";
 import CommonContent from "~/components/CommonContent.astro";
 import SubHeading from "~/components/SubHeading.astro";
 import SubList from "~/components/SubList.astro";
+import { articles } from "~/data/articles";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<ArticleLayout article="media-guide">
+<ArticleLayout article={articles["media-guide"]}>
 	<CommonContent heading="Branding">
 		<BodyText>
 			When referring to us in announcements, social media posts, or other broad

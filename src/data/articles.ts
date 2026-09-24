@@ -1,6 +1,5 @@
 export interface Article {
 	description: string;
-	/** Shorter title for the articles list, if different from the page title. */
 	listTitle?: string;
 	title: string;
 }

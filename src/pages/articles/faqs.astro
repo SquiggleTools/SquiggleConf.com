@@ -1,5 +1,6 @@
 ---
 import FAQSections from "~/components/FAQSections.astro";
+import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
@@ -102,7 +103,7 @@ Note that talk tickets _do not_ include:
 ] as const;
 ---
 
-<ArticleLayout article="faqs" introWidth="normal">
+<ArticleLayout article={articles.faqs} introWidth="normal">
 	<Fragment slot="lead">
 		Got questions not covered here? Reach out, we'd be happy to talk!
 		<a href="mailto:questions@squiggleconf.com">questions@squiggleconf.com</a>
