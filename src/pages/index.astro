@@ -18,6 +18,7 @@ import {
 	networking,
 	scottTolinski,
 	simonsTheater,
+	syntax,
 	talkBlocks,
 	thePrimeagen,
 	timelineMCs,
@@ -407,20 +408,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<TimelineMedia>
 						<Collage
 							ariaLabel="Podcast recording live guests"
-							layout="avatar-trio"
+							layout="avatar-pair"
 							photos={[
-								{
-									alt: "ThePrimeagen portrait",
-									src: thePrimeagen,
-								},
-								{
-									alt: "Scott Tolinski portrait",
-									src: scottTolinski,
-								},
-								{
-									alt: "Wes Bos portrait",
-									src: wesBos,
-								},
+								{ alt: "Syntax logo", src: syntax },
+								{ alt: "ThePrimeagen portrait", src: thePrimeagen },
 							]}
 							shape="avatar"
 						/>
@@ -431,7 +422,23 @@ import PageLayout from "~/layouts/PageLayout.astro";
 								discussing the ins and outs of how to succeed and be happy in
 								today's tech industry.
 							</p>
-							<p class="fireside-host">Hosted by Scott Tolinski and Wes Bos</p>
+							<div class="podcast-hosts">
+								<TimelineImage
+									alt="Wes Bos portrait"
+									class="podcast-host-image"
+									radius="var(--radiusPill)"
+									src={wesBos}
+								/>
+								<TimelineImage
+									alt="Scott Tolinski portrait"
+									class="podcast-host-image"
+									radius="var(--radiusPill)"
+									src={scottTolinski}
+								/>
+								<p class="fireside-host">
+									Hosted by Scott Tolinski and Wes Bos
+								</p>
+							</div>
 						</TimelineCopy>
 					</TimelineMedia>
 				</TimelineEntry>
@@ -698,6 +705,23 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.fireside-host {
 		font-style: italic;
+	}
+
+	.podcast-hosts {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+	}
+
+	.podcast-host-image {
+		height: 2.75rem;
+		width: 2.75rem;
+	}
+
+	.podcast-hosts .fireside-host {
+		margin: 0 0 0 0.5rem;
 	}
 
 	@media (width < 900px) {

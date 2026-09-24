@@ -41,6 +41,7 @@ import timelineFish2 from "~/assets/design/timeline-fish-2.svg?raw";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg?raw";
 import timelineFish4 from "~/assets/design/timeline-fish-4.svg?raw";
 import timelineFish5 from "~/assets/design/timeline-fish-5.svg?raw";
+import syntax from "~/assets/logos/syntax.svg";
 import networking from "~/assets/stills/attendees-networking.png";
 import harbor from "~/assets/stills/boston-harbor.png";
 
@@ -241,6 +242,7 @@ export {
 	postcardFront,
 	scottTolinski,
 	simonsTheater,
+	syntax,
 	terminalShop,
 	thePrimeagen,
 	urbanwild1,
