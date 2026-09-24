@@ -24,7 +24,12 @@ const { class: className, tall, ...props } = Astro.props;
 
 <style>
 	.hero {
-		background: linear-gradient(180deg, #e9f9ff 0%, #f3fcff 50%, #fffdde 100%);
+		background: linear-gradient(
+			180deg,
+			var(--colorBlueBright2) 0%,
+			#f3fcff 50%,
+			#fffdde 100%
+		);
 		z-index: 1;
 		color: var(--colorBackground);
 		padding-bottom: var(--cityscapeHeightArea);

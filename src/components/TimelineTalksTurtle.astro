@@ -14,7 +14,9 @@ import turtleSvg from "~/assets/design/turtle.svg?raw";
 
 <style>
 	.timeline-talks-turtle {
-		filter: drop-shadow(0 0.7rem 1.3rem rgba(4, 25, 48, 0.16));
+		filter: drop-shadow(
+			0 0.7rem 1.3rem rgb(from var(--colorBlue5) r g b / 16%)
+		);
 		margin-left: auto;
 		pointer-events: none;
 		position: relative;
@@ -67,10 +69,10 @@ import turtleSvg from "~/assets/design/turtle.svg?raw";
 
 	.timeline-talks-turtle-bubble {
 		animation: timeline-talks-turtle-bubble 1.9s ease-in infinite;
-		background: rgba(255, 255, 255, 0.42);
-		border: 1px solid rgba(255, 255, 255, 0.52);
+		background: rgb(from white r g b / 42%);
+		border: 1px solid rgb(from white r g b / 52%);
 		border-radius: 999px;
-		box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.08);
+		box-shadow: 0 0 0.5rem rgb(from white r g b / 8%);
 		opacity: 0;
 		position: absolute;
 	}
