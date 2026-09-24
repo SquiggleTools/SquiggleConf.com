@@ -2,38 +2,25 @@
 	color-scheme: light;
 
 	--colorBlackIsh: #041930;
-	--colorBlueBright0: #e2eff4;
 	--colorBlueBright1: #d8f3ff;
 	--colorBlueBright2: #e6f7fe;
-	--colorBlueBright3: #98d8f3;
-	--colorBlueBright4: #5aa2c2;
-	--colorBlueBright5: #1f7fab;
-	--colorBlueBright6: #196d9a;
-	--colorBlueDull3: #b0ccd7;
-	--colorBlueDull6: #58646b;
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
 	--colorRed1: #ffbfc2;
-	--colorSandDark: #2c2a29;
-	--colorSandLight: #f7f4f1;
 	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
 	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
 	--colorWhiteIsh: #eaeaf7;
 
-	--colorAccentDark: var(--colorBlue4);
 	--colorAccentLight: var(--colorBlue1);
 	--colorAccentMedium: var(--colorBlue3);
 	--colorAccentSecond: var(--colorBlue2);
 	--colorBackground: var(--colorBlackIsh);
-	--colorBackgroundEmphasized: var(--colorBlueBright3);
 	--colorForeground: var(--colorBlue4);
 	--colorForegroundAccent: var(--colorWhiteIsh);
 	--colorForegroundEmphasized: var(--colorBlue5);
-	--colorSandBackground: var(--colorSandLight);
-	--colorSandForeground: var(--colorBlackIsh);
 	--colorUnhappy: var(--colorRed1);
 	--colorTextShadow: var(--colorTextShadowLight);
 
@@ -42,7 +29,6 @@
 	--fontFamilyLogo: "Josefin Sans Variable";
 	--fontFamilyMonospace: "Geist Mono", monospace;
 
-	--fontSizeSmallest: clamp(0.7rem, 1.9vw, 0.9rem);
 	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
 	--fontSizeMedium: clamp(1.25rem, 3.25vw, 1.5rem);
@@ -50,22 +36,13 @@
 	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
 	--fontSizeHero: clamp(2rem, 5vw, 3rem);
 	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
-	--fontSizeLogoLarge: clamp(2.5rem, 5.25vw, 3rem);
 	--fontSizeLogoLarger: clamp(2.8rem, 7vw, 4.9rem);
 
 	--fontWeightLight: 200;
 	--fontWeightMedium: 300;
 	--fontWeightSemibold: 350;
 	--fontWeightBold: 500;
-	--fontWeightLogo: 600;
 
-	--letterSpacingLoose: 1px;
-	--letterSpacingLogo: -1px;
-	--letterSpacingTight: -0.5px;
-
-	--lineHeightLarge: 1.25;
-
-	--sizeContentAreaEmphasized: 43rem;
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
@@ -74,8 +51,6 @@
 	--transitionFast: 140ms;
 	--transitionMedium: 280ms;
 	--transitionBackground: var(--transitionFast);
-
-	color-scheme: light;
 }
 
 html {
@@ -86,25 +61,16 @@ html {
 html.dark {
 	color-scheme: dark;
 
-	--colorBlueBright0: #030f1c;
 	--colorBlueBright1: #051b32;
 	--colorBlueBright2: var(--colorBlue5);
-	--colorBlueBright3: var(--colorBlue4);
-	--colorBlueBright4: var(--colorBlue4);
-	--colorBlueBright5: #196d9a;
-	--colorBlueBright6: #1f7fab;
 
 	--colorAccentLight: var(--colorBlue5);
 	--colorAccentSecond: var(--colorBlue4);
 	--colorAccentMedium: var(--colorBlue2);
-	--colorAccentDark: var(--colorBlue2);
 	--colorBackground: var(--colorWhiteIsh);
-	--colorBackgroundEmphasized: var(--colorBlue4);
 	--colorForeground: var(--colorBlue);
 	--colorForegroundAccent: var(--colorBlackIsh);
 	--colorForegroundEmphasized: var(--colorBlue1);
-	--colorSandBackground: var(--colorBlue4);
-	--colorSandForeground: var(--colorSandLight);
 	--colorUnhappy: var(--colorRed1);
 	--colorTextShadow: var(--colorTextShadowDark);
 }

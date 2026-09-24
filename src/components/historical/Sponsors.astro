@@ -8,7 +8,7 @@ import SponsorLogos from "./SponsorLogos.astro";
 
 <FullSection>
 	<HeadingFlanked id="sponsors">Sponsors</HeadingFlanked>
-	<BodyText class="sponsors-blurb" size="large" width="lean">
+	<BodyText class="sponsors-blurb">
 		The support of our generous sponsors help make SquiggleConf possible. They
 		have our sincere appreciation and thanks.
 	</BodyText>
@@ -20,16 +20,5 @@ import SponsorLogos from "./SponsorLogos.astro";
 	.sponsors-blurb {
 		margin: auto;
 		padding-bottom: 3.5rem;
-	}
-
-	@media (min-width: 819px) {
-		.sponsor-group a {
-			padding: 1.5rem 0;
-		}
-
-		.sponsor {
-			max-width: calc(49% - var(--sponsorSpacing));
-			width: 100%;
-		}
 	}
 </style>

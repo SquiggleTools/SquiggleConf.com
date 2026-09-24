@@ -3,20 +3,17 @@ import BioLinks from "./BioLinks.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
 import SpeakerImage from "./SpeakerImage.astro";
 import SubtleCard from "./SubtleCard.astro";
-import { SpeakerInfo } from "~/data/speakers";
-import { SessionInfo } from "~/data/historical/types";
+import { PersonInfo, SessionInfo } from "~/data/historical/types";
 
 interface Props {
 	class?: string;
-	showBioLinkText?: boolean;
-	speaker: SpeakerInfo;
+	speaker: PersonInfo;
 	talks: SessionInfo[];
 	year: number;
 }
 
 const {
 	class: className,
-	showBioLinkText,
 	speaker: { image, links, name, qualification, slug },
 	talks,
 	year,
@@ -55,7 +52,6 @@ const {
 					</ul>
 				</div>
 			</div>
-			<slot name="top-right" />
 		</div>
 		<slot name="center" />
 		<div class="speaker-links">
@@ -64,7 +60,6 @@ const {
 				links={links}
 				name={name}
 				size="large"
-				showText={showBioLinkText}
 			/>
 		</div>
 	</SubtleCard>
@@ -121,10 +116,6 @@ const {
 	.talk-title {
 		font-size: var(--fontSizeH4);
 		text-decoration: none;
-	}
-
-	html.dark .bio {
-		line-height: 1.4;
 	}
 
 	.speaker-links {

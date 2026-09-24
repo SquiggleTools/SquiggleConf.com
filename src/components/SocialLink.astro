@@ -2,38 +2,18 @@
 import { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
-export type SocialLinkSize = "small" | "normal" | "large";
-
 interface Props {
 	alt: string;
 	class?: string;
 	href: string;
-	inverted?: boolean;
-	size?: SocialLinkSize;
 	src: ImageMetadata;
 }
 
-const {
-	alt,
-	class: className,
-	inverted,
-	href,
-	size = "normal",
-	src,
-} = Astro.props;
+const { alt, class: className, href, src } = Astro.props;
 ---
 
-<a
-	class:list={["social-link", className, inverted && "social-link-inverted"]}
-	href={href}
-	target="_blank"
->
-	<Image
-		alt={alt}
-		class:list={["social-image", size]}
-		fit="contain"
-		src={src}
-	/>
+<a class:list={["social-link", className]} href={href} target="_blank">
+	<Image alt={alt} class="social-image" fit="contain" src={src} />
 </a>
 
 <style>
@@ -45,25 +25,13 @@ const {
 		text-decoration: none;
 	}
 
-	.social-image.small {
-		--sizeSocialImage: 1.5rem;
-	}
-
-	.social-image.normal {
-		--sizeSocialImage: 2rem;
-	}
-
-	.social-image.large {
-		--sizeSocialImage: 4rem;
-	}
-
 	.social-image {
-		height: var(--sizeSocialImage);
+		height: 2rem;
 		user-select: none;
-		width: var(--sizeSocialImage);
+		width: 2rem;
 	}
 
-	html:not(.dark) .social-link-inverted {
+	html:not(.dark) .social-link {
 		filter: hue-rotate(180deg) invert();
 		opacity: 0.9;
 	}

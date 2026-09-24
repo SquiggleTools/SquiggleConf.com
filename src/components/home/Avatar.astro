@@ -3,16 +3,15 @@ import { Image } from "astro:assets";
 import PlaceholderMark from "./PlaceholderMark.astro";
 
 interface Props {
-	class?: string;
 	alt: string;
 	image: ImageMetadata;
 	placeholder?: boolean;
 }
 
-const { alt, class: className, image, placeholder, ...props } = Astro.props;
+const { alt, image, placeholder, ...props } = Astro.props;
 ---
 
-<div class:list={["avatar", className]} {...props}>
+<div class="avatar" {...props}>
 	<Image
 		class={placeholder ? "avatar-placeholder" : undefined}
 		alt={alt}

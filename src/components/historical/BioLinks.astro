@@ -16,7 +16,6 @@ interface Props {
 	class?: string;
 	links: BioLinksPlatforms;
 	name: string;
-	showText?: boolean;
 	size?: "normal" | "large";
 }
 
@@ -27,14 +26,13 @@ export interface BioLinksPlatforms {
 	linkedin?: string | null;
 	mastodon?: string | null;
 	twitch?: string | null;
-	twitter?: string | null;
 	website?: string | null;
 	x?: string | null;
 	youtube?: string | null;
 	medium?: string | null;
 }
 
-const { class: className, links, name, size, showText, ...rest } = Astro.props;
+const { class: className, links, name, size, ...rest } = Astro.props;
 
 const aliases = [
 	["bluesky", "on bluesky", bluesky],
@@ -69,14 +67,7 @@ const aliases = [
 							target="_blank"
 							rel="noreferrer"
 						>
-							{showText ? (
-								<>
-									<Image alt="" class="link" src={src} />
-									<span class="link-text">{links[link].split("/").at(-1)}</span>
-								</>
-							) : (
-								<Image alt={`${name}${platform}`} class="link" src={src} />
-							)}
+							<Image alt={`${name}${platform}`} class="link" src={src} />
 						</a>
 					),
 			)
@@ -114,11 +105,6 @@ const aliases = [
 		filter: brightness(1.5);
 		width: var(--bioLinkImageSize);
 		user-select: none;
-	}
-
-	.link-text {
-		color: var(--colorBlueDarkDull);
-		margin-right: 1rem;
 	}
 
 	html:not(.dark) .link {

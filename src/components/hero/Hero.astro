@@ -5,10 +5,9 @@ import HeroCityscape from "./HeroCityscape.astro";
 interface Props {
 	class?: string;
 	tall?: boolean;
-	scrollNotice?: boolean;
 }
 
-const { class: className, scrollNotice, tall, ...props } = Astro.props;
+const { class: className, tall, ...props } = Astro.props;
 ---
 
 <section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
@@ -21,14 +20,6 @@ const { class: className, scrollNotice, tall, ...props } = Astro.props;
 	<ContentArea class="hero-contents">
 		<slot />
 	</ContentArea>
-
-	{
-		Astro.props.scrollNotice && (
-			<div class="hero-scroll-notice">
-				Scroll to explore the depths of SquiggleConf
-			</div>
-		)
-	}
 </section>
 
 <style>
@@ -72,16 +63,5 @@ const { class: className, scrollNotice, tall, ...props } = Astro.props;
 	.hero-contents {
 		z-index: 1;
 		position: relative;
-	}
-
-	.hero-scroll-notice {
-		color: var(--colorBlue1);
-		font-family: var(--fontFamilyHeading);
-		font-weight: var(--fontWeightSemibold);
-		font-style: italic;
-		bottom: 2rem;
-		position: absolute;
-		text-align: center;
-		width: 100%;
 	}
 </style>

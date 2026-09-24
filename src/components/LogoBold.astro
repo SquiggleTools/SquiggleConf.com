@@ -3,19 +3,16 @@ import TextSquiggly from "./TextSquiggly.astro";
 
 interface Props {
 	class?: string;
-	size?: "normal" | "large";
-	year?: number;
 }
 
-const { class: className, size = "normal", ...props } = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<div class:list={["logo-bold", `size-${size}`, className]} {...props}>
+<div class:list={["logo-bold", className]} {...props}>
 	<TextSquiggly width="medium">
 		<Fragment slot="inside">Squiggle</Fragment>
 		<Fragment slot="after">Conf</Fragment>
 	</TextSquiggly>
-	{Astro.props.year && <span class="year">{Astro.props.year}</span>}
 </div>
 
 <style>
@@ -25,23 +22,9 @@ const { class: className, size = "normal", ...props } = Astro.props;
 		font-style: initial;
 		text-shadow: 0px 1.5px 3px var(--colorTextShadow);
 		white-space: nowrap;
-	}
-
-	.size-normal {
-		font-size: var(--fontSizeLogoLarge);
-		font-weight: var(--fontWeightLogo);
-	}
-
-	.size-large {
 		font-size: var(--fontSizeLogoLarger);
 		font-weight: 800;
 		letter-spacing: -2px;
-	}
-
-	.year {
-		color: var(--colorAccentMedium);
-		font-family: var(--fontFamilyHeading);
-		font-weight: var(--fontWeightBold);
 	}
 
 	:global(html.dark) .logo-bold {

@@ -4,7 +4,6 @@ import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
 import { currentYear } from "~/data/years";
-import ThemeToggle from "./ThemeToggle.astro";
 
 function hrefProps(pathname: string) {
 	return {
@@ -108,7 +107,6 @@ const { hideLogo, year } = Astro.props;
 		--header-background: #e9f9ff;
 		--header-foreground: var(--colorBlue5);
 		--header-logo-text: var(--colorBlue5);
-		--header-logo-year: var(--colorBlue3);
 		--header-button-background: rgba(255, 255, 255, 0.08);
 		--header-button-border: rgba(4, 25, 48, 0.22);
 		--header-button-foreground: var(--colorBlue5);
@@ -129,7 +127,6 @@ const { hideLogo, year } = Astro.props;
 		--header-background: #04142d;
 		--header-foreground: var(--colorWhiteIsh);
 		--header-logo-text: var(--colorWhiteIsh);
-		--header-logo-year: var(--colorBlue2);
 		--header-button-background: transparent;
 		--header-button-border: rgba(125, 207, 226, 0.34);
 		--header-button-foreground: var(--colorWhiteIsh);
@@ -150,7 +147,6 @@ const { hideLogo, year } = Astro.props;
 
 	a.logo :global(.logo.regular) {
 		--colorLogoText: var(--header-logo-text);
-		--colorLogoYear: var(--header-logo-year);
 		text-shadow: none;
 	}
 
@@ -197,7 +193,6 @@ const { hideLogo, year } = Astro.props;
 		flex-direction: column;
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeLarge);
-		font-weight: var(--fontWeightSemibold);
 		font-weight: bold;
 		gap: 0.5rem;
 		line-height: 1.5;

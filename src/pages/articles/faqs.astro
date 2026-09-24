@@ -1,7 +1,6 @@
 ---
 import BodyText from "~/components/BodyText.astro";
 import ContentArea from "~/components/ContentArea.astro";
-import FAQSection from "~/components/FAQSection.astro";
 import FAQSections from "~/components/FAQSections.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
@@ -36,7 +35,7 @@ const faqs: FAQSection[] = [
 			[
 				"What events are you planning?",
 				`
-See <a href="/schedule">Schedule</a> for a high-level overview of our schedule. Details are partially dependent on corporate sponsorships.
+See <a href="/">Schedule</a> for a high-level overview of our schedule. Details are partially dependent on corporate sponsorships.
 
 <br />
 
@@ -132,20 +131,5 @@ Note that talk tickets _do not_ include:
 <style>
 	.body-text-top {
 		margin: 5rem auto 0;
-	}
-
-	.apply-button {
-		align-self: center;
-		gap: 0.5rem;
-		margin-top: 2rem;
-	}
-
-	.area {
-		font-weight: var(--fontWeightBold);
-	}
-
-	.action-button {
-		display: inline-block;
-		margin: 2rem;
 	}
 </style>
