@@ -42,6 +42,7 @@ import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
+import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
 import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
@@ -204,12 +205,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="9am"
 				>
-					<div
-						class="timeline-list timeline-list-pair"
-						aria-label="Conference MCs"
-					>
+					<TimelineList aria-label="Conference MCs" columns={2}>
 						{timelineMCs.map((host) => <PersonCard person={host} />)}
-					</div>
+					</TimelineList>
 				</TimelineEntry>
 
 				<TimelineEntry
@@ -218,9 +216,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="9am"
 				>
-					<div class="timeline-list" aria-label="Speaker talks">
+					<TimelineList aria-label="Speaker talks">
 						{talkBlocks.morning.map((talk) => <PersonCard person={talk} />)}
-					</div>
+					</TimelineList>
 				</TimelineEntry>
 
 				<TimelineRail time="10:30am" />
@@ -292,9 +290,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="11am"
 				>
-					<div class="timeline-list" aria-label="Late morning talks">
+					<TimelineList aria-label="Late morning talks">
 						{talkBlocks.lateMorning.map((talk) => <PersonCard person={talk} />)}
-					</div>
+					</TimelineList>
 				</TimelineEntry>
 
 				<TimelineVenue venue="quincyMarket" />
@@ -350,9 +348,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="2pm"
 				>
-					<div class="timeline-list" aria-label="Afternoon talks">
+					<TimelineList aria-label="Afternoon talks">
 						{talkBlocks.afternoon.map((talk) => <PersonCard person={talk} />)}
-					</div>
+					</TimelineList>
 				</TimelineEntry>
 
 				<TimelineRail time="3:30pm" />
@@ -364,13 +362,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					subtitle="choose your own adventure"
 					time="3:30pm"
 				>
-					<div class="timeline-list" aria-label="Explore Boston options">
+					<TimelineList aria-label="Explore Boston options">
 						{
 							exploreChoices.map((choice) => (
 								<ExploreChoiceCard choice={choice} />
 							))
 						}
-					</div>
+					</TimelineList>
 				</TimelineEntry>
 
 				<TimelineVenue last span={5} venue="urbanWild" />
@@ -657,19 +655,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		text-underline-offset: 0.14em;
 	}
 
-	.timeline-list {
-		display: grid;
-		gap: 0.8rem;
-		margin-top: 0.8rem;
-		max-width: 44rem;
-		position: relative;
-		z-index: 1;
-	}
-
-	.timeline-list-pair {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
 	.launch-party-collage {
 		margin-bottom: 1rem;
 	}
@@ -736,10 +721,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			margin-top: 0;
 			order: -1;
 			padding: 0 0.15rem 0.2rem;
-		}
-
-		.timeline-list-pair {
-			grid-template-columns: 1fr;
 		}
 
 		.lunch-copy {
