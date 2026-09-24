@@ -6,6 +6,9 @@ export default defineConfig({
 	adapter: cloudflare({
 		imageService: "passthrough",
 	}),
+	build: {
+		format: "file",
+	},
 	env: {
 		schema: {
 			BREVO_API_KEY: envField.string({
