@@ -16,7 +16,7 @@ const { spots } = Astro.props;
 	data-lunch-carousel
 	aria-label="Lunch options photo carousel"
 >
-	<TimelineImage radius="0.9rem">
+	<TimelineImage radius="var(--radiusLarge)">
 		<div class="lunch-carousel-track" data-lunch-track>
 			{
 				spots.map((spot, index) => (
@@ -67,7 +67,7 @@ const { spots } = Astro.props;
 	.lunch-carousel-track {
 		display: flex;
 		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
-		transition: transform 320ms ease;
+		transition: transform var(--transitionMedium) ease;
 		will-change: transform;
 	}
 
@@ -114,7 +114,7 @@ const { spots } = Astro.props;
 	.lunch-slide-caption strong {
 		font-family: var(--fontFamilyHeading);
 		font-size: 1.08rem;
-		font-weight: 700;
+		font-weight: var(--fontWeightHeavy);
 		line-height: 1.05;
 	}
 
@@ -129,15 +129,15 @@ const { spots } = Astro.props;
 		appearance: none;
 		background: rgb(from white r g b / 24%);
 		border: 1px solid rgb(from var(--colorBlue1) r g b / 45%);
-		border-radius: 999px;
+		border-radius: var(--radiusPill);
 		cursor: pointer;
 		height: 0.65rem;
 		margin: 0;
 		padding: 0;
 		transition:
-			background-color var(--timeline-hover-duration) ease,
-			transform var(--timeline-hover-duration) ease,
-			width var(--timeline-hover-duration) ease;
+			background-color var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease,
+			width var(--transitionNormal) ease;
 		width: 0.65rem;
 	}
 

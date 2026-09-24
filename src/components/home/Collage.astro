@@ -66,7 +66,7 @@ const toStyle = (frame: CollageFrame | undefined) =>
 					loading="lazy"
 					objectPosition={photo.objectPosition}
 					placeholder={photo.placeholder}
-					radius={shape === "avatar" ? "999px" : undefined}
+					radius={shape === "avatar" ? "var(--radiusPill)" : undefined}
 					src={photo.src}
 				/>
 			</div>
@@ -87,7 +87,7 @@ const toStyle = (frame: CollageFrame | undefined) =>
 	.collage-item {
 		display: grid;
 		position: absolute;
-		transition: transform var(--timeline-hover-duration) ease;
+		transition: transform var(--transitionNormal) ease;
 	}
 
 	.collage-duo {

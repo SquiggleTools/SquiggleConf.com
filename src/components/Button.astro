@@ -53,12 +53,12 @@ const {
 	}
 
 	.button-size-normal {
-		border-radius: 2rem;
+		border-radius: var(--radiusPill);
 		padding: 0.65rem 1.25rem;
 	}
 
 	.button-size-large {
-		border-radius: 4rem;
+		border-radius: var(--radiusPill);
 		font-size: var(--fontSizeMedium);
 		padding: 0.85rem 2rem 0.75rem;
 	}
@@ -115,9 +115,9 @@ const {
 		);
 		--colorButtonBorderHover: var(--colorButtonBrand);
 		--colorButtonColorHover: var(--colorButtonColor);
-		backdrop-filter: blur(16px) saturate(155%);
+		backdrop-filter: var(--backdropFrosted);
 		border: 1px solid var(--colorButtonBrand);
-		border-radius: 0.9rem;
+		border-radius: var(--radiusLarge);
 		box-shadow:
 			inset 0 1px 0 rgb(from white r g b / 20%),
 			0 1rem 2rem rgb(from var(--colorButtonBrand) r g b / 16%),
@@ -125,9 +125,9 @@ const {
 		gap: 0.7rem;
 		padding: 0.75rem 1.1rem 0.75rem 0.9rem;
 		transition:
-			background var(--transitionFast) ease,
-			box-shadow var(--transitionFast) ease,
-			transform var(--transitionFast) ease;
+			background var(--transitionNormal) ease,
+			box-shadow var(--transitionNormal) ease,
+			transform var(--transitionNormal) ease;
 	}
 
 	.button-variant-brand:focus:not(:active, [disabled]),
@@ -156,7 +156,7 @@ const {
 			inset 0 1px 0 rgb(from white r g b / 22%),
 			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
 		border-color: var(--colorButtonBorder);
-		border-radius: 0.85rem;
+		border-radius: var(--radiusLarge);
 		box-shadow: var(--shadowButton);
 		font-weight: var(--fontWeightBold);
 		text-wrap: nowrap;
