@@ -94,24 +94,7 @@ const tiers = [
 
 <style>
 	.past-sponsors {
-		--texture-stripe: rgb(from var(--colorBlue3) r g b / 6%);
-		--texture-dot-1: rgb(from white r g b / 36%);
-		--texture-dot-2: rgb(from white r g b / 26%);
-		--texture-dot-3: rgb(from white r g b / 24%);
-		--overlay-top: rgb(from white r g b / 42%);
-		--overlay-bottom: rgb(from var(--colorBlue4) r g b / 14%);
-		--highlight: rgb(from white r g b / 70%);
-		--kicker-background: rgb(from white r g b / 60%);
-		--kicker-border: rgb(from var(--colorBlue3) r g b / 18%);
-		--kicker-color: var(--colorBlue3);
-		--heading-color: var(--colorBlue4);
-		--copy-color: rgb(from var(--colorBlue4) r g b / 78%);
-		--panel-top: rgb(from white r g b / 72%);
-		--panel-bottom: rgb(from var(--colorBlueBright1) r g b / 58%);
-		--panel-base: rgb(from var(--colorBlue1) r g b / 52%);
 		--panel-shadow: 0 1.1rem 2.4rem rgb(from var(--colorBlue3) r g b / 14%);
-		--logo-hover-background: rgb(from var(--colorBlue3) r g b / 6%);
-		--logo-hover-ring: rgb(from var(--colorBlue3) r g b / 14%);
 		background:
 			radial-gradient(
 				circle at 18% 16%,
@@ -143,26 +126,8 @@ const tiers = [
 		width: 100%;
 	}
 
-	:global(html.dark) .past-sponsors {
-		--texture-stripe: rgb(from var(--colorBlue1) r g b / 4%);
-		--texture-dot-1: rgb(from white r g b / 13%);
-		--texture-dot-2: rgb(from white r g b / 10%);
-		--texture-dot-3: rgb(from white r g b / 8%);
-		--overlay-top: rgb(from var(--colorBlue1) r g b / 14%);
-		--overlay-bottom: rgb(from var(--colorBlue6) r g b / 48%);
-		--highlight: rgb(from white r g b / 12%);
-		--kicker-background: rgb(from var(--colorWhiteIsh) r g b / 9%);
-		--kicker-border: rgb(from var(--colorBlue1) r g b / 20%);
-		--kicker-color: var(--colorWhiteIsh);
-		--heading-color: white;
-		--copy-color: rgb(from var(--colorWhiteIsh) r g b / 84%);
-		--panel-top: rgb(from var(--colorBlue1) r g b / 12%);
-		--panel-bottom: rgb(from var(--colorBlue1) r g b / 3%);
-		--panel-base: rgb(from var(--colorBlue6) r g b / 42%);
-		--panel-highlight: rgb(from white r g b / 10%);
+	html.dark .past-sponsors {
 		--panel-shadow: 0 1.5rem 3rem rgb(from var(--colorBlue6) r g b / 34%);
-		--logo-hover-background: rgb(from var(--colorWhiteIsh) r g b / 8%);
-		--logo-hover-ring: rgb(from var(--colorBlue1) r g b / 16%);
 		background:
 			radial-gradient(
 				circle at 20% 18%,
@@ -201,22 +166,29 @@ const tiers = [
 		background:
 			repeating-linear-gradient(
 				114deg,
-				var(--texture-stripe) 0 2px,
+				light-dark(
+						rgb(from var(--colorBlue3) r g b / 6%),
+						rgb(from var(--colorBlue1) r g b / 4%)
+					)
+					0 2px,
 				transparent 2px 28px
 			),
 			radial-gradient(
 				circle at 12% 20%,
-				var(--texture-dot-1) 0 1px,
+				light-dark(rgb(from white r g b / 36%), rgb(from white r g b / 13%)) 0
+					1px,
 				transparent 1px
 			),
 			radial-gradient(
 				circle at 74% 36%,
-				var(--texture-dot-2) 0 1.5px,
+				light-dark(rgb(from white r g b / 26%), rgb(from white r g b / 10%)) 0
+					1.5px,
 				transparent 1.5px
 			),
 			radial-gradient(
 				circle at 48% 72%,
-				var(--texture-dot-3) 0 1px,
+				light-dark(rgb(from white r g b / 24%), rgb(from white r g b / 8%)) 0
+					1px,
 				transparent 1px
 			);
 		opacity: 0.9;
@@ -224,8 +196,22 @@ const tiers = [
 
 	.past-sponsors::after {
 		background:
-			linear-gradient(180deg, var(--overlay-top), transparent 18%),
-			linear-gradient(0deg, var(--overlay-bottom), transparent 24%);
+			linear-gradient(
+				180deg,
+				light-dark(
+					rgb(from white r g b / 42%),
+					rgb(from var(--colorBlue1) r g b / 14%)
+				),
+				transparent 18%
+			),
+			linear-gradient(
+				0deg,
+				light-dark(
+					rgb(from var(--colorBlue4) r g b / 14%),
+					rgb(from var(--colorBlue6) r g b / 48%)
+				),
+				transparent 24%
+			);
 	}
 
 	.past-sponsors-shell {
@@ -249,11 +235,19 @@ const tiers = [
 	}
 
 	.past-sponsors-kicker {
-		background: var(--kicker-background);
-		border: 1px solid var(--kicker-border);
+		background: light-dark(
+			rgb(from white r g b / 60%),
+			rgb(from var(--colorWhiteIsh) r g b / 9%)
+		);
+		border: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue3) r g b / 18%),
+				rgb(from var(--colorBlue1) r g b / 20%)
+			);
 		border-radius: var(--radiusPill);
-		box-shadow: inset 0 1px 0 var(--highlight);
-		color: var(--kicker-color);
+		box-shadow: inset 0 1px 0
+			light-dark(rgb(from white r g b / 70%), rgb(from white r g b / 12%));
+		color: light-dark(var(--colorBlue3), var(--colorWhiteIsh));
 		font-family: var(--fontFamilyMonospace);
 		font-size: 0.78rem;
 		font-weight: var(--fontWeightBolder);
@@ -264,7 +258,7 @@ const tiers = [
 	}
 
 	.past-sponsors h2 {
-		color: var(--heading-color);
+		color: light-dark(var(--colorBlue4), white);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(2.4rem, 5.4vw, 4.7rem);
 		font-weight: var(--fontWeightHeavy);
@@ -274,18 +268,35 @@ const tiers = [
 	}
 
 	.past-sponsors-copy {
-		color: var(--copy-color);
+		color: light-dark(
+			rgb(from var(--colorBlue4) r g b / 78%),
+			rgb(from var(--colorWhiteIsh) r g b / 84%)
+		);
 		max-width: 42rem;
 	}
 
 	.past-sponsors-panel {
 		backdrop-filter: var(--backdropFrosted);
 		background:
-			linear-gradient(180deg, var(--panel-top), var(--panel-bottom)),
-			var(--panel-base);
+			linear-gradient(
+				180deg,
+				light-dark(
+					rgb(from white r g b / 72%),
+					rgb(from var(--colorBlue1) r g b / 12%)
+				),
+				light-dark(
+					rgb(from var(--colorBlueBright1) r g b / 58%),
+					rgb(from var(--colorBlue1) r g b / 3%)
+				)
+			),
+			light-dark(
+				rgb(from var(--colorBlue1) r g b / 52%),
+				rgb(from var(--colorBlue6) r g b / 42%)
+			);
 		border-radius: var(--radiusXLarge);
 		box-shadow:
-			inset 0 1px 0 var(--panel-highlight, var(--highlight)),
+			inset 0 1px 0
+				light-dark(rgb(from white r g b / 70%), rgb(from white r g b / 10%)),
 			var(--panel-shadow);
 		display: flex;
 		flex-direction: column;
@@ -329,8 +340,15 @@ const tiers = [
 
 	.sponsor-logo:hover,
 	.sponsor-logo:focus-visible {
-		background: var(--logo-hover-background);
-		box-shadow: inset 0 0 0 1px var(--logo-hover-ring);
+		background: light-dark(
+			rgb(from var(--colorBlue3) r g b / 6%),
+			rgb(from var(--colorWhiteIsh) r g b / 8%)
+		);
+		box-shadow: inset 0 0 0 1px
+			light-dark(
+				rgb(from var(--colorBlue3) r g b / 14%),
+				rgb(from var(--colorBlue1) r g b / 16%)
+			);
 		transform: translateY(-1px);
 	}
 
