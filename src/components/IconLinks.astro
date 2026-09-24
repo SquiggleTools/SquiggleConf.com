@@ -1,30 +1,32 @@
 ---
-import { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import type { SvgComponent } from "astro/types";
 
 interface IconLink {
 	alt: string;
 	href: string;
-	src: ImageMetadata;
+	/** Drawn in currentColor, so it follows the surrounding text color. */
+	src: SvgComponent;
 }
 
 interface Props {
 	class?: string;
-	historical?: boolean;
 	links: IconLink[];
 }
 
-const { class: className, historical, links, ...rest } = Astro.props;
+const { class: className, links, ...rest } = Astro.props;
 ---
 
-<div
-	class:list={["icon-links", historical && "icon-links-historical", className]}
-	{...rest}
->
+<div class:list={["icon-links", className]} {...rest}>
 	{
-		links.map(({ alt, href, src }) => (
-			<a class="icon-link" href={href} rel="noreferrer" target="_blank">
-				<Image alt={alt} class="icon-link-image" fit="contain" src={src} />
+		links.map(({ alt, href, src: Icon }) => (
+			<a
+				aria-label={alt}
+				class="icon-link"
+				href={href}
+				rel="noreferrer"
+				target="_blank"
+			>
+				<Icon aria-hidden="true" class="icon-link-image" />
 			</a>
 		))
 	}
@@ -49,18 +51,5 @@ const { class: className, historical, links, ...rest } = Astro.props;
 		height: var(--iconLinkSize, 1.2rem);
 		user-select: none;
 		width: var(--iconLinkSize, 1.2rem);
-	}
-
-	html:not(.dark) .icon-link-image {
-		filter: hue-rotate(180deg) invert();
-	}
-
-	.icon-links-historical .icon-link-image {
-		filter: brightness(1.5);
-		object-fit: cover;
-	}
-
-	html:not(.dark) .icon-links-historical .icon-link-image {
-		filter: hue-rotate(180deg) invert(0.7);
 	}
 </style>
