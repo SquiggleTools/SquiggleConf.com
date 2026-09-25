@@ -8,6 +8,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 export const getStaticPaths = getStaticPathsHistorical;
 
+export const prerender = true;
+
 const { year } = Astro.params;
 
 const historicalData =
