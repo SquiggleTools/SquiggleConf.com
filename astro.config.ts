@@ -6,6 +6,9 @@ export default defineConfig({
 	adapter: cloudflare({
 		imageService: "passthrough",
 	}),
+	build: {
+		format: "file",
+	},
 	env: {
 		schema: {
 			BREVO_API_KEY: envField.string({
@@ -33,8 +36,8 @@ export default defineConfig({
 	redirects: {
 		"/2024/about": "/about",
 		"/2024/code-of-conduct": "/code-of-conduct",
-		"/2024/faqs": "/faqs",
-		"/2024/travel": "/travel",
+		"/2024/faqs": "/articles/faqs",
+		"/2024/travel": "/articles/travel",
 		"/faqs": "/articles/faqs",
 		"/schedule": "/",
 		"/sessions": "/2025/sessions",
