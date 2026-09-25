@@ -4,19 +4,13 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"div"> {
 	/** Fixed width for the media column, instead of sizing to its content. */
 	mediaWidth?: string;
-	/** Viewport width below which the media stacks above the copy. */
-	stackBelow?: 700 | 900;
 }
 
-const { class: className, mediaWidth, stackBelow = 700, ...rest } = Astro.props;
+const { class: className, mediaWidth, ...rest } = Astro.props;
 ---
 
 <div
-	class:list={[
-		"timeline-media",
-		`timeline-media-stack-${stackBelow}`,
-		className,
-	]}
+	class:list={["timeline-media", className]}
 	style={mediaWidth &&
 		`grid-template-columns: minmax(0, ${mediaWidth}) minmax(0, 1fr)`}
 	{...rest}
@@ -33,16 +27,8 @@ const { class: className, mediaWidth, stackBelow = 700, ...rest } = Astro.props;
 		max-width: 48rem;
 	}
 
-	@media (width < 700px) {
-		.timeline-media-stack-700 {
-			align-items: flex-start;
-			display: flex;
-			flex-direction: column;
-		}
-	}
-
-	@media (width < 900px) {
-		.timeline-media-stack-900 {
+	@container timeline-entry (width < 38rem) {
+		.timeline-media {
 			align-items: flex-start;
 			display: flex;
 			flex-direction: column;
