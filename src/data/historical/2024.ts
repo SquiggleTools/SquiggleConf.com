@@ -450,7 +450,7 @@ export const peopleBySlug: Record<string, PersonInfo> = {
 	},
 };
 
-export const talksBySlug: Record<string, SessionInfo> = {
+export const sessionsBySlug: Record<string, SessionInfo> = {
 	"talk-aakansha-doshi": {
 		description:
 			"How do we manipulate pixels in a DOM-oriented world? HTML \\<canvas\\>! I recently built [Excalidraw](https://excalidraw.com)’s ‘labeled arrows’ feature, which heavily utilizes all sorts of Canvas element JavaScript APIs for rich graphics and media display in web browsers. Let’s dig in to see how Canvas and Excalidraw work under the hood!\n\nI’ll cover with demos:\n- Why labeled arrows were built: including the ‘how’ and ‘why’ of design decisions\n- The architecture of how elements are structured and how text is tied to the arrow\n- Rendering arrows in canvas, including multi-point arrows and transparency effects\n- How Canvas and SVG compare & contrast with mask attributes, clipping, and clearRect\n- Performance optimizations such as caching labeled repeat computational and graphics work\n\nThe audience will come away understanding how Canvas APIs work together - along with how labeled arrows were implemented in Excalidraw.",

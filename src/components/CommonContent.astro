@@ -11,7 +11,11 @@ interface Props {
 const { class: className, heading, ...props } = Astro.props;
 ---
 
-<ContentArea class:list={["common-content", className]} width="thin" {...props}>
+<ContentArea
+	class:list={["common-content", "prose", className]}
+	width="thin"
+	{...props}
+>
 	{
 		heading && (
 			<Heading id={slugify(heading)} level="h2">

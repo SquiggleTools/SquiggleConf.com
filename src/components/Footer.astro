@@ -1,4 +1,5 @@
 ---
+import { eventDate, eventLocation } from "~/data/event";
 import { currentYear, years } from "~/data/years";
 import { socials } from "~/data/socials";
 import ContentArea from "./ContentArea.astro";
@@ -23,8 +24,8 @@ const yearPairs =
 		<div class="left">
 			<Logo />
 			<div class="footer-date-location">
-				<span>May 7th, 2027 ·</span>
-				<span>Boston, Massachusetts</span>
+				<span>{eventDate}, {currentYear} ·</span>
+				<span>{eventLocation}</span>
 			</div>
 		</div>
 		<div class="right">

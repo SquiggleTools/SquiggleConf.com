@@ -26,16 +26,11 @@ import Heading from "./Heading.astro";
 				class="email-input"
 				id="email"
 				name="email"
-				type="email"
 				placeholder="cool.dev@awesome.com"
+				required
+				type="email"
 			/>
-			<Button
-				as="button"
-				id="submit"
-				size="large"
-				type="submit"
-				variant="light"
-			>
+			<Button as="button" size="large" type="submit" variant="light">
 				Subscribe
 			</Button>
 		</form>
@@ -46,73 +41,44 @@ import Heading from "./Heading.astro";
 
 <script>
 	const form = document.getElementById("newsletter-form") as HTMLFormElement;
-	const input = document.getElementById("email") as HTMLInputElement;
-	const submit = document.getElementById("submit") as HTMLButtonElement;
+	const message = document.getElementById("newsletter-message")!;
+	const submit = form.querySelector("button")!;
 
-	function setSubmitDisabled() {
-		submit.disabled = !input.value;
+	function setMessage(text: string, unhappy: boolean) {
+		message.textContent = text;
+		message.classList.toggle("unhappy", unhappy);
 	}
 
-	input.addEventListener("change", setSubmitDisabled);
-	setSubmitDisabled();
-
-	function setMessage(text: string, status: "happy" | "unhappy") {
-		const messageDiv = document.getElementById(
-			"newsletter-message",
-		) as HTMLDivElement;
-
-		messageDiv.textContent = text;
-
-		if (status === "unhappy") {
-			messageDiv.classList.add("unhappy");
-		} else {
-			messageDiv.classList.remove("unhappy");
-		}
-	}
-
-	form.addEventListener("submit", (event) => {
+	form.addEventListener("submit", async (event) => {
 		event.preventDefault();
+		submit.disabled = true;
 
-		const submitButton = form.querySelector("button") as HTMLButtonElement;
-		submitButton.disabled = true;
-
-		const emailInput = form.querySelector("input") as HTMLInputElement;
-		const email = emailInput.value;
-
-		const formBody = "userGroup=&email=" + encodeURIComponent(email);
-		fetch(form.action, {
-			method: "POST",
-			body: formBody,
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-			},
-		})
-			.then((response) => [response.ok, response.text(), response] as const)
-			.then(([ok, dataPromise, response]) => {
-				dataPromise.then((data) => {
-					if (ok) {
-						setMessage("Thanks for signing up!", "happy");
-						form.reset();
-						return;
-					}
-
-					setMessage(
-						`There was an issue: ${data || response.statusText}`,
-						"unhappy",
-					);
-				});
-			})
-			.catch((error) => {
-				setMessage(
-					error.message === "Failed to fetch"
-						? "Too many requests. Try again later, please?"
-						: error.message,
-					"unhappy",
-				);
-			})
-			.finally(() => {
-				submitButton.disabled = false;
+		try {
+			const response = await fetch(form.action, {
+				body: new FormData(form),
+				method: "POST",
 			});
+
+			if (response.ok) {
+				setMessage("Thanks for signing up!", false);
+				form.reset();
+			} else {
+				setMessage(
+					`There was an issue: ${(await response.text()) || response.statusText}`,
+					true,
+				);
+			}
+		} catch (error) {
+			const { message } = error as Error;
+			setMessage(
+				message === "Failed to fetch"
+					? "Too many requests. Try again later, please?"
+					: message,
+				true,
+			);
+		} finally {
+			submit.disabled = false;
+		}
 	});
 </script>
 

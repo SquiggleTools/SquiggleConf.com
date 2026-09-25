@@ -1,10 +1,11 @@
 ---
+import { eventDate, eventLocation } from "~/data/event";
 import Logo from "../Logo.astro";
 ---
 
 <div class="hero-intro">
 	<Logo bold />
-	<p class="hero-subtitle">May 7th · Boston, Massachusetts</p>
+	<p class="hero-subtitle">{eventDate} · {eventLocation}</p>
 </div>
 
 <style>

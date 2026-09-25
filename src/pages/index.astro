@@ -1,34 +1,34 @@
 ---
 import "@fontsource/shantell-sans";
 
+import bigRav from "~/assets/2027/bigrav.webp";
+import harborwalk from "~/assets/2027/boston-harborwalk.webp";
+import funrun1 from "~/assets/2027/fun-run-1.webp";
+import funrun2 from "~/assets/2027/fun-run-2.webp";
+import milkcookies1 from "~/assets/2027/milkcookies-1.webp";
+import milkcookies2 from "~/assets/2027/milkcookies-2.webp";
+import milkcookies3 from "~/assets/2027/milkcookies-3.webp";
 import placeholder9 from "~/assets/2027/placeholder-9.webp";
+import simonsTheater from "~/assets/2027/simons-theater.webp";
+import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
+import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
+import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
+import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
+import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
+import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
+import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
+import scottTolinski from "~/assets/avatars/scott-tolinski.webp";
+import thePrimeagen from "~/assets/avatars/theprimeagen.webp";
+import wesBos from "~/assets/avatars/wes-bos.webp";
+import syntax from "~/assets/logos/syntax.svg";
+import networking from "~/assets/stills/attendees-networking.png";
+import harbor from "~/assets/stills/boston-harbor.png";
 import Hero from "~/components/hero/Hero.astro";
 import {
-	bigRav,
-	dillonMulroy,
 	exploreChoices,
-	funrun1,
-	funrun2,
-	harbor,
-	harborwalk,
 	lunchSpots,
-	milkcookies1,
-	milkcookies2,
-	milkcookies3,
-	networking,
-	scottTolinski,
-	simonsTheater,
-	syntax,
 	talkBlocks,
-	thePrimeagen,
 	timelineMCs,
-	urbanwild1,
-	urbanwild2,
-	urbanwild3,
-	urbanwild4,
-	urbanwild5,
-	urbanwildLogo,
-	wesBos,
 } from "~/components/home/data";
 import Collage from "~/components/home/Collage.astro";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
@@ -37,21 +37,25 @@ import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
-import TimelineCopy from "~/components/home/TimelineCopy.astro";
+import TimelineCopy from "~/components/home/timeline/TimelineCopy.astro";
+import TimelineLink from "~/components/home/timeline/TimelineLink.astro";
+import TimelineLinkList from "~/components/home/timeline/TimelineLinkList.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
+import TimelineHeading from "~/components/home/timeline/TimelineHeading.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
 import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
 import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
+import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
+import { eventDate, eventLocation } from "~/data/event";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
-import TimelineTalksTurtle from "~/components/TimelineTalksTurtle.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
@@ -64,7 +68,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineFishLayer swimUntil="talks-morning" />
 			<div class="top-side-by-side">
 				<div class="top-side-left">
-					<h2 class="top-heading">the devtools conference</h2>
+					<TimelineHeading class="top-heading" level="h2">
+						the devtools conference
+					</TimelineHeading>
 					<p class="top-intro">
 						SquiggleConf is a conference focused on software developer tools: AI
 						tools, linters, code editors, performance and security tools,
@@ -77,8 +83,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineGrid>
 				<TimelineDayCap date="May 6th" day="Thursday">
 					<div class="timeline-grid-intro">
-						<h3>SquiggleConf 2027</h3>
-						<p>Boston, Massachusetts</p>
+						<TimelineHeading class="timeline-grid-intro-heading" level="h3">
+							SquiggleConf 2027
+						</TimelineHeading>
+						<p>{eventLocation}</p>
 					</div>
 				</TimelineDayCap>
 
@@ -114,7 +122,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</TimelineCopy>
 				</TimelineEntry>
 
-				<TimelineDayCap date="May 7th" day="Friday" />
+				<TimelineDayCap date={eventDate} day="Friday" />
 
 				<TimelineVenue span={7} venue="aquarium" />
 				<TimelineRail time="7am" />
@@ -128,7 +136,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					variant="fun-run"
 				>
 					<div class="fun-run-body">
-						<TimelineCopy>
+						<TimelineCopy class="fun-run-copy">
 							<p>
 								Optional for some, best way to start the day for others! This
 								SquiggleConf tradition is a casual yet eventful 5k through the
@@ -179,7 +187,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 					time="8am"
 				>
-					<TimelineMedia stackBelow={900}>
+					<TimelineMedia>
 						<TimelineImage
 							alt="Presenter on stage inside the Simons IMAX Theater"
 							class="event-image-wide"
@@ -231,48 +239,19 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="10:30am"
 					variant="break"
 				>
-					<TimelineMedia stackBelow={900}>
+					<TimelineMedia>
 						<Collage
 							ariaLabel="Milk and Cookies break collage"
-							layout="trio"
+							layout="trio-compact"
 							photos={[
-								{
-									alt: "Milk and cookies spread",
-									frame: {
-										height: "5.7rem",
-										left: "0.25rem",
-										rotate: "-8deg",
-										top: "1rem",
-										width: "7.5rem",
-									},
-									src: milkcookies3,
-								},
-								{
-									alt: "Cookies at the break",
-									frame: {
-										height: "5.8rem",
-										left: "5.4rem",
-										rotate: "2deg",
-										top: "0.2rem",
-										width: "7.5rem",
-										zIndex: 1,
-									},
-									src: milkcookies1,
-								},
+								{ alt: "Milk and cookies spread", src: milkcookies3 },
+								{ alt: "Cookies at the break", src: milkcookies1 },
 								{
 									alt: "Milk and cookies break crowd",
-									frame: {
-										height: "5rem",
-										left: "11rem",
-										rotate: "10deg",
-										top: "2rem",
-										width: "6rem",
-									},
 									objectPosition: "10% 0%",
 									src: milkcookies2,
 								},
 							]}
-							size={{ height: "8rem", width: "18.6rem" }}
 						/>
 						<TimelineCopy class="break-copy">
 							<p>A SquiggleConf classic!</p><p>
@@ -305,25 +284,22 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="quincyMarket"
 					time="12pm"
 				>
-					<TimelineMedia mediaWidth="10rem" stackBelow={900}>
+					<TimelineMedia mediaWidth="10rem">
 						<LunchCarousel spots={lunchSpots} />
 						<TimelineCopy class="lunch-copy">
 							<p>
 								Head out together into
-								<a href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace</a
+								<TimelineLink href="https://faneuilhallmarketplace.com/dining">
+									Faneuil Hall Marketplace</TimelineLink
 								> at Quincy Market, keep conversations moving, and treat the middle
 								of the day like your devtools field trip lunch break.
 							</p>
-							<ul class="lunch-links">
-								{
-									lunchSpots.map((spot) => (
-										<li>
-											<a href={spot.url}>{spot.name}</a>
-										</li>
-									))
-								}
-							</ul>
+							<TimelineLinkList
+								links={lunchSpots.map(({ name, url }) => ({
+									href: url,
+									text: name,
+								}))}
+							/>
 							<p>
 								Fast options, easy wandering, and enough variety that everyone
 								can grab something good before heading back for the afternoon
@@ -415,8 +391,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy>
-							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
+						<TimelineCopy heading="Developer Life and Work in 2027">
 							<p>
 								Join Syntax.fm and ThePrimeagen in a live podcast recording
 								discussing the ins and outs of how to succeed and be happy in
@@ -465,8 +440,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy class="fireside-copy">
-							<h3 class="fireside-topic">Topic To Be Announced</h3>
+						<TimelineCopy class="fireside-copy" heading="Topic To Be Announced">
 							<p>
 								Join us for a fireside chat with a notable JavaScript-y friend
 								about a pressing issue in the technical space.
@@ -524,9 +498,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						/>
 						<TimelineCopy>
 							<p>
-								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
-								alternative, indie, and punk rock band that combines pop-punk vocals
-								with classic rock and prog-rock influences.
+								<TimelineLink href="https://bigrav.band"
+									><strong>Big Rav</strong></TimelineLink
+								> is a Boston-based alternative, indie, and punk rock band that combines
+								pop-punk vocals with classic rock and prog-rock influences.
 								<span class="fireside-host">
 									featuring SquiggleConf's own Maddy Montaquila on vocals.
 								</span>
@@ -543,11 +518,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top-heading {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeDisplay);
 		font-style: italic;
-		font-weight: var(--fontWeightBold);
 		line-height: 1;
 		padding-top: 1rem;
 		position: relative;
@@ -565,7 +537,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-side-by-side {
-		max-width: 70rem;
+		max-width: var(--sizeContentAreaNormal);
 		margin: auto;
 		gap: 5rem;
 		align-items: center;
@@ -593,16 +565,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-left: 2rem;
 	}
 
-	.timeline-grid-intro h3,
 	.timeline-grid-intro p {
 		margin: 0;
 	}
 
-	.timeline-grid-intro h3 {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
+	.timeline-grid-intro-heading {
 		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
-		font-weight: var(--fontWeightBold);
 		line-height: 0.98;
 	}
 
@@ -634,28 +602,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-top: 0.2rem;
 	}
 
-	.lunch-copy a {
-		color: var(--colorLink);
-		font-weight: var(--fontWeightBold);
-	}
-
-	.lunch-links {
-		color: var(--colorLink);
-		display: grid;
-		gap: 0.42rem;
-		margin: 0;
-		padding-left: 1.2rem;
-	}
-
-	.lunch-links li::marker {
-		color: var(--colorLink);
-	}
-
-	.lunch-links a {
-		color: var(--colorLink);
-		font-weight: var(--fontWeightSemibold);
-	}
-
 	.launch-party-collage {
 		margin-bottom: 1rem;
 	}
@@ -670,7 +616,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		top: 1rem;
 	}
 
-	.fun-run-body .timeline-copy {
+	.fun-run-body > .fun-run-copy {
 		max-width: 50%;
 		position: relative;
 	}
@@ -688,15 +634,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	.event-image-circle {
 		height: 8rem;
 		width: 8rem;
-	}
-
-	.fireside-topic {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.2rem;
-		font-weight: var(--fontWeightBold);
-		line-height: 1.05;
-		margin: 0 0 0.25rem;
 	}
 
 	.fireside-host {
@@ -752,7 +689,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			grid-template-columns: minmax(0, 1fr) 8rem;
 		}
 
-		.fun-run-body .timeline-copy {
+		.fun-run-body > .fun-run-copy {
 			margin-top: 0.15rem;
 			max-width: none;
 		}

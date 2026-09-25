@@ -1,12 +1,14 @@
 ---
 import { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
 
-import BioLinks, { BioLinksPlatforms } from "./BioLinks.astro";
+import type { PersonLinks } from "~/data/historical/types";
+
+import Avatar from "./Avatar.astro";
+import BioLinks from "./BioLinks.astro";
 
 export interface Props {
 	class?: string;
-	links: BioLinksPlatforms;
+	links: PersonLinks;
 	name: string;
 	photo: ImageMetadata;
 }
@@ -15,7 +17,7 @@ const { class: className, links, name, photo, ...rest } = Astro.props;
 ---
 
 <li {...rest} class:list={["bio", className]}>
-	<Image alt="" class="bio-image" src={photo} />
+	<Avatar alt="" class="bio-image" src={photo} />
 	<div class="bio-name">{name}</div>
 	<BioLinks name={name} links={links} />
 </li>
@@ -33,10 +35,8 @@ const { class: className, links, name, photo, ...rest } = Astro.props;
 	}
 
 	.bio-image {
-		border-radius: var(--radiusPill);
 		height: 5rem;
 		margin-bottom: 0.5rem;
-		user-select: none;
 		width: 5rem;
 	}
 

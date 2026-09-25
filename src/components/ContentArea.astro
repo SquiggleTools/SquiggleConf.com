@@ -1,4 +1,11 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"section"> {
+	as?: "div" | "section";
+	width?: "normal" | "thin" | "wide";
+}
+
 const {
 	as: As = "div",
 	class: className,

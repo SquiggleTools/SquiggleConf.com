@@ -37,7 +37,7 @@ const seen = new Set<PersonInfo>();
 						return true;
 					})
 					.map((person) => (
-						<SubtleCard class="speaker-card" renderAs="li">
+						<SubtleCard as="li" class="speaker-card">
 							<SpeakerSmall
 								href={`/${year}/sessions#${talk.slug}`}
 								person={person}
@@ -76,7 +76,7 @@ const seen = new Set<PersonInfo>();
 			align-items: center;
 			flex-direction: row;
 			flex-wrap: wrap;
-			max-width: calc(var(--widthBodyLean) + 4rem);
+			max-width: calc(var(--sizeContentAreaThin) + 4rem);
 		}
 
 		.speaker-card {
@@ -87,7 +87,7 @@ const seen = new Set<PersonInfo>();
 	@media (--widthXLarge) {
 		.speakers-list {
 			padding: 2rem 0;
-			max-width: calc(var(--widthBodyFull) + 2rem);
+			max-width: calc(var(--sizeContentAreaNormal) + 2rem);
 		}
 
 		.speaker-card {

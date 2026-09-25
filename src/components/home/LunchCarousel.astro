@@ -66,14 +66,15 @@ const { spots } = Astro.props;
 
 	.lunch-carousel-track {
 		display: flex;
-		transform: translate3d(calc(var(--lunch-carousel-index, 0) * -100%), 0, 0);
-		transition: transform var(--transitionMedium);
-		will-change: transform;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
 	}
 
 	.lunch-slide {
 		flex: 0 0 100%;
 		position: relative;
+		scroll-snap-align: start;
 	}
 
 	.lunch-slide-image {
@@ -174,6 +175,7 @@ const { spots } = Astro.props;
 	for (const carousel of document.querySelectorAll<HTMLElement>(
 		"[data-lunch-carousel]",
 	)) {
+		const track = carousel.querySelector<HTMLElement>("[data-lunch-track]")!;
 		const dots = [
 			...carousel.querySelectorAll<HTMLButtonElement>("[data-lunch-dot]"),
 		];
@@ -181,15 +183,21 @@ const { spots } = Astro.props;
 		let activeIndex = 0;
 		let autoAdvanceTimer: number | undefined;
 
-		const setSlide = (index: number) => {
-			activeIndex = index % slides.length;
-			carousel.style.setProperty("--lunch-carousel-index", `${activeIndex}`);
+		const markActive = () => {
+			activeIndex = Math.round(track.scrollLeft / track.clientWidth);
 			for (const [slideIndex, slide] of slides.entries()) {
 				slide.setAttribute("aria-hidden", `${slideIndex !== activeIndex}`);
 			}
 			for (const [dotIndex, dot] of dots.entries()) {
 				dot.setAttribute("aria-pressed", `${dotIndex === activeIndex}`);
 			}
+		};
+
+		const setSlide = (index: number) => {
+			track.scrollTo({
+				behavior: reducedMotionQuery.matches ? "instant" : "smooth",
+				left: (index % slides.length) * track.clientWidth,
+			});
 		};
 
 		const stopAutoAdvance = () => window.clearInterval(autoAdvanceTimer);
@@ -203,6 +211,8 @@ const { spots } = Astro.props;
 				);
 			}
 		};
+
+		track.addEventListener("scroll", markActive, { passive: true });
 
 		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {
@@ -226,7 +236,6 @@ const { spots } = Astro.props;
 			}
 		});
 
-		setSlide(0);
 		startAutoAdvance();
 	}
 </script>

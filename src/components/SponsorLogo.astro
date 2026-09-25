@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import type { SponsorInfo } from "~/data/historical/types";
+import ThemedImage from "./ThemedImage.astro";
+
+interface Props extends HTMLAttributes<"a"> {
+	sponsor: SponsorInfo;
+}
+
+const { sponsor, ...rest } = Astro.props;
+---
+
+<a
+	href={sponsor.href}
+	rel="noreferrer"
+	target="_blank"
+	title={sponsor.title}
+	{...rest}
+>
+	<ThemedImage alt={sponsor.title} height={128} sources={sponsor.logos} />
+</a>
