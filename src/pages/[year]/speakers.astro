@@ -50,9 +50,8 @@ const { data: historicalData, year } = Astro.props;
 <style>
 	.speakers-list {
 		display: flex;
-		flex-direction: column;
+		flex-flow: column wrap;
 		gap: 2rem;
-		flex-wrap: wrap;
 		list-style-type: none;
 		margin: 2rem;
 		padding: 0 var(--widthBodyPadding);

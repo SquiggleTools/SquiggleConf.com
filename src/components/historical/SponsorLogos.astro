@@ -33,6 +33,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 	.sponsor-logos {
 		margin: auto;
 		max-width: var(--sizeContentAreaNormal);
+
 		--sponsorSize0: 14rem;
 		--sponsorSize1: 7rem;
 		--sponsorSize2: 5.6rem;
@@ -72,8 +73,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 
 	@media (--widthMedium) {
 		.sponsor-group {
-			flex-direction: row;
-			flex-wrap: wrap;
+			flex-flow: row wrap;
 			gap: 0;
 		}
 

@@ -10,10 +10,9 @@
 	--colorBlue5: #041930;
 	--colorBlue6: #04142d;
 	--colorRed1: #ffbfc2;
-	--colorTextShadowLight: rgba(70, 96, 140, 0.35);
-	--colorTextShadowDark: rgba(0, 0, 7, 0.25);
+	--colorTextShadowLight: rgb(70 96 140 / 35%);
+	--colorTextShadowDark: rgb(0 0 7 / 25%);
 	--colorWhiteIsh: #eaeaf7;
-
 	--colorAccentLight: light-dark(var(--colorBlue1), var(--colorBlue5));
 	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
 	--colorAccentSecond: light-dark(var(--colorBlue2), var(--colorBlue4));
@@ -25,7 +24,6 @@
 		var(--colorTextShadowLight),
 		var(--colorTextShadowDark)
 	);
-
 	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
 	--colorHeadingHover: light-dark(var(--colorBlue5), white);
 	--colorCopy: light-dark(
@@ -46,7 +44,6 @@
 	);
 	--colorLink: light-dark(var(--colorBlue4), white);
 	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
-
 	--colorCream: #edebe4;
 	--colorBackdropLight: var(--colorInverted);
 	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorSubtle));
@@ -54,12 +51,10 @@
 	--colorForegroundBody: light-dark(#203238, #d2ebf1);
 	--colorSubtleLight: #a5e2fc;
 	--colorSubtle: light-dark(var(--colorSubtleLight), #062430);
-
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
 	--fontFamilyMonospace: "Geist Mono", monospace;
-
 	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
 	--fontSizeMedium: clamp(1.25rem, 3.25vw, 1.5rem);
@@ -77,7 +72,6 @@
 	--fontSizeH2: clamp(1.75rem, 5vw, 2rem);
 	--fontSizeH3: clamp(1.5rem, 3.5vw, 1.75rem);
 	--fontSizeH4: clamp(1.15rem, 2.5vw, 1.35rem);
-
 	--fontWeightExtraLight: 200;
 	--fontWeightLight: 300;
 	--fontWeightSemiLight: 350;
@@ -87,29 +81,23 @@
 	--fontWeightBold: 700;
 	--fontWeightExtraBold: 800;
 	--fontWeightBody: var(--fontWeightLight);
-
 	--lineHeightBody: 1.4;
-
 	--radiusXSmall: 0.25rem;
 	--radiusSmall: 0.375rem;
 	--radiusMedium: 0.5rem;
 	--radiusLarge: 1rem;
 	--radiusXLarge: 2rem;
 	--radiusPill: 999px;
-
 	--shadowHeadingHover: none;
 	--shadowImage: 0 0.25rem 0.7rem rgb(from var(--colorBlue5) r g b / 12%);
 	--shadowImageActive: 0 0.55rem 1rem rgb(from var(--colorBlue5) r g b / 18%);
 	--sizeImageBorder: 2px;
-
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
 	--sizeScrollMarginTop: 2rem;
 	--widthBodyPadding: clamp(1rem, 5vw, 2rem);
-
 	--backdropFrosted: blur(16px) saturate(145%);
-
 	--transitionFast: 140ms;
 	--transitionNormal: 220ms;
 	--transitionMedium: 280ms;
@@ -127,9 +115,7 @@ html.dark {
 
 	--colorBlueBright1: #051b32;
 	--colorBlueBright2: var(--colorBlue5);
-
 	--lineHeightBody: 1.5;
-
 	--shadowHeadingHover: 0 0.3rem 1rem rgb(from var(--colorBlue5) r g b / 24%);
 }
 

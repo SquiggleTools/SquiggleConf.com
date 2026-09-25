@@ -14,5 +14,6 @@
 		"yaml"
 	],
 	"eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+	"stylelint.validate": ["astro", "css"],
 	"typescript.tsdk": "node_modules/typescript/lib"
 }

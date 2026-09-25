@@ -34,6 +34,7 @@ const {
 		--colorButtonBackgroundHover: var(--colorBlue1);
 		--colorButtonBorderHover: transparent;
 		--colorButtonColorHover: var(--colorBlue5);
+
 		background: var(--colorButtonBackground);
 		color: var(--colorButtonColor);
 		align-items: center;
@@ -77,6 +78,7 @@ const {
 		--colorButtonBackground: var(--colorWhiteIsh);
 		--colorButtonBackgroundHover: var(--colorBlue2);
 		--colorButtonBorderHover: var(--colorBlue1);
+
 		color: var(--colorBlue5);
 		font-weight: var(--fontWeightMedium);
 	}
@@ -117,6 +119,7 @@ const {
 		);
 		--colorButtonBorderHover: var(--colorTerminalOrange);
 		--colorButtonColorHover: var(--colorButtonColor);
+
 		backdrop-filter: var(--backdropFrosted);
 		border: 1px solid var(--colorTerminalOrange);
 		border-radius: var(--radiusLarge);
@@ -160,8 +163,8 @@ const {
 			rgb(from var(--colorBlue5) r g b / 30%),
 			rgb(from var(--colorBlue1) r g b / 46%)
 		);
-		--colorButtonColor: currentColor;
-		--colorButtonColorHover: currentColor;
+		--colorButtonColor: currentcolor;
+		--colorButtonColorHover: currentcolor;
 		--shadowButton:
 			inset 0 1px 0 rgb(from white r g b / 16%),
 			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
@@ -169,6 +172,7 @@ const {
 		--shadowButtonHover:
 			inset 0 1px 0 rgb(from white r g b / 22%),
 			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
+
 		border-color: var(--colorButtonBorder);
 		border-radius: var(--radiusLarge);
 		box-shadow: var(--shadowButton);
