@@ -1,5 +1,4 @@
 ---
-import BodyText from "~/components/BodyText.astro";
 import ContentArea from "~/components/ContentArea.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard, {
@@ -7,6 +6,8 @@ import HeroContentsStandard, {
 } from "~/components/hero/HeroContentsStandard.astro";
 import type { Article } from "~/data/articles";
 import PageLayout from "./PageLayout.astro";
+
+import "./prose.css";
 
 interface Props {
 	article: Article;
@@ -30,10 +31,10 @@ const {
 
 	{
 		Astro.slots.has("lead") && (
-			<ContentArea width={introWidth}>
-				<BodyText class="article-lead">
+			<ContentArea class="prose" width={introWidth}>
+				<p class="article-lead">
 					<slot name="lead" />
-				</BodyText>
+				</p>
 				<slot name="intro" />
 			</ContentArea>
 		)

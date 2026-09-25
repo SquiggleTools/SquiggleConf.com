@@ -89,6 +89,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		--timeline-image-scale: 1;
 		--timeline-image-shadow: var(--shadowImage);
 		--timeline-image-zoom: 1;
+		container: timeline-entry / inline-size;
 		isolation: isolate;
 		margin: 1rem 0;
 		padding: 1.35rem 0.5rem 1.5rem 2rem;
@@ -324,8 +325,6 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 <script>
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 
-	import { onScrollFrame } from "./onScrollFrame";
-
 	const cards = [
 		...document.querySelectorAll<HTMLElement>(".timeline-content"),
 	];
@@ -334,18 +333,38 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	);
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
-	onScrollFrame(() => {
-		const threshold = innerHeight / 2;
+	const headingsAboveMiddle = new Set<Element>();
+
+	const updateActiveCard = () => {
 		const activeCard =
 			mobileQuery.matches &&
-			cards.findLast(
-				(_, index) => headings[index].getBoundingClientRect().top <= threshold,
-			);
+			cards.findLast((_, index) => headingsAboveMiddle.has(headings[index]));
 
 		for (const card of cards) {
 			card.toggleAttribute("data-mobile-active", card === activeCard);
 		}
-	}, mobileQuery);
+	};
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					headingsAboveMiddle.add(entry.target);
+				} else {
+					headingsAboveMiddle.delete(entry.target);
+				}
+			}
+
+			updateActiveCard();
+		},
+		{ rootMargin: "100000px 0px -50% 0px" },
+	);
+
+	for (const heading of headings) {
+		observer.observe(heading);
+	}
+
+	mobileQuery.addEventListener("change", updateActiveCard);
 
 	const toPercent = (fraction: number) =>
 		`${(Math.min(Math.max(fraction, 0), 1) * 100).toFixed(2)}%`;
