@@ -2,7 +2,6 @@
 import type { HTMLAttributes } from "astro/types";
 
 import type {
-	CollageFrame,
 	CollageLayout,
 	CollagePhoto,
 	CollageShape,
@@ -11,55 +10,32 @@ import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props extends HTMLAttributes<"div"> {
 	ariaLabel?: string;
-	decorative?: boolean;
 	layout: CollageLayout;
 	photos: readonly CollagePhoto[];
 	shape?: CollageShape;
-	/** Overrides the layout's default dimensions. */
-	size?: { height?: string; width?: string };
 }
 
 const {
 	ariaLabel,
 	class: className,
-	decorative,
 	layout,
 	photos,
 	shape = "photo",
-	size,
 	...rest
 } = Astro.props;
-
-const toStyle = (frame: CollageFrame | undefined) =>
-	frame && {
-		height: frame.height,
-		left: frame.left,
-		rotate: frame.rotate,
-		top: frame.top,
-		width: frame.width,
-		"z-index": frame.zIndex,
-	};
 ---
 
 <div
-	aria-hidden={!ariaLabel && decorative ? "true" : undefined}
 	aria-label={ariaLabel}
 	class:list={["collage", `collage-${layout}`, `collage-${shape}`, className]}
 	role={ariaLabel ? "group" : undefined}
-	style={size && {
-		"--collage-height": size.height,
-		"--collage-width": size.width,
-	}}
 	{...rest}
 >
 	{
 		photos.map((photo, index) => (
-			<div
-				class={`collage-item collage-item-${index + 1}`}
-				style={toStyle(photo.frame)}
-			>
+			<div class={`collage-item collage-item-${index + 1}`}>
 				<TimelineImage
-					alt={decorative || photo.decorative ? "" : photo.alt}
+					alt={photo.decorative ? "" : photo.alt}
 					effect={
 						shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
 					}
@@ -134,6 +110,36 @@ const toStyle = (frame: CollageFrame | undefined) =>
 		left: 13rem;
 		rotate: 9deg;
 		top: 0.85rem;
+	}
+
+	.collage-trio-compact {
+		--collage-height: 8rem;
+		--collage-width: 18.6rem;
+	}
+
+	.collage-trio-compact .collage-item-1 {
+		height: 5.7rem;
+		left: 0.25rem;
+		rotate: -8deg;
+		top: 1rem;
+		width: 7.5rem;
+	}
+
+	.collage-trio-compact .collage-item-2 {
+		height: 5.8rem;
+		left: 5.4rem;
+		rotate: 2deg;
+		top: 0.2rem;
+		width: 7.5rem;
+		z-index: 1;
+	}
+
+	.collage-trio-compact .collage-item-3 {
+		height: 5rem;
+		left: 11rem;
+		rotate: 10deg;
+		top: 2rem;
+		width: 6rem;
 	}
 
 	.collage-feature-five {

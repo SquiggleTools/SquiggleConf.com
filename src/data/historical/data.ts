@@ -6,7 +6,7 @@ export const historicalDataByYear = {
 	2024: {
 		date: "October 3-4, 2024",
 		peopleBySlug: data2024.peopleBySlug,
-		sessionsBySlug: data2024.talksBySlug,
+		sessionsBySlug: data2024.sessionsBySlug,
 		sponsors: data2024.sponsors,
 	},
 	2025: {
@@ -18,7 +18,8 @@ export const historicalDataByYear = {
 } satisfies Record<string, HistoricalDataForYear>;
 
 export function getStaticPathsHistorical() {
-	return Object.keys(historicalDataByYear).map((key) => ({
-		params: { year: +key },
+	return Object.entries(historicalDataByYear).map(([key, data]) => ({
+		params: { year: key },
+		props: { data, year: Number(key) },
 	}));
 }
