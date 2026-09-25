@@ -26,3 +26,10 @@
 	margin: 3rem 0 1rem;
 	text-align: center;
 }
+
+.prose > hr {
+	border: none;
+	border-top: 1px solid currentColor;
+	margin: 1lh 0;
+	opacity: 0.25;
+}
