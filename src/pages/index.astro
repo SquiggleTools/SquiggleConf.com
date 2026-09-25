@@ -42,6 +42,7 @@ import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
+import TimelineHeading from "~/components/home/timeline/TimelineHeading.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
 import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
@@ -64,7 +65,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineFishLayer swimUntil="talks-morning" />
 			<div class="top-side-by-side">
 				<div class="top-side-left">
-					<h2 class="top-heading">the devtools conference</h2>
+					<TimelineHeading class="top-heading" level="h2">
+						the devtools conference
+					</TimelineHeading>
 					<p class="top-intro">
 						SquiggleConf is a conference focused on software developer tools: AI
 						tools, linters, code editors, performance and security tools,
@@ -77,7 +80,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineGrid>
 				<TimelineDayCap date="May 6th" day="Thursday">
 					<div class="timeline-grid-intro">
-						<h3>SquiggleConf 2027</h3>
+						<TimelineHeading class="timeline-grid-intro-heading" level="h3">
+							SquiggleConf 2027
+						</TimelineHeading>
 						<p>Boston, Massachusetts</p>
 					</div>
 				</TimelineDayCap>
@@ -416,7 +421,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							shape="avatar"
 						/>
 						<TimelineCopy>
-							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
+							<TimelineHeading class="fireside-topic" level="h3">
+								Developer Life and Work in 2027
+							</TimelineHeading>
 							<p>
 								Join Syntax.fm and ThePrimeagen in a live podcast recording
 								discussing the ins and outs of how to succeed and be happy in
@@ -466,7 +473,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							shape="avatar"
 						/>
 						<TimelineCopy class="fireside-copy">
-							<h3 class="fireside-topic">Topic To Be Announced</h3>
+							<TimelineHeading class="fireside-topic" level="h3">
+								Topic To Be Announced
+							</TimelineHeading>
 							<p>
 								Join us for a fireside chat with a notable JavaScript-y friend
 								about a pressing issue in the technical space.
@@ -590,12 +599,11 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-left: 2rem;
 	}
 
-	.timeline-grid-intro h3,
 	.timeline-grid-intro p {
 		margin: 0;
 	}
 
-	.timeline-grid-intro h3 {
+	.timeline-grid-intro-heading {
 		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
 		line-height: 0.98;
 	}

@@ -1,5 +1,6 @@
 ---
 import type { ExploreChoiceData } from "~/components/home/types";
+import TimelineHeading from "./timeline/TimelineHeading.astro";
 import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
@@ -22,7 +23,9 @@ const { choice } = Astro.props;
 			src={choice.image}
 		/>
 		<div class="explore-copy">
-			<h3>{choice.title}</h3>
+			<TimelineHeading class="explore-title" level="h3">
+				{choice.title}
+			</TimelineHeading>
 			<p>{choice.description}</p>
 		</div>
 		{
@@ -148,7 +151,7 @@ const { choice } = Astro.props;
 		min-width: 0;
 	}
 
-	.explore-copy h3 {
+	.explore-title {
 		font-size: clamp(1.2rem, 1.7vw, 1.45rem);
 		line-height: 1.05;
 		margin: 0;
@@ -198,7 +201,7 @@ const { choice } = Astro.props;
 			width: 4rem;
 		}
 
-		.explore-copy h3 {
+		.explore-title {
 			font-size: 1.15rem;
 		}
 	}

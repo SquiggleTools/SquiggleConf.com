@@ -6,7 +6,7 @@ import type {
 	TimelineTimeMode,
 	VenueId,
 } from "~/components/home/types";
-import Heading from "~/components/Heading.astro";
+import TimelineHeading from "./TimelineHeading.astro";
 
 interface Props {
 	entryId: TimelineEntryId;
@@ -40,8 +40,8 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	data-timeline-entry={entryId}
 >
 	<div class="timeline-heading-line">
-		<Heading class="timeline-heading" id={entryId} level="h2" link
-			>{heading}</Heading
+		<TimelineHeading class="timeline-heading" id={entryId} level="h2" link
+			>{heading}</TimelineHeading
 		>
 	</div>
 	<div
