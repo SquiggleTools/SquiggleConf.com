@@ -1,20 +1,21 @@
 ---
-import themeMoon from "~/assets/design/theme-moon.svg";
-import themeSun from "~/assets/design/theme-sun.svg";
+import ThemeMoon from "~/assets/design/theme-moon.svg";
+import ThemeSun from "~/assets/design/theme-sun.svg";
 ---
 
 <button
 	aria-label="Theme toggle (enable JavaScript to use)"
 	class="theme-toggle"
 >
-	<img alt="" class="moon" src={themeMoon.src} />
-	<img alt="" class="sun" src={themeSun.src} />
+	<ThemeMoon aria-hidden="true" class="moon" />
+	<ThemeSun aria-hidden="true" class="sun" />
 </button>
 
 <style>
 	.theme-toggle {
 		background: none;
 		border: transparent;
+		color: light-dark(var(--colorBlue3), var(--colorBlue1));
 		cursor: pointer;
 		font-size: 1.5rem;
 		height: 1.5rem;
@@ -29,11 +30,12 @@ import themeSun from "~/assets/design/theme-sun.svg";
 		opacity: 1;
 	}
 
-	img {
+	svg {
 		height: 1.75rem;
 		position: absolute;
 		right: 0;
 		top: 0;
+		width: auto;
 	}
 
 	html.dark .sun,
