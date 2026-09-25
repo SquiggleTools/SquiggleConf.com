@@ -89,6 +89,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		--timeline-image-scale: 1;
 		--timeline-image-shadow: var(--shadowImage);
 		--timeline-image-zoom: 1;
+
 		container: timeline-entry / inline-size;
 		isolation: isolate;
 		margin: 1rem 0;
@@ -113,7 +114,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	}
 
 	.timeline-content::before {
-		border: 1px solid rgb(from white r g b / 4%);
+		border: 1px solid rgb(from var(--colorWhite) r g b / 4%);
 		opacity: 0.22;
 		transform: scale(0.985);
 		transition:
@@ -135,8 +136,8 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		padding: 3px;
 		transition: opacity var(--transitionNormal);
 		mask:
-			linear-gradient(#fff 0 0) content-box exclude,
-			linear-gradient(#fff 0 0);
+			linear-gradient(var(--colorWhite) 0 0) content-box exclude,
+			linear-gradient(var(--colorWhite) 0 0);
 	}
 
 	.timeline-content:hover,
@@ -303,7 +304,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			background: linear-gradient(
 				135deg,
 				rgb(from var(--colorBlue1) r g b / 50%),
-				rgb(from white r g b / 42%)
+				rgb(from var(--colorWhite) r g b / 42%)
 			);
 		}
 

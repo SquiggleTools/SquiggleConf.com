@@ -29,7 +29,7 @@
 
 .prose > hr {
 	border: none;
-	border-top: 1px solid currentColor;
+	border-top: 1px solid currentcolor;
 	margin: 1lh 0;
 	opacity: 0.25;
 }

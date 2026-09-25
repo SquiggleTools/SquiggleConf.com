@@ -5,7 +5,7 @@
 <style>
 	.timeline-section {
 		--timeline-rail-background: light-dark(
-			rgb(from white r g b / 42%),
+			rgb(from var(--colorWhite) r g b / 42%),
 			var(--colorBlueBright1)
 		);
 		--timeline-rail-border-color: light-dark(
@@ -22,7 +22,10 @@
 		);
 		--timeline-time-color: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
 		--timeline-time-shadow: 0 1px 0
-			light-dark(rgb(from white r g b / 46%), rgb(from white r g b / 22%));
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 46%),
+				rgb(from var(--colorWhite) r g b / 22%)
+			);
 		--timeline-venue-color: light-dark(
 			rgb(from var(--colorBlue5) r g b / 90%),
 			var(--colorHeading)
@@ -40,18 +43,18 @@
 			135deg,
 			light-dark(
 				rgb(from var(--colorBlue5) r g b / 5%),
-				rgb(from white r g b / 13%)
+				rgb(from var(--colorWhite) r g b / 13%)
 			),
 			light-dark(
 				rgb(from var(--colorBlue5) r g b / 2%),
-				rgb(from white r g b / 3%)
+				rgb(from var(--colorWhite) r g b / 3%)
 			)
 		);
 		--timeline-card-hover-shadow:
 			inset 0 0 0 1px
 				light-dark(
 					rgb(from var(--colorBlue4) r g b / 10%),
-					rgb(from white r g b / 8%)
+					rgb(from var(--colorWhite) r g b / 8%)
 				),
 			0 1rem 2rem
 				light-dark(
@@ -60,12 +63,13 @@
 				);
 		--timeline-card-glow-inner: light-dark(
 			rgb(from var(--colorBlue4) r g b / 55%),
-			color-mix(in srgb, var(--colorBlue2), white 8%)
+			color-mix(in srgb, var(--colorBlue2), var(--colorWhite) 8%)
 		);
 		--timeline-card-glow-outer: light-dark(
 			rgb(from var(--colorBlue4) r g b / 25%),
 			rgb(from var(--colorBlue2) r g b / 52%)
 		);
+
 		isolation: isolate;
 		padding: 2rem clamp(0.15rem, 0.5vw, 1rem) clamp(3rem, 7vw, 5rem);
 		position: relative;

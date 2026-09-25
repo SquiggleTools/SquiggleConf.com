@@ -15,6 +15,13 @@ jobs:
       - uses: ./.github/actions/prepare
       - run: pnpm astro sync
       - run: pnpm lint
+  lint_css:
+    name: Lint CSS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/prepare
+      - run: pnpm lint:css
   lint_knip:
     name: Lint Knip
     runs-on: ubuntu-latest

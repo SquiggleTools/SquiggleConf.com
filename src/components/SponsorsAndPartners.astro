@@ -90,6 +90,7 @@ const tiers = [
 <style>
 	.past-sponsors {
 		--panel-shadow: 0 1.1rem 2.4rem rgb(from var(--colorBlue3) r g b / 14%);
+
 		background:
 			radial-gradient(
 				circle at 18% 16%,
@@ -123,6 +124,7 @@ const tiers = [
 
 	html.dark .past-sponsors {
 		--panel-shadow: 0 1.5rem 3rem rgb(from var(--colorBlue6) r g b / 34%);
+
 		background:
 			radial-gradient(
 				circle at 20% 18%,
@@ -170,20 +172,29 @@ const tiers = [
 			),
 			radial-gradient(
 				circle at 12% 20%,
-				light-dark(rgb(from white r g b / 36%), rgb(from white r g b / 13%)) 0
-					1px,
+				light-dark(
+						rgb(from var(--colorWhite) r g b / 36%),
+						rgb(from var(--colorWhite) r g b / 13%)
+					)
+					0 1px,
 				transparent 1px
 			),
 			radial-gradient(
 				circle at 74% 36%,
-				light-dark(rgb(from white r g b / 26%), rgb(from white r g b / 10%)) 0
-					1.5px,
+				light-dark(
+						rgb(from var(--colorWhite) r g b / 26%),
+						rgb(from var(--colorWhite) r g b / 10%)
+					)
+					0 1.5px,
 				transparent 1.5px
 			),
 			radial-gradient(
 				circle at 48% 72%,
-				light-dark(rgb(from white r g b / 24%), rgb(from white r g b / 8%)) 0
-					1px,
+				light-dark(
+						rgb(from var(--colorWhite) r g b / 24%),
+						rgb(from var(--colorWhite) r g b / 8%)
+					)
+					0 1px,
 				transparent 1px
 			);
 		opacity: 0.9;
@@ -194,7 +205,7 @@ const tiers = [
 			linear-gradient(
 				180deg,
 				light-dark(
-					rgb(from white r g b / 42%),
+					rgb(from var(--colorWhite) r g b / 42%),
 					rgb(from var(--colorBlue1) r g b / 14%)
 				),
 				transparent 18%
@@ -231,7 +242,7 @@ const tiers = [
 
 	.past-sponsors-kicker {
 		background: light-dark(
-			rgb(from white r g b / 60%),
+			rgb(from var(--colorWhite) r g b / 60%),
 			rgb(from var(--colorWhiteIsh) r g b / 9%)
 		);
 		border: 1px solid
@@ -241,7 +252,10 @@ const tiers = [
 			);
 		border-radius: var(--radiusPill);
 		box-shadow: inset 0 1px 0
-			light-dark(rgb(from white r g b / 70%), rgb(from white r g b / 12%));
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 70%),
+				rgb(from var(--colorWhite) r g b / 12%)
+			);
 		color: light-dark(var(--colorBlue3), var(--colorWhiteIsh));
 		font-family: var(--fontFamilyMonospace);
 		font-size: 0.78rem;
@@ -253,7 +267,7 @@ const tiers = [
 	}
 
 	.past-sponsors h2 {
-		color: light-dark(var(--colorBlue4), white);
+		color: light-dark(var(--colorBlue4), var(--colorWhite));
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(2.4rem, 5.4vw, 4.7rem);
 		font-weight: var(--fontWeightBold);
@@ -276,7 +290,7 @@ const tiers = [
 			linear-gradient(
 				180deg,
 				light-dark(
-					rgb(from white r g b / 72%),
+					rgb(from var(--colorWhite) r g b / 72%),
 					rgb(from var(--colorBlue1) r g b / 12%)
 				),
 				light-dark(
@@ -291,7 +305,10 @@ const tiers = [
 		border-radius: var(--radiusXLarge);
 		box-shadow:
 			inset 0 1px 0
-				light-dark(rgb(from white r g b / 70%), rgb(from white r g b / 10%)),
+				light-dark(
+					rgb(from var(--colorWhite) r g b / 70%),
+					rgb(from var(--colorWhite) r g b / 10%)
+				),
 			var(--panel-shadow);
 		display: flex;
 		flex-direction: column;

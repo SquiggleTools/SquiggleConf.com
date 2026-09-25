@@ -81,8 +81,8 @@ const { spots } = Astro.props;
 		aspect-ratio: 1 / 1;
 		background: linear-gradient(
 			180deg,
-			rgb(from white r g b / 16%),
-			rgb(from white r g b / 3%)
+			rgb(from var(--colorWhite) r g b / 16%),
+			rgb(from var(--colorWhite) r g b / 3%)
 		);
 		user-select: none;
 	}
@@ -103,13 +103,13 @@ const { spots } = Astro.props;
 			rgb(from var(--colorBlue5) r g b / 88%) 100%
 		);
 		bottom: 0;
-		color: white;
+		color: var(--colorWhite);
 		display: grid;
 		left: 0;
 		padding: 2rem 0.9rem 0.8rem;
 		position: absolute;
 		right: 0;
-		text-shadow: 0 0.15rem 0.35rem rgb(from black r g b / 28%);
+		text-shadow: 0 0.15rem 0.35rem rgb(from var(--colorBlack) r g b / 28%);
 	}
 
 	.lunch-slide-caption strong {
@@ -128,7 +128,7 @@ const { spots } = Astro.props;
 
 	.lunch-carousel-dot {
 		appearance: none;
-		background: rgb(from white r g b / 24%);
+		background: rgb(from var(--colorWhite) r g b / 24%);
 		border: 1px solid rgb(from var(--colorBlue1) r g b / 45%);
 		border-radius: var(--radiusPill);
 		cursor: pointer;
@@ -143,19 +143,19 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-dot[aria-pressed="true"] {
-		background: rgb(from white r g b / 96%);
+		background: rgb(from var(--colorWhite) r g b / 96%);
 		transform: scale(1.02);
 		width: 1.7rem;
 	}
 
 	.lunch-carousel-dot:hover,
 	.lunch-carousel-dot:focus-visible {
-		background: rgb(from white r g b / 72%);
+		background: rgb(from var(--colorWhite) r g b / 72%);
 		outline: none;
 	}
 
 	.lunch-carousel-dot:focus-visible {
-		box-shadow: 0 0 0 0.16rem rgb(from white r g b / 28%);
+		box-shadow: 0 0 0 0.16rem rgb(from var(--colorWhite) r g b / 28%);
 	}
 
 	@media not (--widthLarge) {

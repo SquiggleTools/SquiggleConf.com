@@ -34,6 +34,7 @@ const {
 		--colorButtonBackgroundHover: var(--colorBlue1);
 		--colorButtonBorderHover: transparent;
 		--colorButtonColorHover: var(--colorBlue5);
+
 		background: var(--colorButtonBackground);
 		color: var(--colorButtonColor);
 		align-items: center;
@@ -77,6 +78,7 @@ const {
 		--colorButtonBackground: var(--colorWhiteIsh);
 		--colorButtonBackgroundHover: var(--colorBlue2);
 		--colorButtonBorderHover: var(--colorBlue1);
+
 		color: var(--colorBlue5);
 		font-weight: var(--fontWeightMedium);
 	}
@@ -99,7 +101,6 @@ const {
 
 	/* terminal.shop's orange, as frosted glass. */
 	.button-variant-terminal {
-		--colorTerminalOrange: #ff5e00;
 		--colorButtonColor: var(--colorHeading);
 		--colorButtonBackground: linear-gradient(
 			140deg,
@@ -117,11 +118,12 @@ const {
 		);
 		--colorButtonBorderHover: var(--colorTerminalOrange);
 		--colorButtonColorHover: var(--colorButtonColor);
+
 		backdrop-filter: var(--backdropFrosted);
 		border: 1px solid var(--colorTerminalOrange);
 		border-radius: var(--radiusLarge);
 		box-shadow:
-			inset 0 1px 0 rgb(from white r g b / 20%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 20%),
 			0 1rem 2rem rgb(from var(--colorTerminalOrange) r g b / 16%),
 			0 0 0 1px rgb(from var(--colorTerminalOrange) r g b / 12%);
 		gap: 0.7rem;
@@ -136,7 +138,7 @@ const {
 	.button-variant-terminal:hover:not(:active, [disabled]) {
 		border-width: 1px;
 		box-shadow:
-			inset 0 1px 0 rgb(from white r g b / 22%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 22%),
 			0 1rem 2rem rgb(from var(--colorTerminalOrange) r g b / 22%),
 			0 0 0 1px rgb(from var(--colorTerminalOrange) r g b / 18%);
 		transform: translateY(-1px);
@@ -145,7 +147,7 @@ const {
 	/* A translucent outline that takes its text color from its surroundings. */
 	.button-variant-ghost {
 		--colorButtonBackground: light-dark(
-			rgb(from white r g b / 8%),
+			rgb(from var(--colorWhite) r g b / 8%),
 			transparent
 		);
 		--colorButtonBackgroundHover: light-dark(
@@ -160,15 +162,16 @@ const {
 			rgb(from var(--colorBlue5) r g b / 30%),
 			rgb(from var(--colorBlue1) r g b / 46%)
 		);
-		--colorButtonColor: currentColor;
-		--colorButtonColorHover: currentColor;
+		--colorButtonColor: currentcolor;
+		--colorButtonColorHover: currentcolor;
 		--shadowButton:
-			inset 0 1px 0 rgb(from white r g b / 16%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
 			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
 			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
 		--shadowButtonHover:
-			inset 0 1px 0 rgb(from white r g b / 22%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 22%),
 			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
+
 		border-color: var(--colorButtonBorder);
 		border-radius: var(--radiusLarge);
 		box-shadow: var(--shadowButton);
@@ -183,11 +186,11 @@ const {
 
 	html.dark .button-variant-ghost {
 		--shadowButton:
-			inset 0 1px 0 rgb(from white r g b / 16%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
 			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
 			0 0 0 1px rgb(from var(--colorBlue1) r g b / 18%);
 		--shadowButtonHover:
-			inset 0 1px 0 rgb(from white r g b / 18%),
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 18%),
 			0 0.25rem 0.5rem rgb(from var(--colorBlue2) r g b / 22%);
 	}
 
