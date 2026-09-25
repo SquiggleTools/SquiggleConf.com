@@ -71,7 +71,7 @@ const {
 
 	.button-variant-emphasized {
 		--colorButtonBackground: var(--colorAccentMedium);
-		--colorButtonColor: var(--colorForegroundAccent);
+		--colorButtonColor: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
 	}
 
 	.button-variant-light {
@@ -84,8 +84,8 @@ const {
 	}
 
 	.button:active {
-		--colorButtonBackground: var(--colorAccentSecond);
-		--colorButtonColor: var(--colorForeground);
+		--colorButtonBackground: light-dark(var(--colorBlue2), var(--colorBlue4));
+		--colorButtonColor: var(--colorBlue4);
 	}
 
 	html.dark .button:active {

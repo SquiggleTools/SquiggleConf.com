@@ -69,24 +69,24 @@ const { swimUntil } = Astro.props;
 		opacity: 0.78;
 	}
 
-	.timeline-fish-image :global([fill="#F5F4F2"]) {
-		fill: light-dark(var(--colorBlue3), var(--colorFish1));
+	html:not(.dark) .timeline-fish-image :global([fill="#F5F4F2"]) {
+		fill: var(--colorBlue3);
 	}
 
-	.timeline-fish-image :global([fill="#C5E2D6"]) {
-		fill: light-dark(var(--colorOcean), var(--colorFish2));
+	html:not(.dark) .timeline-fish-image :global([fill="#C5E2D6"]) {
+		fill: color-mix(in srgb, var(--colorBlue3) 80%, var(--colorBlue2));
 	}
 
-	.timeline-fish-image :global([fill="#6A8B91"]) {
-		fill: light-dark(var(--colorBlue4), var(--colorFish3));
+	html:not(.dark) .timeline-fish-image :global([fill="#6A8B91"]) {
+		fill: var(--colorBlue4);
 	}
 
-	.timeline-fish-image :global([fill="#8AC0CC"]) {
-		fill: light-dark(var(--colorBlue2), var(--colorFish4));
+	html:not(.dark) .timeline-fish-image :global([fill="#8AC0CC"]) {
+		fill: var(--colorBlue2);
 	}
 
-	.timeline-fish-image :global([fill="#274238"]) {
-		fill: light-dark(var(--colorBlue5), var(--colorFish5));
+	html:not(.dark) .timeline-fish-image :global([fill="#274238"]) {
+		fill: var(--colorBlue5);
 	}
 
 	.timeline-fish-shell-1 {

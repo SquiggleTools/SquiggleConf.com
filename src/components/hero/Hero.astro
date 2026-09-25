@@ -26,9 +26,9 @@ const { class: className, tall, ...props } = Astro.props;
 	.hero {
 		background: linear-gradient(
 			180deg,
-			light-dark(var(--colorBlueBright2), var(--colorBlue6)) 0%,
-			light-dark(var(--colorHeroHaze), var(--colorBlue6)) 50%,
-			light-dark(var(--colorHeroSand), var(--colorBlue6)) 100%
+			var(--colorBlueBright2) 0%,
+			light-dark(var(--colorWhite), var(--colorBlue5)) 50%,
+			light-dark(var(--colorCream), var(--colorBlue5)) 100%
 		);
 		z-index: 1;
 		color: var(--colorHeading);

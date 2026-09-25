@@ -6,14 +6,23 @@
 	.deep-sea-surface {
 		background: linear-gradient(
 				to bottom,
-				var(--colorDeepSea1),
-				var(--colorDeepSea2),
-				var(--colorDeepSea3),
-				var(--colorDeepSea4),
-				var(--colorDeepSea5),
-				var(--colorDeepSea6),
-				var(--colorDeepSea7),
-				var(--colorDeepSea8)
+				light-dark(var(--colorWhite), var(--colorSea)),
+				light-dark(
+					var(--colorBlueBright2),
+					color-mix(in srgb, var(--colorSea), var(--colorBlue4))
+				),
+				light-dark(
+					var(--colorBlueBright1),
+					color-mix(in srgb, var(--colorBlue4), var(--colorBlue5))
+				),
+				light-dark(
+					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue2) 20%),
+					var(--colorBlue5)
+				),
+				light-dark(
+					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue3) 20%),
+					var(--colorBlue5)
+				)
 			)
 			var(--colorBlueBright2);
 		color: var(--colorForegroundEmphasized);
@@ -26,10 +35,8 @@
 		background:
 			radial-gradient(
 				circle at top,
-				light-dark(rgb(from var(--colorDeepSeaGlow) r g b / 49%), transparent)
-					50%,
-				light-dark(rgb(from var(--colorDeepSeaHaze) r g b / 70%), transparent)
-					70%
+				light-dark(rgb(from var(--colorBlue1) r g b / 49%), transparent) 50%,
+				light-dark(rgb(from var(--colorWhite) r g b / 70%), transparent) 70%
 			),
 			repeating-linear-gradient(
 				116deg,
@@ -41,7 +48,7 @@
 				transparent 2px 18px,
 				light-dark(
 						rgb(from var(--colorBlue3) r g b / 10%),
-						rgb(from var(--colorDeepSeaStripeBright) r g b / 2.8%)
+						rgb(from var(--colorBlue2) r g b / 2.8%)
 					)
 					18px 20px,
 				transparent 20px 34px
@@ -55,8 +62,8 @@
 					0 1px,
 				transparent 1px 15px,
 				light-dark(
-						rgb(from var(--colorOcean) r g b / 4%),
-						rgb(from var(--colorDeepSeaStripeMedium) r g b / 2.6%)
+						rgb(from var(--colorBlue3) r g b / 4%),
+						rgb(from var(--colorBlue2) r g b / 2.6%)
 					)
 					15px 17px,
 				transparent 17px 31px
