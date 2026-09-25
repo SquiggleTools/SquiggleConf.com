@@ -10,26 +10,15 @@ import website from "~/assets/logos/website.svg";
 import x from "~/assets/logos/x.svg";
 import youtube from "~/assets/logos/youtube.svg";
 
+import type { PersonLinks } from "~/data/historical/types";
+
 import IconLinks from "./IconLinks.astro";
 
 interface Props {
 	class?: string;
-	links: BioLinksPlatforms;
+	links: PersonLinks;
 	name: string;
 	size?: "large";
-}
-
-export interface BioLinksPlatforms {
-	bluesky?: string | null;
-	github?: string | null;
-	gitlab?: string | null;
-	linkedin?: string | null;
-	mastodon?: string | null;
-	medium?: string | null;
-	twitch?: string | null;
-	website?: string | null;
-	x?: string | null;
-	youtube?: string | null;
 }
 
 const { class: className, links, name, size, ...rest } = Astro.props;

@@ -1,5 +1,6 @@
 ---
 import { ImageMetadata } from "astro";
+import type { SvgComponent } from "astro/types";
 import { Image } from "astro:assets";
 
 import C from "~/assets/logos/c.png";
@@ -155,18 +156,23 @@ interface Props {
 
 const { tag } = Astro.props;
 const image = images[tag];
-const isLight = whiteStrokeIcons.includes(image);
+const LightIcon = whiteStrokeIcons.includes(image)
+	? (image as unknown as SvgComponent)
+	: undefined;
 ---
 
 <div class="tag-chip" style={{ alignSelf: "end" }}>
 	{
-		image && (
-			<Image
-				class:list={["tag-icon", isLight ? "light-icon" : ""]}
-				alt={`${tag} logo`}
-				src={image}
-				height={24}
+		LightIcon ? (
+			<LightIcon
+				aria-hidden="true"
+				class="tag-icon light-icon"
+				fill="currentColor"
 			/>
+		) : (
+			image && (
+				<Image class="tag-icon" alt={`${tag} logo`} src={image} height={24} />
+			)
 		)
 	}
 	{tag}
@@ -186,16 +192,12 @@ const isLight = whiteStrokeIcons.includes(image);
 	}
 
 	.light-icon {
-		filter: invert(1);
+		color: light-dark(#171512, #e8eaed);
 		opacity: 0.5;
 	}
 
 	.tag-icon {
 		margin-right: 0.25rem;
 		max-width: 24px;
-	}
-
-	html.dark .tag-icon {
-		filter: none;
 	}
 </style>
