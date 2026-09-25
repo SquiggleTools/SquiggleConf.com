@@ -1,7 +1,7 @@
 ---
+import Avatar from "../Avatar.astro";
 import BioLinks from "../BioLinks.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
-import SpeakerImage from "./SpeakerImage.astro";
 import SubtleCard from "./SubtleCard.astro";
 import { PersonInfo, SessionInfo } from "~/data/historical/types";
 
@@ -26,7 +26,7 @@ const {
 		<div class="speaker-top">
 			<div class="speaker-top-content">
 				<div class="speaker-image-container">
-					<SpeakerImage image={image} name={name} />
+					<Avatar alt={`${name} Avatar`} size={128} src={image} />
 				</div>
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
