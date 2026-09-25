@@ -1,18 +1,11 @@
-import bigRav from "~/assets/2027/bigrav.webp";
-import harborwalk from "~/assets/2027/boston-harborwalk.webp";
 import duck1 from "~/assets/2027/duck-1.webp";
 import duck2 from "~/assets/2027/duck-2.webp";
-import funrun1 from "~/assets/2027/fun-run-1.webp";
-import funrun2 from "~/assets/2027/fun-run-2.webp";
 import lunchBerryTwist from "~/assets/2027/lunch-berry-twist.webp";
 import lunchBostonChowda from "~/assets/2027/lunch-boston-chowda.webp";
 import lunchRegina from "~/assets/2027/lunch-regina.webp";
 import lunchSalad from "~/assets/2027/lunch-salad.webp";
 import lunchWickedLobsta from "~/assets/2027/lunch-wicked-lobsta.webp";
 import maddyMontaquila from "~/assets/2027/maddy.webp";
-import milkcookies1 from "~/assets/2027/milkcookies-1.webp";
-import milkcookies2 from "~/assets/2027/milkcookies-2.webp";
-import milkcookies3 from "~/assets/2027/milkcookies-3.webp";
 import placeholder1 from "~/assets/2027/placeholder-1.webp";
 import placeholder2 from "~/assets/2027/placeholder-2.webp";
 import placeholder3 from "~/assets/2027/placeholder-3.webp";
@@ -20,30 +13,13 @@ import placeholder4 from "~/assets/2027/placeholder-4.webp";
 import placeholder5 from "~/assets/2027/placeholder-5.webp";
 import placeholder6 from "~/assets/2027/placeholder-6.webp";
 import placeholder7 from "~/assets/2027/placeholder-7.webp";
-import postcardBack from "~/assets/2027/postcard-back.webp";
-import postcardFront from "~/assets/2027/postcard-front.webp";
 import rest1 from "~/assets/2027/rest-1.webp";
-import simonsTheater from "~/assets/2027/simons-theater.webp";
-import terminalShop from "~/assets/2027/terminal.shop.svg";
-import urbanwild1 from "~/assets/2027/urbanwild-1.webp";
-import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
-import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
-import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
-import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
-import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
-import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
-import scottTolinski from "~/assets/avatars/scott-tolinski.webp";
-import thePrimeagen from "~/assets/avatars/theprimeagen.webp";
 import tjDevries from "~/assets/avatars/tj-devries.webp";
-import wesBos from "~/assets/avatars/wes-bos.webp";
 import timelineFish1 from "~/assets/design/timeline-fish-1.svg?raw";
 import timelineFish2 from "~/assets/design/timeline-fish-2.svg?raw";
 import timelineFish3 from "~/assets/design/timeline-fish-3.svg?raw";
 import timelineFish4 from "~/assets/design/timeline-fish-4.svg?raw";
 import timelineFish5 from "~/assets/design/timeline-fish-5.svg?raw";
-import syntax from "~/assets/logos/syntax.svg";
-import networking from "~/assets/stills/attendees-networking.png";
-import harbor from "~/assets/stills/boston-harbor.png";
 
 import type {
 	ExploreChoiceData,
@@ -226,30 +202,3 @@ export const timelineFish = [
 	timelineFish4,
 	timelineFish5,
 ] as const;
-
-export {
-	bigRav,
-	dillonMulroy,
-	funrun1,
-	funrun2,
-	harbor,
-	harborwalk,
-	milkcookies1,
-	milkcookies2,
-	milkcookies3,
-	networking,
-	postcardBack,
-	postcardFront,
-	scottTolinski,
-	simonsTheater,
-	syntax,
-	terminalShop,
-	thePrimeagen,
-	urbanwild1,
-	urbanwild2,
-	urbanwild3,
-	urbanwild4,
-	urbanwild5,
-	urbanwildLogo,
-	wesBos,
-};
