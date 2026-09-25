@@ -201,7 +201,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	}
 
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
-	@media (width >= 900px) {
+	@media (--widthLarge) {
 		.timeline-content:is(:hover, :focus-within) {
 			--timeline-collage-duo-1: translate3d(1rem, -1rem, 0) scale(1.18);
 			--timeline-collage-duo-2: translate3d(-0.25rem, -2rem, 0) scale(1.18);
@@ -255,7 +255,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-content {
 			margin: 0.85rem 0;
 			padding-bottom: 1rem;

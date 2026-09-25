@@ -251,7 +251,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 		opacity: 1;
 	}
 
-	@media (width < 700px) {
+	@media not (--widthSmall) {
 		.postcard-flip {
 			transform: none;
 		}

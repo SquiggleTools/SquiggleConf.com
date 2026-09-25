@@ -197,7 +197,7 @@ const { swimUntil } = Astro.props;
 		}
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-fish-layer {
 			display: none;
 		}

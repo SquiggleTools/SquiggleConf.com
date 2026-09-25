@@ -42,7 +42,7 @@ const { bottom, span, time } = Astro.props;
 		text-align: center;
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-rail {
 			display: none;
 		}

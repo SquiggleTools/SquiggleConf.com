@@ -358,13 +358,13 @@ const tiers = [
 		justify-content: center;
 	}
 
-	@media (width >= 900px) {
+	@media (--widthLarge) {
 		.past-sponsors-cta {
 			justify-content: flex-start;
 		}
 	}
 
-	@media (width < 700px) {
+	@media not (--widthSmall) {
 		.past-sponsors-shell {
 			padding-left: 1rem;
 			padding-right: 1rem;

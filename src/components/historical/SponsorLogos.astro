@@ -70,7 +70,7 @@ const sponsorGroups = Object.groupBy(sponsors, (sponsor) => sponsor.placement);
 		max-width: var(--sponsorSize);
 	}
 
-	@media (width >= 819px) {
+	@media (--widthMedium) {
 		.sponsor-group {
 			flex-direction: row;
 			flex-wrap: wrap;

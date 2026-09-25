@@ -657,7 +657,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		margin: 0 0 0 0.5rem;
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.top-side-by-side {
 			flex-direction: column;
 			gap: 0;

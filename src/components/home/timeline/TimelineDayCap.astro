@@ -43,7 +43,7 @@ const { date, day } = Astro.props;
 		border-top-left-radius: var(--radiusMedium);
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-cell-empty {
 			display: none;
 		}
