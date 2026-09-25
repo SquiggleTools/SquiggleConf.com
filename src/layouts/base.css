@@ -8,128 +8,56 @@
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
-	--colorBlue6: #04142d;
-	--colorRed1: #ffbfc2;
-	--colorTextShadowLight: rgb(70 96 140 / 35%);
-	--colorTextShadowDark: rgb(0 0 7 / 25%);
-	--colorWhiteIsh: #eaeaf7;
-	--colorWhite: white;
-	--colorBlack: black;
-	--colorOcean: #1f7fab;
+	--colorCream: #f6f3e8;
 	--colorTerminalOrange: #ff5e00;
-	--colorAccentLight: light-dark(var(--colorBlue1), var(--colorBlue5));
+	--colorWhite: white;
+	--colorWhiteIsh: #eaeaf7;
 	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
-	--colorAccentSecond: light-dark(var(--colorBlue2), var(--colorBlue4));
-	--colorForeground: var(--colorBlue4);
-	--colorForegroundAccent: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
-	--colorForegroundEmphasized: light-dark(var(--colorBlue5), var(--colorBlue1));
-	--colorUnhappy: var(--colorRed1);
-	--colorTextShadow: light-dark(
-		var(--colorTextShadowLight),
-		var(--colorTextShadowDark)
-	);
-	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
-	--colorHeadingHover: light-dark(var(--colorBlue5), var(--colorWhite));
+	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorBlue4));
 	--colorCopy: light-dark(
 		rgb(from var(--colorBlue5) r g b / 84%),
 		rgb(from var(--colorWhiteIsh) r g b / 84%)
 	);
-	--colorCopyHover: light-dark(
-		rgb(from var(--colorBlue5) r g b / 92%),
-		rgb(from var(--colorWhite) r g b / 90%)
-	);
+	--colorForegroundEmphasized: light-dark(var(--colorBlue5), var(--colorBlue1));
+	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
+	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
+	--colorLink: light-dark(var(--colorBlue4), var(--colorWhite));
 	--colorMuted: light-dark(
 		rgb(from var(--colorBlue4) r g b / 76%),
 		rgb(from var(--colorBlue1) r g b / 82%)
 	);
-	--colorMutedHover: light-dark(
-		rgb(from var(--colorBlue4) r g b / 86%),
-		rgb(from var(--colorWhite) r g b / 88%)
-	);
-	--colorLink: light-dark(var(--colorBlue4), var(--colorWhite));
-	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
-	--colorCream: #edebe4;
-	--colorBackdropLight: var(--colorInverted);
-	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorSubtle));
-	--colorInverted: light-dark(var(--colorCream), #10141b);
-	--colorForegroundBody: light-dark(#203238, #d2ebf1);
-	--colorSubtleLight: #a5e2fc;
-	--colorSubtle: light-dark(var(--colorSubtleLight), #062430);
-	--colorDeepSea1: light-dark(#f8fcff, #004077);
-	--colorDeepSea2: light-dark(#effaff, #013a6c);
-	--colorDeepSea3: light-dark(var(--colorBlueBright2), var(--colorBlue4));
-	--colorDeepSea4: light-dark(var(--colorBlueBright1), #042446);
-	--colorDeepSea5: light-dark(#c8edfb, #042140);
-	--colorDeepSea6: light-dark(#c9effd, #041b37);
-	--colorDeepSea7: light-dark(#c8efff, var(--colorBlue5));
-	--colorDeepSea8: light-dark(#aedff5, var(--colorBlue6));
-	--colorDeepSeaGlow: #c9e2fc;
-	--colorDeepSeaHaze: #f5f5ff;
-	--colorDeepSeaStripeBright: #76d9ff;
-	--colorDeepSeaStripeMedium: #38addf;
-	--colorFish1: #f5f4f2;
-	--colorFish2: #c5e2d6;
-	--colorFish3: #6a8b91;
-	--colorFish4: #8ac0cc;
-	--colorFish5: #274238;
-	--colorHeroHaze: #f3fcff;
-	--colorHeroSand: #fffdde;
-	--colorHistoricalIcon: light-dark(#171512, #e8eaed);
-	--colorPostcardBack: #fffdf8;
-	--colorPostcardFront: #f7f2ea;
-	--colorPostcardInk: #49515f;
-	--colorPostcardLine: #585858;
+	--colorTextShadow: light-dark(rgb(70 96 140 / 35%), rgb(0 0 7 / 25%));
+	--colorUnhappy: #ffbfc2;
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
 	--fontFamilyMonospace: "Geist Mono", monospace;
-	--fontSizeSmaller: clamp(0.9rem, 2.25vw, 1.1rem);
+	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
+	--fontSizeSmaller: clamp(0.95rem, 1.5vw, 1.05rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
 	--fontSizeMedium: clamp(1.25rem, 3.25vw, 1.5rem);
 	--fontSizeLarge: clamp(1.5rem, 3.75vw, 2rem);
-	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
-	--fontSizeLogo: clamp(1.75rem, 4.375vw, 2.25rem);
-	--fontSizeLogoLarger: clamp(2.8rem, 7vw, 4.9rem);
 	--fontSizeDisplay: clamp(1.8rem, 2.8vw, 2.45rem);
-	--fontSizeCardTitle: 1.1rem;
-	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
-	--fontSizeCopySmall: clamp(0.95rem, 1.35vw, 1rem);
-	--fontSizeBody: 1.2rem;
-	--fontSizeBodyLarge: 1.5rem;
-	--fontSizeBodySmaller: 1rem;
-	--fontSizeH2: clamp(1.75rem, 5vw, 2rem);
-	--fontSizeH3: clamp(1.5rem, 3.5vw, 1.75rem);
-	--fontSizeH4: clamp(1.15rem, 2.5vw, 1.35rem);
+	--fontSizeLarger: clamp(2rem, 4.5vw, 3rem);
 	--fontWeightExtraLight: 200;
 	--fontWeightLight: 300;
 	--fontWeightSemiLight: 350;
-	--fontWeightRegular: 400;
 	--fontWeightMedium: 500;
 	--fontWeightSemibold: 600;
 	--fontWeightBold: 700;
-	--fontWeightExtraBold: 800;
-	--fontWeightBody: var(--fontWeightLight);
 	--lineHeightBody: 1.4;
-	--radiusXSmall: 0.25rem;
-	--radiusSmall: 0.375rem;
+	--radiusSmall: 0.25rem;
 	--radiusMedium: 0.5rem;
 	--radiusLarge: 1rem;
-	--radiusXLarge: 2rem;
 	--radiusPill: 999px;
-	--shadowHeadingHover: none;
-	--shadowImage: 0 0.25rem 0.7rem rgb(from var(--colorBlue5) r g b / 12%);
-	--shadowImageActive: 0 0.55rem 1rem rgb(from var(--colorBlue5) r g b / 18%);
 	--sizeImageBorder: 2px;
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
-	--sizeScrollMarginTop: 2rem;
 	--widthBodyPadding: clamp(1rem, 5vw, 2rem);
 	--backdropFrosted: blur(16px) saturate(145%);
 	--transitionFast: 140ms;
 	--transitionNormal: 220ms;
-	--transitionMedium: 280ms;
-	--transitionSlow: 480ms;
 	--transitionEaseOut: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -144,7 +72,6 @@ html.dark {
 	--colorBlueBright1: #051b32;
 	--colorBlueBright2: var(--colorBlue5);
 	--lineHeightBody: 1.5;
-	--shadowHeadingHover: 0 0.3rem 1rem rgb(from var(--colorBlue5) r g b / 24%);
 }
 
 @media (prefers-reduced-motion: reduce) {

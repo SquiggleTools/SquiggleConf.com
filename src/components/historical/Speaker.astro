@@ -85,8 +85,8 @@ const {
 
 	.title {
 		display: block;
-		color: var(--colorForegroundBody);
-		font-size: var(--fontSizeH3);
+		color: var(--colorCopy);
+		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightMedium);
 		margin-bottom: 0.25rem;
 		text-decoration: none;
@@ -95,7 +95,7 @@ const {
 	.title::after {
 		content: " #";
 		opacity: 0;
-		transition: var(--transitionMedium) opacity;
+		transition: var(--transitionNormal) opacity;
 	}
 
 	:is(.speaker:hover, .speaker:focus-within) .title::after {
@@ -110,11 +110,11 @@ const {
 		list-style: none;
 		padding-top: 0.5rem;
 		padding-left: 0;
-		font-size: var(--fontSizeBody);
+		font-size: var(--fontSizeSmall);
 	}
 
 	.talk-title {
-		font-size: var(--fontSizeH4);
+		font-size: var(--fontSizeSmall);
 		text-decoration: none;
 	}
 

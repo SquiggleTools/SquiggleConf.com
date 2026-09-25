@@ -63,8 +63,8 @@ const {
 	}
 
 	.title {
-		color: var(--colorForegroundBody);
-		font-size: var(--fontSizeH3);
+		color: var(--colorCopy);
+		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightMedium);
 		text-align: left;
 		margin-bottom: 0.5rem;
@@ -74,7 +74,7 @@ const {
 	.title::after {
 		content: " #";
 		opacity: 0;
-		transition: var(--transitionMedium) opacity;
+		transition: var(--transitionNormal) opacity;
 	}
 
 	:is(.talk:hover, .talk:focus-within) .title::after {
@@ -82,11 +82,11 @@ const {
 	}
 
 	.talk-description {
-		color: var(--colorForegroundBody);
+		color: var(--colorCopy);
 		line-height: 1.4;
 		overflow: hidden;
 		text-align: left;
-		transition: var(--transitionMedium) line-height;
+		transition: var(--transitionNormal) line-height;
 	}
 
 	html.dark .talk-description {

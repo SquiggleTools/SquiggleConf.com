@@ -85,9 +85,14 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		--timeline-collage-duo-1: translate3d(0, 0, 0);
 		--timeline-collage-duo-2: translate3d(0, 0, 0);
 		--timeline-entry-copy-color: var(--colorCopy);
+		--timeline-heading-hover-shadow: 0 0.3rem 1rem
+			light-dark(transparent, rgb(from var(--colorBlue5) r g b / 24%));
 		--timeline-image-grow-border-width: var(--sizeImageBorder);
 		--timeline-image-scale: 1;
-		--timeline-image-shadow: var(--shadowImage);
+		--timeline-image-shadow: 0 0.25rem 0.7rem
+			rgb(from var(--colorBlue5) r g b / 12%);
+		--timeline-image-shadow-active: 0 0.55rem 1rem
+			rgb(from var(--colorBlue5) r g b / 18%);
 		--timeline-image-zoom: 1;
 
 		container: timeline-entry / inline-size;
@@ -174,7 +179,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	.timeline-subtitle {
 		color: var(--colorMuted);
 		display: block;
-		font-size: var(--fontSizeCopySmall);
+		font-size: var(--fontSizeSmaller);
 		font-weight: var(--fontWeightMedium);
 		margin: -0.5rem 0 0.5rem;
 		transition: color var(--transitionNormal);
@@ -195,7 +200,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 
 	.timeline-mobile-location {
 		color: var(--colorMuted);
-		font-size: var(--fontSizeCopySmall);
+		font-size: var(--fontSizeSmaller);
 		font-weight: var(--fontWeightMedium);
 		line-height: 1.2;
 		transition: color var(--transitionNormal);
@@ -206,10 +211,10 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		.timeline-content:is(:hover, :focus-within) {
 			--timeline-collage-duo-1: translate3d(1rem, -1rem, 0) scale(1.18);
 			--timeline-collage-duo-2: translate3d(-0.25rem, -2rem, 0) scale(1.18);
-			--timeline-entry-copy-color: var(--colorCopyHover);
+			--timeline-entry-copy-color: var(--colorHeading);
 			--timeline-image-grow-border-width: 1px;
 			--timeline-image-scale: 1.25;
-			--timeline-image-shadow: var(--shadowImageActive);
+			--timeline-image-shadow: var(--timeline-image-shadow-active);
 			--timeline-image-zoom: 1.1;
 		}
 
@@ -225,14 +230,14 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-content:is(:hover, :focus-within) .timeline-heading {
-			color: var(--colorHeadingHover);
-			text-shadow: var(--shadowHeadingHover);
+			color: var(--colorLink);
+			text-shadow: var(--timeline-heading-hover-shadow);
 			transform: translateX(0.08rem);
 		}
 
 		.timeline-content:is(:hover, :focus-within)
 			:is(.timeline-subtitle, .timeline-mobile-location) {
-			color: var(--colorMutedHover);
+			color: var(--colorCopy);
 		}
 	}
 
@@ -288,9 +293,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		.timeline-content[data-mobile-active] {
 			--timeline-collage-duo-1: translate3d(0.28rem, -0.3rem, 0) scale(1.06);
 			--timeline-collage-duo-2: translate3d(-0.08rem, -0.42rem, 0) scale(1.06);
-			--timeline-entry-copy-color: var(--colorCopyHover);
+			--timeline-entry-copy-color: var(--colorHeading);
 			--timeline-image-scale: 1.12;
-			--timeline-image-shadow: var(--shadowImageActive);
+			--timeline-image-shadow: var(--timeline-image-shadow-active);
 			--timeline-image-zoom: 1.07;
 		}
 
@@ -309,13 +314,13 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-content[data-mobile-active] .timeline-heading {
-			color: var(--colorHeadingHover);
-			text-shadow: var(--shadowHeadingHover);
+			color: var(--colorLink);
+			text-shadow: var(--timeline-heading-hover-shadow);
 		}
 
 		.timeline-content[data-mobile-active]
 			:is(.timeline-subtitle, .timeline-mobile-location) {
-			color: var(--colorMutedHover);
+			color: var(--colorCopy);
 		}
 	}
 </style>

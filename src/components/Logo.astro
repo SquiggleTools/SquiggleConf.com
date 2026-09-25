@@ -20,14 +20,14 @@ const { bold, class: className, ...props } = Astro.props;
 	.logo {
 		display: flex;
 		font-family: var(--fontFamilyLogo);
-		font-size: var(--fontSizeLogo);
+		font-size: var(--fontSizeDisplay);
 		font-style: initial;
-		font-weight: var(--fontWeightExtraBold);
+		font-weight: var(--fontWeightBold);
 		user-select: none;
 	}
 
 	.logo-bold {
-		font-size: var(--fontSizeLogoLarger);
+		font-size: clamp(2.8rem, 7vw, 4.9rem);
 		letter-spacing: -2px;
 		text-shadow: 0 1.5px 3px var(--colorTextShadow);
 		white-space: nowrap;
