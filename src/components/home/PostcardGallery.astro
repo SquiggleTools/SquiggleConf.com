@@ -275,7 +275,7 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 		opacity: 1;
 	}
 
-	@media (width < 700px) {
+	@media not (--widthSmall) {
 		.postcard-stack-flip {
 			transform: none;
 		}

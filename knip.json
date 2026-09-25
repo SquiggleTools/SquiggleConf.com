@@ -3,5 +3,6 @@
 	"entry": ["src/pages/_image.ts"],
 	"ignoreBinaries": ["printf"],
 	"ignoreDependencies": ["sharp", "wrangler"],
-	"ignoreExportsUsedInFile": { "interface": true, "type": true }
+	"ignoreExportsUsedInFile": { "interface": true, "type": true },
+	"postcss": true
 }

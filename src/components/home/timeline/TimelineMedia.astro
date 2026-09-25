@@ -33,7 +33,7 @@ const { class: className, mediaWidth, stackBelow = 700, ...rest } = Astro.props;
 		max-width: 48rem;
 	}
 
-	@media (width < 700px) {
+	@media not (--widthSmall) {
 		.timeline-media-stack-700 {
 			align-items: flex-start;
 			display: flex;
@@ -41,7 +41,7 @@ const { class: className, mediaWidth, stackBelow = 700, ...rest } = Astro.props;
 		}
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-media-stack-900 {
 			align-items: flex-start;
 			display: flex;

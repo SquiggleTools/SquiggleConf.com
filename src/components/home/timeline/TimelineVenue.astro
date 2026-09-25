@@ -109,7 +109,7 @@ const decorated = Astro.slots.has("default");
 		padding-bottom: 3.75rem;
 	}
 
-	@media (width < 900px) {
+	@media not (--widthLarge) {
 		.timeline-venue {
 			display: none;
 		}
