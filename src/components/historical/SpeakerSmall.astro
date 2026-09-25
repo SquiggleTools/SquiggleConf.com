@@ -1,8 +1,8 @@
 ---
 import { Polymorphic } from "astro/types";
 import { PersonInfo } from "~/data/historical/types";
+import Avatar from "../Avatar.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
-import SpeakerImage from "./SpeakerImage.astro";
 
 type Props<Tag extends "div" | "li"> = Polymorphic<{
 	as: Tag;
@@ -22,7 +22,7 @@ const {
 
 <As class:list={["speaker-small", className]} {...rest}>
 	<div class="speaker-image-container">
-		<SpeakerImage image={speaker.image} name={speaker.name} size={96} />
+		<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
 	</div>
 	<div class="speaker-text">
 		{
