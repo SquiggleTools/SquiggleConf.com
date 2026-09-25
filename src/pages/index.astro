@@ -38,6 +38,8 @@ import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
+import TimelineLink from "~/components/home/TimelineLink.astro";
+import TimelineLinkList from "~/components/home/TimelineLinkList.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
@@ -310,20 +312,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						<TimelineCopy class="lunch-copy">
 							<p>
 								Head out together into
-								<a href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace</a
+								<TimelineLink href="https://faneuilhallmarketplace.com/dining">
+									Faneuil Hall Marketplace</TimelineLink
 								> at Quincy Market, keep conversations moving, and treat the middle
 								of the day like your devtools field trip lunch break.
 							</p>
-							<ul>
-								{
-									lunchSpots.map((spot) => (
-										<li>
-											<a href={spot.url}>{spot.name}</a>
-										</li>
-									))
-								}
-							</ul>
+							<TimelineLinkList
+								links={lunchSpots.map(({ name, url }) => ({
+									href: url,
+									text: name,
+								}))}
+							/>
 							<p>
 								Fast options, easy wandering, and enough variety that everyone
 								can grab something good before heading back for the afternoon
@@ -415,8 +414,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy>
-							<h3>Developer Life and Work in 2027</h3>
+						<TimelineCopy heading="Developer Life and Work in 2027">
 							<p>
 								Join Syntax.fm and ThePrimeagen in a live podcast recording
 								discussing the ins and outs of how to succeed and be happy in
@@ -465,8 +463,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy class="fireside-copy">
-							<h3>Topic To Be Announced</h3>
+						<TimelineCopy class="fireside-copy" heading="Topic To Be Announced">
 							<p>
 								Join us for a fireside chat with a notable JavaScript-y friend
 								about a pressing issue in the technical space.
@@ -524,9 +521,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						/>
 						<TimelineCopy>
 							<p>
-								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
-								alternative, indie, and punk rock band that combines pop-punk vocals
-								with classic rock and prog-rock influences.
+								<TimelineLink href="https://bigrav.band"
+									><strong>Big Rav</strong></TimelineLink
+								> is a Boston-based alternative, indie, and punk rock band that combines
+								pop-punk vocals with classic rock and prog-rock influences.
 								<span class="fireside-host">
 									featuring SquiggleConf's own Maddy Montaquila on vocals.
 								</span>
