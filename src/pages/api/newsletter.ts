@@ -34,8 +34,6 @@ export const POST: APIRoute = async ({ request }) => {
 			method: "POST",
 		});
 
-		console.log(response);
-
 		return response.ok || isBrevoDuplicateIdentifier(await response.json())
 			? new Response("Thanks for signing up!", { status: 200 })
 			: new Response("Error", { status: 400 });

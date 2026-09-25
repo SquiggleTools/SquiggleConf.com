@@ -1,0 +1,32 @@
+---
+interface Props {
+	links: readonly { href: string; text: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="timeline-link-list">
+	{
+		links.map(({ href, text }) => (
+			<li>
+				<a href={href}>{text}</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.timeline-link-list {
+		color: var(--colorLink);
+		display: grid;
+		gap: 0.42rem;
+		margin: 0;
+		padding-left: 1.2rem;
+	}
+
+	a {
+		color: var(--colorLink);
+		font-weight: var(--fontWeightSemibold);
+	}
+</style>

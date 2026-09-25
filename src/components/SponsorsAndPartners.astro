@@ -5,7 +5,7 @@ import { links } from "~/data/links";
 import BodyText from "./BodyText.astro";
 import Button from "./Button.astro";
 import Newsletter from "./Newsletter.astro";
-import ThemedImage from "./ThemedImage.astro";
+import SponsorLogo from "./SponsorLogo.astro";
 
 const pastSponsors = Object.values(historicalDataByYear).flatMap(
 	({ sponsors }) => sponsors,
@@ -60,16 +60,11 @@ const tiers = [
 				tiers.map((tier) => (
 					<div class="past-sponsors-tier">
 						{tier.map((sponsor) => (
-							<a
+							<SponsorLogo
 								class="sponsor-logo"
-								href={sponsor.href}
-								rel="noreferrer"
+								sponsor={sponsor}
 								style={{ "--logo-size": sponsor.size }}
-								target="_blank"
-								title={sponsor.title}
-							>
-								<ThemedImage alt="" height={128} sources={sponsor.logos} />
-							</a>
+							/>
 						))}
 					</div>
 				))
@@ -352,7 +347,7 @@ const tiers = [
 		transform: translateY(-1px);
 	}
 
-	.sponsor-logo img {
+	.sponsor-logo :global(img) {
 		max-height: var(--logo-size);
 		max-width: var(--logo-size);
 	}
