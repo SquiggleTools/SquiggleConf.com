@@ -1,20 +1,18 @@
 ---
+import type { InferGetStaticPropsType } from "astro";
+
 import Speaker from "~/components/historical/Speaker.astro";
 import SafeMarkdown from "~/components/SafeMarkdown.astro";
+import { getStaticPathsHistorical } from "~/data/historical/data";
 import PageLayout from "~/layouts/PageLayout.astro";
-import {
-	getStaticPathsHistorical,
-	historicalDataByYear,
-} from "~/data/historical/data";
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = getStaticPathsHistorical;
 
 export const prerender = true;
 
-const { year } = Astro.params;
-
-const historicalData =
-	historicalDataByYear[year as keyof typeof historicalDataByYear];
+const { data: historicalData, year } = Astro.props;
 ---
 
 <PageLayout
