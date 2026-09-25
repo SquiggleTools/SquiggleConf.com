@@ -5,7 +5,12 @@ import { postcardBack, postcardFront } from "~/components/home/data";
 ---
 
 <div class="postcard-gallery">
-	<div class="postcard-stack postcard-stack-flip">
+	<div
+		aria-label="SquiggleConf postcard"
+		class="postcard-stack postcard-stack-flip"
+		role="group"
+		tabindex="0"
+	>
 		<div class="postcard-flip-scene">
 			<div class="postcard-flip-inner">
 				<span class="postcard-face postcard-face-front">
