@@ -59,7 +59,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 		aspect-ratio: 6 / 4;
 		border-radius: var(--radiusSmall);
 		box-shadow:
-			0 0.08rem 0 rgb(from white r g b / 50%),
+			0 0.08rem 0 rgb(from var(--colorWhite) r g b / 50%),
 			0 0.35rem 0.75rem rgb(from var(--colorBlue5) r g b / 14%),
 			0 1.35rem 2.6rem rgb(from var(--colorBlue5) r g b / 24%);
 		display: block;
@@ -152,7 +152,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip:is(:hover, :focus-within, [data-mobile-flipped]) .postcard {
 		box-shadow:
-			0 0.08rem 0 rgb(from white r g b / 56%),
+			0 0.08rem 0 rgb(from var(--colorWhite) r g b / 56%),
 			0 0.45rem 0.95rem rgb(from var(--colorBlue5) r g b / 16%),
 			0 1.65rem 3rem rgb(from var(--colorBlue5) r g b / 28%);
 	}
@@ -175,12 +175,12 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	}
 
 	.postcard-front {
-		background: #f7f2ea;
+		background: var(--colorPostcardFront);
 	}
 
 	.postcard-back {
-		background: #fffdf8;
-		color: #49515f;
+		background: var(--colorPostcardBack);
+		color: var(--colorPostcardInk);
 		font-family: "Shantell Sans", cursive;
 		font-weight: var(--fontWeightRegular);
 	}
@@ -217,7 +217,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	}
 
 	.postcard-back-line::after {
-		border-bottom: 1px solid #585858;
+		border-bottom: 1px solid var(--colorPostcardLine);
 		content: " ";
 		display: block;
 		filter: blur(0.75px);

@@ -13,6 +13,10 @@
 	--colorTextShadowLight: rgb(70 96 140 / 35%);
 	--colorTextShadowDark: rgb(0 0 7 / 25%);
 	--colorWhiteIsh: #eaeaf7;
+	--colorWhite: white;
+	--colorBlack: black;
+	--colorOcean: #1f7fab;
+	--colorTerminalOrange: #ff5e00;
 	--colorAccentLight: light-dark(var(--colorBlue1), var(--colorBlue5));
 	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
 	--colorAccentSecond: light-dark(var(--colorBlue2), var(--colorBlue4));
@@ -25,14 +29,14 @@
 		var(--colorTextShadowDark)
 	);
 	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
-	--colorHeadingHover: light-dark(var(--colorBlue5), white);
+	--colorHeadingHover: light-dark(var(--colorBlue5), var(--colorWhite));
 	--colorCopy: light-dark(
 		rgb(from var(--colorBlue5) r g b / 84%),
 		rgb(from var(--colorWhiteIsh) r g b / 84%)
 	);
 	--colorCopyHover: light-dark(
 		rgb(from var(--colorBlue5) r g b / 92%),
-		rgb(from white r g b / 90%)
+		rgb(from var(--colorWhite) r g b / 90%)
 	);
 	--colorMuted: light-dark(
 		rgb(from var(--colorBlue4) r g b / 76%),
@@ -40,9 +44,9 @@
 	);
 	--colorMutedHover: light-dark(
 		rgb(from var(--colorBlue4) r g b / 86%),
-		rgb(from white r g b / 88%)
+		rgb(from var(--colorWhite) r g b / 88%)
 	);
-	--colorLink: light-dark(var(--colorBlue4), white);
+	--colorLink: light-dark(var(--colorBlue4), var(--colorWhite));
 	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
 	--colorCream: #edebe4;
 	--colorBackdropLight: var(--colorInverted);
@@ -51,6 +55,30 @@
 	--colorForegroundBody: light-dark(#203238, #d2ebf1);
 	--colorSubtleLight: #a5e2fc;
 	--colorSubtle: light-dark(var(--colorSubtleLight), #062430);
+	--colorDeepSea1: light-dark(#f8fcff, #004077);
+	--colorDeepSea2: light-dark(#effaff, #013a6c);
+	--colorDeepSea3: light-dark(var(--colorBlueBright2), var(--colorBlue4));
+	--colorDeepSea4: light-dark(var(--colorBlueBright1), #042446);
+	--colorDeepSea5: light-dark(#c8edfb, #042140);
+	--colorDeepSea6: light-dark(#c9effd, #041b37);
+	--colorDeepSea7: light-dark(#c8efff, var(--colorBlue5));
+	--colorDeepSea8: light-dark(#aedff5, var(--colorBlue6));
+	--colorDeepSeaGlow: #c9e2fc;
+	--colorDeepSeaHaze: #f5f5ff;
+	--colorDeepSeaStripeBright: #76d9ff;
+	--colorDeepSeaStripeMedium: #38addf;
+	--colorFish1: #f5f4f2;
+	--colorFish2: #c5e2d6;
+	--colorFish3: #6a8b91;
+	--colorFish4: #8ac0cc;
+	--colorFish5: #274238;
+	--colorHeroHaze: #f3fcff;
+	--colorHeroSand: #fffdde;
+	--colorHistoricalIcon: light-dark(#171512, #e8eaed);
+	--colorPostcardBack: #fffdf8;
+	--colorPostcardFront: #f7f2ea;
+	--colorPostcardInk: #49515f;
+	--colorPostcardLine: #585858;
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
 	--fontFamilyLogo: "Josefin Sans Variable";
