@@ -3,39 +3,52 @@ import { venues } from "~/components/home/data";
 import type { VenueId } from "~/components/home/types";
 
 interface Props {
-	last?: boolean;
-	span?: 2 | 5 | 7;
 	venue: VenueId;
 }
 
-const { last, span, venue } = Astro.props;
+const { venue } = Astro.props;
 const { mapUrl, name } = venues[venue];
-const decorated = Astro.slots.has("default");
+const decorated = Astro.slots.has("decoration");
 ---
 
-<div
-	class:list={[
-		"timeline-venue",
-		decorated && "timeline-venue-decorated",
-		last && "timeline-venue-last",
-	]}
-	style={span && `grid-row: span ${span}`}
->
-	<div class="timeline-venue-stack">
-		<a
-			class="timeline-location-link"
-			href={mapUrl}
-			rel="noreferrer"
-			target="_blank"
-		>
-			{name.split(" ").map((line) => <p>{line}</p>)}
-		</a>
+<div class="timeline-venue">
+	<div
+		class:list={[
+			"timeline-venue-label",
+			decorated && "timeline-venue-decorated",
+		]}
+	>
+		<div class="timeline-venue-stack">
+			<a
+				class="timeline-location-link"
+				href={mapUrl}
+				rel="noreferrer"
+				target="_blank"
+			>
+				{name.split(" ").map((line) => <p>{line}</p>)}
+			</a>
+			<slot name="decoration" />
+		</div>
+	</div>
+	<div class="timeline-venue-slots">
 		<slot />
 	</div>
 </div>
 
 <style>
 	.timeline-venue {
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+	}
+
+	.timeline-venue-slots {
+		display: grid;
+		grid-column: 2 / -1;
+		grid-template-columns: subgrid;
+	}
+
+	.timeline-venue-label {
 		align-items: flex-end;
 		align-self: stretch;
 		color: var(--timeline-venue-color);
@@ -50,11 +63,11 @@ const decorated = Astro.slots.has("default");
 		text-align: right;
 	}
 
-	.timeline-venue-last {
+	.timeline-venue:last-child .timeline-venue-label {
 		margin-bottom: 1rem;
 	}
 
-	.timeline-venue p {
+	.timeline-venue-label p {
 		margin: 0;
 	}
 
@@ -110,7 +123,12 @@ const decorated = Astro.slots.has("default");
 	}
 
 	@media (width < 900px) {
-		.timeline-venue {
+		.timeline-venue,
+		.timeline-venue-slots {
+			display: contents;
+		}
+
+		.timeline-venue-label {
 			display: none;
 		}
 	}

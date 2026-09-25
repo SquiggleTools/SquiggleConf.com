@@ -1,21 +1,31 @@
 ---
 interface Props {
-	bottom?: boolean;
-	span?: 2;
 	time: string;
 }
 
-const { bottom, span, time } = Astro.props;
+const { time } = Astro.props;
 ---
 
-<div
-	class:list={["timeline-rail", bottom && "timeline-bottom"]}
-	style={span && `grid-row: span ${span}`}
->
-	<p class="timeline-time">{time}</p>
+<div class="timeline-slot">
+	<div class="timeline-rail">
+		<p class="timeline-time">{time}</p>
+	</div>
+	<div class="timeline-slot-entries">
+		<slot />
+	</div>
 </div>
 
 <style>
+	.timeline-slot {
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+	}
+
+	.timeline-slot-entries {
+		display: grid;
+	}
+
 	.timeline-rail {
 		background: var(--timeline-rail-background);
 		border: 1px solid var(--timeline-rail-border-color);
@@ -26,9 +36,9 @@ const { bottom, span, time } = Astro.props;
 		position: relative;
 	}
 
-	.timeline-bottom {
-		border-bottom-right-radius: var(--radiusMedium);
+	:global(.timeline-venue:last-child) .timeline-slot:last-child .timeline-rail {
 		border-bottom-left-radius: var(--radiusMedium);
+		border-bottom-right-radius: var(--radiusMedium);
 	}
 
 	.timeline-time {
@@ -38,11 +48,16 @@ const { bottom, span, time } = Astro.props;
 		font-weight: var(--fontWeightBold);
 		margin: 1rem 0 0;
 		padding-top: 1.15rem;
-		text-shadow: var(--timeline-time-shadow);
 		text-align: center;
+		text-shadow: var(--timeline-time-shadow);
 	}
 
 	@media (width < 900px) {
+		.timeline-slot,
+		.timeline-slot-entries {
+			display: contents;
+		}
+
 		.timeline-rail {
 			display: none;
 		}

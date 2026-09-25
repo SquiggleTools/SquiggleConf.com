@@ -38,14 +38,14 @@ import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/TimelineCopy.astro";
-import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
+import TimelineDay from "~/components/home/timeline/TimelineDay.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
 import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
-import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
+import TimelineSlot from "~/components/home/timeline/TimelineSlot.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
@@ -75,465 +75,478 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<PostcardGallery />
 			</div>
 			<TimelineGrid>
-				<TimelineDayCap date="May 6th" day="Thursday">
-					<div class="timeline-grid-intro">
+				<TimelineDay date="May 6th" day="Thursday">
+					<div class="timeline-grid-intro" slot="intro">
 						<h3>SquiggleConf 2027</h3>
 						<p>Boston, Massachusetts</p>
 					</div>
-				</TimelineDayCap>
 
-				<TimelineVenue last venue="nedDevines" />
-				<TimelineRail bottom time="6pm" />
+					<TimelineVenue venue="nedDevines">
+						<TimelineSlot time="6pm">
+							<TimelineEntry
+								entryId="launch-party"
+								heading="Launch Party!"
+								venue="nedDevines"
+								time="6-9pm"
+								timeMode="range"
+							>
+								<Collage
+									ariaLabel="Launch party collage"
+									class="launch-party-collage"
+									layout="trio"
+									photos={[
+										{ alt: "Boston harbor near the venue", src: harbor },
+										{
+											alt: "People networking at SquiggleConf",
+											src: networking,
+										},
+										{
+											alt: "Speakers gathered together at the event",
+											src: harborwalk,
+										},
+									]}
+								/>
+								<TimelineCopy>
+									<p>
+										Kick off the weekend with snacks, drinks, and an easy room
+										full of tool-loving people. It is the place to settle in,
+										say hi, and start the conference with a little momentum.
+									</p>
+								</TimelineCopy>
+							</TimelineEntry>
+						</TimelineSlot>
+					</TimelineVenue>
+				</TimelineDay>
+				<TimelineDay date="May 7th" day="Friday">
+					<TimelineVenue venue="aquarium">
+						<TimelineSlot time="7am">
+							<TimelineEntry
+								entryId="fun-run"
+								heading="Fun Run"
+								venue="aquarium"
+								time="7-7:30am"
+								timeMode="range"
+								variant="fun-run"
+							>
+								<div class="fun-run-body">
+									<TimelineCopy>
+										<p>
+											Optional for some, best way to start the day for others!
+											This SquiggleConf tradition is a casual yet eventful 5k
+											through the Boston shoreline.
+										</p>
+									</TimelineCopy>
+									<div class="fun-run-collage">
+										<Collage
+											ariaLabel="Fun run collage"
+											layout="duo"
+											photos={[
+												{
+													alt: "Fun Run route by the waterfront",
+													objectPosition: "10% 10%",
+													src: funrun1,
+												},
+												{
+													alt: "Runners gathering before the Fun Run",
+													objectPosition: "38% 50%",
+													src: funrun2,
+												},
+											]}
+										/>
+									</div>
+								</div>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="8am">
+							<TimelineEntry
+								entryId="check-in"
+								heading="Check In"
+								venue="aquarium"
+								time="8am"
+							>
+								<TimelineCopy>
+									<p>
+										Pick up your badge, settle in, and grab a terminal.shop
+										coffee before the first sessions start.
+									</p>
+									<TerminalShopButton />
+								</TimelineCopy>
+							</TimelineEntry>
 
-				<TimelineEntry
-					entryId="launch-party"
-					heading="Launch Party!"
-					venue="nedDevines"
-					time="6-9pm"
-					timeMode="range"
-				>
-					<Collage
-						ariaLabel="Launch party collage"
-						class="launch-party-collage"
-						layout="trio"
-						photos={[
-							{ alt: "Boston harbor near the venue", src: harbor },
-							{ alt: "People networking at SquiggleConf", src: networking },
-							{
-								alt: "Speakers gathered together at the event",
-								src: harborwalk,
-							},
-						]}
-					/>
-					<TimelineCopy>
-						<p>
-							Kick off the weekend with snacks, drinks, and an easy room full of
-							tool-loving people. It is the place to settle in, say hi, and
-							start the conference with a little momentum.
-						</p>
-					</TimelineCopy>
-				</TimelineEntry>
+							<TimelineEntry
+								entryId="simons-imax-theater"
+								heading="Talks in an IMAX Theater"
+								venue="aquarium"
+								time="8am"
+							>
+								<TimelineMedia stackBelow={900}>
+									<TimelineImage
+										alt="Presenter on stage inside the Simons IMAX Theater"
+										class="event-image-wide"
+										effect="zoom"
+										loading="eager"
+										src={simonsTheater}
+										zoomOrigin="top right"
+									/>
+									<TimelineCopy>
+										<p>
+											The talks take place in an IMAX theater. That means super
+											comfortable seats, great visibility, and a 60ft high
+											screen.
+										</p>
+										<p>Also, a penguin exhibit next door.</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="9am">
+							<TimelineEntry
+								entryId="meet-your-mcs"
+								heading="Meet your MCs!"
+								venue="aquarium"
+								time="9am"
+							>
+								<TimelineList aria-label="Conference MCs" columns={2}>
+									{timelineMCs.map((host) => <PersonCard person={host} />)}
+								</TimelineList>
+							</TimelineEntry>
 
-				<TimelineDayCap date="May 7th" day="Friday" />
-
-				<TimelineVenue span={7} venue="aquarium" />
-				<TimelineRail time="7am" />
-
-				<TimelineEntry
-					entryId="fun-run"
-					heading="Fun Run"
-					venue="aquarium"
-					time="7-7:30am"
-					timeMode="range"
-					variant="fun-run"
-				>
-					<div class="fun-run-body">
-						<TimelineCopy>
-							<p>
-								Optional for some, best way to start the day for others! This
-								SquiggleConf tradition is a casual yet eventful 5k through the
-								Boston shoreline.
-							</p>
-						</TimelineCopy>
-						<div class="fun-run-collage">
-							<Collage
-								ariaLabel="Fun run collage"
-								layout="duo"
-								photos={[
+							<TimelineEntry
+								entryId="talks-morning"
+								heading="Talks"
+								venue="aquarium"
+								time="9am"
+							>
+								<TimelineList aria-label="Speaker talks">
 									{
-										alt: "Fun Run route by the waterfront",
-										objectPosition: "10% 10%",
-										src: funrun1,
-									},
+										talkBlocks.morning.map((talk) => (
+											<PersonCard person={talk} />
+										))
+									}
+								</TimelineList>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="10:30am">
+							<TimelineEntry
+								entryId="cookies-break"
+								heading="Milk & Cookies Break"
+								venue="aquarium"
+								time="10:30am"
+								variant="break"
+							>
+								<TimelineMedia stackBelow={900}>
+									<Collage
+										ariaLabel="Milk and Cookies break collage"
+										layout="trio"
+										photos={[
+											{
+												alt: "Milk and cookies spread",
+												frame: {
+													height: "5.7rem",
+													left: "0.25rem",
+													rotate: "-8deg",
+													top: "1rem",
+													width: "7.5rem",
+												},
+												src: milkcookies3,
+											},
+											{
+												alt: "Cookies at the break",
+												frame: {
+													height: "5.8rem",
+													left: "5.4rem",
+													rotate: "2deg",
+													top: "0.2rem",
+													width: "7.5rem",
+													zIndex: 1,
+												},
+												src: milkcookies1,
+											},
+											{
+												alt: "Milk and cookies break crowd",
+												frame: {
+													height: "5rem",
+													left: "11rem",
+													rotate: "10deg",
+													top: "2rem",
+													width: "6rem",
+												},
+												objectPosition: "10% 0%",
+												src: milkcookies2,
+											},
+										]}
+										size={{ height: "8rem", width: "18.6rem" }}
+									/>
+									<TimelineCopy class="break-copy">
+										<p>A SquiggleConf classic!</p><p>
+											Catch up with people you just met, and trade notes on the
+											morning’s talks.
+										</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="11am">
+							<TimelineEntry
+								entryId="talks-late"
+								heading="Talks"
+								venue="aquarium"
+								time="11am"
+							>
+								<TimelineList aria-label="Late morning talks">
 									{
-										alt: "Runners gathering before the Fun Run",
-										objectPosition: "38% 50%",
-										src: funrun2,
-									},
-								]}
-							/>
+										talkBlocks.lateMorning.map((talk) => (
+											<PersonCard person={talk} />
+										))
+									}
+								</TimelineList>
+							</TimelineEntry>
+						</TimelineSlot>
+					</TimelineVenue>
+					<TimelineVenue venue="quincyMarket">
+						<TimelineSlot time="12pm">
+							<TimelineEntry
+								entryId="lunch"
+								heading="Lunch"
+								venue="quincyMarket"
+								time="12pm"
+							>
+								<TimelineMedia mediaWidth="10rem" stackBelow={900}>
+									<LunchCarousel spots={lunchSpots} />
+									<TimelineCopy class="lunch-copy">
+										<p>
+											Head out together into
+											<a href="https://faneuilhallmarketplace.com/dining">
+												Faneuil Hall Marketplace</a
+											> at Quincy Market, keep conversations moving, and treat the
+											middle of the day like your devtools field trip lunch break.
+										</p>
+										<ul class="lunch-links">
+											{
+												lunchSpots.map((spot) => (
+													<li>
+														<a href={spot.url}>{spot.name}</a>
+													</li>
+												))
+											}
+										</ul>
+										<p>
+											Fast options, easy wandering, and enough variety that
+											everyone can grab something good before heading back for
+											the afternoon block.
+										</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+					</TimelineVenue>
+					<TimelineVenue venue="aquarium">
+						<div
+							slot="decoration"
+							class="timeline-venue-decoration timeline-venue-decoration-turtle"
+							aria-hidden="true"
+						>
+							<TimelineTalksTurtle />
 						</div>
-					</div>
-				</TimelineEntry>
+						<TimelineSlot time="2pm">
+							<TimelineEntry
+								entryId="talks-afternoon"
+								heading="Talks"
+								venue="aquarium"
+								time="2pm"
+							>
+								<TimelineList aria-label="Afternoon talks">
+									{
+										talkBlocks.afternoon.map((talk) => (
+											<PersonCard person={talk} />
+										))
+									}
+								</TimelineList>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="3:30pm">
+							<TimelineEntry
+								entryId="explore-boston"
+								heading="Explore Boston"
+								location="Boston"
+								subtitle="choose your own adventure"
+								time="3:30pm"
+							>
+								<TimelineList aria-label="Explore Boston options">
+									{
+										exploreChoices.map((choice) => (
+											<ExploreChoiceCard choice={choice} />
+										))
+									}
+								</TimelineList>
+							</TimelineEntry>
+						</TimelineSlot>
+					</TimelineVenue>
+					<TimelineVenue venue="urbanWild">
+						<TimelineSlot time="6pm">
+							<TimelineEntry
+								entryId="arrive-urban-wild"
+								heading="Arrive at Urban Wild"
+								venue="urbanWild"
+								time="6pm"
+							>
+								<TimelineMedia>
+									<TimelineImage
+										alt="Urban Wild Boston logo"
+										class="event-image-wide"
+										effect="zoom"
+										loading="eager"
+										src={urbanwildLogo}
+										zoomOrigin="top right"
+									/>
+									<TimelineCopy>
+										<p>
+											The rest of the night takes place at Urban Wild Boston.
+											Also the last clue of the Scavenger Hunt may or may not be
+											here.......
+										</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
 
-				<TimelineRail span={2} time="8am" />
-
-				<TimelineEntry
-					entryId="check-in"
-					heading="Check In"
-					venue="aquarium"
-					time="8am"
-				>
-					<TimelineCopy>
-						<p>
-							Pick up your badge, settle in, and grab a terminal.shop coffee
-							before the first sessions start.
-						</p>
-						<TerminalShopButton />
-					</TimelineCopy>
-				</TimelineEntry>
-
-				<TimelineEntry
-					entryId="simons-imax-theater"
-					heading="Talks in an IMAX Theater"
-					venue="aquarium"
-					time="8am"
-				>
-					<TimelineMedia stackBelow={900}>
-						<TimelineImage
-							alt="Presenter on stage inside the Simons IMAX Theater"
-							class="event-image-wide"
-							effect="zoom"
-							loading="eager"
-							src={simonsTheater}
-							zoomOrigin="top right"
-						/>
-						<TimelineCopy>
-							<p>
-								The talks take place in an IMAX theater. That means super
-								comfortable seats, great visibility, and a 60ft high screen.
-							</p>
-							<p>Also, a penguin exhibit next door.</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
-
-				<TimelineRail span={2} time="9am" />
-
-				<TimelineEntry
-					entryId="meet-your-mcs"
-					heading="Meet your MCs!"
-					venue="aquarium"
-					time="9am"
-				>
-					<TimelineList aria-label="Conference MCs" columns={2}>
-						{timelineMCs.map((host) => <PersonCard person={host} />)}
-					</TimelineList>
-				</TimelineEntry>
-
-				<TimelineEntry
-					entryId="talks-morning"
-					heading="Talks"
-					venue="aquarium"
-					time="9am"
-				>
-					<TimelineList aria-label="Speaker talks">
-						{talkBlocks.morning.map((talk) => <PersonCard person={talk} />)}
-					</TimelineList>
-				</TimelineEntry>
-
-				<TimelineRail time="10:30am" />
-
-				<TimelineEntry
-					entryId="cookies-break"
-					heading="Milk & Cookies Break"
-					venue="aquarium"
-					time="10:30am"
-					variant="break"
-				>
-					<TimelineMedia stackBelow={900}>
-						<Collage
-							ariaLabel="Milk and Cookies break collage"
-							layout="trio"
-							photos={[
-								{
-									alt: "Milk and cookies spread",
-									frame: {
-										height: "5.7rem",
-										left: "0.25rem",
-										rotate: "-8deg",
-										top: "1rem",
-										width: "7.5rem",
-									},
-									src: milkcookies3,
-								},
-								{
-									alt: "Cookies at the break",
-									frame: {
-										height: "5.8rem",
-										left: "5.4rem",
-										rotate: "2deg",
-										top: "0.2rem",
-										width: "7.5rem",
-										zIndex: 1,
-									},
-									src: milkcookies1,
-								},
-								{
-									alt: "Milk and cookies break crowd",
-									frame: {
-										height: "5rem",
-										left: "11rem",
-										rotate: "10deg",
-										top: "2rem",
-										width: "6rem",
-									},
-									objectPosition: "10% 0%",
-									src: milkcookies2,
-								},
-							]}
-							size={{ height: "8rem", width: "18.6rem" }}
-						/>
-						<TimelineCopy class="break-copy">
-							<p>A SquiggleConf classic!</p><p>
-								Catch up with people you just met, and trade notes on the
-								morning’s talks.
-							</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
-
-				<TimelineRail time="11am" />
-
-				<TimelineEntry
-					entryId="talks-late"
-					heading="Talks"
-					venue="aquarium"
-					time="11am"
-				>
-					<TimelineList aria-label="Late morning talks">
-						{talkBlocks.lateMorning.map((talk) => <PersonCard person={talk} />)}
-					</TimelineList>
-				</TimelineEntry>
-
-				<TimelineVenue venue="quincyMarket" />
-				<TimelineRail time="12pm" />
-
-				<TimelineEntry
-					entryId="lunch"
-					heading="Lunch"
-					venue="quincyMarket"
-					time="12pm"
-				>
-					<TimelineMedia mediaWidth="10rem" stackBelow={900}>
-						<LunchCarousel spots={lunchSpots} />
-						<TimelineCopy class="lunch-copy">
-							<p>
-								Head out together into
-								<a href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace</a
-								> at Quincy Market, keep conversations moving, and treat the middle
-								of the day like your devtools field trip lunch break.
-							</p>
-							<ul class="lunch-links">
-								{
-									lunchSpots.map((spot) => (
-										<li>
-											<a href={spot.url}>{spot.name}</a>
-										</li>
-									))
-								}
-							</ul>
-							<p>
-								Fast options, easy wandering, and enough variety that everyone
-								can grab something good before heading back for the afternoon
-								block.
-							</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
-
-				<TimelineVenue span={2} venue="aquarium">
-					<div
-						class="timeline-venue-decoration timeline-venue-decoration-turtle"
-						aria-hidden="true"
-					>
-						<TimelineTalksTurtle />
-					</div>
-				</TimelineVenue>
-				<TimelineRail time="2pm" />
-
-				<TimelineEntry
-					entryId="talks-afternoon"
-					heading="Talks"
-					venue="aquarium"
-					time="2pm"
-				>
-					<TimelineList aria-label="Afternoon talks">
-						{talkBlocks.afternoon.map((talk) => <PersonCard person={talk} />)}
-					</TimelineList>
-				</TimelineEntry>
-
-				<TimelineRail time="3:30pm" />
-
-				<TimelineEntry
-					entryId="explore-boston"
-					heading="Explore Boston"
-					location="Boston"
-					subtitle="choose your own adventure"
-					time="3:30pm"
-				>
-					<TimelineList aria-label="Explore Boston options">
-						{
-							exploreChoices.map((choice) => (
-								<ExploreChoiceCard choice={choice} />
-							))
-						}
-					</TimelineList>
-				</TimelineEntry>
-
-				<TimelineVenue last span={5} venue="urbanWild" />
-				<TimelineRail span={2} time="6pm" />
-
-				<TimelineEntry
-					entryId="arrive-urban-wild"
-					heading="Arrive at Urban Wild"
-					venue="urbanWild"
-					time="6pm"
-				>
-					<TimelineMedia>
-						<TimelineImage
-							alt="Urban Wild Boston logo"
-							class="event-image-wide"
-							effect="zoom"
-							loading="eager"
-							src={urbanwildLogo}
-							zoomOrigin="top right"
-						/>
-						<TimelineCopy>
-							<p>
-								The rest of the night takes place at Urban Wild Boston. Also the
-								last clue of the Scavenger Hunt may or may not be here.......
-							</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
-
-				<TimelineEntry
-					entryId="live-podcast-recording"
-					heading="Live Podcast Recording"
-					venue="urbanWild"
-					time="6pm"
-				>
-					<TimelineMedia>
-						<Collage
-							ariaLabel="Podcast recording live guests"
-							layout="avatar-pair"
-							photos={[
-								{ alt: "Syntax logo", src: syntax },
-								{ alt: "ThePrimeagen portrait", src: thePrimeagen },
-							]}
-							shape="avatar"
-						/>
-						<TimelineCopy>
-							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
-							<p>
-								Join Syntax.fm and ThePrimeagen in a live podcast recording
-								discussing the ins and outs of how to succeed and be happy in
-								today's tech industry.
-							</p>
-							<div class="podcast-hosts">
-								<TimelineImage
-									alt="Wes Bos portrait"
-									class="podcast-host-image"
-									radius="var(--radiusPill)"
-									src={wesBos}
+							<TimelineEntry
+								entryId="live-podcast-recording"
+								heading="Live Podcast Recording"
+								venue="urbanWild"
+								time="6pm"
+							>
+								<TimelineMedia>
+									<Collage
+										ariaLabel="Podcast recording live guests"
+										layout="avatar-pair"
+										photos={[
+											{ alt: "Syntax logo", src: syntax },
+											{ alt: "ThePrimeagen portrait", src: thePrimeagen },
+										]}
+										shape="avatar"
+									/>
+									<TimelineCopy>
+										<h3 class="fireside-topic">
+											Developer Life and Work in 2027
+										</h3>
+										<p>
+											Join Syntax.fm and ThePrimeagen in a live podcast
+											recording discussing the ins and outs of how to succeed
+											and be happy in today's tech industry.
+										</p>
+										<div class="podcast-hosts">
+											<TimelineImage
+												alt="Wes Bos portrait"
+												class="podcast-host-image"
+												radius="var(--radiusPill)"
+												src={wesBos}
+											/>
+											<TimelineImage
+												alt="Scott Tolinski portrait"
+												class="podcast-host-image"
+												radius="var(--radiusPill)"
+												src={scottTolinski}
+											/>
+											<p class="fireside-host">
+												Hosted by Wes Bos and Scott Tolinski
+											</p>
+										</div>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="7pm">
+							<TimelineEntry
+								entryId="fireside-chat"
+								heading="Fireside Chat"
+								venue="urbanWild"
+								time="7pm"
+							>
+								<TimelineMedia>
+									<Collage
+										ariaLabel="Fireside chat guests"
+										layout="avatar-duo"
+										photos={[
+											{
+												alt: "Placeholder portrait",
+												placeholder: true,
+												src: placeholder9,
+											},
+											{ alt: "Dillon Mulroy portrait", src: dillonMulroy },
+										]}
+										shape="avatar"
+									/>
+									<TimelineCopy class="fireside-copy">
+										<h3 class="fireside-topic">Topic To Be Announced</h3>
+										<p>
+											Join us for a fireside chat with a notable JavaScript-y
+											friend about a pressing issue in the technical space.
+										</p>
+										<p class="fireside-host">hosted by Dillon Mulroy</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+						<TimelineSlot time="7:30pm">
+							<TimelineEntry
+								entryId="after-party"
+								heading="After Party"
+								venue="urbanWild"
+								time="7:30-9pm"
+								timeMode="range"
+							>
+								<Collage
+									ariaLabel="After party collage"
+									class="afterparty-collage"
+									layout="feature-five"
+									photos={[
+										{ alt: "", decorative: true, src: urbanwild1 },
+										{ alt: "", decorative: true, src: urbanwild2 },
+										{ alt: "", decorative: true, src: urbanwild3 },
+										{ alt: "", decorative: true, src: urbanwild4 },
+										{ alt: "", decorative: true, src: urbanwild5 },
+									]}
 								/>
-								<TimelineImage
-									alt="Scott Tolinski portrait"
-									class="podcast-host-image"
-									radius="var(--radiusPill)"
-									src={scottTolinski}
-								/>
-								<p class="fireside-host">
-									Hosted by Wes Bos and Scott Tolinski
-								</p>
-							</div>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
+								<TimelineCopy>
+									<p>
+										After the podcast and fireside chat, we'll switch into party
+										mode at Urban Wild: video arcade bowling, lots of light
+										bites and refreshments, and most of all - a chance to hang
+										with everyone you just met at the conference!
+									</p>
+								</TimelineCopy>
+							</TimelineEntry>
 
-				<TimelineRail time="7pm" />
-
-				<TimelineEntry
-					entryId="fireside-chat"
-					heading="Fireside Chat"
-					venue="urbanWild"
-					time="7pm"
-				>
-					<TimelineMedia>
-						<Collage
-							ariaLabel="Fireside chat guests"
-							layout="avatar-duo"
-							photos={[
-								{
-									alt: "Placeholder portrait",
-									placeholder: true,
-									src: placeholder9,
-								},
-								{ alt: "Dillon Mulroy portrait", src: dillonMulroy },
-							]}
-							shape="avatar"
-						/>
-						<TimelineCopy class="fireside-copy">
-							<h3 class="fireside-topic">Topic To Be Announced</h3>
-							<p>
-								Join us for a fireside chat with a notable JavaScript-y friend
-								about a pressing issue in the technical space.
-							</p>
-							<p class="fireside-host">hosted by Dillon Mulroy</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
-
-				<TimelineRail bottom span={2} time="7:30pm" />
-
-				<TimelineEntry
-					entryId="after-party"
-					heading="After Party"
-					venue="urbanWild"
-					time="7:30-9pm"
-					timeMode="range"
-				>
-					<Collage
-						ariaLabel="After party collage"
-						class="afterparty-collage"
-						layout="feature-five"
-						photos={[
-							{ alt: "", decorative: true, src: urbanwild1 },
-							{ alt: "", decorative: true, src: urbanwild2 },
-							{ alt: "", decorative: true, src: urbanwild3 },
-							{ alt: "", decorative: true, src: urbanwild4 },
-							{ alt: "", decorative: true, src: urbanwild5 },
-						]}
-					/>
-					<TimelineCopy>
-						<p>
-							After the podcast and fireside chat, we'll switch into party mode
-							at Urban Wild: video arcade bowling, lots of light bites and
-							refreshments, and most of all - a chance to hang with everyone you
-							just met at the conference!
-						</p>
-					</TimelineCopy>
-				</TimelineEntry>
-
-				<TimelineEntry
-					entryId="big-rav"
-					heading="Big Rav"
-					venue="urbanWild"
-					time="9pm"
-				>
-					<TimelineMedia>
-						<TimelineImage
-							alt="Big Rav band portrait"
-							class="event-image-circle"
-							effect="grow"
-							loading="eager"
-							radius="var(--radiusPill)"
-							src={bigRav}
-						/>
-						<TimelineCopy>
-							<p>
-								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
-								alternative, indie, and punk rock band that combines pop-punk vocals
-								with classic rock and prog-rock influences.
-								<span class="fireside-host">
-									featuring SquiggleConf's own Maddy Montaquila on vocals.
-								</span>
-							</p>
-						</TimelineCopy>
-					</TimelineMedia>
-				</TimelineEntry>
+							<TimelineEntry
+								entryId="big-rav"
+								heading="Big Rav"
+								venue="urbanWild"
+								time="9pm"
+							>
+								<TimelineMedia>
+									<TimelineImage
+										alt="Big Rav band portrait"
+										class="event-image-circle"
+										effect="grow"
+										loading="eager"
+										radius="var(--radiusPill)"
+										src={bigRav}
+									/>
+									<TimelineCopy>
+										<p>
+											<a href="https://bigrav.band"><strong>Big Rav</strong></a> is
+											a Boston-based alternative, indie, and punk rock band that combines
+											pop-punk vocals with classic rock and prog-rock influences.
+											<span class="fireside-host">
+												featuring SquiggleConf's own Maddy Montaquila on vocals.
+											</span>
+										</p>
+									</TimelineCopy>
+								</TimelineMedia>
+							</TimelineEntry>
+						</TimelineSlot>
+					</TimelineVenue>
+				</TimelineDay>
 			</TimelineGrid>
 		</TimelineSection>
 		<Registration />
