@@ -295,18 +295,27 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 <script>
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 
-	import { onScrollFrame } from "./timeline/onScrollFrame";
-
 	const postcard = document.querySelector<HTMLElement>(".postcard-stack-flip");
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard) {
-		onScrollFrame(() => {
-			const { height, top } = postcard.getBoundingClientRect();
+		let centerAboveMiddle = false;
+
+		const updateFlipped = () => {
 			postcard.toggleAttribute(
 				"data-mobile-flipped",
-				mobileQuery.matches && top + height / 2 <= innerHeight / 2,
+				mobileQuery.matches && centerAboveMiddle,
 			);
-		}, mobileQuery);
+		};
+
+		new IntersectionObserver(
+			([entry]) => {
+				centerAboveMiddle = entry.intersectionRatio >= 0.5;
+				updateFlipped();
+			},
+			{ rootMargin: "100000px 0px -50% 0px", threshold: 0.5 },
+		).observe(postcard);
+
+		mobileQuery.addEventListener("change", updateFlipped);
 	}
 </script>
