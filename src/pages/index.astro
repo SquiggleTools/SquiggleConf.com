@@ -38,6 +38,8 @@ import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/timeline/TimelineCopy.astro";
+import TimelineLink from "~/components/home/timeline/TimelineLink.astro";
+import TimelineLinkList from "~/components/home/timeline/TimelineLinkList.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
@@ -129,7 +131,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					variant="fun-run"
 				>
 					<div class="fun-run-body">
-						<TimelineCopy>
+						<TimelineCopy class="fun-run-copy">
 							<p>
 								Optional for some, best way to start the day for others! This
 								SquiggleConf tradition is a casual yet eventful 5k through the
@@ -282,20 +284,17 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						<TimelineCopy class="lunch-copy">
 							<p>
 								Head out together into
-								<a href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace</a
+								<TimelineLink href="https://faneuilhallmarketplace.com/dining">
+									Faneuil Hall Marketplace</TimelineLink
 								> at Quincy Market, keep conversations moving, and treat the middle
 								of the day like your devtools field trip lunch break.
 							</p>
-							<ul class="lunch-links">
-								{
-									lunchSpots.map((spot) => (
-										<li>
-											<a href={spot.url}>{spot.name}</a>
-										</li>
-									))
-								}
-							</ul>
+							<TimelineLinkList
+								links={lunchSpots.map(({ name, url }) => ({
+									href: url,
+									text: name,
+								}))}
+							/>
 							<p>
 								Fast options, easy wandering, and enough variety that everyone
 								can grab something good before heading back for the afternoon
@@ -387,8 +386,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy>
-							<h3 class="fireside-topic">Developer Life and Work in 2027</h3>
+						<TimelineCopy heading="Developer Life and Work in 2027">
 							<p>
 								Join Syntax.fm and ThePrimeagen in a live podcast recording
 								discussing the ins and outs of how to succeed and be happy in
@@ -437,8 +435,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 							shape="avatar"
 						/>
-						<TimelineCopy class="fireside-copy">
-							<h3 class="fireside-topic">Topic To Be Announced</h3>
+						<TimelineCopy class="fireside-copy" heading="Topic To Be Announced">
 							<p>
 								Join us for a fireside chat with a notable JavaScript-y friend
 								about a pressing issue in the technical space.
@@ -496,9 +493,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						/>
 						<TimelineCopy>
 							<p>
-								<a href="https://bigrav.band"><strong>Big Rav</strong></a> is a Boston-based
-								alternative, indie, and punk rock band that combines pop-punk vocals
-								with classic rock and prog-rock influences.
+								<TimelineLink href="https://bigrav.band"
+									><strong>Big Rav</strong></TimelineLink
+								> is a Boston-based alternative, indie, and punk rock band that combines
+								pop-punk vocals with classic rock and prog-rock influences.
 								<span class="fireside-host">
 									featuring SquiggleConf's own Maddy Montaquila on vocals.
 								</span>
@@ -606,28 +604,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-top: 0.2rem;
 	}
 
-	.lunch-copy a {
-		color: var(--colorLink);
-		font-weight: var(--fontWeightBold);
-	}
-
-	.lunch-links {
-		color: var(--colorLink);
-		display: grid;
-		gap: 0.42rem;
-		margin: 0;
-		padding-left: 1.2rem;
-	}
-
-	.lunch-links li::marker {
-		color: var(--colorLink);
-	}
-
-	.lunch-links a {
-		color: var(--colorLink);
-		font-weight: var(--fontWeightSemibold);
-	}
-
 	.launch-party-collage {
 		margin-bottom: 1rem;
 	}
@@ -642,7 +618,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		top: 1rem;
 	}
 
-	.fun-run-body .timeline-copy {
+	.fun-run-body > .fun-run-copy {
 		max-width: 50%;
 		position: relative;
 	}
@@ -660,15 +636,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	.event-image-circle {
 		height: 8rem;
 		width: 8rem;
-	}
-
-	.fireside-topic {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
-		font-size: 1.2rem;
-		font-weight: var(--fontWeightBold);
-		line-height: 1.05;
-		margin: 0 0 0.25rem;
 	}
 
 	.fireside-host {
@@ -724,7 +691,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			grid-template-columns: minmax(0, 1fr) 8rem;
 		}
 
-		.fun-run-body .timeline-copy {
+		.fun-run-body > .fun-run-copy {
 			margin-top: 0.15rem;
 			max-width: none;
 		}
