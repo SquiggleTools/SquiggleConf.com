@@ -1,5 +1,6 @@
 ---
 import type { PersonCardData, TalkCardData } from "~/components/home/types";
+import TimelineHeading from "./timeline/TimelineHeading.astro";
 import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
@@ -22,11 +23,15 @@ const title = "title" in person ? person.title : undefined;
 		{
 			title ? (
 				<>
-					<h3>{title}</h3>
+					<TimelineHeading class="person-card-title" level="h3">
+						{title}
+					</TimelineHeading>
 					<p class="person-card-name">{person.name}</p>
 				</>
 			) : (
-				<h3>{person.name}</h3>
+				<TimelineHeading class="person-card-title" level="h3">
+					{person.name}
+				</TimelineHeading>
 			)
 		}
 		<p class="person-card-role">{person.qualification}</p>
@@ -59,16 +64,13 @@ const title = "title" in person ? person.title : undefined;
 		place-content: normal;
 	}
 
-	.person-card-copy h3 {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
+	.person-card-title {
 		font-size: var(--fontSizeCardTitle);
-		font-weight: var(--fontWeightBold);
 		line-height: 1.15;
 		margin: 0;
 	}
 
-	.person-card-talk h3 {
+	.person-card-talk .person-card-title {
 		align-self: center;
 		line-height: 1.25;
 	}

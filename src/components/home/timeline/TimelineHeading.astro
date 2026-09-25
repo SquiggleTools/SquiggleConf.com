@@ -1,0 +1,21 @@
+---
+import type { ComponentProps } from "astro/types";
+
+import Heading from "~/components/Heading.astro";
+
+type Props = ComponentProps<typeof Heading>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<Heading class:list={["timeline-heading-defaults", className]} {...rest}>
+	<slot />
+</Heading>
+
+<style>
+	.timeline-heading-defaults {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightBold);
+	}
+</style>

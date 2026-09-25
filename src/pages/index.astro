@@ -44,6 +44,7 @@ import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
+import TimelineHeading from "~/components/home/timeline/TimelineHeading.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
 import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
@@ -67,7 +68,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineFishLayer swimUntil="talks-morning" />
 			<div class="top-side-by-side">
 				<div class="top-side-left">
-					<h2 class="top-heading">the devtools conference</h2>
+					<TimelineHeading class="top-heading" level="h2">
+						the devtools conference
+					</TimelineHeading>
 					<p class="top-intro">
 						SquiggleConf is a conference focused on software developer tools: AI
 						tools, linters, code editors, performance and security tools,
@@ -80,7 +83,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			<TimelineGrid>
 				<TimelineDayCap date="May 6th" day="Thursday">
 					<div class="timeline-grid-intro">
-						<h3>SquiggleConf 2027</h3>
+						<TimelineHeading class="timeline-grid-intro-heading" level="h3">
+							SquiggleConf 2027
+						</TimelineHeading>
 						<p>{eventLocation}</p>
 					</div>
 				</TimelineDayCap>
@@ -513,11 +518,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top-heading {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeDisplay);
 		font-style: italic;
-		font-weight: var(--fontWeightBold);
 		line-height: 1;
 		padding-top: 1rem;
 		position: relative;
@@ -563,16 +565,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-left: 2rem;
 	}
 
-	.timeline-grid-intro h3,
 	.timeline-grid-intro p {
 		margin: 0;
 	}
 
-	.timeline-grid-intro h3 {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
+	.timeline-grid-intro-heading {
 		font-size: clamp(1.55rem, 2.7vw, 2.1rem);
-		font-weight: var(--fontWeightBold);
 		line-height: 0.98;
 	}
 

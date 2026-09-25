@@ -1,6 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
+import TimelineHeading from "./TimelineHeading.astro";
+
 interface Props extends HTMLAttributes<"div"> {
 	heading?: string;
 }
@@ -9,7 +11,13 @@ const { class: className, heading, ...attributes } = Astro.props;
 ---
 
 <div {...attributes} class:list={["timeline-copy", className]}>
-	{heading && <h3 class="timeline-copy-heading">{heading}</h3>}
+	{
+		heading && (
+			<TimelineHeading class="timeline-copy-heading" level="h3">
+				{heading}
+			</TimelineHeading>
+		)
+	}
 	<slot />
 </div>
 
@@ -30,10 +38,7 @@ const { class: className, heading, ...attributes } = Astro.props;
 	}
 
 	.timeline-copy-heading {
-		color: var(--colorHeading);
-		font-family: var(--fontFamilyHeading);
 		font-size: 1.2rem;
-		font-weight: var(--fontWeightBold);
 		line-height: 1.05;
 		margin: 0 0 0.25rem;
 	}
