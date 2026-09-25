@@ -235,45 +235,16 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<TimelineMedia>
 						<Collage
 							ariaLabel="Milk and Cookies break collage"
-							layout="trio"
+							layout="trio-compact"
 							photos={[
-								{
-									alt: "Milk and cookies spread",
-									frame: {
-										height: "5.7rem",
-										left: "0.25rem",
-										rotate: "-8deg",
-										top: "1rem",
-										width: "7.5rem",
-									},
-									src: milkcookies3,
-								},
-								{
-									alt: "Cookies at the break",
-									frame: {
-										height: "5.8rem",
-										left: "5.4rem",
-										rotate: "2deg",
-										top: "0.2rem",
-										width: "7.5rem",
-										zIndex: 1,
-									},
-									src: milkcookies1,
-								},
+								{ alt: "Milk and cookies spread", src: milkcookies3 },
+								{ alt: "Cookies at the break", src: milkcookies1 },
 								{
 									alt: "Milk and cookies break crowd",
-									frame: {
-										height: "5rem",
-										left: "11rem",
-										rotate: "10deg",
-										top: "2rem",
-										width: "6rem",
-									},
 									objectPosition: "10% 0%",
 									src: milkcookies2,
 								},
 							]}
-							size={{ height: "8rem", width: "18.6rem" }}
 						/>
 						<TimelineCopy class="break-copy">
 							<p>A SquiggleConf classic!</p><p>
