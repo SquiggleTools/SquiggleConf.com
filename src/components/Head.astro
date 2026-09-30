@@ -25,7 +25,9 @@ const keywords = [
 ];
 
 const title = [
-	Astro.props.title,
+	year === currentYear
+		? Astro.props.title
+		: [year, Astro.props.title].filter(Boolean).join(" "),
 	`SquiggleConf`,
 	`${eventDate} ${currentYear}: Your Boston devtools field trip.`,
 ]
