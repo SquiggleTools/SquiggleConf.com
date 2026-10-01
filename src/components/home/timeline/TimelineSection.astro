@@ -5,7 +5,7 @@
 <style>
 	.timeline-section {
 		--timeline-rail-background: light-dark(
-			rgb(from var(--colorWhite) r g b / 42%),
+			var(--colorWhiteAlpha42),
 			var(--colorBlueBright1)
 		);
 		--timeline-rail-border-color: light-dark(
@@ -37,7 +37,7 @@
 		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
 			light-dark(
 				rgb(from var(--colorBlue5) r g b / 10%),
-				rgb(from var(--colorBlue5) r g b / 18%)
+				var(--colorBlue5Alpha18)
 			);
 		--timeline-card-hover-background: linear-gradient(
 			135deg,
@@ -54,11 +54,11 @@
 			inset 0 0 0 1px
 				light-dark(
 					rgb(from var(--colorBlue4) r g b / 10%),
-					rgb(from var(--colorWhite) r g b / 8%)
+					var(--colorWhiteAlpha8)
 				),
 			0 1rem 2rem
 				light-dark(
-					rgb(from var(--colorBlue5) r g b / 8%),
+					var(--colorBlue5Alpha8),
 					rgb(from var(--colorBlue5) r g b / 14%)
 				);
 		--timeline-card-glow-inner: light-dark(

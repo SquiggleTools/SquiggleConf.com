@@ -27,6 +27,11 @@
 		rgb(from var(--colorBlue4) r g b / 76%),
 		rgb(from var(--colorBlue1) r g b / 82%)
 	);
+	--colorBlue5Alpha8: rgb(from var(--colorBlue5) r g b / 8%);
+	--colorBlue5Alpha18: rgb(from var(--colorBlue5) r g b / 18%);
+	--colorWhiteAlpha8: rgb(from var(--colorWhite) r g b / 8%);
+	--colorWhiteAlpha12: rgb(from var(--colorWhite) r g b / 12%);
+	--colorWhiteAlpha42: rgb(from var(--colorWhite) r g b / 42%);
 	--colorTextShadow: light-dark(rgb(70 96 140 / 35%), rgb(0 0 7 / 25%));
 	--colorUnhappy: #ffbfc2;
 	--fontFamilyBody: "Inter Variable";

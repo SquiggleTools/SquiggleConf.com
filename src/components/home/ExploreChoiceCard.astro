@@ -38,7 +38,7 @@ const { choice } = Astro.props;
 
 <style>
 	.explore-card {
-		background: rgb(from var(--colorWhite) r g b / 8%);
+		background: var(--colorWhiteAlpha8);
 		border: 1px solid var(--colorBlue3);
 		border-radius: var(--radiusMedium);
 		box-shadow: inset 0 0 0 0 rgb(from var(--colorWhite) r g b / 14%);
@@ -64,7 +64,7 @@ const { choice } = Astro.props;
 		box-shadow: inset 0 0 0 1px
 			light-dark(
 				rgb(from var(--colorBlue4) r g b / 6%),
-				rgb(from var(--colorWhite) r g b / 12%)
+				var(--colorWhiteAlpha12)
 			);
 		transform: translateX(0.08rem);
 	}
@@ -81,7 +81,7 @@ const { choice } = Astro.props;
 		align-items: center;
 		background: light-dark(
 			rgb(from var(--colorBlue5) r g b / 4%),
-			rgb(from var(--colorWhite) r g b / 8%)
+			var(--colorWhiteAlpha8)
 		);
 		border: 2px solid
 			light-dark(
@@ -100,19 +100,13 @@ const { choice } = Astro.props;
 	}
 
 	.explore-card:hover .explore-radio {
-		background: light-dark(
-			rgb(from var(--colorBlue5) r g b / 8%),
-			rgb(from var(--colorWhite) r g b / 12%)
-		);
+		background: light-dark(var(--colorBlue5Alpha8), var(--colorWhiteAlpha12));
 		border-color: light-dark(
 			rgb(from var(--colorBlue4) r g b / 85%),
 			rgb(from var(--colorWhite) r g b / 95%)
 		);
 		box-shadow: 0 0 0 0.18rem
-			light-dark(
-				rgb(from var(--colorBlue5) r g b / 8%),
-				rgb(from var(--colorWhite) r g b / 12%)
-			);
+			light-dark(var(--colorBlue5Alpha8), var(--colorWhiteAlpha12));
 	}
 
 	.explore-radio-dot {
