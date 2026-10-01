@@ -5,6 +5,8 @@ import SubtleCard from "./SubtleCard.astro";
 import SessionTags from "./SessionTags.astro";
 import { SessionInfo } from "~/data/historical/types";
 
+import "~/layouts/anchor-title.css";
+
 interface Props {
 	class?: string;
 	session: SessionInfo;
@@ -19,10 +21,10 @@ const {
 } = Astro.props;
 ---
 
-<li class:list={["talk", className]} id={slug} {...rest}>
+<li class:list={["talk", "anchor-title-card", className]} id={slug} {...rest}>
 	<SubtleCard>
 		<div class="talk-top">
-			<a class="title" href={`#${slug}`}>{title}</a>
+			<a class="title anchor-title" href={`#${slug}`}>{title}</a>
 			<div class="talk-description">
 				<SafeMarkdown of={description} />
 			</div>
@@ -51,7 +53,6 @@ const {
 		display: flex;
 		flex-basis: 0;
 		flex-direction: column;
-		font-family: var(--fontFamilyBody);
 		justify-content: space-between;
 		scroll-margin-top: 1rem;
 	}
@@ -69,16 +70,6 @@ const {
 		text-align: left;
 		margin-bottom: 0.5rem;
 		text-decoration: none;
-	}
-
-	.title::after {
-		content: " #";
-		opacity: 0;
-		transition: var(--transitionNormal) opacity;
-	}
-
-	:is(.talk:hover, .talk:focus-within) .title::after {
-		opacity: 1;
 	}
 
 	.talk-description {
@@ -111,7 +102,6 @@ const {
 	.speakers {
 		align-items: flex-start;
 		display: flex;
-		font-family: var(--fontFamilyBody);
 		gap: 1rem 4rem;
 		flex-wrap: wrap;
 		margin-top: 1.5rem;
