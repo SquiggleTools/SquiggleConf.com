@@ -1,6 +1,5 @@
 {
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
-	"entry": ["src/pages/_image.ts"],
 	"ignoreBinaries": ["printf"],
 	"ignoreDependencies": ["sharp", "wrangler"],
 	"ignoreExportsUsedInFile": { "interface": true, "type": true },
