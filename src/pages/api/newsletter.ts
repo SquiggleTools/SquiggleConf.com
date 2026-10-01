@@ -7,7 +7,7 @@ const bodySchema = z.object({
 });
 
 export const POST: APIRoute = async ({ request }) => {
-	if (!BREVO_API_KEY || BREVO_LIST_ID === undefined) {
+	if (!BREVO_API_KEY) {
 		return new Response("Newsletter signup is unavailable", {
 			status: 503,
 		});

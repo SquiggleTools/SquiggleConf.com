@@ -53,7 +53,7 @@ import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
-import { eventDate, eventLocation } from "~/data/event";
+import { eventDate, eventDateEve, eventLocation } from "~/data/event";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
@@ -81,7 +81,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<PostcardGallery />
 			</div>
 			<TimelineGrid>
-				<TimelineDayCap date="May 6th" day="Thursday">
+				<TimelineDayCap date={eventDateEve} day="Thursday">
 					<div class="timeline-grid-intro">
 						<TimelineHeading class="timeline-grid-intro-heading" level="h3">
 							SquiggleConf 2027
