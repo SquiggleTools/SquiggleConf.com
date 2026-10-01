@@ -263,6 +263,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 </style>
 
 <script>
+	import { observeAboveMiddle } from "~/utils/aboveMiddle";
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
@@ -278,13 +279,14 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 			);
 		};
 
-		new IntersectionObserver(
-			([entry]) => {
-				centerAboveMiddle = entry.intersectionRatio >= 0.5;
+		observeAboveMiddle(
+			[postcard],
+			(_, above) => {
+				centerAboveMiddle = above;
 				updateFlipped();
 			},
-			{ rootMargin: "100000px 0px -50% 0px", threshold: 0.5 },
-		).observe(postcard);
+			0.5,
+		);
 
 		mobileQuery.addEventListener("change", updateFlipped);
 	}
