@@ -23,14 +23,15 @@ import wesBos from "~/assets/avatars/wes-bos.webp";
 import syntax from "~/assets/logos/syntax.svg";
 import networking from "~/assets/stills/attendees-networking.png";
 import harbor from "~/assets/stills/boston-harbor.png";
+import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Hero from "~/components/hero/Hero.astro";
+import Collage from "~/components/home/Collage.astro";
 import {
 	exploreChoices,
 	lunchSpots,
 	talkBlocks,
 	timelineMCs,
 } from "~/components/home/data";
-import Collage from "~/components/home/Collage.astro";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
@@ -38,24 +39,23 @@ import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/timeline/TimelineCopy.astro";
-import TimelineLink from "~/components/home/timeline/TimelineLink.astro";
-import TimelineLinkList from "~/components/home/timeline/TimelineLinkList.astro";
 import TimelineDayCap from "~/components/home/timeline/TimelineDayCap.astro";
 import TimelineEntry from "~/components/home/timeline/TimelineEntry.astro";
 import TimelineFishLayer from "~/components/home/timeline/TimelineFishLayer.astro";
 import TimelineGrid from "~/components/home/timeline/TimelineGrid.astro";
 import TimelineHeading from "~/components/home/timeline/TimelineHeading.astro";
 import TimelineImage from "~/components/home/timeline/TimelineImage.astro";
+import TimelineLink from "~/components/home/timeline/TimelineLink.astro";
+import TimelineLinkList from "~/components/home/timeline/TimelineLinkList.astro";
 import TimelineList from "~/components/home/timeline/TimelineList.astro";
 import TimelineMedia from "~/components/home/timeline/TimelineMedia.astro";
 import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
-import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
-import { eventDate, eventLocation } from "~/data/event";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
+import { eventDate, eventLocation } from "~/data/event";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
@@ -96,9 +96,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="launch-party"
 					heading="Launch Party!"
-					venue="nedDevines"
 					time="6-9pm"
 					timeMode="range"
+					venue="nedDevines"
 				>
 					<Collage
 						ariaLabel="Launch party collage"
@@ -130,10 +130,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="fun-run"
 					heading="Fun Run"
-					venue="aquarium"
 					time="7-7:30am"
 					timeMode="range"
 					variant="fun-run"
+					venue="aquarium"
 				>
 					<div class="fun-run-body">
 						<TimelineCopy class="fun-run-copy">
@@ -169,8 +169,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="check-in"
 					heading="Check In"
-					venue="aquarium"
 					time="8am"
+					venue="aquarium"
 				>
 					<TimelineCopy>
 						<p>
@@ -184,8 +184,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="simons-imax-theater"
 					heading="Talks in an IMAX Theater"
-					venue="aquarium"
 					time="8am"
+					venue="aquarium"
 				>
 					<TimelineMedia>
 						<TimelineImage
@@ -211,8 +211,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="meet-your-mcs"
 					heading="Meet your MCs!"
-					venue="aquarium"
 					time="9am"
+					venue="aquarium"
 				>
 					<TimelineList aria-label="Conference MCs" columns={2}>
 						{timelineMCs.map((host) => <PersonCard person={host} />)}
@@ -222,8 +222,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-morning"
 					heading="Talks"
-					venue="aquarium"
 					time="9am"
+					venue="aquarium"
 				>
 					<TimelineList aria-label="Speaker talks">
 						{talkBlocks.morning.map((talk) => <PersonCard person={talk} />)}
@@ -235,9 +235,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="cookies-break"
 					heading="Milk & Cookies Break"
-					venue="aquarium"
 					time="10:30am"
 					variant="break"
+					venue="aquarium"
 				>
 					<TimelineMedia>
 						<Collage
@@ -267,8 +267,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-late"
 					heading="Talks"
-					venue="aquarium"
 					time="11am"
+					venue="aquarium"
 				>
 					<TimelineList aria-label="Late morning talks">
 						{talkBlocks.lateMorning.map((talk) => <PersonCard person={talk} />)}
@@ -281,8 +281,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="lunch"
 					heading="Lunch"
-					venue="quincyMarket"
 					time="12pm"
+					venue="quincyMarket"
 				>
 					<TimelineMedia mediaWidth="10rem">
 						<LunchCarousel spots={lunchSpots} />
@@ -311,8 +311,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 				<TimelineVenue span={2} venue="aquarium">
 					<div
-						class="timeline-venue-decoration timeline-venue-decoration-turtle"
 						aria-hidden="true"
+						class="timeline-venue-decoration timeline-venue-decoration-turtle"
 					>
 						<TimelineTalksTurtle />
 					</div>
@@ -322,8 +322,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-afternoon"
 					heading="Talks"
-					venue="aquarium"
 					time="2pm"
+					venue="aquarium"
 				>
 					<TimelineList aria-label="Afternoon talks">
 						{talkBlocks.afternoon.map((talk) => <PersonCard person={talk} />)}
@@ -354,8 +354,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="arrive-urban-wild"
 					heading="Arrive at Urban Wild"
-					venue="urbanWild"
 					time="6pm"
+					venue="urbanWild"
 				>
 					<TimelineMedia>
 						<TimelineImage
@@ -378,8 +378,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="live-podcast-recording"
 					heading="Live Podcast Recording"
-					venue="urbanWild"
 					time="6pm"
+					venue="urbanWild"
 				>
 					<TimelineMedia>
 						<Collage
@@ -423,8 +423,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="fireside-chat"
 					heading="Fireside Chat"
-					venue="urbanWild"
 					time="7pm"
+					venue="urbanWild"
 				>
 					<TimelineMedia>
 						<Collage
@@ -455,9 +455,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="after-party"
 					heading="After Party"
-					venue="urbanWild"
 					time="7:30-9pm"
 					timeMode="range"
+					venue="urbanWild"
 				>
 					<Collage
 						ariaLabel="After party collage"
@@ -484,8 +484,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="big-rav"
 					heading="Big Rav"
-					venue="urbanWild"
 					time="9pm"
+					venue="urbanWild"
 				>
 					<TimelineMedia>
 						<TimelineImage
