@@ -30,25 +30,23 @@ const {
 				</div>
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
-						<a class="title" href={`#${slug}`}>{name}</a>
-						{
-							qualification && (
-								<div>
-									<SafeMarkdown of={qualification} />
-								</div>
-							)
-						}
+						<a class="title" href={`#${slug}`}>
+							{name}
+						</a>
+						{qualification && (
+							<div>
+								<SafeMarkdown of={qualification} />
+							</div>
+						)}
 					</div>
 					<ul class="speaker-talks">
-						{
-							talks.map((talk) => (
-								<li>
-									<a class="talk-title" href={`/${year}/sessions#${talk.slug}`}>
-										{talk.title}
-									</a>
-								</li>
-							))
-						}
+						{talks.map((talk) => (
+							<li>
+								<a class="talk-title" href={`/${year}/sessions#${talk.slug}`}>
+									{talk.title}
+								</a>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

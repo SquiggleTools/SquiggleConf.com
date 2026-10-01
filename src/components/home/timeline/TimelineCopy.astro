@@ -11,13 +11,11 @@ const { class: className, heading, ...attributes } = Astro.props;
 ---
 
 <div {...attributes} class:list={["timeline-copy", className]}>
-	{
-		heading && (
-			<TimelineHeading class="timeline-copy-heading" level="h3">
-				{heading}
-			</TimelineHeading>
-		)
-	}
+	{heading && (
+		<TimelineHeading class="timeline-copy-heading" level="h3">
+			{heading}
+		</TimelineHeading>
+	)}
 	<slot />
 </div>
 

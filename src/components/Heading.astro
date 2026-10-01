@@ -10,15 +10,13 @@ const { level: As, link, ...rest } = Astro.props;
 ---
 
 <As class:list={[Astro.props.class, "heading"]} {...rest}>
-	{
-		link ? (
-			<a href={link === true ? `#${Astro.props.id}` : link}>
-				<slot />
-			</a>
-		) : (
+	{link ? (
+		<a href={link === true ? `#${Astro.props.id}` : link}>
 			<slot />
-		)
-	}
+		</a>
+	) : (
+		<slot />
+	)}
 </As>
 
 <style>

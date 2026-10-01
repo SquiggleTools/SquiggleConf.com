@@ -21,29 +21,27 @@ const { data: historicalData, year } = Astro.props;
 	year={year}
 >
 	<ul class="speakers-list">
-		{
-			Object.values(historicalData.peopleBySlug)
-				.sort((a, b) =>
-					!!a.biography === !!b.biography
-						? a.name.localeCompare(b.name)
-						: a.biography
-							? -1
-							: 1,
-				)
-				.map((person) => (
-					<Speaker
-						speaker={person}
-						talks={Object.values(historicalData.sessionsBySlug).filter((talk) =>
-							talk.people.includes(person),
-						)}
-						year={year}
-					>
-						<div class="bio" slot="center">
-							<SafeMarkdown of={person.biography} />
-						</div>
-					</Speaker>
-				))
-		}
+		{Object.values(historicalData.peopleBySlug)
+			.sort((a, b) =>
+				!!a.biography === !!b.biography
+					? a.name.localeCompare(b.name)
+					: a.biography
+						? -1
+						: 1,
+			)
+			.map((person) => (
+				<Speaker
+					speaker={person}
+					talks={Object.values(historicalData.sessionsBySlug).filter((talk) =>
+						talk.people.includes(person),
+					)}
+					year={year}
+				>
+					<div class="bio" slot="center">
+						<SafeMarkdown of={person.biography} />
+					</div>
+				</Speaker>
+			))}
 	</ul>
 </PageLayout>
 

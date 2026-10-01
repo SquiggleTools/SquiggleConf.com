@@ -17,19 +17,17 @@ const { class: className, links, ...rest } = Astro.props;
 ---
 
 <div class:list={["icon-links", className]} {...rest}>
-	{
-		links.map(({ alt, href, src: Icon }) => (
-			<a
-				aria-label={alt}
-				class="icon-link"
-				href={href}
-				rel="noreferrer"
-				target="_blank"
-			>
-				<Icon aria-hidden="true" class="icon-link-image" />
-			</a>
-		))
-	}
+	{links.map(({ alt, href, src: Icon }) => (
+		<a
+			aria-label={alt}
+			class="icon-link"
+			href={href}
+			rel="noreferrer"
+			target="_blank"
+		>
+			<Icon aria-hidden="true" class="icon-link-image" />
+		</a>
+	))}
 </div>
 
 <style>

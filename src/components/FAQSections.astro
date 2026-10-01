@@ -7,11 +7,9 @@ interface Props {
 ---
 
 <div class="faq-sections">
-	{
-		Astro.props.sections.map(({ title, pairs: section }) => (
-			<FAQSection pairs={section} title={title} />
-		))
-	}
+	{Astro.props.sections.map(({ title, pairs: section }) => (
+		<FAQSection pairs={section} title={title} />
+	))}
 </div>
 
 <style>

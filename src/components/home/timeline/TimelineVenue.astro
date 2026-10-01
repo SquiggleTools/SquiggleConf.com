@@ -28,7 +28,9 @@ const decorated = Astro.slots.has("default");
 			rel="noreferrer"
 			target="_blank"
 		>
-			{name.split(" ").map((line) => <p>{line}</p>)}
+			{name.split(" ").map((line) => (
+				<p>{line}</p>
+			))}
 		</a>
 		<slot />
 	</div>

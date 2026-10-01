@@ -13,15 +13,13 @@ interface Props {
 const { class: className, sources, ...rest } = Astro.props;
 ---
 
-{
-	(["dark", "light"] as const).map((theme) => (
-		<Image
-			class:list={[className, `themed-image-${theme}`]}
-			src={sources[theme]}
-			{...rest}
-		/>
-	))
-}
+{(["dark", "light"] as const).map((theme) => (
+	<Image
+		class:list={[className, `themed-image-${theme}`]}
+		src={sources[theme]}
+		{...rest}
+	/>
+))}
 
 <style>
 	html.dark .themed-image-light,

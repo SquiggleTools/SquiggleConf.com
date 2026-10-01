@@ -6,7 +6,9 @@ type Props = HTMLAttributes<"a">;
 const { class: className, ...rest } = Astro.props;
 ---
 
-<a class:list={["timeline-link", className]} {...rest}><slot /></a>
+<a class:list={["timeline-link", className]} {...rest}>
+	<slot />
+</a>
 
 <style>
 	.timeline-link {

@@ -7,13 +7,11 @@ const { links } = Astro.props;
 ---
 
 <ul class="timeline-link-list">
-	{
-		links.map(({ href, text }) => (
-			<li>
-				<a href={href}>{text}</a>
-			</li>
-		))
-	}
+	{links.map(({ href, text }) => (
+		<li>
+			<a href={href}>{text}</a>
+		</li>
+	))}
 </ul>
 
 <style>
