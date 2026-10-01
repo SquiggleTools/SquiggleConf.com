@@ -1,9 +1,10 @@
 ---
+import { SessionInfo } from "~/data/historical/types";
+
 import SafeMarkdown from "../SafeMarkdown.astro";
+import SessionTags from "./SessionTags.astro";
 import SpeakerSmall from "./SpeakerSmall.astro";
 import SubtleCard from "./SubtleCard.astro";
-import SessionTags from "./SessionTags.astro";
-import { SessionInfo } from "~/data/historical/types";
 
 interface Props {
 	class?: string;
@@ -13,7 +14,7 @@ interface Props {
 
 const {
 	class: className,
-	session: { title, people, tags, description, slug },
+	session: { description, people, slug, tags, title },
 	year,
 	...rest
 } = Astro.props;
