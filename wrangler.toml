@@ -8,9 +8,6 @@ preview_urls = true
 pattern = "squiggleconf.com"
 custom_domain = true
 
-[vars]
-BREVO_LIST_ID = "3"
-
 [assets]
 binding = "ASSETS"
 directory = "./dist"
