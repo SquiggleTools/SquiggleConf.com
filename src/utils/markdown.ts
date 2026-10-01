@@ -1,12 +1,12 @@
-import { marked, Renderer, type Tokens } from "marked";
+import { marked } from "marked";
 
 marked.use({
-	renderer: {
-		link(token: Tokens.Link) {
-			const html = Renderer.prototype.link.call(this as Renderer, token);
-			return /^https?:/.test(token.href)
-				? html.replace("<a ", '<a rel="noreferrer" target="_blank" ')
-				: html;
+	hooks: {
+		postprocess(html) {
+			return html.replaceAll(
+				/<a href="(https?:[^"]*)"/g,
+				'<a href="$1" rel="noreferrer" target="_blank"',
+			);
 		},
 	},
 });
