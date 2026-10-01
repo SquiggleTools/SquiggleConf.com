@@ -18,40 +18,37 @@ const seen = new Set<PersonInfo>();
 
 <SectionWrapper>
 	<BodyText class="speakers-body-text" historical>
-		See {year}'s full details on <a href={`/${year}/sessions`}
-			>{year} Sessions</a
-		> and
+		See {year}'s full details on{" "}
+		<a href={`/${year}/sessions`}>{year} Sessions</a> and
 		<a href={`/${year}/speakers`}>{year} Speakers</a>.
 	</BodyText>
 
 	<ul class="speakers-list">
-		{
-			talks.map((talk) =>
-				talk.people
-					.filter((person) => {
-						if (seen.has(person)) {
-							return false;
-						}
+		{talks.map((talk) =>
+			talk.people
+				.filter((person) => {
+					if (seen.has(person)) {
+						return false;
+					}
 
-						seen.add(person);
-						return true;
-					})
-					.map((person) => (
-						<SubtleCard as="li" class="speaker-card">
-							<SpeakerSmall
-								href={`/${year}/sessions#${talk.slug}`}
-								person={person}
-							>
-								<BioLinks
-									class="speaker-bio-links"
-									name={person.name}
-									links={person.links}
-								/>
-							</SpeakerSmall>
-						</SubtleCard>
-					)),
-			)
-		}
+					seen.add(person);
+					return true;
+				})
+				.map((person) => (
+					<SubtleCard as="li" class="speaker-card">
+						<SpeakerSmall
+							href={`/${year}/sessions#${talk.slug}`}
+							person={person}
+						>
+							<BioLinks
+								class="speaker-bio-links"
+								name={person.name}
+								links={person.links}
+							/>
+						</SpeakerSmall>
+					</SubtleCard>
+				)),
+		)}
 	</ul>
 </SectionWrapper>
 

@@ -11,8 +11,10 @@ const { class: className, mediaWidth, ...rest } = Astro.props;
 
 <div
 	class:list={["timeline-media", className]}
-	style={mediaWidth &&
-		`grid-template-columns: minmax(0, ${mediaWidth}) minmax(0, 1fr)`}
+	style={
+		mediaWidth &&
+		`grid-template-columns: minmax(0, ${mediaWidth}) minmax(0, 1fr)`
+	}
 	{...rest}
 >
 	<slot />

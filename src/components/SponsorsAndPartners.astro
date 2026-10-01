@@ -56,19 +56,17 @@ const tiers = [
 		</div>
 
 		<div class="past-sponsors-panel">
-			{
-				tiers.map((tier) => (
-					<div class="past-sponsors-tier">
-						{tier.map((sponsor) => (
-							<SponsorLogo
-								class="sponsor-logo"
-								sponsor={sponsor}
-								style={{ "--logo-size": sponsor.size }}
-							/>
-						))}
-					</div>
-				))
-			}
+			{tiers.map((tier) => (
+				<div class="past-sponsors-tier">
+					{tier.map((sponsor) => (
+						<SponsorLogo
+							class="sponsor-logo"
+							sponsor={sponsor}
+							style={{ "--logo-size": sponsor.size }}
+						/>
+					))}
+				</div>
+			))}
 		</div>
 
 		<div class="past-sponsors-cta">

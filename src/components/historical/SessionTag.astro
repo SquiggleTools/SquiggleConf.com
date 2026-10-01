@@ -162,19 +162,17 @@ const LightIcon = whiteStrokeIcons.includes(image)
 ---
 
 <div class="tag-chip" style={{ alignSelf: "end" }}>
-	{
-		LightIcon ? (
-			<LightIcon
-				aria-hidden="true"
-				class="tag-icon light-icon"
-				fill="currentColor"
-			/>
-		) : (
-			image && (
-				<Image class="tag-icon" alt={`${tag} logo`} src={image} height={24} />
-			)
+	{LightIcon ? (
+		<LightIcon
+			aria-hidden="true"
+			class="tag-icon light-icon"
+			fill="currentColor"
+		/>
+	) : (
+		image && (
+			<Image class="tag-icon" alt={`${tag} logo`} src={image} height={24} />
 		)
-	}
+	)}
 	{tag}
 </div>
 

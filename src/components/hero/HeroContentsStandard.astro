@@ -13,17 +13,15 @@ const { heading, squiggly = "medium" }: Props = Astro.props;
 <div
 	class:list={["hero-contents-standard", `hero-contents-standard-${squiggly}`]}
 >
-	{
-		squiggly === "none" ? (
-			<Heading level="h1">{heading}</Heading>
-		) : (
-			<TextSquiggly width={squiggly}>
-				<Heading level="h1" slot="inside">
-					{heading}
-				</Heading>
-			</TextSquiggly>
-		)
-	}
+	{squiggly === "none" ? (
+		<Heading level="h1">{heading}</Heading>
+	) : (
+		<TextSquiggly width={squiggly}>
+			<Heading level="h1" slot="inside">
+				{heading}
+			</Heading>
+		</TextSquiggly>
+	)}
 
 	<p class="hero-contents-standard-body">
 		<slot />

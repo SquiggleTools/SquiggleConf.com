@@ -22,21 +22,19 @@ const pairs = await Promise.all(
 	<Heading class="h3" level="h3">
 		{Astro.props.title}
 	</Heading>
-	{
-		pairs.map(([question, answer]) => (
-			<details>
-				<summary>
-					<Dropdown
-						aria-hidden="true"
-						class="faq-dropdown"
-						preserveAspectRatio="none"
-					/>
-					<span>{question}</span>
-				</summary>
-				<div class="faq-answer" set:html={answer} />
-			</details>
-		))
-	}
+	{pairs.map(([question, answer]) => (
+		<details>
+			<summary>
+				<Dropdown
+					aria-hidden="true"
+					class="faq-dropdown"
+					preserveAspectRatio="none"
+				/>
+				<span>{question}</span>
+			</summary>
+			<div class="faq-answer" set:html={answer} />
+		</details>
+	))}
 </div>
 
 <style>

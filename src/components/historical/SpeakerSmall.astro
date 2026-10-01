@@ -25,20 +25,16 @@ const {
 		<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
 	</div>
 	<div class="speaker-text">
-		{
-			href && (
-				<a class="speaker-text-links" href={href} aria-label={speaker.name} />
-			)
-		}
+		{href && (
+			<a class="speaker-text-links" href={href} aria-label={speaker.name} />
+		)}
 		<div class="name">{speaker.name}</div>
 		<div class="details">
-			{
-				speaker.qualification && (
-					<div>
-						<SafeMarkdown of={speaker.qualification} />
-					</div>
-				)
-			}
+			{speaker.qualification && (
+				<div>
+					<SafeMarkdown of={speaker.qualification} />
+				</div>
+			)}
 		</div>
 		<slot />
 	</div>

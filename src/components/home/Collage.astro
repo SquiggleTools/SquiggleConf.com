@@ -31,23 +31,21 @@ const {
 	role={ariaLabel ? "group" : undefined}
 	{...rest}
 >
-	{
-		photos.map((photo, index) => (
-			<div class={`collage-item collage-item-${index + 1}`}>
-				<TimelineImage
-					alt={photo.decorative ? "" : photo.alt}
-					effect={
-						shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
-					}
-					loading="lazy"
-					objectPosition={photo.objectPosition}
-					placeholder={photo.placeholder}
-					radius={shape === "avatar" ? "var(--radiusPill)" : undefined}
-					src={photo.src}
-				/>
-			</div>
-		))
-	}
+	{photos.map((photo, index) => (
+		<div class={`collage-item collage-item-${index + 1}`}>
+			<TimelineImage
+				alt={photo.decorative ? "" : photo.alt}
+				effect={
+					shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
+				}
+				loading="lazy"
+				objectPosition={photo.objectPosition}
+				placeholder={photo.placeholder}
+				radius={shape === "avatar" ? "var(--radiusPill)" : undefined}
+				src={photo.src}
+			/>
+		</div>
+	))}
 </div>
 
 <style>

@@ -9,6 +9,7 @@ export default defineConfig({
 	build: {
 		format: "file",
 	},
+	compressHTML: true,
 	env: {
 		schema: {
 			BREVO_API_KEY: envField.string({
@@ -24,10 +25,6 @@ export default defineConfig({
 		},
 	},
 	image: {
-		endpoint: {
-			entrypoint: "src/pages/_image.ts",
-			route: "/_image",
-		},
 		layout: "constrained",
 		responsiveStyles: true,
 	},
@@ -44,8 +41,6 @@ export default defineConfig({
 		"/speakers": "/2025/speakers",
 		"/travel": "/articles/travel",
 	},
-	session: {
-		driver: "memory",
-	},
+	session: false,
 	site: "https://squiggleconf.com",
 });

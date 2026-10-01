@@ -11,15 +11,13 @@ const { swimUntil } = Astro.props;
 ---
 
 <div class="timeline-fish-layer" aria-hidden="true" data-swim-until={swimUntil}>
-	{
-		timelineFish.map((fish, index) => (
-			<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
-				<div class="timeline-fish-body">
-					<span class="timeline-fish-image" set:html={fish} />
-				</div>
+	{timelineFish.map((fish, index) => (
+		<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
+			<div class="timeline-fish-body">
+				<span class="timeline-fish-image" set:html={fish} />
 			</div>
-		))
-	}
+		</div>
+	))}
 </div>
 
 <style>
