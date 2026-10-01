@@ -4,6 +4,7 @@ import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
 import { currentYear } from "~/data/years";
+import { pagePathname } from "~/utils/pathname";
 
 interface Props {
 	hideLogo?: boolean;
@@ -11,13 +12,14 @@ interface Props {
 }
 
 const { hideLogo, year } = Astro.props;
+const pathname = pagePathname(Astro.url);
 
 const navLinks = [
 	{ href: "/articles", text: "Articles" },
 	{ href: "https://shop.squiggle.tools", text: "Shop" },
 	...(year === currentYear ? [] : [{ href: "/", text: currentYear }]),
 ].map(({ href, text }) => ({
-	"aria-current": Astro.url.pathname === href ? ("page" as const) : undefined,
+	"aria-current": pathname === href ? ("page" as const) : undefined,
 	href,
 	target: href.startsWith("https") ? "_blank" : undefined,
 	text,
