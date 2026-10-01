@@ -33,7 +33,7 @@ import openjsFoundationLight from "~/assets/logos/openjs-foundation-light.svg";
 import prismaBlack from "~/assets/logos/prisma-black.svg";
 import prismaWhite from "~/assets/logos/prisma-white.svg";
 
-import { PersonInfo, SessionInfo, SponsorInfo } from "./types";
+import type { PersonInfo, SessionInfo, SponsorInfo } from "./types";
 
 export const peopleBySlug: Record<string, PersonInfo> = {
 	"aakansha-doshi": {
