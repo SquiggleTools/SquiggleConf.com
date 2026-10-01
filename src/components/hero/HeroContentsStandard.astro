@@ -4,10 +4,10 @@ import TextSquiggly from "~/components/TextSquiggly.astro";
 
 export interface Props {
 	heading: string;
-	squiggly?: "medium" | "wide" | "none";
+	squiggly: "medium" | "wide" | "none";
 }
 
-const { heading, squiggly = "medium" }: Props = Astro.props;
+const { heading, squiggly } = Astro.props;
 ---
 
 <div
