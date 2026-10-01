@@ -146,10 +146,7 @@ const {
 
 	/* A translucent outline that takes its text color from its surroundings. */
 	.button-variant-ghost {
-		--colorButtonBackground: light-dark(
-			rgb(from var(--colorWhite) r g b / 8%),
-			transparent
-		);
+		--colorButtonBackground: light-dark(var(--colorWhiteAlpha8), transparent);
 		--colorButtonBackgroundHover: light-dark(
 			rgb(from var(--colorBlue5) r g b / 14%),
 			rgb(from var(--colorBlue2) r g b / 78%)
@@ -167,7 +164,7 @@ const {
 		--shadowButton:
 			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
 			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
-			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
+			0 0 0 1px var(--colorBlue5Alpha8);
 		--shadowButtonHover:
 			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 22%),
 			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
