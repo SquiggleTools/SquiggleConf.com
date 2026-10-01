@@ -13,8 +13,9 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 	}
 
-	const formData = Object.fromEntries(await request.formData());
-	const body = bodySchema.safeParse(formData);
+	const body = bodySchema.safeParse(
+		Object.fromEntries(await request.formData().catch(() => [])),
+	);
 	if (body.error) {
 		return new Response("Invalid body", { status: 400 });
 	}
