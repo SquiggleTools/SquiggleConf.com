@@ -2,7 +2,7 @@
 import type { Polymorphic } from "astro/types";
 
 type Props<Tag extends "div" | "li"> = Polymorphic<{
-	as?: Tag;
+	as: Tag;
 	class?: string;
 }>;
 
