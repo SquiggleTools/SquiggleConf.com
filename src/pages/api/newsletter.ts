@@ -2,6 +2,8 @@ import { APIRoute } from "astro";
 import { BREVO_API_KEY, BREVO_LIST_ID } from "astro:env/server";
 import { z } from "zod";
 
+export const prerender = false;
+
 const bodySchema = z.object({
 	email: z.email(),
 });
