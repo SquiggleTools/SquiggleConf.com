@@ -1,6 +1,7 @@
 ---
 import { eventDate } from "~/data/event";
 import { currentYear } from "~/data/years";
+import { pagePathname } from "~/utils/pathname";
 
 import ThemeSetting from "./ThemeSetting.astro";
 
@@ -13,6 +14,7 @@ export interface Props {
 const { description, year = currentYear } = Astro.props;
 
 const banner = new URL("banner.png", Astro.site).toString();
+const pageUrl = new URL(pagePathname(Astro.url), Astro.site).toString();
 const favicon = new URL("favicon.png", Astro.site).toString();
 
 const keywords = [
@@ -65,7 +67,7 @@ const metaPairs = [
 		property: `og:type`,
 	},
 	{
-		content: Astro.url,
+		content: pageUrl,
 		property: `og:url`,
 	},
 	{
@@ -106,6 +108,7 @@ const metaPairs = [
 <head>
 	<meta charset="utf-8" />
 	<ThemeSetting />
+	<link href={pageUrl} rel="canonical" />
 	<link href="/favicon.png" rel="icon" type="image/png" />
 	<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 	{metaPairs.map((meta) => <meta {...meta} />)}
