@@ -4,7 +4,7 @@ import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
 	adapter: cloudflare({
-		imageService: "passthrough",
+		imageService: "compile",
 	}),
 	build: {
 		format: "file",

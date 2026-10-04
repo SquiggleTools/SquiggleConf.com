@@ -12,9 +12,9 @@ const { year } = Astro.props;
 ---
 
 <Hero class="next-year-notice">
-	<h2 class="primary-h2">
+	<h1 class="notice-heading">
 		Thank you to everyone who made SquiggleConf {year} wonderful!
-	</h2>
+	</h1>
 
 	<p class="byline">
 		<strong class="next-year">
@@ -32,7 +32,7 @@ const { year } = Astro.props;
 		text-align: center;
 	}
 
-	.primary-h2 {
+	.notice-heading {
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeSmall);
 		padding: 1rem var(--widthBodyPadding) 2rem;
