@@ -14,8 +14,6 @@ import tseslint from "typescript-eslint";
 export default defineConfig(
 	globalIgnores([
 		".astro",
-		".vercel",
-		".worktrees",
 		"dist",
 		"node_modules",
 		"pnpm-lock.yaml",
