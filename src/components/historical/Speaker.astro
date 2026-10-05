@@ -32,13 +32,9 @@ const {
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
 						<a class="title" href={`#${slug}`}>{name}</a>
-						{
-							qualification && (
-								<div>
-									<SafeMarkdown of={qualification} />
-								</div>
-							)
-						}
+						<div>
+							<SafeMarkdown of={qualification} />
+						</div>
 					</div>
 					<ul class="speaker-talks">
 						{
