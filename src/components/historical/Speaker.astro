@@ -26,9 +26,7 @@ const {
 	<SubtleCard>
 		<div class="speaker-top">
 			<div class="speaker-top-content">
-				<div class="speaker-image-container">
-					<Avatar alt={`${name} Avatar`} size={128} src={image} />
-				</div>
+				<Avatar alt={`${name} Avatar`} size={128} src={image} />
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
 						<a class="title" href={`#${slug}`}>{name}</a>
@@ -52,12 +50,7 @@ const {
 		</div>
 		<slot name="center" />
 		<div class="speaker-links">
-			<BioLinks
-				class="speaker-bio-links"
-				links={links}
-				name={name}
-				size="large"
-			/>
+			<BioLinks links={links} name={name} size="large" />
 		</div>
 	</SubtleCard>
 </li>

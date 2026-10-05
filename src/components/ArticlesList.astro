@@ -8,7 +8,7 @@ import Heading from "./Heading.astro";
 const entries = Object.entries<Article>(articles);
 ---
 
-<ContentArea class="articles-list">
+<ContentArea>
 	<ul>
 		{
 			entries.map(([slug, article]) => (

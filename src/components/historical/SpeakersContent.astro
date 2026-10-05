@@ -43,11 +43,7 @@ const seen = new Set<PersonInfo>();
 								href={`/${year}/sessions#${talk.slug}`}
 								person={person}
 							>
-								<BioLinks
-									class="speaker-bio-links"
-									links={person.links}
-									name={person.name}
-								/>
+								<BioLinks links={person.links} name={person.name} />
 							</SpeakerSmall>
 						</SubtleCard>
 					)),
