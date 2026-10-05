@@ -2,19 +2,20 @@
 import TextSquiggly from "./TextSquiggly.astro";
 
 interface Props {
+	as?: "div" | "h1";
 	bold?: boolean;
 	class?: string;
 }
 
-const { bold, class: className, ...props } = Astro.props;
+const { as: As = "div", bold, class: className, ...props } = Astro.props;
 ---
 
-<div class:list={["logo", bold && "logo-bold", className]} {...props}>
+<As class:list={["logo", bold && "logo-bold", className]} {...props}>
 	<TextSquiggly width="medium">
 		<Fragment slot="inside">Squiggle</Fragment>
 		<Fragment slot="after">Conf</Fragment>
 	</TextSquiggly>
-</div>
+</As>
 
 <style>
 	.logo {

@@ -10,8 +10,6 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = getStaticPathsHistorical;
 
-export const prerender = true;
-
 const { data: historicalData, year } = Astro.props;
 ---
 
@@ -23,13 +21,7 @@ const { data: historicalData, year } = Astro.props;
 	<ul class="speakers-list">
 		{
 			Object.values(historicalData.peopleBySlug)
-				.sort((a, b) =>
-					!!a.biography === !!b.biography
-						? a.name.localeCompare(b.name)
-						: a.biography
-							? -1
-							: 1,
-				)
+				.toSorted((a, b) => a.name.localeCompare(b.name))
 				.map((person) => (
 					<Speaker
 						speaker={person}
