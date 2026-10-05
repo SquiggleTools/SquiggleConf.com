@@ -8,8 +8,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 <PageLayout description="That page could not be found." title="Page Not Found">
 	<Hero>
 		<HeroContentsStandard heading="Page Not Found" squiggly="none">
-			We couldn't find anything at that address. It may have moved, or the link
-			may have a typo.
+			You've drifted into uncharted waters. <br /> Consider navigating back to the
+			surface.
 		</HeroContentsStandard>
 	</Hero>
 	<div class="not-found-actions">
@@ -23,6 +23,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	.not-found-actions {
 		display: flex;
 		justify-content: center;
-		padding: 3rem var(--widthBodyPadding) 5rem;
+		padding: clamp(3rem, 7vh, 25rem) var(--widthBodyPadding);
 	}
 </style>
