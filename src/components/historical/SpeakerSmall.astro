@@ -25,11 +25,9 @@ const {
 <As class:list={["speaker-small", className]} {...rest}>
 	<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
 	<div class="speaker-text">
-		{
-			href && (
-				<a aria-label={speaker.name} class="speaker-text-links" href={href} />
-			)
-		}
+		{href && (
+			<a aria-label={speaker.name} class="speaker-text-links" href={href} />
+		)}
 		<div class="name">{speaker.name}</div>
 		<div class="details">
 			<div>

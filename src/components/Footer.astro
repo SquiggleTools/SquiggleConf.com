@@ -25,7 +25,9 @@ const yearPairs =
 		<div class="left">
 			<Logo />
 			<div class="footer-date-location">
-				<span>{eventDate}, {currentYear} ·</span>
+				<span>
+					{eventDate}, {currentYear} ·
+				</span>
 				<span>{eventLocation}</span>
 			</div>
 		</div>
@@ -33,14 +35,14 @@ const yearPairs =
 			<div class="footer-links">
 				<a href="/about">About</a>
 				<a href="/code-of-conduct">Code of Conduct</a>
-				<a href="https://shop.squiggle.tools" target="_blank">Shop</a>
-				{
-					yearPairs.map(([yearHref, yearText]) => (
-						<a href={yearHref} target="_blank">
-							{yearText}
-						</a>
-					))
-				}
+				<a href="https://shop.squiggle.tools" target="_blank">
+					Shop
+				</a>
+				{yearPairs.map(([yearHref, yearText]) => (
+					<a href={yearHref} target="_blank">
+						{yearText}
+					</a>
+				))}
 				<ThemeToggle />
 			</div>
 			<IconLinks class="footer-socials" links={socials} />

@@ -18,11 +18,11 @@ const { data: historicalData, year } = Astro.props;
 	year={year}
 >
 	<ul class="talks-list">
-		{
-			Object.values(historicalData.sessionsBySlug)
-				.toSorted((a, b) => a.title.localeCompare(b.title))
-				.map((session) => <Session session={session} year={year} />)
-		}
+		{Object.values(historicalData.sessionsBySlug)
+			.toSorted((a, b) => a.title.localeCompare(b.title))
+			.map((session) => (
+				<Session session={session} year={year} />
+			))}
 	</ul>
 </PageLayout>
 

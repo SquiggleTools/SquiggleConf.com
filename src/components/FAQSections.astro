@@ -10,11 +10,9 @@ const { level, sections } = Astro.props;
 ---
 
 <div class="faq-sections">
-	{
-		sections.map(({ pairs, title }) => (
-			<FAQSection level={level} pairs={pairs} title={title} />
-		))
-	}
+	{sections.map(({ pairs, title }) => (
+		<FAQSection level={level} pairs={pairs} title={title} />
+	))}
 </div>
 
 <style>

@@ -17,13 +17,11 @@ const { class: className, heading, ...props } = Astro.props;
 	width="thin"
 	{...props}
 >
-	{
-		heading && (
-			<Heading id={slugify(heading)} level="h2">
-				{heading}
-			</Heading>
-		)
-	}
+	{heading && (
+		<Heading id={slugify(heading)} level="h2">
+			{heading}
+		</Heading>
+	)}
 	<slot />
 </ContentArea>
 

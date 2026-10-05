@@ -74,8 +74,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<p class="top-intro">
 						SquiggleConf is a conference focused on software developer tools: AI
 						tools, linters, code editors, performance and security tools,
-						debuggers, and more. We mix heavy talks with fun events.<br />Think
-						of it like your devtools fieldtrip.
+						debuggers, and more. We mix heavy talks with fun events.
+						<br />
+						Think of it like your devtools fieldtrip.
 					</p>
 				</div>
 				<PostcardGallery />
@@ -214,7 +215,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 				>
 					<TimelineList aria-label="Conference MCs" columns={2}>
-						{timelineMCs.map((host) => <PersonCard person={host} />)}
+						{timelineMCs.map((host) => (
+							<PersonCard person={host} />
+						))}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -225,7 +228,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 				>
 					<TimelineList aria-label="Speaker talks">
-						{talkBlocks.morning.map((talk) => <PersonCard person={talk} />)}
+						{talkBlocks.morning.map((talk) => (
+							<PersonCard person={talk} />
+						))}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -253,7 +258,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							]}
 						/>
 						<TimelineCopy class="break-copy">
-							<p>A SquiggleConf classic!</p><p>
+							<p>A SquiggleConf classic!</p>
+							<p>
 								Catch up with people you just met, and trade notes on the
 								morning’s talks.
 							</p>
@@ -270,7 +276,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 				>
 					<TimelineList aria-label="Late morning talks">
-						{talkBlocks.lateMorning.map((talk) => <PersonCard person={talk} />)}
+						{talkBlocks.lateMorning.map((talk) => (
+							<PersonCard person={talk} />
+						))}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -289,9 +297,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							<p>
 								Head out together into
 								<TimelineLink href="https://faneuilhallmarketplace.com/dining">
-									Faneuil Hall Marketplace</TimelineLink
-								> at Quincy Market, keep conversations moving, and treat the middle
-								of the day like your devtools field trip lunch break.
+									Faneuil Hall Marketplace
+								</TimelineLink>{" "}
+								at Quincy Market, keep conversations moving, and treat the
+								middle of the day like your devtools field trip lunch break.
 							</p>
 							<TimelineLinkList
 								links={lunchSpots.map(({ name, url }) => ({
@@ -325,7 +334,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					venue="aquarium"
 				>
 					<TimelineList aria-label="Afternoon talks">
-						{talkBlocks.afternoon.map((talk) => <PersonCard person={talk} />)}
+						{talkBlocks.afternoon.map((talk) => (
+							<PersonCard person={talk} />
+						))}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -339,11 +350,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="3:30pm"
 				>
 					<TimelineList aria-label="Explore Boston options">
-						{
-							exploreChoices.map((choice) => (
-								<ExploreChoiceCard choice={choice} />
-							))
-						}
+						{exploreChoices.map((choice) => (
+							<ExploreChoiceCard choice={choice} />
+						))}
 					</TimelineList>
 				</TimelineEntry>
 
@@ -495,10 +504,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						/>
 						<TimelineCopy>
 							<p>
-								<TimelineLink href="https://bigrav.band"
-									><strong>Big Rav</strong></TimelineLink
-								> is a Boston-based alternative, indie, and punk rock band that combines
-								pop-punk vocals with classic rock and prog-rock influences.
+								<TimelineLink href="https://bigrav.band">
+									<strong>Big Rav</strong>
+								</TimelineLink>{" "}
+								is a Boston-based alternative, indie, and punk rock band that
+								combines pop-punk vocals with classic rock and prog-rock
+								influences.
 								<span class="fireside-host">
 									featuring SquiggleConf's own Maddy Montaquila on vocals.
 								</span>

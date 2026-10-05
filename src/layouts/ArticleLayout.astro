@@ -30,16 +30,14 @@ const {
 		</HeroContentsStandard>
 	</Hero>
 
-	{
-		Astro.slots.has("lead") && (
-			<ContentArea class="prose" width={introWidth}>
-				<p class="article-lead">
-					<slot name="lead" />
-				</p>
-				<slot name="intro" />
-			</ContentArea>
-		)
-	}
+	{Astro.slots.has("lead") && (
+		<ContentArea class="prose" width={introWidth}>
+			<p class="article-lead">
+				<slot name="lead" />
+			</p>
+			<slot name="intro" />
+		</ContentArea>
+	)}
 
 	<slot />
 </PageLayout>

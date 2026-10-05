@@ -12,11 +12,11 @@ const { class: className, tags, ...rest } = Astro.props;
 ---
 
 <div class:list={["tags", className]} {...rest}>
-	{
-		tags
-			.flatMap((tag) => (tag === "Language Soup" ? languageSoup : tag))
-			.map((tag) => <SessionTag tag={tag} />)
-	}
+	{tags
+		.flatMap((tag) => (tag === "Language Soup" ? languageSoup : tag))
+		.map((tag) => (
+			<SessionTag tag={tag} />
+		))}
 </div>
 
 <style>

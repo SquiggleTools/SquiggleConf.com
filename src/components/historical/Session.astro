@@ -25,7 +25,9 @@ const {
 <li class:list={["talk", "anchor-title-card", className]} id={slug} {...rest}>
 	<SubtleCard>
 		<div class="talk-top">
-			<a class="title anchor-title" href={`#${slug}`}>{title}</a>
+			<a class="title anchor-title" href={`#${slug}`}>
+				{title}
+			</a>
 			<div class="talk-description">
 				<SafeMarkdown of={description} />
 			</div>
@@ -34,15 +36,13 @@ const {
 
 		<div class="talk-details">
 			<ul class="speakers">
-				{
-					people.map((person) => (
-						<SpeakerSmall
-							as="li"
-							href={`/${year}/speakers#${person.slug}`}
-							person={person}
-						/>
-					))
-				}
+				{people.map((person) => (
+					<SpeakerSmall
+						as="li"
+						href={`/${year}/speakers#${person.slug}`}
+						person={person}
+					/>
+				))}
 			</ul>
 		</div>
 	</SubtleCard>

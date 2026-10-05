@@ -10,16 +10,14 @@ const entries = Object.entries<Article>(articles);
 
 <ContentArea>
 	<ul>
-		{
-			entries.map(([slug, article]) => (
-				<li>
-					<a href={`/articles/${slug}`}>
-						<Heading level="h2">{article.listTitle ?? article.title}</Heading>
-					</a>
-					<BodyText>{article.description}</BodyText>
-				</li>
-			))
-		}
+		{entries.map(([slug, article]) => (
+			<li>
+				<a href={`/articles/${slug}`}>
+					<Heading level="h2">{article.listTitle ?? article.title}</Heading>
+				</a>
+				<BodyText>{article.description}</BodyText>
+			</li>
+		))}
 	</ul>
 </ContentArea>
 

@@ -10,7 +10,9 @@ const { bios, class: className, ...rest } = Astro.props;
 ---
 
 <ul class:list={["bios", className]} {...rest}>
-	{bios.map((bio) => <Bio {...bio} />)}
+	{bios.map((bio) => (
+		<Bio {...bio} />
+	))}
 </ul>
 
 <style>

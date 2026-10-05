@@ -12,7 +12,9 @@ const { date, day } = Astro.props;
 	<p>{day}</p>
 	<p>{date}</p>
 </div>
-<slot><div aria-hidden="true" class="timeline-cell-empty"></div></slot>
+<slot>
+	<div aria-hidden="true" class="timeline-cell-empty"></div>
+</slot>
 
 <style>
 	.timeline-cell-empty {

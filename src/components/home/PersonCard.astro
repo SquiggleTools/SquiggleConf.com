@@ -21,20 +21,18 @@ const title = "title" in person ? person.title : undefined;
 		src={person.image}
 	/>
 	<div class="person-card-copy">
-		{
-			title ? (
-				<>
-					<TimelineHeading class="person-card-title" level="h3">
-						{title}
-					</TimelineHeading>
-					<p class="person-card-name">{person.name}</p>
-				</>
-			) : (
+		{title ? (
+			<>
 				<TimelineHeading class="person-card-title" level="h3">
-					{person.name}
+					{title}
 				</TimelineHeading>
-			)
-		}
+				<p class="person-card-name">{person.name}</p>
+			</>
+		) : (
+			<TimelineHeading class="person-card-title" level="h3">
+				{person.name}
+			</TimelineHeading>
+		)}
 		<p class="person-card-role">{person.qualification}</p>
 	</div>
 </article>

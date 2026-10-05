@@ -37,30 +37,34 @@ const ticketsButton = {
 
 <header>
 	<ContentArea class="header-content-area" width="wide">
-		{
-			hideLogo ? (
-				<Button {...ticketsButton}>{currentYear} Tickets</Button>
-			) : (
-				<a class="logo" href="/">
-					<Logo />
-				</a>
-			)
-		}
+		{hideLogo ? (
+			<Button {...ticketsButton}>{currentYear} Tickets</Button>
+		) : (
+			<a class="logo" href="/">
+				<Logo />
+			</a>
+		)}
 		<button
 			aria-label="Open menu"
 			class="header-menu-toggle"
 			popovertarget="header-links"
-			type="button">≡</button
+			type="button"
 		>
+			≡
+		</button>
 		<nav class="header-links" id="header-links" popover>
 			<button
 				aria-label="Close menu"
 				class="header-menu-toggle"
 				popovertarget="header-links"
 				popovertargetaction="hide"
-				type="button">≡</button
+				type="button"
 			>
-			{navLinks.map(({ text, ...props }) => <a {...props}>{text}</a>)}
+				≡
+			</button>
+			{navLinks.map(({ text, ...props }) => (
+				<a {...props}>{text}</a>
+			))}
 			{!hideLogo && <Button {...ticketsButton}>{currentYear} Tickets</Button>}
 		</nav>
 	</ContentArea>

@@ -13,7 +13,9 @@ const { choice } = Astro.props;
 
 <article class="explore-card">
 	<div aria-hidden="true" class="explore-choice">
-		<span class="explore-radio"><span class="explore-radio-dot"></span></span>
+		<span class="explore-radio">
+			<span class="explore-radio-dot"></span>
+		</span>
 	</div>
 	<div class="explore-card-body">
 		<TimelineImage
@@ -29,11 +31,9 @@ const { choice } = Astro.props;
 			</TimelineHeading>
 			<p>{choice.description}</p>
 		</div>
-		{
-			choice.badgeLabel && (
-				<div class="explore-spots-left">{choice.badgeLabel}</div>
-			)
-		}
+		{choice.badgeLabel && (
+			<div class="explore-spots-left">{choice.badgeLabel}</div>
+		)}
 	</div>
 </article>
 

@@ -42,9 +42,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	data-timeline-entry={entryId}
 >
 	<div class="timeline-heading-line">
-		<TimelineHeading class="timeline-heading" id={entryId} level="h2" link
-			>{heading}</TimelineHeading
-		>
+		<TimelineHeading class="timeline-heading" id={entryId} level="h2" link>
+			{heading}
+		</TimelineHeading>
 	</div>
 	<div
 		class:list={[
@@ -53,27 +53,23 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 			timeMode === "point" && "timeline-inline-time-point",
 		]}
 	>
-		<div>
-			{time}
-		</div>
-		{
-			mobileLocation && (
-				<div class="timeline-mobile-meta">
-					{mobileLocationHref ? (
-						<a
-							class="timeline-mobile-location"
-							href={mobileLocationHref}
-							rel="noreferrer"
-							target="_blank"
-						>
-							{mobileLocation}
-						</a>
-					) : (
-						<p class="timeline-mobile-location">{mobileLocation}</p>
-					)}
-				</div>
-			)
-		}
+		<div>{time}</div>
+		{mobileLocation && (
+			<div class="timeline-mobile-meta">
+				{mobileLocationHref ? (
+					<a
+						class="timeline-mobile-location"
+						href={mobileLocationHref}
+						rel="noreferrer"
+						target="_blank"
+					>
+						{mobileLocation}
+					</a>
+				) : (
+					<p class="timeline-mobile-location">{mobileLocation}</p>
+				)}
+			</div>
+		)}
 	</div>
 	{subtitle && <p class="timeline-subtitle">{subtitle}</p>}
 	<slot />

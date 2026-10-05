@@ -117,19 +117,13 @@ const logo = logos[tag];
 ---
 
 <div class="tag-chip">
-	{
-		Icon ? (
-			<Icon
-				aria-hidden="true"
-				class="tag-icon light-icon"
-				fill="currentColor"
-			/>
-		) : (
-			logo && (
-				<Image alt={`${tag} logo`} class="tag-icon" height={24} src={logo} />
-			)
+	{Icon ? (
+		<Icon aria-hidden="true" class="tag-icon light-icon" fill="currentColor" />
+	) : (
+		logo && (
+			<Image alt={`${tag} logo`} class="tag-icon" height={24} src={logo} />
 		)
-	}
+	)}
 	{tag}
 </div>
 

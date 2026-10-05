@@ -111,7 +111,9 @@ const metaPairs = [
 	<link href={pageUrl} rel="canonical" />
 	<link href="/favicon.png" rel="icon" type="image/png" />
 	<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-	{metaPairs.map((meta) => <meta {...meta} />)}
+	{metaPairs.map((meta) => (
+		<meta {...meta} />
+	))}
 	<meta content={Astro.generator} name="generator" />
 	<meta content="width=device-width" name="viewport" />
 	<meta content=`SquiggleConf ${year}` name="apple-mobile-web-app-title" />

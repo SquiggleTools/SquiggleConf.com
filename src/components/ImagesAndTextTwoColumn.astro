@@ -39,11 +39,9 @@ interface Props {
 		</div>
 
 		<div class="images-secondary">
-			{
-				Astro.props.images.secondary.map((image) => (
-					<Image {...image} layout="fixed" />
-				))
-			}
+			{Astro.props.images.secondary.map((image) => (
+				<Image {...image} layout="fixed" />
+			))}
 		</div>
 	</ContentArea>
 </div>

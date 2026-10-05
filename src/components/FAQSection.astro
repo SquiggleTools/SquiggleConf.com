@@ -21,21 +21,19 @@ const pairs = Astro.props.pairs.map(
 	<Heading class="faq-heading" level={level}>
 		{title}
 	</Heading>
-	{
-		pairs.map(([question, answer]) => (
-			<details>
-				<summary>
-					<Dropdown
-						aria-hidden="true"
-						class="faq-dropdown"
-						preserveAspectRatio="none"
-					/>
-					<span>{question}</span>
-				</summary>
-				<div class="faq-answer" set:html={answer} />
-			</details>
-		))
-	}
+	{pairs.map(([question, answer]) => (
+		<details>
+			<summary>
+				<Dropdown
+					aria-hidden="true"
+					class="faq-dropdown"
+					preserveAspectRatio="none"
+				/>
+				<span>{question}</span>
+			</summary>
+			<div class="faq-answer" set:html={answer} />
+		</details>
+	))}
 </div>
 
 <style>

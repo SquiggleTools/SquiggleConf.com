@@ -42,10 +42,11 @@ Day-to-day development stays the same: `pnpm dev`.
 If you need to cut over production immediately, deploy directly from this repo:
 
 ```shell
-npx wrangler deploy
+pnpm build
+npx wrangler deploy -c dist/server/wrangler.json
 ```
 
-This uses the worker config in `wrangler.toml`.
+The build writes a complete worker config to `dist/server/wrangler.json` from the settings in `wrangler.toml`.
 
 ### CI Behavior
 

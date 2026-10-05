@@ -21,26 +21,24 @@ const { spots } = Astro.props;
 >
 	<TimelineImage radius="var(--radiusLarge)">
 		<div class="lunch-carousel-track" data-lunch-track>
-			{
-				spots.map((spot, index) => (
-					<div
-						aria-hidden={index === 0 ? "false" : "true"}
-						class="lunch-slide"
-						data-lunch-slide
-					>
-						<div class="lunch-slide-image">
-							<Image
-								alt={spot.alt}
-								loading={index === 0 ? "eager" : "lazy"}
-								src={spot.image}
-							/>
-						</div>
-						<div class="lunch-slide-caption">
-							<strong>{spot.name}</strong>
-						</div>
+			{spots.map((spot, index) => (
+				<div
+					aria-hidden={index === 0 ? "false" : "true"}
+					class="lunch-slide"
+					data-lunch-slide
+				>
+					<div class="lunch-slide-image">
+						<Image
+							alt={spot.alt}
+							loading={index === 0 ? "eager" : "lazy"}
+							src={spot.image}
+						/>
 					</div>
-				))
-			}
+					<div class="lunch-slide-caption">
+						<strong>{spot.name}</strong>
+					</div>
+				</div>
+			))}
 		</div>
 	</TimelineImage>
 	<div
@@ -48,17 +46,15 @@ const { spots } = Astro.props;
 		class="lunch-carousel-dots"
 		role="group"
 	>
-		{
-			spots.map((spot, index) => (
-				<button
-					aria-label={`Show ${spot.name}`}
-					aria-pressed={index === 0 ? "true" : "false"}
-					class="lunch-carousel-dot"
-					data-lunch-dot
-					type="button"
-				/>
-			))
-		}
+		{spots.map((spot, index) => (
+			<button
+				aria-label={`Show ${spot.name}`}
+				aria-pressed={index === 0 ? "true" : "false"}
+				class="lunch-carousel-dot"
+				data-lunch-dot
+				type="button"
+			/>
+		))}
 	</div>
 </div>
 
