@@ -2,6 +2,8 @@ import { APIRoute } from "astro";
 import { BREVO_API_KEY, BREVO_LIST_ID } from "astro:env/server";
 import { z } from "zod";
 
+export const prerender = false;
+
 const bodySchema = z.object({
 	email: z.email(),
 });
@@ -13,8 +15,9 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 	}
 
-	const formData = Object.fromEntries(await request.formData());
-	const body = bodySchema.safeParse(formData);
+	const body = bodySchema.safeParse(
+		Object.fromEntries(await request.formData().catch(() => [])),
+	);
 	if (body.error) {
 		return new Response("Invalid body", { status: 400 });
 	}

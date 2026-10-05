@@ -4,7 +4,7 @@ import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
 	adapter: cloudflare({
-		imageService: "passthrough",
+		imageService: "compile",
 	}),
 	build: {
 		format: "file",
@@ -29,7 +29,7 @@ export default defineConfig({
 		responsiveStyles: true,
 	},
 	integrations: [konamiEmojiBlast()],
-	output: "server",
+	output: "static",
 	redirects: {
 		"/2024/about": "/about",
 		"/2024/code-of-conduct": "/code-of-conduct",
