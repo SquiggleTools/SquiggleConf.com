@@ -6,25 +6,25 @@ export interface HistoricalDataForYear {
 }
 
 export interface PersonInfo {
-	biography: null | string;
+	biography: string;
 	image: ImageMetadata;
 	links: PersonLinks;
 	name: string;
-	qualification: null | string;
+	qualification: string;
 	slug: string;
 }
 
 export interface PersonLinks {
-	bluesky?: null | string;
-	github?: null | string;
-	gitlab?: null | string;
-	linkedin?: null | string;
-	mastodon?: null | string;
-	medium?: null | string;
-	twitch?: null | string;
-	website?: null | string;
-	x?: null | string;
-	youtube?: null | string;
+	bluesky?: string;
+	github?: string;
+	gitlab?: string;
+	linkedin?: string;
+	mastodon?: string;
+	medium?: string;
+	twitch?: string;
+	website?: string;
+	x?: string;
+	youtube?: string;
 }
 
 export interface SessionInfo {

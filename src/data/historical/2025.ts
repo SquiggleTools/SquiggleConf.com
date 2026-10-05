@@ -32,7 +32,7 @@ import rushStackLite from "~/assets/logos/rushstack-lite.svg";
 import voidZeroBlack from "~/assets/logos/voidzero-black.svg";
 import voidZeroWhite from "~/assets/logos/voidzero-white.svg";
 
-import { PersonInfo, SessionInfo, SponsorInfo } from "./types";
+import type { PersonInfo, SessionInfo, SponsorInfo } from "./types";
 
 export const peopleBySlug = {
 	"alexander-lichter": {
