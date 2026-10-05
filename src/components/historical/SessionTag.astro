@@ -51,47 +51,16 @@ import VSCode from "~/assets/logos/vscode.png";
 import WebAssembly from "~/assets/logos/web-assembly.svg";
 import Zig from "~/assets/logos/zig.svg";
 
-const whiteStrokeIcons: ImageMetadata[] = [
-	AST,
-	Accessibility,
-	Account,
-	AnimationIcon,
-	Assignment,
-	Bug,
-	Autoplay,
-	Calculate,
-	Code,
-	Diversity,
-	Dock,
-	Docs,
-	Edit,
-	Extension,
-	Footprint,
-	Forrest,
-	Handyman,
-	Headset,
-	Hub,
-	Inclusive,
-	Lightning,
-	Monorepo,
-	Palette,
-	Protocol,
-	Rocket,
-	Stylus,
-	Terminal,
-	Vitals,
-];
+interface Props {
+	tag: string;
+}
 
-const images: Record<string, ImageMetadata> = {
+const icons: Record<string, SvgComponent> = {
 	Accessibility,
 	"Accessibility Tree": Accessibility,
-	Architecture,
 	ASTs: AST,
 	"Build Optimization": Handyman,
-	C,
-	"C++": Cpp,
 	Canvas: Palette,
-	"Chrome DevTools": ChromeDevTools,
 	CLIs: Terminal,
 	"Community Building": Diversity,
 	"Core Web Vitals": Vitals,
@@ -103,60 +72,61 @@ const images: Record<string, ImageMetadata> = {
 	"Developer Relations": Headset,
 	Docs,
 	Documentation: Docs,
-	DotNet,
-	"Durable Execution": Hardware,
 	"Editor Extensions": Extension,
 	Extensions: Extension,
-	Go,
 	"Inclusive Design": Inclusive,
 	Inclusivity: Inclusive,
-	JavaScript,
-	JetBrains,
 	"Language Server Protocol": Protocol,
 	"Launching Software Products": Rocket,
-	Microservices: ScatterPlot,
 	"Monorepo Tooling": Monorepo,
-	"Node.js": NodeJSLogo,
 	"Open Source": Account,
-	"Open Telemetry": OpenTelemetry,
 	Parsing: Calculate,
 	Performance: Lightning,
-	Rust,
 	"Source Code": Code,
-	SVG,
 	"Task Management": Assignment,
 	"Technical Writing": Edit,
 	Tracing: Footprint,
 	TreeSitter: Forrest,
+	"Web Animations API": AnimationIcon,
+};
+
+const logos: Record<string, ImageMetadata> = {
+	Architecture,
+	C,
+	"C++": Cpp,
+	"Chrome DevTools": ChromeDevTools,
+	DotNet,
+	"Durable Execution": Hardware,
+	Go,
+	JavaScript,
+	JetBrains,
+	Microservices: ScatterPlot,
+	"Node.js": NodeJSLogo,
+	"Open Telemetry": OpenTelemetry,
+	Rust,
+	SVG,
 	TypeScript,
 	"VS Code": VSCode,
-	"Web Animations API": AnimationIcon,
 	WebAssembly,
 	Zig,
 };
 
-interface Props {
-	tag: string;
-}
-
 const { tag } = Astro.props;
-const image = images[tag];
-const LightIcon = whiteStrokeIcons.includes(image)
-	? (image as unknown as SvgComponent)
-	: undefined;
+const Icon = icons[tag];
+const logo = logos[tag];
 ---
 
-<div class="tag-chip" style={{ alignSelf: "end" }}>
+<div class="tag-chip">
 	{
-		LightIcon ? (
-			<LightIcon
+		Icon ? (
+			<Icon
 				aria-hidden="true"
 				class="tag-icon light-icon"
 				fill="currentColor"
 			/>
 		) : (
-			image && (
-				<Image alt={`${tag} logo`} class="tag-icon" height={24} src={image} />
+			logo && (
+				<Image alt={`${tag} logo`} class="tag-icon" height={24} src={logo} />
 			)
 		)
 	}
@@ -165,8 +135,9 @@ const LightIcon = whiteStrokeIcons.includes(image)
 
 <style>
 	.tag-chip {
-		display: inline-flex;
 		align-items: center;
+		align-self: end;
+		display: inline-flex;
 		background-color: var(--colorBackdropOff);
 		box-shadow: 0 0 0.125rem var(--colorTextShadow);
 		border-radius: var(--radiusSmall);
