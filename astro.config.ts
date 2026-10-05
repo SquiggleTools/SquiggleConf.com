@@ -43,4 +43,10 @@ export default defineConfig({
 	},
 	session: false,
 	site: "https://squiggleconf.com",
+	vite: {
+		build: {
+			assetsInlineLimit: (filePath, content) =>
+				filePath.endsWith(".css") ? content.length < 20_000 : undefined,
+		},
+	},
 });
