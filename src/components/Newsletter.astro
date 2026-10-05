@@ -40,18 +40,22 @@ import Heading from "./Heading.astro";
 </div>
 
 <script>
-	const form = document.getElementById("newsletter-form") as HTMLFormElement;
-	const message = document.getElementById("newsletter-message")!;
-	const submit = form.querySelector("button")!;
+	const form = document.querySelector<HTMLFormElement>("#newsletter-form");
+	const message = document.querySelector("#newsletter-message");
+	const submit = form?.querySelector("button");
 
 	function setMessage(text: string, unhappy: boolean) {
-		message.textContent = text;
-		message.classList.toggle("unhappy", unhappy);
+		if (message) {
+			message.textContent = text;
+			message.classList.toggle("unhappy", unhappy);
+		}
 	}
 
-	form.addEventListener("submit", async (event) => {
+	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
-		submit.disabled = true;
+		if (submit) {
+			submit.disabled = true;
+		}
 
 		try {
 			const response = await fetch(form.action, {
@@ -68,16 +72,15 @@ import Heading from "./Heading.astro";
 					true,
 				);
 			}
-		} catch (error) {
-			const { message } = error as Error;
+		} catch {
 			setMessage(
-				message === "Failed to fetch"
-					? "Too many requests. Try again later, please?"
-					: message,
+				"We couldn't reach the server. Please check your connection and try again.",
 				true,
 			);
 		} finally {
-			submit.disabled = false;
+			if (submit) {
+				submit.disabled = false;
+			}
 		}
 	});
 </script>

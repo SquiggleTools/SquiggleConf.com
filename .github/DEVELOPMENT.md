@@ -19,7 +19,6 @@ All Astro commands are run from the root of the project, from a terminal:
 | :---------------------- | :----------------------------------------------- |
 | `pnpm run dev`          | Starts local dev server at `localhost:4321`      |
 | `pnpm run build`        | Build your production site to `./dist/`          |
-| `pnpm run preview`      | Preview your build locally, before deploying     |
 | `pnpm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `pnpm run astro --help` | Get help using the Astro CLI                     |
 
@@ -39,7 +38,7 @@ pnpm format --write
 This package includes several forms of linting to enforce consistent code quality and styling.
 Each should be shown in VS Code, and can be run manually on the command-line:
 
-- `pnpm lint` ([ESLint](https://eslint.org) with [typescript-eslint](https://typescript-eslint.io)): Lints JavaScript and TypeScript source files
+- `pnpm lint` ([ESLint](https://eslint.org) with [typescript-eslint](https://typescript-eslint.io)): Lints Astro, JavaScript, TypeScript source files
 - `pnpm lint:css` ([Stylelint](https://stylelint.io)): Lints CSS in `.astro` and `.css` files
 - `pnpm lint:knip` ([knip](https://github.com/webpro/knip)): Detects unused files, dependencies, and code exports
 - `pnpm lint:packages` ([pnpm dedupe --check](https://pnpm.io/cli/dedupe)): Checks for unnecessarily duplicated packages in the `pnpm-lock.yml` file

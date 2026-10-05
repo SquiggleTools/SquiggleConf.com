@@ -1,6 +1,8 @@
 ---
-import { Polymorphic } from "astro/types";
-import { PersonInfo } from "~/data/historical/types";
+import type { Polymorphic } from "astro/types";
+
+import type { PersonInfo } from "~/data/historical/types";
+
 import Avatar from "../Avatar.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
 
@@ -21,24 +23,18 @@ const {
 ---
 
 <As class:list={["speaker-small", className]} {...rest}>
-	<div class="speaker-image-container">
-		<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
-	</div>
+	<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
 	<div class="speaker-text">
 		{
 			href && (
-				<a class="speaker-text-links" href={href} aria-label={speaker.name} />
+				<a aria-label={speaker.name} class="speaker-text-links" href={href} />
 			)
 		}
 		<div class="name">{speaker.name}</div>
 		<div class="details">
-			{
-				speaker.qualification && (
-					<div>
-						<SafeMarkdown of={speaker.qualification} />
-					</div>
-				)
-			}
+			<div>
+				<SafeMarkdown of={speaker.qualification} />
+			</div>
 		</div>
 		<slot />
 	</div>

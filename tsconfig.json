@@ -1,17 +1,9 @@
 {
+	"extends": "astro/tsconfigs/strict",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"esModuleInterop": true,
-		"module": "Preserve",
-		"moduleResolution": "Bundler",
-		"noEmit": true,
 		"paths": {
 			"~/*": ["src/*"]
-		},
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"target": "ESNext"
-	},
-	"include": ["src"]
+		}
+	}
 }

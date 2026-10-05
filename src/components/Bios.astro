@@ -1,12 +1,12 @@
 ---
-import Bio, { Props as BioProps } from "~/components/Bio.astro";
+import Bio, { type Props as BioProps } from "~/components/Bio.astro";
 
 interface Props {
 	bios: BioProps[];
 	class?: string;
 }
 
-const { class: className, bios, ...rest } = Astro.props;
+const { bios, class: className, ...rest } = Astro.props;
 ---
 
 <ul class:list={["bios", className]} {...rest}>
