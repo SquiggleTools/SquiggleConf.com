@@ -1,4 +1,5 @@
-import { APIRoute } from "astro";
+import type { APIRoute } from "astro";
+
 import { BREVO_API_KEY, BREVO_LIST_ID } from "astro:env/server";
 import { z } from "zod";
 
