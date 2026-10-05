@@ -1,15 +1,9 @@
 ---
-import { marked } from "marked";
+import { renderMarkdownInline } from "~/utils/markdown";
 
 interface Props {
 	of: string;
 }
-
-// https://github.com/astro-community/md/issues/20
-const rendered = (await marked.parseInline(Astro.props.of)).replaceAll(
-	"<a ",
-	`<a rel="noreferrer" target="_blank"`,
-);
 ---
 
-<Fragment set:html={rendered} />
+<Fragment set:html={renderMarkdownInline(Astro.props.of)} />

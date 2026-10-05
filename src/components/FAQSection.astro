@@ -1,7 +1,6 @@
 ---
-import { marked } from "marked";
-
 import Dropdown from "~/assets/glyphs/dropdown.svg";
+import { renderMarkdown } from "~/utils/markdown";
 
 import Heading from "./Heading.astro";
 
@@ -13,11 +12,8 @@ export interface Props {
 
 const { level = "h3", title } = Astro.props;
 
-const pairs = await Promise.all(
-	Astro.props.pairs.map(async ([question, answer]) => {
-		const parsedAnswer = await marked.parse(answer);
-		return [question, parsedAnswer];
-	}),
+const pairs = Astro.props.pairs.map(
+	([question, answer]) => [question, renderMarkdown(answer)] as const,
 );
 ---
 
@@ -83,6 +79,10 @@ const pairs = await Promise.all(
 
 	details[open] .faq-dropdown {
 		transform: rotate(180deg);
+	}
+
+	.faq-answer :global(p + p) {
+		margin-top: 0.75rem;
 	}
 
 	@media (--widthMedium) {
