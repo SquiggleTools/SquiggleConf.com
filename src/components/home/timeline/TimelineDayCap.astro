@@ -7,13 +7,13 @@ interface Props {
 const { date, day } = Astro.props;
 ---
 
-<div class="timeline-cell-empty" aria-hidden="true"></div>
+<div aria-hidden="true" class="timeline-cell-empty"></div>
 <div class="timeline-cap timeline-top">
 	<p>{day}</p>
 	<p>{date}</p>
 </div>
 <slot>
-	<div class="timeline-cell-empty" aria-hidden="true"></div>
+	<div aria-hidden="true" class="timeline-cell-empty"></div>
 </slot>
 
 <style>

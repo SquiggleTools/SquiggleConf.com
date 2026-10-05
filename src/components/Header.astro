@@ -1,10 +1,11 @@
 ---
 import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+import { pagePathname } from "~/utils/pathname";
+
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
-import { currentYear } from "~/data/years";
-import { pagePathname } from "~/utils/pathname";
 
 interface Props {
 	hideLogo?: boolean;
