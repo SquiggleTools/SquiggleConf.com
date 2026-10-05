@@ -11,6 +11,7 @@ const { class: className, columns = 1, ...rest } = Astro.props;
 
 <div
 	class:list={["timeline-list", `timeline-list-columns-${columns}`, className]}
+	role={rest["aria-label"] ? "group" : undefined}
 	{...rest}
 >
 	<slot />
