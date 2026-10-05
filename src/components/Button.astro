@@ -118,8 +118,16 @@ const {
 			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
 			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
 		--shadowButtonHover:
-			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 22%),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue5) r g b / 16%);
+			inset 0 1px 0
+				light-dark(
+					rgb(from var(--colorWhite) r g b / 22%),
+					rgb(from var(--colorWhite) r g b / 18%)
+				),
+			0 0.25rem 0.5rem
+				light-dark(
+					rgb(from var(--colorBlue5) r g b / 16%),
+					rgb(from var(--colorBlue2) r g b / 22%)
+				);
 
 		border-color: var(--colorButtonBorder);
 		border-radius: var(--radiusLarge);
@@ -138,9 +146,6 @@ const {
 			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
 			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
 			0 0 0 1px rgb(from var(--colorBlue1) r g b / 18%);
-		--shadowButtonHover:
-			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 18%),
-			0 0.25rem 0.5rem rgb(from var(--colorBlue2) r g b / 22%);
 	}
 
 	.button-variant-ghost:hover,
