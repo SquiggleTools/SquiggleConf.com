@@ -15,6 +15,7 @@
 	--colorWhiteIsh: #eaeaf7;
 	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
 	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorBlue4));
+	--colorBackground: light-dark(var(--colorWhite), #121212);
 	--colorCopy: light-dark(
 		rgb(from var(--colorBlue5) r g b / 84%),
 		rgb(from var(--colorWhiteIsh) r g b / 84%)
@@ -63,6 +64,7 @@
 }
 
 html {
+	background-color: var(--colorBackground);
 	min-height: 100%;
 	font-family: var(--fontFamilyBody);
 }
