@@ -1,0 +1,27 @@
+---
+import Button from "~/components/Button.astro";
+import Hero from "~/components/hero/Hero.astro";
+import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import PageLayout from "~/layouts/PageLayout.astro";
+---
+
+<PageLayout description="That page could not be found." title="Page Not Found">
+	<Hero>
+		<HeroContentsStandard heading="Page Not Found" squiggly="none">
+			You've drifted into uncharted waters. <br /> Consider navigating to the surface.
+		</HeroContentsStandard>
+	</Hero>
+	<div class="not-found-actions">
+		<Button as="a" href="/" size="large" variant="emphasized">
+			Back to the homepage
+		</Button>
+	</div>
+</PageLayout>
+
+<style>
+	.not-found-actions {
+		display: flex;
+		justify-content: center;
+		padding: clamp(3rem, 7vh, 25rem) var(--widthBodyPadding);
+	}
+</style>
