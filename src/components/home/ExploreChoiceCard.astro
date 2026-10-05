@@ -1,5 +1,6 @@
 ---
 import type { ExploreChoiceData } from "~/components/home/types";
+
 import TimelineHeading from "./timeline/TimelineHeading.astro";
 import TimelineImage from "./timeline/TimelineImage.astro";
 
@@ -11,7 +12,7 @@ const { choice } = Astro.props;
 ---
 
 <article class="explore-card">
-	<div class="explore-choice" aria-hidden="true">
+	<div aria-hidden="true" class="explore-choice">
 		<span class="explore-radio"><span class="explore-radio-dot"></span></span>
 	</div>
 	<div class="explore-card-body">

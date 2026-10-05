@@ -6,6 +6,7 @@ import type {
 	CollagePhoto,
 	CollageShape,
 } from "~/components/home/types";
+
 import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -35,7 +36,7 @@ const {
 		photos.map((photo, index) => (
 			<div class={`collage-item collage-item-${index + 1}`}>
 				<TimelineImage
-					alt={photo.decorative ? "" : photo.alt}
+					alt={photo.alt}
 					effect={
 						shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
 					}

@@ -1,9 +1,11 @@
 ---
 import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+import { pagePathname } from "~/utils/pathname";
+
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
-import { currentYear } from "~/data/years";
 
 interface Props {
 	hideLogo?: boolean;
@@ -11,13 +13,14 @@ interface Props {
 }
 
 const { hideLogo, year } = Astro.props;
+const pathname = pagePathname(Astro.url);
 
 const navLinks = [
 	{ href: "/articles", text: "Articles" },
 	{ href: "https://shop.squiggle.tools", text: "Shop" },
 	...(year === currentYear ? [] : [{ href: "/", text: currentYear }]),
 ].map(({ href, text }) => ({
-	"aria-current": Astro.url.pathname === href ? ("page" as const) : undefined,
+	"aria-current": pathname === href ? ("page" as const) : undefined,
 	href,
 	target: href.startsWith("https") ? "_blank" : undefined,
 	text,
@@ -44,14 +47,14 @@ const ticketsButton = {
 			)
 		}
 		<button
-			aria-label="Toggle header"
+			aria-label="Open menu"
 			class="header-menu-toggle"
 			popovertarget="header-links"
 			type="button">≡</button
 		>
 		<nav class="header-links" id="header-links" popover>
 			<button
-				aria-label="Toggle header"
+				aria-label="Close menu"
 				class="header-menu-toggle"
 				popovertarget="header-links"
 				popovertargetaction="hide"
@@ -133,10 +136,6 @@ const ticketsButton = {
 		position: absolute;
 		text-align: right;
 		width: 45vw;
-	}
-
-	.header-links:popover-open .header-button {
-		display: none;
 	}
 
 	.header-links a:not([aria-current]) {

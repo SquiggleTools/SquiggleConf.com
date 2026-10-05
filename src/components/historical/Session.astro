@@ -1,9 +1,12 @@
 ---
+import type { SessionInfo } from "~/data/historical/types";
+
 import SafeMarkdown from "../SafeMarkdown.astro";
+import SessionTags from "./SessionTags.astro";
 import SpeakerSmall from "./SpeakerSmall.astro";
 import SubtleCard from "./SubtleCard.astro";
-import SessionTags from "./SessionTags.astro";
-import { SessionInfo } from "~/data/historical/types";
+
+import "~/layouts/anchor-title.css";
 
 interface Props {
 	class?: string;
@@ -13,16 +16,16 @@ interface Props {
 
 const {
 	class: className,
-	session: { title, people, tags, description, slug },
+	session: { description, people, slug, tags, title },
 	year,
 	...rest
 } = Astro.props;
 ---
 
-<li class:list={["talk", className]} id={slug} {...rest}>
+<li class:list={["talk", "anchor-title-card", className]} id={slug} {...rest}>
 	<SubtleCard>
 		<div class="talk-top">
-			<a class="title" href={`#${slug}`}>{title}</a>
+			<a class="title anchor-title" href={`#${slug}`}>{title}</a>
 			<div class="talk-description">
 				<SafeMarkdown of={description} />
 			</div>
@@ -42,7 +45,6 @@ const {
 				}
 			</ul>
 		</div>
-		<div class="talk-details-links"></div>
 	</SubtleCard>
 </li>
 
@@ -51,7 +53,6 @@ const {
 		display: flex;
 		flex-basis: 0;
 		flex-direction: column;
-		font-family: var(--fontFamilyBody);
 		justify-content: space-between;
 		scroll-margin-top: 1rem;
 	}
@@ -69,16 +70,6 @@ const {
 		text-align: left;
 		margin-bottom: 0.5rem;
 		text-decoration: none;
-	}
-
-	.title::after {
-		content: " #";
-		opacity: 0;
-		transition: var(--transitionNormal) opacity;
-	}
-
-	:is(.talk:hover, .talk:focus-within) .title::after {
-		opacity: 1;
 	}
 
 	.talk-description {
@@ -102,16 +93,9 @@ const {
 		width: 100%;
 	}
 
-	.talk-details-links {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-	}
-
 	.speakers {
 		align-items: flex-start;
 		display: flex;
-		font-family: var(--fontFamilyBody);
 		gap: 1rem 4rem;
 		flex-wrap: wrap;
 		margin-top: 1.5rem;

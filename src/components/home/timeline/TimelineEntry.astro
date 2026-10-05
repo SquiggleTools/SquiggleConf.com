@@ -1,11 +1,13 @@
 ---
-import { venues } from "~/components/home/data";
 import type {
 	TimelineEntryId,
 	TimelineEntryVariant,
 	TimelineTimeMode,
 	VenueId,
 } from "~/components/home/types";
+
+import { venues } from "~/components/home/data";
+
 import TimelineHeading from "./TimelineHeading.astro";
 
 interface Props {
@@ -326,6 +328,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 </style>
 
 <script>
+	import { observeAboveMiddle } from "~/utils/aboveMiddle";
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 
 	const cards = [
@@ -348,24 +351,15 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 	};
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			for (const entry of entries) {
-				if (entry.isIntersecting) {
-					headingsAboveMiddle.add(entry.target);
-				} else {
-					headingsAboveMiddle.delete(entry.target);
-				}
-			}
+	observeAboveMiddle(headings, (heading, above) => {
+		if (above) {
+			headingsAboveMiddle.add(heading);
+		} else {
+			headingsAboveMiddle.delete(heading);
+		}
 
-			updateActiveCard();
-		},
-		{ rootMargin: "100000px 0px -50% 0px" },
-	);
-
-	for (const heading of headings) {
-		observer.observe(heading);
-	}
+		updateActiveCard();
+	});
 
 	mobileQuery.addEventListener("change", updateActiveCard);
 

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import type { LunchSpotData } from "~/components/home/types";
+
 import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
@@ -12,24 +13,26 @@ const { spots } = Astro.props;
 ---
 
 <div
+	aria-label="Lunch options photo carousel"
+	aria-roledescription="carousel"
 	class="lunch-carousel"
 	data-lunch-carousel
-	aria-label="Lunch options photo carousel"
+	role="group"
 >
 	<TimelineImage radius="var(--radiusLarge)">
 		<div class="lunch-carousel-track" data-lunch-track>
 			{
 				spots.map((spot, index) => (
 					<div
+						aria-hidden={index === 0 ? "false" : "true"}
 						class="lunch-slide"
 						data-lunch-slide
-						aria-hidden={index === 0 ? "false" : "true"}
 					>
 						<div class="lunch-slide-image">
 							<Image
 								alt={spot.alt}
-								src={spot.image}
 								loading={index === 0 ? "eager" : "lazy"}
+								src={spot.image}
 							/>
 						</div>
 						<div class="lunch-slide-caption">
@@ -40,15 +43,19 @@ const { spots } = Astro.props;
 			}
 		</div>
 	</TimelineImage>
-	<div class="lunch-carousel-dots" aria-label="Lunch image navigation">
+	<div
+		aria-label="Lunch image navigation"
+		class="lunch-carousel-dots"
+		role="group"
+	>
 		{
 			spots.map((spot, index) => (
 				<button
-					type="button"
-					class="lunch-carousel-dot"
-					data-lunch-dot
 					aria-label={`Show ${spot.name}`}
 					aria-pressed={index === 0 ? "true" : "false"}
+					class="lunch-carousel-dot"
+					data-lunch-dot
+					type="button"
 				/>
 			))
 		}
@@ -170,12 +177,16 @@ const { spots } = Astro.props;
 </style>
 
 <script>
-	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+	import { reducedMotionQuery } from "~/utils/motion";
 
 	for (const carousel of document.querySelectorAll<HTMLElement>(
 		"[data-lunch-carousel]",
 	)) {
-		const track = carousel.querySelector<HTMLElement>("[data-lunch-track]")!;
+		const track = carousel.querySelector<HTMLElement>("[data-lunch-track]");
+		if (!track) {
+			continue;
+		}
+
 		const dots = [
 			...carousel.querySelectorAll<HTMLButtonElement>("[data-lunch-dot]"),
 		];

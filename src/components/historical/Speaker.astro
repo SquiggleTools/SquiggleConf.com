@@ -1,9 +1,12 @@
 ---
+import type { PersonInfo, SessionInfo } from "~/data/historical/types";
+
 import Avatar from "../Avatar.astro";
 import BioLinks from "../BioLinks.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
 import SubtleCard from "./SubtleCard.astro";
-import { PersonInfo, SessionInfo } from "~/data/historical/types";
+
+import "~/layouts/anchor-title.css";
 
 interface Props {
 	class?: string;
@@ -21,23 +24,21 @@ const {
 } = Astro.props;
 ---
 
-<li class:list={["speaker", className]} id={slug} {...rest}>
+<li
+	class:list={["speaker", "anchor-title-card", className]}
+	id={slug}
+	{...rest}
+>
 	<SubtleCard>
 		<div class="speaker-top">
 			<div class="speaker-top-content">
-				<div class="speaker-image-container">
-					<Avatar alt={`${name} Avatar`} size={128} src={image} />
-				</div>
+				<Avatar alt={`${name} Avatar`} size={128} src={image} />
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
-						<a class="title" href={`#${slug}`}>{name}</a>
-						{
-							qualification && (
-								<div>
-									<SafeMarkdown of={qualification} />
-								</div>
-							)
-						}
+						<a class="title anchor-title" href={`#${slug}`}>{name}</a>
+						<div>
+							<SafeMarkdown of={qualification} />
+						</div>
 					</div>
 					<ul class="speaker-talks">
 						{
@@ -55,12 +56,7 @@ const {
 		</div>
 		<slot name="center" />
 		<div class="speaker-links">
-			<BioLinks
-				class="speaker-bio-links"
-				links={links}
-				name={name}
-				size="large"
-			/>
+			<BioLinks links={links} name={name} size="large" />
 		</div>
 	</SubtleCard>
 </li>
@@ -90,16 +86,6 @@ const {
 		font-weight: var(--fontWeightMedium);
 		margin-bottom: 0.25rem;
 		text-decoration: none;
-	}
-
-	.title::after {
-		content: " #";
-		opacity: 0;
-		transition: var(--transitionNormal) opacity;
-	}
-
-	:is(.speaker:hover, .speaker:focus-within) .title::after {
-		opacity: 1;
 	}
 
 	.speaker-headline-text {
