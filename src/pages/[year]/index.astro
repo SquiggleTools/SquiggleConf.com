@@ -10,8 +10,6 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 export const getStaticPaths = getStaticPathsHistorical;
 
-export const prerender = true;
-
 const { data: historicalData, year } = Astro.props;
 const description = `${historicalData.date} · Boston New England Aquarium`;
 ---

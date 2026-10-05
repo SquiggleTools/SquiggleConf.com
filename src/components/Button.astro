@@ -1,10 +1,10 @@
 ---
-import { HTMLTag, Polymorphic } from "astro/types";
+import type { HTMLTag, Polymorphic } from "astro/types";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{
 	as: Tag;
 	class?: string;
-	size?: "normal" | "large";
+	size?: "large" | "normal";
 	variant: "accent" | "emphasized" | "ghost" | "light" | "terminal";
 }>;
 

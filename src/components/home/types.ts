@@ -11,7 +11,6 @@ export type CollageLayout =
 
 export interface CollagePhoto {
 	alt: string;
-	decorative?: boolean;
 	objectPosition?: string;
 	placeholder?: boolean;
 	src: ImageMetadata;

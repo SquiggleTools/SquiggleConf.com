@@ -3,10 +3,10 @@ import mantaDown from "~/assets/design/manta-down.svg";
 import mantaUp from "~/assets/design/manta-up.svg";
 import squiggleThickWide from "~/assets/design/squiggle-thick-wide.svg";
 
+import Arrow from "./Arrow.astro";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import DecorativeImage from "./DecorativeImage.astro";
-import Arrow from "./Arrow.astro";
 ---
 
 <div class="registration">
@@ -16,9 +16,9 @@ import Arrow from "./Arrow.astro";
 		src={squiggleThickWide}
 	/>
 	<ContentArea
+		aria-label="Registration"
 		as="section"
 		class="registration-contents"
-		aria-label="Registration"
 	>
 		<DecorativeImage class="manta manta-down" fit="contain" src={mantaDown} />
 		<DecorativeImage class="manta manta-up" fit="contain" src={mantaUp} />
