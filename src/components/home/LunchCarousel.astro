@@ -123,21 +123,33 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-dots {
+		--lunch-dot-gutter: calc((1.5rem - 0.65rem) / 2);
+
 		display: flex;
-		gap: 0.45rem;
 		justify-content: center;
+		margin: calc(var(--lunch-dot-gutter) * -1) 0;
 		padding-bottom: 0.15rem;
 	}
 
 	.lunch-carousel-dot {
 		appearance: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		display: grid;
+		height: 1.5rem;
+		margin: 0;
+		padding: 0 var(--lunch-dot-gutter);
+		place-items: center;
+	}
+
+	.lunch-carousel-dot::before {
 		background: rgb(from var(--colorWhite) r g b / 24%);
 		border: 1px solid rgb(from var(--colorBlue1) r g b / 45%);
 		border-radius: var(--radiusPill);
-		cursor: pointer;
+		box-sizing: border-box;
+		content: "";
 		height: 0.65rem;
-		margin: 0;
-		padding: 0;
 		transition:
 			background-color var(--transitionNormal),
 			transform var(--transitionNormal),
@@ -145,20 +157,29 @@ const { spots } = Astro.props;
 		width: 0.65rem;
 	}
 
-	.lunch-carousel-dot[aria-pressed="true"] {
+	.lunch-carousel-dot[aria-pressed="true"]::before {
 		background: rgb(from var(--colorWhite) r g b / 96%);
 		transform: scale(1.02);
 		width: 1.7rem;
 	}
 
-	.lunch-carousel-dot:hover,
-	.lunch-carousel-dot:focus-visible {
+	.lunch-carousel-dot:hover::before,
+	.lunch-carousel-dot:focus-visible::before {
 		background: rgb(from var(--colorWhite) r g b / 72%);
-		outline: none;
 	}
 
 	.lunch-carousel-dot:focus-visible {
+		outline: none;
+	}
+
+	.lunch-carousel-dot:focus-visible::before {
 		box-shadow: 0 0 0 0.16rem rgb(from var(--colorWhite) r g b / 28%);
+	}
+
+	@media (forced-colors: active) {
+		.lunch-carousel-dot:is(:hover, :focus-visible)::before {
+			border-color: Highlight;
+		}
 	}
 
 	@media not (--widthLarge) {
