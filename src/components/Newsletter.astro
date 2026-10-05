@@ -72,12 +72,9 @@ import Heading from "./Heading.astro";
 					true,
 				);
 			}
-		} catch (error) {
-			const { message } = error as Error;
+		} catch {
 			setMessage(
-				message === "Failed to fetch"
-					? "Too many requests. Try again later, please?"
-					: message,
+				"We couldn't reach the server. Please check your connection and try again.",
 				true,
 			);
 		} finally {

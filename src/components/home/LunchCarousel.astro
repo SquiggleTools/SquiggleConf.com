@@ -14,8 +14,10 @@ const { spots } = Astro.props;
 
 <div
 	aria-label="Lunch options photo carousel"
+	aria-roledescription="carousel"
 	class="lunch-carousel"
 	data-lunch-carousel
+	role="group"
 >
 	<TimelineImage radius="var(--radiusLarge)">
 		<div class="lunch-carousel-track" data-lunch-track>
@@ -41,7 +43,11 @@ const { spots } = Astro.props;
 			}
 		</div>
 	</TimelineImage>
-	<div aria-label="Lunch image navigation" class="lunch-carousel-dots">
+	<div
+		aria-label="Lunch image navigation"
+		class="lunch-carousel-dots"
+		role="group"
+	>
 		{
 			spots.map((spot, index) => (
 				<button
