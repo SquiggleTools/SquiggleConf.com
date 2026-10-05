@@ -1,6 +1,7 @@
+import type { HistoricalDataForYear } from "./types";
+
 import * as data2024 from "./2024";
 import * as data2025 from "./2025";
-import { HistoricalDataForYear } from "./types";
 
 export const historicalDataByYear = {
 	2024: {

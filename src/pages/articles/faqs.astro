@@ -27,9 +27,7 @@ const faqs: FAQSection[] = [
 			[
 				"What events are you planning?",
 				`
-See <a href="/">Schedule</a> for a high-level overview of our schedule. Details are partially dependent on corporate sponsorships.
-
-<br />
+See [Schedule](/) for a high-level overview of our schedule. Details are partially dependent on corporate sponsorships.
 
 SquiggleConf will include:
 
@@ -37,9 +35,7 @@ SquiggleConf will include:
 - Breaks and breakout sessions during the conference
 - Spaces to ask speakers questions and network with other attendees
 
-<br />
-
-Subscribe to the <a href="/#newsletter">newsletter</a> to be the first to know more!
+Subscribe to the [newsletter](/#newsletter) to be the first to know more!
 				`,
 			],
 		],
@@ -50,8 +46,8 @@ Subscribe to the <a href="/#newsletter">newsletter</a> to be the first to know m
 			[
 				"How can I ask speakers questions?",
 				`Talks have time reserved for live Q&A. Additionally, each session has a channel in Discord where you can ask questions.
-				<br />
-				We'd also encourage you to find them in-person between sessions and start conversations. They're friendly people.`,
+
+We'd also encourage you to find them in-person between sessions and start conversations. They're friendly people.`,
 			],
 			[
 				"Will talks be recorded?",
@@ -86,13 +82,13 @@ Your ticket gets you:
 
 Note that talk tickets _do not_ include:
 
-- Meals, including lunch at <a href="https://faneuilhallmarketplace.com" rel="noreferrer" target="_blank">Faneuil Hall Marketplace</a>
+- Meals, including lunch at [Faneuil Hall Marketplace](https://faneuilhallmarketplace.com)
 - Travel to or from the conference
 					`,
 			],
 			[
 				"What is your refund policy?",
-				"Full refunds. If you can't make it, please let us know - we can work with you. <br /> Do not come to SquiggleConf if you have any COVID symptoms.",
+				"Full refunds. If you can't make it, please let us know - we can work with you.\n\nDo not come to SquiggleConf if you have any COVID symptoms.",
 			],
 			[
 				"Will there be ticket sales at the door?",
@@ -110,6 +106,9 @@ Note that talk tickets _do not_ include:
 	</Fragment>
 
 	<Fragment slot="intro">
-		<FAQSections sections={faqs.map(([title, pairs]) => ({ title, pairs }))} />
+		<FAQSections
+			level="h2"
+			sections={faqs.map(([title, pairs]) => ({ pairs, title }))}
+		/>
 	</Fragment>
 </ArticleLayout>

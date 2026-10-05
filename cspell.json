@@ -3,9 +3,6 @@
 	"ignorePaths": [
 		".all-contributorsrc",
 		".astro",
-		".vercel",
-		"CHANGELOG.md",
-		"coverage",
 		"dist",
 		"node_modules",
 		"pnpm-lock.yaml",
@@ -53,6 +50,7 @@
 		"mulroy",
 		"Murg",
 		"neaq",
+		"noreferrer",
 		"Nuxt",
 		"octoguide",
 		"OctoGuide",
