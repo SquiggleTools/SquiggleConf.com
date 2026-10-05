@@ -1,8 +1,10 @@
 ---
-interface Props {
-	as?: "div" | "li";
+import type { Polymorphic } from "astro/types";
+
+type Props<Tag extends "div" | "li"> = Polymorphic<{
+	as: Tag;
 	class?: string;
-}
+}>;
 
 const { as: As = "div", class: className, ...rest } = Astro.props;
 ---
