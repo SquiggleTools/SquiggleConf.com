@@ -2,43 +2,84 @@
 import { Image } from "astro:assets";
 
 import terminalShop from "~/assets/2027/terminal.shop.svg";
-
-import Button from "../Button.astro";
 ---
 
-<Button
-	as="a"
-	class="timeline-checkin-button"
+<a
+	class="terminal-shop-button"
 	href="https://terminal.shop"
 	rel="noreferrer"
 	target="_blank"
-	variant="terminal"
 >
 	<Image
 		alt=""
 		aria-hidden="true"
-		class="timeline-checkin-button-icon"
+		class="terminal-shop-button-icon"
 		src={terminalShop}
 	/>
-	<span class="timeline-checkin-button-label">terminal.shop coffee</span>
-</Button>
+	<span class="terminal-shop-button-label">terminal.shop coffee</span>
+</a>
 
 <style>
-	.timeline-checkin-button {
+	.terminal-shop-button {
+		--colorTerminalGlass: rgb(from var(--colorTerminalOrange) r g b / 28%);
+		--colorTerminalGlassHover: rgb(from var(--colorTerminalOrange) r g b / 48%);
+
+		align-items: center;
+		backdrop-filter: var(--backdropFrosted);
+		background: linear-gradient(
+			140deg,
+			rgb(from var(--colorTerminalOrange) r g b / 34%) 0%,
+			var(--colorTerminalGlass) 38%,
+			rgb(from var(--colorTerminalOrange) r g b / 22%) 68%,
+			rgb(from var(--colorTerminalOrange) r g b / 30%) 100%
+		);
+		border: 1px solid var(--colorTerminalOrange);
+		border-radius: var(--radiusLarge);
+		box-shadow:
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 20%),
+			0 1rem 2rem rgb(from var(--colorTerminalOrange) r g b / 16%),
+			0 0 0 1px rgb(from var(--colorTerminalOrange) r g b / 12%);
+		color: var(--colorHeading);
+		cursor: pointer;
+		display: inline-flex;
+		gap: 0.7rem;
 		height: fit-content;
 		justify-self: start;
 		margin-top: 1rem;
+		padding: 0.75rem 1.1rem 0.75rem 0.9rem;
+		text-decoration: none;
 		text-wrap: balance;
+		transition:
+			background var(--transitionNormal),
+			box-shadow var(--transitionNormal),
+			transform var(--transitionNormal);
+		user-select: none;
 		width: fit-content;
 	}
 
-	.timeline-checkin-button-icon {
+	.terminal-shop-button:hover,
+	.terminal-shop-button:focus-visible {
+		background: linear-gradient(
+			140deg,
+			rgb(from var(--colorTerminalOrange) r g b / 56%) 0%,
+			var(--colorTerminalGlassHover) 38%,
+			rgb(from var(--colorTerminalOrange) r g b / 42%) 68%,
+			rgb(from var(--colorTerminalOrange) r g b / 52%) 100%
+		);
+		box-shadow:
+			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 22%),
+			0 1rem 2rem rgb(from var(--colorTerminalOrange) r g b / 22%),
+			0 0 0 1px rgb(from var(--colorTerminalOrange) r g b / 18%);
+		transform: translateY(-1px);
+	}
+
+	.terminal-shop-button-icon {
 		display: block;
 		height: 1.5rem;
 		width: auto;
 	}
 
-	.timeline-checkin-button-label {
+	.terminal-shop-button-label {
 		font-family: var(--fontFamilyMonospace);
 		font-size: 0.95rem;
 		font-weight: var(--fontWeightSemiLight);
