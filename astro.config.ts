@@ -20,7 +20,7 @@ export default defineConfig({
 			BREVO_LIST_ID: envField.number({
 				access: "public",
 				context: "server",
-				optional: true,
+				default: 3,
 			}),
 		},
 	},

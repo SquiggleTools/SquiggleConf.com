@@ -1,6 +1,7 @@
 ---
+import type { Props as HeadProps } from "~/components/Head.astro";
+
 import Footer from "~/components/Footer.astro";
-import { Props as HeadProps } from "~/components/Head.astro";
 import Header from "~/components/Header.astro";
 import NextYearNotice from "~/components/historical/NextYearNotice.astro";
 import { currentYear } from "~/data/years";
@@ -39,6 +40,7 @@ const historical = year !== currentYear;
 		--fontFamilyBody: "Urbanist Variable", sans-serif;
 
 		display: flex;
+		font-family: var(--fontFamilyBody);
 		flex-direction: column;
 		align-items: center;
 		padding: 1.5rem 0 3.5rem;

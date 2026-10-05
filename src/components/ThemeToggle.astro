@@ -45,8 +45,9 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 </style>
 
 <script>
+	import { reducedMotionQuery } from "~/utils/motion";
+
 	const html = document.documentElement;
-	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
 
 	for (const toggle of document.querySelectorAll(".theme-toggle")) {
 		const updateLabel = () => {

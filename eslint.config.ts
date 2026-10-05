@@ -58,9 +58,7 @@ export default defineConfig(
 		ignores: ["**/*.astro/*.ts"],
 		languageOptions: {
 			parserOptions: {
-				projectService: {
-					allowDefaultProject: ["*.config.*s"],
-				},
+				projectService: true,
 			},
 		},
 		rules: {

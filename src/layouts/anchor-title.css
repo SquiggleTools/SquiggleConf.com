@@ -1,0 +1,9 @@
+.anchor-title::after {
+	content: " #";
+	opacity: 0;
+	transition: var(--transitionNormal) opacity;
+}
+
+.anchor-title-card:is(:hover, :focus-within) .anchor-title::after {
+	opacity: 1;
+}

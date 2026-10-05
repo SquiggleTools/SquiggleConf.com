@@ -1,6 +1,6 @@
 ---
 import BodyText from "~/components/BodyText.astro";
-import { Article, articles } from "~/data/articles";
+import { type Article, articles } from "~/data/articles";
 
 import ContentArea from "./ContentArea.astro";
 import Heading from "./Heading.astro";
@@ -8,7 +8,7 @@ import Heading from "./Heading.astro";
 const entries = Object.entries<Article>(articles);
 ---
 
-<ContentArea class="articles-list">
+<ContentArea>
 	<ul>
 		{entries.map(([slug, article]) => (
 			<li>

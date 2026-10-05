@@ -173,7 +173,7 @@ const { spots } = Astro.props;
 </style>
 
 <script>
-	const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+	import { reducedMotionQuery } from "~/utils/motion";
 
 	for (const carousel of document.querySelectorAll<HTMLElement>(
 		"[data-lunch-carousel]",
