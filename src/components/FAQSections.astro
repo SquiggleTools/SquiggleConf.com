@@ -2,14 +2,17 @@
 import FAQSection, { type Props as FAQSectionProps } from "./FAQSection.astro";
 
 interface Props {
-	sections: FAQSectionProps[];
+	level?: FAQSectionProps["level"];
+	sections: Omit<FAQSectionProps, "level">[];
 }
+
+const { level, sections } = Astro.props;
 ---
 
 <div class="faq-sections">
 	{
-		Astro.props.sections.map(({ title, pairs: section }) => (
-			<FAQSection pairs={section} title={title} />
+		sections.map(({ pairs, title }) => (
+			<FAQSection level={level} pairs={pairs} title={title} />
 		))
 	}
 </div>
