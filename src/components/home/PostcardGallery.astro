@@ -6,12 +6,13 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 ---
 
 <div class="postcard-gallery">
-	<button
-		aria-label="Flip the SquiggleConf postcard"
-		aria-pressed="false"
-		class="postcard-flip"
-		type="button"
-	>
+	<div class="postcard-flip">
+		<button
+			aria-label="Flip the SquiggleConf postcard"
+			aria-pressed="false"
+			class="postcard-flip-toggle"
+			type="button"
+		></button>
 		<div class="postcard-flip-scene">
 			<div class="postcard-flip-inner">
 				<span class="postcard-face">
@@ -51,7 +52,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 				</span>
 			</div>
 		</div>
-	</button>
+	</div>
 </div>
 
 <style>
@@ -107,32 +108,37 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip {
 		animation: postcard-idle-wiggle 5s ease-in-out infinite;
-		background: none;
-		border: none;
-		color: inherit;
-		cursor: pointer;
 		display: grid;
-		font: inherit;
 		justify-items: center;
 		margin: 3em 0 2rem;
 		padding: 0 0 2.2rem;
-		text-align: inherit;
+		position: relative;
 		transform: rotate(-4deg);
 		transition: transform var(--transitionNormal);
 		width: min(100%, 31.5rem);
+	}
+
+	.postcard-flip-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		inset: 0;
+		padding: 0;
+		position: absolute;
 	}
 
 	.postcard-flip:is(
 		:hover,
 		:focus-within,
 		[data-mobile-flipped],
-		[aria-pressed="true"]
+		:has(> [aria-pressed="true"])
 	) {
 		animation: none;
 	}
 
 	.postcard-flip-scene {
 		perspective: 1200px;
+		pointer-events: none;
 		transition: transform var(--transitionNormal) var(--transitionEaseOut);
 		width: 100%;
 	}
@@ -144,7 +150,6 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip-inner {
 		aspect-ratio: 6 / 4;
-		pointer-events: none;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 480ms var(--transitionEaseOut);
@@ -153,7 +158,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	/* data-mobile-flipped is only set on mobile, when scrolled past */
 	.postcard-flip[data-mobile-flipped],
-	[aria-pressed="true"] .postcard-flip-scene {
+	[aria-pressed="true"] + .postcard-flip-scene {
 		transform: translateY(-0.08rem);
 	}
 
@@ -161,7 +166,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 			:hover,
 			:focus-within,
 			[data-mobile-flipped],
-			[aria-pressed="true"]
+			:has(> [aria-pressed="true"])
 		)
 		.postcard-flip-inner {
 		transform: rotateY(180deg);
@@ -171,7 +176,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 			:hover,
 			:focus-within,
 			[data-mobile-flipped],
-			[aria-pressed="true"]
+			:has(> [aria-pressed="true"])
 		)
 		.postcard {
 		box-shadow:
@@ -273,7 +278,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 			:hover,
 			:focus-within,
 			[data-mobile-flipped],
-			[aria-pressed="true"]
+			:has(> [aria-pressed="true"])
 		)
 		.postcard-note {
 		opacity: 1;
@@ -295,13 +300,14 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
+	const toggle = document.querySelector<HTMLElement>(".postcard-flip-toggle");
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
-	if (postcard) {
-		postcard.addEventListener("click", () => {
-			postcard.setAttribute(
+	if (postcard && toggle) {
+		toggle.addEventListener("click", () => {
+			toggle.setAttribute(
 				"aria-pressed",
-				`${postcard.getAttribute("aria-pressed") !== "true"}`,
+				`${toggle.getAttribute("aria-pressed") !== "true"}`,
 			);
 		});
 
