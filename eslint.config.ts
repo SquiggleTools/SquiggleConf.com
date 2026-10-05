@@ -1,6 +1,7 @@
 import comments from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import eslint from "@eslint/js";
 import markdown from "@eslint/markdown";
+import astro from "eslint-plugin-astro";
 import jsdoc from "eslint-plugin-jsdoc";
 import jsonc from "eslint-plugin-jsonc";
 import n from "eslint-plugin-n";
@@ -54,6 +55,7 @@ export default defineConfig(
 			regexp.configs["flat/recommended"],
 		],
 		files: ["**/*.{js,ts}"],
+		ignores: ["**/*.astro/*.ts"],
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
@@ -75,6 +77,29 @@ export default defineConfig(
 		},
 		settings: { perfectionist: { partitionByComment: true, type: "natural" } },
 	},
+	{
+		extends: [
+			eslint.configs.recommended,
+			tseslint.configs.strict,
+			tseslint.configs.stylistic,
+			perfectionist.configs["recommended-natural"],
+			regexp.configs["flat/recommended"],
+		],
+		files: ["**/*.astro", "**/*.astro/*.ts"],
+		rules: {
+			"logical-assignment-operators": [
+				"error",
+				"always",
+				{ enforceForIfStatements: true },
+			],
+			"no-useless-rename": "error",
+			"object-shorthand": "error",
+			"operator-assignment": "error",
+		},
+		settings: { perfectionist: { partitionByComment: true, type: "natural" } },
+	},
+	astro.configs["flat/recommended"],
+	astro.configs["flat/jsx-a11y-strict"],
 	{
 		extends: [yml.configs["flat/recommended"], yml.configs["flat/prettier"]],
 		files: ["**/*.{yml,yaml}"],

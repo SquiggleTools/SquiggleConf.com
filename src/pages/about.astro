@@ -1,17 +1,18 @@
 ---
+import type { Props as BioProps } from "~/components/Bio.astro";
+
 import dimitriMitropoulos from "~/assets/avatars/dimitri-mitropoulos.webp";
 import hadleyGarrett from "~/assets/avatars/hadley-garrett.webp";
 import joshGoldberg from "~/assets/avatars/josh-goldberg.webp";
 import katharineMitropoulos from "~/assets/avatars/katharine-mitropoulos.webp";
 import bostonTSClub from "~/assets/logos/boston-ts-club.svg";
 import michiganTypeScript from "~/assets/logos/michigan-typescript.png";
-import type { Props as BioProps } from "~/components/Bio.astro";
-import CommonContent from "~/components/CommonContent.astro";
-import ArticleLayout from "~/layouts/ArticleLayout.astro";
-import Bios from "~/components/Bios.astro";
 import Arrow from "~/components/Arrow.astro";
+import Bios from "~/components/Bios.astro";
 import Button from "~/components/Button.astro";
+import CommonContent from "~/components/CommonContent.astro";
 import { links } from "~/data/links";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 const biosSquiggleTools: BioProps[] = [
 	{
@@ -102,15 +103,15 @@ const biosStaff: BioProps[] = [
 			their background or resources.
 		</p>
 
-		<Bios class="about-bios" bios={biosSquiggleTools} />
+		<Bios bios={biosSquiggleTools} class="about-bios" />
 
 		<Button
 			as="a"
 			class="donate-button"
-			size="large"
-			variant="emphasized"
 			href={links.donate}
+			size="large"
 			target="_blank"
+			variant="emphasized"
 		>
 			Donate to the Squiggle.Tools 501(c)(3)
 			<Arrow />

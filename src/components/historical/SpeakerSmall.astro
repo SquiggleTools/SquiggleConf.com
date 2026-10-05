@@ -1,6 +1,8 @@
 ---
 import type { Polymorphic } from "astro/types";
+
 import type { PersonInfo } from "~/data/historical/types";
+
 import Avatar from "../Avatar.astro";
 import SafeMarkdown from "../SafeMarkdown.astro";
 
@@ -27,7 +29,7 @@ const {
 	<div class="speaker-text">
 		{
 			href && (
-				<a class="speaker-text-links" href={href} aria-label={speaker.name} />
+				<a aria-label={speaker.name} class="speaker-text-links" href={href} />
 			)
 		}
 		<div class="name">{speaker.name}</div>
