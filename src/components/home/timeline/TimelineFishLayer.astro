@@ -1,6 +1,7 @@
 ---
-import { timelineFish } from "~/components/home/data";
 import type { TimelineEntryId } from "~/components/home/types";
+
+import { timelineFish } from "~/components/home/data";
 
 interface Props {
 	/** The fish finish swimming once this entry scrolls past. */
@@ -10,7 +11,7 @@ interface Props {
 const { swimUntil } = Astro.props;
 ---
 
-<div class="timeline-fish-layer" aria-hidden="true" data-swim-until={swimUntil}>
+<div aria-hidden="true" class="timeline-fish-layer" data-swim-until={swimUntil}>
 	{
 		timelineFish.map((fish, index) => (
 			<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
@@ -211,10 +212,11 @@ const { swimUntil } = Astro.props;
 
 <script>
 	import { reducedMotionQuery } from "~/utils/motion";
+
 	import { onScrollFrame } from "./onScrollFrame";
 
 	const layer = document.querySelector<HTMLElement>(".timeline-fish-layer");
-	const section = layer?.offsetParent;
+	const section = layer?.parentElement;
 	const talks = document.querySelector<HTMLElement>(
 		`[data-timeline-entry="${layer?.dataset.swimUntil}"]`,
 	);

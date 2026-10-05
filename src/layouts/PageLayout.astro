@@ -1,9 +1,11 @@
 ---
-import { Props as HeadProps } from "~/components/Head.astro";
+import type { Props as HeadProps } from "~/components/Head.astro";
+
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import NextYearNotice from "~/components/historical/NextYearNotice.astro";
 import { currentYear } from "~/data/years";
+
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = HeadProps & {
@@ -17,9 +19,9 @@ const historical = year !== currentYear;
 <BaseLayout {...props} year={year}>
 	<Header hideLogo={hideHeaderLogo} year={year} />
 	{historical && <NextYearNotice year={year} />}
-	<div class:list={["body-area", { "page-layout-historical": historical }]}>
+	<main class:list={["body-area", { "page-layout-historical": historical }]}>
 		<slot />
-	</div>
+	</main>
 	<Footer year={year} />
 </BaseLayout>
 

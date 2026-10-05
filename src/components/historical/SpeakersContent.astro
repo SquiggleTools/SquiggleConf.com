@@ -1,10 +1,11 @@
 ---
+import type { PersonInfo, SessionInfo } from "~/data/historical/types";
+
 import BioLinks from "../BioLinks.astro";
 import BodyText from "../BodyText.astro";
 import SectionWrapper from "./SectionWrapper.astro";
 import SpeakerSmall from "./SpeakerSmall.astro";
 import SubtleCard from "./SubtleCard.astro";
-import { PersonInfo, SessionInfo } from "~/data/historical/types";
 
 interface Props {
 	talks: SessionInfo[];
@@ -42,11 +43,7 @@ const seen = new Set<PersonInfo>();
 								href={`/${year}/sessions#${talk.slug}`}
 								person={person}
 							>
-								<BioLinks
-									class="speaker-bio-links"
-									name={person.name}
-									links={person.links}
-								/>
+								<BioLinks links={person.links} name={person.name} />
 							</SpeakerSmall>
 						</SubtleCard>
 					)),

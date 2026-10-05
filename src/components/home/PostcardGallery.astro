@@ -6,20 +6,20 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 ---
 
 <div class="postcard-gallery">
-	<div
-		aria-label="SquiggleConf postcard"
+	<button
+		aria-label="Flip the SquiggleConf postcard"
+		aria-pressed="false"
 		class="postcard-flip"
-		role="group"
-		tabindex="0"
+		type="button"
 	>
 		<div class="postcard-flip-scene">
 			<div class="postcard-flip-inner">
-				<span class="postcard-face postcard-face-front">
+				<span class="postcard-face">
 					<span class="postcard postcard-front">
 						<Image
 							alt="Front of the SquiggleConf postcard"
-							src={postcardFront}
 							loading="eager"
+							src={postcardFront}
 						/>
 					</span>
 				</span>
@@ -27,8 +27,8 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 					<span class="postcard postcard-back">
 						<Image
 							alt="Back of the SquiggleConf postcard"
-							src={postcardBack}
 							loading="eager"
+							src={postcardBack}
 						/>
 						<span class="postcard-back-message">
 							<span>Hi Mom,</span>
@@ -51,7 +51,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 				</span>
 			</div>
 		</div>
-	</div>
+	</button>
 </div>
 
 <style>
@@ -107,16 +107,27 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip {
 		animation: postcard-idle-wiggle 5s ease-in-out infinite;
+		background: none;
+		border: none;
+		color: inherit;
+		cursor: pointer;
 		display: grid;
+		font: inherit;
 		justify-items: center;
 		margin: 3em 0 2rem;
-		padding-bottom: 2.2rem;
+		padding: 0 0 2.2rem;
+		text-align: inherit;
 		transform: rotate(-4deg);
 		transition: transform var(--transitionNormal);
 		width: min(100%, 31.5rem);
 	}
 
-	.postcard-flip:is(:hover, :focus-within, [data-mobile-flipped]) {
+	.postcard-flip:is(
+		:hover,
+		:focus-within,
+		[data-mobile-flipped],
+		[aria-pressed="true"]
+	) {
 		animation: none;
 	}
 
@@ -141,16 +152,28 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	}
 
 	/* data-mobile-flipped is only set on mobile, when scrolled past */
-	.postcard-flip[data-mobile-flipped] .postcard-flip-scene {
+	.postcard-flip[data-mobile-flipped],
+	[aria-pressed="true"] .postcard-flip-scene {
 		transform: translateY(-0.08rem);
 	}
 
-	.postcard-flip:is(:hover, :focus-within, [data-mobile-flipped])
+	.postcard-flip:is(
+			:hover,
+			:focus-within,
+			[data-mobile-flipped],
+			[aria-pressed="true"]
+		)
 		.postcard-flip-inner {
 		transform: rotateY(180deg);
 	}
 
-	.postcard-flip:is(:hover, :focus-within, [data-mobile-flipped]) .postcard {
+	.postcard-flip:is(
+			:hover,
+			:focus-within,
+			[data-mobile-flipped],
+			[aria-pressed="true"]
+		)
+		.postcard {
 		box-shadow:
 			0 0.08rem 0 rgb(from var(--colorWhite) r g b / 56%),
 			0 0.45rem 0.95rem rgb(from var(--colorBlue5) r g b / 16%),
@@ -246,7 +269,12 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 		width: min(100%, 20rem);
 	}
 
-	.postcard-flip:is(:hover, :focus-within, [data-mobile-flipped])
+	.postcard-flip:is(
+			:hover,
+			:focus-within,
+			[data-mobile-flipped],
+			[aria-pressed="true"]
+		)
 		.postcard-note {
 		opacity: 1;
 	}
@@ -270,6 +298,13 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard) {
+		postcard.addEventListener("click", () => {
+			postcard.setAttribute(
+				"aria-pressed",
+				`${postcard.getAttribute("aria-pressed") !== "true"}`,
+			);
+		});
+
 		let centerAboveMiddle = false;
 
 		const updateFlipped = () => {
