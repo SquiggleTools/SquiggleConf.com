@@ -5,9 +5,12 @@ import { renderMarkdown } from "~/utils/markdown";
 import Heading from "./Heading.astro";
 
 export interface Props {
+	level?: "h2" | "h3";
 	pairs: [string, string][];
 	title: string;
 }
+
+const { level = "h3", title } = Astro.props;
 
 const pairs = Astro.props.pairs.map(
 	([question, answer]) => [question, renderMarkdown(answer)] as const,
@@ -15,8 +18,8 @@ const pairs = Astro.props.pairs.map(
 ---
 
 <div>
-	<Heading class="h3" level="h3">
-		{Astro.props.title}
+	<Heading class="faq-heading" level={level}>
+		{title}
 	</Heading>
 	{
 		pairs.map(([question, answer]) => (
@@ -36,7 +39,7 @@ const pairs = Astro.props.pairs.map(
 </div>
 
 <style>
-	.h3 {
+	.faq-heading {
 		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightLight);
 	}

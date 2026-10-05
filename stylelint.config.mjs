@@ -7,7 +7,7 @@ export default {
 			files: ["**/*.astro"],
 		},
 		{
-			files: ["src/layouts/base.css", "src/styles/historical.css"],
+			files: ["src/layouts/base.css"],
 			rules: {
 				"color-named": null,
 				"color-no-hex": null,
