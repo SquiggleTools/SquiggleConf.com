@@ -25,6 +25,7 @@ import networking from "~/assets/stills/attendees-networking.webp";
 import harbor from "~/assets/stills/boston-harbor.webp";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Hero from "~/components/hero/Hero.astro";
+import CfpOpens from "~/components/home/cfp/CfpOpens.astro";
 import Collage from "~/components/home/Collage.astro";
 import {
 	exploreChoices,
@@ -81,6 +82,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				</div>
 				<PostcardGallery />
 			</div>
+			<CfpOpens />
 			<TimelineGrid>
 				<TimelineDayCap date={eventDateEve} day="Thursday">
 					<div class="timeline-grid-intro">

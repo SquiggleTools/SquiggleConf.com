@@ -1,0 +1,73 @@
+---
+import type { PersonCardData } from "~/components/home/types";
+
+import CfpAvatar from "./CfpAvatar.astro";
+
+interface Props {
+	person: PersonCardData;
+	tag?: string;
+}
+
+const { person, tag } = Astro.props;
+---
+
+<li class="cfp-person">
+	<CfpAvatar person={person} />
+	<div class="cfp-person-copy">
+		<p class="cfp-person-name">{person.name}</p>
+		<p class="cfp-person-role">{person.qualification}</p>
+		{tag && <p class="cfp-person-tag">{tag}</p>}
+	</div>
+</li>
+
+<style>
+	.cfp-person {
+		display: grid;
+		gap: 0.6rem;
+		justify-items: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+	}
+
+	.cfp-person-copy {
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.cfp-person-name {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmaller);
+		font-weight: var(--fontWeightBold);
+		line-height: 1.15;
+		margin: 0;
+	}
+
+	.cfp-person-role {
+		color: var(--colorMuted);
+		font-size: var(--fontSizeCaption);
+		font-weight: var(--fontWeightLight);
+		line-height: 1.25;
+		margin: 0;
+	}
+
+	.cfp-person-tag {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeCaption);
+		font-weight: var(--fontWeightSemibold);
+		letter-spacing: 0.08em;
+		margin: 0.2rem 0 0;
+		text-transform: uppercase;
+	}
+
+	.cfp-person:hover :global(.cfp-avatar) {
+		scale: 1.06;
+	}
+
+	.cfp-person :global(.cfp-avatar) {
+		transition: scale var(--transitionNormal) var(--transitionEaseOut);
+	}
+</style>

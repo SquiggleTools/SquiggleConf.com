@@ -1,0 +1,233 @@
+---
+import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import CfpBubbles from "./CfpBubbles.astro";
+import CfpPerson from "./CfpPerson.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp-opens-heading" class="cfp-opens">
+	<div aria-hidden="true" class="cfp-opens-rays">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<CfpBubbles class="cfp-opens-bubbles" count={36} />
+	<div class="cfp-opens-inner">
+		<div class="cfp-opens-headline">
+			<p class="cfp-opens-eyebrow">Call for proposals</p>
+			<TimelineHeading
+				class="cfp-opens-heading"
+				id="cfp-opens-heading"
+				level="h2"
+			>
+				CFP Opens <span class="cfp-opens-date">{cfpOpenDate}</span>
+			</TimelineHeading>
+			<p class="cfp-opens-close">Submissions close {cfpCloseDate}</p>
+		</div>
+		<div class="cfp-opens-lineup">
+			<ul aria-label="Launch speakers" class="cfp-opens-people">
+				{cfpLaunchSpeakers.map((person) => (
+					<CfpPerson person={person} tag="launch speaker" />
+				))}
+			</ul>
+			<ul aria-label="Event hosts" class="cfp-opens-people">
+				{cfpHosts.map((person) => (
+					<CfpPerson person={person} />
+				))}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cfp-opens {
+		--cfp-avatar-size: 6.5rem;
+
+		background: linear-gradient(
+			to bottom,
+			transparent,
+			var(--colorBlueBright1) 30%,
+			var(--colorBlue5)
+		);
+		border-block: 1px solid var(--timeline-rail-border-color);
+		isolation: isolate;
+		margin: 1rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
+		overflow: hidden;
+		padding: clamp(3.5rem, 7vw, 5.5rem) 1rem;
+		position: relative;
+	}
+
+	.cfp-opens-rays {
+		inset: 0;
+		mix-blend-mode: screen;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.cfp-opens-rays span {
+		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
+		background: linear-gradient(
+			to bottom,
+			rgb(from var(--colorBlue2) r g b / 22%),
+			transparent 85%
+		);
+		filter: blur(10px);
+		height: 130%;
+		left: var(--left);
+		position: absolute;
+		top: -10%;
+		transform-origin: top center;
+		width: var(--width);
+	}
+
+	.cfp-opens-rays span:nth-child(1) {
+		--left: 12%;
+		--width: 4rem;
+
+		rotate: 18deg;
+	}
+
+	.cfp-opens-rays span:nth-child(2) {
+		--left: 30%;
+		--width: 2rem;
+
+		animation-delay: -3s;
+		rotate: 10deg;
+	}
+
+	.cfp-opens-rays span:nth-child(3) {
+		--left: 50%;
+		--width: 6rem;
+
+		animation-delay: -6s;
+		rotate: 0deg;
+	}
+
+	.cfp-opens-rays span:nth-child(4) {
+		--left: 68%;
+		--width: 2.5rem;
+
+		animation-delay: -2s;
+		rotate: -9deg;
+	}
+
+	.cfp-opens-rays span:nth-child(5) {
+		--left: 84%;
+		--width: 4.5rem;
+
+		animation-delay: -8s;
+		rotate: -16deg;
+	}
+
+	@keyframes cfp-opens-sway {
+		0% {
+			opacity: 0.5;
+			transform: skewX(-6deg);
+		}
+
+		100% {
+			opacity: 1;
+			transform: skewX(6deg);
+		}
+	}
+
+	.cfp-opens-bubbles {
+		opacity: 0.6;
+	}
+
+	.cfp-opens-inner {
+		display: grid;
+		gap: clamp(2.5rem, 5vw, 4rem);
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		z-index: 1;
+	}
+
+	.cfp-opens-headline {
+		display: grid;
+		gap: 0.25rem;
+	}
+
+	.cfp-opens-eyebrow {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightSemibold);
+		letter-spacing: 0.08em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.cfp-opens-heading {
+		font-size: clamp(2.8rem, 7vw, 5.25rem);
+		font-style: italic;
+		line-height: 0.95;
+		margin: 0;
+	}
+
+	.cfp-opens-date {
+		color: var(--colorAccentMedium);
+		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 22%);
+	}
+
+	.cfp-opens-close {
+		color: var(--colorMuted);
+		font-size: var(--fontSizeSmaller);
+		font-style: italic;
+		margin: 0.5rem 0 0;
+	}
+
+	.cfp-opens-lineup {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: 3fr 4fr;
+	}
+
+	.cfp-opens-people {
+		display: grid;
+		gap: 1rem;
+		grid-auto-columns: 1fr;
+		grid-auto-flow: column;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cfp-opens-people :global(.cfp-person):nth-child(odd) :global(.cfp-avatar) {
+		animation: cfp-opens-bob 5s ease-in-out infinite;
+	}
+
+	.cfp-opens-people :global(.cfp-person):nth-child(even) :global(.cfp-avatar) {
+		animation: cfp-opens-bob 5s ease-in-out infinite -2.5s;
+	}
+
+	@keyframes cfp-opens-bob {
+		0%,
+		100% {
+			translate: 0 0;
+		}
+
+		50% {
+			translate: 0 -0.4rem;
+		}
+	}
+
+	@media not (--widthLarge) {
+		.cfp-opens {
+			--cfp-avatar-size: 5rem;
+		}
+
+		.cfp-opens-lineup {
+			grid-template-columns: 1fr;
+		}
+
+		.cfp-opens-people {
+			grid-auto-flow: row;
+			grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+		}
+	}
+</style>
