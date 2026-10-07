@@ -28,6 +28,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 			</TimelineHeading>
 			<p class="cfp-opens-close">Submissions close {cfpCloseDate}</p>
 		</div>
+		<p class="cfp-opens-label">Launch Lineup</p>
 		<div class="cfp-opens-lineup">
 			<ul aria-label="Launch speakers" class="cfp-opens-people">
 				{cfpLaunchSpeakers.map((person) => (
@@ -45,6 +46,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 <style>
 	.cfp-opens {
+		--cfp-avatar-border: 1.5px solid var(--colorBlue1);
 		--cfp-avatar-size: 6.5rem;
 
 		background: var(--colorBlue5);
@@ -175,6 +177,27 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		font-size: var(--fontSizeSmaller);
 		font-style: italic;
 		margin: 0.5rem 0 0;
+	}
+
+	.cfp-opens-label {
+		align-items: center;
+		color: var(--colorMuted);
+		display: flex;
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmaller);
+		font-weight: var(--fontWeightBold);
+		gap: 0.75rem;
+		letter-spacing: 0.1em;
+		margin: 0 0 calc(-1 * clamp(1rem, 2.5vw, 2rem));
+		text-transform: uppercase;
+	}
+
+	.cfp-opens-label::before,
+	.cfp-opens-label::after {
+		background: var(--timeline-rail-border-color);
+		content: "";
+		flex: 1;
+		height: 1px;
 	}
 
 	.cfp-opens-lineup {
