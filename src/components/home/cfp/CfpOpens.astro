@@ -31,7 +31,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		<div class="cfp-opens-lineup">
 			<ul aria-label="Launch speakers" class="cfp-opens-people">
 				{cfpLaunchSpeakers.map((person) => (
-					<CfpPerson person={person} tag="launch speaker" />
+					<CfpPerson person={person} />
 				))}
 			</ul>
 			<ul aria-label="Event hosts" class="cfp-opens-people">
@@ -47,12 +47,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	.cfp-opens {
 		--cfp-avatar-size: 6.5rem;
 
-		background: linear-gradient(
-			to bottom,
-			transparent,
-			var(--colorBlueBright1) 30%,
-			var(--colorBlue5)
-		);
+		background: var(--colorBlue5);
 		border-block: 1px solid var(--timeline-rail-border-color);
 		isolation: isolate;
 		margin: 1rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;

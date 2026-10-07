@@ -8,4 +8,4 @@ export const eventLocation = "Boston, Massachusetts";
 
 export const cfpOpenDate = "Nov 14th";
 
-export const cfpCloseDate = "TBD";
+export const cfpCloseDate = "Jan 15th";

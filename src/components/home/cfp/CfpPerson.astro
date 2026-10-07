@@ -1,14 +1,13 @@
 ---
-import type { PersonCardData } from "~/components/home/types";
+import type { CfpPersonData } from "./data";
 
 import CfpAvatar from "./CfpAvatar.astro";
 
 interface Props {
-	person: PersonCardData;
-	tag?: string;
+	person: CfpPersonData;
 }
 
-const { person, tag } = Astro.props;
+const { person } = Astro.props;
 ---
 
 <li class="cfp-person">
@@ -16,7 +15,7 @@ const { person, tag } = Astro.props;
 	<div class="cfp-person-copy">
 		<p class="cfp-person-name">{person.name}</p>
 		<p class="cfp-person-role">{person.qualification}</p>
-		{tag && <p class="cfp-person-tag">{tag}</p>}
+		{person.detail && <p class="cfp-person-role">{person.detail}</p>}
 	</div>
 </li>
 
@@ -51,16 +50,6 @@ const { person, tag } = Astro.props;
 		font-weight: var(--fontWeightLight);
 		line-height: 1.25;
 		margin: 0;
-	}
-
-	.cfp-person-tag {
-		color: var(--colorAccentMedium);
-		font-family: var(--fontFamilyHeading);
-		font-size: var(--fontSizeCaption);
-		font-weight: var(--fontWeightSemibold);
-		letter-spacing: 0.08em;
-		margin: 0.2rem 0 0;
-		text-transform: uppercase;
 	}
 
 	.cfp-person:hover :global(.cfp-avatar) {
