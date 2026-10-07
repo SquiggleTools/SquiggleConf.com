@@ -1,0 +1,197 @@
+---
+import squigglyWide from "~/assets/design/squiggly-wide.svg?raw";
+
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import TimelineTalksTurtle from "../timeline/TimelineTalksTurtle.astro";
+import CfpBubbles from "./CfpBubbles.astro";
+import CfpPerson from "./CfpPerson.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp1-heading" class="cfp1">
+	<CfpBubbles count={30} />
+	<div aria-hidden="true" class="cfp1-turtle-track">
+		<div class="cfp1-turtle">
+			<TimelineTalksTurtle />
+		</div>
+	</div>
+	<div class="cfp1-inner">
+		<TimelineHeading class="cfp1-heading" id="cfp1-heading" level="h2">
+			CFP Ships
+			<span class="cfp1-date">
+				Nov 14th
+				<span
+					aria-hidden="true"
+					class="cfp1-squiggle"
+					set:html={squigglyWide}
+				/>
+			</span>
+		</TimelineHeading>
+		<div class="cfp1-groups">
+			<div class="cfp1-group">
+				<p class="cfp1-label">Launch Speakers</p>
+				<ul class="cfp1-people">
+					{cfpLaunchSpeakers.map((person) => (
+						<CfpPerson person={person} />
+					))}
+				</ul>
+			</div>
+			<div aria-hidden="true" class="cfp1-divider"></div>
+			<div class="cfp1-group">
+				<p class="cfp1-label">Event Hosts</p>
+				<ul class="cfp1-people">
+					{cfpHosts.map((person) => (
+						<CfpPerson person={person} />
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cfp1 {
+		--cfp-avatar-size: 5.5rem;
+
+		background: var(--colorBlueBright1);
+		border-block: 1px solid var(--timeline-rail-border-color);
+		container-type: inline-size;
+		isolation: isolate;
+		overflow: hidden;
+		padding: clamp(3rem, 7vw, 5.5rem) 1rem;
+		position: relative;
+	}
+
+	.cfp1-inner {
+		display: grid;
+		gap: clamp(2rem, 4vw, 3.5rem);
+		justify-items: center;
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		z-index: 1;
+	}
+
+	.cfp1-heading {
+		font-size: clamp(2.6rem, 6.5vw, 4.75rem);
+		font-style: italic;
+		line-height: 1;
+		margin: 0;
+		text-align: center;
+	}
+
+	.cfp1-date {
+		display: inline-block;
+		position: relative;
+	}
+
+	.cfp1-squiggle {
+		bottom: -0.3em;
+		left: 0;
+		position: absolute;
+		width: 100%;
+	}
+
+	.cfp1-squiggle :global(svg) {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.cfp1-squiggle :global(path) {
+		animation: cfp1-squiggle-draw 2.5s var(--transitionEaseOut) both;
+		stroke: var(--colorBlue2);
+		stroke-dasharray: 1200;
+	}
+
+	@keyframes cfp1-squiggle-draw {
+		from {
+			stroke-dashoffset: 1200;
+		}
+
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	.cfp1-groups {
+		align-items: start;
+		display: grid;
+		gap: 2.5rem;
+		grid-template-columns: 3fr auto 4fr;
+		width: 100%;
+	}
+
+	.cfp1-group {
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.cfp1-label {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.08em;
+		margin: 0;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.cfp1-people {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+		margin: 0;
+		padding: 0;
+	}
+
+	.cfp1-divider {
+		align-self: stretch;
+		background: linear-gradient(
+			to bottom,
+			transparent,
+			var(--timeline-rail-border-color),
+			transparent
+		);
+		width: 1px;
+	}
+
+	.cfp1-turtle-track {
+		inset: auto 0 1.5rem;
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+	}
+
+	.cfp1-turtle {
+		animation: cfp1-swim 38s linear infinite;
+		opacity: 0.85;
+		transform: scaleX(-1);
+		width: 8rem;
+	}
+
+	@keyframes cfp1-swim {
+		0% {
+			translate: calc(100cqw + 2rem) 0;
+		}
+
+		50% {
+			translate: 50cqw -1.5rem;
+		}
+
+		100% {
+			translate: -10rem 0;
+		}
+	}
+
+	@media not (--widthLarge) {
+		.cfp1-groups {
+			grid-template-columns: 1fr;
+		}
+
+		.cfp1-divider {
+			display: none;
+		}
+	}
+</style>

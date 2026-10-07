@@ -1,0 +1,195 @@
+---
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import CfpBubbles from "./CfpBubbles.astro";
+import CfpPerson from "./CfpPerson.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp2-heading" class="cfp2">
+	<div aria-hidden="true" class="cfp2-caustics"></div>
+	<div class="cfp2-inner">
+		<div class="cfp2-headline">
+			<p class="cfp2-eyebrow">Call for proposals</p>
+			<TimelineHeading class="cfp2-heading" id="cfp2-heading" level="h2">
+				CFP Ships <span class="cfp2-date">Nov 14th</span>
+			</TimelineHeading>
+		</div>
+		<div class="cfp2-groups">
+			<div class="cfp2-group">
+				<p class="cfp2-label">Launch Speakers</p>
+				<ul class="cfp2-people">
+					{cfpLaunchSpeakers.map((person) => (
+						<CfpPerson class="cfp2-porthole" person={person} />
+					))}
+				</ul>
+			</div>
+			<div class="cfp2-group">
+				<p class="cfp2-label">Event Hosts</p>
+				<ul class="cfp2-people">
+					{cfpHosts.map((person) => (
+						<CfpPerson class="cfp2-porthole" person={person} />
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<CfpBubbles class="cfp2-bubbles" count={16} />
+</section>
+
+<style>
+	.cfp2 {
+		--cfp-avatar-size: 6rem;
+		--cfp-avatar-border: 0.55rem solid var(--colorBlue3);
+
+		background: var(--colorBlue5);
+		box-shadow:
+			inset 0 1.5rem 2rem -1.5rem rgb(from var(--colorBlue5) r g b / 80%),
+			inset 0 -1.5rem 2rem -1.5rem rgb(from var(--colorBlue5) r g b / 80%);
+		color-scheme: dark;
+		isolation: isolate;
+		overflow: hidden;
+		padding: clamp(3rem, 7vw, 5.5rem) 1rem;
+		position: relative;
+	}
+
+	.cfp2-caustics {
+		animation: cfp2-caustics 18s ease-in-out infinite alternate;
+		background:
+			radial-gradient(
+				ellipse 18rem 6rem at 20% 10%,
+				rgb(from var(--colorBlue2) r g b / 16%),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 22rem 8rem at 75% 0%,
+				rgb(from var(--colorBlue2) r g b / 12%),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 14rem 5rem at 50% 30%,
+				rgb(from var(--colorWhite) r g b / 6%),
+				transparent 70%
+			);
+		background-size: 140% 100%;
+		inset: 0;
+		mix-blend-mode: screen;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	@keyframes cfp2-caustics {
+		from {
+			background-position: 0% 0%;
+		}
+
+		to {
+			background-position: 100% 20%;
+		}
+	}
+
+	.cfp2-inner {
+		display: grid;
+		gap: clamp(2rem, 4vw, 3rem);
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		z-index: 1;
+	}
+
+	.cfp2-headline {
+		display: grid;
+		gap: 0.25rem;
+	}
+
+	.cfp2-eyebrow {
+		color: var(--colorBlue2);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightSemibold);
+		letter-spacing: 0.08em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.cfp2-heading {
+		color: var(--colorWhiteIsh);
+		font-size: clamp(2.8rem, 7vw, 5.25rem);
+		font-style: italic;
+		line-height: 0.95;
+		margin: 0;
+	}
+
+	.cfp2-date {
+		color: var(--colorBlue2);
+		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 45%);
+	}
+
+	.cfp2-groups {
+		display: grid;
+		gap: 3rem;
+		grid-template-columns: 3fr 4fr;
+	}
+
+	.cfp2-group {
+		display: grid;
+		gap: 1.25rem;
+		align-content: start;
+	}
+
+	.cfp2-label {
+		border-bottom: 1px solid rgb(from var(--colorBlue2) r g b / 30%);
+		color: var(--colorBlue1);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeMedium);
+		font-weight: var(--fontWeightBold);
+		margin: 0;
+		padding-bottom: 0.5rem;
+	}
+
+	.cfp2-people {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+		margin: 0;
+		padding: 0;
+	}
+
+	.cfp2-porthole :global(.cfp-avatar) {
+		box-shadow:
+			0 0 0 2px var(--colorBlue4),
+			0 0 0 0.3rem rgb(from var(--colorBlue2) r g b / 35%),
+			inset 0 0 1rem rgb(from var(--colorBlue5) r g b / 70%),
+			0 0.75rem 1.5rem rgb(from var(--colorBlue5) r g b / 60%);
+	}
+
+	.cfp2-porthole :global(.cfp-avatar)::after {
+		background: radial-gradient(
+			circle at 30% 25%,
+			rgb(from var(--colorWhite) r g b / 35%),
+			transparent 35%
+		);
+		border-radius: inherit;
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.cfp2-porthole :global(.cfp-person-name) {
+		color: var(--colorWhiteIsh);
+	}
+
+	.cfp2-porthole :global(.cfp-person-role) {
+		color: rgb(from var(--colorBlue1) r g b / 82%);
+	}
+
+	.cfp2-bubbles {
+		opacity: 0.7;
+	}
+
+	@media not (--widthLarge) {
+		.cfp2-groups {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

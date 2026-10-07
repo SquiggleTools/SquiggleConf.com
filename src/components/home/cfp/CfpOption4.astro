@@ -1,0 +1,256 @@
+---
+import fishSchool from "~/assets/design/fish-school-dull.svg";
+
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import CfpPerson from "./CfpPerson.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp4-heading" class="cfp4">
+	<img
+		alt=""
+		aria-hidden="true"
+		class="cfp4-fish cfp4-fish-1"
+		src={fishSchool.src}
+	/>
+	<img
+		alt=""
+		aria-hidden="true"
+		class="cfp4-fish cfp4-fish-2"
+		src={fishSchool.src}
+	/>
+	<div class="cfp4-inner">
+		<div class="cfp4-headline">
+			<div aria-hidden="true" class="cfp4-sonar">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<TimelineHeading class="cfp4-heading" id="cfp4-heading" level="h2">
+				CFP Ships Nov 14th
+			</TimelineHeading>
+			<p class="cfp4-countdown" data-cfp-countdown="2026-11-14T00:00:00">
+				<span class="cfp4-countdown-days">--</span> days to go
+			</p>
+		</div>
+		<div class="cfp4-groups">
+			<div class="cfp4-panel">
+				<p class="cfp4-label">Launch Speakers</p>
+				<ul class="cfp4-people">
+					{cfpLaunchSpeakers.map((person) => (
+						<CfpPerson layout="row" person={person} />
+					))}
+				</ul>
+			</div>
+			<div class="cfp4-panel">
+				<p class="cfp4-label">Event Hosts</p>
+				<ul class="cfp4-people cfp4-people-hosts">
+					{cfpHosts.map((person) => (
+						<CfpPerson layout="row" person={person} />
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cfp4 {
+		--cfp-avatar-size: 4rem;
+
+		background:
+			radial-gradient(
+				ellipse at 50% 20%,
+				rgb(from var(--colorBlue3) r g b / 25%),
+				transparent 60%
+			),
+			var(--colorBlueBright1);
+		border-block: 1px solid var(--timeline-rail-border-color);
+		isolation: isolate;
+		overflow: hidden;
+		padding: clamp(3rem, 7vw, 5rem) 1rem;
+		position: relative;
+	}
+
+	.cfp4-inner {
+		display: grid;
+		gap: clamp(2rem, 4vw, 3rem);
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		z-index: 1;
+	}
+
+	.cfp4-headline {
+		display: grid;
+		gap: 0.75rem;
+		justify-items: center;
+		position: relative;
+	}
+
+	.cfp4-sonar {
+		left: 50%;
+		pointer-events: none;
+		position: absolute;
+		top: 50%;
+	}
+
+	.cfp4-sonar span {
+		animation: cfp4-ping 4.5s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+		border: 2px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		height: 8rem;
+		left: -4rem;
+		opacity: 0;
+		position: absolute;
+		top: -4rem;
+		width: 8rem;
+	}
+
+	.cfp4-sonar span:nth-child(2) {
+		animation-delay: 1.5s;
+	}
+
+	.cfp4-sonar span:nth-child(3) {
+		animation-delay: 3s;
+	}
+
+	@keyframes cfp4-ping {
+		0% {
+			opacity: 0.7;
+			transform: scale(0.4);
+		}
+
+		100% {
+			opacity: 0;
+			transform: scale(5);
+		}
+	}
+
+	.cfp4-heading {
+		font-size: clamp(2.6rem, 6.5vw, 4.75rem);
+		line-height: 1;
+		margin: 0;
+		position: relative;
+		text-align: center;
+		text-shadow: 0 0.2rem 1.5rem var(--colorBlueBright1);
+	}
+
+	.cfp4-countdown {
+		background: var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		color: light-dark(var(--colorWhite), var(--colorBlue5));
+		font-family: var(--fontFamilyMonospace);
+		font-size: var(--fontSizeSmaller);
+		font-weight: var(--fontWeightSemibold);
+		margin: 0;
+		padding: 0.3rem 1rem;
+		position: relative;
+	}
+
+	.cfp4-groups {
+		align-items: start;
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: 1fr 1.5fr;
+	}
+
+	.cfp4-panel {
+		backdrop-filter: var(--backdropFrosted);
+		background: var(--timeline-rail-background);
+		border: 1px solid var(--timeline-rail-border-color);
+		border-radius: var(--radiusLarge);
+		box-shadow: var(--timeline-venue-stack-shadow);
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+		padding: 1.25rem 1.5rem 1.5rem;
+		position: relative;
+	}
+
+	.cfp4-panel::before {
+		color: var(--timeline-venue-at-color);
+		content: "@";
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.5rem;
+		font-weight: var(--fontWeightBold);
+		left: -0.15rem;
+		line-height: 1;
+		opacity: 0.72;
+		position: absolute;
+		top: -0.5rem;
+		transform: rotate(-10deg);
+	}
+
+	.cfp4-label {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeMedium);
+		font-weight: var(--fontWeightBold);
+		margin: 0;
+	}
+
+	.cfp4-people {
+		display: grid;
+		gap: 0.9rem;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cfp4-people-hosts {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.cfp4-fish {
+		pointer-events: none;
+		position: absolute;
+		filter: brightness(2.6) saturate(0.8);
+		opacity: 0.45;
+		width: 14rem;
+		z-index: 0;
+	}
+
+	.cfp4-fish-1 {
+		animation: cfp4-drift 46s linear infinite;
+		top: 12%;
+	}
+
+	.cfp4-fish-2 {
+		animation: cfp4-drift 60s linear infinite -25s;
+		bottom: 8%;
+		width: 10rem;
+	}
+
+	@keyframes cfp4-drift {
+		from {
+			left: -16rem;
+		}
+
+		to {
+			left: 100%;
+		}
+	}
+
+	@media not (--widthLarge) {
+		.cfp4-groups,
+		.cfp4-people-hosts {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script>
+	for (const element of document.querySelectorAll<HTMLElement>(
+		"[data-cfp-countdown]",
+	)) {
+		const target = new Date(element.dataset.cfpCountdown ?? "");
+		const days = Math.max(
+			0,
+			Math.ceil((target.getTime() - Date.now()) / (1000 * 60 * 60 * 24)),
+		);
+		const output = element.querySelector(".cfp4-countdown-days");
+		if (output) {
+			output.textContent = String(days);
+		}
+	}
+</script>

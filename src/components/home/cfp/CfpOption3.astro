@@ -1,0 +1,208 @@
+---
+import PersonCard from "../PersonCard.astro";
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import TimelineTalksTurtle from "../timeline/TimelineTalksTurtle.astro";
+import CfpBubbles from "./CfpBubbles.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp3-heading" class="cfp3">
+	<CfpBubbles count={14} />
+	<div class="cfp3-inner">
+		<div class="cfp3-tow">
+			<div aria-hidden="true" class="cfp3-turtle">
+				<TimelineTalksTurtle />
+			</div>
+			<svg
+				aria-hidden="true"
+				class="cfp3-rope"
+				preserveAspectRatio="none"
+				viewBox="0 0 100 20"
+			>
+				<path d="M0 10 Q 25 2, 50 10 T 100 10" />
+			</svg>
+			<div class="cfp3-banner">
+				<TimelineHeading class="cfp3-heading" id="cfp3-heading" level="h2">
+					CFP Ships Nov 14th
+				</TimelineHeading>
+			</div>
+		</div>
+		<div class="cfp3-groups">
+			<div class="cfp3-group">
+				<TimelineHeading class="cfp3-label" level="h3">
+					Launch Speakers
+				</TimelineHeading>
+				<div class="cfp3-cards">
+					{cfpLaunchSpeakers.map((person) => (
+						<PersonCard person={person} />
+					))}
+				</div>
+			</div>
+			<div class="cfp3-group">
+				<TimelineHeading class="cfp3-label" level="h3">
+					Event Hosts
+				</TimelineHeading>
+				<div class="cfp3-cards cfp3-cards-hosts">
+					{cfpHosts.map((person) => (
+						<PersonCard person={person} />
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cfp3 {
+		background: var(--colorBlue5);
+		color-scheme: dark;
+		isolation: isolate;
+		mask:
+			radial-gradient(
+					1.2rem 0.9rem at 50% 0,
+					transparent 98%,
+					var(--colorBlue5)
+				)
+				0 0 / 2.4rem 51% repeat-x,
+			radial-gradient(
+					1.2rem 0.9rem at 50% 100%,
+					transparent 98%,
+					var(--colorBlue5)
+				)
+				0 100% / 2.4rem 51% repeat-x;
+		overflow: hidden;
+		padding: clamp(4rem, 8vw, 6rem) 1rem;
+		position: relative;
+	}
+
+	.cfp3-inner {
+		display: grid;
+		gap: clamp(2rem, 4vw, 3rem);
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		z-index: 1;
+	}
+
+	.cfp3-tow {
+		align-items: center;
+		animation: cfp3-tow 7s ease-in-out infinite;
+		display: grid;
+		grid-template-columns: 8rem 4rem auto;
+		justify-content: center;
+	}
+
+	@keyframes cfp3-tow {
+		0%,
+		100% {
+			translate: 0 0;
+		}
+
+		50% {
+			translate: -0.75rem -0.4rem;
+		}
+	}
+
+	.cfp3-turtle {
+		transform: scaleX(-1);
+	}
+
+	.cfp3-rope {
+		fill: none;
+		height: 1.25rem;
+		stroke: var(--colorBlue1);
+		stroke-dasharray: 3 2;
+		stroke-width: 1.5;
+		width: 100%;
+	}
+
+	.cfp3-banner {
+		animation: cfp3-flutter 2.4s ease-in-out infinite;
+		background: linear-gradient(
+			100deg,
+			var(--colorBlue2),
+			color-mix(in srgb, var(--colorBlue2), var(--colorWhite) 30%)
+		);
+		box-shadow: 0 1rem 2rem rgb(from var(--colorBlue5) r g b / 60%);
+		clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%);
+		padding: 1rem 4rem 1rem 1.75rem;
+		transform-origin: left center;
+	}
+
+	@keyframes cfp3-flutter {
+		0%,
+		100% {
+			transform: skewY(-1.5deg) rotate(-1deg);
+		}
+
+		50% {
+			transform: skewY(1.5deg) rotate(1deg);
+		}
+	}
+
+	.cfp3-heading {
+		color: var(--colorBlue5);
+		font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+		font-style: italic;
+		line-height: 1;
+		margin: 0;
+		white-space: nowrap;
+	}
+
+	.cfp3-groups {
+		display: grid;
+		gap: 3rem;
+		grid-template-columns: 1fr 2fr;
+	}
+
+	.cfp3-group {
+		align-content: start;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.cfp3-label {
+		font-size: var(--fontSizeLarge);
+		margin: 0;
+	}
+
+	.cfp3-cards {
+		display: grid;
+		gap: 0.8rem 1.5rem;
+	}
+
+	.cfp3-cards-hosts {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.cfp3-cards :global(.person-card) {
+		border-radius: var(--radiusLarge);
+		padding: 0.5rem;
+		transition: background var(--transitionNormal);
+	}
+
+	.cfp3-cards :global(.person-card:hover) {
+		background: var(--timeline-card-hover-background);
+		box-shadow: var(--timeline-card-hover-shadow);
+	}
+
+	.cfp3-cards :global(.timeline-image) {
+		aspect-ratio: 1;
+		border-radius: var(--radiusPill);
+	}
+
+	@media not (--widthLarge) {
+		.cfp3-tow {
+			grid-template-columns: 5rem 2rem auto;
+		}
+
+		.cfp3-banner {
+			padding-right: 2.5rem;
+		}
+
+		.cfp3-groups,
+		.cfp3-cards-hosts {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

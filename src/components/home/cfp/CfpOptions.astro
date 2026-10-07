@@ -1,0 +1,66 @@
+---
+import CfpOption1 from "./CfpOption1.astro";
+import CfpOption2 from "./CfpOption2.astro";
+import CfpOption3 from "./CfpOption3.astro";
+import CfpOption4 from "./CfpOption4.astro";
+import CfpOption5 from "./CfpOption5.astro";
+import CfpOption6 from "./CfpOption6.astro";
+
+const options = [
+	{ Component: CfpOption1, name: "Bubble Column" },
+	{ Component: CfpOption2, name: "Portholes" },
+	{ Component: CfpOption3, name: "Myrtle's Banner" },
+	{ Component: CfpOption4, name: "Sonar Countdown" },
+	{ Component: CfpOption5, name: "Boarding Pass" },
+	{ Component: CfpOption6, name: "Deep Dive" },
+];
+---
+
+<div class="cfp-options">
+	{options.map(({ Component, name }, index) => (
+		<div class="cfp-option" data-cfp-option={index + 1}>
+			<a class="cfp-option-tag" href={`?cfp=${index + 1}`}>
+				Option {index + 1}: {name}
+			</a>
+			<Component />
+		</div>
+	))}
+</div>
+
+<style>
+	.cfp-options {
+		display: grid;
+		gap: 3rem;
+		margin: 1rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
+	}
+
+	.cfp-option {
+		position: relative;
+	}
+
+	.cfp-option-tag {
+		background: var(--colorTerminalOrange);
+		border-radius: 0 0 var(--radiusMedium) 0;
+		color: var(--colorWhite);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.8rem;
+		left: 0;
+		padding: 0.25rem 0.75rem;
+		position: absolute;
+		text-decoration: none;
+		top: 0;
+		z-index: 5;
+	}
+</style>
+
+<script>
+	const selected = new URLSearchParams(location.search).get("cfp");
+
+	if (selected) {
+		for (const option of document.querySelectorAll<HTMLElement>(
+			"[data-cfp-option]",
+		)) {
+			option.hidden = option.dataset.cfpOption !== selected;
+		}
+	}
+</script>

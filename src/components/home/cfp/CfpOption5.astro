@@ -1,0 +1,240 @@
+---
+import mantaUp from "~/assets/design/manta-up.svg";
+
+import TimelineHeading from "../timeline/TimelineHeading.astro";
+import CfpBubbles from "./CfpBubbles.astro";
+import CfpPerson from "./CfpPerson.astro";
+import { cfpHosts, cfpLaunchSpeakers } from "./data";
+---
+
+<section aria-labelledby="cfp5-heading" class="cfp5">
+	<CfpBubbles count={18} />
+	<img alt="" aria-hidden="true" class="cfp5-manta" src={mantaUp.src} />
+	<div class="cfp5-ticket">
+		<div class="cfp5-stub">
+			<p class="cfp5-stub-label">Call for Proposals</p>
+			<TimelineHeading class="cfp5-heading" id="cfp5-heading" level="h2">
+				CFP Ships
+				<span class="cfp5-date">Nov 14th</span>
+			</TimelineHeading>
+			<dl class="cfp5-details">
+				<div>
+					<dt>From</dt>
+					<dd>Your head</dd>
+				</div>
+				<div>
+					<dt>To</dt>
+					<dd>IMAX stage</dd>
+				</div>
+				<div>
+					<dt>Gate</dt>
+					<dd>BOS</dd>
+				</div>
+			</dl>
+		</div>
+		<div class="cfp5-body">
+			<div class="cfp5-group">
+				<p class="cfp5-label">Launch Speakers</p>
+				<ul class="cfp5-people">
+					{cfpLaunchSpeakers.map((person) => (
+						<CfpPerson person={person} />
+					))}
+				</ul>
+			</div>
+			<div class="cfp5-group">
+				<p class="cfp5-label">Event Hosts</p>
+				<ul class="cfp5-people">
+					{cfpHosts.map((person) => (
+						<CfpPerson person={person} />
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cfp5 {
+		--cfp-avatar-size: 4.75rem;
+		--cfp5-airmail: repeating-linear-gradient(
+			-45deg,
+			var(--colorBlue2) 0 0.6rem,
+			transparent 0.6rem 1.2rem,
+			var(--colorTerminalOrange) 1.2rem 1.8rem,
+			transparent 1.8rem 2.4rem
+		);
+		--cfp5-notch: 1.1rem;
+
+		background: var(--colorBlue5);
+		color-scheme: dark;
+		container-type: inline-size;
+		isolation: isolate;
+		overflow: hidden;
+		padding: clamp(3rem, 7vw, 5rem) 1rem;
+		position: relative;
+	}
+
+	.cfp5-manta {
+		pointer-events: none;
+		position: absolute;
+		animation: cfp5-glide 32s ease-in-out infinite;
+		opacity: 0.55;
+		top: 1rem;
+		width: 12rem;
+		z-index: 0;
+	}
+
+	@keyframes cfp5-glide {
+		0% {
+			translate: -14rem 2rem;
+			rotate: 8deg;
+		}
+
+		50% {
+			translate: 50cqw -0.5rem;
+			rotate: -4deg;
+		}
+
+		100% {
+			translate: 100cqw 3rem;
+			rotate: 6deg;
+		}
+	}
+
+	.cfp5-ticket {
+		background: var(--colorBlue4);
+		border-radius: var(--radiusLarge);
+		box-shadow:
+			0 1.5rem 3rem rgb(from var(--colorBlue5) r g b / 70%),
+			inset 0 0 0 1px rgb(from var(--colorBlue2) r g b / 25%);
+		display: grid;
+		grid-template-columns: var(--cfp5-perforation) 1fr;
+		margin: 0 auto;
+		mask:
+			radial-gradient(
+					circle var(--cfp5-notch) at var(--cfp5-perforation) 0,
+					transparent 98%,
+					var(--colorBlue5)
+				)
+				top / 100% 51% no-repeat,
+			radial-gradient(
+					circle var(--cfp5-notch) at var(--cfp5-perforation) 100%,
+					transparent 98%,
+					var(--colorBlue5)
+				)
+				bottom / 100% 51% no-repeat;
+		max-width: var(--sizeContentAreaNormal);
+		position: relative;
+		rotate: -1deg;
+		transition: rotate var(--transitionNormal) var(--transitionEaseOut);
+		z-index: 1;
+
+		--cfp5-perforation: 21rem;
+	}
+
+	.cfp5-ticket:hover {
+		rotate: 0deg;
+	}
+
+	.cfp5-ticket::before {
+		background: var(--cfp5-airmail);
+		content: "";
+		height: 0.6rem;
+		inset: 0 0 auto;
+		position: absolute;
+	}
+
+	.cfp5-stub {
+		border-right: 3px dashed rgb(from var(--colorBlue1) r g b / 30%);
+		display: grid;
+		gap: 1rem;
+		align-content: center;
+		padding: 2.5rem 1.75rem 2rem;
+	}
+
+	.cfp5-stub-label,
+	.cfp5-label {
+		color: var(--colorBlue2);
+		font-family: var(--fontFamilyMonospace);
+		font-size: var(--fontSizeCaption);
+		letter-spacing: 0.12em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.cfp5-heading {
+		color: var(--colorWhiteIsh);
+		font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+		font-style: italic;
+		line-height: 0.95;
+		margin: 0;
+	}
+
+	.cfp5-date {
+		color: var(--colorBlue2);
+		display: block;
+	}
+
+	.cfp5-details {
+		display: flex;
+		gap: 1.25rem;
+		margin: 0;
+	}
+
+	.cfp5-details dt {
+		color: rgb(from var(--colorBlue1) r g b / 65%);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.7rem;
+		text-transform: uppercase;
+	}
+
+	.cfp5-details dd {
+		color: var(--colorWhiteIsh);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightBold);
+		margin: 0;
+	}
+
+	.cfp5-body {
+		align-content: center;
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: 3fr 4fr;
+		padding: 2.5rem 1.5rem 2rem;
+	}
+
+	.cfp5-group {
+		align-content: start;
+		display: grid;
+		gap: 1.25rem;
+	}
+
+	.cfp5-people {
+		display: grid;
+		gap: 1rem 0.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+		margin: 0;
+		padding: 0;
+	}
+
+	.cfp5-people :global(.cfp-person-name) {
+		color: var(--colorWhiteIsh);
+	}
+
+	@media not (--widthLarge) {
+		.cfp5-ticket {
+			grid-template-columns: 1fr;
+			mask: none;
+			rotate: 0deg;
+		}
+
+		.cfp5-stub {
+			border-bottom: 3px dashed rgb(from var(--colorBlue1) r g b / 30%);
+			border-right: none;
+		}
+
+		.cfp5-body {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

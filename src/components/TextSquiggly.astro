@@ -1,8 +1,7 @@
 ---
-import { Image } from "astro:assets";
-
 import squigglyMedium from "~/assets/design/squiggly-medium.svg";
 import squigglyWide from "~/assets/design/squiggly-wide.svg";
+import Img from "~/components/Img.astro";
 
 interface Props {
 	width: "medium" | "wide";
@@ -20,7 +19,7 @@ const { width, ...props } = Astro.props;
 	<span class="text">
 		<slot name="inside" />
 	</span>
-	<Image alt="" class="squiggly" src={images[width]} />
+	<Img alt="" class="squiggly" src={images[width]} />
 </em>
 <slot name="after" />
 
