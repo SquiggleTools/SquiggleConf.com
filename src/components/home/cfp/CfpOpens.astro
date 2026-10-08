@@ -35,7 +35,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 					<CfpPerson person={person} />
 				))}
 			</ul>
-			<ul aria-label="Event hosts" class="cfp-opens-people">
+			<ul aria-label="Event hosts" class="cfp-opens-people cfp-opens-hosts">
 				{cfpHosts.map((person) => (
 					<CfpPerson person={person} />
 				))}
@@ -245,7 +245,15 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 		.cfp-opens-people {
 			grid-auto-flow: row;
-			grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+		}
+
+		.cfp-opens-people :global(.cfp-person) {
+			grid-column: span 2;
+		}
+
+		.cfp-opens-hosts :global(.cfp-person):nth-child(odd) {
+			grid-column: 2 / span 2;
 		}
 	}
 </style>
