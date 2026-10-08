@@ -9,9 +9,10 @@ const { class: className, count = 24 } = Astro.props;
 const bubbles = Array.from({ length: count }, (_, index) => {
 	const seed = Math.sin(index * 9301 + 49297) * 233280;
 	const random = seed - Math.floor(seed);
+	const duration = 14 + random * 14;
 	return {
-		delay: (index * 1.37) % 9,
-		duration: 7 + random * 7,
+		delay: ((index * 0.37) % 1) * duration,
+		duration,
 		left: (index * 37 + random * 23) % 100,
 		size: 0.25 + random * 0.6,
 		sway: (random - 0.5) * 3,
