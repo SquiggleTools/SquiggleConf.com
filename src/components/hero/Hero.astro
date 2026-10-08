@@ -12,6 +12,7 @@ const { class: className, tall, ...props } = Astro.props;
 ---
 
 <section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
+	<slot name="backdrop" />
 	<div class="hero-decorations">
 		<div class="hero-decorations-inner">
 			<HeroCityscape />
@@ -42,7 +43,7 @@ const { class: className, tall, ...props } = Astro.props;
 	}
 
 	.hero.tall {
-		--cityscapeHeightArea: 8rem;
+		--cityscapeHeightArea: 4.5rem;
 	}
 
 	.hero-decorations {
