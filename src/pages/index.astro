@@ -63,25 +63,25 @@ import PageLayout from "~/layouts/PageLayout.astro";
 <PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
 	<Hero tall>
 		<HomeHeroLockup />
+		<div class="top-side-by-side">
+			<div class="top-side-left">
+				<TimelineHeading class="top-heading" level="h2">
+					the devtools conference
+				</TimelineHeading>
+				<p class="top-intro">
+					SquiggleConf is a conference focused on software developer tools: AI
+					tools, linters, code editors, performance and security tools,
+					debuggers, and more. We mix heavy talks with fun events.
+					<br />
+					Think of it like your devtools fieldtrip.
+				</p>
+			</div>
+			<PostcardGallery />
+		</div>
 	</Hero>
 	<DeepSeaSurface>
 		<TimelineSection>
 			<TimelineFishLayer swimUntil="talks-morning" />
-			<div class="top-side-by-side">
-				<div class="top-side-left">
-					<TimelineHeading class="top-heading" level="h2">
-						the devtools conference
-					</TimelineHeading>
-					<p class="top-intro">
-						SquiggleConf is a conference focused on software developer tools: AI
-						tools, linters, code editors, performance and security tools,
-						debuggers, and more. We mix heavy talks with fun events.
-						<br />
-						Think of it like your devtools fieldtrip.
-					</p>
-				</div>
-				<PostcardGallery />
-			</div>
 			<CfpOpens />
 			<TimelineGrid>
 				<TimelineDayCap date={eventDateEve} day="Thursday">
@@ -547,6 +547,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-side-by-side {
+		zoom: 0.67;
 		max-width: var(--sizeContentAreaNormal);
 		margin: auto;
 		gap: 5rem;
