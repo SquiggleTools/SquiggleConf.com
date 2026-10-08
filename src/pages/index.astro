@@ -547,7 +547,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-side-by-side {
-		zoom: 0.67;
 		max-width: var(--sizeContentAreaNormal);
 		margin: auto;
 		gap: 5rem;
@@ -555,6 +554,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		display: flex;
 		flex-direction: row;
 		text-align: right;
+	}
+
+	.top-side-by-side :global(.postcard-gallery) {
+		zoom: 0.83;
 	}
 
 	.top-side-left {
