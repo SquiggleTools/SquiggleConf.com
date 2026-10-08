@@ -1,0 +1,272 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventDateEve,
+} from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const facts = [
+	{ label: "Launch party", value: `${eventDateEve} · Ned Devine's` },
+	{ label: "Talks", value: `${eventDate} · Aquarium IMAX` },
+	{ label: "Live", value: "Syntax × ThePrimeagen" },
+	{
+		href: "#cfp-opens-heading",
+		label: "CFP",
+		value: `${cfpOpenDate} → ${cfpCloseDate}`,
+	},
+];
+---
+
+{at === "hero-after-lockup" && (
+	<div class="d02-glance">
+		<ul aria-label="At a glance" class="d02-facts">
+			{facts.map(({ href, label, value }) => {
+				const Tag = href ? "a" : "span";
+				return (
+					<li>
+						<Tag class="d02-fact" href={href}>
+							<span class="d02-fact-label">{label}</span>
+							<span class="d02-fact-value">{value}</span>
+						</Tag>
+					</li>
+				);
+			})}
+		</ul>
+		<div class="d02-actions">
+			<a class="d02-action d02-action-primary" href={links.tickets}>
+				Get {currentYear} tickets
+			</a>
+			<a class="d02-action" href="/cfp">
+				Submit a talk
+			</a>
+			<a class="d02-action" href="#newsletter">
+				Get updates
+			</a>
+		</div>
+	</div>
+)}
+
+<style>
+	.d02-glance {
+		place-items: center center;
+		display: grid;
+		gap: 1rem;
+		margin: 0.25rem auto 1rem;
+	}
+
+	.d02-facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.d02-fact {
+		align-items: baseline;
+		backdrop-filter: blur(6px);
+		background: light-dark(rgb(255 255 255 / 70%), rgb(255 255 255 / 5%));
+		border: 1px solid light-dark(rgb(17 109 154 / 25%), rgb(56 206 214 / 30%));
+		border-radius: var(--radiusPill);
+		color: var(--colorHeading);
+		display: inline-flex;
+		font-size: var(--fontSizeCaption);
+		gap: 0.5rem;
+		padding: 0.35rem 0.8rem;
+		text-decoration: none;
+		transition:
+			border-color var(--transitionFast),
+			background var(--transitionFast);
+	}
+
+	a.d02-fact:hover {
+		background: light-dark(rgb(56 206 214 / 18%), rgb(56 206 214 / 15%));
+		border-color: var(--colorAccentMedium);
+	}
+
+	.d02-fact-label {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.72rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.d02-fact-value {
+		font-weight: var(--fontWeightMedium);
+	}
+
+	.d02-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		justify-content: center;
+	}
+
+	.d02-action {
+		border: 2px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightSemibold);
+		padding: 0.5rem 1.2rem;
+		text-decoration: none;
+		transition:
+			background var(--transitionFast),
+			transform var(--transitionFast);
+	}
+
+	.d02-action:hover {
+		background: light-dark(rgb(56 206 214 / 15%), rgb(56 206 214 / 18%));
+		transform: translateY(-1px);
+	}
+
+	.d02-action-primary {
+		background: var(--colorAccentMedium);
+		box-shadow: 0 0.4rem 1.4rem rgb(56 206 214 / 30%);
+		color: light-dark(var(--colorWhite), var(--colorBlue5));
+	}
+
+	.d02-action-primary:hover {
+		background: light-dark(var(--colorBlue4), var(--colorBlue1));
+	}
+
+	@media not (--widthSmall) {
+		.d02-facts {
+			display: grid;
+			gap: 0.4rem;
+			grid-template-columns: 1fr 1fr;
+			width: 100%;
+		}
+
+		.d02-fact {
+			border-radius: var(--radiusMedium);
+			flex-direction: column;
+			gap: 0.1rem;
+			height: 100%;
+			padding: 0.4rem 0.6rem;
+			width: 100%;
+		}
+
+		.d02-fact-label {
+			font-size: 0.65rem;
+		}
+
+		.d02-fact-value {
+			font-size: 0.85rem;
+		}
+
+		.d02-action {
+			font-size: 0.95rem;
+			padding: 0.45rem 1rem;
+		}
+
+		.d02-action:last-child {
+			display: none;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="2"] header {
+		padding: 1rem 0 0.5rem;
+	}
+
+	html[data-design="2"] .hero {
+		--cityscapeHeightArea: 6rem;
+
+		background:
+			radial-gradient(
+				ellipse 55% 40% at 50% 42%,
+				light-dark(rgb(56 206 214 / 18%), rgb(17 109 154 / 45%)),
+				transparent 70%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), #06243f) 60%,
+				light-dark(var(--colorCream), #093559) 100%
+			);
+	}
+
+	html[data-design="2"] .hero-cityscape {
+		height: 8rem;
+	}
+
+	html[data-design="2"] .hero-intro {
+		gap: 0.75rem;
+		padding: 0;
+	}
+
+	html[data-design="2"] .hero-intro .logo-bold {
+		font-size: clamp(2.6rem, 6vw, 4.2rem);
+	}
+
+	html[data-design="2"] .hero-subtitle {
+		margin: 0 0 0.35rem;
+	}
+
+	html[data-design="2"] .top-side-by-side {
+		gap: 3.5rem;
+	}
+
+	html[data-design="2"] .top-side-left {
+		margin-bottom: 0;
+	}
+
+	html[data-design="2"] .top-heading {
+		font-size: clamp(1.5rem, 2.2vw, 2rem);
+		padding-top: 0;
+	}
+
+	html[data-design="2"] .top-intro {
+		font-size: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	html[data-design="2"] .top-side-by-side .postcard-gallery {
+		margin-bottom: 0;
+		zoom: 0.55;
+	}
+
+	html[data-design="2"] .postcard-flip {
+		margin: 2rem 0 0.5rem;
+		padding-bottom: 2rem;
+	}
+
+	html[data-design="2"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="2"] .cfp-opens {
+		padding-top: 2rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="2"] .top-intro {
+			padding: 0;
+		}
+
+		html[data-design="2"] .top-side-by-side .postcard-gallery {
+			zoom: 0.75;
+		}
+
+		html[data-design="2"] .postcard-flip {
+			margin-top: 0.75rem;
+		}
+	}
+</style>

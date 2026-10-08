@@ -17,6 +17,7 @@ const historical = year !== currentYear;
 ---
 
 <BaseLayout {...props} year={year}>
+	<slot name="before-header" />
 	<Header hideLogo={hideHeaderLogo} year={year} />
 	{historical && <NextYearNotice year={year} />}
 	<main class:list={["body-area", { "page-layout-historical": historical }]}>

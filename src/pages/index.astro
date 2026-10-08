@@ -24,6 +24,8 @@ import syntax from "~/assets/logos/syntax.svg";
 import networking from "~/assets/stills/attendees-networking.webp";
 import harbor from "~/assets/stills/boston-harbor.webp";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
+import DesignMount from "~/components/designs/DesignMount.astro";
+import DesignSwitcher from "~/components/designs/DesignSwitcher.astro";
 import Hero from "~/components/hero/Hero.astro";
 import CfpOpens from "~/components/home/cfp/CfpOpens.astro";
 import Collage from "~/components/home/Collage.astro";
@@ -61,8 +63,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
 <PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
+	<DesignMount at="before-header" slot="before-header" />
 	<Hero tall>
+		<DesignMount at="hero-backdrop" slot="backdrop" />
+		<DesignMount at="hero-start" />
 		<HomeHeroLockup />
+		<DesignMount at="hero-after-lockup" />
 		<div class="top-side-by-side">
 			<div class="top-side-left">
 				<TimelineHeading class="top-heading" level="h2">
@@ -78,11 +84,18 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			</div>
 			<PostcardGallery />
 		</div>
+		<DesignMount at="hero-end" />
 	</Hero>
+	<DesignMount at="after-hero" />
 	<DeepSeaSurface>
 		<TimelineSection>
 			<TimelineFishLayer swimUntil="talks-morning" />
-			<CfpOpens />
+			<DesignMount at="cfp-before" />
+			<CfpOpens>
+				<DesignMount at="cfp-backdrop" slot="backdrop" />
+				<DesignMount at="cfp-top" slot="top" />
+				<DesignMount at="cfp-end" />
+			</CfpOpens>
 			<TimelineGrid>
 				<TimelineDayCap date={eventDateEve} day="Thursday">
 					<div class="timeline-grid-intro">
@@ -524,6 +537,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		<Registration />
 	</DeepSeaSurface>
 	<SponsorsAndPartners />
+	<DesignSwitcher />
 </PageLayout>
 
 <style>

@@ -1,5 +1,6 @@
 {
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
+	"entry": ["src/components/designs/d*/{Design.astro,meta.ts}"],
 	"ignoreDependencies": ["sharp"],
 	"ignoreExportsUsedInFile": {
 		"interface": true,

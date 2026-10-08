@@ -1,5 +1,12 @@
 <script is:inline>
-	if (localStorage.getItem("theme") !== "light") {
+	const params = new URLSearchParams(location.search);
+
+	if ((params.get("theme") ?? localStorage.getItem("theme")) !== "light") {
 		document.documentElement.classList.add("dark");
+	}
+
+	const design = params.get("design");
+	if (design && design !== "0") {
+		document.documentElement.dataset.design = design;
 	}
 </script>

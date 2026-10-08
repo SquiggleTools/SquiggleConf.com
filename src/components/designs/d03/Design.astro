@@ -1,0 +1,369 @@
+---
+import { cfpOpenDate, eventDate, eventDateEve } from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const runOfShow = [
+	{ day: "Thu", href: "#launch-party", text: "Launch party", time: "6pm" },
+	{ day: "Fri", href: "#fun-run", text: "Fun run", time: "7am" },
+	{
+		day: "Fri",
+		href: "#simons-imax-theater",
+		text: "Talks in an IMAX theater",
+		time: "8am",
+	},
+	{
+		day: "Fri",
+		href: "#explore-boston",
+		text: "Explore Boston",
+		time: "3:30pm",
+	},
+	{
+		day: "Fri",
+		href: "#live-podcast-recording",
+		text: "Live podcast",
+		time: "6pm",
+	},
+	{ day: "Fri", href: "#big-rav", text: "Big Rav", time: "9pm" },
+];
+---
+
+{at === "hero-start" && (
+	<p class="d03-eyebrow">
+		<span class="d03-eyebrow-dot" />
+		{eventDateEve}–{eventDate.replace("May ", "")}, {currentYear} · New England
+		Aquarium, Boston
+	</p>
+)}
+
+{at === "hero-end" && (
+	<div class="d03-actions">
+		<a class="d03-action d03-action-primary" href={links.tickets}>
+			Get tickets
+		</a>
+		<a class="d03-action" href="#cfp-opens-heading">
+			CFP opens {cfpOpenDate} ↓
+		</a>
+	</div>
+)}
+
+{at === "hero-end" && (
+	<ol aria-label="Run of show" class="d03-run">
+		{runOfShow.map(({ day, href, text, time }) => (
+			<li>
+				<a class="d03-run-item" href={href}>
+					<span class="d03-run-time">
+						{day} {time}
+					</span>
+					<span class="d03-run-text">{text}</span>
+				</a>
+			</li>
+		))}
+	</ol>
+)}
+
+<style>
+	.d03-eyebrow {
+		align-items: center;
+		border: 1px solid light-dark(rgb(17 109 154 / 30%), rgb(56 206 214 / 35%));
+		border-radius: var(--radiusPill);
+		color: var(--colorAccentMedium);
+		display: inline-flex;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.78rem;
+		gap: 0.5rem;
+		justify-self: start;
+		letter-spacing: 0.02em;
+		margin: 0;
+		padding: 0.3rem 0.8rem;
+	}
+
+	.d03-eyebrow-dot {
+		animation: d03-pulse 2.4s ease-in-out infinite;
+		background: var(--colorTerminalOrange);
+		border-radius: var(--radiusPill);
+		box-shadow: 0 0 0.5rem var(--colorTerminalOrange);
+		height: 0.45rem;
+		width: 0.45rem;
+	}
+
+	@keyframes d03-pulse {
+		50% {
+			opacity: 0.35;
+		}
+	}
+
+	.d03-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.d03-action {
+		border: 2px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightSemibold);
+		padding: 0.55rem 1.3rem;
+		text-decoration: none;
+		transition: background var(--transitionFast);
+	}
+
+	.d03-action:hover {
+		background: light-dark(rgb(56 206 214 / 15%), rgb(56 206 214 / 18%));
+	}
+
+	.d03-action-primary {
+		background: var(--colorAccentMedium);
+		color: light-dark(var(--colorWhite), var(--colorBlue5));
+	}
+
+	.d03-action-primary:hover {
+		background: light-dark(var(--colorBlue4), var(--colorBlue1));
+	}
+
+	.d03-run {
+		border-block: 1px solid
+			light-dark(rgb(17 109 154 / 20%), rgb(56 206 214 / 22%));
+		counter-reset: run;
+		display: grid;
+		grid-auto-columns: minmax(0, 1fr);
+		grid-auto-flow: column;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.d03-run li {
+		position: relative;
+	}
+
+	.d03-run li + li::before {
+		background: light-dark(rgb(17 109 154 / 20%), rgb(56 206 214 / 22%));
+		content: "";
+		height: 60%;
+		left: 0;
+		position: absolute;
+		top: 20%;
+		width: 1px;
+	}
+
+	.d03-run-item {
+		color: var(--colorHeading);
+		display: grid;
+		gap: 0.15rem;
+		height: 100%;
+		padding: 0.7rem 1rem;
+		text-decoration: none;
+		transition: background var(--transitionFast);
+	}
+
+	.d03-run-item:hover {
+		background: light-dark(rgb(56 206 214 / 12%), rgb(56 206 214 / 10%));
+	}
+
+	.d03-run-time {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.75rem;
+		text-transform: uppercase;
+	}
+
+	.d03-run-text {
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.95rem;
+		font-weight: var(--fontWeightSemibold);
+		line-height: 1.2;
+	}
+
+	@media not (--widthLarge) {
+		.d03-eyebrow {
+			justify-self: center;
+			margin: 0 auto 0.5rem;
+			width: fit-content;
+		}
+
+		.d03-actions {
+			justify-content: center;
+			margin: 1rem 0 0;
+		}
+
+		.d03-run {
+			grid-auto-columns: 9rem;
+			margin: 0 calc(-1 * var(--widthBodyPadding));
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+		}
+
+		.d03-run li {
+			scroll-snap-align: start;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="3"] header {
+		padding: 1rem 0 0.5rem;
+	}
+
+	html[data-design="3"] .hero {
+		--cityscapeHeightArea: 6.5rem;
+
+		background:
+			radial-gradient(
+				ellipse 40% 55% at 78% 45%,
+				light-dark(rgb(56 206 214 / 20%), rgb(17 109 154 / 50%)),
+				transparent 70%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), #05213c) 60%,
+				light-dark(var(--colorCream), #08304f) 100%
+			);
+	}
+
+	html[data-design="3"] .hero-cityscape {
+		height: 8.5rem;
+	}
+
+	@media (--widthLarge) {
+		html[data-design="3"] .hero-contents {
+			align-items: start;
+			gap: 1rem 3.5rem;
+			display: grid;
+			grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+		}
+
+		html[data-design="3"] .d03-eyebrow {
+			grid-column: 1;
+			grid-row: 1;
+			margin-top: 0.75rem;
+		}
+
+		html[data-design="3"] .hero-intro {
+			align-items: flex-start;
+			gap: 0.4rem;
+			grid-column: 1;
+			grid-row: 2;
+			padding: 0;
+			text-align: left;
+		}
+
+		html[data-design="3"] .hero-intro .logo-bold {
+			font-size: clamp(3.4rem, 6.4vw, 5.6rem);
+			letter-spacing: -3px;
+		}
+
+		html[data-design="3"] .hero-subtitle {
+			display: none;
+		}
+
+		html[data-design="3"] .top-side-by-side {
+			display: contents;
+		}
+
+		html[data-design="3"] .top-side-left {
+			align-items: flex-start;
+			grid-column: 1;
+			grid-row: 3;
+			margin: 0;
+			text-align: left;
+		}
+
+		html[data-design="3"] .top-heading {
+			font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+			padding-top: 0.25rem;
+		}
+
+		html[data-design="3"] .top-intro {
+			font-size: 1.02rem;
+			margin: 0.5rem 0 0;
+			max-width: 34rem;
+			padding: 0;
+		}
+
+		html[data-design="3"] .d03-actions {
+			grid-column: 1;
+			grid-row: 4;
+			margin-top: 0.25rem;
+		}
+
+		html[data-design="3"] .top-side-by-side .postcard-gallery {
+			align-self: center;
+			grid-column: 2;
+			grid-row: 1 / 5;
+			margin: 0;
+			zoom: 0.95;
+		}
+
+		html[data-design="3"] .postcard-flip {
+			margin: 1rem 0 0;
+			padding-bottom: 1.6rem;
+			transform: rotate(3deg);
+		}
+
+		html[data-design="3"] .d03-run {
+			grid-column: 1 / -1;
+			grid-row: 5;
+			margin-top: 1.25rem;
+		}
+	}
+
+	html[data-design="3"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="3"] .cfp-opens {
+		padding-top: 2rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="3"] .hero-contents {
+			display: grid;
+		}
+
+		html[data-design="3"] .d03-eyebrow {
+			display: none;
+		}
+
+		html[data-design="3"] .top-side-by-side {
+			display: contents;
+		}
+
+		html[data-design="3"] .top-side-left {
+			order: 1;
+		}
+
+		html[data-design="3"] .d03-actions {
+			order: 2;
+		}
+
+		html[data-design="3"] .d03-run {
+			order: 4;
+		}
+
+		html[data-design="3"] .top-intro {
+			padding: 0;
+		}
+
+		html[data-design="3"] .top-side-by-side .postcard-gallery {
+			margin-bottom: 0;
+			order: 3;
+			zoom: 0.75;
+		}
+
+		html[data-design="3"] .postcard-flip {
+			margin: 0.5rem 0 0;
+		}
+	}
+</style>

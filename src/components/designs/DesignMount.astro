@@ -1,0 +1,23 @@
+---
+import type { DesignMountPoint } from "./types";
+
+import { designs } from "./designs";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+---
+
+{designs.map(({ Design, id }) => (
+	<div class="design-mount" data-at={at} data-for={id}>
+		<Design at={at} />
+	</div>
+))}
+
+<style is:global>
+	.design-mount {
+		display: none;
+	}
+</style>

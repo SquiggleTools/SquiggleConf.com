@@ -1,0 +1,326 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventLocation,
+} from "~/data/event";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+---
+
+{at === "before-header" && (
+	<div aria-label="Conference status" class="d06-statusbar" role="note">
+		<div class="d06-statusbar-inner">
+			<span class="d06-item d06-item-brand">
+				<span aria-hidden="true" class="d06-brand-mark" />
+				squiggleconf/{currentYear}
+			</span>
+			<a class="d06-item d06-item-warn" href="#cfp-opens-heading">
+				<span aria-hidden="true" class="d06-glyph">
+					▲
+				</span>
+				CFP opens <strong>{cfpOpenDate} 2026</strong>
+			</a>
+			<span class="d06-item d06-item-close">
+				<span aria-hidden="true" class="d06-glyph d06-glyph-info">
+					●
+				</span>
+				closes {cfpCloseDate}
+			</span>
+			<span aria-hidden="true" class="d06-spacer" />
+			<span class="d06-item d06-item-date">
+				{eventDate} {currentYear}
+			</span>
+			<span class="d06-item d06-item-location">{eventLocation}</span>
+			<span class="d06-item d06-item-venue">New England Aquarium</span>
+		</div>
+	</div>
+)}
+
+{at === "hero-after-lockup" && (
+	<p class="d06-kicker">
+		<span>Talks in an IMAX theater</span>
+		<span aria-hidden="true">·</span>
+		<span>Launch party the night before</span>
+		<span aria-hidden="true">·</span>
+		<span>A live podcast after-party</span>
+	</p>
+)}
+
+<style>
+	.d06-statusbar {
+		background: light-dark(var(--colorBlue3), var(--colorSea));
+		border-bottom: 1px solid rgb(from var(--colorBlue2) r g b / 40%);
+		color: var(--colorWhiteIsh);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.78rem;
+		position: sticky;
+		top: 0;
+		z-index: 50;
+	}
+
+	.d06-statusbar-inner {
+		align-items: stretch;
+		display: flex;
+		margin: 0 auto;
+		max-width: var(--sizeContentAreaWide);
+		min-height: 1.9rem;
+		overflow: hidden;
+		padding: 0 var(--widthBodyPadding);
+		white-space: nowrap;
+	}
+
+	.d06-item {
+		align-items: center;
+		color: inherit;
+		display: inline-flex;
+		gap: 0.45rem;
+		padding: 0 0.75rem;
+		text-decoration: none;
+	}
+
+	.d06-item:first-child {
+		padding-left: 0;
+	}
+
+	.d06-item-brand {
+		color: var(--colorBlue1);
+	}
+
+	.d06-brand-mark {
+		background: var(--colorBlue2);
+		border-radius: var(--radiusPill);
+		box-shadow: 0 0 0.5rem var(--colorBlue2);
+		height: 0.5rem;
+		width: 0.5rem;
+	}
+
+	.d06-item-warn {
+		background: rgb(from var(--colorTerminalOrange) r g b / 22%);
+		transition: background var(--transitionFast);
+	}
+
+	.d06-item-warn:hover,
+	.d06-item-warn:focus-visible {
+		background: rgb(from var(--colorTerminalOrange) r g b / 40%);
+	}
+
+	.d06-item-warn strong {
+		font-weight: var(--fontWeightBold);
+	}
+
+	.d06-glyph {
+		color: var(--colorTerminalOrange);
+		font-size: 0.7em;
+	}
+
+	.d06-glyph-info {
+		color: var(--colorBlue2);
+	}
+
+	.d06-spacer {
+		flex: 1;
+	}
+
+	.d06-item-date,
+	.d06-item-location,
+	.d06-item-venue {
+		border-left: 1px solid rgb(from var(--colorWhite) r g b / 18%);
+	}
+
+	.d06-item-venue {
+		padding-right: 0;
+	}
+
+	.d06-kicker {
+		color: var(--colorMuted);
+		display: flex;
+		flex-wrap: wrap;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.8rem;
+		gap: 0.35rem 0.75rem;
+		justify-content: center;
+		letter-spacing: 0.04em;
+		margin: 0 auto 0.5rem;
+	}
+
+	@media not (--widthXLarge) {
+		.d06-item-venue {
+			display: none;
+		}
+	}
+
+	@media not (--widthLarge) {
+		.d06-item-location,
+		.d06-item-close,
+		.d06-spacer {
+			display: none;
+		}
+
+		.d06-statusbar-inner {
+			justify-content: space-between;
+		}
+
+		.d06-kicker {
+			align-items: center;
+			flex-direction: column;
+			font-size: 0.72rem;
+			gap: 0.15rem;
+			margin: 0.25rem auto 0;
+		}
+
+		.d06-kicker [aria-hidden="true"] {
+			display: none;
+		}
+	}
+
+	@media not (--widthXSmall) {
+		.d06-item-brand {
+			display: none;
+		}
+
+		.d06-item-warn {
+			padding-left: 0.5rem;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="6"] header {
+		padding: 1rem 0;
+	}
+
+	html[data-design="6"] .hero::before {
+		background:
+			radial-gradient(
+				ellipse 55% 60% at 50% 0%,
+				light-dark(
+					rgb(from var(--colorBlue2) r g b / 14%),
+					rgb(from var(--colorBlue2) r g b / 13%)
+				),
+				transparent 70%
+			),
+			linear-gradient(
+					light-dark(
+							rgb(from var(--colorBlue3) r g b / 7%),
+							rgb(from var(--colorBlue2) r g b / 6%)
+						)
+						1px,
+					transparent 1px
+				)
+				50% 0 / 2.25rem 2.25rem,
+			linear-gradient(
+					90deg,
+					light-dark(
+							rgb(from var(--colorBlue3) r g b / 7%),
+							rgb(from var(--colorBlue2) r g b / 6%)
+						)
+						1px,
+					transparent 1px
+				)
+				50% 0 / 2.25rem 2.25rem;
+		content: "";
+		inset: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			transparent,
+			var(--colorBlue5) 12%,
+			var(--colorBlue5) 35%,
+			transparent 85%
+		);
+		pointer-events: none;
+		position: absolute;
+	}
+
+	html[data-design="6"] .hero.tall {
+		--cityscapeHeightArea: 6.5rem;
+	}
+
+	html[data-design="6"] .hero-cityscape {
+		height: 8.5rem;
+	}
+
+	html[data-design="6"] .hero-intro {
+		gap: 0.8rem;
+		padding-top: 0;
+	}
+
+	html[data-design="6"] .hero-subtitle {
+		letter-spacing: 0.03em;
+		margin-bottom: 0;
+	}
+
+	html[data-design="6"] .top-side-by-side {
+		gap: 3.5rem;
+	}
+
+	html[data-design="6"] .top-side-left {
+		margin-bottom: 1rem;
+	}
+
+	html[data-design="6"] .top-heading {
+		padding-top: 0;
+		text-decoration: underline wavy var(--colorAccentMedium) 1.5px;
+		text-decoration-skip-ink: none;
+		text-underline-offset: 0.28em;
+	}
+
+	html[data-design="6"] .top-side-by-side .postcard-gallery {
+		zoom: 0.68;
+	}
+
+	html[data-design="6"] .postcard-flip {
+		margin: 1.25rem 0 0.5rem;
+	}
+
+	html[data-design="6"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="6"] .cfp-opens {
+		padding-top: clamp(2.25rem, 4vw, 3rem);
+	}
+
+	html[data-design="6"] .cfp-opens-eyebrow::before {
+		color: var(--colorTerminalOrange);
+		content: "▲ ";
+		font-size: 0.75em;
+		vertical-align: 0.1em;
+	}
+
+	html[data-design="6"] .cfp-opens-date {
+		text-decoration: underline wavy var(--colorTerminalOrange) 2px;
+		text-decoration-skip-ink: none;
+		text-underline-offset: 0.2em;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="6"] header {
+			padding: 0.75rem 0;
+		}
+
+		html[data-design="6"] .hero-intro {
+			gap: 0.6rem;
+		}
+
+		html[data-design="6"] .top-heading {
+			padding-top: 0.75rem;
+		}
+
+		html[data-design="6"] .top-intro {
+			padding: 0;
+		}
+
+		html[data-design="6"] .postcard-flip {
+			margin: 1rem 0 0;
+		}
+	}
+</style>
