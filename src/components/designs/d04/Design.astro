@@ -1,0 +1,408 @@
+---
+import { Image } from "astro:assets";
+
+import simonsTheater from "~/assets/2027/simons-theater.webp";
+import thePrimeagen from "~/assets/avatars/theprimeagen.webp";
+import syntax from "~/assets/logos/syntax.svg";
+import Img from "~/components/Img.astro";
+import { cfpCloseDate, cfpOpenDate, eventDateEve } from "~/data/event";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+---
+
+{at === "hero-start" && (
+	<div aria-hidden="true" class="d04-card d04-card-intro" />
+)}
+
+{at === "hero-start" && (
+	<div aria-hidden="true" class="d04-card d04-card-postcard" />
+)}
+
+{at === "hero-end" && (
+	<div class="d04-card d04-fact d04-fact-when">
+		<p class="d04-label">When</p>
+		<p class="d04-big">
+			May 7<span class="d04-big-sub">{currentYear}</span>
+		</p>
+		<p class="d04-small">Launch party {eventDateEve}</p>
+	</div>
+)}
+
+{at === "hero-end" && (
+	<a class="d04-card d04-fact d04-fact-where" href="#simons-imax-theater">
+		<Image alt="" class="d04-where-image" src={simonsTheater} width={480} />
+		<p class="d04-label">Where</p>
+		<p class="d04-medium">New England Aquarium</p>
+		<p class="d04-small">Talks in the Simons IMAX Theater</p>
+	</a>
+)}
+
+{at === "hero-end" && (
+	<a class="d04-card d04-fact d04-fact-cfp" href="#cfp-opens-heading">
+		<p class="d04-label">Call for proposals</p>
+		<p class="d04-big">
+			<span class="d04-countdown" data-opens="2026-11-14T00:00:00-05:00">
+				{cfpOpenDate}
+			</span>
+		</p>
+		<p class="d04-small d04-countdown-detail">
+			Opens {cfpOpenDate}, closes {cfpCloseDate}
+		</p>
+	</a>
+)}
+
+{at === "hero-end" && (
+	<a class="d04-card d04-fact d04-fact-live" href="#live-podcast-recording">
+		<p class="d04-label">Live on stage</p>
+		<div class="d04-live-avatars">
+			<Img alt="Syntax.fm" class="d04-live-avatar" src={syntax} width={96} />
+			<Image
+				alt="ThePrimeagen"
+				class="d04-live-avatar"
+				src={thePrimeagen}
+				width={96}
+			/>
+		</div>
+		<p class="d04-small">Syntax × ThePrimeagen podcast recording</p>
+	</a>
+)}
+
+<style>
+	.d04-card {
+		backdrop-filter: blur(10px);
+		background: light-dark(rgb(255 255 255 / 72%), rgb(255 255 255 / 4.5%));
+		border: 1px solid light-dark(rgb(6 48 82 / 12%), rgb(255 255 255 / 10%));
+		border-radius: 1.25rem;
+		box-shadow: 0 1rem 2.5rem light-dark(rgb(6 48 82 / 8%), rgb(0 0 0 / 22%));
+	}
+
+	.d04-fact {
+		color: var(--colorHeading);
+		display: grid;
+		gap: 0.2rem;
+		isolation: isolate;
+		overflow: hidden;
+		padding: 1rem 1.15rem;
+		position: relative;
+		text-decoration: none;
+		transition:
+			transform var(--transitionNormal) var(--transitionEaseOut),
+			border-color var(--transitionNormal);
+	}
+
+	a.d04-fact:hover {
+		border-color: var(--colorAccentMedium);
+		transform: translateY(-3px);
+	}
+
+	.d04-fact p {
+		margin: 0;
+	}
+
+	.d04-label {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.72rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.d04-big {
+		align-items: baseline;
+		display: flex;
+		font-family: var(--fontFamilyHeading);
+		font-size: 2.1rem;
+		font-style: italic;
+		font-weight: var(--fontWeightBold);
+		gap: 0.4rem;
+		line-height: 1.05;
+	}
+
+	.d04-big-sub {
+		color: var(--colorMuted);
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: var(--fontWeightMedium);
+	}
+
+	.d04-medium {
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.3rem;
+		font-weight: var(--fontWeightBold);
+		line-height: 1.1;
+		margin-top: auto;
+	}
+
+	.d04-small {
+		color: var(--colorMuted);
+		font-size: 0.82rem;
+		line-height: 1.3;
+	}
+
+	.d04-fact-where {
+		align-content: end;
+		color: var(--colorWhiteIsh);
+	}
+
+	.d04-fact-where .d04-label {
+		color: var(--colorBlue2);
+	}
+
+	.d04-fact-where .d04-small {
+		color: rgb(234 234 247 / 80%);
+	}
+
+	.d04-where-image {
+		height: 100%;
+		inset: 0;
+		object-fit: cover;
+		position: absolute;
+		transition: scale 600ms var(--transitionEaseOut);
+		width: 100%;
+		z-index: -1;
+	}
+
+	.d04-fact-where::after {
+		background: linear-gradient(
+			to top,
+			rgb(4 25 48 / 92%) 15%,
+			rgb(4 25 48 / 25%)
+		);
+		content: "";
+		inset: 0;
+		position: absolute;
+		z-index: -1;
+	}
+
+	.d04-fact-where:hover .d04-where-image {
+		scale: 1.06;
+	}
+
+	.d04-fact-cfp {
+		background:
+			radial-gradient(
+				circle at 100% 0%,
+				light-dark(rgb(56 206 214 / 30%), rgb(56 206 214 / 25%)),
+				transparent 65%
+			),
+			light-dark(rgb(255 255 255 / 72%), rgb(255 255 255 / 4.5%));
+	}
+
+	.d04-countdown {
+		color: var(--colorAccentMedium);
+	}
+
+	.d04-live-avatars {
+		display: flex;
+		margin: 0.15rem 0;
+	}
+
+	.d04-live-avatar {
+		background: var(--colorBlue5);
+		border: 2px solid light-dark(var(--colorWhite), var(--colorBlue4));
+		border-radius: var(--radiusPill);
+		height: 2.6rem;
+		object-fit: cover;
+		width: 2.6rem;
+	}
+
+	.d04-live-avatar + .d04-live-avatar {
+		margin-left: -0.6rem;
+	}
+</style>
+
+<style is:global>
+	html[data-design="4"] header {
+		padding: 1rem 0 0.75rem;
+	}
+
+	html[data-design="4"] .hero {
+		--cityscapeHeightArea: 6rem;
+
+		background:
+			radial-gradient(
+				ellipse 70% 50% at 50% 60%,
+				light-dark(rgb(56 206 214 / 16%), rgb(17 109 154 / 45%)),
+				transparent 70%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), #05213c) 60%,
+				light-dark(var(--colorCream), #08304f) 100%
+			);
+	}
+
+	html[data-design="4"] .hero-cityscape {
+		height: 8rem;
+	}
+
+	html[data-design="4"] .hero-contents {
+		display: grid;
+		gap: 0.9rem;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		max-width: min(90vw, var(--sizeContentAreaWide));
+		width: var(--sizeContentAreaWide);
+	}
+
+	html[data-design="4"] .hero-intro,
+	html[data-design="4"] .top-side-left,
+	html[data-design="4"] .top-side-by-side .postcard-gallery {
+		position: relative;
+		z-index: 1;
+	}
+
+	html[data-design="4"] .d04-card-intro {
+		grid-column: 1 / 3;
+		grid-row: 1 / 3;
+	}
+
+	html[data-design="4"] .d04-card-postcard {
+		background:
+			radial-gradient(
+				circle at 50% 50%,
+				light-dark(rgb(56 206 214 / 18%), rgb(56 206 214 / 12%)),
+				transparent 70%
+			),
+			light-dark(rgb(255 255 255 / 40%), rgb(255 255 255 / 2.5%));
+		grid-column: 3 / 5;
+		grid-row: 1 / 3;
+	}
+
+	html[data-design="4"] .hero-intro {
+		align-items: flex-start;
+		gap: 0.85rem;
+		grid-column: 1 / 3;
+		grid-row: 1;
+		padding: 1.6rem 1.75rem 0;
+		text-align: left;
+	}
+
+	html[data-design="4"] .hero-intro .logo-bold {
+		font-size: clamp(2.6rem, 5vw, 4.2rem);
+	}
+
+	html[data-design="4"] .hero-subtitle {
+		color: var(--colorAccentMedium);
+		font-size: 1.1rem;
+		margin: 0;
+	}
+
+	html[data-design="4"] .top-side-by-side {
+		display: contents;
+	}
+
+	html[data-design="4"] .top-side-left {
+		align-items: flex-start;
+		grid-column: 1 / 3;
+		grid-row: 2;
+		margin: 0;
+		padding: 0 1.75rem 1.6rem;
+		text-align: left;
+	}
+
+	html[data-design="4"] .top-heading {
+		font-size: 1.6rem;
+		padding-top: 0.25rem;
+	}
+
+	html[data-design="4"] .top-intro {
+		font-size: 0.95rem;
+		margin: 0.4rem 0 0;
+		padding: 0;
+	}
+
+	html[data-design="4"] .top-side-by-side .postcard-gallery {
+		align-self: center;
+		grid-column: 3 / 5;
+		grid-row: 1 / 3;
+		margin: 0;
+		zoom: 0.78;
+	}
+
+	html[data-design="4"] .postcard-flip {
+		margin: 1.5rem 0 0.5rem;
+		padding-bottom: 1.5rem;
+	}
+
+	html[data-design="4"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="4"] .cfp-opens {
+		padding-top: 2rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="4"] .hero-contents {
+			gap: 0.6rem;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		html[data-design="4"] .d04-card-intro,
+		html[data-design="4"] .hero-intro,
+		html[data-design="4"] .top-side-left {
+			grid-column: 1 / -1;
+		}
+
+		html[data-design="4"] .hero-intro {
+			padding: 1.1rem 1.1rem 0;
+		}
+
+		html[data-design="4"] .top-side-left {
+			padding: 0 1.1rem 1.1rem;
+			text-align: left;
+		}
+
+		html[data-design="4"] .top-heading {
+			margin: 0;
+		}
+
+		html[data-design="4"] .d04-card-postcard {
+			display: none;
+		}
+
+		html[data-design="4"] .top-side-by-side .postcard-gallery {
+			grid-column: 1 / -1;
+			grid-row: auto;
+			order: 1;
+		}
+
+		html[data-design="4"] .d04-big {
+			font-size: 1.6rem;
+		}
+
+		html[data-design="4"] .d04-medium {
+			font-size: 1.05rem;
+		}
+	}
+</style>
+
+<script>
+	import { onDesign } from "../onDesign";
+
+	onDesign(4, () => {
+		const countdown = document.querySelector<HTMLElement>(".d04-countdown");
+		const opens = countdown?.dataset.opens;
+		if (!countdown || !opens) {
+			return;
+		}
+
+		const days = Math.ceil((Date.parse(opens) - Date.now()) / 86_400_000);
+		if (days > 1) {
+			countdown.textContent = `${days} days`;
+		} else if (days === 1) {
+			countdown.textContent = "1 day";
+		} else {
+			countdown.textContent = "Open now";
+		}
+	});
+</script>

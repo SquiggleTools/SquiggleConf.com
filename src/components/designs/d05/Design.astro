@@ -1,0 +1,508 @@
+---
+import cityscape from "~/assets/design/cityscape.svg";
+import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const address = [
+	`SquiggleConf ${currentYear}`,
+	"New England Aquarium, Simons IMAX Theater",
+	"1 Central Wharf",
+	"Boston, MA 02110",
+];
+---
+
+{at === "hero-start" && <div aria-hidden="true" class="d05-card" />}
+
+{at === "hero-start" && <div aria-hidden="true" class="d05-divider" />}
+
+{at === "hero-start" && (
+	<p aria-hidden="true" class="d05-greeting">
+		Greetings from Boston!
+	</p>
+)}
+
+{at === "hero-end" && (
+	<div class="d05-side">
+		<div class="d05-postage">
+			<svg aria-hidden="true" class="d05-postmark" viewBox="0 0 220 120">
+				<defs>
+					<path
+						d="M 60 60 m -42 0 a 42 42 0 1 1 84 0 a 42 42 0 1 1 -84 0"
+						id="d05-ring"
+					/>
+				</defs>
+				<circle cx="60" cy="60" fill="none" r="52" stroke-width="2.5" />
+				<circle cx="60" cy="60" fill="none" r="32" stroke-width="1.5" />
+				<text class="d05-postmark-ring">
+					<textPath href="#d05-ring" startOffset="0">
+						BOSTON · MASSACHUSETTS · MAY 07 ·
+					</textPath>
+				</text>
+				<text class="d05-postmark-year" text-anchor="middle" x="60" y="68">
+					{currentYear}
+				</text>
+				<path
+					class="d05-postmark-waves"
+					d="M118 38 q 12 -8 24 0 t 24 0 t 24 0 t 24 0 M118 54 q 12 -8 24 0 t 24 0 t 24 0 t 24 0 M118 70 q 12 -8 24 0 t 24 0 t 24 0 t 24 0 M118 86 q 12 -8 24 0 t 24 0 t 24 0 t 24 0"
+					fill="none"
+					stroke-width="2"
+				/>
+			</svg>
+			<div aria-hidden="true" class="d05-stamp">
+				<div
+					class="d05-stamp-art"
+					style={{ backgroundImage: `url(${cityscape.src})` }}
+				/>
+				<span class="d05-stamp-top">Squiggle</span>
+				<span class="d05-stamp-bottom">Forever · {currentYear}</span>
+			</div>
+		</div>
+		<ul aria-label="Venue address" class="d05-address">
+			{address.map((line) => (
+				<li>{line}</li>
+			))}
+		</ul>
+		<div class="d05-side-footer">
+			<a class="d05-rubber" href="#cfp-opens-heading">
+				<span class="d05-rubber-big">CFP opens {cfpOpenDate}</span>
+				<span class="d05-rubber-small">Closes {cfpCloseDate}</span>
+			</a>
+			<a class="d05-tickets" href={links.tickets}>
+				Get tickets →
+			</a>
+		</div>
+	</div>
+)}
+
+<style>
+	.d05-card {
+		--d05-red: #ef4f50;
+		--d05-cyan: #4ec3cf;
+		--d05-paper: #fbf8ef;
+
+		background: repeating-linear-gradient(
+			-45deg,
+			var(--d05-red) 0 1.3rem,
+			var(--d05-paper) 1.3rem 2rem,
+			var(--d05-cyan) 2rem 3.3rem,
+			var(--d05-paper) 3.3rem 4rem
+		);
+		border-radius: 0.6rem;
+		box-shadow:
+			0 0.1rem 0 rgb(255 255 255 / 50%),
+			0 1rem 2rem rgb(4 25 48 / 25%),
+			0 2.5rem 5rem rgb(4 25 48 / 35%);
+		position: relative;
+		rotate: -0.6deg;
+	}
+
+	.d05-card::before {
+		background:
+			radial-gradient(
+				ellipse at 20% 0%,
+				rgb(255 255 255 / 70%),
+				transparent 60%
+			),
+			repeating-linear-gradient(
+				0deg,
+				rgb(4 25 48 / 1.8%) 0 1px,
+				transparent 1px 4px
+			),
+			var(--d05-paper);
+		border-radius: 0.2rem;
+		content: "";
+		inset: 0.6rem;
+		position: absolute;
+	}
+
+	.d05-divider {
+		background: #e0585a;
+		border-radius: 1px;
+		width: 2px;
+	}
+
+	.d05-greeting {
+		color: rgb(4 25 48 / 55%);
+		font-family: "Shantell Sans", cursive;
+		font-size: 0.95rem;
+		margin: 0;
+	}
+
+	.d05-side {
+		color: var(--colorBlue5);
+		display: grid;
+		gap: 1rem;
+		grid-template-rows: auto 1fr auto;
+	}
+
+	.d05-postage {
+		align-items: start;
+		display: flex;
+		justify-content: flex-end;
+		position: relative;
+	}
+
+	.d05-postmark {
+		color: rgb(4 25 48 / 55%);
+		height: 6.5rem;
+		margin-right: -2.5rem;
+		position: relative;
+		rotate: -10deg;
+		stroke: currentcolor;
+		top: 1.5rem;
+		z-index: 1;
+	}
+
+	.d05-postmark-ring {
+		fill: currentcolor;
+		font-family: var(--fontFamilyHeading);
+		font-size: 10px;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 1.5px;
+	}
+
+	.d05-postmark-year {
+		fill: currentcolor;
+		font-family: var(--fontFamilyHeading);
+		font-size: 22px;
+		font-weight: var(--fontWeightBold);
+	}
+
+	.d05-stamp {
+		background: #e9f4f7;
+		display: grid;
+		gap: 0.15rem;
+		grid-template-rows: auto 1fr auto;
+		height: 8.25rem;
+		outline: 0.4rem dotted #fbf8ef;
+		outline-offset: -0.2rem;
+		padding: 0.55rem;
+		rotate: 3deg;
+		width: 6.75rem;
+		box-shadow: 0 0.2rem 0.5rem rgb(4 25 48 / 25%);
+	}
+
+	.d05-stamp-art {
+		background-color: #1d5f8c;
+		background-position: 35% bottom;
+		background-repeat: no-repeat;
+		background-size: auto 85%;
+		border: 1px solid #1d5f8c;
+		grid-row: 2;
+	}
+
+	.d05-stamp-top,
+	.d05-stamp-bottom {
+		color: #1d5f8c;
+		font-family: var(--fontFamilyLogo);
+		font-size: 0.7rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.06em;
+		line-height: 1;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.d05-stamp-top {
+		grid-row: 1;
+	}
+
+	.d05-stamp-bottom {
+		font-size: 0.55rem;
+		grid-row: 3;
+	}
+
+	.d05-address {
+		align-self: center;
+		display: grid;
+		gap: 0.2rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.d05-address li {
+		border-bottom: 1.5px solid rgb(4 25 48 / 30%);
+		font-family: "Shantell Sans", cursive;
+		font-size: 1rem;
+		padding: 0.35rem 0.25rem 0.15rem;
+	}
+
+	.d05-side-footer {
+		align-items: end;
+		display: flex;
+		gap: 1rem;
+		justify-content: space-between;
+	}
+
+	.d05-rubber {
+		border: 3px solid #d63b3d;
+		border-radius: 0.4rem;
+		box-shadow:
+			inset 0 0 0 2px #fbf8ef,
+			inset 0 0 0 3.5px #d63b3d;
+		color: #d63b3d;
+		display: grid;
+		font-family: var(--fontFamilyHeading);
+		line-height: 1.1;
+		opacity: 0.88;
+		padding: 0.45rem 0.8rem;
+		rotate: -5deg;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: rotate var(--transitionNormal) var(--transitionEaseOut);
+		white-space: nowrap;
+	}
+
+	.d05-rubber:hover {
+		rotate: 0deg;
+	}
+
+	.d05-rubber-big {
+		font-size: 1.05rem;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+	}
+
+	.d05-rubber-small {
+		font-size: 0.7rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.12em;
+	}
+
+	.d05-tickets {
+		background: var(--colorBlue5);
+		border-radius: var(--radiusPill);
+		color: var(--colorWhiteIsh);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightSemibold);
+		padding: 0.55rem 1.2rem;
+		text-decoration: none;
+		transition: background var(--transitionFast);
+		white-space: nowrap;
+	}
+
+	.d05-tickets:hover {
+		background: var(--colorBlue3);
+	}
+
+	@media not (--widthLarge) {
+		.d05-card {
+			rotate: 0deg;
+		}
+
+		.d05-postage {
+			justify-content: center;
+		}
+
+		.d05-postmark {
+			height: 5rem;
+			top: 1rem;
+		}
+
+		.d05-stamp {
+			height: 6.75rem;
+			width: 5.5rem;
+		}
+
+		.d05-address li {
+			font-size: 0.9rem;
+		}
+
+		.d05-rubber-big {
+			font-size: 0.85rem;
+		}
+
+		.d05-rubber-small {
+			font-size: 0.6rem;
+		}
+
+		.d05-tickets {
+			font-size: 0.9rem;
+			padding: 0.5rem 0.9rem;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="5"] header {
+		padding: 1rem 0 0.5rem;
+	}
+
+	html[data-design="5"] .hero {
+		--cityscapeHeightArea: 6rem;
+
+		padding-top: 0.5rem;
+		background:
+			radial-gradient(
+				ellipse 55% 45% at 50% 45%,
+				light-dark(rgb(56 206 214 / 18%), rgb(17 109 154 / 50%)),
+				transparent 72%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), #05213c) 60%,
+				light-dark(var(--colorCream), #08304f) 100%
+			);
+	}
+
+	html[data-design="5"] .hero-cityscape {
+		height: 8rem;
+	}
+
+	html[data-design="5"] .hero-contents {
+		--colorCopy: rgb(4 25 48 / 82%);
+		--colorHeading: var(--colorBlue5);
+		--colorTextShadow: rgb(70 96 140 / 25%);
+
+		color: var(--colorBlue5);
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) 2px minmax(0, 1fr);
+		grid-template-rows: auto auto 1fr;
+		max-width: min(92vw, 68rem);
+	}
+
+	html[data-design="5"] .d05-card {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
+
+	html[data-design="5"] .d05-divider {
+		grid-column: 2;
+		grid-row: 1 / -1;
+		margin: 3rem 0;
+		position: relative;
+		z-index: 1;
+	}
+
+	html[data-design="5"] .d05-greeting,
+	html[data-design="5"] .hero-intro,
+	html[data-design="5"] .top-side-left,
+	html[data-design="5"] .d05-side {
+		position: relative;
+		z-index: 1;
+	}
+
+	html[data-design="5"] .d05-greeting {
+		grid-column: 1;
+		grid-row: 1;
+		padding: 2.4rem 2.75rem 0;
+	}
+
+	html[data-design="5"] .hero-intro {
+		align-items: flex-start;
+		gap: 0.6rem;
+		grid-column: 1;
+		grid-row: 2;
+		padding: 0.3rem 2.75rem 0;
+		text-align: left;
+	}
+
+	html[data-design="5"] .hero-intro .logo-bold {
+		font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+	}
+
+	html[data-design="5"] .hero-subtitle {
+		color: var(--colorBlue3);
+		margin: 0;
+	}
+
+	html[data-design="5"] .top-side-by-side {
+		display: contents;
+	}
+
+	html[data-design="5"] .top-side-by-side .postcard-gallery {
+		display: none;
+	}
+
+	html[data-design="5"] .top-side-left {
+		align-items: flex-start;
+		grid-column: 1;
+		grid-row: 3;
+		margin: 0;
+		padding: 0 2.75rem 2.5rem;
+		text-align: left;
+	}
+
+	html[data-design="5"] .top-heading {
+		font-size: 1.7rem;
+		padding-top: 0.75rem;
+	}
+
+	html[data-design="5"] .top-intro {
+		font-family: "Shantell Sans", cursive;
+		font-size: 1rem;
+		line-height: 1.65;
+		margin: 0.5rem 0 0;
+		padding: 0;
+	}
+
+	html[data-design="5"] .d05-side {
+		grid-column: 3;
+		grid-row: 1 / -1;
+		padding: 1.75rem 2.25rem 2.25rem 2.5rem;
+	}
+
+	html[data-design="5"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="5"] .cfp-opens {
+		padding-top: 2rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="5"] .hero-contents {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: none;
+		}
+
+		html[data-design="5"] .d05-card {
+			grid-row: 1 / 6;
+		}
+
+		html[data-design="5"] .d05-greeting {
+			grid-row: 1;
+			padding: 1.6rem 1.5rem 0;
+		}
+
+		html[data-design="5"] .hero-intro {
+			grid-row: 2;
+			padding: 0.2rem 1.5rem 0;
+		}
+
+		html[data-design="5"] .top-side-left {
+			grid-row: 3;
+			padding: 0 1.5rem 1rem;
+		}
+
+		html[data-design="5"] .top-heading {
+			margin: 0;
+		}
+
+		html[data-design="5"] .d05-divider {
+			grid-column: 1;
+			grid-row: 4;
+			height: 2px;
+			margin: 0 1.5rem;
+			width: auto;
+		}
+
+		html[data-design="5"] .d05-side {
+			grid-column: 1;
+			grid-row: 5;
+			padding: 0 1.5rem 1.75rem;
+		}
+	}
+</style>

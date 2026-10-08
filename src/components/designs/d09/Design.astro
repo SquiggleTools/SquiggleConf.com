@@ -1,0 +1,576 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventDateEve,
+	eventLocation,
+} from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+interface Job {
+	href: string;
+	name: string;
+	time: string;
+}
+
+interface Stage {
+	jobs: Job[];
+	kind?: "cfp";
+	label: string;
+	title: string;
+}
+
+const stages: Stage[] = [
+	{
+		jobs: [
+			{
+				href: "#cfp-opens-heading",
+				name: "Opens",
+				time: `${cfpOpenDate} 2026`,
+			},
+			{ href: "#cfp-opens-heading", name: "Closes", time: cfpCloseDate },
+		],
+		kind: "cfp",
+		label: "Call for proposals",
+		title: "cfp",
+	},
+	{
+		jobs: [{ href: "#launch-party", name: "Launch party", time: "6pm" }],
+		label: `Thu, ${eventDateEve}`,
+		title: "eve",
+	},
+	{
+		jobs: [
+			{ href: "#fun-run", name: "Fun run", time: "7am" },
+			{ href: "#check-in", name: "Check in", time: "8am" },
+			{ href: "#talks-morning", name: "Talks", time: "9am" },
+			{ href: "#cookies-break", name: "Milk & cookies", time: "10:30" },
+			{ href: "#talks-late", name: "Talks", time: "11am" },
+		],
+		label: `Fri, ${eventDate}`,
+		title: "morning",
+	},
+	{
+		jobs: [
+			{ href: "#lunch", name: "Lunch, Quincy Market", time: "12pm" },
+			{ href: "#talks-afternoon", name: "Talks", time: "2pm" },
+			{ href: "#explore-boston", name: "Explore Boston", time: "3:30" },
+		],
+		label: "Fri, afternoon",
+		title: "afternoon",
+	},
+	{
+		jobs: [
+			{ href: "#live-podcast-recording", name: "Live podcast", time: "6pm" },
+			{ href: "#fireside-chat", name: "Fireside chat", time: "7pm" },
+			{ href: "#after-party", name: "After party", time: "7:30" },
+			{ href: "#big-rav", name: "Big Rav", time: "9pm" },
+		],
+		label: "Fri, Urban Wild",
+		title: "evening",
+	},
+];
+---
+
+{at === "hero-after-lockup" && (
+	<div class="d09-actions">
+		<a class="d09-action d09-action-primary" href={links.tickets}>
+			Get {currentYear} tickets
+		</a>
+		<a class="d09-action" href="/cfp">
+			CFP opens {cfpOpenDate}
+		</a>
+	</div>
+)}
+
+{at === "hero-end" && (
+	<section aria-label="The weekend at a glance" class="d09-pipeline">
+		<div class="d09-pipeline-bar">
+			<span class="d09-pipeline-file">
+				<span aria-hidden="true" class="d09-pipeline-icon">
+					▶
+				</span>
+				squiggleconf-{currentYear}.yml
+			</span>
+			<span class="d09-pipeline-meta">
+				{eventLocation} · {stages.length} stages
+			</span>
+		</div>
+		<ol class="d09-stages">
+			{stages.map(({ jobs, kind, label, title }) => (
+				<li class:list={["d09-stage", kind && `d09-stage-${kind}`]}>
+					<p class="d09-stage-label">{label}</p>
+					<div class="d09-stage-box">
+						<p class="d09-stage-title">{title}</p>
+						<ul class="d09-jobs">
+							{jobs.map(({ href, name, time }) => (
+								<li>
+									<a class="d09-job" href={href}>
+										<span aria-hidden="true" class="d09-job-status" />
+										<span class="d09-job-name">{name}</span>
+										<span class="d09-job-time">{time}</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				</li>
+			))}
+		</ol>
+	</section>
+)}
+
+<style>
+	.d09-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		grid-area: actions;
+	}
+
+	.d09-action {
+		border: 1.5px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightSemibold);
+		padding: 0.55rem 1.2rem;
+		text-decoration: none;
+		transition:
+			background var(--transitionFast),
+			color var(--transitionFast);
+	}
+
+	.d09-action:hover,
+	.d09-action:focus-visible {
+		background: rgb(from var(--colorBlue2) r g b / 18%);
+	}
+
+	.d09-action-primary {
+		background: var(--colorAccentMedium);
+		color: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
+	}
+
+	.d09-action-primary:hover,
+	.d09-action-primary:focus-visible {
+		background: var(--colorBlue1);
+		color: var(--colorBlue5);
+	}
+
+	.d09-pipeline {
+		--d09-surface: light-dark(
+			var(--colorWhite),
+			color-mix(in srgb, var(--colorBlue5) 65%, var(--colorBlue4))
+		);
+		--d09-line: light-dark(
+			rgb(from var(--colorBlue4) r g b / 18%),
+			rgb(from var(--colorBlue2) r g b / 26%)
+		);
+
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 55%),
+			rgb(from var(--colorBlue5) r g b / 55%)
+		);
+		backdrop-filter: blur(6px);
+		border: 1px solid var(--d09-line);
+		border-radius: var(--radiusLarge);
+		grid-area: pipeline;
+		margin-top: 2rem;
+		text-align: left;
+	}
+
+	.d09-pipeline-bar {
+		align-items: center;
+		border-bottom: 1px solid var(--d09-line);
+		color: var(--colorMuted);
+		display: flex;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.75rem;
+		justify-content: space-between;
+		padding: 0.55rem 1rem;
+	}
+
+	.d09-pipeline-file {
+		color: var(--colorHeading);
+	}
+
+	.d09-pipeline-icon {
+		color: var(--colorAccentMedium);
+		font-size: 0.65rem;
+		margin-right: 0.35rem;
+	}
+
+	.d09-stages {
+		display: grid;
+		gap: 1.75rem;
+		grid-template-columns: 0.9fr 0.9fr 1.1fr 1.15fr 1fr;
+		list-style: none;
+		margin: 0;
+		padding: 0.9rem 1.25rem 1.1rem;
+	}
+
+	.d09-stage {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		position: relative;
+	}
+
+	.d09-stage + .d09-stage::before {
+		background: var(--d09-line);
+		content: "";
+		height: 1px;
+		left: -1.75rem;
+		position: absolute;
+		top: 2.65rem;
+		width: 1.75rem;
+	}
+
+	.d09-stage + .d09-stage::after {
+		background: var(--d09-surface);
+		border: 1px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		content: "";
+		height: 0.45rem;
+		left: -0.25rem;
+		position: absolute;
+		top: calc(2.65rem - 0.2rem);
+		width: 0.45rem;
+	}
+
+	.d09-stage-label {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.78rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.08em;
+		margin: 0;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.d09-stage-box {
+		background: var(--d09-surface);
+		border: 1px solid var(--d09-line);
+		border-radius: var(--radiusMedium);
+		box-shadow: 0 0.5rem 1.25rem
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 8%),
+				rgb(from var(--colorBlue5) r g b / 40%)
+			);
+		flex: 1;
+		padding: 0.25rem 0.35rem 0.35rem;
+	}
+
+	.d09-stage-cfp .d09-stage-box {
+		border-color: rgb(from var(--colorTerminalOrange) r g b / 60%);
+		box-shadow: 0 0 1.5rem rgb(from var(--colorTerminalOrange) r g b / 18%);
+	}
+
+	.d09-stage-title {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.7rem;
+		margin: 0;
+		padding: 0.35rem 0.5rem 0.25rem;
+	}
+
+	.d09-jobs {
+		display: grid;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.d09-job {
+		align-items: center;
+		border-radius: var(--radiusSmall);
+		color: var(--colorHeading);
+		display: flex;
+		font-size: 0.85rem;
+		gap: 0.5rem;
+		padding: 0.3rem 0.5rem;
+		text-decoration: none;
+		transition: background var(--transitionFast);
+	}
+
+	.d09-job:hover,
+	.d09-job:focus-visible {
+		background: rgb(from var(--colorBlue2) r g b / 14%);
+	}
+
+	.d09-job-status {
+		border: 1.5px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		flex: none;
+		height: 0.65rem;
+		width: 0.65rem;
+	}
+
+	.d09-stage-cfp .d09-job-status {
+		animation: d09-pulse 2s ease-in-out infinite;
+		background: var(--colorTerminalOrange);
+		border-color: var(--colorTerminalOrange);
+	}
+
+	.d09-stage-cfp li + li .d09-job-status {
+		animation: none;
+		background: none;
+	}
+
+	@keyframes d09-pulse {
+		50% {
+			box-shadow: 0 0 0 0.3rem rgb(from var(--colorTerminalOrange) r g b / 0%);
+		}
+
+		0%,
+		100% {
+			box-shadow: 0 0 0 0 rgb(from var(--colorTerminalOrange) r g b / 50%);
+		}
+	}
+
+	.d09-job-name {
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.d09-job-time {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.72rem;
+		white-space: nowrap;
+	}
+
+	.d09-stage-cfp .d09-job-time {
+		color: var(--colorAccentMedium);
+	}
+
+	@media not (--widthXLarge) {
+		.d09-stages {
+			gap: 1.25rem;
+			grid-auto-columns: minmax(14.5rem, 1fr);
+			grid-auto-flow: column;
+			grid-template-columns: none;
+			overflow-x: auto;
+			scroll-padding-inline: 1.25rem;
+			scroll-snap-type: x mandatory;
+		}
+
+		.d09-stage {
+			scroll-snap-align: start;
+		}
+
+		.d09-stage + .d09-stage::before {
+			left: -1.25rem;
+			width: 1.25rem;
+		}
+
+		.d09-stage + .d09-stage::after {
+			display: none;
+		}
+	}
+
+	@media not (--widthLarge) {
+		.d09-actions {
+			justify-content: center;
+		}
+
+		.d09-pipeline {
+			margin-top: 1.25rem;
+		}
+
+		.d09-pipeline-meta {
+			display: none;
+		}
+
+		.d09-stage-box {
+			flex: none;
+		}
+
+		.d09-stages {
+			display: grid;
+			gap: 0.6rem;
+			grid-auto-flow: row;
+			grid-template-columns: minmax(0, 1fr);
+			overflow: visible;
+			padding: 0.75rem;
+		}
+
+		.d09-stage + .d09-stage::before {
+			display: none;
+		}
+
+		.d09-stage {
+			display: grid;
+			gap: 0.6rem;
+			grid-template-columns: 5.5rem minmax(0, 1fr);
+		}
+
+		.d09-stage-label {
+			font-size: 0.68rem;
+			padding-top: 0.45rem;
+			white-space: normal;
+		}
+
+		.d09-stage-title {
+			display: none;
+		}
+
+		.d09-jobs {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0 0.25rem;
+		}
+
+		.d09-job {
+			font-size: 0.8rem;
+			gap: 0.35rem;
+			padding: 0.2rem 0.35rem;
+		}
+
+		.d09-job-name {
+			flex: none;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="9"] .hero {
+		background:
+			radial-gradient(
+				ellipse 45% 60% at 85% 50%,
+				rgb(from var(--colorBlue2) r g b / 14%),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 40% 60% at 5% 60%,
+				light-dark(
+					rgb(from var(--colorBlue3) r g b / 8%),
+					rgb(from var(--colorSea) r g b / 45%)
+				),
+				transparent 70%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), var(--colorBlue5)) 50%,
+				light-dark(var(--colorCream), var(--colorBlue5)) 100%
+			);
+	}
+
+	html[data-design="9"] header {
+		padding: 1rem 0;
+	}
+
+	html[data-design="9"] .hero.tall {
+		--cityscapeHeightArea: 5.5rem;
+	}
+
+	html[data-design="9"] .hero-cityscape {
+		height: 7.5rem;
+	}
+
+	html[data-design="9"] .hero-contents {
+		align-items: end;
+		column-gap: clamp(2rem, 5vw, 5rem);
+		display: grid;
+		grid-template:
+			"lockup intro" auto
+			"actions intro" auto
+			"pipeline pipeline" auto / minmax(0, 1fr) minmax(0, 1fr);
+		padding-top: 1rem;
+	}
+
+	html[data-design="9"] .hero-intro {
+		align-items: flex-start;
+		gap: 0.5rem;
+		grid-area: lockup;
+		padding: 0 0 1rem;
+		text-align: left;
+	}
+
+	html[data-design="9"] .hero-intro .logo-bold {
+		font-size: clamp(2.8rem, 6.4vw, 5.25rem);
+	}
+
+	html[data-design="9"] .hero-subtitle {
+		font-size: clamp(1rem, 1.8vw, 1.35rem);
+	}
+
+	html[data-design="9"] .top-side-by-side {
+		display: contents;
+	}
+
+	html[data-design="9"] .top-side-left {
+		align-items: flex-start;
+		border-left: 2px solid var(--colorAccentMedium);
+		grid-area: intro;
+		margin: 0;
+		padding-left: 1.5rem;
+		text-align: left;
+	}
+
+	html[data-design="9"] .top-heading {
+		font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+		padding-top: 0;
+	}
+
+	html[data-design="9"] .top-intro {
+		font-size: 0.98rem;
+		margin: 0.5rem 0 0;
+		padding: 0;
+	}
+
+	html[data-design="9"] .top-side-by-side .postcard-gallery {
+		display: none;
+	}
+
+	html[data-design="9"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="9"] .cfp-opens {
+		padding-top: clamp(2.25rem, 4vw, 3rem);
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="9"] header {
+			padding: 0.75rem 0;
+		}
+
+		html[data-design="9"] .hero-contents {
+			grid-template:
+				"lockup" auto
+				"actions" auto
+				"pipeline" auto
+				"intro" auto / minmax(0, 1fr);
+			padding-top: 0;
+		}
+
+		html[data-design="9"] .hero-intro {
+			align-items: center;
+			padding-bottom: 0.75rem;
+			text-align: center;
+		}
+
+		html[data-design="9"] .top-side-left {
+			align-items: center;
+			border-left: none;
+			margin-top: 1.5rem;
+			padding: 0;
+			text-align: center;
+		}
+	}
+</style>

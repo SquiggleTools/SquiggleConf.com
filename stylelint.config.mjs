@@ -15,6 +15,14 @@ export default {
 			},
 		},
 		{
+			files: ["src/components/designs/**"],
+			rules: {
+				"color-named": null,
+				"color-no-hex": null,
+				"declaration-property-value-disallowed-list": null,
+			},
+		},
+		{
 			files: ["src/layouts/breakpoints.css"],
 			rules: {
 				"at-rule-disallowed-list": null,

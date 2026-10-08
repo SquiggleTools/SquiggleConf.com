@@ -16,7 +16,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		<span></span>
 	</div>
 	<CfpBubbles class="cfp-opens-bubbles" count={18} />
+	<slot name="backdrop" />
 	<div class="cfp-opens-inner">
+		<slot name="top" />
 		<div class="cfp-opens-headline">
 			<p class="cfp-opens-eyebrow">Call for proposals</p>
 			<TimelineHeading
@@ -41,6 +43,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 				))}
 			</ul>
 		</div>
+		<slot />
 	</div>
 </section>
 

@@ -1,0 +1,328 @@
+---
+import { venues } from "~/components/home/data";
+import { cfpOpenDate, eventDate, eventDateEve } from "~/data/event";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const chips = [
+	{ label: eventDateEve, text: `Launch party at ${venues.nedDevines.name}` },
+	{ label: eventDate, text: `Talks at the ${venues.aquarium.name}` },
+	{ href: "#cfp-opens-heading", label: cfpOpenDate, text: "CFP opens" },
+];
+---
+
+{at === "hero-backdrop" && (
+	<div aria-hidden="true" class="d12-orbs">
+		<span class="d12-orb d12-orb-1" />
+		<span class="d12-orb d12-orb-2" />
+		<span class="d12-orb d12-orb-3" />
+		<span class="d12-orb d12-orb-4" />
+	</div>
+)}
+
+{at === "hero-after-lockup" && (
+	<ul aria-label="At a glance" class="d12-chips">
+		{chips.map(({ href, label, text }) => {
+			const Tag = href ? "a" : "span";
+			return (
+				<li>
+					<Tag class="d12-chip" href={href}>
+						<strong class="d12-chip-label">{label}</strong>
+						<span>{text}</span>
+					</Tag>
+				</li>
+			);
+		})}
+	</ul>
+)}
+
+<style>
+	.d12-orbs {
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.d12-orb {
+		border-radius: 50%;
+		position: absolute;
+		will-change: transform;
+	}
+
+	.d12-orb-1 {
+		animation: d12-drift-a 26s ease-in-out infinite alternate;
+		background: radial-gradient(
+			circle,
+			light-dark(
+				rgb(from var(--colorBlue2) r g b / 38%),
+				rgb(from var(--colorBlue2) r g b / 30%)
+			),
+			transparent 65%
+		);
+		height: 42rem;
+		left: -10rem;
+		top: -12rem;
+		width: 42rem;
+	}
+
+	.d12-orb-2 {
+		animation: d12-drift-b 32s ease-in-out infinite alternate;
+		background: radial-gradient(
+			circle,
+			light-dark(
+				rgb(from var(--colorTerminalOrange) r g b / 22%),
+				rgb(from var(--colorTerminalOrange) r g b / 22%)
+			),
+			transparent 65%
+		);
+		height: 36rem;
+		right: -8rem;
+		top: 6rem;
+		width: 36rem;
+	}
+
+	.d12-orb-3 {
+		animation: d12-drift-a 38s ease-in-out infinite alternate-reverse;
+		background: radial-gradient(
+			circle,
+			light-dark(
+				rgb(from var(--colorBlue3) r g b / 28%),
+				rgb(from var(--colorSea) r g b / 95%)
+			),
+			transparent 65%
+		);
+		bottom: -14rem;
+		height: 44rem;
+		left: 30%;
+		width: 44rem;
+	}
+
+	.d12-orb-4 {
+		animation: d12-drift-b 22s ease-in-out infinite alternate-reverse;
+		background: radial-gradient(
+			circle,
+			light-dark(
+				rgb(from var(--colorBlue1) r g b / 70%),
+				rgb(from var(--colorBlue3) r g b / 40%)
+			),
+			transparent 65%
+		);
+		height: 24rem;
+		left: 55%;
+		top: -6rem;
+		width: 24rem;
+	}
+
+	@keyframes d12-drift-a {
+		0% {
+			transform: translate3d(0, 0, 0) scale(1);
+		}
+
+		100% {
+			transform: translate3d(12rem, 4rem, 0) scale(1.15);
+		}
+	}
+
+	@keyframes d12-drift-b {
+		0% {
+			transform: translate3d(0, 0, 0) scale(1.1);
+		}
+
+		100% {
+			transform: translate3d(-10rem, -3rem, 0) scale(0.9);
+		}
+	}
+
+	.d12-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+		list-style: none;
+		margin: 0.5rem auto 0;
+		padding: 0;
+	}
+
+	.d12-chips li {
+		margin: 0;
+	}
+
+	.d12-chip {
+		align-items: baseline;
+		backdrop-filter: var(--backdropFrosted);
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 55%),
+			rgb(from var(--colorWhite) r g b / 7%)
+		);
+		border: 1px solid
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 90%),
+				rgb(from var(--colorWhite) r g b / 14%)
+			);
+		border-radius: var(--radiusPill);
+		box-shadow:
+			inset 0 1px 0
+				light-dark(
+					rgb(from var(--colorWhite) r g b / 90%),
+					rgb(from var(--colorWhite) r g b / 12%)
+				),
+			0 0.5rem 1.5rem rgb(from var(--colorBlue5) r g b / 12%);
+		color: var(--colorCopy);
+		display: inline-flex;
+		font-size: var(--fontSizeCaption);
+		gap: 0.55rem;
+		padding: 0.5rem 1.1rem;
+		text-decoration: none;
+		transition:
+			transform var(--transitionNormal) var(--transitionEaseOut),
+			background var(--transitionNormal);
+	}
+
+	a.d12-chip:hover,
+	a.d12-chip:focus-visible {
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 80%),
+			rgb(from var(--colorBlue2) r g b / 18%)
+		);
+		transform: translateY(-2px);
+	}
+
+	.d12-chip-label {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-style: italic;
+		font-weight: var(--fontWeightBold);
+	}
+</style>
+
+<style is:global>
+	html[data-design="12"] header {
+		backdrop-filter: var(--backdropFrosted);
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 35%),
+			rgb(from var(--colorBlue5) r g b / 35%)
+		);
+		border-bottom: 1px solid
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 80%),
+				rgb(from var(--colorWhite) r g b / 8%)
+			);
+		padding: 1rem 0;
+		position: relative;
+		z-index: 2;
+	}
+
+	html[data-design="12"] .body-area {
+		margin-top: -5.6rem;
+	}
+
+	html[data-design="12"] .hero {
+		background: linear-gradient(
+			180deg,
+			light-dark(var(--colorBlueBright2), var(--colorBlue5)) 0%,
+			light-dark(var(--colorWhite), var(--colorBlue4)) 60%,
+			light-dark(var(--colorCream), var(--colorSea)) 100%
+		);
+		padding-top: 5.6rem;
+	}
+
+	html[data-design="12"] .hero-intro {
+		gap: 0.6rem;
+		padding-bottom: 0;
+	}
+
+	html[data-design="12"] .top-side-by-side {
+		gap: 3rem;
+		margin-top: 1.75rem;
+	}
+
+	html[data-design="12"] .top-side-left {
+		align-items: flex-start;
+		backdrop-filter: var(--backdropFrosted);
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 45%),
+			rgb(from var(--colorWhite) r g b / 5%)
+		);
+		border: 1px solid
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 90%),
+				rgb(from var(--colorWhite) r g b / 12%)
+			);
+		border-radius: var(--radiusLarge);
+		box-shadow:
+			inset 0 1px 0
+				light-dark(
+					rgb(from var(--colorWhite) r g b / 90%),
+					rgb(from var(--colorWhite) r g b / 10%)
+				),
+			0 1.5rem 3rem rgb(from var(--colorBlue5) r g b / 14%);
+		margin-bottom: 0;
+		padding: 1.25rem 2rem 1.75rem;
+		text-align: left;
+	}
+
+	html[data-design="12"] .top-heading {
+		padding-top: 0;
+	}
+
+	html[data-design="12"] .top-intro {
+		margin-left: 0;
+		padding: 0;
+	}
+
+	html[data-design="12"] .top-side-by-side .postcard-gallery {
+		margin-bottom: 0;
+		zoom: 0.72;
+	}
+
+	html[data-design="12"] .postcard-flip {
+		margin: 0;
+	}
+
+	html[data-design="12"] .hero.tall {
+		--cityscapeHeightArea: 7.5rem;
+	}
+
+	html[data-design="12"] .cfp-opens {
+		padding-top: 2.5rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="12"] .top-side-by-side {
+			gap: 0;
+			margin-top: 1.25rem;
+		}
+
+		html[data-design="12"] .top-side-left {
+			padding: 1rem 1.25rem 1.25rem;
+		}
+
+		html[data-design="12"] .top-heading {
+			margin: 0;
+		}
+
+		html[data-design="12"] .top-intro {
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		html[data-design="12"] .top-side-by-side .postcard-gallery {
+			zoom: 0.56;
+		}
+
+		html[data-design="12"] .postcard-flip {
+			margin-top: 2rem;
+		}
+
+		html[data-design="12"] .d12-chips {
+			gap: 0.5rem;
+		}
+	}
+</style>

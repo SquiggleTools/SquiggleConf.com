@@ -1,0 +1,263 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventLocation,
+} from "~/data/event";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const items = [
+	{ highlight: true, text: `CFP opens ${cfpOpenDate} 2026` },
+	{ text: `Submissions close ${cfpCloseDate}` },
+	{ text: `${eventDate} ${currentYear} · ${eventLocation}` },
+	{ text: "Talks in an IMAX theater" },
+	{ text: "Launch party at Ned Devine's" },
+	{ text: "5k fun run along the shoreline" },
+	{ text: "Milk & cookies" },
+	{ text: "Lunch at Quincy Market" },
+	{ text: "Live podcast: Syntax + ThePrimeagen" },
+	{ text: "Big Rav live at Urban Wild" },
+	{ text: "A penguin exhibit next door" },
+];
+
+const [month, day] = eventDate.replace(/\D+$/, "").split(" ");
+---
+
+{at === "hero-backdrop" && (
+	<div aria-hidden="true" class="d10-backdrop">
+		<span class="d10-backdrop-month">{month}</span>
+		<span class="d10-backdrop-day">{day}</span>
+	</div>
+)}
+
+{at === "after-hero" && (
+	<div class="d10-ticker-wrap">
+		<div class="d10-ticker">
+			{[false, true].map((duplicate) => (
+				<ul
+					aria-hidden={duplicate ? "true" : undefined}
+					aria-label={duplicate ? undefined : "Highlights"}
+					class="d10-ticker-track"
+				>
+					{items.map(({ highlight, text }) => (
+						<li class:list={["d10-ticker-item", highlight && "d10-hl"]}>
+							{text}
+						</li>
+					))}
+				</ul>
+			))}
+		</div>
+	</div>
+)}
+
+<style>
+	.d10-backdrop {
+		color: transparent;
+		display: flex;
+		font-family: var(--fontFamilyHeading);
+		font-style: italic;
+		font-weight: var(--fontWeightBold);
+		inset: 0;
+		justify-content: space-between;
+		line-height: 0.8;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+		user-select: none;
+		-webkit-text-stroke: 1.5px
+			light-dark(
+				rgb(from var(--colorBlue3) r g b / 20%),
+				rgb(from var(--colorBlue2) r g b / 22%)
+			);
+	}
+
+	.d10-backdrop-month,
+	.d10-backdrop-day {
+		font-size: clamp(10rem, 30vw, 28rem);
+		letter-spacing: -0.04em;
+	}
+
+	.d10-backdrop-month {
+		margin: -0.05em 0 0 -0.08em;
+	}
+
+	.d10-backdrop-day {
+		align-self: flex-end;
+		margin: 0 0.02em 0.35em 0;
+		-webkit-text-stroke-color: light-dark(
+			rgb(from var(--colorTerminalOrange) r g b / 30%),
+			rgb(from var(--colorTerminalOrange) r g b / 32%)
+		);
+	}
+
+	.d10-ticker-wrap {
+		margin: -1.6rem 0 -1.2rem;
+		overflow-x: clip;
+		position: relative;
+		z-index: 2;
+	}
+
+	.d10-ticker {
+		background: light-dark(var(--colorBlue5), var(--colorBlue2));
+		border-block: 2px solid light-dark(var(--colorBlue2), var(--colorBlue5));
+		box-shadow: 0 0.6rem 1.5rem rgb(from var(--colorBlue5) r g b / 35%);
+		color: light-dark(var(--colorCream), var(--colorBlue5));
+		display: flex;
+		margin-left: -5vw;
+		overflow: hidden;
+		rotate: -1.5deg;
+		width: 110vw;
+	}
+
+	.d10-ticker-track {
+		animation: d10-scroll 60s linear infinite;
+		display: flex;
+		flex: none;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.d10-ticker:hover .d10-ticker-track {
+		animation-play-state: paused;
+	}
+
+	.d10-ticker-item {
+		align-items: center;
+		display: flex;
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.05rem;
+		font-style: italic;
+		font-weight: var(--fontWeightBold);
+		gap: 1.5rem;
+		letter-spacing: 0.02em;
+		padding: 0.6rem 0 0.6rem 1.5rem;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.d10-ticker-item::after {
+		background: currentcolor;
+		content: "";
+		height: 0.5rem;
+		mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8'><path d='M1 4c2.5-4 5-4 7.5 0s5 4 7.5 0 5-4 7 0' fill='none' stroke='%23000' stroke-width='2'/></svg>")
+			center / contain no-repeat;
+		opacity: 0.6;
+		width: 1.5rem;
+	}
+
+	.d10-hl {
+		color: light-dark(var(--colorBlue2), var(--colorBlue5));
+		text-decoration: underline wavy var(--colorTerminalOrange) 2px;
+		text-decoration-skip-ink: none;
+		text-underline-offset: 0.3em;
+	}
+
+	@keyframes d10-scroll {
+		to {
+			transform: translateX(-100%);
+		}
+	}
+
+	@media not (--widthLarge) {
+		.d10-backdrop {
+			flex-direction: column;
+		}
+
+		.d10-backdrop-month,
+		.d10-backdrop-day {
+			font-size: 11rem;
+		}
+
+		.d10-ticker-item {
+			font-size: 0.9rem;
+			padding-block: 0.45rem;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="10"] header {
+		padding: 1rem 0;
+	}
+
+	html[data-design="10"] .hero.tall {
+		--cityscapeHeightArea: 6rem;
+	}
+
+	html[data-design="10"] .hero-cityscape {
+		height: 8.5rem;
+	}
+
+	html[data-design="10"] .hero-intro {
+		gap: 0.75rem;
+		padding-top: 0;
+	}
+
+	html[data-design="10"] .hero-intro .logo-bold {
+		font-size: clamp(3rem, 8vw, 5.75rem);
+	}
+
+	html[data-design="10"] .hero-subtitle {
+		font-weight: var(--fontWeightMedium);
+		letter-spacing: 0.12em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	html[data-design="10"] .top-side-by-side {
+		gap: 3.5rem;
+	}
+
+	html[data-design="10"] .top-side-left {
+		margin-bottom: 0.5rem;
+	}
+
+	html[data-design="10"] .top-heading {
+		font-size: clamp(2rem, 3vw, 2.6rem);
+		padding-top: 0;
+	}
+
+	html[data-design="10"] .top-side-by-side .postcard-gallery {
+		zoom: 0.66;
+	}
+
+	html[data-design="10"] .postcard-flip {
+		margin: 1rem 0 0.5rem;
+	}
+
+	html[data-design="10"] .timeline-section {
+		padding-top: 1.5rem;
+	}
+
+	html[data-design="10"] .cfp-opens {
+		padding-top: clamp(2.25rem, 4vw, 3rem);
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="10"] .hero-subtitle {
+			letter-spacing: 0.06em;
+		}
+
+		html[data-design="10"] .top-heading {
+			padding-top: 1rem;
+		}
+
+		html[data-design="10"] .top-side-left {
+			margin-bottom: 2rem;
+		}
+
+		html[data-design="10"] .top-side-by-side .postcard-gallery {
+			display: none;
+		}
+	}
+</style>

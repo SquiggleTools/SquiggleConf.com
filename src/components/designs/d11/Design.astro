@@ -1,0 +1,216 @@
+---
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+---
+
+{at === "hero-backdrop" && (
+	<div aria-hidden="true" class="d11-sky">
+		<span class="d11-stars d11-stars-a" />
+		<span class="d11-stars d11-stars-b" />
+		<span class="d11-glow" />
+	</div>
+)}
+
+<style>
+	.d11-sky {
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.d11-stars {
+		background-repeat: repeat;
+		inset: 0 0 35%;
+		display: none;
+		mask-image: linear-gradient(to bottom, black 30%, transparent);
+		position: absolute;
+	}
+
+	:global(html.dark) .d11-stars {
+		display: block;
+	}
+
+	.d11-stars-a {
+		animation: d11-twinkle 6s ease-in-out infinite alternate;
+		background-image:
+			radial-gradient(1.5px 1.5px at 8% 14%, var(--colorWhiteIsh), transparent),
+			radial-gradient(1px 1px at 23% 62%, var(--colorBlue1), transparent),
+			radial-gradient(
+				1.5px 1.5px at 41% 31%,
+				var(--colorWhiteIsh),
+				transparent
+			),
+			radial-gradient(1px 1px at 57% 78%, var(--colorBlue1), transparent),
+			radial-gradient(2px 2px at 71% 9%, var(--colorWhiteIsh), transparent),
+			radial-gradient(1px 1px at 88% 46%, var(--colorBlue1), transparent),
+			radial-gradient(1.5px 1.5px at 94% 83%, var(--colorWhiteIsh), transparent);
+		background-size: 380px 260px;
+	}
+
+	.d11-stars-b {
+		animation: d11-twinkle 9s ease-in-out infinite alternate-reverse;
+		background-image:
+			radial-gradient(1px 1px at 15% 40%, var(--colorWhiteIsh), transparent),
+			radial-gradient(1.5px 1.5px at 33% 85%, var(--colorBlue2), transparent),
+			radial-gradient(1px 1px at 52% 12%, var(--colorWhiteIsh), transparent),
+			radial-gradient(1px 1px at 66% 55%, var(--colorWhiteIsh), transparent),
+			radial-gradient(1.5px 1.5px at 81% 24%, var(--colorBlue1), transparent);
+		background-position: 120px 60px;
+		background-size: 530px 340px;
+	}
+
+	.d11-glow {
+		animation: d11-breathe 10s ease-in-out infinite alternate;
+		background:
+			radial-gradient(
+				ellipse 45% 70% at 50% 100%,
+				light-dark(
+					rgb(from var(--colorTerminalOrange) r g b / 22%),
+					rgb(from var(--colorTerminalOrange) r g b / 40%)
+				),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 30% 60% at 18% 100%,
+				rgb(from var(--colorBlue2) r g b / 20%),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 30% 60% at 84% 100%,
+				rgb(from var(--colorBlue2) r g b / 16%),
+				transparent 70%
+			);
+		bottom: 2rem;
+		height: 26rem;
+		left: -10%;
+		position: absolute;
+		right: -10%;
+		transform-origin: bottom center;
+	}
+
+	@keyframes d11-twinkle {
+		0% {
+			opacity: 0.35;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes d11-breathe {
+		0% {
+			opacity: 0.75;
+			transform: scaleY(0.92);
+		}
+
+		100% {
+			opacity: 1;
+			transform: scaleY(1.05);
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="11"] header {
+		background: light-dark(var(--colorBlueBright2), var(--colorBlue5));
+	}
+
+	html[data-design="11"] .hero {
+		background: linear-gradient(
+			180deg,
+			light-dark(var(--colorBlueBright2), var(--colorBlue5)) 0%,
+			light-dark(
+					var(--colorBlueBright1),
+					color-mix(in srgb, var(--colorBlue5) 70%, var(--colorBlue4))
+				)
+				35%,
+			light-dark(
+					var(--colorCream),
+					color-mix(in srgb, var(--colorBlue4) 70%, var(--colorSea))
+				)
+				72%,
+			light-dark(
+					color-mix(in srgb, var(--colorCream) 80%, var(--colorTerminalOrange)),
+					color-mix(in srgb, var(--colorSea) 85%, var(--colorBlue3))
+				)
+				100%
+		);
+	}
+
+	html[data-design="11"] .hero-intro {
+		gap: 0.6rem;
+		padding-bottom: 0;
+	}
+
+	html[data-design="11"] .hero-subtitle {
+		text-shadow: 0 0 1.5rem
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 80%),
+				rgb(from var(--colorBlue2) r g b / 35%)
+			);
+	}
+
+	html[data-design="11"] .logo-bold {
+		text-shadow:
+			0 1.5px 3px var(--colorTextShadow),
+			0 0 2.5rem
+				light-dark(
+					rgb(from var(--colorWhite) r g b / 90%),
+					rgb(from var(--colorBlue2) r g b / 25%)
+				);
+	}
+
+	html[data-design="11"] .top-side-left {
+		margin-bottom: 0;
+	}
+
+	html[data-design="11"] .top-side-by-side .postcard-gallery {
+		margin-bottom: 0;
+		zoom: 0.72;
+	}
+
+	html[data-design="11"] .postcard-flip {
+		margin: 1.5rem 0 0;
+	}
+
+	html[data-design="11"] .hero.tall {
+		--cityscapeHeightArea: 7rem;
+	}
+
+	html[data-design="11"] .hero-cityscape {
+		filter: drop-shadow(
+			0 -0.4rem 1.2rem
+				light-dark(
+					rgb(from var(--colorTerminalOrange) r g b / 18%),
+					rgb(from var(--colorBlue2) r g b / 22%)
+				)
+		);
+	}
+
+	html[data-design="11"] .cfp-opens {
+		padding-top: 2.5rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="11"] .top-side-by-side .postcard-gallery {
+			zoom: 0.56;
+		}
+
+		html[data-design="11"] .top-intro {
+			font-size: 0.95rem;
+			line-height: 1.5;
+			padding: 0;
+		}
+
+		html[data-design="11"] .postcard-flip {
+			margin-top: 1rem;
+		}
+	}
+</style>

@@ -1,0 +1,133 @@
+---
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+---
+
+{at === "hero-backdrop" && <div aria-hidden="true" class="d01-grid" />}
+
+<style>
+	.d01-grid {
+		background-image: radial-gradient(
+			light-dark(rgb(4 25 48 / 14%), rgb(234 234 247 / 13%)) 1px,
+			transparent 1.5px
+		);
+		background-size: 1.4rem 1.4rem;
+		inset: 0;
+		mask-image: radial-gradient(
+			ellipse 60% 55% at 50% 30%,
+			black,
+			transparent 75%
+		);
+		pointer-events: none;
+		position: absolute;
+	}
+</style>
+
+<style is:global>
+	html[data-design="1"] header {
+		padding: 1rem 0;
+	}
+
+	html[data-design="1"] .hero {
+		--cityscapeHeightArea: 6.5rem;
+
+		background:
+			radial-gradient(
+				ellipse 38% 32% at 50% 14%,
+				light-dark(rgb(56 206 214 / 22%), rgb(56 206 214 / 17%)),
+				transparent 70%
+			),
+			radial-gradient(
+				ellipse 75% 45% at 50% 100%,
+				light-dark(rgb(255 94 0 / 12%), rgb(17 109 154 / 70%)),
+				transparent 72%
+			),
+			radial-gradient(
+				ellipse 30% 30% at 82% 52%,
+				light-dark(rgb(56 206 214 / 14%), rgb(56 206 214 / 10%)),
+				transparent 70%
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				light-dark(var(--colorWhite), #072a4b) 55%,
+				light-dark(var(--colorCream), #0a3a63) 100%
+			);
+	}
+
+	html[data-design="1"] .hero-cityscape {
+		height: 8.5rem;
+	}
+
+	html[data-design="1"] .hero-intro {
+		gap: 0.9rem;
+		padding: 0;
+	}
+
+	html[data-design="1"] .hero-subtitle {
+		color: var(--colorAccentMedium);
+		font-weight: var(--fontWeightMedium);
+	}
+
+	html[data-design="1"] .top-side-by-side {
+		gap: 4rem;
+	}
+
+	html[data-design="1"] .top-side-left {
+		margin-bottom: 0;
+	}
+
+	html[data-design="1"] .top-heading {
+		background: linear-gradient(
+			100deg,
+			light-dark(var(--colorBlue5), var(--colorWhiteIsh)) 30%,
+			var(--colorAccentMedium)
+		);
+		background-clip: text;
+		color: transparent;
+		padding-right: 0.15em;
+	}
+
+	html[data-design="1"] .top-side-by-side .postcard-gallery {
+		margin-bottom: 0;
+		zoom: 0.74;
+	}
+
+	html[data-design="1"] .postcard-flip {
+		margin: 1.25rem 0 0.5rem;
+		padding-bottom: 1.6rem;
+	}
+
+	html[data-design="1"] .postcard-flip-scene {
+		filter: drop-shadow(
+			0 0 2.5rem light-dark(rgb(56 206 214 / 25%), rgb(56 206 214 / 22%))
+		);
+	}
+
+	html[data-design="1"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="1"] .cfp-opens {
+		padding-top: 2.25rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="1"] .top-intro {
+			padding: 0;
+		}
+
+		html[data-design="1"] .top-side-by-side .postcard-gallery {
+			zoom: 0.8;
+		}
+
+		html[data-design="1"] .postcard-flip {
+			margin-top: 0.5rem;
+		}
+	}
+</style>

@@ -1,0 +1,622 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventDateEve,
+	eventLocation,
+} from "~/data/event";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+type Line = [TokenKind, string][];
+
+type TokenKind = "f" | "k" | "p" | "s" | "v";
+
+const property = (name: string, value: string): Line => [
+	["v", `  ${name}`],
+	["p", ": "],
+	["s", `"${value}"`],
+	["p", ","],
+];
+
+const lines: Line[] = [
+	[
+		["k", "import"],
+		["p", " { "],
+		["f", "defineConference"],
+		["p", " } "],
+		["k", "from"],
+		["s", ' "squiggleconf"'],
+		["p", ";"],
+	],
+	[],
+	[
+		["k", "export default "],
+		["f", "defineConference"],
+		["p", "({"],
+	],
+	property("tagline", "the devtools conference"),
+	property("date", `${eventDate} ${currentYear}`),
+	property("city", eventLocation),
+	property("venue", "New England Aquarium"),
+	property("stage", "Simons IMAX Theater"),
+	property("launchParty", `${eventDateEve}, Ned Devine's`),
+	property("afterParty", "Urban Wild"),
+	property("liveShow", "Syntax + ThePrimeagen"),
+];
+
+const escape = (text: string) =>
+	text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+
+const render = (line: Line) =>
+	line
+		.map(([kind, text]) => `<span class="d07-t-${kind}">${escape(text)}</span>`)
+		.join("");
+
+const cfpLine = lines.length + 1;
+
+const cfpHtml = `<span class="d07-squiggle">${render([
+	["v", "  cfp"],
+	["p", ": { "],
+	["v", "opens"],
+	["p", ": "],
+	["s", `"${cfpOpenDate} 2026"`],
+	["p", ", "],
+	["v", "closes"],
+	["p", ": "],
+	["s", `"${cfpCloseDate}"`],
+	["p", " }"],
+])}</span>${render([["p", ","]])}<span class="d07-cursor"></span>`;
+
+const rows = [
+	...lines.map((line) => ({ active: false, html: render(line) })),
+	{ active: true, html: cfpHtml },
+	{ active: false, html: render([["p", "});"]]) },
+];
+---
+
+{at === "hero-after-lockup" && (
+	<figure
+		aria-label="SquiggleConf at a glance"
+		class="d07-editor"
+		style={`--d07-cfp-line: ${cfpLine}`}
+	>
+		<div aria-hidden="true" class="d07-tabs">
+			<span class="d07-lights">
+				<span />
+				<span />
+				<span />
+			</span>
+			<span class="d07-tab d07-tab-active">
+				<span class="d07-tab-icon">TS</span>
+				squiggleconf.config.ts
+			</span>
+			<span class="d07-tab">
+				<span class="d07-tab-icon d07-tab-icon-md">M↓</span>
+				cfp.md
+			</span>
+		</div>
+		<div class="d07-scroll">
+			<div class="d07-code">
+				{rows.map(({ active, html }, index) => (
+					<div class:list={["d07-line", active && "d07-line-active"]}>
+						<span aria-hidden="true" class="d07-ln">
+							{index + 1}
+						</span>
+						<span class="d07-src" set:html={html} />
+					</div>
+				))}
+			</div>
+		</div>
+		<div class="d07-hover" role="note">
+			<p class="d07-hover-title">
+				<span aria-hidden="true" class="d07-hover-glyph">
+					▲
+				</span>
+				The call for proposals opens <strong>{cfpOpenDate} 2026</strong>
+			</p>
+			<p class="d07-hover-body">
+				Submissions close {cfpCloseDate}. Start sketching that talk about your
+				favorite linter, editor, or debugger.
+			</p>
+			<p class="d07-hover-rule">squiggleconf(cfp-opens-soon)</p>
+			<p class="d07-hover-actions">
+				<a href="/cfp">Quick Fix: submit a talk</a>
+				<a href="#cfp-opens-heading">View launch lineup</a>
+			</p>
+		</div>
+		<div aria-hidden="true" class="d07-status">
+			<span>
+				<span class="d07-status-warn">▲ 1</span> ✕ 0
+			</span>
+			<span class="d07-status-right">TypeScript</span>
+		</div>
+	</figure>
+)}
+
+<style>
+	.d07-editor {
+		--d07-line-height: 1.55rem;
+		--d07-tabs-height: 2.4rem;
+		--d07-pad: 0.8rem;
+		--d07-kw: light-dark(
+			color-mix(in srgb, var(--colorTerminalOrange), var(--colorBlue5) 25%),
+			var(--colorUnhappy)
+		);
+		--d07-fn: light-dark(var(--colorBlue3), var(--colorBlue1));
+		--d07-prop: light-dark(var(--colorBlue4), var(--colorWhiteIsh));
+		--d07-str: light-dark(
+			color-mix(in srgb, var(--colorBlue2), var(--colorBlue5) 40%),
+			var(--colorBlue2)
+		);
+		--d07-punctuation: light-dark(
+			rgb(from var(--colorBlue4) r g b / 60%),
+			rgb(from var(--colorBlue1) r g b / 60%)
+		);
+
+		background: light-dark(
+			var(--colorWhite),
+			color-mix(in srgb, var(--colorBlue5) 72%, var(--colorBlue4))
+		);
+		border: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 16%),
+				rgb(from var(--colorBlue2) r g b / 28%)
+			);
+		border-radius: var(--radiusLarge);
+		box-shadow:
+			0 0 0 1px rgb(from var(--colorWhite) r g b / 4%) inset,
+			0 1.5rem 3rem
+				light-dark(
+					rgb(from var(--colorBlue4) r g b / 18%),
+					rgb(from var(--colorBlue5) r g b / 70%)
+				),
+			0 0 5rem
+				light-dark(
+					rgb(from var(--colorBlue2) r g b / 14%),
+					rgb(from var(--colorBlue2) r g b / 12%)
+				);
+		grid-area: editor;
+		margin: 0;
+		position: relative;
+		text-align: left;
+		z-index: 2;
+	}
+
+	.d07-tabs {
+		align-items: stretch;
+		background: light-dark(
+			var(--colorCream),
+			rgb(from var(--colorBlue5) r g b / 80%)
+		);
+		border-bottom: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 12%),
+				rgb(from var(--colorBlue2) r g b / 18%)
+			);
+		border-radius: var(--radiusLarge) var(--radiusLarge) 0 0;
+		display: flex;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.78rem;
+		height: var(--d07-tabs-height);
+		overflow: hidden;
+	}
+
+	.d07-lights {
+		align-items: center;
+		display: flex;
+		gap: 0.4rem;
+		padding: 0 1rem;
+	}
+
+	.d07-lights span {
+		background: var(--colorTerminalOrange);
+		border-radius: var(--radiusPill);
+		height: 0.7rem;
+		width: 0.7rem;
+	}
+
+	.d07-lights span:nth-child(2) {
+		background: light-dark(var(--colorBlue1), var(--colorCream));
+	}
+
+	.d07-lights span:nth-child(3) {
+		background: var(--colorBlue2);
+	}
+
+	.d07-tab {
+		align-items: center;
+		border-right: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 10%),
+				rgb(from var(--colorBlue2) r g b / 14%)
+			);
+		color: var(--colorMuted);
+		display: flex;
+		gap: 0.45rem;
+		padding: 0 1rem;
+		white-space: nowrap;
+	}
+
+	.d07-tab-active {
+		background: light-dark(
+			var(--colorWhite),
+			color-mix(in srgb, var(--colorBlue5) 72%, var(--colorBlue4))
+		);
+		border-left: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 10%),
+				rgb(from var(--colorBlue2) r g b / 14%)
+			);
+		box-shadow: inset 0 2px 0 var(--colorBlue2);
+		color: var(--colorHeading);
+	}
+
+	.d07-tab-icon {
+		color: var(--colorBlue2);
+		font-size: 0.65rem;
+		font-weight: var(--fontWeightBold);
+	}
+
+	.d07-tab-icon-md {
+		color: var(--colorMuted);
+	}
+
+	.d07-scroll {
+		overflow-x: auto;
+		padding: var(--d07-pad) 0;
+	}
+
+	.d07-code {
+		color: var(--d07-prop);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.86rem;
+		line-height: var(--d07-line-height);
+		margin: 0;
+		min-width: max-content;
+		padding-right: 1.5rem;
+		tab-size: 2;
+	}
+
+	.d07-line {
+		display: flex;
+		min-height: var(--d07-line-height);
+	}
+
+	.d07-src {
+		white-space: pre;
+	}
+
+	.d07-line-active {
+		background: light-dark(
+			rgb(from var(--colorBlue2) r g b / 9%),
+			rgb(from var(--colorBlue2) r g b / 7%)
+		);
+		box-shadow: inset 2px 0 0 var(--colorTerminalOrange);
+	}
+
+	.d07-ln {
+		color: light-dark(
+			rgb(from var(--colorBlue4) r g b / 35%),
+			rgb(from var(--colorBlue1) r g b / 30%)
+		);
+		flex: none;
+		margin-right: 1.25rem;
+		text-align: right;
+		user-select: none;
+		width: 2.75rem;
+	}
+
+	.d07-line-active .d07-ln {
+		color: var(--colorHeading);
+	}
+
+	.d07-src :global(.d07-t-k) {
+		color: var(--d07-kw);
+		font-style: italic;
+	}
+
+	.d07-src :global(.d07-t-f) {
+		color: var(--d07-fn);
+	}
+
+	.d07-src :global(.d07-t-p) {
+		color: var(--d07-punctuation);
+	}
+
+	.d07-src :global(.d07-t-s) {
+		color: var(--d07-str);
+	}
+
+	.d07-src :global(.d07-t-v) {
+		color: var(--d07-prop);
+	}
+
+	.d07-src :global(.d07-squiggle) {
+		text-decoration: underline wavy var(--colorTerminalOrange) 1.5px;
+		text-decoration-skip-ink: none;
+		text-underline-offset: 0.3em;
+	}
+
+	.d07-src :global(.d07-cursor) {
+		animation: d07-blink 1.1s steps(1) infinite;
+		background: var(--colorBlue2);
+		display: inline-block;
+		height: 1.1em;
+		margin-left: 0.1em;
+		vertical-align: -0.2em;
+		width: 2px;
+	}
+
+	@keyframes d07-blink {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	.d07-hover {
+		background: light-dark(var(--colorWhite), var(--colorBlue4));
+		border: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 18%),
+				rgb(from var(--colorBlue2) r g b / 40%)
+			);
+		border-radius: var(--radiusMedium);
+		box-shadow: 0 1rem 2.25rem
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 22%),
+				rgb(from var(--colorBlue5) r g b / 65%)
+			);
+		color: var(--colorCopy);
+		display: grid;
+		font-size: 0.85rem;
+		gap: 0.4rem;
+		left: 6.5rem;
+		max-width: 22rem;
+		padding: 0.8rem 1rem 0.7rem;
+		position: absolute;
+		top: calc(
+			var(--d07-tabs-height) + var(--d07-pad) + var(--d07-line-height) *
+				(var(--d07-cfp-line) + 0.15)
+		);
+		z-index: 3;
+	}
+
+	.d07-hover p {
+		margin: 0;
+	}
+
+	.d07-hover-title {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1rem;
+	}
+
+	.d07-hover-title strong {
+		color: var(--colorAccentMedium);
+		white-space: nowrap;
+	}
+
+	.d07-hover-glyph {
+		color: var(--colorTerminalOrange);
+		font-size: 0.75em;
+		margin-right: 0.2rem;
+	}
+
+	.d07-hover-body {
+		line-height: 1.45;
+		text-wrap: pretty;
+	}
+
+	.d07-hover-rule {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.72rem;
+	}
+
+	.d07-hover-actions {
+		border-top: 1px solid
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 12%),
+				rgb(from var(--colorBlue2) r g b / 22%)
+			);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1.25rem;
+		padding-top: 0.5rem;
+	}
+
+	.d07-hover-actions a {
+		color: var(--colorAccentMedium);
+		font-size: 0.8rem;
+		font-weight: var(--fontWeightSemibold);
+		text-decoration: none;
+	}
+
+	.d07-hover-actions a:hover,
+	.d07-hover-actions a:focus-visible {
+		text-decoration: underline;
+	}
+
+	.d07-status {
+		background: light-dark(var(--colorBlue3), var(--colorSea));
+		border-radius: 0 0 var(--radiusLarge) var(--radiusLarge);
+		color: var(--colorWhiteIsh);
+		display: flex;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.7rem;
+		justify-content: space-between;
+		padding: 0.3rem 1rem;
+	}
+
+	.d07-status-warn {
+		color: var(--colorCream);
+		margin-right: 0.5rem;
+	}
+
+	@media not (--widthLarge) {
+		.d07-editor {
+			--d07-line-height: 1.35rem;
+		}
+
+		.d07-code {
+			font-size: 0.72rem;
+			min-width: 0;
+			padding-right: 0.75rem;
+		}
+
+		.d07-src {
+			padding-left: 4ch;
+			text-indent: -4ch;
+			white-space: pre-wrap;
+		}
+
+		.d07-ln {
+			margin-right: 0.75rem;
+			width: 1.75rem;
+		}
+
+		.d07-tab:not(.d07-tab-active) {
+			display: none;
+		}
+
+		.d07-hover {
+			left: auto;
+			margin: 0 0.75rem 0.75rem;
+			max-width: none;
+			position: relative;
+			top: auto;
+		}
+
+		.d07-status-right {
+			display: none;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="7"] .hero-contents {
+		align-items: center;
+		column-gap: clamp(2rem, 4vw, 4rem);
+		display: grid;
+		grid-template:
+			"lockup editor" auto
+			"intro editor" auto / minmax(0, 0.85fr) minmax(0, 1.15fr);
+		padding-bottom: 2rem;
+		padding-top: 2.5rem;
+	}
+
+	html[data-design="7"] .hero-intro {
+		align-items: flex-start;
+		align-self: end;
+		gap: 0.6rem;
+		grid-area: lockup;
+		padding: 0;
+		text-align: left;
+	}
+
+	html[data-design="7"] .hero-intro .logo-bold {
+		font-size: clamp(2.8rem, 5.6vw, 4.6rem);
+	}
+
+	html[data-design="7"] .top-side-by-side {
+		display: contents;
+	}
+
+	html[data-design="7"] .top-side-left {
+		align-items: flex-start;
+		align-self: start;
+		grid-area: intro;
+		margin: 0;
+		text-align: left;
+	}
+
+	html[data-design="7"] .top-heading {
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
+		padding-top: 1.25rem;
+	}
+
+	html[data-design="7"] .top-intro {
+		font-size: 1rem;
+		margin: 0.6rem 0 0;
+		max-width: 30rem;
+		padding: 0;
+	}
+
+	html[data-design="7"] .top-side-by-side .postcard-gallery {
+		place-self: start end;
+		grid-area: editor;
+		margin: 0;
+		position: relative;
+		translate: 30% -26%;
+		width: 19rem;
+		z-index: 1;
+		zoom: 1;
+	}
+
+	html[data-design="7"] .top-side-by-side .postcard-flip {
+		margin: 0;
+		padding: 0;
+		rotate: 9deg;
+	}
+
+	html[data-design="7"] .hero.tall {
+		--cityscapeHeightArea: 6rem;
+	}
+
+	html[data-design="7"] .hero-cityscape {
+		height: 8rem;
+	}
+
+	html[data-design="7"] .timeline-section {
+		padding-top: 0.5rem;
+	}
+
+	html[data-design="7"] .cfp-opens {
+		padding-top: clamp(2.5rem, 4vw, 3.25rem);
+	}
+
+	@media not (--widthXLarge) {
+		html[data-design="7"] .top-side-by-side .postcard-gallery {
+			display: none;
+		}
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="7"] .hero-contents {
+			grid-template:
+				"lockup" auto
+				"editor" auto
+				"intro" auto / minmax(0, 1fr);
+			padding-bottom: 2rem;
+			padding-top: 0.25rem;
+			row-gap: 1.25rem;
+		}
+
+		html[data-design="7"] .hero-intro {
+			align-items: center;
+			text-align: center;
+		}
+
+		html[data-design="7"] .top-side-left {
+			align-items: center;
+			text-align: center;
+		}
+
+		html[data-design="7"] .top-heading {
+			padding-top: 0;
+		}
+
+		html[data-design="7"] .top-intro {
+			margin: 0.6rem auto 0;
+		}
+	}
+</style>

@@ -1,0 +1,494 @@
+---
+import { venues } from "~/components/home/data";
+import { cfpCloseDate, cfpOpenDate, eventDateEve } from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
+
+import type { DesignMountPoint } from "../types";
+
+interface Props {
+	at: DesignMountPoint;
+}
+
+const { at } = Astro.props;
+
+const facts = [
+	{ label: "Eve", value: `${eventDateEve} · launch party` },
+	{ label: "Venue", value: `${venues.aquarium.name} · Simons IMAX theater` },
+	{ label: "CFP", value: `Opens ${cfpOpenDate} · closes ${cfpCloseDate}` },
+];
+---
+
+{at === "hero-backdrop" && (
+	<div aria-hidden="true" class="d13-sky">
+		<svg class="d13-aurora" preserveAspectRatio="none" viewBox="0 0 1440 420">
+			<defs>
+				<linearGradient id="d13-ribbon-a" x1="0" x2="0" y1="0" y2="1">
+					<stop class="d13-stop-clear" offset="0" />
+					<stop class="d13-stop-cyan" offset="0.75" />
+					<stop class="d13-stop-pale" offset="1" />
+				</linearGradient>
+				<linearGradient id="d13-ribbon-b" x1="0" x2="0" y1="0" y2="1">
+					<stop class="d13-stop-clear" offset="0" />
+					<stop class="d13-stop-sea" offset="0.7" />
+					<stop class="d13-stop-cyan" offset="1" />
+				</linearGradient>
+				<linearGradient id="d13-ribbon-c" x1="0" x2="0" y1="0" y2="1">
+					<stop class="d13-stop-clear" offset="0" />
+					<stop class="d13-stop-warm" offset="0.8" />
+					<stop class="d13-stop-pale" offset="1" />
+				</linearGradient>
+			</defs>
+			<g class="d13-ribbon d13-ribbon-1">
+				<path
+					d="M-100 210 C150 140 380 270 640 190 S1060 90 1540 170 L1540 40 C1160 -20 900 110 640 50 S160 10 -100 70 Z"
+					fill="url(#d13-ribbon-a)"
+				/>
+			</g>
+			<g class="d13-ribbon d13-ribbon-2">
+				<path
+					d="M-100 290 C260 230 520 330 820 260 S1240 200 1540 250 L1540 130 C1240 90 1000 170 760 130 S260 110 -100 160 Z"
+					fill="url(#d13-ribbon-b)"
+				/>
+			</g>
+			<g class="d13-ribbon d13-ribbon-3">
+				<path
+					d="M300 170 C520 120 700 210 920 150 S1250 100 1400 130 L1400 20 C1200 -10 1020 70 860 30 S500 10 300 60 Z"
+					fill="url(#d13-ribbon-c)"
+				/>
+			</g>
+		</svg>
+		<div class="d13-rays" />
+		<span class="d13-orb" />
+	</div>
+)}
+
+{at === "hero-after-lockup" && (
+	<div class="d13-glance">
+		<dl class="d13-facts">
+			{facts.map(({ label, value }) => (
+				<div class="d13-fact">
+					<dt>{label}</dt>
+					<dd>{value}</dd>
+				</div>
+			))}
+		</dl>
+		<div class="d13-actions">
+			<a class="d13-button d13-button-primary" href={links.tickets}>
+				Get {currentYear} tickets
+			</a>
+			<a class="d13-button" href="#cfp-opens-heading">
+				Speak at SquiggleConf
+			</a>
+		</div>
+	</div>
+)}
+
+<style>
+	.d13-sky {
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.d13-aurora {
+		display: none;
+		filter: blur(3px);
+		height: 30rem;
+		left: -10%;
+		mask-composite: intersect;
+		mask-image:
+			repeating-linear-gradient(
+				90deg,
+				var(--colorBlue5) 0 3px,
+				rgb(from var(--colorBlue5) r g b / 55%) 5px 9px,
+				rgb(from var(--colorBlue5) r g b / 85%) 11px 12px,
+				rgb(from var(--colorBlue5) r g b / 35%) 14px 21px
+			),
+			linear-gradient(to bottom, transparent, var(--colorBlue5) 25%),
+			linear-gradient(
+				to right,
+				rgb(from var(--colorBlue5) r g b / 40%) 10%,
+				rgb(from var(--colorBlue5) r g b / 40%) 38%,
+				var(--colorBlue5) 58%
+			);
+		opacity: 0.8;
+		position: absolute;
+		top: 0;
+		width: 120%;
+	}
+
+	:global(html.dark) .d13-aurora {
+		display: block;
+	}
+
+	.d13-stop-clear {
+		stop-color: var(--colorBlue2);
+		stop-opacity: 0;
+	}
+
+	.d13-stop-cyan {
+		stop-color: var(--colorBlue2);
+		stop-opacity: 0.7;
+	}
+
+	.d13-stop-pale {
+		stop-color: color-mix(in oklab, var(--colorBlue2) 50%, var(--colorCream));
+		stop-opacity: 0.8;
+	}
+
+	.d13-stop-sea {
+		stop-color: var(--colorBlue3);
+		stop-opacity: 0.5;
+	}
+
+	.d13-stop-warm {
+		stop-color: var(--colorTerminalOrange);
+		stop-opacity: 0.2;
+	}
+
+	.d13-ribbon {
+		transform-box: fill-box;
+		transform-origin: 50% 0;
+		will-change: transform, opacity;
+	}
+
+	.d13-ribbon-1 {
+		animation: d13-sway 17s ease-in-out infinite alternate;
+	}
+
+	.d13-ribbon-2 {
+		animation: d13-sway 23s ease-in-out infinite alternate-reverse;
+		animation-delay: -5s;
+	}
+
+	.d13-ribbon-3 {
+		animation: d13-sway 13s ease-in-out infinite alternate;
+		animation-delay: -8s;
+	}
+
+	@keyframes d13-sway {
+		0% {
+			opacity: 0.6;
+			transform: translateX(-4%) skewX(-8deg) scaleY(0.88);
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0.7;
+			transform: translateX(4%) skewX(8deg) scaleY(1.15);
+		}
+	}
+
+	.d13-rays {
+		animation: d13-turn 90s linear infinite;
+		aspect-ratio: 1;
+		background: repeating-conic-gradient(
+			from 0deg,
+			rgb(from var(--colorWhite) r g b / 55%) 0deg 6deg,
+			transparent 6deg 18deg
+		);
+		border-radius: 50%;
+		display: block;
+		mask-image: radial-gradient(circle, black 5%, transparent 60%);
+		opacity: 0.8;
+		position: absolute;
+		right: max(-34rem, calc(50% - 72rem));
+		top: -30rem;
+		width: 80rem;
+	}
+
+	:global(html.dark) .d13-rays {
+		display: none;
+	}
+
+	@keyframes d13-turn {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.d13-orb {
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(in srgb, var(--colorCream) 75%, var(--colorTerminalOrange)) 0
+				22%,
+			color-mix(in srgb, var(--colorCream) 45%, var(--colorTerminalOrange)) 32%,
+			rgb(from var(--colorTerminalOrange) r g b / 18%) 34%,
+			transparent 70%
+		);
+		border-radius: 50%;
+		height: 20rem;
+		position: absolute;
+		right: max(-6rem, calc(50% - 44rem));
+		top: 0;
+		width: 20rem;
+	}
+
+	:global(html.dark) .d13-orb {
+		animation: d13-glow 7s ease-in-out infinite alternate;
+		background: none;
+		box-shadow:
+			inset -1.1rem 0.5rem 0 0 var(--colorWhiteIsh),
+			0 0 3rem rgb(from var(--colorBlue1) r g b / 20%);
+		height: 4rem;
+		right: max(1.5rem, calc(50% - 44rem));
+		rotate: -20deg;
+		top: 6.5rem;
+		width: 4rem;
+	}
+
+	@keyframes d13-glow {
+		0% {
+			filter: drop-shadow(0 0 0.5rem rgb(from var(--colorBlue1) r g b / 30%));
+		}
+
+		100% {
+			filter: drop-shadow(0 0 1.5rem rgb(from var(--colorBlue1) r g b / 55%));
+		}
+	}
+
+	.d13-glance {
+		display: grid;
+		gap: 1.25rem;
+		grid-area: glance;
+		justify-items: start;
+	}
+
+	.d13-facts {
+		border-left: 2px solid var(--colorAccentMedium);
+		display: grid;
+		gap: 0.35rem;
+		margin: 0;
+		padding-left: 1rem;
+	}
+
+	.d13-fact {
+		align-items: baseline;
+		display: flex;
+		gap: 0.75rem;
+	}
+
+	.d13-fact dt {
+		color: var(--colorAccentMedium);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeCaption);
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.08em;
+		min-width: 3.5rem;
+		text-transform: uppercase;
+	}
+
+	.d13-fact dd {
+		color: var(--colorCopy);
+		font-size: var(--fontSizeSmaller);
+		margin: 0;
+	}
+
+	.d13-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.d13-button {
+		border: 2px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-weight: var(--fontWeightSemibold);
+		padding: 0.6rem 1.3rem;
+		text-decoration: none;
+		transition:
+			transform var(--transitionNormal) var(--transitionEaseOut),
+			background var(--transitionNormal);
+	}
+
+	.d13-button:hover,
+	.d13-button:focus-visible {
+		background: rgb(from var(--colorBlue2) r g b / 18%);
+		transform: translateY(-2px);
+	}
+
+	.d13-button-primary {
+		background: var(--colorAccentMedium);
+		box-shadow: 0 0.5rem 1.5rem rgb(from var(--colorBlue2) r g b / 30%);
+		color: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
+	}
+
+	.d13-button-primary:hover,
+	.d13-button-primary:focus-visible {
+		background: var(--colorAccentMedium);
+	}
+
+	@media not (--widthLarge) {
+		.d13-glance {
+			justify-items: center;
+		}
+
+		.d13-facts {
+			gap: 0.25rem;
+		}
+
+		.d13-fact dd {
+			font-size: var(--fontSizeCaption);
+		}
+
+		.d13-actions {
+			gap: 0.5rem;
+			justify-content: center;
+		}
+
+		.d13-button {
+			font-size: 0.9rem;
+			padding: 0.5rem 0.95rem;
+		}
+
+		.d13-orb {
+			height: 9rem;
+			right: -3.5rem;
+			top: -3.5rem;
+			width: 9rem;
+		}
+
+		:global(html.dark) .d13-orb {
+			box-shadow:
+				inset -0.6rem 0.3rem 0 0 var(--colorWhiteIsh),
+				0 0 2rem rgb(from var(--colorBlue1) r g b / 20%);
+			height: 2.25rem;
+			right: 1rem;
+			top: 5.4rem;
+			width: 2.25rem;
+		}
+	}
+</style>
+
+<style is:global>
+	html[data-design="13"] header {
+		background: transparent;
+		position: relative;
+		z-index: 2;
+	}
+
+	html[data-design="13"] .body-area {
+		margin-top: -5.75rem;
+	}
+
+	html[data-design="13"] .hero {
+		padding-top: 5.75rem;
+		background: linear-gradient(
+			180deg,
+			light-dark(var(--colorBlueBright2), var(--colorBlue5)) 0%,
+			light-dark(
+					var(--colorWhite),
+					color-mix(in srgb, var(--colorBlue5) 60%, var(--colorBlue4))
+				)
+				55%,
+			light-dark(var(--colorCream), var(--colorBlue4)) 100%
+		);
+	}
+
+	html[data-design="13"] .hero-contents {
+		align-items: center;
+		padding-top: 0.5rem;
+		display: grid;
+		gap: 1.1rem clamp(2rem, 5vw, 5rem);
+		grid-template:
+			"intro postcard" auto
+			"glance postcard" auto
+			"about postcard" auto
+			/ 1.15fr 1fr;
+		max-width: min(90vw, var(--sizeContentAreaWide));
+		width: 100%;
+	}
+
+	html[data-design="13"] .top-side-by-side {
+		display: contents;
+	}
+
+	html[data-design="13"] .hero-intro {
+		align-items: flex-start;
+		gap: 0.5rem;
+		grid-area: intro;
+		padding: 0;
+		text-align: left;
+	}
+
+	html[data-design="13"] .hero-subtitle {
+		font-size: clamp(1.1rem, 2vw, 1.6rem);
+		margin: 0;
+	}
+
+	html[data-design="13"] .top-side-left {
+		align-items: flex-start;
+		grid-area: about;
+		margin: 0;
+		text-align: left;
+	}
+
+	html[data-design="13"] .top-heading {
+		font-size: clamp(1.4rem, 2vw, 1.75rem);
+		padding-top: 0.25rem;
+	}
+
+	html[data-design="13"] .top-intro {
+		font-size: var(--fontSizeSmaller);
+		margin: 0.4rem 0 0;
+		max-width: 34rem;
+		padding: 0;
+	}
+
+	html[data-design="13"] .top-side-by-side .postcard-gallery {
+		align-self: center;
+		grid-area: postcard;
+		margin: 0;
+		zoom: 0.9;
+	}
+
+	html[data-design="13"] .postcard-flip {
+		margin: 0;
+	}
+
+	html[data-design="13"] .hero.tall {
+		--cityscapeHeightArea: 8.5rem;
+	}
+
+	html[data-design="13"] .cfp-opens {
+		padding-top: 2.5rem;
+	}
+
+	@media not (--widthLarge) {
+		html[data-design="13"] .hero-contents {
+			grid-template:
+				"intro" auto
+				"glance" auto
+				"postcard" auto
+				"about" auto
+				/ 1fr;
+			padding-top: 0.5rem;
+			row-gap: 1rem;
+		}
+
+		html[data-design="13"] .hero-intro,
+		html[data-design="13"] .top-side-left {
+			align-items: center;
+			text-align: center;
+		}
+
+		html[data-design="13"] .top-heading {
+			margin: auto;
+		}
+
+		html[data-design="13"] .top-side-by-side .postcard-gallery {
+			zoom: 0.62;
+		}
+
+		html[data-design="13"] .postcard-flip {
+			margin: 0.5rem 0 0;
+		}
+	}
+</style>
