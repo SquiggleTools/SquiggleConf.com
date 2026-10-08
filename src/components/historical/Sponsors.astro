@@ -1,9 +1,8 @@
 ---
-import { Image } from "astro:assets";
-
 import type { SponsorInfo } from "~/data/historical/types";
 
 import squiggleFlankingLean from "~/assets/2024/squiggle-flanking-lean.svg";
+import Img from "~/components/Img.astro";
 
 import BodyText from "../BodyText.astro";
 import Heading from "../Heading.astro";
@@ -19,11 +18,11 @@ const { sponsors } = Astro.props;
 
 <SectionWrapper>
 	<div class="squiggle-flanked">
-		<Image alt="" class="squiggle" src={squiggleFlankingLean} />
+		<Img alt="" class="squiggle" src={squiggleFlankingLean} />
 		<Heading class="heading" id="sponsors" level="h2" link>
 			Sponsors
 		</Heading>
-		<Image alt="" class="squiggle squiggle-right" src={squiggleFlankingLean} />
+		<Img alt="" class="squiggle squiggle-right" src={squiggleFlankingLean} />
 	</div>
 	<BodyText class="sponsors-blurb" historical>
 		The support of our generous sponsors help make SquiggleConf possible. They

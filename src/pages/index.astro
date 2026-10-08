@@ -25,6 +25,7 @@ import networking from "~/assets/stills/attendees-networking.webp";
 import harbor from "~/assets/stills/boston-harbor.webp";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Hero from "~/components/hero/Hero.astro";
+import CfpOpens from "~/components/home/cfp/CfpOpens.astro";
 import Collage from "~/components/home/Collage.astro";
 import {
 	exploreChoices,
@@ -62,25 +63,26 @@ import PageLayout from "~/layouts/PageLayout.astro";
 <PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
 	<Hero tall>
 		<HomeHeroLockup />
+		<div class="top-side-by-side">
+			<div class="top-side-left">
+				<TimelineHeading class="top-heading" level="h2">
+					the devtools conference
+				</TimelineHeading>
+				<p class="top-intro">
+					SquiggleConf is a conference focused on software developer tools: AI
+					tools, linters, code editors, performance and security tools,
+					debuggers, and more. We mix heavy talks with fun events.
+					<br />
+					Think of it like your devtools fieldtrip.
+				</p>
+			</div>
+			<PostcardGallery />
+		</div>
 	</Hero>
 	<DeepSeaSurface>
 		<TimelineSection>
 			<TimelineFishLayer swimUntil="talks-morning" />
-			<div class="top-side-by-side">
-				<div class="top-side-left">
-					<TimelineHeading class="top-heading" level="h2">
-						the devtools conference
-					</TimelineHeading>
-					<p class="top-intro">
-						SquiggleConf is a conference focused on software developer tools: AI
-						tools, linters, code editors, performance and security tools,
-						debuggers, and more. We mix heavy talks with fun events.
-						<br />
-						Think of it like your devtools fieldtrip.
-					</p>
-				</div>
-				<PostcardGallery />
-			</div>
+			<CfpOpens />
 			<TimelineGrid>
 				<TimelineDayCap date={eventDateEve} day="Thursday">
 					<div class="timeline-grid-intro">
@@ -552,6 +554,10 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		display: flex;
 		flex-direction: row;
 		text-align: right;
+	}
+
+	.top-side-by-side :global(.postcard-gallery) {
+		zoom: 0.83;
 	}
 
 	.top-side-left {
