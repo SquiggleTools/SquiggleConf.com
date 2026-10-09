@@ -610,7 +610,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	@media (--widthLarge) {
 		.top {
-			padding-top: 2.5rem;
+			padding-top: 3.5rem;
 			column-gap: 3.5rem;
 			grid-template:
 				"main postcard" auto
@@ -629,7 +629,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 		.top-heading {
 			font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-			padding-top: 3.25rem;
+			padding-top: 2.75rem;
 		}
 
 		.top-actions {
@@ -637,6 +637,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		}
 
 		.top :global(.postcard-gallery) {
+			align-items: flex-end;
 			align-self: end;
 			margin-top: 4rem;
 			zoom: 0.8;
