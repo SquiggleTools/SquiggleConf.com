@@ -23,6 +23,7 @@ import wesBos from "~/assets/avatars/wes-bos.webp";
 import syntax from "~/assets/logos/syntax.svg";
 import networking from "~/assets/stills/attendees-networking.webp";
 import harbor from "~/assets/stills/boston-harbor.webp";
+import Button from "~/components/Button.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Hero from "~/components/hero/Hero.astro";
 import CfpOpens from "~/components/home/cfp/CfpOpens.astro";
@@ -34,6 +35,9 @@ import {
 	timelineMCs,
 } from "~/components/home/data";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
+import HeroHarbor from "~/components/home/hero/HeroHarbor.astro";
+import HeroPipeline from "~/components/home/hero/HeroPipeline.astro";
+import HeroSky from "~/components/home/hero/HeroSky.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
@@ -57,14 +61,18 @@ import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import { eventDate, eventDateEve, eventLocation } from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
 <PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
-	<Hero tall>
-		<HomeHeroLockup />
-		<div class="top-side-by-side">
-			<div class="top-side-left">
+	<Hero tall width="wide">
+		<HeroSky slot="backdrop" />
+		<HeroHarbor slot="decorations" />
+		<div class="top">
+			<div class="top-main">
+				<HomeHeroLockup />
 				<TimelineHeading class="top-heading" level="h2">
 					the devtools conference
 				</TimelineHeading>
@@ -75,8 +83,22 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					<br />
 					Think of it like your devtools fieldtrip.
 				</p>
+				<div class="top-actions">
+					<Button
+						as="a"
+						href={links.tickets}
+						target="_blank"
+						variant="emphasized"
+					>
+						Get {currentYear} tickets
+					</Button>
+					<Button as="a" href="#newsletter" variant="ghost">
+						Subscribe for updates
+					</Button>
+				</div>
 			</div>
 			<PostcardGallery />
+			<HeroPipeline />
 		</div>
 	</Hero>
 	<DeepSeaSurface>
@@ -527,46 +549,107 @@ import PageLayout from "~/layouts/PageLayout.astro";
 </PageLayout>
 
 <style>
+	.top {
+		padding-top: 4rem;
+		display: grid;
+		grid-template:
+			"main" auto
+			"pipeline" auto
+			"postcard" auto / minmax(0, 1fr);
+	}
+
+	.top-main {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		grid-area: main;
+		text-align: center;
+	}
+
 	.top-heading {
 		font-size: var(--fontSizeDisplay);
 		font-style: italic;
 		line-height: 1;
-		padding-top: 1rem;
+		padding-top: 1.5rem;
 		position: relative;
 		z-index: 1;
 	}
 
 	.top-intro {
 		color: var(--colorCopy);
-		font-size: clamp(1rem, 1.35vw, 1.12rem);
-		line-height: 1.6;
-		padding: 0 0 0 2rem;
-		margin: 1rem auto 0;
-		max-width: 39rem;
+		font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+		line-height: 1.55;
+		margin: 1rem 0 0;
+		max-width: 36rem;
 		text-wrap: pretty;
 	}
 
-	.top-side-by-side {
-		max-width: var(--sizeContentAreaNormal);
-		margin: auto;
-		gap: 5rem;
-		align-items: center;
+	.top-actions {
 		display: flex;
-		flex-direction: row;
-		text-align: right;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+		margin-top: 1.25rem;
 	}
 
-	.top-side-by-side :global(.postcard-gallery) {
-		zoom: 0.83;
+	.top :global(.postcard-gallery) {
+		grid-area: postcard;
+		margin: 0;
+		zoom: 0.75;
 	}
 
-	.top-side-left {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		text-align: right;
-		width: 100%;
-		margin-bottom: 2.5rem;
+	.top :global(.postcard-flip) {
+		margin: 1rem 0 0;
+		padding-bottom: 1.6rem;
+	}
+
+	.top :global(.hero-pipeline) {
+		grid-area: pipeline;
+		margin-top: 2.25rem;
+	}
+
+	@media (--widthLarge) {
+		.top {
+			padding-top: 3.5rem;
+			column-gap: 3.5rem;
+			grid-template:
+				"main postcard" auto
+				"pipeline pipeline" auto / minmax(0, 1.35fr) minmax(0, 1fr);
+		}
+
+		.top-main {
+			align-items: flex-start;
+			padding-bottom: 1rem;
+			text-align: left;
+		}
+
+		.top-intro {
+			max-width: 41rem;
+		}
+
+		.top-heading {
+			font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+			padding-top: 2.75rem;
+		}
+
+		.top-actions {
+			justify-content: flex-start;
+		}
+
+		.top :global(.postcard-gallery) {
+			align-items: flex-end;
+			align-self: end;
+			margin-top: 4rem;
+			zoom: 0.8;
+		}
+
+		.top :global(.postcard-flip) {
+			margin-top: 0.5rem;
+		}
+
+		.top :global(.hero-pipeline) {
+			margin-top: 4rem;
+		}
 	}
 
 	.timeline-grid-intro {
@@ -669,20 +752,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	@media not (--widthLarge) {
-		.top-side-by-side {
-			flex-direction: column;
-			gap: 0;
-		}
-
-		.top-heading {
-			margin: auto;
-		}
-
-		.top-side-left {
-			margin-bottom: 0;
-			text-align: center;
-		}
-
 		.timeline-grid-intro {
 			margin-top: 0;
 			order: -1;

@@ -89,6 +89,8 @@ import Heading from "./Heading.astro";
 
 <style>
 	.newsletter {
+		--newsletter-floor-height: 22rem;
+
 		padding: 0 0 3rem;
 		overflow: hidden;
 		position: relative;
@@ -151,36 +153,23 @@ import Heading from "./Heading.astro";
 
 	.ocean-floor-left,
 	.ocean-floor-right {
-		display: none;
+		bottom: 0;
+		height: var(--newsletter-floor-height);
+		max-width: none;
+		width: auto;
 	}
 
-	@media (--widthXSmall) {
-		.ocean-floor-left,
-		.ocean-floor-right {
-			display: initial;
-		}
-
-		.ocean-floor-left {
-			bottom: -12%;
-			height: 90%;
-			left: -50%;
-		}
-
-		.ocean-floor-right {
-			bottom: 0;
-			height: 90%;
-			right: -50%;
-		}
+	.ocean-floor-left {
+		left: min(
+			0rem,
+			calc(50% - 2rem - var(--newsletter-floor-height) * 1480 / 604)
+		);
 	}
 
-	@media (--widthXLarge) {
-		.ocean-floor-left {
-			bottom: 0;
-			left: -25%;
-		}
-
-		.ocean-floor-right {
-			right: -10%;
-		}
+	.ocean-floor-right {
+		left: max(
+			calc(50% + 8rem),
+			calc(100% - var(--newsletter-floor-height) * 1025 / 604)
+		);
 	}
 </style>

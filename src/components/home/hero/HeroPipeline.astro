@@ -1,0 +1,358 @@
+---
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	eventDate,
+	eventDateEve,
+	eventLocation,
+} from "~/data/event";
+import { currentYear } from "~/data/years";
+
+interface Job {
+	href: string;
+	name: string;
+	time: string;
+}
+
+interface Stage {
+	cfp?: boolean;
+	jobs: Job[];
+	label: string;
+	title: string;
+}
+
+const stages: Stage[] = [
+	{
+		cfp: true,
+		jobs: [
+			{ href: "#cfp-opens-heading", name: "Opens", time: cfpOpenDate },
+			{ href: "#cfp-opens-heading", name: "Closes", time: cfpCloseDate },
+		],
+		label: "Call for proposals",
+		title: "cfp",
+	},
+	{
+		jobs: [{ href: "#launch-party", name: "Launch party", time: "6pm" }],
+		label: `Thu, ${eventDateEve}`,
+		title: "eve",
+	},
+	{
+		jobs: [
+			{ href: "#fun-run", name: "Fun run", time: "7am" },
+			{ href: "#check-in", name: "Check in", time: "8am" },
+			{ href: "#talks-morning", name: "Talks", time: "9am" },
+		],
+		label: `Fri, ${eventDate}`,
+		title: "morning",
+	},
+	{
+		jobs: [
+			{ href: "#lunch", name: "Lunch, Quincy Market", time: "12pm" },
+			{ href: "#talks-afternoon", name: "Talks", time: "2pm" },
+			{ href: "#explore-boston", name: "Explore Boston", time: "3:30pm" },
+		],
+		label: "Fri, afternoon",
+		title: "afternoon",
+	},
+	{
+		jobs: [
+			{ href: "#live-podcast-recording", name: "Live podcast", time: "6pm" },
+			{ href: "#fireside-chat", name: "Fireside chat", time: "7pm" },
+			{ href: "#after-party", name: "After party", time: "7:30pm" },
+		],
+		label: "Fri, Urban Wild",
+		title: "evening",
+	},
+];
+---
+
+<section aria-label="The weekend at a glance" class="hero-pipeline">
+	<div class="hero-pipeline-bar">
+		<span class="hero-pipeline-file">
+			<span aria-hidden="true" class="hero-pipeline-icon">
+				▶
+			</span>
+			squiggleconf-{currentYear}.yml
+		</span>
+		<span class="hero-pipeline-meta">
+			{eventLocation} · {stages.length} stages
+		</span>
+	</div>
+	<ol class="hero-pipeline-stages">
+		{stages.map(({ cfp, jobs, label, title }) => (
+			<li
+				class:list={["hero-pipeline-stage", cfp && "hero-pipeline-stage-cfp"]}
+			>
+				<p class="hero-pipeline-stage-label">{label}</p>
+				<div class="hero-pipeline-stage-box">
+					<p class="hero-pipeline-stage-title">{title}</p>
+					<ul class="hero-pipeline-jobs">
+						{jobs.map(({ href, name, time }) => (
+							<li>
+								<a class="hero-pipeline-job" href={href}>
+									<span aria-hidden="true" class="hero-pipeline-job-status" />
+									<span class="hero-pipeline-job-name">{name}</span>
+									<span class="hero-pipeline-job-time">{time}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			</li>
+		))}
+	</ol>
+</section>
+
+<style>
+	.hero-pipeline {
+		--hero-pipeline-surface: light-dark(
+			var(--colorWhite),
+			color-mix(in srgb, var(--colorBlue5) 65%, var(--colorBlue4))
+		);
+		--hero-pipeline-line: light-dark(
+			rgb(from var(--colorBlue4) r g b / 18%),
+			rgb(from var(--colorBlue2) r g b / 26%)
+		);
+
+		backdrop-filter: blur(6px);
+		background: light-dark(
+			rgb(from var(--colorWhite) r g b / 55%),
+			rgb(from var(--colorBlue5) r g b / 55%)
+		);
+		border: 1px solid var(--hero-pipeline-line);
+		border-radius: var(--radiusLarge);
+		text-align: left;
+	}
+
+	.hero-pipeline-bar {
+		align-items: center;
+		border-bottom: 1px solid var(--hero-pipeline-line);
+		color: var(--colorMuted);
+		display: flex;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.75rem;
+		justify-content: space-between;
+		padding: 0.4rem 1rem;
+	}
+
+	.hero-pipeline-icon {
+		color: var(--colorAccentMedium);
+		font-size: 0.65rem;
+		margin-right: 0.35rem;
+	}
+
+	.hero-pipeline-stages {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: minmax(0, 1fr);
+		list-style: none;
+		margin: 0;
+		padding: 0.75rem;
+	}
+
+	.hero-pipeline-stage {
+		display: grid;
+		gap: 0.6rem;
+		grid-template-columns: 5.5rem minmax(0, 1fr);
+		position: relative;
+	}
+
+	.hero-pipeline-stage-label {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyHeading);
+		font-size: 0.68rem;
+		font-weight: var(--fontWeightBold);
+		letter-spacing: 0.08em;
+		margin: 0;
+		padding-top: 0.45rem;
+		text-transform: uppercase;
+	}
+
+	.hero-pipeline-stage-box {
+		background: var(--hero-pipeline-surface);
+		border: 1px solid var(--hero-pipeline-line);
+		border-radius: var(--radiusMedium);
+		box-shadow: 0 0.5rem 1.25rem
+			light-dark(
+				rgb(from var(--colorBlue4) r g b / 8%),
+				rgb(from var(--colorBlue5) r g b / 40%)
+			);
+		padding: 0.25rem 0.35rem 0.35rem;
+	}
+
+	.hero-pipeline-stage-cfp .hero-pipeline-stage-box {
+		border-color: rgb(from var(--colorTerminalOrange) r g b / 60%);
+		box-shadow: 0 0 1.5rem rgb(from var(--colorTerminalOrange) r g b / 18%);
+	}
+
+	.hero-pipeline-stage-title {
+		color: var(--colorMuted);
+		display: none;
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.7rem;
+		margin: 0;
+		padding: 0.3rem 0.5rem 0.15rem;
+	}
+
+	.hero-pipeline-jobs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 0.25rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.hero-pipeline-job {
+		align-items: center;
+		border-radius: var(--radiusSmall);
+		color: var(--colorHeading);
+		display: flex;
+		font-size: 0.8rem;
+		gap: 0.35rem;
+		padding: 0.2rem 0.35rem;
+		text-decoration: none;
+		transition: background var(--transitionFast);
+	}
+
+	.hero-pipeline-job:hover,
+	.hero-pipeline-job:focus-visible {
+		background: rgb(from var(--colorBlue2) r g b / 14%);
+	}
+
+	.hero-pipeline-job-status {
+		border: 1.5px solid var(--colorAccentMedium);
+		border-radius: var(--radiusPill);
+		flex: none;
+		height: 0.65rem;
+		width: 0.65rem;
+	}
+
+	.hero-pipeline-stage-cfp li:first-child .hero-pipeline-job-status {
+		animation: hero-pipeline-pulse 2s ease-in-out infinite;
+		background: var(--colorTerminalOrange);
+		border-color: var(--colorTerminalOrange);
+	}
+
+	.hero-pipeline-stage-cfp li + li .hero-pipeline-job-status {
+		border-color: var(--colorTerminalOrange);
+	}
+
+	@keyframes hero-pipeline-pulse {
+		0%,
+		100% {
+			box-shadow: 0 0 0 0 rgb(from var(--colorTerminalOrange) r g b / 50%);
+		}
+
+		50% {
+			box-shadow: 0 0 0 0.3rem rgb(from var(--colorTerminalOrange) r g b / 0%);
+		}
+	}
+
+	.hero-pipeline-job-name {
+		white-space: nowrap;
+	}
+
+	.hero-pipeline-job-time {
+		color: var(--colorMuted);
+		font-family: var(--fontFamilyMonospace);
+		font-size: 0.72rem;
+		white-space: nowrap;
+	}
+
+	.hero-pipeline-stage-cfp .hero-pipeline-job-time {
+		color: var(--colorAccentMedium);
+	}
+
+	@media not (--widthSmall) {
+		.hero-pipeline-meta {
+			display: none;
+		}
+	}
+
+	@media (--widthLarge) {
+		.hero-pipeline-stages {
+			gap: 1.25rem;
+			grid-auto-columns: minmax(14.5rem, 1fr);
+			grid-auto-flow: column;
+			grid-template-columns: none;
+			overflow-x: auto;
+			padding: 0.7rem 1.25rem 0.85rem;
+			scroll-padding-inline: 1.25rem;
+			scroll-snap-type: x mandatory;
+		}
+
+		.hero-pipeline-stage {
+			display: flex;
+			flex-direction: column;
+			gap: 0.3rem;
+			scroll-snap-align: start;
+		}
+
+		.hero-pipeline-stage + .hero-pipeline-stage::before {
+			background: var(--hero-pipeline-line);
+			content: "";
+			height: 1px;
+			left: -1.25rem;
+			position: absolute;
+			top: 2.25rem;
+			width: 1.25rem;
+		}
+
+		.hero-pipeline-stage-label {
+			font-size: 0.78rem;
+			padding-top: 0;
+			white-space: nowrap;
+		}
+
+		.hero-pipeline-stage-box {
+			flex: 1;
+		}
+
+		.hero-pipeline-stage-title {
+			display: block;
+		}
+
+		.hero-pipeline-jobs {
+			display: grid;
+		}
+
+		.hero-pipeline-job {
+			font-size: 0.85rem;
+			gap: 0.5rem;
+			padding: 0.06rem 0.5rem;
+		}
+
+		.hero-pipeline-job-name {
+			flex: 1;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	@media (--widthXLarge) {
+		.hero-pipeline-stages {
+			gap: 1.75rem;
+			grid-auto-flow: row;
+			grid-template-columns: 0.9fr 0.9fr 1.1fr 1.15fr 1fr;
+			overflow-x: visible;
+		}
+
+		.hero-pipeline-stage + .hero-pipeline-stage::before {
+			left: -1.75rem;
+			width: 1.75rem;
+		}
+
+		.hero-pipeline-stage + .hero-pipeline-stage::after {
+			background: var(--hero-pipeline-surface);
+			border: 1px solid var(--colorAccentMedium);
+			border-radius: var(--radiusPill);
+			content: "";
+			height: 0.45rem;
+			left: -0.25rem;
+			position: absolute;
+			top: calc(2.25rem - 0.2rem);
+			width: 0.45rem;
+		}
+	}
+</style>
