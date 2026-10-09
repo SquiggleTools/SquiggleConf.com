@@ -35,11 +35,9 @@ const ticketsButton = {
 } as const;
 ---
 
-<header>
+<header class:list={[hideLogo && "header-floating"]}>
 	<ContentArea class="header-content-area" width="wide">
-		{hideLogo ? (
-			<Button {...ticketsButton}>{currentYear} Tickets</Button>
-		) : (
+		{!hideLogo && (
 			<a class="logo" href="/">
 				<Logo />
 			</a>
@@ -88,6 +86,15 @@ const ticketsButton = {
 		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
 		padding: 1.5rem 0;
+	}
+
+	.header-floating {
+		background: transparent;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 2;
 	}
 
 	.logo {

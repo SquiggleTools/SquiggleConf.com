@@ -6,20 +6,23 @@ import HeroCityscape from "./HeroCityscape.astro";
 interface Props {
 	class?: string;
 	tall?: boolean;
+	width?: "normal" | "wide";
 }
 
-const { class: className, tall, ...props } = Astro.props;
+const { class: className, tall, width, ...props } = Astro.props;
 ---
 
 <section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
 	<slot name="backdrop" />
 	<div class="hero-decorations">
-		<div class="hero-decorations-inner">
-			<HeroCityscape />
-		</div>
+		<slot name="decorations">
+			<div class="hero-decorations-inner">
+				<HeroCityscape />
+			</div>
+		</slot>
 	</div>
 
-	<ContentArea class="hero-contents">
+	<ContentArea class="hero-contents" width={width}>
 		<slot />
 	</ContentArea>
 </section>
@@ -43,7 +46,7 @@ const { class: className, tall, ...props } = Astro.props;
 	}
 
 	.hero.tall {
-		--cityscapeHeightArea: 4.5rem;
+		--cityscapeHeightArea: 12rem;
 	}
 
 	.hero-decorations {

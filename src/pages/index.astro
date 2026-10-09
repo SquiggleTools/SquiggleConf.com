@@ -60,20 +60,16 @@ import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
-import {
-	cfpOpenDate,
-	eventDate,
-	eventDateEve,
-	eventLocation,
-} from "~/data/event";
+import { eventDate, eventDateEve, eventLocation } from "~/data/event";
 import { links } from "~/data/links";
 import { currentYear } from "~/data/years";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
 <PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
-	<Hero tall>
+	<Hero tall width="wide">
 		<HeroSky slot="backdrop" />
+		<HeroHarbor slot="decorations" />
 		<div class="top">
 			<div class="top-main">
 				<HomeHeroLockup />
@@ -96,8 +92,8 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					>
 						Get {currentYear} tickets
 					</Button>
-					<Button as="a" href="#cfp-opens-heading" variant="ghost">
-						CFP opens {cfpOpenDate}
+					<Button as="a" href="#newsletter" variant="ghost">
+						Subscribe for updates
 					</Button>
 				</div>
 			</div>
@@ -106,7 +102,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		</div>
 	</Hero>
 	<DeepSeaSurface>
-		<HeroHarbor />
 		<TimelineSection>
 			<TimelineFishLayer swimUntil="talks-morning" />
 			<CfpOpens />
@@ -555,6 +550,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top {
+		padding-top: 4rem;
 		display: grid;
 		grid-template:
 			"main" auto
@@ -574,7 +570,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		font-size: var(--fontSizeDisplay);
 		font-style: italic;
 		line-height: 1;
-		padding-top: 1rem;
+		padding-top: 1.5rem;
 		position: relative;
 		z-index: 1;
 	}
@@ -583,7 +579,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		color: var(--colorCopy);
 		font-size: clamp(0.95rem, 1.35vw, 1.05rem);
 		line-height: 1.55;
-		margin: 0.75rem 0 0;
+		margin: 1rem 0 0;
 		max-width: 36rem;
 		text-wrap: pretty;
 	}
@@ -593,7 +589,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		flex-wrap: wrap;
 		gap: 0.75rem;
 		justify-content: center;
-		margin-top: 1rem;
+		margin-top: 1.25rem;
 	}
 
 	.top :global(.postcard-gallery) {
@@ -609,11 +605,12 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.top :global(.hero-pipeline) {
 		grid-area: pipeline;
-		margin-top: 1.5rem;
+		margin-top: 2.25rem;
 	}
 
 	@media (--widthLarge) {
 		.top {
+			padding-top: 1.5rem;
 			column-gap: 3.5rem;
 			grid-template:
 				"main postcard" auto
@@ -631,7 +628,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 		.top-heading {
 			font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-			padding-top: 0.4rem;
+			padding-top: 1.25rem;
 		}
 
 		.top-actions {
@@ -639,8 +636,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		}
 
 		.top :global(.postcard-gallery) {
-			align-self: center;
-			zoom: 0.9;
+			align-self: end;
+			margin-top: 4rem;
+			zoom: 0.8;
 		}
 
 		.top :global(.postcard-flip) {
@@ -648,7 +646,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		}
 
 		.top :global(.hero-pipeline) {
-			margin-top: 1rem;
+			margin-top: 2rem;
 		}
 	}
 
