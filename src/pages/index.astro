@@ -36,7 +36,6 @@ import {
 } from "~/components/home/data";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
 import HeroHarbor from "~/components/home/hero/HeroHarbor.astro";
-import HeroPipeline from "~/components/home/hero/HeroPipeline.astro";
 import HeroSky from "~/components/home/hero/HeroSky.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
@@ -98,7 +97,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				</div>
 			</div>
 			<PostcardGallery />
-			<HeroPipeline />
 		</div>
 	</Hero>
 	<DeepSeaSurface>
@@ -554,7 +552,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		display: grid;
 		grid-template:
 			"main" auto
-			"pipeline" auto
 			"postcard" auto / minmax(0, 1fr);
 	}
 
@@ -603,23 +600,15 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		padding-bottom: 1.6rem;
 	}
 
-	.top :global(.hero-pipeline) {
-		grid-area: pipeline;
-		margin-top: 2.25rem;
-	}
-
 	@media (--widthLarge) {
 		.top {
 			padding-top: 3.5rem;
 			column-gap: 3.5rem;
-			grid-template:
-				"main postcard" auto
-				"pipeline pipeline" auto / minmax(0, 1.35fr) minmax(0, 1fr);
+			grid-template: "main postcard" auto / minmax(0, 1.35fr) minmax(0, 1fr);
 		}
 
 		.top-main {
 			align-items: flex-start;
-			padding-bottom: 1rem;
 			text-align: left;
 		}
 
@@ -645,10 +634,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 		.top :global(.postcard-flip) {
 			margin-top: 0.5rem;
-		}
-
-		.top :global(.hero-pipeline) {
-			margin-top: 4rem;
 		}
 	}
 

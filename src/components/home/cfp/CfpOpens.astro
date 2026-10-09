@@ -116,7 +116,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--width: 4.5rem;
 
 		animation-delay: -8s;
-		rotate: 16deg;
+		rotate: 8deg;
 	}
 
 	@keyframes cfp-opens-sway {
@@ -131,13 +131,12 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 	}
 
-	.cfp-opens-bubbles {
+	.cfp-opens :global(.cfp-opens-bubbles) {
 		mask-image: linear-gradient(
 			to bottom,
 			transparent,
 			var(--colorBlue5) 200px
 		);
-		opacity: 0.3;
 	}
 
 	.cfp-opens-inner {

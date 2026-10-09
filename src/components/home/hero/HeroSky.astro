@@ -35,15 +35,21 @@ const clouds = [
 		<svg
 			class="hero-sky-birds"
 			style={`--duration: ${duration}s; --left: ${left}; --size: ${size}rem; --top: ${top}rem`}
-			viewBox={index ? "0 0 36 20" : "0 0 120 40"}
+			viewBox={index ? "0 0 28 12" : "0 0 120 40"}
 		>
 			{index ? (
-				<path class="hero-sky-bird" d="M2 14 Q10 4 18 14 Q26 4 34 14" />
+				<path class="hero-sky-bird" d="M2 6 Q5 1 8 6 T14 6 T20 6 T26 6" />
 			) : (
 				<>
-					<path class="hero-sky-bird" d="M4 20 Q12 10 20 20 Q28 10 36 20" />
-					<path class="hero-sky-bird" d="M50 8 Q56 0 62 8 Q68 0 74 8" />
-					<path class="hero-sky-bird" d="M86 28 Q92 21 98 28 Q104 21 110 28" />
+					<path
+						class="hero-sky-bird"
+						d="M4 20 Q8 14 12 20 T20 20 T28 20 T36 20"
+					/>
+					<path class="hero-sky-bird" d="M50 8 Q53 3 56 8 T62 8 T68 8 T74 8" />
+					<path
+						class="hero-sky-bird"
+						d="M86 28 Q89 23 92 28 T98 28 T104 28 T110 28"
+					/>
 				</>
 			)}
 		</svg>
@@ -245,9 +251,9 @@ const clouds = [
 		fill: none;
 		left: var(--left);
 		position: absolute;
-		stroke: light-dark(var(--colorBlue4), var(--colorBlue1));
+		stroke: var(--colorSquiggle);
 		stroke-linecap: round;
-		stroke-width: 1.6;
+		stroke-width: 1.4;
 		top: var(--top);
 		width: var(--size);
 	}
