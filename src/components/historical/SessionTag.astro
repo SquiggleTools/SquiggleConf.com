@@ -2,8 +2,6 @@
 import type { ImageMetadata } from "astro";
 import type { SvgComponent } from "astro/types";
 
-import { Image } from "astro:assets";
-
 import C from "~/assets/logos/c.png";
 import ChromeDevTools from "~/assets/logos/chrome-dev-tools.svg";
 import Cpp from "~/assets/logos/cpp.png";
@@ -50,6 +48,7 @@ import TypeScript from "~/assets/logos/typescript.svg";
 import VSCode from "~/assets/logos/vscode.png";
 import WebAssembly from "~/assets/logos/web-assembly.svg";
 import Zig from "~/assets/logos/zig.svg";
+import Img from "~/components/Img.astro";
 
 interface Props {
 	tag: string;
@@ -120,9 +119,7 @@ const logo = logos[tag];
 	{Icon ? (
 		<Icon aria-hidden="true" class="tag-icon light-icon" fill="currentColor" />
 	) : (
-		logo && (
-			<Image alt={`${tag} logo`} class="tag-icon" height={24} src={logo} />
-		)
+		logo && <Img alt={`${tag} logo`} class="tag-icon" height={24} src={logo} />
 	)}
 	{tag}
 </div>

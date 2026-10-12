@@ -1,0 +1,85 @@
+---
+interface Props {
+	class?: string;
+	count?: number;
+}
+
+const { class: className, count = 24 } = Astro.props;
+
+const bubbles = Array.from({ length: count }, (_, index) => {
+	const seed = Math.sin(index * 9301 + 49297) * 233280;
+	const random = seed - Math.floor(seed);
+	const duration = 14 + random * 14;
+	return {
+		delay: ((index * 0.37) % 1) * duration,
+		duration,
+		left: (index * 37 + random * 23) % 100,
+		size: 0.25 + random * 0.6,
+		sway: (random - 0.5) * 3,
+	};
+});
+---
+
+<div aria-hidden="true" class:list={["cfp-bubbles", className]}>
+	{bubbles.map(({ delay, duration, left, size, sway }) => (
+		<span
+			class="cfp-bubble"
+			style={`--delay: -${delay}s; --duration: ${duration}s; --left: ${left}%; --size: ${size}rem; --sway: ${sway}rem`}
+		/>
+	))}
+</div>
+
+<style>
+	.cfp-bubbles {
+		container-type: size;
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.cfp-bubble {
+		animation: cfp-bubble-rise var(--duration) ease-in infinite;
+		animation-delay: var(--delay);
+		background: rgb(from var(--colorWhite) r g b / 18%);
+		border: 1px solid rgb(from var(--colorWhite) r g b / 45%);
+		border-radius: var(--radiusPill);
+		bottom: -1rem;
+		box-shadow: inset -0.08rem -0.08rem 0.2rem
+			rgb(from var(--colorWhite) r g b / 30%);
+		height: var(--size);
+		left: var(--left);
+		opacity: 0;
+		position: absolute;
+		width: var(--size);
+	}
+
+	html:not(.dark) .cfp-bubble {
+		background: rgb(from var(--colorBlue3) r g b / 12%);
+		border-color: rgb(from var(--colorBlue3) r g b / 40%);
+	}
+
+	@keyframes cfp-bubble-rise {
+		0% {
+			opacity: 0;
+			transform: translate3d(0, 0, 0) scale(0.6);
+		}
+
+		15% {
+			opacity: 0.8;
+		}
+
+		50% {
+			transform: translate3d(var(--sway), -50cqh, 0) scale(0.9);
+		}
+
+		90% {
+			opacity: 0.6;
+		}
+
+		100% {
+			opacity: 0;
+			transform: translate3d(0, -110cqh, 0) scale(1.15);
+		}
+	}
+</style>

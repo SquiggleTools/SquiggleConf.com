@@ -1,12 +1,14 @@
 ---
-import { Image, type LocalImageProps } from "astro:assets";
+import type { LocalImageProps } from "astro:assets";
+
+import Img from "./Img.astro";
 
 type Props = Omit<LocalImageProps, "alt">;
 
 const { class: className, ...rest } = Astro.props as LocalImageProps;
 ---
 
-<Image class:list={[className, "decorative-image"]} {...rest} alt="" />
+<Img class:list={[className, "decorative-image"]} {...rest} alt="" />
 
 <style>
 	.decorative-image {

@@ -5,7 +5,7 @@
 <p align="center">
 	<!-- prettier-ignore-start -->
 	<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-	<a href="#contributors" target="_blank"><img alt="👪 All Contributors: 10" src="https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-10-21bb42.svg" /></a>
+	<a href="#contributors" target="_blank"><img alt="👪 All Contributors: 11" src="https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-11-21bb42.svg" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 	<!-- prettier-ignore-end -->
 	<a href="https://github.com/SquiggleTools/SquiggleConf.com/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank"><img alt="🤝 Code of Conduct: Kept" src="https://img.shields.io/badge/%F0%9F%A4%9D_code_of_conduct-kept-21bb42" /></a>
@@ -63,6 +63,7 @@ This setup keeps the same feel: you develop locally with Astro, then push to Git
 <!-- spellchecker: disable -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tbody>
     <tr>
@@ -78,10 +79,12 @@ This setup keeps the same feel: you develop locally with Astro, then push to Git
       <td align="center" valign="top" width="14.28%"><a href="http://ducktyped.dev"><img src="https://avatars.githubusercontent.com/u/1930213?v=4?s=100" width="100px;" alt="Ryan Waskiewicz"/><br /><sub><b>Ryan Waskiewicz</b></sub></a><br /><a href="https://github.com/SquiggleTools/SquiggleConf.com/commits?author=rwaskiewicz" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://varunshukla07.vercel.app/"><img src="https://avatars.githubusercontent.com/u/94779584?v=4?s=100" width="100px;" alt="Varun Shukla"/><br /><sub><b>Varun Shukla</b></sub></a><br /><a href="https://github.com/SquiggleTools/SquiggleConf.com/commits?author=varunshukla07" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Yonava"><img src="https://avatars.githubusercontent.com/u/76519301?v=4?s=100" width="100px;" alt="Yona Alexander Voss-Andreae"/><br /><sub><b>Yona Alexander Voss-Andreae</b></sub></a><br /><a href="https://github.com/SquiggleTools/SquiggleConf.com/commits?author=yonava" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://yufa-li.com/"><img src="https://avatars.githubusercontent.com/u/112290188?v=4?s=100" width="100px;" alt="Yufa "/><br /><sub><b>Yufa </b></sub></a><br /><a href="https://github.com/SquiggleTools/SquiggleConf.com/commits?author=01001101ck" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
 
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

@@ -1,8 +1,8 @@
 :root {
 	color-scheme: light;
 
-	--colorBlueBright1: #d8f3ff;
-	--colorBlueBright2: #e6f7fe;
+	--colorBlueBright1: light-dark(#d8f3ff, #051b32);
+	--colorBlueBright2: light-dark(#e6f7fe, var(--colorBlue5));
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
@@ -15,6 +15,7 @@
 	--colorWhiteIsh: #eaeaf7;
 	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
 	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorBlue4));
+	--colorBackground: light-dark(var(--colorWhite), #121212);
 	--colorCopy: light-dark(
 		rgb(from var(--colorBlue5) r g b / 84%),
 		rgb(from var(--colorWhiteIsh) r g b / 84%)
@@ -63,6 +64,7 @@
 }
 
 html {
+	background-color: var(--colorBackground);
 	min-height: 100%;
 	font-family: var(--fontFamilyBody);
 }
@@ -70,8 +72,6 @@ html {
 html.dark {
 	color-scheme: dark;
 
-	--colorBlueBright1: #051b32;
-	--colorBlueBright2: var(--colorBlue5);
 	--lineHeightBody: 1.5;
 }
 

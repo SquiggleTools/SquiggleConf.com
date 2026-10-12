@@ -17,7 +17,13 @@ const { class: className, links, name, photo, ...rest } = Astro.props;
 ---
 
 <li {...rest} class:list={["bio", className]}>
-	<Avatar alt="" class="bio-image" src={photo} />
+	<Avatar
+		alt=""
+		class="bio-image"
+		size={80}
+		src={photo}
+		widths={[80, 160, 240]}
+	/>
 	<div class="bio-name">{name}</div>
 	<BioLinks links={links} name={name} />
 </li>

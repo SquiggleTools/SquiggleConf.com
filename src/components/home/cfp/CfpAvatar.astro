@@ -1,0 +1,52 @@
+---
+import type { PersonCardData } from "~/components/home/types";
+
+import Img from "~/components/Img.astro";
+
+import PlaceholderMark from "../PlaceholderMark.astro";
+
+interface Props {
+	class?: string;
+	person: PersonCardData;
+}
+
+const { class: className, person } = Astro.props;
+---
+
+<div class:list={["cfp-avatar", className]}>
+	<Img
+		alt={person.placeholder ? "" : person.name}
+		class:list={[person.placeholder && "cfp-avatar-placeholder"]}
+		src={person.image}
+		width={240}
+	/>
+	{person.placeholder && <PlaceholderMark />}
+</div>
+
+<style>
+	.cfp-avatar {
+		aspect-ratio: 1;
+		background: var(--colorBlue5);
+		border: var(
+			--cfp-avatar-border,
+			var(--sizeImageBorder) solid var(--colorImageBorder)
+		);
+		border-radius: var(--radiusPill);
+		box-shadow: 0 0.4rem 1rem rgb(from var(--colorBlue5) r g b / 30%);
+		box-sizing: border-box;
+		overflow: hidden;
+		position: relative;
+		width: var(--cfp-avatar-size, 5rem);
+	}
+
+	img {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.cfp-avatar-placeholder {
+		filter: blur(2px);
+	}
+</style>

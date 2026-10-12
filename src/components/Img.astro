@@ -1,0 +1,30 @@
+---
+import type { ImageMetadata } from "astro";
+
+import { Image, type LocalImageProps } from "astro:assets";
+
+type Props = LocalImageProps;
+
+const imageOnlyProps = new Set([
+	"densities",
+	"fit",
+	"format",
+	"layout",
+	"position",
+	"quality",
+	"src",
+	"widths",
+]);
+
+const { alt } = Astro.props;
+const src = Astro.props.src as ImageMetadata;
+const svgProps = Object.fromEntries(
+	Object.entries(Astro.props).filter(([key]) => !imageOnlyProps.has(key)),
+);
+---
+
+{src.format === "svg" ? (
+	<img {...svgProps} alt={alt} src={src.src} />
+) : (
+	<Image {...(Astro.props as LocalImageProps)} />
+)}
