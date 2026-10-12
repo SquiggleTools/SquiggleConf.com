@@ -8,6 +8,7 @@ interface Props {
 	class?: string;
 	size?: number;
 	src: ImageMetadata;
+	widths?: number[];
 }
 
 const { class: className, size, ...rest } = Astro.props;
