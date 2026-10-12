@@ -1,8 +1,8 @@
 :root {
 	color-scheme: light;
 
-	--colorBlueBright1: #d8f3ff;
-	--colorBlueBright2: #e6f7fe;
+	--colorBlueBright1: light-dark(#d8f3ff, #051b32);
+	--colorBlueBright2: light-dark(#e6f7fe, var(--colorBlue5));
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
@@ -70,8 +70,6 @@ html {
 html.dark {
 	color-scheme: dark;
 
-	--colorBlueBright1: #051b32;
-	--colorBlueBright2: var(--colorBlue5);
 	--lineHeightBody: 1.5;
 }
 
