@@ -394,15 +394,13 @@ const clouds = [
 		const span = Math.max(radius * 5, innerWidth * 0.4);
 		const steps = 24;
 
-		const rise = bezier(
-			[
-				[x - span, hidden],
-				[x - span, y],
-				[x - span / 2, y],
-				[x, y],
-			],
-			steps,
-		);
+		const rise = Array.from({ length: steps + 1 }, (_, index): Point => {
+			const angle = Math.PI * (1 - index / steps / 2);
+			return [
+				x + span * Math.cos(angle),
+				hidden - (hidden - y) * Math.sin(angle),
+			];
+		});
 		const set = rise
 			.map(([pointX, pointY]): Point => [2 * x - pointX, pointY])
 			.reverse();
@@ -442,23 +440,6 @@ const clouds = [
 			],
 			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
 		);
-	}
-
-	function bezier(points: Point[], steps: number) {
-		return Array.from({ length: steps + 1 }, (_, index) => {
-			let current = points;
-			const t = index / steps;
-			while (current.length > 1) {
-				current = current.slice(1).map((point, i): Point => {
-					const previous = current[i] ?? point;
-					return [
-						previous[0] + (point[0] - previous[0]) * t,
-						previous[1] + (point[1] - previous[1]) * t,
-					];
-				});
-			}
-			return current[0] ?? points[0] ?? [0, 0];
-		});
 	}
 
 	function toKeyframes(
