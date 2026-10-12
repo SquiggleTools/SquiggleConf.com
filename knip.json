@@ -1,6 +1,10 @@
 {
 	"$schema": "https://unpkg.com/knip@latest/schema.json",
-	"ignoreDependencies": ["sharp"],
+	"ignoreDependencies": [
+		"@fontsource-variable/inter",
+		"@fontsource-variable/josefin-sans",
+		"sharp"
+	],
 	"ignoreExportsUsedInFile": {
 		"interface": true,
 		"type": true
