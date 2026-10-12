@@ -30,7 +30,6 @@ const clouds = [
 			<path d="M10 30 H54 A8 8 0 0 0 54 14 A10 10 0 0 0 38 8 A12 12 0 0 0 16 12 A10 10 0 0 0 10 30 Z" />
 		</svg>
 	))}
-	<span class="hero-sky-orb"></span>
 	{birds.map(({ duration, left, size, top }, index) => (
 		<svg
 			class="hero-sky-birds"
@@ -49,6 +48,14 @@ const clouds = [
 		</svg>
 	))}
 </div>
+<button
+	aria-label="Toggle light and dark mode"
+	class="hero-sky-orb"
+	style={`--orb-center: ${orbCenter}`}
+	type="button"
+>
+	<span aria-hidden="true" class="hero-sky-orb-body"></span>
+</button>
 
 <style>
 	.hero-sky {
@@ -210,6 +217,28 @@ const clouds = [
 	}
 
 	.hero-sky-orb {
+		background: none;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		display: none;
+		height: 4rem;
+		left: var(--orb-center);
+		padding: 0;
+		position: absolute;
+		top: 6.5rem;
+		translate: -50% 0;
+		view-transition-name: hero-orb;
+		width: 4rem;
+		z-index: 2;
+	}
+
+	.hero-sky-orb:focus-visible {
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: 0.5rem;
+	}
+
+	.hero-sky-orb-body {
 		--hero-orb-crescent: light-dark(transparent, var(--colorWhiteIsh));
 		--hero-orb-glow: light-dark(
 			rgb(from var(--colorTerminalOrange) r g b / 55%),
@@ -223,15 +252,16 @@ const clouds = [
 		);
 		border-radius: 50%;
 		box-shadow: inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
-		display: none;
+		display: block;
 		filter: drop-shadow(0 0 0.75rem var(--hero-orb-glow));
-		height: 4rem;
-		left: var(--orb-center);
-		position: absolute;
+		height: 100%;
 		rotate: -20deg;
-		top: 6.5rem;
-		translate: -50% 0;
-		width: 4rem;
+		transition: scale var(--transitionNormal) var(--transitionEaseOut);
+		width: 100%;
+	}
+
+	.hero-sky-orb:hover .hero-sky-orb-body {
+		scale: 1.08;
 	}
 
 	@keyframes hero-sky-orb-glow {
@@ -301,9 +331,99 @@ const clouds = [
 	}
 </style>
 
+<style is:global>
+	html.hero-orb-travel::view-transition-old(root),
+	html.hero-orb-travel::view-transition-new(root),
+	html.hero-orb-travel::view-transition-group(hero-orb) {
+		animation-duration: 2s;
+	}
+
+	html.hero-orb-travel::view-transition-old(hero-orb),
+	html.hero-orb-travel::view-transition-new(hero-orb) {
+		transform-origin: var(--hero-orb-pivot-x) var(--hero-orb-pivot-y);
+	}
+
+	html.hero-orb-travel::view-transition-old(hero-orb) {
+		animation: hero-orb-set 2s ease-in both;
+	}
+
+	html.hero-orb-travel::view-transition-new(hero-orb) {
+		animation: hero-orb-rise 2s ease-out both;
+	}
+
+	@keyframes hero-orb-set {
+		0% {
+			opacity: 1;
+			transform: rotate(0deg);
+		}
+
+		50%,
+		100% {
+			opacity: 0;
+			transform: rotate(40deg);
+		}
+	}
+
+	@keyframes hero-orb-rise {
+		0%,
+		50% {
+			opacity: 0;
+			transform: rotate(-50deg);
+		}
+
+		100% {
+			opacity: 1;
+			transform: rotate(0deg);
+		}
+	}
+</style>
+
 <script>
+	import { reducedMotionQuery } from "~/utils/motion";
+	import { getOppositeTheme, getTheme, setTheme } from "~/utils/theme";
+
 	const sky = document.querySelector<HTMLElement>(".hero-sky");
-	const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+	const orb = document.querySelector<HTMLButtonElement>(".hero-sky-orb");
+	let traveling = false;
+
+	function switchTheme() {
+		setTheme(getOppositeTheme());
+	}
+
+	orb?.addEventListener("click", () => {
+		const hero = orb.closest(".hero");
+
+		if (traveling) {
+			return;
+		}
+
+		if (reducedMotionQuery.matches || !document.startViewTransition || !hero) {
+			switchTheme();
+			return;
+		}
+
+		const html = document.documentElement;
+		const heroBox = hero.getBoundingClientRect();
+		const orbBox = orb.getBoundingClientRect();
+
+		html.style.setProperty(
+			"--hero-orb-pivot-x",
+			`${heroBox.left + heroBox.width / 2 - orbBox.left}px`,
+		);
+		html.style.setProperty(
+			"--hero-orb-pivot-y",
+			`${heroBox.bottom - orbBox.top}px`,
+		);
+		html.classList.add("hero-orb-travel");
+		traveling = true;
+
+		document.startViewTransition(switchTheme).finished.finally(() => {
+			html.classList.remove("hero-orb-travel");
+			html.style.removeProperty("--hero-orb-pivot-x");
+			html.style.removeProperty("--hero-orb-pivot-y");
+			traveling = false;
+		});
+	});
 
 	function launchShootingStar(container: HTMLElement) {
 		const star = document.createElement("span");
@@ -337,9 +457,9 @@ const clouds = [
 		setTimeout(
 			() => {
 				if (
-					!reducedMotion.matches &&
+					!reducedMotionQuery.matches &&
 					!document.hidden &&
-					document.documentElement.classList.contains("dark")
+					getTheme() === "dark"
 				) {
 					launchShootingStar(container);
 				}
