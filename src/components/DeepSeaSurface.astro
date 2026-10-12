@@ -6,7 +6,10 @@
 	.deep-sea-surface {
 		background: linear-gradient(
 				to bottom,
-				light-dark(var(--colorWhite), var(--colorSea)),
+				light-dark(
+					color-mix(in srgb, var(--colorBlue3) 20%, var(--colorBlueBright1)),
+					var(--colorSea)
+				),
 				light-dark(
 					var(--colorBlueBright2),
 					color-mix(in srgb, var(--colorSea), var(--colorBlue4))

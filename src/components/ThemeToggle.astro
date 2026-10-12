@@ -46,24 +46,29 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 
 <script>
 	import { reducedMotionQuery } from "~/utils/motion";
-
-	const html = document.documentElement;
+	import {
+		getOppositeTheme,
+		getTheme,
+		setTheme,
+		themeChangeEvent,
+	} from "~/utils/theme";
 
 	for (const toggle of document.querySelectorAll(".theme-toggle")) {
 		const updateLabel = () => {
-			const theme = html.classList.contains("dark") ? "dark" : "light";
-			toggle.setAttribute("aria-label", `Theme toggle (current: ${theme})`);
-		};
-
-		const toggleTheme = () => {
-			const dark = html.classList.toggle("dark");
-			localStorage.setItem("theme", dark ? "dark" : "light");
-			updateLabel();
+			toggle.setAttribute(
+				"aria-label",
+				`Theme toggle (current: ${getTheme()})`,
+			);
 		};
 
 		updateLabel();
+		document.addEventListener(themeChangeEvent, updateLabel);
 
 		toggle.addEventListener("click", () => {
+			const toggleTheme = () => {
+				setTheme(getOppositeTheme());
+			};
+
 			if (reducedMotionQuery.matches || !document.startViewTransition) {
 				toggleTheme();
 			} else {

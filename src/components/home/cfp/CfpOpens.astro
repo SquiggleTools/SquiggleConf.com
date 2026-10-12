@@ -18,7 +18,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	<CfpBubbles class="cfp-opens-bubbles" count={18} />
 	<div class="cfp-opens-inner">
 		<div class="cfp-opens-headline">
-			<p class="cfp-opens-eyebrow">Call for proposals</p>
+			<p class="cfp-opens-eyebrow" id="call-for-proposals">
+				<a href="#call-for-proposals">Call for proposals</a>
+			</p>
 			<TimelineHeading
 				class="cfp-opens-heading"
 				id="cfp-opens-heading"
@@ -51,9 +53,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 		border-top: 1px solid var(--timeline-rail-border-color);
 		isolation: isolate;
-		margin: -1.15rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
-		overflow: hidden;
-		padding: clamp(3.5rem, 7vw, 5.5rem) 1rem;
+		margin: -2rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
+		overflow: clip;
+		padding: 6.5rem 1rem clamp(3.5rem, 7vw, 5.5rem);
 		position: relative;
 	}
 
@@ -68,7 +70,10 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
 		background: linear-gradient(
 			to bottom,
-			rgb(from var(--colorBlue2) r g b / 22%),
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 55%),
+				rgb(from var(--colorBlue2) r g b / 22%)
+			),
 			transparent 85%
 		);
 		filter: blur(10px);
@@ -84,7 +89,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--left: 12%;
 		--width: 4rem;
 
-		rotate: 18deg;
+		rotate: 64deg;
 	}
 
 	.cfp-opens-rays span:nth-child(2) {
@@ -92,7 +97,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--width: 2rem;
 
 		animation-delay: -3s;
-		rotate: 10deg;
+		rotate: 58deg;
 	}
 
 	.cfp-opens-rays span:nth-child(3) {
@@ -100,7 +105,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--width: 6rem;
 
 		animation-delay: -6s;
-		rotate: 0deg;
+		rotate: 48deg;
 	}
 
 	.cfp-opens-rays span:nth-child(4) {
@@ -108,7 +113,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--width: 2.5rem;
 
 		animation-delay: -2s;
-		rotate: -9deg;
+		rotate: 34deg;
 	}
 
 	.cfp-opens-rays span:nth-child(5) {
@@ -116,7 +121,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		--width: 4.5rem;
 
 		animation-delay: -8s;
-		rotate: -16deg;
+		rotate: 8deg;
 	}
 
 	@keyframes cfp-opens-sway {
@@ -131,8 +136,12 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 	}
 
-	.cfp-opens-bubbles {
-		opacity: 0.3;
+	.cfp-opens :global(.cfp-opens-bubbles) {
+		mask-image: linear-gradient(
+			to bottom,
+			transparent,
+			var(--colorBlue5) 200px
+		);
 	}
 
 	.cfp-opens-inner {
@@ -147,6 +156,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	.cfp-opens-headline {
 		display: grid;
 		gap: 0.25rem;
+		margin-bottom: calc(-0.5 * clamp(2.5rem, 5vw, 4rem));
 	}
 
 	.cfp-opens-eyebrow {
@@ -156,11 +166,21 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		font-weight: var(--fontWeightSemibold);
 		letter-spacing: 0.08em;
 		margin: 0;
+		scroll-margin-top: 2rem;
 		text-transform: uppercase;
 	}
 
+	.cfp-opens-eyebrow a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.cfp-opens-eyebrow a:is(:hover, :focus-visible) {
+		text-decoration: underline;
+	}
+
 	.cfp-opens-heading {
-		font-size: clamp(2.24rem, 5.6vw, 4.2rem);
+		font-size: clamp(2rem, 5vw, 3.75rem);
 		font-style: italic;
 		line-height: 1.05;
 		margin: 0;
@@ -168,7 +188,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 	.cfp-opens-date {
 		color: var(--colorAccentMedium);
-		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 22%);
+		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 15%);
 		white-space: nowrap;
 	}
 
