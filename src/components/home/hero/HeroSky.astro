@@ -331,13 +331,17 @@ const clouds = [
 </style>
 
 <style is:global>
+	html.hero-orb-travel {
+		--hero-orb-easing: cubic-bezier(0.37, 0, 0.63, 1);
+	}
+
 	html.hero-orb-travel .hero-sky-orb {
 		view-transition-name: hero-orb;
 		z-index: 0;
 	}
 
-	html.hero-orb-travel .top-main {
-		view-transition-name: hero-intro;
+	html.hero-orb-travel .hero-contents {
+		view-transition-name: hero-contents;
 	}
 
 	html.hero-orb-travel .hero-harbor-skyline {
@@ -349,8 +353,8 @@ const clouds = [
 	html.hero-orb-travel::view-transition-group(*),
 	html.hero-orb-travel::view-transition-old(*),
 	html.hero-orb-travel::view-transition-new(*) {
-		animation-duration: 1.5s;
-		animation-timing-function: linear;
+		animation-duration: 2.5s;
+		animation-timing-function: var(--hero-orb-easing);
 	}
 
 	html.hero-orb-travel::view-transition-group(hero-orb) {
@@ -377,7 +381,8 @@ const clouds = [
 		setTheme(getOppositeTheme());
 	}
 
-	const travelDuration = 1500;
+	const travelDuration = 2500;
+	const travelEasing = "cubic-bezier(0.37, 0, 0.63, 1)";
 
 	type Point = [number, number];
 
@@ -386,7 +391,7 @@ const clouds = [
 		const radius = orbBox.width / 2;
 		const [x, y]: Point = [orbBox.left + radius, orbBox.top + radius];
 		const hidden = horizon + radius * 1.5;
-		const span = Math.max(radius * 4, innerWidth * 0.3);
+		const span = Math.max(radius * 5, innerWidth * 0.4);
 		const steps = 24;
 
 		const rise = bezier(
@@ -403,7 +408,7 @@ const clouds = [
 			.reverse();
 		const options = {
 			duration: travelDuration,
-			easing: "linear",
+			easing: travelEasing,
 			fill: "both",
 		} as const;
 
@@ -418,6 +423,22 @@ const clouds = [
 			[
 				{ offset: 0, translate: `${-span}px ${hidden - y}px` },
 				...toKeyframes(rise, [x, y], 0.5, 1),
+			],
+			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
+		);
+		html.animate(
+			[
+				{ offset: 0, opacity: 1 },
+				{ offset: 0.5, opacity: 0 },
+				{ offset: 1, opacity: 0 },
+			],
+			{ ...options, pseudoElement: "::view-transition-old(hero-orb)" },
+		);
+		html.animate(
+			[
+				{ offset: 0, opacity: 0 },
+				{ offset: 0.5, opacity: 0 },
+				{ offset: 1, opacity: 1 },
 			],
 			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
 		);
