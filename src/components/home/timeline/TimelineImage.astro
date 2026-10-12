@@ -3,10 +3,18 @@ import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 
 import Img from "~/components/Img.astro";
+import { getCoverImageProps } from "~/utils/images";
 
 import PlaceholderMark from "../PlaceholderMark.astro";
 
-interface Props extends HTMLAttributes<"div"> {
+type Props = TimelineImageProps &
+	(
+		| { size: number; src: ImageMetadata }
+		/** Without a src, the frame wraps its slotted content instead. */
+		| { size?: undefined; src?: undefined }
+	);
+
+interface TimelineImageProps extends HTMLAttributes<"div"> {
 	alt?: string;
 	/** How the image responds while its timeline entry is active. */
 	effect?: "grow" | "zoom";
@@ -14,8 +22,7 @@ interface Props extends HTMLAttributes<"div"> {
 	objectPosition?: string;
 	placeholder?: boolean;
 	radius?: string;
-	/** Without a src, the frame wraps its slotted content instead. */
-	src?: ImageMetadata;
+	scale?: number;
 	zoomOrigin?: string;
 }
 
@@ -27,6 +34,8 @@ const {
 	objectPosition,
 	placeholder,
 	radius,
+	scale = 1,
+	size,
 	src,
 	zoomOrigin,
 	...rest
@@ -38,6 +47,8 @@ const imageStyle = [
 ]
 	.filter(Boolean)
 	.join("; ");
+
+const effectScale = { grow: 1.25, zoom: 1.1 } as const;
 ---
 
 <div
@@ -57,6 +68,11 @@ const imageStyle = [
 			loading={loading}
 			src={src}
 			style={imageStyle || undefined}
+			{...getCoverImageProps(
+				src,
+				size,
+				scale * (effect ? effectScale[effect] : 1),
+			)}
 		/>
 	) : (
 		<slot />
