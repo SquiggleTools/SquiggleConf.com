@@ -2,6 +2,13 @@
 import cityscape from "~/assets/design/cityscape.svg";
 ---
 
+<link
+	as="image"
+	fetchpriority="high"
+	href={cityscape.src}
+	media="(width >= 819px)"
+	rel="preload"
+/>
 <div
 	class="hero-cityscape"
 	style={{ backgroundImage: `url(${cityscape.src})` }}
