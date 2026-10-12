@@ -228,7 +228,6 @@ const clouds = [
 		position: absolute;
 		top: 6.5rem;
 		translate: -50% 0;
-		view-transition-name: hero-orb;
 		width: 4rem;
 		z-index: 2;
 	}
@@ -332,49 +331,37 @@ const clouds = [
 </style>
 
 <style is:global>
-	html.hero-orb-travel::view-transition-old(root),
-	html.hero-orb-travel::view-transition-new(root),
+	html.hero-orb-travel .hero-sky-orb {
+		view-transition-name: hero-orb;
+		z-index: 0;
+	}
+
+	html.hero-orb-travel .hero-contents {
+		view-transition-name: hero-contents;
+	}
+
+	html.hero-orb-travel .hero-harbor-skyline {
+		position: relative;
+		view-transition-name: hero-skyline;
+		z-index: 3;
+	}
+
+	html.hero-orb-travel::view-transition-group(*),
+	html.hero-orb-travel::view-transition-old(*),
+	html.hero-orb-travel::view-transition-new(*) {
+		animation-duration: 1.5s;
+		animation-timing-function: linear;
+	}
+
 	html.hero-orb-travel::view-transition-group(hero-orb) {
-		animation-duration: 2s;
+		animation: none;
+		clip-path: inset(-9999px -9999px var(--hero-orb-horizon) -9999px);
 	}
 
 	html.hero-orb-travel::view-transition-old(hero-orb),
 	html.hero-orb-travel::view-transition-new(hero-orb) {
-		transform-origin: var(--hero-orb-pivot-x) var(--hero-orb-pivot-y);
-	}
-
-	html.hero-orb-travel::view-transition-old(hero-orb) {
-		animation: hero-orb-set 2s ease-in both;
-	}
-
-	html.hero-orb-travel::view-transition-new(hero-orb) {
-		animation: hero-orb-rise 2s ease-out both;
-	}
-
-	@keyframes hero-orb-set {
-		0% {
-			opacity: 1;
-			transform: rotate(0deg);
-		}
-
-		50%,
-		100% {
-			opacity: 0;
-			transform: rotate(40deg);
-		}
-	}
-
-	@keyframes hero-orb-rise {
-		0%,
-		50% {
-			opacity: 0;
-			transform: rotate(-50deg);
-		}
-
-		100% {
-			opacity: 1;
-			transform: rotate(0deg);
-		}
+		animation: none;
+		mix-blend-mode: normal;
 	}
 </style>
 
@@ -390,6 +377,91 @@ const clouds = [
 		setTheme(getOppositeTheme());
 	}
 
+	const travelDuration = 1500;
+
+	type Point = [number, number];
+
+	function animateTravel(orbBox: DOMRect, horizon: number) {
+		const html = document.documentElement;
+		const radius = orbBox.width / 2;
+		const origin: Point = [orbBox.left + radius, orbBox.top + radius];
+		const hidden = horizon + radius * 1.5;
+		const top = Math.max(radius * 1.5, origin[1] - radius * 2);
+		const left = Math.max(radius * 3, innerWidth * 0.12);
+		const right = Math.min(innerWidth - radius, origin[0] + radius * 2);
+
+		const set = bezier([origin, [right, origin[1]], [right, hidden]], 12);
+		const rise = bezier(
+			[[left, hidden], [left, top], [origin[0] - radius * 6, top], origin],
+			36,
+		);
+		const split = pathLength(set) / (pathLength(set) + pathLength(rise));
+		const options = {
+			duration: travelDuration,
+			easing: "linear",
+			fill: "both",
+		} as const;
+
+		html.animate(
+			[
+				...toKeyframes(set, origin, 0, split),
+				{
+					offset: 1,
+					translate: `${right - origin[0]}px ${hidden - origin[1]}px`,
+				},
+			],
+			{ ...options, pseudoElement: "::view-transition-old(hero-orb)" },
+		);
+		html.animate(
+			[
+				{
+					offset: 0,
+					translate: `${left - origin[0]}px ${hidden - origin[1]}px`,
+				},
+				...toKeyframes(rise, origin, split, 1),
+			],
+			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
+		);
+	}
+
+	function bezier(points: Point[], steps: number) {
+		return Array.from({ length: steps + 1 }, (_, index) => {
+			let current = points;
+			const t = index / steps;
+			while (current.length > 1) {
+				current = current.slice(1).map((point, i): Point => {
+					const previous = current[i] ?? point;
+					return [
+						previous[0] + (point[0] - previous[0]) * t,
+						previous[1] + (point[1] - previous[1]) * t,
+					];
+				});
+			}
+			return current[0] ?? points[0] ?? [0, 0];
+		});
+	}
+
+	function pathLength(points: Point[]) {
+		return points.reduce((total, point, index) => {
+			const previous = points[index - 1];
+			return previous
+				? total + Math.hypot(point[0] - previous[0], point[1] - previous[1])
+				: total;
+		}, 0);
+	}
+
+	function toKeyframes(
+		points: Point[],
+		origin: Point,
+		from: number,
+		to: number,
+	): Keyframe[] {
+		return points.map(([x, y], index) => ({
+			offset: from + ((to - from) * index) / (points.length - 1),
+			translate: `${x - origin[0]}px ${y - origin[1]}px`,
+		}));
+	}
+
 	orb?.addEventListener("click", () => {
 		const hero = orb.closest(".hero");
 
@@ -403,24 +475,29 @@ const clouds = [
 		}
 
 		const html = document.documentElement;
-		const heroBox = hero.getBoundingClientRect();
 		const orbBox = orb.getBoundingClientRect();
+		const horizon =
+			hero.querySelector(".hero-harbor-water")?.getBoundingClientRect().top ??
+			hero.getBoundingClientRect().bottom;
 
 		html.style.setProperty(
-			"--hero-orb-pivot-x",
-			`${heroBox.left + heroBox.width / 2 - orbBox.left}px`,
-		);
-		html.style.setProperty(
-			"--hero-orb-pivot-y",
-			`${heroBox.bottom - orbBox.top}px`,
+			"--hero-orb-horizon",
+			`${orbBox.bottom - horizon}px`,
 		);
 		html.classList.add("hero-orb-travel");
 		traveling = true;
 
-		document.startViewTransition(switchTheme).finished.finally(() => {
+		const transition = document.startViewTransition(switchTheme);
+
+		transition.ready
+			.then(() => {
+				animateTravel(orbBox, horizon);
+			})
+			.catch(() => undefined);
+
+		transition.finished.finally(() => {
 			html.classList.remove("hero-orb-travel");
-			html.style.removeProperty("--hero-orb-pivot-x");
-			html.style.removeProperty("--hero-orb-pivot-y");
+			html.style.removeProperty("--hero-orb-horizon");
 			traveling = false;
 		});
 	});

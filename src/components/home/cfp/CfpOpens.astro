@@ -68,7 +68,10 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
 		background: linear-gradient(
 			to bottom,
-			rgb(from var(--colorBlue2) r g b / 22%),
+			light-dark(
+				rgb(from var(--colorWhite) r g b / 55%),
+				rgb(from var(--colorBlue2) r g b / 22%)
+			),
 			transparent 85%
 		);
 		filter: blur(10px);
