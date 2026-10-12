@@ -65,7 +65,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	</div>
 	<div
 		class="hero-harbor-art hero-harbor-waves"
-		style={`background-image: url(${cityscapeWaves.src})`}
+		style={`--hero-harbor-waves: url(${cityscapeWaves.src})`}
 	></div>
 </div>
 
@@ -259,8 +259,9 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	.hero-harbor-waves {
-		background-position: center top;
-		background-size: auto calc(var(--hero-harbor-art-height) * 40 / 536);
+		background: light-dark(var(--colorWhite), var(--colorWhiteIsh));
+		mask: var(--hero-harbor-waves) center top / auto
+			calc(var(--hero-harbor-art-height) * 40 / 536) repeat-x;
 		height: calc(var(--hero-harbor-art-height) * 40 / 536);
 		margin-top: calc(var(--hero-harbor-art-height) * -14 / 536);
 		position: relative;
