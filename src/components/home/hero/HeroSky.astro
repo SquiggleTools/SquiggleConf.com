@@ -336,8 +336,8 @@ const clouds = [
 		z-index: 0;
 	}
 
-	html.hero-orb-travel .hero-contents {
-		view-transition-name: hero-contents;
+	html.hero-orb-travel .top-main {
+		view-transition-name: hero-intro;
 	}
 
 	html.hero-orb-travel .hero-harbor-skyline {
@@ -384,18 +384,23 @@ const clouds = [
 	function animateTravel(orbBox: DOMRect, horizon: number) {
 		const html = document.documentElement;
 		const radius = orbBox.width / 2;
-		const origin: Point = [orbBox.left + radius, orbBox.top + radius];
+		const [x, y]: Point = [orbBox.left + radius, orbBox.top + radius];
 		const hidden = horizon + radius * 1.5;
-		const top = Math.max(radius * 1.5, origin[1] - radius * 2);
-		const left = Math.max(radius * 3, innerWidth * 0.12);
-		const right = Math.min(innerWidth - radius, origin[0] + radius * 2);
+		const span = Math.max(radius * 4, innerWidth * 0.3);
+		const steps = 24;
 
-		const set = bezier([origin, [right, origin[1]], [right, hidden]], 12);
 		const rise = bezier(
-			[[left, hidden], [left, top], [origin[0] - radius * 6, top], origin],
-			36,
+			[
+				[x - span, hidden],
+				[x - span, y],
+				[x - span / 2, y],
+				[x, y],
+			],
+			steps,
 		);
-		const split = pathLength(set) / (pathLength(set) + pathLength(rise));
+		const set = rise
+			.map(([pointX, pointY]): Point => [2 * x - pointX, pointY])
+			.reverse();
 		const options = {
 			duration: travelDuration,
 			easing: "linear",
@@ -404,21 +409,15 @@ const clouds = [
 
 		html.animate(
 			[
-				...toKeyframes(set, origin, 0, split),
-				{
-					offset: 1,
-					translate: `${right - origin[0]}px ${hidden - origin[1]}px`,
-				},
+				...toKeyframes(set, [x, y], 0, 0.5),
+				{ offset: 1, translate: `${span}px ${hidden - y}px` },
 			],
 			{ ...options, pseudoElement: "::view-transition-old(hero-orb)" },
 		);
 		html.animate(
 			[
-				{
-					offset: 0,
-					translate: `${left - origin[0]}px ${hidden - origin[1]}px`,
-				},
-				...toKeyframes(rise, origin, split, 1),
+				{ offset: 0, translate: `${-span}px ${hidden - y}px` },
+				...toKeyframes(rise, [x, y], 0.5, 1),
 			],
 			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
 		);
@@ -439,15 +438,6 @@ const clouds = [
 			}
 			return current[0] ?? points[0] ?? [0, 0];
 		});
-	}
-
-	function pathLength(points: Point[]) {
-		return points.reduce((total, point, index) => {
-			const previous = points[index - 1];
-			return previous
-				? total + Math.hypot(point[0] - previous[0], point[1] - previous[1])
-				: total;
-		}, 0);
 	}
 
 	function toKeyframes(

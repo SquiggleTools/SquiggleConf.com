@@ -18,7 +18,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	<CfpBubbles class="cfp-opens-bubbles" count={18} />
 	<div class="cfp-opens-inner">
 		<div class="cfp-opens-headline">
-			<p class="cfp-opens-eyebrow">Call for proposals</p>
+			<p class="cfp-opens-eyebrow" id="call-for-proposals">
+				<a href="#call-for-proposals">Call for proposals</a>
+			</p>
 			<TimelineHeading
 				class="cfp-opens-heading"
 				id="cfp-opens-heading"
@@ -164,7 +166,17 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		font-weight: var(--fontWeightSemibold);
 		letter-spacing: 0.08em;
 		margin: 0;
+		scroll-margin-top: 2rem;
 		text-transform: uppercase;
+	}
+
+	.cfp-opens-eyebrow a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.cfp-opens-eyebrow a:is(:hover, :focus-visible) {
+		text-decoration: underline;
 	}
 
 	.cfp-opens-heading {
