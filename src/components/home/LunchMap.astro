@@ -1,0 +1,176 @@
+---
+import { venues } from "./data";
+
+const origin = venues.aquarium.name;
+const destination = venues.quincyMarket.name;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(`${origin}, Boston, MA`)}&destination=${encodeURIComponent(`${destination}, Boston, MA`)}&travelmode=walking`;
+---
+
+<a
+	aria-label={`Walking directions from the ${origin} to ${destination}, about 6 minutes away`}
+	class="lunch-map"
+	href={directionsUrl}
+	rel="noreferrer"
+	target="_blank"
+>
+	<svg aria-hidden="true" viewBox="0 0 480 200">
+		<path
+			class="lunch-map-water"
+			d="M392 0 C 380 40, 404 70, 388 100 C 374 130, 400 160, 386 200 L 480 200 L 480 0 Z"
+		></path>
+		<rect
+			class="lunch-map-pier"
+			height="26"
+			rx="4"
+			width="96"
+			x="384"
+			y="122"
+		></rect>
+		<rect class="lunch-map-road" height="200" width="14" x="356" y="0"></rect>
+		<rect
+			class="lunch-map-park"
+			height="200"
+			rx="6"
+			width="34"
+			x="314"
+			y="0"
+		></rect>
+		<rect
+			class="lunch-map-building"
+			height="26"
+			rx="5"
+			width="168"
+			x="112"
+			y="50"
+		></rect>
+		<circle class="lunch-map-building" cx="196" cy="63" r="14"></circle>
+		<rect
+			class="lunch-map-building"
+			height="26"
+			rx="4"
+			width="44"
+			x="44"
+			y="50"
+		></rect>
+		<path
+			class="lunch-map-route"
+			d="M440 135 C 400 135, 372 134, 340 120 C 316 108, 300 80, 284 68"
+		></path>
+		<circle class="lunch-map-pin" cx="440" cy="135" r="9"></circle>
+		<circle class="lunch-map-pin" cx="282" cy="66" r="9"></circle>
+		<text class="lunch-map-label" text-anchor="middle" x="196" y="108">
+			Quincy Market
+		</text>
+		<text class="lunch-map-label" text-anchor="end" x="472" y="180">
+			Aquarium
+		</text>
+		<text class="lunch-map-walk" text-anchor="middle" x="250" y="152">
+			~6 min walk
+		</text>
+		<text class="lunch-map-note" text-anchor="middle" x="66" y="38">
+			Faneuil Hall
+		</text>
+		<text class="lunch-map-note" x="402" y="32">
+			Harbor
+		</text>
+		<text class="lunch-map-note" transform="rotate(-90 336 96)" x="336" y="96">
+			Greenway
+		</text>
+	</svg>
+</a>
+
+<style>
+	.lunch-map {
+		backdrop-filter: var(--backdropFrosted);
+		background: var(--timeline-rail-background);
+		border: 1px solid var(--timeline-rail-border-color);
+		border-radius: var(--radiusLarge);
+		display: block;
+		margin-top: 0.85rem;
+		max-width: 30rem;
+		overflow: hidden;
+		transition: border-color var(--transitionNormal);
+	}
+
+	.lunch-map:hover,
+	.lunch-map:focus-visible {
+		border-color: var(--colorAccentMedium);
+	}
+
+	svg {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.lunch-map-water {
+		fill: rgb(from var(--colorBlue2) r g b / 22%);
+	}
+
+	.lunch-map-pier {
+		fill: light-dark(
+			rgb(from var(--colorBlue4) r g b / 18%),
+			rgb(from var(--colorWhiteIsh) r g b / 20%)
+		);
+	}
+
+	.lunch-map-road {
+		fill: light-dark(
+			rgb(from var(--colorBlue4) r g b / 10%),
+			rgb(from var(--colorWhiteIsh) r g b / 10%)
+		);
+	}
+
+	.lunch-map-park {
+		fill: rgb(from var(--colorBlue2) r g b / 14%);
+	}
+
+	.lunch-map-building {
+		fill: light-dark(
+			rgb(from var(--colorBlue4) r g b / 22%),
+			rgb(from var(--colorBlue1) r g b / 26%)
+		);
+	}
+
+	.lunch-map-route {
+		animation: lunch-map-march 1.2s linear infinite;
+		fill: none;
+		stroke: var(--colorAccentMedium);
+		stroke-dasharray: 2 9;
+		stroke-linecap: round;
+		stroke-width: 4;
+	}
+
+	.lunch-map-pin {
+		fill: var(--colorAccentMedium);
+		stroke: var(--colorBlueBright1);
+		stroke-width: 3;
+	}
+
+	.lunch-map-label,
+	.lunch-map-walk {
+		fill: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 22px;
+		font-weight: var(--fontWeightBold);
+	}
+
+	.lunch-map-walk {
+		fill: var(--colorAccentMedium);
+		font-style: italic;
+	}
+
+	.lunch-map-note {
+		fill: var(--colorMuted);
+		font-family: var(--fontFamilyHeading);
+		font-size: 17px;
+		font-style: italic;
+		letter-spacing: 0.08em;
+	}
+
+	@keyframes lunch-map-march {
+		to {
+			stroke-dashoffset: 11;
+		}
+	}
+</style>

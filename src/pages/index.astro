@@ -37,6 +37,7 @@ import {
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
+import LunchMap from "~/components/home/LunchMap.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
@@ -294,6 +295,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					time="12pm"
 					venue="quincyMarket"
 				>
+					<LunchMap />
 					<TimelineMedia mediaWidth="10rem">
 						<LunchCarousel spots={lunchSpots} />
 						<TimelineCopy class="lunch-copy">
