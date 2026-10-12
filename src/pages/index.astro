@@ -586,7 +586,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		flex-wrap: wrap;
 		gap: 0.75rem;
 		justify-content: center;
-		margin-top: 1.25rem;
+		margin: 1.25rem 0 2rem;
 	}
 
 	.top :global(.postcard-gallery) {
@@ -596,8 +596,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top :global(.postcard-flip) {
-		margin: 1rem 0 0;
+		margin: 0;
 		padding-bottom: 1.6rem;
+	}
+
+	@media (--widthSmall) {
+		.top-actions {
+			margin-bottom: 2.75rem;
+		}
 	}
 
 	@media (--widthLarge) {
@@ -623,6 +629,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 		.top-actions {
 			justify-content: flex-start;
+			margin-bottom: 0;
 		}
 
 		.top :global(.postcard-gallery) {
