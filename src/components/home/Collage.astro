@@ -24,6 +24,16 @@ const {
 	shape = "photo",
 	...rest
 } = Astro.props;
+
+const itemSizes = {
+	"avatar-duo": [128, 88],
+	"avatar-pair": [112, 112],
+	"avatar-trio": [128, 80, 80],
+	duo: [138, 143],
+	"feature-five": [424, 202, 202, 214, 195],
+	trio: [161, 146, 157],
+	"trio-compact": [132, 123, 108],
+} satisfies Record<CollageLayout, number[]>;
 ---
 
 <div
@@ -43,6 +53,8 @@ const {
 				objectPosition={photo.objectPosition}
 				placeholder={photo.placeholder}
 				radius={shape === "avatar" ? "var(--radiusPill)" : undefined}
+				scale={layout === "duo" ? 1.18 : undefined}
+				size={itemSizes[layout][index]}
 				src={photo.src}
 			/>
 		</div>
