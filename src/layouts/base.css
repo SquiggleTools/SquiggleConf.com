@@ -1,34 +1,90 @@
+@property --themeDark {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
+@property --themeDarkFast {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
+@property --themeDarkStep {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
 :root {
 	color-scheme: light;
 
-	--colorBlueBright1: light-dark(#d8f3ff, #051b32);
-	--colorBlueBright2: light-dark(#e6f7fe, var(--colorBlue5));
+	--themeDarkness: calc(var(--themeDark) * 100%);
+	--colorBlueBright1: color-mix(in srgb, #d8f3ff, #051b32 var(--themeDarkness));
+	--colorBlueBright2: color-mix(
+		in srgb,
+		#e6f7fe,
+		var(--colorBlue5) var(--themeDarkness)
+	);
 	--colorBlue1: #bcdfe9;
 	--colorBlue2: #38ced6;
 	--colorBlue3: #116d9a;
 	--colorBlue4: #063052;
 	--colorBlue5: #041930;
 	--colorCream: #f6f3e8;
+	--colorLagoon: #9fe7ff;
 	--colorSea: #004077;
 	--colorTerminalOrange: #ff5e00;
+	--colorSunrise: #ffd98a;
+	--colorViolet: #cd62ff;
 	--colorWhite: white;
 	--colorWhiteIsh: #eaeaf7;
-	--colorAccentMedium: light-dark(var(--colorBlue3), var(--colorBlue2));
-	--colorBackdropOff: light-dark(var(--colorWhiteIsh), var(--colorBlue4));
-	--colorBackground: light-dark(var(--colorWhite), #121212);
-	--colorCopy: light-dark(
+	--colorAccentMedium: color-mix(
+		in srgb,
+		var(--colorBlue3),
+		var(--colorBlue2) var(--themeDarkness)
+	);
+	--colorBackdropOff: color-mix(
+		in srgb,
+		var(--colorWhiteIsh),
+		var(--colorBlue4) var(--themeDarkness)
+	);
+	--colorBackground: color-mix(
+		in srgb,
+		var(--colorWhite),
+		#121212 var(--themeDarkness)
+	);
+	--colorCopy: color-mix(
+		in srgb,
 		rgb(from var(--colorBlue5) r g b / 84%),
-		rgb(from var(--colorWhiteIsh) r g b / 84%)
+		rgb(from var(--colorWhiteIsh) r g b / 84%) var(--themeDarkness)
 	);
-	--colorForegroundEmphasized: light-dark(var(--colorBlue5), var(--colorBlue1));
-	--colorHeading: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
+	--colorForegroundEmphasized: color-mix(
+		in srgb,
+		var(--colorBlue5),
+		var(--colorBlue1) var(--themeDarkness)
+	);
+	--colorHeading: color-mix(
+		in srgb,
+		var(--colorBlue5),
+		var(--colorWhiteIsh) var(--themeDarkness)
+	);
 	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
-	--colorLink: light-dark(var(--colorBlue4), var(--colorWhite));
-	--colorMuted: light-dark(
-		rgb(from var(--colorBlue4) r g b / 76%),
-		rgb(from var(--colorBlue1) r g b / 82%)
+	--colorLink: color-mix(
+		in srgb,
+		var(--colorBlue4),
+		var(--colorWhite) var(--themeDarkness)
 	);
-	--colorTextShadow: light-dark(rgb(70 96 140 / 35%), rgb(0 0 7 / 25%));
+	--colorMuted: color-mix(
+		in srgb,
+		rgb(from var(--colorBlue4) r g b / 76%),
+		rgb(from var(--colorBlue1) r g b / 82%) var(--themeDarkness)
+	);
+	--colorTextShadow: color-mix(
+		in srgb,
+		rgb(70 96 140 / 35%),
+		rgb(0 0 7 / 25%) var(--themeDarkness)
+	);
 	--colorUnhappy: #ffbfc2;
 	--fontFamilyBody: "Inter Variable";
 	--fontFamilyHeading: "Urbanist Variable";
@@ -61,6 +117,7 @@
 	--transitionFast: 140ms;
 	--transitionNormal: 220ms;
 	--transitionEaseOut: cubic-bezier(0.22, 1, 0.36, 1);
+	--transitionTheme: 2.5s;
 }
 
 html {
@@ -73,6 +130,9 @@ html.dark {
 	color-scheme: dark;
 
 	--lineHeightBody: 1.5;
+	--themeDark: 1;
+	--themeDarkFast: 1;
+	--themeDarkStep: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -88,5 +148,12 @@ html.dark {
 	html,
 	body {
 		scroll-behavior: smooth;
+	}
+
+	html.theme-transition {
+		transition:
+			--themeDark var(--transitionTheme) ease-in-out,
+			--themeDarkFast calc(var(--transitionTheme) / 2) ease-in-out,
+			--themeDarkStep var(--transitionTheme) steps(2, jump-none);
 	}
 }

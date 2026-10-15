@@ -45,14 +45,10 @@ import DecorativeImage from "./DecorativeImage.astro";
 	.squiggle-thick-wide {
 		height: 100%;
 		left: 0;
-		opacity: 0.2;
+		opacity: calc(0.2 - var(--themeDark) * 0.165);
 		top: 0%;
 		width: 100%;
 		z-index: 0;
-	}
-
-	html.dark .squiggle-thick-wide {
-		opacity: 0.035;
 	}
 
 	.manta-down {

@@ -53,6 +53,7 @@ const { swimUntil } = Astro.props;
 		display: block;
 		height: 100%;
 		max-width: none;
+		opacity: calc(0.78 + var(--themeDark) * 0.22);
 		width: max-content;
 	}
 
@@ -64,8 +65,8 @@ const { swimUntil } = Astro.props;
 	}
 
 	/* The fish SVGs' own fills are their dark theme colors. */
-	html:not(.dark) .timeline-fish-image {
-		opacity: 0.78;
+	:global(html.theme-transition) .timeline-fish-image :global([fill]) {
+		transition: fill var(--transitionTheme) ease-in-out;
 	}
 
 	html:not(.dark) .timeline-fish-image :global([fill="#F5F4F2"]) {

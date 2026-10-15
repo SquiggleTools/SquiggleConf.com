@@ -33,7 +33,6 @@ const yearPairs =
 		</div>
 		<div class="right">
 			<div class="footer-links">
-				<a href="/about">About</a>
 				<a href="/code-of-conduct">Code of Conduct</a>
 				<a href="https://shop.squiggle.tools" target="_blank">
 					Shop
@@ -107,10 +106,7 @@ const yearPairs =
 
 		margin-top: 2rem;
 		max-width: 15rem;
-	}
-
-	html:not(.dark) .footer-socials {
-		opacity: 0.9;
+		opacity: calc(0.9 + var(--themeDark) * 0.1);
 	}
 
 	@media (--widthXSmall) {

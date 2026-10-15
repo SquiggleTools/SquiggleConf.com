@@ -18,9 +18,12 @@ const clouds = [
 ---
 
 <div aria-hidden="true" class="hero-sky" style={`--orb-center: ${orbCenter}`}>
-	<span class="hero-sky-stars hero-sky-stars-near"></span>
-	<span class="hero-sky-stars hero-sky-stars-far"></span>
+	<div class="hero-sky-night">
+		<span class="hero-sky-stars hero-sky-stars-near"></span>
+		<span class="hero-sky-stars hero-sky-stars-far"></span>
+	</div>
 	<span class="hero-sky-glow"></span>
+	<span class="hero-sky-orb-glow"></span>
 	{clouds.map(({ drift, left, size, top }) => (
 		<svg
 			class="hero-sky-cloud"
@@ -59,40 +62,62 @@ const clouds = [
 
 <style>
 	.hero-sky {
-		background: linear-gradient(
-			180deg,
-			var(--colorBlueBright2) 0%,
-			light-dark(
-					var(--colorBlueBright1),
-					color-mix(in srgb, var(--colorBlue5) 70%, var(--colorBlue4))
-				)
-				35%,
-			light-dark(
-					var(--colorCream),
-					color-mix(in srgb, var(--colorBlue4) 70%, var(--colorSea))
-				)
-				72%,
-			light-dark(
-					color-mix(in srgb, var(--colorCream) 80%, var(--colorTerminalOrange)),
-					color-mix(in srgb, var(--colorSea) 85%, var(--colorBlue3))
-				)
-				100%
-		);
+		background:
+			radial-gradient(
+				ellipse 60% 95% at 0% 40%,
+				color-mix(
+						in srgb,
+						var(--colorBlueBright1),
+						transparent var(--themeDarkness)
+					)
+					35%,
+				transparent
+			),
+			linear-gradient(
+				180deg,
+				var(--colorBlueBright2) 0%,
+				color-mix(
+						in srgb,
+						var(--colorBlueBright1),
+						color-mix(in srgb, var(--colorBlue5) 70%, var(--colorBlue4))
+							var(--themeDarkness)
+					)
+					35%,
+				color-mix(
+						in srgb,
+						var(--colorCream),
+						color-mix(in srgb, var(--colorBlue4) 70%, var(--colorSea))
+							var(--themeDarkness)
+					)
+					72%,
+				color-mix(
+						in srgb,
+						color-mix(
+							in srgb,
+							var(--colorCream) 80%,
+							var(--colorTerminalOrange)
+						),
+						color-mix(in srgb, var(--colorSea) 85%, var(--colorBlue3))
+							var(--themeDarkness)
+					)
+					100%
+			);
 		inset: 0;
 		overflow: hidden;
 		pointer-events: none;
 		position: absolute;
 	}
 
-	.hero-sky-stars {
-		display: none;
-		inset: 0 0 35%;
-		mask-image: linear-gradient(to bottom, var(--colorBlue5) 30%, transparent);
+	.hero-sky-night {
+		inset: 0;
+		opacity: var(--themeDarkFast);
 		position: absolute;
 	}
 
-	:global(html.dark) .hero-sky-stars {
-		display: block;
+	.hero-sky-stars {
+		inset: 0 0 35%;
+		mask-image: linear-gradient(to bottom, var(--colorBlue5) 30%, transparent);
+		position: absolute;
 	}
 
 	.hero-sky-stars-near {
@@ -151,21 +176,17 @@ const clouds = [
 		animation: hero-sky-breathe 10s ease-in-out infinite alternate;
 		background:
 			radial-gradient(
-				ellipse 45% 70% at 50% 100%,
-				light-dark(
-					rgb(from var(--colorTerminalOrange) r g b / 22%),
-					rgb(from var(--colorTerminalOrange) r g b / 40%)
-				),
-				transparent 70%
-			),
-			radial-gradient(
 				ellipse 30% 60% at 18% 100%,
 				rgb(from var(--colorBlue2) r g b / 20%),
 				transparent 70%
 			),
 			radial-gradient(
 				ellipse 30% 60% at 84% 100%,
-				rgb(from var(--colorBlue2) r g b / 16%),
+				color-mix(
+					in srgb,
+					transparent,
+					rgb(from var(--colorBlue2) r g b / 16%) var(--themeDarkness)
+				),
 				transparent 70%
 			);
 		bottom: 3rem;
@@ -174,6 +195,25 @@ const clouds = [
 		position: absolute;
 		right: -10%;
 		transform-origin: bottom center;
+	}
+
+	.hero-sky-orb-glow {
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorSunrise) r g b / 37%),
+				rgb(from var(--colorViolet) r g b / 20%) var(--themeDarkness)
+			),
+			transparent 70%
+		);
+		display: none;
+		height: 120rem;
+		left: var(--orb-center);
+		position: absolute;
+		top: 8.5rem;
+		translate: -50% -50%;
+		width: 120rem;
 	}
 
 	@keyframes hero-sky-breathe {
@@ -190,8 +230,11 @@ const clouds = [
 
 	.hero-sky-cloud {
 		animation: hero-sky-drift var(--drift) ease-in-out infinite alternate;
-		display: none;
-		fill: var(--colorWhite);
+		fill: color-mix(
+			in srgb,
+			var(--colorWhite),
+			transparent calc(var(--themeDarkFast) * 100%)
+		);
 		filter: drop-shadow(
 			0 0.2rem 0.4rem rgb(from var(--colorBlue4) r g b / 10%)
 		);
@@ -200,10 +243,6 @@ const clouds = [
 		position: absolute;
 		top: var(--top);
 		width: var(--size);
-	}
-
-	:global(html:not(.dark)) .hero-sky-cloud {
-		display: block;
 	}
 
 	@keyframes hero-sky-drift {
@@ -238,16 +277,22 @@ const clouds = [
 	}
 
 	.hero-sky-orb-body {
-		--hero-orb-crescent: light-dark(transparent, var(--colorWhiteIsh));
-		--hero-orb-glow: light-dark(
+		--hero-orb-crescent: color-mix(
+			in srgb,
+			transparent,
+			var(--colorWhiteIsh) var(--themeDarkness)
+		);
+		--hero-orb-glow: color-mix(
+			in srgb,
 			rgb(from var(--colorTerminalOrange) r g b / 55%),
-			rgb(from var(--colorBlue1) r g b / 45%)
+			rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
 		);
 
 		animation: hero-sky-orb-glow 7s ease-in-out infinite alternate;
-		background: light-dark(
+		background: color-mix(
+			in srgb,
 			color-mix(in srgb, var(--colorCream) 50%, var(--colorTerminalOrange)),
-			transparent
+			transparent var(--themeDarkness)
 		);
 		border-radius: 50%;
 		box-shadow: inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
@@ -274,7 +319,11 @@ const clouds = [
 		fill: none;
 		left: var(--left);
 		position: absolute;
-		stroke: light-dark(var(--colorBlue4), var(--colorWhiteIsh));
+		stroke: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorWhiteIsh) calc(var(--themeDarkFast) * 100%)
+		);
 		stroke-linecap: round;
 		stroke-width: 1.4;
 		top: var(--top);
@@ -308,13 +357,15 @@ const clouds = [
 	}
 
 	@media (--widthSmall) {
-		.hero-sky-orb {
+		.hero-sky-orb,
+		.hero-sky-orb-glow {
 			display: block;
 		}
 	}
 
 	@media (--widthLarge) {
-		.hero-sky-orb {
+		.hero-sky-orb,
+		.hero-sky-orb-glow {
 			display: none;
 		}
 
@@ -324,73 +375,48 @@ const clouds = [
 	}
 
 	@media (--widthXLarge) {
-		.hero-sky-orb {
+		.hero-sky-orb,
+		.hero-sky-orb-glow {
 			display: block;
 		}
 	}
 </style>
 
 <style is:global>
-	html.hero-orb-travel {
-		--hero-orb-easing: cubic-bezier(0.37, 0, 0.63, 1);
-	}
-
 	html.hero-orb-travel .hero-sky-orb {
-		view-transition-name: hero-orb;
 		z-index: 0;
 	}
 
-	html.hero-orb-travel .hero-contents {
-		view-transition-name: hero-contents;
+	.theme-pin-light {
+		--themeDarkness: 0%;
 	}
 
-	html.hero-orb-travel .hero-harbor-skyline {
-		position: relative;
-		view-transition-name: hero-skyline;
-		z-index: 3;
-	}
-
-	html.hero-orb-travel::view-transition-group(*),
-	html.hero-orb-travel::view-transition-old(*),
-	html.hero-orb-travel::view-transition-new(*) {
-		animation-duration: 2.5s;
-		animation-timing-function: var(--hero-orb-easing);
-	}
-
-	html.hero-orb-travel::view-transition-group(hero-orb) {
-		animation: none;
-		clip-path: inset(-9999px -9999px var(--hero-orb-horizon) -9999px);
-	}
-
-	html.hero-orb-travel::view-transition-old(hero-orb),
-	html.hero-orb-travel::view-transition-new(hero-orb) {
-		animation: none;
-		mix-blend-mode: normal;
+	.theme-pin-dark {
+		--themeDarkness: 100%;
 	}
 </style>
 
 <script>
 	import { reducedMotionQuery } from "~/utils/motion";
-	import { getOppositeTheme, getTheme, setTheme } from "~/utils/theme";
+	import {
+		changeTheme,
+		getOppositeTheme,
+		getTheme,
+		themeTransitionDuration,
+	} from "~/utils/theme";
 
-	const sky = document.querySelector<HTMLElement>(".hero-sky");
+	const night = document.querySelector<HTMLElement>(".hero-sky-night");
 	const orb = document.querySelector<HTMLButtonElement>(".hero-sky-orb");
 	let traveling = false;
 
-	function switchTheme() {
-		setTheme(getOppositeTheme());
-	}
-
-	const travelDuration = 2500;
 	const travelEasing = "cubic-bezier(0.37, 0, 0.63, 1)";
 
 	type Point = [number, number];
 
-	function animateTravel(orbBox: DOMRect, horizon: number) {
-		const html = document.documentElement;
+	function travelKeyframes(orbBox: DOMRect, horizon: number) {
 		const radius = orbBox.width / 2;
 		const [x, y]: Point = [orbBox.left + radius, orbBox.top + radius];
-		const hidden = horizon + radius * 1.5;
+		const hidden = horizon + radius * 1.1;
 		const span = Math.max(radius * 5, innerWidth * 0.4);
 		const steps = 24;
 
@@ -404,54 +430,35 @@ const clouds = [
 		const set = rise
 			.map(([pointX, pointY]): Point => [2 * x - pointX, pointY])
 			.reverse();
-		const options = {
-			duration: travelDuration,
-			easing: travelEasing,
-			fill: "both",
-		} as const;
+		const frames = [
+			...set.map((point, index) => ({
+				offset: index / steps / 2,
+				point,
+				rising: false,
+			})),
+			...rise.map((point, index) => ({
+				offset: 0.5 + index / steps / 2,
+				point,
+				rising: true,
+			})),
+		];
+		const shift = ([pointX, pointY]: Point) =>
+			`translate(${pointX - x}px, ${pointY - y}px)`;
 
-		html.animate(
-			[
-				...toKeyframes(set, [x, y], 0, 0.5),
-				{ offset: 1, translate: `${span}px ${hidden - y}px` },
-			],
-			{ ...options, pseudoElement: "::view-transition-old(hero-orb)" },
-		);
-		html.animate(
-			[
-				{ offset: 0, translate: `${-span}px ${hidden - y}px` },
-				...toKeyframes(rise, [x, y], 0.5, 1),
-			],
-			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
-		);
-		html.animate(
-			[
-				{ offset: 0, opacity: 1, rotate: "0deg" },
-				{ offset: 0.5, opacity: 0, rotate: "90deg" },
-				{ offset: 1, opacity: 0, rotate: "90deg" },
-			],
-			{ ...options, pseudoElement: "::view-transition-old(hero-orb)" },
-		);
-		html.animate(
-			[
-				{ offset: 0, opacity: 0, rotate: "-90deg" },
-				{ offset: 0.5, opacity: 0, rotate: "-90deg" },
-				{ offset: 1, opacity: 1, rotate: "0deg" },
-			],
-			{ ...options, pseudoElement: "::view-transition-new(hero-orb)" },
-		);
-	}
-
-	function toKeyframes(
-		points: Point[],
-		origin: Point,
-		from: number,
-		to: number,
-	): Keyframe[] {
-		return points.map(([x, y], index) => ({
-			offset: from + ((to - from) * index) / (points.length - 1),
-			translate: `${x - origin[0]}px ${y - origin[1]}px`,
-		}));
+		return {
+			glow: frames.map(({ offset, point, rising }) => ({
+				offset,
+				opacity: rising
+					? Math.max(0, (offset - 0.55) / 0.45)
+					: Math.max(0, 1 - offset / 0.45),
+				transform: shift(point),
+			})),
+			orb: frames.map(({ offset, point, rising }) => ({
+				offset,
+				opacity: rising ? offset * 2 - 1 : 1 - offset * 2,
+				transform: `${shift(point)} rotate(${rising ? offset * 180 - 180 : offset * 180}deg)`,
+			})),
+		};
 	}
 
 	orb?.addEventListener("click", () => {
@@ -461,37 +468,46 @@ const clouds = [
 			return;
 		}
 
-		if (reducedMotionQuery.matches || !document.startViewTransition || !hero) {
-			switchTheme();
+		if (reducedMotionQuery.matches || !hero) {
+			changeTheme();
 			return;
 		}
 
 		const html = document.documentElement;
-		const orbBox = orb.getBoundingClientRect();
+		const glow = hero.querySelector<HTMLElement>(".hero-sky-orb-glow");
+		const pinned = glow ? [orb, glow] : [orb];
+		const before = getTheme();
+		const after = getOppositeTheme();
 		const horizon =
 			hero.querySelector(".hero-harbor-water")?.getBoundingClientRect().top ??
 			hero.getBoundingClientRect().bottom;
+		const keyframes = travelKeyframes(orb.getBoundingClientRect(), horizon);
+		const options = { duration: themeTransitionDuration, easing: travelEasing };
 
-		html.style.setProperty(
-			"--hero-orb-horizon",
-			`${orbBox.bottom - horizon}px`,
-		);
-		html.classList.add("hero-orb-travel");
 		traveling = true;
+		html.classList.add("hero-orb-travel");
+		for (const element of pinned) {
+			element.classList.add(`theme-pin-${before}`);
+		}
 
-		const transition = document.startViewTransition(switchTheme);
+		changeTheme(after);
+		glow?.animate(keyframes.glow, options);
+		const travel = orb.animate(keyframes.orb, options);
 
-		transition.ready
-			.then(() => {
-				animateTravel(orbBox, horizon);
-			})
-			.catch(() => undefined);
+		setTimeout(() => {
+			for (const element of pinned) {
+				element.classList.replace(`theme-pin-${before}`, `theme-pin-${after}`);
+			}
+		}, themeTransitionDuration / 2);
 
-		transition.finished.finally(() => {
+		const done = () => {
+			for (const element of pinned) {
+				element.classList.remove(`theme-pin-${after}`);
+			}
 			html.classList.remove("hero-orb-travel");
-			html.style.removeProperty("--hero-orb-horizon");
 			traveling = false;
-		});
+		};
+		travel.finished.then(done, done);
 	});
 
 	function launchShootingStar(container: HTMLElement) {
@@ -535,11 +551,11 @@ const clouds = [
 
 				scheduleShootingStar(container);
 			},
-			3000 + Math.random() * 9000,
+			1500 + Math.random() * 4500,
 		);
 	}
 
-	if (sky) {
-		scheduleShootingStar(sky);
+	if (night) {
+		scheduleShootingStar(night);
 	}
 </script>

@@ -80,7 +80,11 @@ const ticketsButton = {
 <style>
 	header {
 		--header-background: var(--colorBlueBright2);
-		--header-foreground: light-dark(var(--colorBlue5), var(--colorWhiteIsh));
+		--header-foreground: color-mix(
+			in srgb,
+			var(--colorBlue5),
+			var(--colorWhiteIsh) var(--themeDarkness)
+		);
 
 		color: var(--header-foreground);
 		background: var(--header-background);
@@ -163,6 +167,15 @@ const ticketsButton = {
 	}
 
 	@media (--widthXLarge) {
+		.header-floating {
+			padding-top: 4rem;
+		}
+
+		.header-floating .header-content-area {
+			align-items: flex-start;
+			min-height: 0;
+		}
+
 		.header-menu-toggle {
 			display: none;
 		}

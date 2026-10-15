@@ -1,20 +1,17 @@
 ---
-import oceanFloorLeft from "~/assets/design/ocean-floor-left.svg";
-import oceanFloorRight from "~/assets/design/ocean-floor-right.svg";
+import OceanFloorLeft from "~/assets/design/ocean-floor-left.svg";
+import OceanFloorRight from "~/assets/design/ocean-floor-right.svg";
 
+import Bubbles from "./Bubbles.astro";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
-import DecorativeImage from "./DecorativeImage.astro";
 import Heading from "./Heading.astro";
 ---
 
 <div class="newsletter" id="newsletter">
-	<DecorativeImage
-		class="ocean-floor-left"
-		fit="contain"
-		src={oceanFloorLeft}
-	/>
-	<DecorativeImage class="ocean-floor-right" src={oceanFloorRight} />
+	<OceanFloorLeft aria-hidden="true" class="ocean-floor ocean-floor-left" />
+	<OceanFloorRight aria-hidden="true" class="ocean-floor ocean-floor-right" />
+	<Bubbles class="newsletter-bubbles" count={56} />
 	<ContentArea as="section" class="newsletter-contents">
 		<Heading level="h2">
 			Sign up to receive announcements and important SquiggleConf info.
@@ -151,12 +148,150 @@ import Heading from "./Heading.astro";
 		color: var(--colorUnhappy);
 	}
 
-	.ocean-floor-left,
-	.ocean-floor-right {
+	.newsletter :global(.newsletter-bubbles) {
+		--bubbles-mask: linear-gradient(
+			to right,
+			var(--colorBlue5) calc(50% - 22rem),
+			transparent calc(50% - 13rem),
+			transparent calc(50% + 13rem),
+			var(--colorBlue5) calc(50% + 22rem)
+		);
+	}
+
+	.ocean-floor {
 		bottom: 0;
 		height: var(--newsletter-floor-height);
 		max-width: none;
+		pointer-events: none;
+		position: absolute;
+		user-select: none;
 		width: auto;
+	}
+
+	.ocean-floor :global(.ocean-plant) {
+		animation-direction: alternate;
+		animation-iteration-count: infinite;
+		animation-name: ocean-plant-sway;
+		animation-timing-function: ease-in-out;
+		transform-box: fill-box;
+		transform-origin: bottom center;
+	}
+
+	.ocean-floor :global(.ocean-plant-green) {
+		animation-duration: 8s;
+	}
+
+	.ocean-floor :global(.ocean-plant-slow) {
+		animation-duration: 19s;
+	}
+
+	.ocean-floor :global(.ocean-plant:nth-of-type(5n + 1)) {
+		animation-delay: -2.7s;
+	}
+
+	.ocean-floor :global(.ocean-plant:nth-of-type(5n + 2)) {
+		animation-delay: -5.3s;
+	}
+
+	.ocean-floor :global(.ocean-plant:nth-of-type(5n + 3)) {
+		animation-delay: -9.1s;
+	}
+
+	.ocean-floor :global(.ocean-plant:nth-of-type(5n + 4)) {
+		animation-delay: -12.4s;
+	}
+
+	@keyframes ocean-plant-sway {
+		from {
+			rotate: -1.4deg;
+		}
+
+		to {
+			rotate: 1.4deg;
+		}
+	}
+
+	.ocean-floor :global(.crab-claw) {
+		animation-delay: var(--claw-delay);
+		animation-duration: var(--claw-duration);
+		animation-iteration-count: infinite;
+		animation-timing-function: ease-in-out;
+		transform-box: view-box;
+		transform-origin: var(--claw-pivot);
+	}
+
+	.ocean-floor :global(.crab-claw-left) {
+		animation-name: crab-claw-wave-left;
+	}
+
+	.ocean-floor :global(.crab-claw-right) {
+		animation-name: crab-claw-wave-right;
+	}
+
+	@keyframes crab-claw-wave-left {
+		0%,
+		100% {
+			rotate: 0deg;
+		}
+
+		14% {
+			rotate: -12deg;
+		}
+
+		28% {
+			rotate: -3deg;
+		}
+
+		42% {
+			rotate: -10deg;
+		}
+
+		56% {
+			rotate: 0deg;
+		}
+
+		68%,
+		72% {
+			rotate: -7deg;
+		}
+
+		70%,
+		74% {
+			rotate: 0deg;
+		}
+	}
+
+	@keyframes crab-claw-wave-right {
+		0%,
+		100% {
+			rotate: 0deg;
+		}
+
+		14% {
+			rotate: 12deg;
+		}
+
+		28% {
+			rotate: 3deg;
+		}
+
+		42% {
+			rotate: 10deg;
+		}
+
+		56% {
+			rotate: 0deg;
+		}
+
+		68%,
+		72% {
+			rotate: 7deg;
+		}
+
+		70%,
+		74% {
+			rotate: 0deg;
+		}
 	}
 
 	.ocean-floor-left {

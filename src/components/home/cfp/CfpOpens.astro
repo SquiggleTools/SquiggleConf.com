@@ -1,8 +1,8 @@
 ---
+import Bubbles from "~/components/Bubbles.astro";
 import { cfpCloseDate, cfpOpenDate } from "~/data/event";
 
 import TimelineHeading from "../timeline/TimelineHeading.astro";
-import CfpBubbles from "./CfpBubbles.astro";
 import CfpPerson from "./CfpPerson.astro";
 import { cfpHosts, cfpLaunchSpeakers } from "./data";
 ---
@@ -15,7 +15,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		<span></span>
 		<span></span>
 	</div>
-	<CfpBubbles class="cfp-opens-bubbles" count={18} />
+	<Bubbles class="cfp-opens-bubbles" count={42} />
 	<div class="cfp-opens-inner">
 		<div class="cfp-opens-headline">
 			<p class="cfp-opens-eyebrow" id="call-for-proposals">
@@ -70,9 +70,10 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
 		background: linear-gradient(
 			to bottom,
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorWhite) r g b / 55%),
-				rgb(from var(--colorBlue2) r g b / 22%)
+				rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
 			),
 			transparent 85%
 		);
@@ -137,11 +138,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	}
 
 	.cfp-opens :global(.cfp-opens-bubbles) {
-		mask-image: linear-gradient(
-			to bottom,
-			transparent,
-			var(--colorBlue5) 200px
-		);
+		--bubbles-fade: 12.5rem;
 	}
 
 	.cfp-opens-inner {

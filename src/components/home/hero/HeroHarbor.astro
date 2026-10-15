@@ -39,6 +39,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 >
 	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
 	<div class="hero-harbor-water">
+		<span class="hero-harbor-glow"></span>
 		<div
 			class="hero-harbor-art hero-harbor-reflection"
 			style={background}
@@ -97,15 +98,40 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	.hero-harbor-water {
 		background: linear-gradient(
 			to bottom,
-			light-dark(
+			color-mix(
+				in srgb,
 				color-mix(in srgb, var(--colorBlueBright1) 55%, var(--colorWhite)),
 				color-mix(in srgb, var(--colorSea) 70%, var(--colorBlue3))
+					var(--themeDarkness)
 			),
-			light-dark(var(--colorBlueBright1), var(--colorSea))
+			color-mix(
+				in srgb,
+				var(--colorBlueBright1),
+				var(--colorSea) var(--themeDarkness)
+			)
 		);
 		height: var(--hero-harbor-water-height);
 		overflow: hidden;
 		position: relative;
+	}
+
+	.hero-harbor-glow {
+		background: radial-gradient(
+			ellipse 50% 150% at 50% 0%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorSunrise) r g b / 16%),
+				rgb(from var(--colorViolet) r g b / 9%) var(--themeDarkness)
+			),
+			transparent
+		);
+		display: none;
+		height: 100%;
+		left: var(--orb-center);
+		position: absolute;
+		top: 0;
+		translate: -50% 0;
+		width: 110rem;
 	}
 
 	.hero-harbor-reflection {
@@ -142,9 +168,10 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	.hero-harbor-orb-path {
 		background: radial-gradient(
 			ellipse 50% 100% at 50% 0%,
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorTerminalOrange) r g b / 30%),
-				rgb(from var(--colorCream) r g b / 22%)
+				rgb(from var(--colorCream) r g b / 22%) var(--themeDarkness)
 			),
 			transparent 80%
 		);
@@ -160,15 +187,17 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	.hero-harbor-glint {
 		animation: hero-harbor-glint var(--duration) ease-in-out infinite;
 		animation-delay: var(--delay);
-		background: light-dark(
+		background: color-mix(
+			in srgb,
 			var(--colorWhite),
-			rgb(from var(--colorCream) r g b / 90%)
+			rgb(from var(--colorCream) r g b / 90%) var(--themeDarkness)
 		);
 		border-radius: var(--radiusPill);
 		box-shadow: 0 0 0.4rem
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorTerminalOrange) r g b / 40%),
-				rgb(from var(--colorCream) r g b / 50%)
+				rgb(from var(--colorCream) r g b / 50%) var(--themeDarkness)
 			);
 		height: 2px;
 		left: var(--left);
@@ -199,6 +228,12 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		animation: hero-harbor-sail var(--duration) linear infinite;
 		animation-delay: var(--delay);
 		left: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			var(--colorBlue5) 76%,
+			rgb(from var(--colorBlue5) r g b / 50%) 76%,
+			transparent 96%
+		);
 		position: absolute;
 		top: var(--top);
 		translate: var(--rest) 0;
@@ -212,23 +247,37 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 
 	.hero-harbor-boat-sail,
 	.hero-harbor-boat-jib {
-		stroke: light-dark(rgb(from var(--colorBlue4) r g b / 75%), transparent);
+		stroke: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue4) r g b / 75%),
+			rgb(from var(--colorBlue5) r g b / 70%) var(--themeDarkness)
+		);
 		stroke-linejoin: round;
 		stroke-width: 1.5;
 	}
 
 	.hero-harbor-boat-hull {
-		fill: light-dark(var(--colorBlue4), var(--colorBlue1));
+		fill: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorBlue5) var(--themeDarkness)
+		);
 	}
 
 	.hero-harbor-boat-sail {
-		fill: light-dark(var(--colorWhite), var(--colorCream));
+		fill: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorCream) var(--themeDarkness)
+		);
 	}
 
 	.hero-harbor-boat-jib {
-		fill: light-dark(
+		fill: color-mix(
+			in srgb,
 			var(--colorBlue1),
-			color-mix(in srgb, var(--colorCream) 80%, var(--colorBlue1))
+			color-mix(in srgb, var(--colorBlue1) 80%, var(--colorBlue4))
+				var(--themeDarkness)
 		);
 	}
 
@@ -259,7 +308,11 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	.hero-harbor-waves {
-		background: light-dark(var(--colorWhite), var(--colorWhiteIsh));
+		background: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorWhiteIsh) var(--themeDarkness)
+		);
 		mask: var(--hero-harbor-waves) center top / auto
 			calc(var(--hero-harbor-art-height) * 40 / 536) repeat-x;
 		height: calc(var(--hero-harbor-art-height) * 40 / 536);
@@ -268,6 +321,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthSmall) {
+		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
 			display: block;
@@ -281,6 +335,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthLarge) {
+		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
 			display: none;
@@ -288,6 +343,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthXLarge) {
+		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
 			display: block;
