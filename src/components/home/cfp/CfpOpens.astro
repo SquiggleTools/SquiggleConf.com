@@ -3,6 +3,7 @@ import { cfpCloseDate, cfpOpenDate } from "~/data/event";
 
 import TimelineHeading from "../timeline/TimelineHeading.astro";
 import CfpBubbles from "./CfpBubbles.astro";
+import CfpCountdown from "./CfpCountdown.astro";
 import CfpPerson from "./CfpPerson.astro";
 import { cfpHosts, cfpLaunchSpeakers } from "./data";
 ---
@@ -29,6 +30,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 				CFP Opens <span class="cfp-opens-date">{cfpOpenDate} 2026</span>
 			</TimelineHeading>
 			<p class="cfp-opens-close">Submissions close {cfpCloseDate}</p>
+			<CfpCountdown />
 		</div>
 		<p class="cfp-opens-label">Launch Lineup</p>
 		<div class="cfp-opens-lineup">
