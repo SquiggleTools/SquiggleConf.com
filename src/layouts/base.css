@@ -57,7 +57,7 @@
 	--colorBackground: color-mix(
 		in srgb,
 		var(--colorWhite),
-		#121212 var(--themeDarkness)
+		color-mix(in srgb, var(--colorBlue5) 55%, #000) var(--themeDarkness)
 	);
 	--colorCopy: color-mix(
 		in srgb,

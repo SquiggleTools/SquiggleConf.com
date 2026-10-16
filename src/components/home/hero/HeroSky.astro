@@ -10,10 +10,10 @@ const birds = [
 ];
 
 const clouds = [
-	{ drift: 60, left: "33%", size: 4.5, top: 0.75 },
-	{ drift: 45, left: "55%", size: 3, top: 0.25 },
-	{ drift: 70, left: "88%", size: 5, top: 15 },
-	{ drift: 55, left: "1%", size: 4, top: 9 },
+	{ drift: 60, left: "33%", moonlight: 36, size: 4.5, top: 0.75 },
+	{ drift: 45, left: "55%", moonlight: 36, size: 3, top: 0.25 },
+	{ drift: 70, left: "88%", moonlight: 100, size: 5, top: 15 },
+	{ drift: 55, left: "1%", moonlight: 36, size: 4, top: 9 },
 ];
 ---
 
@@ -24,13 +24,27 @@ const clouds = [
 	</div>
 	<span class="hero-sky-glow"></span>
 	<span class="hero-sky-orb-glow"></span>
-	{clouds.map(({ drift, left, size, top }) => (
+	{clouds.map(({ drift, left, moonlight, size, top }, index) => (
 		<svg
 			class="hero-sky-cloud"
-			style={`--drift: ${drift}s; --left: ${left}; --size: ${size}rem; --top: ${top}rem`}
+			style={`--drift: ${drift}s; --left: ${left}; --moonlight: ${moonlight}%; --size: ${size}rem; --top: ${top}rem`}
 			viewBox="0 0 64 32"
 		>
-			<path d="M10 30 H54 A8 8 0 0 0 54 14 A10 10 0 0 0 38 8 A12 12 0 0 0 16 12 A10 10 0 0 0 10 30 Z" />
+			<linearGradient
+				gradientUnits="userSpaceOnUse"
+				id={`hero-sky-cloud-fill-${index}`}
+				x1="32"
+				x2="32"
+				y1="4"
+				y2="30"
+			>
+				<stop class="hero-sky-cloud-lit" offset="0" />
+				<stop class="hero-sky-cloud-shade" offset="1" />
+			</linearGradient>
+			<path
+				d="M10 30 H54 A8 8 0 0 0 54 14 A10 10 0 0 0 38 8 A12 12 0 0 0 16 12 A10 10 0 0 0 10 30 Z"
+				fill={`url(#hero-sky-cloud-fill-${index})`}
+			/>
 		</svg>
 	))}
 	{birds.map(({ duration, left, size, top }, index) => (
@@ -172,7 +186,7 @@ const clouds = [
 		animation: hero-sky-breathe 10s ease-in-out infinite alternate;
 		background:
 			radial-gradient(
-				ellipse 45% 70% at 50% 100%,
+				ellipse 45% 47% at 50% 100%,
 				color-mix(
 					in srgb,
 					transparent,
@@ -233,18 +247,40 @@ const clouds = [
 		}
 	}
 
-	.hero-sky-cloud {
-		animation: hero-sky-drift var(--drift) ease-in-out infinite alternate;
-		fill: color-mix(
+	.hero-sky-cloud-lit {
+		stop-color: color-mix(
 			in srgb,
 			var(--colorWhite),
-			transparent calc(var(--themeDarkStep) * 100%)
+			color-mix(
+					in srgb,
+					var(--colorBlue5),
+					color-mix(
+							in srgb,
+							color-mix(in srgb, var(--colorBlue1) 15%, var(--colorBlue4)),
+							var(--colorViolet) 14%
+						)
+						var(--moonlight)
+				)
+				var(--themeDarkness)
 		);
+	}
+
+	.hero-sky-cloud-shade {
+		stop-color: color-mix(
+			in srgb,
+			var(--colorWhite),
+			color-mix(in srgb, var(--colorBlue5), var(--colorBlue4) var(--moonlight))
+				var(--themeDarkness)
+		);
+	}
+
+	.hero-sky-cloud {
+		animation: hero-sky-drift var(--drift) ease-in-out infinite alternate;
 		filter: drop-shadow(
 			0 0.2rem 0.4rem rgb(from var(--colorBlue4) r g b / 10%)
 		);
 		left: var(--left);
-		opacity: calc(0.9 * var(--themeDip));
+		opacity: 0.9;
 		position: absolute;
 		top: var(--top);
 		width: var(--size);
@@ -514,6 +550,50 @@ const clouds = [
 		};
 		travel.finished.then(done, done);
 	});
+
+	const clouds = [...document.querySelectorAll(".hero-sky-cloud")];
+
+	function aimClouds() {
+		if (
+			!orb ||
+			document.documentElement.classList.contains("hero-orb-travel")
+		) {
+			return;
+		}
+
+		const orbBox = orb.getBoundingClientRect();
+		const [orbX, orbY] = [
+			orbBox.left + orbBox.width / 2,
+			orbBox.top + orbBox.height / 2,
+		];
+
+		for (const cloud of clouds) {
+			const box = cloud.getBoundingClientRect();
+			const angle = orbBox.width
+				? Math.atan2(
+						orbY - (box.top + box.height / 2),
+						orbX - (box.left + box.width / 2),
+					)
+				: -Math.PI / 2;
+			const [x, y] = [Math.cos(angle), Math.sin(angle)];
+			const reach = Math.abs(x) * 31 + Math.abs(y) * 13;
+			const gradient = cloud.querySelector("linearGradient");
+
+			for (const [name, value] of Object.entries({
+				x1: 32 + x * reach,
+				x2: 32 - x * reach,
+				y1: 17 + y * reach,
+				y2: 17 - y * reach,
+			})) {
+				gradient?.setAttribute(name, `${value}`);
+			}
+		}
+	}
+
+	const hero = orb?.closest(".hero");
+	if (hero && clouds.length) {
+		new ResizeObserver(aimClouds).observe(hero);
+	}
 
 	function launchShootingStar(container: HTMLElement) {
 		const star = document.createElement("span");
