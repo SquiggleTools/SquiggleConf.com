@@ -2,7 +2,8 @@
 import cityscapeWaves from "~/assets/design/cityscape-waves.svg";
 import cityscape from "~/assets/design/cityscape.svg";
 
-import { orbCenter } from "./orb";
+import { lightRays } from "../lightRays";
+import { orbCenter, orbCenterInContainer } from "./orb";
 
 const background = `background-image: url(${cityscape.src})`;
 
@@ -35,7 +36,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 <div
 	aria-hidden="true"
 	class="hero-harbor"
-	style={`--orb-center: ${orbCenter}`}
+	style={`--orb-center: ${orbCenter}; --orb-center-in-water: ${orbCenterInContainer}`}
 >
 	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
 	<div class="hero-harbor-water">
@@ -45,6 +46,13 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 			style={background}
 		></div>
 		<span class="hero-harbor-orb-path"></span>
+		<div class="hero-harbor-rays">
+			{lightRays.map(({ delay, left, width }) => (
+				<span
+					style={`--delay: -${delay}s; --left: ${left}cqw; --width: ${width}rem`}
+				/>
+			))}
+		</div>
 		{glints.map(({ delay, duration, left, orb, top, width }) => (
 			<span
 				class:list={["hero-harbor-glint", orb && "hero-harbor-glint-orb"]}
@@ -110,6 +118,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 				var(--colorSea) var(--themeDarkness)
 			)
 		);
+		container-type: inline-size;
 		height: var(--hero-harbor-water-height);
 		overflow: hidden;
 		position: relative;
@@ -182,6 +191,56 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		top: 0;
 		translate: -50% 0;
 		width: 10rem;
+	}
+
+	.hero-harbor-rays {
+		inset: 0;
+		opacity: var(--themeDip);
+		pointer-events: none;
+		position: absolute;
+		visibility: hidden;
+	}
+
+	.hero-harbor-rays span {
+		animation: hero-harbor-ray-pulse 11s ease-in-out infinite alternate;
+		animation-delay: var(--delay);
+		background: color-mix(
+			in srgb,
+			rgb(
+				from color-mix(in srgb, var(--colorSunrise) 45%, var(--colorWhite)) r g
+					b / 23%
+			),
+			rgb(from var(--colorBlue1) r g b / 10%) var(--themeDarkness)
+		);
+		bottom: -10rem;
+		filter: blur(10px);
+		height: 40rem;
+		left: calc(var(--left) - var(--width) / 2);
+		position: absolute;
+		transform: rotate(
+			atan2(
+				calc(
+					var(--orb-center-in-water) + var(--themeDarkStep) * 0.7rem -
+						var(--left)
+				),
+				calc(
+					var(--hero-harbor-depth, 29rem) + var(--hero-harbor-water-height) -
+						8.5rem + var(--themeDarkStep) * 0.7rem
+				)
+			)
+		);
+		transform-origin: 50% calc(100% - 10rem);
+		width: var(--width);
+	}
+
+	@keyframes hero-harbor-ray-pulse {
+		0% {
+			opacity: 0.5;
+		}
+
+		100% {
+			opacity: 1;
+		}
 	}
 
 	.hero-harbor-glint {
@@ -321,6 +380,10 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthSmall) {
+		.hero-harbor-rays {
+			visibility: visible;
+		}
+
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
@@ -335,6 +398,10 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthLarge) {
+		.hero-harbor-rays {
+			visibility: hidden;
+		}
+
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
@@ -343,6 +410,10 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthXLarge) {
+		.hero-harbor-rays {
+			visibility: visible;
+		}
+
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
 		.hero-harbor-glint-orb {
@@ -350,3 +421,18 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		}
 	}
 </style>
+
+<script>
+	const hero = document.querySelector(".hero");
+	const harbor = hero?.querySelector<HTMLElement>(".hero-harbor");
+	const water = harbor?.querySelector(".hero-harbor-water");
+
+	if (hero && harbor && water) {
+		new ResizeObserver(() => {
+			harbor.style.setProperty(
+				"--hero-harbor-depth",
+				`${water.getBoundingClientRect().top - hero.getBoundingClientRect().top}px`,
+			);
+		}).observe(hero);
+	}
+</script>

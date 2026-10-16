@@ -106,7 +106,7 @@ const clouds = [
 
 	.hero-sky-night {
 		inset: 0;
-		opacity: var(--themeDarkFast);
+		opacity: calc(var(--themeDarkStep) * var(--themeDip));
 		position: absolute;
 	}
 
@@ -229,13 +229,13 @@ const clouds = [
 		fill: color-mix(
 			in srgb,
 			var(--colorWhite),
-			transparent calc(var(--themeDarkFast) * 100%)
+			transparent calc(var(--themeDarkStep) * 100%)
 		);
 		filter: drop-shadow(
 			0 0.2rem 0.4rem rgb(from var(--colorBlue4) r g b / 10%)
 		);
 		left: var(--left);
-		opacity: 0.9;
+		opacity: calc(0.9 * var(--themeDip));
 		position: absolute;
 		top: var(--top);
 		width: var(--size);
@@ -318,8 +318,9 @@ const clouds = [
 		stroke: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorWhiteIsh) calc(var(--themeDarkFast) * 100%)
+			var(--colorWhiteIsh) calc(var(--themeDarkStep) * 100%)
 		);
+		opacity: var(--themeDip);
 		stroke-linecap: round;
 		stroke-width: 1.4;
 		top: var(--top);

@@ -70,11 +70,72 @@ const {
 
 	.button-variant-emphasized {
 		--colorButtonBackground: var(--colorAccentMedium);
+		--colorButtonBorder: transparent;
+		--shadowButtonRing: 0 0 0.15rem 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 11%),
+				rgb(from var(--colorBlue1) r g b / 17%) var(--themeDarkness)
+			);
+		--shadowButtonRingHover: 0 0 0.15rem 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 15%),
+				rgb(from var(--colorBlue1) r g b / 23%) var(--themeDarkness)
+			);
+		--colorButtonInset: color-mix(
+			in srgb,
+			transparent,
+			rgb(from var(--colorWhite) r g b / 16%) var(--themeDarkness)
+		);
+		--colorButtonInsetHover: color-mix(
+			in srgb,
+			transparent,
+			rgb(from var(--colorWhite) r g b / 18%) var(--themeDarkness)
+		);
 		--colorButtonColor: color-mix(
 			in srgb,
 			var(--colorWhiteIsh),
 			var(--colorBlue5) var(--themeDarkness)
 		);
+
+		isolation: isolate;
+		overflow: clip;
+		position: relative;
+	}
+
+	.button-variant-emphasized::before,
+	.button-variant-emphasized::after {
+		content: "";
+		opacity: calc(1 - var(--themeDark));
+		pointer-events: none;
+		position: absolute;
+		z-index: -1;
+	}
+
+	.button-variant-emphasized::before {
+		background: radial-gradient(
+			ellipse 90% 80% at 50% 100%,
+			rgb(from var(--colorBlue2) r g b / 55%),
+			transparent 70%
+		);
+		border-radius: calc(var(--radiusLarge) - 2px);
+		inset: 0;
+	}
+
+	.button-variant-emphasized::after {
+		background: linear-gradient(
+			to bottom,
+			rgb(from var(--colorWhite) r g b / 25%),
+			rgb(from var(--colorWhite) r g b / 4%)
+		);
+		border-radius: calc(var(--radiusLarge) - 4px) calc(var(--radiusLarge) - 4px)
+			0.75rem 0.75rem;
+		filter: blur(0.35rem);
+		height: 48%;
+		left: 0.4rem;
+		right: 0.4rem;
+		top: 2px;
 	}
 
 	.button-variant-light {
@@ -109,18 +170,8 @@ const {
 
 	.button-variant-emphasized,
 	.button-variant-ghost {
-		--colorButtonBorder: color-mix(
-			in srgb,
-			rgb(from var(--colorBlue5) r g b / 22%),
-			rgb(from var(--colorBlue1) r g b / 34%) var(--themeDarkness)
-		);
-		--colorButtonBorderHover: color-mix(
-			in srgb,
-			rgb(from var(--colorBlue5) r g b / 30%),
-			rgb(from var(--colorBlue1) r g b / 46%) var(--themeDarkness)
-		);
 		--shadowButton:
-			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
+			inset 0 1px 0 var(--colorButtonInset),
 			0 0.1rem 0.1rem
 				color-mix(
 					in srgb,
@@ -133,19 +184,9 @@ const {
 					transparent,
 					rgb(from var(--colorBlue2) r g b / 18%) var(--themeDarkness)
 				),
-			0 0 0 1px
-				color-mix(
-					in srgb,
-					rgb(from var(--colorBlue5) r g b / 8%),
-					rgb(from var(--colorBlue1) r g b / 18%) var(--themeDarkness)
-				);
+			var(--shadowButtonRing);
 		--shadowButtonHover:
-			inset 0 1px 0
-				color-mix(
-					in srgb,
-					rgb(from var(--colorWhite) r g b / 22%),
-					rgb(from var(--colorWhite) r g b / 18%) var(--themeDarkness)
-				),
+			inset 0 1px 0 var(--colorButtonInsetHover),
 			0 0.25rem 0.5rem
 				color-mix(
 					in srgb,
@@ -159,6 +200,29 @@ const {
 
 	/* A translucent outline that takes its text color from its surroundings. */
 	.button-variant-ghost {
+		--colorButtonBorder: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue5) r g b / 22%),
+			rgb(from var(--colorBlue1) r g b / 34%) var(--themeDarkness)
+		);
+		--colorButtonBorderHover: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue5) r g b / 30%),
+			rgb(from var(--colorBlue1) r g b / 46%) var(--themeDarkness)
+		);
+		--shadowButtonRing: 0 0 0 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 8%),
+				rgb(from var(--colorBlue1) r g b / 18%) var(--themeDarkness)
+			);
+		--shadowButtonRingHover: 0 0 0 1px var(--colorButtonBorderHover);
+		--colorButtonInset: rgb(from var(--colorWhite) r g b / 16%);
+		--colorButtonInsetHover: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 22%),
+			rgb(from var(--colorWhite) r g b / 18%) var(--themeDarkness)
+		);
 		--colorButtonBackground: color-mix(
 			in srgb,
 			rgb(from var(--colorWhite) r g b / 8%),
@@ -174,8 +238,6 @@ const {
 	.button-variant-emphasized:focus-visible,
 	.button-variant-ghost:hover,
 	.button-variant-ghost:focus-visible {
-		box-shadow:
-			var(--shadowButtonHover),
-			0 0 0 1px var(--colorButtonBorderHover);
+		box-shadow: var(--shadowButtonHover), var(--shadowButtonRingHover);
 	}
 </style>

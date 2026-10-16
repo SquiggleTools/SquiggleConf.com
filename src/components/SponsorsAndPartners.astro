@@ -172,33 +172,45 @@ const tiers = [
 					)
 					100%
 			);
-		margin-top: -0.75rem;
+		margin-top: calc(-1 * var(--sizeSeamHeight));
 		mask:
-			url("../assets/design/seam-wave-below.svg") 0 0 / 1.75rem 0.75rem repeat-x,
-			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0 0.75rem / 100%
-				calc(100% - 0.75rem) no-repeat;
+			url("../assets/design/seam-wave-below.svg") 0 0 / var(--sizeSeamWidth)
+				var(--sizeSeamHeight) repeat-x,
+			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0
+				calc(var(--sizeSeamHeight) - 1px) / 100%
+				calc(100% - var(--sizeSeamHeight) + 1px) no-repeat;
 		overflow: clip;
 		position: relative;
 		width: 100%;
 	}
 
 	.past-sponsors-seam {
-		background: url("../assets/design/seam-wave-above.svg") 0 -2px / 1.75rem
-			0.75rem repeat-x;
+		background:
+			url("../assets/design/seam-wave-above.svg") 0 calc(1rem - 2px) /
+				var(--sizeSeamWidth) var(--sizeSeamHeight) repeat-x,
+			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0 0 / 100%
+				calc(1rem - 1px) no-repeat;
 		filter: drop-shadow(
 			0 calc(0.15rem + 2px) 0.2rem
 				color-mix(
 					in srgb,
-					rgb(from var(--colorBlue3) r g b / 30%),
+					rgb(from var(--colorBlue3) r g b / 20%),
 					rgb(from var(--colorBlue5) r g b / 65%) var(--themeDarkness)
 				)
 		);
-		height: 0.75rem;
+		height: calc(var(--sizeSeamHeight) + 2rem);
 		left: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			rgb(from var(--colorBlue5) r g b / 67%)
+				calc(1rem + var(--sizeSeamHeight) * 0.125),
+			rgb(from var(--colorBlue5) r g b / 33%)
+				calc(1rem + var(--sizeSeamHeight) * 0.875)
+		);
 		pointer-events: none;
 		position: absolute;
 		right: 0;
-		top: 0;
+		top: -1rem;
 	}
 
 	.past-sponsors::before,
@@ -283,8 +295,7 @@ const tiers = [
 		gap: 1.5rem;
 		margin: 0 auto;
 		max-width: var(--sizeContentAreaWide);
-		padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2.5rem)
-			clamp(4.5rem, 8vw, 6.5rem);
+		padding: 4.5rem clamp(1.25rem, 3vw, 2.5rem) clamp(4.5rem, 8vw, 6.5rem);
 		position: relative;
 		z-index: 1;
 	}

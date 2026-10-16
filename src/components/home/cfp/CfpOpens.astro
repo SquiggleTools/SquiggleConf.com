@@ -2,6 +2,7 @@
 import Bubbles from "~/components/Bubbles.astro";
 import { cfpCloseDate, cfpOpenDate } from "~/data/event";
 
+import { lightRays } from "../lightRays";
 import TimelineHeading from "../timeline/TimelineHeading.astro";
 import CfpPerson from "./CfpPerson.astro";
 import { cfpHosts, cfpLaunchSpeakers } from "./data";
@@ -9,11 +10,11 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 <section aria-labelledby="cfp-opens-heading" class="cfp-opens">
 	<div aria-hidden="true" class="cfp-opens-rays">
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
+		{lightRays.map(({ angle, delay, left, width }) => (
+			<span
+				style={`--angle: ${angle}deg; --delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
+			/>
+		))}
 	</div>
 	<Bubbles class="cfp-opens-bubbles" count={42} />
 	<div class="cfp-opens-inner">
@@ -62,72 +63,32 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	.cfp-opens-rays {
 		inset: 0;
 		mix-blend-mode: screen;
-		opacity: clamp(
-			0,
-			calc(1 - 8 * min(var(--themeDark), 1 - var(--themeDark))),
-			1
-		);
+		opacity: var(--themeDip);
 		pointer-events: none;
 		position: absolute;
 	}
 
 	.cfp-opens-rays span {
 		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
+		animation-delay: var(--delay);
 		background: linear-gradient(
 			to bottom,
 			color-mix(
-				in srgb,
-				rgb(from var(--colorWhite) r g b / 55%),
-				rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
-			),
-			transparent 85%
+					in srgb,
+					rgb(from var(--colorWhite) r g b / 55%),
+					rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
+				)
+				8rem,
+			transparent calc(8rem + (100% - 8rem) * 0.85)
 		);
 		filter: blur(10px);
-		height: 130%;
-		left: var(--left);
+		height: calc(130% + 8rem);
+		left: calc(var(--left) - var(--width) / 2);
 		position: absolute;
-		top: -10%;
-		transform-origin: top center;
+		rotate: var(--angle);
+		top: -9rem;
+		transform-origin: 50% 10rem;
 		width: var(--width);
-	}
-
-	.cfp-opens-rays span:nth-child(1) {
-		--left: 12%;
-		--width: 4rem;
-
-		rotate: 64deg;
-	}
-
-	.cfp-opens-rays span:nth-child(2) {
-		--left: 30%;
-		--width: 2rem;
-
-		animation-delay: -3s;
-		rotate: 58deg;
-	}
-
-	.cfp-opens-rays span:nth-child(3) {
-		--left: 50%;
-		--width: 6rem;
-
-		animation-delay: -6s;
-		rotate: 48deg;
-	}
-
-	.cfp-opens-rays span:nth-child(4) {
-		--left: 68%;
-		--width: 2.5rem;
-
-		animation-delay: -2s;
-		rotate: 34deg;
-	}
-
-	.cfp-opens-rays span:nth-child(5) {
-		--left: 84%;
-		--width: 4.5rem;
-
-		animation-delay: -8s;
-		rotate: 8deg;
 	}
 
 	@keyframes cfp-opens-sway {

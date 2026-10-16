@@ -4,12 +4,6 @@
 	initial-value: 0;
 }
 
-@property --themeDarkFast {
-	syntax: "<number>";
-	inherits: true;
-	initial-value: 0;
-}
-
 @property --themeDarkStep {
 	syntax: "<number>";
 	inherits: true;
@@ -20,6 +14,11 @@
 	color-scheme: light;
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
+	--themeDip: clamp(
+		0,
+		calc(1 - 8 * min(var(--themeDark), 1 - var(--themeDark))),
+		1
+	);
 	--colorFrost1: #d8f3ff;
 	--colorFrost2: #e6f7fe;
 	--colorBlueBright1: color-mix(
@@ -115,6 +114,8 @@
 	--radiusLarge: 1rem;
 	--radiusPill: 999px;
 	--sizeImageBorder: 2px;
+	--sizeSeamHeight: 1rem;
+	--sizeSeamWidth: 4rem;
 	--sizeContentAreaThin: 49rem;
 	--sizeContentAreaNormal: 70.5rem;
 	--sizeContentAreaWide: 75rem;
@@ -137,7 +138,6 @@ html.dark {
 
 	--lineHeightBody: 1.5;
 	--themeDark: 1;
-	--themeDarkFast: 1;
 	--themeDarkStep: 1;
 }
 
@@ -159,7 +159,6 @@ html.dark {
 	html.theme-transition {
 		transition:
 			--themeDark var(--transitionTheme) ease-in-out,
-			--themeDarkFast calc(var(--transitionTheme) / 2) ease-in-out,
 			--themeDarkStep var(--transitionTheme) steps(2, jump-none);
 	}
 }

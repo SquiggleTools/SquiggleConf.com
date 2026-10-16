@@ -43,20 +43,34 @@
 	}
 
 	.deep-sea-surface::before {
-		background: url("../assets/design/seam-wave-below.svg") 0 2px / 1.75rem
-			0.75rem repeat-x;
-		bottom: 0;
+		background:
+			url("../assets/design/seam-wave-below.svg") 0 calc(1rem + 2px) /
+				var(--sizeSeamWidth) var(--sizeSeamHeight) repeat-x,
+			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0
+				calc(1rem + var(--sizeSeamHeight) + 1px) / 100% 100% no-repeat;
+		bottom: -1rem;
 		content: "";
 		filter: drop-shadow(
 			0 calc(-0.15rem - 2px) 0.2rem
 				color-mix(
 					in srgb,
-					rgb(from var(--colorWhite) r g b / 65%),
-					rgb(from var(--colorBlue1) r g b / 22%) var(--themeDarkness)
+					rgb(from var(--colorBlue4) r g b / 19%),
+					rgb(
+							from var(--colorBlue5) calc(r * 0.3) calc(g * 0.3) calc(b * 0.3) /
+								85%
+						)
+						var(--themeDarkness)
 				)
 		);
-		height: 0.75rem;
+		height: calc(var(--sizeSeamHeight) + 2rem);
 		left: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			rgb(from var(--colorBlue5) r g b / 33%)
+				calc(1rem + var(--sizeSeamHeight) * 0.125),
+			rgb(from var(--colorBlue5) r g b / 67%)
+				calc(1rem + var(--sizeSeamHeight) * 0.875)
+		);
 		pointer-events: none;
 		position: absolute;
 		right: 0;
