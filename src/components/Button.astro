@@ -107,7 +107,6 @@ const {
 	.button-variant-emphasized::before,
 	.button-variant-emphasized::after {
 		content: "";
-		opacity: calc(1 - var(--themeDark));
 		pointer-events: none;
 		position: absolute;
 		z-index: -1;
@@ -115,8 +114,12 @@ const {
 
 	.button-variant-emphasized::before {
 		background: radial-gradient(
-			ellipse 90% 80% at 50% 100%,
-			rgb(from var(--colorBlue2) r g b / 55%),
+			ellipse 90% calc(80% - var(--themeDark) * 20%) at 50% 100%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue2) r g b / 55%),
+				rgb(from var(--colorBlue3) r g b / 45%) var(--themeDarkness)
+			),
 			transparent 70%
 		);
 		border-radius: calc(var(--radiusLarge) - 2px);
