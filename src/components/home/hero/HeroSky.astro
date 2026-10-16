@@ -172,6 +172,15 @@ const clouds = [
 		animation: hero-sky-breathe 10s ease-in-out infinite alternate;
 		background:
 			radial-gradient(
+				ellipse 45% 70% at 50% 100%,
+				color-mix(
+					in srgb,
+					transparent,
+					rgb(from var(--colorTerminalOrange) r g b / 40%) var(--themeDarkness)
+				),
+				transparent 70%
+			),
+			radial-gradient(
 				ellipse 30% 60% at 18% 100%,
 				rgb(from var(--colorBlue2) r g b / 20%),
 				transparent 70%
@@ -199,9 +208,9 @@ const clouds = [
 			color-mix(
 				in srgb,
 				rgb(from var(--colorSunrise) r g b / 37%),
-				rgb(from var(--colorViolet) r g b / 20%) var(--themeDarkness)
+				rgb(from var(--colorViolet) r g b / 16%) var(--themeDarkness)
 			),
-			transparent 70%
+			transparent calc(70% - var(--themeDarkness) * 0.14)
 		);
 		display: none;
 		height: 120rem;
@@ -318,9 +327,8 @@ const clouds = [
 		stroke: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorWhiteIsh) calc(var(--themeDarkStep) * 100%)
+			var(--colorWhiteIsh) var(--themeDarkness)
 		);
-		opacity: var(--themeDip);
 		stroke-linecap: round;
 		stroke-width: 1.4;
 		top: var(--top);
