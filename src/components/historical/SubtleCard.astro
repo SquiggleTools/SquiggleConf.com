@@ -18,7 +18,11 @@ const { as: As = "div", class: className, ...rest } = Astro.props;
 		--cardPadding: 1rem;
 
 		align-items: flex-start;
-		background-color: light-dark(var(--colorCream), var(--colorBlue5));
+		background-color: color-mix(
+			in srgb,
+			var(--colorCream),
+			var(--colorBlue5) var(--themeDarkness)
+		);
 		border-radius: var(--radiusMedium);
 		border: 1px solid var(--colorBackdropOff);
 		box-shadow: 0 0 0.125rem var(--colorTextShadow);

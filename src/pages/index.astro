@@ -80,8 +80,9 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					SquiggleConf is a conference focused on software developer tools: AI
 					tools, linters, code editors, performance and security tools,
 					debuggers, and more. We mix heavy talks with fun events.
-					<br />
-					Think of it like your devtools fieldtrip.
+					<span class="top-intro-tagline">
+						Think of it like your devtools fieldtrip.
+					</span>
 				</p>
 				<div class="top-actions">
 					<Button
@@ -554,7 +555,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 <style>
 	.top {
-		padding-top: 4rem;
+		padding-top: 5rem;
 		display: grid;
 		grid-template:
 			"main" auto
@@ -570,7 +571,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	.top-heading {
-		font-size: var(--fontSizeDisplay);
+		font-size: calc(var(--fontSizeDisplay) * 0.9);
 		font-style: italic;
 		line-height: 1;
 		padding-top: 1.5rem;
@@ -580,11 +581,16 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.top-intro {
 		color: var(--colorCopy);
-		font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+		font-size: clamp(0.85rem, 1.2vw, 0.95rem);
 		line-height: 1.55;
 		margin: 1rem 0 0;
 		max-width: 36rem;
 		text-wrap: pretty;
+	}
+
+	.top-intro-tagline {
+		display: block;
+		margin-top: 0.5lh;
 	}
 
 	.top-actions {
@@ -592,7 +598,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		flex-wrap: wrap;
 		gap: 0.75rem;
 		justify-content: center;
-		margin: 1.25rem 0 2rem;
+		margin: 2.25rem 0 5rem;
 	}
 
 	.top :global(.postcard-gallery) {
@@ -608,13 +614,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	@media (--widthSmall) {
 		.top-actions {
-			margin-bottom: 2.75rem;
+			margin-bottom: 5.75rem;
 		}
 	}
 
 	@media (--widthLarge) {
 		.top {
-			padding-top: 3.5rem;
+			padding-top: 4.5rem;
 			column-gap: 3.5rem;
 			grid-template: "main postcard" auto / minmax(0, 1.35fr) minmax(0, 1fr);
 		}
@@ -629,7 +635,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 		}
 
 		.top-heading {
-			font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+			font-size: clamp(1.45rem, 2.15vw, 1.9rem);
 			padding-top: 2.75rem;
 		}
 

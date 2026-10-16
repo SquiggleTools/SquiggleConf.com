@@ -6,25 +6,33 @@
 	.deep-sea-surface {
 		background: linear-gradient(
 				to bottom,
-				light-dark(
-					color-mix(in srgb, var(--colorBlue3) 20%, var(--colorBlueBright1)),
-					var(--colorSea)
+				color-mix(
+					in srgb,
+					var(--colorLagoon),
+					var(--colorSea) var(--themeDarkness)
 				),
-				light-dark(
-					var(--colorBlueBright2),
-					color-mix(in srgb, var(--colorSea), var(--colorBlue4))
-				),
-				light-dark(
-					var(--colorBlueBright1),
+				color-mix(
+						in srgb,
+						var(--colorFrost2),
+						color-mix(in srgb, var(--colorSea), var(--colorBlue4))
+							var(--themeDarkness)
+					)
+					calc((1 - var(--themeDark)) * 24rem + var(--themeDark) * 25%),
+				color-mix(
+					in srgb,
+					var(--colorFrost1),
 					color-mix(in srgb, var(--colorBlue4), var(--colorBlue5))
+						var(--themeDarkness)
 				),
-				light-dark(
-					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue2) 20%),
-					var(--colorBlue5)
+				color-mix(
+					in srgb,
+					color-mix(in srgb, var(--colorFrost1), var(--colorBlue2) 20%),
+					var(--colorBlue5) var(--themeDarkness)
 				),
-				light-dark(
-					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue3) 20%),
-					var(--colorBlue5)
+				color-mix(
+					in srgb,
+					color-mix(in srgb, var(--colorFrost1), var(--colorBlue3) 20%),
+					var(--colorBlue5) var(--themeDarkness)
 				)
 			)
 			var(--colorBlueBright2);
@@ -34,39 +42,87 @@
 		position: relative;
 	}
 
+	.deep-sea-surface::before {
+		background:
+			url("../assets/design/seam-wave-below.svg") 0 calc(1rem + 2px) /
+				var(--sizeSeamWidth) var(--sizeSeamHeight) repeat-x,
+			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0
+				calc(1rem + var(--sizeSeamHeight) + 1px) / 100% 100% no-repeat;
+		bottom: -1rem;
+		content: "";
+		filter: drop-shadow(
+			0 calc(-0.15rem - 2px) 0.2rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorBlue4) r g b / 19%),
+					rgb(
+							from var(--colorBlue5) calc(r * 0.3) calc(g * 0.3) calc(b * 0.3) /
+								85%
+						)
+						var(--themeDarkness)
+				)
+		);
+		height: calc(var(--sizeSeamHeight) + 2rem);
+		left: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			rgb(from var(--colorBlue5) r g b / 33%)
+				calc(1rem + var(--sizeSeamHeight) * 0.125),
+			rgb(from var(--colorBlue5) r g b / 67%)
+				calc(1rem + var(--sizeSeamHeight) * 0.875)
+		);
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+	}
+
 	.deep-sea-surface::after {
 		background:
 			radial-gradient(
 				circle at top,
-				light-dark(rgb(from var(--colorBlue1) r g b / 49%), transparent) 50%,
-				light-dark(rgb(from var(--colorWhite) r g b / 70%), transparent) 70%
+				color-mix(
+						in srgb,
+						rgb(from var(--colorBlue1) r g b / 49%),
+						transparent var(--themeDarkness)
+					)
+					50%,
+				color-mix(
+						in srgb,
+						rgb(from var(--colorWhite) r g b / 70%),
+						transparent var(--themeDarkness)
+					)
+					70%
 			),
 			repeating-linear-gradient(
 				116deg,
-				light-dark(
+				color-mix(
+						in srgb,
 						rgb(from var(--colorBlue5) r g b / 5%),
-						rgb(from var(--colorWhite) r g b / 4.2%)
+						rgb(from var(--colorWhite) r g b / 4.2%) var(--themeDarkness)
 					)
 					0 2px,
 				transparent 2px 18px,
-				light-dark(
+				color-mix(
+						in srgb,
 						rgb(from var(--colorBlue3) r g b / 10%),
-						rgb(from var(--colorBlue2) r g b / 2.8%)
+						rgb(from var(--colorBlue2) r g b / 2.8%) var(--themeDarkness)
 					)
 					18px 20px,
 				transparent 20px 34px
 			),
 			repeating-linear-gradient(
 				-64deg,
-				light-dark(
+				color-mix(
+						in srgb,
 						rgb(from var(--colorBlue5) r g b / 3%),
-						rgb(from var(--colorWhite) r g b / 1.8%)
+						rgb(from var(--colorWhite) r g b / 1.8%) var(--themeDarkness)
 					)
 					0 1px,
 				transparent 1px 15px,
-				light-dark(
+				color-mix(
+						in srgb,
 						rgb(from var(--colorBlue3) r g b / 4%),
-						rgb(from var(--colorBlue2) r g b / 2.6%)
+						rgb(from var(--colorBlue2) r g b / 2.6%) var(--themeDarkness)
 					)
 					15px 17px,
 				transparent 17px 31px
@@ -74,7 +130,10 @@
 		content: "";
 		inset: 0;
 		mix-blend-mode: multiply;
-		opacity: 0.58;
+		opacity: max(
+			calc(0.58 - var(--themeDark) * 1.16),
+			calc(var(--themeDark) * 0.62 - 0.31)
+		);
 		pointer-events: none;
 		position: absolute;
 		z-index: 0;
@@ -82,6 +141,9 @@
 
 	html.dark .deep-sea-surface::after {
 		mix-blend-mode: screen;
-		opacity: 0.31;
+	}
+
+	html.theme-transition .deep-sea-surface::after {
+		transition: mix-blend-mode var(--transitionTheme) ease-in-out allow-discrete;
 	}
 </style>

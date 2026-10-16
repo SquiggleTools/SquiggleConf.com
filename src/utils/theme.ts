@@ -1,3 +1,5 @@
+import { reducedMotionQuery } from "./motion";
+
 export type Theme = "dark" | "light";
 
 export const themeChangeEvent = "theme-change";
@@ -10,8 +12,25 @@ export function getTheme(): Theme {
 	return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export function setTheme(theme: Theme) {
+function setTheme(theme: Theme) {
 	document.documentElement.classList.toggle("dark", theme === "dark");
 	localStorage.setItem("theme", theme);
 	document.dispatchEvent(new CustomEvent(themeChangeEvent));
+}
+
+export const themeTransitionDuration = 2500;
+
+let themeTransitionEnd: ReturnType<typeof setTimeout> | undefined;
+
+export function changeTheme(theme: Theme = getOppositeTheme()) {
+	if (!reducedMotionQuery.matches) {
+		const html = document.documentElement;
+		html.classList.add("theme-transition");
+		clearTimeout(themeTransitionEnd);
+		themeTransitionEnd = setTimeout(() => {
+			html.classList.remove("theme-transition");
+		}, themeTransitionDuration);
+	}
+
+	setTheme(theme);
 }

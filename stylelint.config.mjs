@@ -34,6 +34,7 @@ export default {
 			"/^(min-|max-)?(device-)?(width|height|aspect-ratio)$/",
 		],
 		"media-feature-range-notation": "context",
+		"value-keyword-case": ["lower", { ignoreKeywords: ["/^--/"] }],
 
 		// Colors come from design tokens in src/layouts/base.css
 		"color-named": "never",

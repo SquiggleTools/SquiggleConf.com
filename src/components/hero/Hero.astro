@@ -32,11 +32,22 @@ const { class: className, tall, width, ...props } = Astro.props;
 		background: linear-gradient(
 			180deg,
 			var(--colorBlueBright2) 0%,
-			light-dark(var(--colorWhite), var(--colorBlue5)) 50%,
-			light-dark(var(--colorCream), var(--colorBlue5)) 100%
+			color-mix(
+					in srgb,
+					var(--colorWhite),
+					var(--colorBlue5) var(--themeDarkness)
+				)
+				50%,
+			color-mix(
+					in srgb,
+					var(--colorCream),
+					var(--colorBlue5) var(--themeDarkness)
+				)
+				100%
 		);
 		z-index: 1;
 		color: var(--colorHeading);
+		overflow-x: clip;
 		padding-bottom: var(--cityscapeHeightArea);
 		position: relative;
 	}
