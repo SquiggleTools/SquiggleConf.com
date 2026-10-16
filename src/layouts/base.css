@@ -20,10 +20,16 @@
 	color-scheme: light;
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
-	--colorBlueBright1: color-mix(in srgb, #d8f3ff, #051b32 var(--themeDarkness));
+	--colorFrost1: #d8f3ff;
+	--colorFrost2: #e6f7fe;
+	--colorBlueBright1: color-mix(
+		in srgb,
+		var(--colorFrost1),
+		#051b32 var(--themeDarkness)
+	);
 	--colorBlueBright2: color-mix(
 		in srgb,
-		#e6f7fe,
+		var(--colorFrost2),
 		var(--colorBlue5) var(--themeDarkness)
 	);
 	--colorBlue1: #bcdfe9;

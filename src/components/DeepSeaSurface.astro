@@ -12,25 +12,26 @@
 					var(--colorSea) var(--themeDarkness)
 				),
 				color-mix(
-					in srgb,
-					var(--colorBlueBright2),
-					color-mix(in srgb, var(--colorSea), var(--colorBlue4))
-						var(--themeDarkness)
-				),
+						in srgb,
+						var(--colorFrost2),
+						color-mix(in srgb, var(--colorSea), var(--colorBlue4))
+							var(--themeDarkness)
+					)
+					calc((1 - var(--themeDark)) * 24rem + var(--themeDark) * 25%),
 				color-mix(
 					in srgb,
-					var(--colorBlueBright1),
+					var(--colorFrost1),
 					color-mix(in srgb, var(--colorBlue4), var(--colorBlue5))
 						var(--themeDarkness)
 				),
 				color-mix(
 					in srgb,
-					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue2) 20%),
+					color-mix(in srgb, var(--colorFrost1), var(--colorBlue2) 20%),
 					var(--colorBlue5) var(--themeDarkness)
 				),
 				color-mix(
 					in srgb,
-					color-mix(in srgb, var(--colorBlueBright1), var(--colorBlue3) 20%),
+					color-mix(in srgb, var(--colorFrost1), var(--colorBlue3) 20%),
 					var(--colorBlue5) var(--themeDarkness)
 				)
 			)
@@ -39,6 +40,26 @@
 		isolation: isolate;
 		overflow: clip;
 		position: relative;
+	}
+
+	.deep-sea-surface::before {
+		background: url("../assets/design/seam-wave-below.svg") 0 2px / 1.75rem
+			0.75rem repeat-x;
+		bottom: 0;
+		content: "";
+		filter: drop-shadow(
+			0 calc(-0.15rem - 2px) 0.2rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorWhite) r g b / 65%),
+					rgb(from var(--colorBlue1) r g b / 22%) var(--themeDarkness)
+				)
+		);
+		height: 0.75rem;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
 	}
 
 	.deep-sea-surface::after {

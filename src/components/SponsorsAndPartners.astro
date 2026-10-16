@@ -45,6 +45,7 @@ const tiers = [
 ---
 
 <div class="past-sponsors">
+	<span aria-hidden="true" class="past-sponsors-seam"></span>
 	<section aria-labelledby="past-sponsors-heading" class="past-sponsors-shell">
 		<div class="past-sponsors-intro">
 			<h2 id="past-sponsors-heading">Past Sponsors</h2>
@@ -101,6 +102,15 @@ const tiers = [
 				);
 
 		background:
+			linear-gradient(
+				to top,
+				color-mix(
+					in srgb,
+					var(--colorLagoon),
+					transparent var(--themeDarkness)
+				),
+				transparent 24rem
+			),
 			radial-gradient(
 				circle at calc(18% + var(--themeDarkness) * 0.02)
 					calc(16% + var(--themeDarkness) * 0.02),
@@ -137,14 +147,14 @@ const tiers = [
 				180deg,
 				color-mix(
 						in srgb,
-						var(--colorBlueBright2),
+						var(--colorFrost2),
 						color-mix(in srgb, var(--colorBlue4), var(--colorBlue5))
 							var(--themeDarkness)
 					)
 					0%,
 				color-mix(
 						in srgb,
-						var(--colorBlueBright1),
+						var(--colorFrost1),
 						var(--colorBlue4) var(--themeDarkness)
 					)
 					calc(28% + var(--themeDarkness) * 0.02),
@@ -162,9 +172,33 @@ const tiers = [
 					)
 					100%
 			);
+		margin-top: -0.75rem;
+		mask:
+			url("../assets/design/seam-wave-below.svg") 0 0 / 1.75rem 0.75rem repeat-x,
+			linear-gradient(var(--colorBlue5), var(--colorBlue5)) 0 0.75rem / 100%
+				calc(100% - 0.75rem) no-repeat;
 		overflow: clip;
 		position: relative;
 		width: 100%;
+	}
+
+	.past-sponsors-seam {
+		background: url("../assets/design/seam-wave-above.svg") 0 -2px / 1.75rem
+			0.75rem repeat-x;
+		filter: drop-shadow(
+			0 calc(0.15rem + 2px) 0.2rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorBlue3) r g b / 30%),
+					rgb(from var(--colorBlue5) r g b / 65%) var(--themeDarkness)
+				)
+		);
+		height: 0.75rem;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+		top: 0;
 	}
 
 	.past-sponsors::before,
@@ -298,7 +332,7 @@ const tiers = [
 				),
 				color-mix(
 					in srgb,
-					rgb(from var(--colorBlueBright1) r g b / 58%),
+					rgb(from var(--colorFrost1) r g b / 58%),
 					rgb(from var(--colorBlue1) r g b / 3%) var(--themeDarkness)
 				)
 			),

@@ -107,13 +107,8 @@ const {
 		transform: translateY(-1px);
 	}
 
-	/* A translucent outline that takes its text color from its surroundings. */
+	.button-variant-emphasized,
 	.button-variant-ghost {
-		--colorButtonBackground: color-mix(
-			in srgb,
-			rgb(from var(--colorWhite) r g b / 8%),
-			transparent var(--themeDarkness)
-		);
 		--colorButtonBorder: color-mix(
 			in srgb,
 			rgb(from var(--colorBlue5) r g b / 22%),
@@ -124,7 +119,6 @@ const {
 			rgb(from var(--colorBlue5) r g b / 30%),
 			rgb(from var(--colorBlue1) r g b / 46%) var(--themeDarkness)
 		);
-		--colorButtonColor: currentcolor;
 		--shadowButton:
 			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
 			0 0.1rem 0.1rem
@@ -161,10 +155,23 @@ const {
 
 		border-color: var(--colorButtonBorder);
 		box-shadow: var(--shadowButton);
+	}
+
+	/* A translucent outline that takes its text color from its surroundings. */
+	.button-variant-ghost {
+		--colorButtonBackground: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 8%),
+			transparent var(--themeDarkness)
+		);
+		--colorButtonColor: currentcolor;
+
 		font-weight: var(--fontWeightMedium);
 		text-wrap: nowrap;
 	}
 
+	.button-variant-emphasized:hover,
+	.button-variant-emphasized:focus-visible,
 	.button-variant-ghost:hover,
 	.button-variant-ghost:focus-visible {
 		box-shadow:
