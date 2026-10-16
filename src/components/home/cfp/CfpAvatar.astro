@@ -19,7 +19,7 @@ const { class: className, person } = Astro.props;
 		alt={person.placeholder ? "" : person.name}
 		class:list={[person.placeholder && "cfp-avatar-placeholder"]}
 		src={person.image}
-		{...getCoverImageProps(person.image, 104, 1.06)}
+		{...getCoverImageProps(person.image, 40, 1.06)}
 	/>
 	{person.placeholder && <PlaceholderMark />}
 </div>
