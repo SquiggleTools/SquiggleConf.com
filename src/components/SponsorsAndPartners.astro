@@ -13,23 +13,22 @@ const pastSponsors = Object.values(historicalDataByYear).flatMap(
 
 const tiers = [
 	[
-		{ size: "14rem", titles: ["Bloomberg"] },
-		{ size: "10rem", titles: ["Mintlify"] },
+		{ size: "3rem", titles: ["Bloomberg"] },
+		{ size: "2.5rem", titles: ["Mintlify"] },
 	],
 	[
+		{ size: "2.25rem", titles: ["Igalia"] },
+		{ size: "1.125rem", titles: ["Datastax"] },
 		{
-			size: "8rem",
-			titles: [
-				"Igalia",
-				"Datastax",
-				"Inngest",
-				"OpenJS Foundation",
-				"Prisma",
-				"Elastic",
-			],
+			size: "2.25rem",
+			titles: ["Inngest", "OpenJS Foundation", "Prisma", "Elastic"],
 		},
 	],
-	[{ size: "6rem", titles: ["VoidZero", "Rush Stack", "Nx", "Progress"] }],
+	[
+		{ size: "2rem", titles: ["VoidZero", "Rush Stack"] },
+		{ size: "5.25rem", titles: ["Nx"] },
+		{ size: "2rem", titles: ["Progress"] },
+	],
 ].map((groups) =>
 	groups.flatMap(({ size, titles }) =>
 		titles.map((title) => {
@@ -392,7 +391,7 @@ const tiers = [
 		border-radius: var(--radiusLarge);
 		display: flex;
 		justify-content: center;
-		min-height: 5rem;
+		min-height: 3.5rem;
 		padding: 0.7rem 1rem;
 		transition:
 			background var(--transitionNormal),
@@ -418,8 +417,8 @@ const tiers = [
 	}
 
 	.sponsor-logo :global(img) {
-		max-height: var(--logo-size);
-		max-width: var(--logo-size);
+		height: var(--logo-size);
+		width: auto;
 	}
 
 	.past-sponsors-cta {
