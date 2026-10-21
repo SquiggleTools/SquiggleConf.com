@@ -105,6 +105,15 @@ const ticketsButton = {
 			menu.hidePopover();
 		}
 	});
+	menu?.addEventListener("focusout", (event) => {
+		if (
+			event.relatedTarget instanceof Node &&
+			!menu.contains(event.relatedTarget) &&
+			menu.matches(":popover-open")
+		) {
+			menu.hidePopover();
+		}
+	});
 	menu?.addEventListener("toggle", (event) => {
 		if (event instanceof ToggleEvent && event.newState === "open") {
 			menu.querySelector("button")?.focus();

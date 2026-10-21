@@ -150,12 +150,21 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 		return layer && section ? [{ field, layer, section }] : [];
 	});
 
-	if (fields.length && !reducedMotionQuery.matches) {
+	if (fields.length) {
 		let frame = 0;
 		const positioned = new WeakSet<HTMLElement>();
 
 		const update = () => {
 			frame = 0;
+
+			if (reducedMotionQuery.matches) {
+				for (const { layer } of fields) {
+					layer.removeAttribute("data-parallax-smooth");
+					layer.style.removeProperty("transform");
+					positioned.delete(layer);
+				}
+				return;
+			}
 
 			const drifts = fields
 				.filter(({ field }) => {
@@ -185,5 +194,6 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 		update();
 		addEventListener("scroll", request, { passive: true });
 		addEventListener("resize", request, { passive: true });
+		reducedMotionQuery.addEventListener("change", request);
 	}
 </script>

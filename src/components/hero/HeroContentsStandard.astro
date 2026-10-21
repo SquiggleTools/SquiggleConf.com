@@ -30,7 +30,7 @@ const { heading, squiggly } = Astro.props;
 
 <style>
 	.hero-contents-standard {
-		align-items: center;
+		align-items: safe center;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -41,6 +41,7 @@ const { heading, squiggly } = Astro.props;
 	h1 {
 		font-size: var(--fontSizeLarger);
 		font-weight: var(--fontWeightLight);
+		max-width: 100%;
 	}
 
 	.hero-contents-standard-medium h1 :global(.text-squiggly .squiggly) {

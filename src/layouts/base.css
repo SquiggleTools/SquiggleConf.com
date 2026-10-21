@@ -22,7 +22,8 @@
 	initial-value: light;
 }
 
-:root {
+:root,
+[data-theme-pinned] {
 	color-scheme: var(--themeColorScheme);
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
@@ -118,7 +119,6 @@
 	--fontWeightMedium: 500;
 	--fontWeightSemibold: 600;
 	--fontWeightBold: 700;
-	--lineHeightBody: calc(1.4 + var(--themeDarkStep) * 0.1);
 	--radiusSmall: 0.25rem;
 	--radiusMedium: 0.5rem;
 	--radiusLarge: 1rem;
@@ -138,16 +138,34 @@
 }
 
 html {
+	--lineHeightBody: 1.4;
+
 	background-color: var(--colorBackground);
-	color: color-mix(in srgb, black, var(--colorWhite) var(--themeDarknessText));
 	min-height: 100%;
 	font-family: var(--fontFamilyBody);
+	overflow-wrap: break-word;
+}
+
+html,
+[data-theme-pinned] {
+	color: color-mix(in srgb, black, var(--colorWhite) var(--themeDarknessText));
 }
 
 html.dark {
+	--lineHeightBody: 1.5;
 	--themeColorScheme: dark;
 	--themeDark: 1;
 	--themeDarkStep: 1;
+	--themeDarkText: 1;
+}
+
+[data-theme-pinned] {
+	--themeDark: 0;
+	--themeDarkText: 0;
+}
+
+html.dark [data-theme-pinned] {
+	--themeDark: 1;
 	--themeDarkText: 1;
 }
 

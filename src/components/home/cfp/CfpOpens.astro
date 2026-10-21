@@ -120,6 +120,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	.cfp-opens-inner {
 		display: grid;
 		gap: clamp(2.5rem, 5vw, 4rem);
+		grid-template-columns: minmax(0, 1fr);
 		margin: 0 auto;
 		max-width: var(--sizeContentAreaWide);
 		position: relative;
@@ -157,7 +158,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	}
 
 	.cfp-opens-heading {
-		font-size: clamp(2rem, 5vw, 3.75rem);
+		font-size: min(clamp(2rem, 5vw, 3.75rem), 11vw);
 		font-style: italic;
 		line-height: 1.05;
 		margin: 0;
@@ -244,11 +245,11 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 
 		.cfp-opens {
-			--cfp-avatar-size: 5rem;
+			--cfp-avatar-size: min(5rem, 25vw);
 		}
 
 		.cfp-opens-lineup {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
 		}
 
 		.cfp-opens-people {

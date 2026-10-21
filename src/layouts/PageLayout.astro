@@ -27,14 +27,18 @@ const historical = year !== currentYear;
 		Skip to content
 	</a>
 	<Header hideLogo={hideHeaderLogo} year={year} />
-	{historical && <NextYearNotice heading={historicalHeading} year={year} />}
-	<main
-		class:list={["body-area", { "page-layout-historical": historical }]}
-		data-theme-lazy
-		id="main"
-	>
-		<slot />
-	</main>
+	{historical ? (
+		<main id="main">
+			<NextYearNotice heading={historicalHeading} year={year} />
+			<div class="body-area page-layout-historical" data-theme-lazy>
+				<slot />
+			</div>
+		</main>
+	) : (
+		<main class="body-area" data-theme-lazy id="main">
+			<slot />
+		</main>
+	)}
 	<Footer year={year} />
 </BaseLayout>
 
@@ -73,7 +77,12 @@ const historical = year !== currentYear;
 		display: flex;
 		font-family: var(--fontFamilyBody);
 		flex-direction: column;
-		align-items: center;
+		align-items: safe center;
+		overflow-wrap: anywhere;
 		padding: 1.5rem 0 3.5rem;
+	}
+
+	.page-layout-historical > :global(*) {
+		max-width: 100%;
 	}
 </style>

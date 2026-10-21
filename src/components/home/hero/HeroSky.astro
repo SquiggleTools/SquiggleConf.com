@@ -335,7 +335,8 @@ const clouds = [
 		cursor: default;
 	}
 
-	.hero-sky-orb:focus-visible {
+	.hero-sky-orb:focus-visible,
+	.hero-sky-orb-focused {
 		outline: 2px solid var(--colorAccentMedium);
 		outline-offset: 0.5rem;
 	}
@@ -609,6 +610,9 @@ const clouds = [
 			return [copy];
 		});
 		const [incomingOrb, incomingGlow] = incoming;
+		if (orb.matches(":focus-visible")) {
+			incomingOrb?.classList.add("hero-sky-orb-focused");
+		}
 
 		traveling = true;
 		html.classList.add("hero-orb-travel");

@@ -46,6 +46,7 @@ const itemSizes = {
 		<div class={`collage-item collage-item-${index + 1}`}>
 			<TimelineImage
 				alt={photo.alt}
+				columnWidth={layout === "feature-five" ? 668 : undefined}
 				effect={
 					shape === "avatar" ? "zoom" : layout === "duo" ? undefined : "grow"
 				}

@@ -26,86 +26,53 @@ export const themeTransitionDuration = 1650;
 
 let themeTransitionEnd: ReturnType<typeof setTimeout> | undefined;
 
-let restoreOffscreenRendering: (() => void) | undefined;
+let unpinOffscreenThemes: (() => void) | undefined;
 
 export function changeTheme(theme: Theme = getOppositeTheme()) {
 	if (!reducedMotionQuery.matches) {
 		const html = document.documentElement;
-		restoreOffscreenRendering?.();
-		restoreOffscreenRendering = skipOffscreenRendering();
+		unpinOffscreenThemes?.();
+		unpinOffscreenThemes = pinOffscreenThemes();
 		html.classList.add("theme-transition");
 		clearTimeout(themeTransitionEnd);
 		themeTransitionEnd = setTimeout(() => {
 			html.classList.remove("theme-transition");
-			restoreOffscreenRendering?.();
-			restoreOffscreenRendering = undefined;
+			unpinOffscreenThemes?.();
+			unpinOffscreenThemes = undefined;
 		}, themeTransitionDuration);
 	}
 
 	setTheme(theme);
 }
 
-function skipOffscreenRendering() {
-	const offscreen = [
-		...document.querySelectorAll<HTMLElement>("[data-theme-lazy] > *"),
-	].flatMap((element) => {
-		const { bottom, height, top, width } = element.getBoundingClientRect();
-		if (!height || (bottom >= 0 && top <= innerHeight)) {
-			return [];
-		}
-
-		const style = getComputedStyle(element);
-		const inset = (...properties: string[]) =>
-			properties.reduce(
-				(total, property) =>
-					total + parseFloat(style.getPropertyValue(property)),
-				0,
-			);
-
-		return [
-			{
-				contentHeight:
-					height -
-					inset(
-						"border-top-width",
-						"border-bottom-width",
-						"padding-top",
-						"padding-bottom",
-					),
-				contentWidth:
-					width -
-					inset(
-						"border-left-width",
-						"border-right-width",
-						"padding-left",
-						"padding-right",
-					),
-				element,
-				height,
-			},
-		];
-	});
-
-	for (const { contentHeight, contentWidth, element } of offscreen) {
-		element.style.containIntrinsicSize = `${contentWidth.toString()}px ${contentHeight.toString()}px`;
-		element.style.contentVisibility = "auto";
-	}
-
-	const unstable = offscreen.filter(
-		({ element, height }) =>
-			Math.abs(element.getBoundingClientRect().height - height) > 0.5,
-	);
-
-	const restore = (elements: typeof offscreen) => {
-		for (const { element } of elements) {
-			element.style.removeProperty("contain-intrinsic-size");
-			element.style.removeProperty("content-visibility");
-		}
+function pinOffscreenThemes() {
+	const margin = innerHeight / 2;
+	const isOffscreen = (element: Element) => {
+		const { bottom, height, top } = element.getBoundingClientRect();
+		return height > 0 && (bottom < -margin || top > innerHeight + margin);
+	};
+	const unpin = (element: Element) => {
+		element.removeAttribute("data-theme-pinned");
 	};
 
-	restore(unstable);
+	let pinned = [
+		...document.querySelectorAll<HTMLElement>("[data-theme-lazy] > *"),
+	].filter(isOffscreen);
+
+	const unpinOnscreen = () => {
+		const onscreen = pinned.filter((element) => !isOffscreen(element));
+		pinned = pinned.filter((element) => !onscreen.includes(element));
+		onscreen.forEach(unpin);
+	};
+
+	for (const element of pinned) {
+		element.setAttribute("data-theme-pinned", "");
+	}
+
+	addEventListener("scroll", unpinOnscreen, { passive: true });
 
 	return () => {
-		restore(offscreen);
+		removeEventListener("scroll", unpinOnscreen);
+		pinned.forEach(unpin);
 	};
 }

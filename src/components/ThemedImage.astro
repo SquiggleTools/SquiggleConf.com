@@ -16,8 +16,7 @@ const { alt, class: className, sources, ...rest } = Astro.props;
 
 <span class="themed-image">
 	<Img
-		alt=""
-		aria-hidden="true"
+		alt={alt}
 		class:list={[className, "themed-image-dark"]}
 		src={sources.dark}
 		{...rest}
@@ -33,11 +32,26 @@ const { alt, class: className, sources, ...rest } = Astro.props;
 <style>
 	.themed-image {
 		display: inline-grid;
+		position: relative;
 	}
 
 	.themed-image-dark,
 	.themed-image-light {
 		grid-area: 1 / 1;
+	}
+
+	html:not(.dark) .themed-image-dark,
+	html.dark .themed-image-light {
+		height: 100%;
+		inset: 0;
+		object-fit: contain;
+		position: absolute;
+		width: 100%;
+	}
+
+	html:not(.dark, .theme-transition) .themed-image-dark,
+	html.dark:not(.theme-transition) .themed-image-light {
+		display: none;
 	}
 
 	.themed-image-dark {

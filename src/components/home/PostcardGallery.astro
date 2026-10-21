@@ -11,6 +11,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 			aria-label="Flip the SquiggleConf postcard"
 			aria-pressed="false"
 			class="postcard-flip-toggle"
+			disabled
 			type="button"
 		></button>
 		<div class="postcard-flip-scene">
@@ -127,6 +128,10 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 		inset: 0;
 		padding: 0;
 		position: absolute;
+	}
+
+	.postcard-flip-toggle:disabled {
+		cursor: default;
 	}
 
 	.postcard-flip:is(
@@ -312,10 +317,14 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	});
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
-	const toggle = document.querySelector<HTMLElement>(".postcard-flip-toggle");
+	const toggle = document.querySelector<HTMLButtonElement>(
+		".postcard-flip-toggle",
+	);
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard && toggle) {
+		toggle.disabled = false;
+
 		const flippedWithoutHover =
 			'[data-flipped="true"], :not([data-flipped])[data-mobile-flipped]';
 		const flippedWithHover =

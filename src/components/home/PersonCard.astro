@@ -44,7 +44,7 @@ const title = "title" in person ? person.title : undefined;
 		align-items: center;
 		display: grid;
 		gap: 0.8rem;
-		grid-template-columns: 5rem 1fr;
+		grid-template-columns: 5rem minmax(0, 1fr);
 	}
 
 	.person-card-image {
@@ -55,6 +55,7 @@ const title = "title" in person ? person.title : undefined;
 		display: grid;
 		gap: 0.28rem;
 		min-height: 5rem;
+		overflow-wrap: anywhere;
 		place-content: center start;
 	}
 
