@@ -87,6 +87,11 @@ const ticketsButton = {
 			menu.hidePopover();
 		}
 	});
+	menu?.addEventListener("toggle", (event) => {
+		if (event instanceof ToggleEvent && event.newState === "open") {
+			menu.querySelector("button")?.focus();
+		}
+	});
 </script>
 
 <style>
@@ -143,12 +148,22 @@ const ticketsButton = {
 		top: calc(5vw - 2.1rem);
 	}
 
+	.header-menu-toggle:focus-visible {
+		border-radius: var(--radiusSmall);
+		outline: 2px solid currentcolor;
+		outline-offset: 2px;
+	}
+
 	.header-menu-toggle:has(+ .header-links:popover-open) {
 		visibility: hidden;
 	}
 
 	.header-links .header-menu-toggle {
-		top: 0;
+		font-size: 3rem;
+		line-height: 1;
+		padding: 0 0.5rem;
+		right: 0.5rem;
+		top: 0.5rem;
 	}
 
 	.header-links {

@@ -132,8 +132,8 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	.postcard-flip:is(
 		:hover,
 		:focus-within,
-		[data-mobile-flipped],
-		:has(> [aria-pressed="true"])
+		[data-flipped],
+		[data-mobile-flipped]
 	) {
 		animation: none;
 	}
@@ -160,23 +160,21 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	/* data-mobile-flipped is only set on mobile, when scrolled past */
 	.postcard-flip[data-mobile-flipped],
-	[aria-pressed="true"] + .postcard-flip-scene {
+	.postcard-flip[data-flipped="true"] .postcard-flip-scene {
 		transform: translateY(-0.08rem);
 	}
 
 	.postcard-flip:is(
-			:hover,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard-flip-inner {
 		transform: rotateY(180deg);
 	}
 
 	.postcard-flip:is(
-			:hover,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard {
 		box-shadow:
@@ -279,9 +277,8 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	}
 
 	.postcard-flip:is(
-			:hover,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard-note {
 		opacity: 1;
@@ -318,11 +315,28 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard && toggle) {
+		const setFlipped = (flipped: boolean | undefined) => {
+			if (flipped === undefined) {
+				delete postcard.dataset.flipped;
+			} else {
+				postcard.dataset.flipped = `${flipped}`;
+			}
+
+			toggle.setAttribute("aria-pressed", `${flipped === true}`);
+		};
+
 		toggle.addEventListener("click", () => {
-			toggle.setAttribute(
-				"aria-pressed",
-				`${toggle.getAttribute("aria-pressed") !== "true"}`,
+			setFlipped(
+				!postcard.matches(
+					'[data-flipped="true"], :not([data-flipped]):is(:hover, [data-mobile-flipped])',
+				),
 			);
+		});
+
+		postcard.addEventListener("pointerleave", (event) => {
+			if (event.pointerType === "mouse") {
+				setFlipped(undefined);
+			}
 		});
 
 		let centerAboveMiddle = false;

@@ -1,5 +1,5 @@
 .anchor-title::after {
-	content: " #";
+	content: " #" / "";
 	opacity: 0;
 	transition: var(--transitionNormal) opacity;
 }

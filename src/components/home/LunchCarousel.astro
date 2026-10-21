@@ -30,6 +30,7 @@ const { spots } = Astro.props;
 					<div class="lunch-slide-image">
 						<Image
 							alt={spot.alt}
+							draggable="false"
 							sizes="(min-width: 900px) 15rem, 27.5rem"
 							src={spot.image}
 							widths={[240, 480]}
@@ -339,6 +340,35 @@ const { spots } = Astro.props;
 				updateAutoAdvance();
 			}
 		});
+
+		let wheelDistance = 0;
+		let wheelGestureEnd: number | undefined;
+
+		track.addEventListener(
+			"wheel",
+			(event) => {
+				if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) {
+					return;
+				}
+
+				event.preventDefault();
+				window.clearTimeout(wheelGestureEnd);
+				wheelGestureEnd = window.setTimeout(() => {
+					wheelDistance = 0;
+				}, 200);
+
+				if (Math.abs(wheelDistance) >= 30) {
+					return;
+				}
+
+				wheelDistance += event.deltaX;
+				if (Math.abs(wheelDistance) >= 30) {
+					setSlide(activeIndex + (wheelDistance > 0 ? 1 : slides.length - 1));
+					updateAutoAdvance();
+				}
+			},
+			{ passive: false },
+		);
 
 		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {

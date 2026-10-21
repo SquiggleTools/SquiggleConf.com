@@ -91,7 +91,7 @@
 		rgb(0 0 7 / 25%) var(--themeDarkness)
 	);
 	--colorUnhappy: #ffbfc2;
-	--colorUnhappyStrong: #a8201a;
+	--colorUnhappyStrong: #8a1a15;
 	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
 	--fontSizeSmaller: clamp(0.95rem, 1.5vw, 1.05rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
