@@ -29,6 +29,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 					<span class="postcard postcard-back">
 						<Image
 							alt="Back of the SquiggleConf postcard"
+							priority
 							sizes="(min-width: 34rem) 31.5rem, 100vw"
 							src={postcardBack}
 						/>
@@ -208,8 +209,12 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	.postcard-back {
 		background: var(--colorCream);
 		color: rgb(from var(--colorBlue5) r g b / 75%);
-		font-family: "Shantell Sans", cursive;
+		font-family: cursive;
 		font-weight: var(--fontWeightSemiLight);
+	}
+
+	.postcard-gallery[data-handwriting-loaded] .postcard-back {
+		font-family: "Shantell Sans", cursive;
 	}
 
 	.postcard-back-message {
@@ -299,6 +304,14 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
 	pauseOffscreen();
+
+	const gallery = document.querySelector<HTMLElement>(".postcard-gallery");
+
+	addEventListener("load", () => {
+		void document.fonts.load(`1em "Shantell Sans"`, "Hi Mom").then(() => {
+			gallery?.toggleAttribute("data-handwriting-loaded", true);
+		});
+	});
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
 	const toggle = document.querySelector<HTMLElement>(".postcard-flip-toggle");

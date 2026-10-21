@@ -30,7 +30,6 @@ const { spots } = Astro.props;
 					<div class="lunch-slide-image">
 						<Image
 							alt={spot.alt}
-							loading={index === 0 ? "eager" : "lazy"}
 							sizes="(min-width: 900px) 15rem, 27.5rem"
 							src={spot.image}
 							widths={[240, 480]}
@@ -207,6 +206,7 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-pause {
+		min-width: 1.5rem;
 		color: color-mix(
 			in srgb,
 			var(--colorBlue4),
