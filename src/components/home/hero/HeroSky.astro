@@ -514,58 +514,48 @@ const clouds = [
 		document.addEventListener(themeChangeEvent, updatePressed);
 	}
 
-	type Point = [number, number];
-
-	const easeInOut = (progress: number) =>
-		(1 - Math.cos(Math.PI * progress)) / 2;
+	const travelEasing = "cubic-bezier(0.65, 0, 0.35, 1)";
+	const travelSteps = 24;
+	const settingShare = 0.6;
 
 	function travelKeyframes(orbBox: DOMRect, horizon: number) {
 		const radius = orbBox.width / 2;
-		const [x, y]: Point = [orbBox.left + radius, orbBox.top + radius];
-		const hidden = horizon + radius * 1.1;
-		const span = Math.max(radius * 5, innerWidth * 0.4);
-		const steps = 24;
+		const drop = horizon + radius * 1.1 - (orbBox.top + radius);
+		const reach = Math.max(radius * 5, innerWidth * 0.4);
 
-		const rise = Array.from({ length: steps + 1 }, (_, index): Point => {
-			const angle = Math.PI * (1 - easeInOut(index / steps) / 2);
-			return [
-				x + span * Math.cos(angle),
-				hidden - (hidden - y) * Math.sin(angle),
-			];
-		});
-		const set = rise
-			.map(([pointX, pointY]): Point => [2 * x - pointX, pointY])
-			.reverse();
-		const frames = [
-			...set.map((point, index) => ({
-				offset: index / steps / 2,
-				point,
-				progress: easeInOut(index / steps),
-				rising: false,
-			})),
-			...rise.map((point, index) => ({
-				offset: 0.5 + index / steps / 2,
-				point,
-				progress: easeInOut(index / steps),
-				rising: true,
-			})),
-		];
-		const fade = (offset: number, start: number, end: number) =>
-			Math.min(1, Math.max(0, (offset - start) / (end - start)));
-		const shift = ([pointX, pointY]: Point) =>
-			`translate(${pointX - x}px, ${pointY - y}px)`;
+		const frames = (side: number, setting: boolean) =>
+			Array.from({ length: travelSteps + 1 }, (_, index) => {
+				const progress = setting
+					? index / travelSteps
+					: 1 - index / travelSteps;
+				const angle = (Math.PI / 2) * progress;
+				const shift = `translate(${side * reach * Math.sin(angle)}px, ${drop * (1 - Math.cos(angle))}px)`;
+				return {
+					glow: {
+						offset: index / travelSteps,
+						opacity: Math.max(0, 1 - progress / 0.9),
+						transform: shift,
+					},
+					orb: {
+						offset: index / travelSteps,
+						opacity: 1 - progress,
+						transform: `${shift} rotate(${side * progress * 90}deg)`,
+					},
+				};
+			});
+
+		const set = frames(1, true);
+		const rise = frames(-1, false);
 
 		return {
-			glow: frames.map(({ offset, point, rising }) => ({
-				offset,
-				opacity: rising ? fade(offset, 0.55, 0.7) : fade(offset, 0.45, 0.3),
-				transform: shift(point),
-			})),
-			orb: frames.map(({ offset, point, progress, rising }) => ({
-				offset,
-				opacity: rising ? fade(offset, 0.5, 0.65) : fade(offset, 0.5, 0.35),
-				transform: `${shift(point)} rotate(${(rising ? progress - 1 : progress) * 90}deg)`,
-			})),
+			rise: {
+				glow: rise.map(({ glow }) => glow),
+				orb: rise.map(({ orb }) => orb),
+			},
+			set: {
+				glow: set.map(({ glow }) => glow),
+				orb: set.map(({ orb }) => orb),
+			},
 		};
 	}
 
@@ -583,35 +573,60 @@ const clouds = [
 
 		const html = document.documentElement;
 		const glow = hero.querySelector<HTMLElement>(".hero-sky-orb-glow");
-		const pinned = glow ? [orb, glow] : [orb];
 		const before = getTheme();
 		const after = getOppositeTheme();
 		const horizon =
 			hero.querySelector(".hero-harbor-water")?.getBoundingClientRect().top ??
 			hero.getBoundingClientRect().bottom;
 		const keyframes = travelKeyframes(orb.getBoundingClientRect(), horizon);
-		const options = { duration: themeTransitionDuration, easing: "linear" };
+		const setting = {
+			duration: themeTransitionDuration * settingShare,
+			easing: travelEasing,
+			fill: "forwards",
+		} as const;
+		const rising = {
+			duration: themeTransitionDuration,
+			easing: travelEasing,
+		} as const;
+
+		const incoming = [orb, glow].flatMap((element) => {
+			if (!element) {
+				return [];
+			}
+
+			const copy = element.cloneNode(true) as HTMLElement;
+			copy.removeAttribute("aria-label");
+			copy.removeAttribute("aria-pressed");
+			copy.setAttribute("aria-hidden", "true");
+			copy.inert = true;
+			copy.classList.add(`theme-pin-${after}`);
+			element.after(copy);
+			return [copy];
+		});
+		const [incomingOrb, incomingGlow] = incoming;
 
 		traveling = true;
 		html.classList.add("hero-orb-travel");
-		for (const element of pinned) {
-			element.classList.add(`theme-pin-${before}`);
-		}
+		orb.classList.add(`theme-pin-${before}`);
+		glow?.classList.add(`theme-pin-${before}`);
 
 		changeTheme(after);
-		glow?.animate(keyframes.glow, options);
-		const travel = orb.animate(keyframes.orb, options);
-
-		setTimeout(() => {
-			for (const element of pinned) {
-				element.classList.replace(`theme-pin-${before}`, `theme-pin-${after}`);
-			}
-		}, themeTransitionDuration / 2);
+		const settingAnimations = [
+			orb.animate(keyframes.set.orb, setting),
+			glow?.animate(keyframes.set.glow, setting),
+		];
+		incomingGlow?.animate(keyframes.rise.glow, rising);
+		const travel = (incomingOrb ?? orb).animate(keyframes.rise.orb, rising);
 
 		const done = () => {
-			for (const element of pinned) {
-				element.classList.remove(`theme-pin-${after}`);
+			for (const animation of settingAnimations) {
+				animation?.cancel();
 			}
+			for (const copy of incoming) {
+				copy.remove();
+			}
+			orb.classList.remove(`theme-pin-${before}`);
+			glow?.classList.remove(`theme-pin-${before}`);
 			html.classList.remove("hero-orb-travel");
 			traveling = false;
 		};
