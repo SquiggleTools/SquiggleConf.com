@@ -247,6 +247,10 @@ const { spots } = Astro.props;
 		.lunch-carousel-pause[data-paused]::before {
 			border-color: transparent transparent transparent ButtonText;
 		}
+
+		.lunch-carousel-pause:focus-visible::before {
+			outline-color: Highlight;
+		}
 	}
 
 	@media not (--widthLarge) {
@@ -324,6 +328,7 @@ const { spots } = Astro.props;
 
 		track.addEventListener("pointerdown", (event) => {
 			swipeStartX = event.clientX;
+			track.setPointerCapture(event.pointerId);
 		});
 		track.addEventListener("pointercancel", () => {
 			swipeStartX = undefined;

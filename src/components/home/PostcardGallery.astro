@@ -160,7 +160,8 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	/* data-mobile-flipped is only set on mobile, when scrolled past */
 	.postcard-flip[data-mobile-flipped],
-	.postcard-flip[data-flipped="true"] .postcard-flip-scene {
+	.postcard-flip[data-flipped="true"]:not(:hover, :focus-within)
+		.postcard-flip-scene {
 		transform: translateY(-0.08rem);
 	}
 
@@ -315,6 +316,19 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard && toggle) {
+		const flippedWithoutHover =
+			'[data-flipped="true"], :not([data-flipped])[data-mobile-flipped]';
+		const flippedWithHover =
+			'[data-flipped="true"], :not([data-flipped]):is(:hover, [data-mobile-flipped])';
+		let lastPointerType = "mouse";
+
+		const syncPressed = () => {
+			toggle.setAttribute(
+				"aria-pressed",
+				`${postcard.matches(flippedWithoutHover)}`,
+			);
+		};
+
 		const setFlipped = (flipped: boolean | undefined) => {
 			if (flipped === undefined) {
 				delete postcard.dataset.flipped;
@@ -322,15 +336,18 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 				postcard.dataset.flipped = `${flipped}`;
 			}
 
-			toggle.setAttribute("aria-pressed", `${flipped === true}`);
+			syncPressed();
 		};
 
+		toggle.addEventListener("pointerdown", (event) => {
+			lastPointerType = event.pointerType;
+		});
+
 		toggle.addEventListener("click", () => {
-			setFlipped(
-				!postcard.matches(
-					'[data-flipped="true"], :not([data-flipped]):is(:hover, [data-mobile-flipped])',
-				),
-			);
+			const selector =
+				lastPointerType === "mouse" ? flippedWithHover : flippedWithoutHover;
+			lastPointerType = "mouse";
+			setFlipped(!postcard.matches(selector));
 		});
 
 		postcard.addEventListener("pointerleave", (event) => {
@@ -346,6 +363,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 				"data-mobile-flipped",
 				mobileQuery.matches && centerAboveMiddle,
 			);
+			syncPressed();
 		};
 
 		observeAboveMiddle(
