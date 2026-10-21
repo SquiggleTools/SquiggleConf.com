@@ -60,7 +60,15 @@ const ticketsButton = {
 			popovertarget="header-links"
 			type="button"
 		>
-			≡
+			<svg
+				aria-hidden="true"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2.25"
+				viewBox="0 0 24 24"
+			>
+				<path d="M2.5 6.5h19M2.5 12h19M2.5 17.5h19" />
+			</svg>
 		</button>
 		<nav class="header-links" id="header-links" popover>
 			<button
@@ -70,7 +78,15 @@ const ticketsButton = {
 				popovertargetaction="hide"
 				type="button"
 			>
-				×
+				<svg
+					aria-hidden="true"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2.25"
+					viewBox="0 0 24 24"
+				>
+					<path d="M5 5l14 14M19 5L5 19" />
+				</svg>
 			</button>
 			{navLinks.map(({ text, ...props }) => (
 				<a {...props}>{text}</a>
@@ -81,6 +97,8 @@ const ticketsButton = {
 </header>
 
 <script>
+	import { headerExpandedQuery } from "~/utils/breakpoints";
+
 	const menu = document.getElementById("header-links");
 	menu?.addEventListener("click", (event) => {
 		if (event.target instanceof HTMLAnchorElement) {
@@ -90,6 +108,11 @@ const ticketsButton = {
 	menu?.addEventListener("toggle", (event) => {
 		if (event instanceof ToggleEvent && event.newState === "open") {
 			menu.querySelector("button")?.focus();
+		}
+	});
+	matchMedia(headerExpandedQuery).addEventListener("change", (event) => {
+		if (event.matches && menu?.matches(":popover-open")) {
+			menu.hidePopover();
 		}
 	});
 </script>
@@ -135,17 +158,29 @@ const ticketsButton = {
 		border: none;
 		color: inherit;
 		cursor: pointer;
-		font: 4rem/0 var(--fontFamilyBody);
-		padding: 1rem 0;
+		display: grid;
+		height: 2rem;
+		padding: 0;
+		place-items: center;
 		position: absolute;
 		right: 0;
 		top: 0;
+		width: 2.5rem;
 		z-index: 2;
 	}
 
+	.header-menu-toggle svg {
+		height: 2rem;
+		width: 2rem;
+	}
+
 	.header-floating .header-menu-toggle {
-		font-size: 3.6rem;
 		top: calc(5vw - 2.1rem);
+	}
+
+	.header-floating .header-menu-toggle svg {
+		height: 1.8rem;
+		width: 1.8rem;
 	}
 
 	.header-menu-toggle:focus-visible {
@@ -159,9 +194,6 @@ const ticketsButton = {
 	}
 
 	.header-links .header-menu-toggle {
-		font-size: 3rem;
-		line-height: 1;
-		padding: 0 0.5rem;
 		right: 0.5rem;
 		top: 0.5rem;
 	}

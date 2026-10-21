@@ -31,12 +31,30 @@ import Heading from "./Heading.astro";
 				required
 				type="email"
 			/>
+			<div class="newsletter-honeypot" hidden>
+				<label>
+					Leave this field empty
+					<input autocomplete="off" name="website" tabindex="-1" type="text" />
+				</label>
+			</div>
 			<Button as="button" size="large" type="submit" variant="light">
 				Subscribe
 			</Button>
 		</form>
 
 		<p id="newsletter-message" role="status"></p>
+		<p class="newsletter-outcome" id="newsletter-subscribed">
+			Thanks for signing up!
+		</p>
+		<p class="newsletter-outcome unhappy" id="newsletter-invalid">
+			Please enter a valid email address.
+		</p>
+		<p class="newsletter-outcome unhappy" id="newsletter-error">
+			We couldn't sign you up right now. Please try again later.
+		</p>
+		<p class="newsletter-outcome unhappy" id="newsletter-unavailable">
+			Newsletter signup is unavailable right now. Please try again later.
+		</p>
 	</ContentArea>
 </div>
 
@@ -160,13 +178,22 @@ import Heading from "./Heading.astro";
 		font-weight: var(--fontWeightLight);
 	}
 
-	#newsletter-message {
+	#newsletter-message,
+	.newsletter-outcome {
 		margin: auto;
 		max-width: min(16rem, 80vw);
 		text-wrap: balance;
 	}
 
-	#newsletter-message.unhappy {
+	.newsletter-outcome {
+		display: none;
+	}
+
+	.newsletter-outcome:target {
+		display: block;
+	}
+
+	:is(#newsletter-message, .newsletter-outcome).unhappy {
 		color: color-mix(
 			in srgb,
 			var(--colorUnhappyStrong),

@@ -11,20 +11,40 @@ interface Props {
 	sources: Record<"dark" | "light", ImageMetadata>;
 }
 
-const { class: className, sources, ...rest } = Astro.props;
+const { alt, class: className, sources, ...rest } = Astro.props;
 ---
 
-{(["dark", "light"] as const).map((theme) => (
+<span class="themed-image">
 	<Img
-		class:list={[className, `themed-image-${theme}`]}
-		src={sources[theme]}
+		alt=""
+		aria-hidden="true"
+		class:list={[className, "themed-image-dark"]}
+		src={sources.dark}
 		{...rest}
 	/>
-))}
+	<Img
+		alt={alt}
+		class:list={[className, "themed-image-light"]}
+		src={sources.light}
+		{...rest}
+	/>
+</span>
 
 <style>
-	html.dark .themed-image-light,
-	html:not(.dark) .themed-image-dark {
-		display: none;
+	.themed-image {
+		display: inline-grid;
+	}
+
+	.themed-image-dark,
+	.themed-image-light {
+		grid-area: 1 / 1;
+	}
+
+	.themed-image-dark {
+		opacity: var(--themeDarkStep);
+	}
+
+	.themed-image-light {
+		opacity: calc(1 - var(--themeDarkStep));
 	}
 </style>

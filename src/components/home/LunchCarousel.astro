@@ -20,17 +20,24 @@ const { spots } = Astro.props;
 	role="group"
 >
 	<TimelineImage radius="var(--radiusLarge)">
-		<div class="lunch-carousel-track" data-lunch-track>
+		<div
+			aria-label="Lunch spot photos"
+			aria-live="polite"
+			class="lunch-carousel-track"
+			data-lunch-track
+			role="group"
+		>
 			{spots.map((spot, index) => (
 				<div
-					aria-hidden={index === 0 ? "false" : "true"}
+					aria-label={`${index + 1} of ${spots.length}`}
+					aria-roledescription="slide"
 					class="lunch-slide"
 					data-lunch-slide
+					role="group"
 				>
 					<div class="lunch-slide-image">
 						<Image
 							alt={spot.alt}
-							draggable="false"
 							sizes="(min-width: 900px) 15rem, 27.5rem"
 							src={spot.image}
 							widths={[240, 480]}
@@ -43,27 +50,35 @@ const { spots } = Astro.props;
 			))}
 		</div>
 	</TimelineImage>
-	<div
-		aria-label="Lunch image navigation"
-		class="lunch-carousel-dots"
-		role="group"
-	>
-		{spots.map((spot, index) => (
-			<button
-				aria-current={index === 0 ? "true" : "false"}
-				aria-label={`Show ${spot.name}`}
-				class="lunch-carousel-dot"
-				data-lunch-dot
-				type="button"
-			/>
-		))}
+	<div class="lunch-carousel-controls" data-lunch-controls hidden>
 		<button
 			aria-label="Pause slideshow"
 			class="lunch-carousel-pause"
 			data-lunch-pause
-			hidden
 			type="button"
-		></button>
+		>
+			<svg aria-hidden="true" data-pause-icon viewBox="0 0 12 12">
+				<path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" fill="currentColor" />
+			</svg>
+			<svg aria-hidden="true" data-play-icon viewBox="0 0 12 12">
+				<path d="M3 1.5v9l7-4.5z" fill="currentColor" />
+			</svg>
+		</button>
+		<div
+			aria-label="Lunch image navigation"
+			class="lunch-carousel-dots"
+			role="group"
+		>
+			{spots.map((spot, index) => (
+				<button
+					aria-current={index === 0 ? "true" : "false"}
+					aria-label={`Show ${spot.name}`}
+					class="lunch-carousel-dot"
+					data-lunch-dot
+					type="button"
+				/>
+			))}
+		</div>
 	</div>
 </div>
 
@@ -71,6 +86,7 @@ const { spots } = Astro.props;
 	.lunch-carousel {
 		display: grid;
 		gap: 0.7rem;
+		grid-template-columns: minmax(0, 1fr);
 		margin: auto 0;
 		max-width: 10rem;
 		width: 100%;
@@ -78,9 +94,15 @@ const { spots } = Astro.props;
 
 	.lunch-carousel-track {
 		display: flex;
-		overflow-x: hidden;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
 		scroll-snap-type: x mandatory;
-		touch-action: pan-y;
+		scrollbar-width: none;
+	}
+
+	.lunch-carousel-track:focus-visible {
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: -2px;
 	}
 
 	.lunch-slide {
@@ -131,13 +153,22 @@ const { spots } = Astro.props;
 		line-height: 1.05;
 	}
 
-	.lunch-carousel-dots {
+	.lunch-carousel-controls {
 		--lunch-dot-gutter: calc((1.5rem - 0.65rem) / 2);
 
+		align-items: center;
 		display: flex;
 		justify-content: center;
 		margin: calc(var(--lunch-dot-gutter) * -1) 0;
 		padding-bottom: 0.15rem;
+	}
+
+	.lunch-carousel-controls[hidden] {
+		display: none;
+	}
+
+	.lunch-carousel-dots {
+		display: flex;
 	}
 
 	.lunch-carousel-dot,
@@ -195,15 +226,19 @@ const { spots } = Astro.props;
 		);
 	}
 
-	.lunch-carousel-dot:focus-visible,
-	.lunch-carousel-pause:focus-visible {
+	.lunch-carousel-dot:focus-visible {
 		outline: none;
 	}
 
-	.lunch-carousel-dot:focus-visible::before,
-	.lunch-carousel-pause:focus-visible::before {
+	.lunch-carousel-dot:focus-visible::before {
 		outline: 2px solid var(--colorAccentMedium);
 		outline-offset: 2px;
+	}
+
+	.lunch-carousel-pause:focus-visible {
+		border-radius: var(--radiusSmall);
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: -2px;
 	}
 
 	.lunch-carousel-pause {
@@ -219,37 +254,23 @@ const { spots } = Astro.props;
 		display: none;
 	}
 
-	.lunch-carousel-pause::before {
-		border-color: currentcolor;
-		border-style: solid;
-		border-width: 0 0.18rem;
-		box-sizing: border-box;
-		content: "";
-		height: 0.65rem;
-		width: 0.55rem;
+	.lunch-carousel-pause svg {
+		height: 0.7rem;
+		width: 0.7rem;
 	}
 
-	.lunch-carousel-pause[data-paused]::before {
-		border-color: transparent transparent transparent currentcolor;
-		border-width: 0.33rem 0 0.33rem 0.55rem;
+	.lunch-carousel-pause [data-play-icon],
+	.lunch-carousel-pause[data-paused] [data-pause-icon] {
+		display: none;
+	}
+
+	.lunch-carousel-pause[data-paused] [data-play-icon] {
+		display: block;
 	}
 
 	@media (forced-colors: active) {
 		.lunch-carousel-dot:is(:hover, :focus-visible)::before {
 			border-color: Highlight;
-		}
-
-		.lunch-carousel-pause::before {
-			border-color: ButtonText;
-			forced-color-adjust: none;
-		}
-
-		.lunch-carousel-pause[data-paused]::before {
-			border-color: transparent transparent transparent ButtonText;
-		}
-
-		.lunch-carousel-pause:focus-visible::before {
-			outline-color: Highlight;
 		}
 	}
 
@@ -271,7 +292,10 @@ const { spots } = Astro.props;
 		"[data-lunch-carousel]",
 	)) {
 		const track = carousel.querySelector<HTMLElement>("[data-lunch-track]");
-		if (!track) {
+		const controls = carousel.querySelector<HTMLElement>(
+			"[data-lunch-controls]",
+		);
+		if (!track || !controls) {
 			continue;
 		}
 
@@ -286,10 +310,30 @@ const { spots } = Astro.props;
 		let focused = false;
 		let hovered = false;
 		let paused = false;
+		let trackWidth = track.clientWidth;
 		let visible = false;
 
+		const realign = () => {
+			trackWidth = track.clientWidth;
+			if (Math.round(track.scrollLeft / trackWidth) !== activeIndex) {
+				track.scrollTo({
+					behavior: "instant",
+					left: activeIndex * trackWidth,
+				});
+			}
+		};
+
 		const markActive = () => {
-			activeIndex = Math.round(track.scrollLeft / track.clientWidth);
+			if (!track.clientWidth) {
+				return;
+			}
+
+			if (track.clientWidth === trackWidth) {
+				activeIndex = Math.round(track.scrollLeft / trackWidth);
+			} else {
+				realign();
+			}
+
 			for (const [slideIndex, slide] of slides.entries()) {
 				slide.setAttribute("aria-hidden", `${slideIndex !== activeIndex}`);
 			}
@@ -314,7 +358,10 @@ const { spots } = Astro.props;
 				pause.hidden = !canAutoAdvance();
 			}
 
-			if (canAutoAdvance() && visible && !focused && !hovered && !paused) {
+			const rotating =
+				canAutoAdvance() && visible && !focused && !hovered && !paused;
+			track.setAttribute("aria-live", rotating ? "off" : "polite");
+			if (rotating) {
 				autoAdvanceTimer = window.setInterval(
 					() => setSlide(activeIndex + 1),
 					3400,
@@ -322,58 +369,16 @@ const { spots } = Astro.props;
 			}
 		};
 
+		controls.hidden = false;
+		track.tabIndex = 0;
+		markActive();
 		track.addEventListener("scroll", markActive, { passive: true });
 
-		let swipeStartX: number | undefined;
-
-		track.addEventListener("pointerdown", (event) => {
-			swipeStartX = event.clientX;
-			track.setPointerCapture(event.pointerId);
-		});
-		track.addEventListener("pointercancel", () => {
-			swipeStartX = undefined;
-		});
-		track.addEventListener("pointerup", (event) => {
-			if (swipeStartX === undefined) {
-				return;
+		new ResizeObserver(() => {
+			if (track.clientWidth && track.clientWidth !== trackWidth) {
+				realign();
 			}
-
-			const swipeDistance = event.clientX - swipeStartX;
-			swipeStartX = undefined;
-			if (Math.abs(swipeDistance) > 30) {
-				setSlide(activeIndex + (swipeDistance < 0 ? 1 : slides.length - 1));
-				updateAutoAdvance();
-			}
-		});
-
-		let wheelDistance = 0;
-		let wheelGestureEnd: number | undefined;
-
-		track.addEventListener(
-			"wheel",
-			(event) => {
-				if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) {
-					return;
-				}
-
-				event.preventDefault();
-				window.clearTimeout(wheelGestureEnd);
-				wheelGestureEnd = window.setTimeout(() => {
-					wheelDistance = 0;
-				}, 200);
-
-				if (Math.abs(wheelDistance) >= 30) {
-					return;
-				}
-
-				wheelDistance += event.deltaX;
-				if (Math.abs(wheelDistance) >= 30) {
-					setSlide(activeIndex + (wheelDistance > 0 ? 1 : slides.length - 1));
-					updateAutoAdvance();
-				}
-			},
-			{ passive: false },
-		);
+		}).observe(track);
 
 		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {

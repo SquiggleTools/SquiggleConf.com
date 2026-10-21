@@ -71,9 +71,10 @@ const clouds = [
 	))}
 </div>
 <button
-	aria-label="Dark mode (enable JavaScript to use)"
+	aria-label="Dark mode"
 	class="hero-sky-orb"
 	data-pause-offscreen
+	disabled
 	style={`--orb-center: ${orbCenter}`}
 	type="button"
 >
@@ -330,6 +331,10 @@ const clouds = [
 		z-index: 2;
 	}
 
+	.hero-sky-orb:disabled {
+		cursor: default;
+	}
+
 	.hero-sky-orb:focus-visible {
 		outline: 2px solid var(--colorAccentMedium);
 		outline-offset: 0.5rem;
@@ -509,7 +514,7 @@ const clouds = [
 			orb.setAttribute("aria-pressed", `${getTheme() === "dark"}`);
 		};
 
-		orb.setAttribute("aria-label", "Dark mode");
+		orb.disabled = false;
 		updatePressed();
 		document.addEventListener(themeChangeEvent, updatePressed);
 	}

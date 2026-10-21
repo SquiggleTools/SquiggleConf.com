@@ -3,11 +3,7 @@ import ThemeMoon from "~/assets/design/theme-moon.svg";
 import ThemeSun from "~/assets/design/theme-sun.svg";
 ---
 
-<button
-	aria-label="Dark mode (enable JavaScript to use)"
-	class="theme-toggle"
-	type="button"
->
+<button aria-label="Dark mode" class="theme-toggle" disabled type="button">
 	<ThemeMoon aria-hidden="true" class="moon" />
 	<ThemeSun aria-hidden="true" class="sun" />
 </button>
@@ -18,10 +14,14 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 		border: transparent;
 		color: inherit;
 		cursor: pointer;
-		display: flex;
+		display: grid;
 		opacity: 0.8;
 		padding: 0;
 		transition: var(--transitionFast) opacity;
+	}
+
+	.theme-toggle:disabled {
+		visibility: hidden;
 	}
 
 	.theme-toggle:focus-within,
@@ -30,25 +30,31 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 	}
 
 	svg {
+		grid-area: 1 / 1;
 		height: 1.25rem;
 		width: 1.25rem;
 	}
 
-	html.dark .sun,
-	html:not(.dark) .moon {
-		display: none;
+	.moon {
+		opacity: var(--themeDarkStep);
+	}
+
+	.sun {
+		opacity: calc(1 - var(--themeDarkStep));
 	}
 </style>
 
 <script>
 	import { changeTheme, getTheme, themeChangeEvent } from "~/utils/theme";
 
-	for (const toggle of document.querySelectorAll(".theme-toggle")) {
+	for (const toggle of document.querySelectorAll<HTMLButtonElement>(
+		".theme-toggle",
+	)) {
 		const updatePressed = () => {
 			toggle.setAttribute("aria-pressed", `${getTheme() === "dark"}`);
 		};
 
-		toggle.setAttribute("aria-label", "Dark mode");
+		toggle.disabled = false;
 		updatePressed();
 		document.addEventListener(themeChangeEvent, updatePressed);
 
