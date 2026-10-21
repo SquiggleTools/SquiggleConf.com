@@ -14,15 +14,15 @@ interface Props {
 const { alt, class: className, sources, ...rest } = Astro.props;
 ---
 
-<span class="themed-image">
+<span aria-label={alt} class="themed-image" role="img">
 	<Img
-		alt={alt}
+		alt=""
 		class:list={[className, "themed-image-dark"]}
 		src={sources.dark}
 		{...rest}
 	/>
 	<Img
-		alt={alt}
+		alt=""
 		class:list={[className, "themed-image-light"]}
 		src={sources.light}
 		{...rest}

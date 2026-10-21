@@ -78,6 +78,12 @@ import Heading from "./Heading.astro";
 	let submitting = false;
 
 	function setMessage(text: string, unhappy: boolean, invalid = false) {
+		for (const outcome of document.querySelectorAll<HTMLElement>(
+			".newsletter-outcome",
+		)) {
+			outcome.hidden = true;
+		}
+
 		if (message) {
 			message.textContent = text;
 			message.classList.toggle("unhappy", unhappy);
@@ -202,7 +208,7 @@ import Heading from "./Heading.astro";
 		display: none;
 	}
 
-	.newsletter-outcome:target {
+	.newsletter-outcome:target:not([hidden]) {
 		display: block;
 	}
 

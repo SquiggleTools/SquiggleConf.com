@@ -121,7 +121,14 @@ const ticketsButton = {
 	});
 	matchMedia(headerExpandedQuery).addEventListener("change", (event) => {
 		if (event.matches && menu?.matches(":popover-open")) {
+			const focused = document.activeElement;
 			menu.hidePopover();
+			if (focused instanceof HTMLElement && menu.contains(focused)) {
+				(focused.checkVisibility()
+					? focused
+					: menu.querySelector("a")
+				)?.focus();
+			}
 		}
 	});
 </script>
