@@ -258,7 +258,7 @@ import Heading from "./Heading.astro";
 	}
 
 	.ocean-floor :global(.crab-claw-finger) {
-		animation: crab-claw-pinch var(--claw-duration) ease-in-out
+		animation: crab-claw-pinch calc(var(--claw-duration) * 3) ease-in-out
 			var(--claw-delay) infinite;
 		transform-box: view-box;
 		transform-origin: var(--crab-pinch-pivot);
@@ -266,16 +266,16 @@ import Heading from "./Heading.astro";
 
 	@keyframes crab-claw-pinch {
 		0%,
-		10%,
-		18%,
-		64%,
-		72%,
+		3.33%,
+		6%,
+		54.67%,
+		57.33%,
 		100% {
 			transform: rotate(0deg);
 		}
 
-		14%,
-		68% {
+		4.67%,
+		56% {
 			transform: rotate(var(--crab-pinch-angle));
 		}
 	}
