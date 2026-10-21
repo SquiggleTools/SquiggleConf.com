@@ -63,6 +63,10 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 		position: absolute;
 	}
 
+	.bubbles-layer[data-parallax-smooth] {
+		transition: transform 0.6s var(--transitionEaseOut);
+	}
+
 	.bubble {
 		animation: bubble-rise var(--duration) ease-in infinite;
 		animation-delay: var(--delay);
@@ -130,6 +134,7 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 
 	if (fields.length && !reducedMotionQuery.matches) {
 		let frame = 0;
+		const positioned = new WeakSet<HTMLElement>();
 
 		const update = () => {
 			frame = 0;
@@ -146,6 +151,12 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 
 			for (const { drift, layer } of drifts) {
 				layer.style.transform = `translateY(${drift}px)`;
+				if (!positioned.has(layer)) {
+					positioned.add(layer);
+					requestAnimationFrame(() => {
+						layer.toggleAttribute("data-parallax-smooth", true);
+					});
+				}
 			}
 		};
 
