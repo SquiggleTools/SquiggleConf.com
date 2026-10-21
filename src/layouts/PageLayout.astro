@@ -10,22 +10,52 @@ import BaseLayout from "./BaseLayout.astro";
 
 type Props = HeadProps & {
 	hideHeaderLogo?: boolean;
+	historicalHeading?: boolean;
 };
 
-const { hideHeaderLogo, year = currentYear, ...props } = Astro.props;
+const {
+	hideHeaderLogo,
+	historicalHeading,
+	year = currentYear,
+	...props
+} = Astro.props;
 const historical = year !== currentYear;
 ---
 
 <BaseLayout {...props} year={year}>
+	<a class="skip-link" href="#main">
+		Skip to content
+	</a>
 	<Header hideLogo={hideHeaderLogo} year={year} />
-	{historical && <NextYearNotice year={year} />}
-	<main class:list={["body-area", { "page-layout-historical": historical }]}>
+	{historical && <NextYearNotice heading={historicalHeading} year={year} />}
+	<main
+		class:list={["body-area", { "page-layout-historical": historical }]}
+		id="main"
+	>
 		<slot />
 	</main>
 	<Footer year={year} />
 </BaseLayout>
 
 <style>
+	.skip-link {
+		background: var(--colorBackground);
+		border-radius: var(--radiusMedium);
+		box-shadow: 0 0 1rem var(--colorTextShadow);
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		left: 1rem;
+		padding: 0.75rem 1rem;
+		position: absolute;
+		top: 1rem;
+		transform: translateY(-200%);
+		z-index: 10;
+	}
+
+	.skip-link:focus {
+		transform: none;
+	}
+
 	.body-area {
 		background: linear-gradient(
 			180deg,
@@ -37,7 +67,7 @@ const historical = year !== currentYear;
 	}
 
 	.page-layout-historical {
-		--fontFamilyBody: "Urbanist Variable", sans-serif;
+		--fontFamilyBody: var(--fontFamilyHeading), sans-serif;
 
 		display: flex;
 		font-family: var(--fontFamilyBody);

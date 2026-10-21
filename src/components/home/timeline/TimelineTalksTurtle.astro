@@ -2,7 +2,7 @@
 import turtleSvg from "~/assets/design/turtle.svg?raw";
 ---
 
-<div aria-hidden="true" class="timeline-talks-turtle">
+<div aria-hidden="true" class="timeline-talks-turtle" data-pause-offscreen>
 	<div class="timeline-talks-turtle-bubbles">
 		<span class="timeline-talks-turtle-bubble bubble-1"></span>
 		<span class="timeline-talks-turtle-bubble bubble-2"></span>
@@ -168,3 +168,9 @@ import turtleSvg from "~/assets/design/turtle.svg?raw";
 		}
 	}
 </style>
+
+<script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+</script>

@@ -8,7 +8,7 @@ import ContentArea from "./ContentArea.astro";
 import Heading from "./Heading.astro";
 ---
 
-<div class="newsletter" id="newsletter">
+<div class="newsletter" data-pause-offscreen id="newsletter">
 	<OceanFloorLeft aria-hidden="true" class="ocean-floor ocean-floor-left" />
 	<OceanFloorRight aria-hidden="true" class="ocean-floor ocean-floor-right" />
 	<Bubbles class="newsletter-bubbles" count={56} />
@@ -22,6 +22,8 @@ import Heading from "./Heading.astro";
 				Email Address
 			</label>
 			<input
+				aria-describedby="newsletter-message"
+				autocomplete="email"
 				class="email-input"
 				id="email"
 				name="email"
@@ -34,27 +36,42 @@ import Heading from "./Heading.astro";
 			</Button>
 		</form>
 
-		<p aria-live="assertive" id="newsletter-message"></p>
+		<p id="newsletter-message" role="status"></p>
 	</ContentArea>
 </div>
 
 <script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+
 	const form = document.querySelector<HTMLFormElement>("#newsletter-form");
+	const email = form?.querySelector("input");
 	const message = document.querySelector("#newsletter-message");
 	const submit = form?.querySelector("button");
+	let submitting = false;
 
 	function setMessage(text: string, unhappy: boolean) {
 		if (message) {
 			message.textContent = text;
 			message.classList.toggle("unhappy", unhappy);
 		}
+
+		if (unhappy) {
+			email?.setAttribute("aria-invalid", "true");
+		} else {
+			email?.removeAttribute("aria-invalid");
+		}
 	}
 
 	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
-		if (submit) {
-			submit.disabled = true;
+		if (submitting) {
+			return;
 		}
+
+		submitting = true;
+		submit?.setAttribute("aria-disabled", "true");
 
 		try {
 			const response = await fetch(form.action, {
@@ -67,7 +84,9 @@ import Heading from "./Heading.astro";
 				form.reset();
 			} else {
 				setMessage(
-					`There was an issue: ${(await response.text()) || response.statusText}`,
+					response.status === 400
+						? "Please enter a valid email address."
+						: "We couldn't sign you up right now. Please try again later.",
 					true,
 				);
 			}
@@ -77,9 +96,8 @@ import Heading from "./Heading.astro";
 				true,
 			);
 		} finally {
-			if (submit) {
-				submit.disabled = false;
-			}
+			submitting = false;
+			submit?.removeAttribute("aria-disabled");
 		}
 	});
 </script>
@@ -124,7 +142,8 @@ import Heading from "./Heading.astro";
 
 	.email-input {
 		background: var(--colorWhiteIsh);
-		border: none;
+		border: 1px solid
+			color-mix(in srgb, var(--colorBlue3), transparent var(--themeDarkness));
 		border-radius: var(--radiusSmall);
 		color: var(--colorBlue5);
 		font-family: var(--fontFamilyHeading);
@@ -137,6 +156,7 @@ import Heading from "./Heading.astro";
 	}
 
 	.email-input::placeholder {
+		color: rgb(from var(--colorBlue5) r g b / 65%);
 		font-weight: var(--fontWeightLight);
 	}
 
@@ -145,7 +165,11 @@ import Heading from "./Heading.astro";
 	}
 
 	#newsletter-message.unhappy {
-		color: var(--colorUnhappy);
+		color: color-mix(
+			in srgb,
+			var(--colorUnhappyStrong),
+			var(--colorUnhappy) var(--themeDarkness)
+		);
 	}
 
 	.newsletter :global(.newsletter-bubbles) {

@@ -14,7 +14,7 @@ const { data: historicalData, year } = Astro.props;
 const description = `${historicalData.date} · Boston New England Aquarium`;
 ---
 
-<PageLayout description={description} year={year}>
+<PageLayout description={description} historicalHeading year={year}>
 	<div class="index-contents">
 		<SpeakersContent
 			talks={Object.values(historicalData.sessionsBySlug)}

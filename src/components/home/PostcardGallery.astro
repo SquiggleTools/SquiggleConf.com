@@ -5,7 +5,7 @@ import postcardBack from "~/assets/2027/postcard-back.webp";
 import postcardFront from "~/assets/2027/postcard-front.webp";
 ---
 
-<div class="postcard-gallery">
+<div class="postcard-gallery" data-pause-offscreen>
 	<div class="postcard-flip">
 		<button
 			aria-label="Flip the SquiggleConf postcard"
@@ -29,7 +29,6 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 					<span class="postcard postcard-back">
 						<Image
 							alt="Back of the SquiggleConf postcard"
-							priority
 							sizes="(min-width: 34rem) 31.5rem, 100vw"
 							src={postcardBack}
 						/>
@@ -166,7 +165,6 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip:is(
 			:hover,
-			:focus-within,
 			[data-mobile-flipped],
 			:has(> [aria-pressed="true"])
 		)
@@ -176,7 +174,6 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip:is(
 			:hover,
-			:focus-within,
 			[data-mobile-flipped],
 			:has(> [aria-pressed="true"])
 		)
@@ -278,7 +275,6 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	.postcard-flip:is(
 			:hover,
-			:focus-within,
 			[data-mobile-flipped],
 			:has(> [aria-pressed="true"])
 		)
@@ -300,6 +296,9 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 <script>
 	import { observeAboveMiddle } from "~/utils/aboveMiddle";
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
 	const toggle = document.querySelector<HTMLElement>(".postcard-flip-toggle");

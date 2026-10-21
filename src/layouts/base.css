@@ -91,10 +91,7 @@
 		rgb(0 0 7 / 25%) var(--themeDarkness)
 	);
 	--colorUnhappy: #ffbfc2;
-	--fontFamilyBody: "Inter Variable";
-	--fontFamilyHeading: "Urbanist Variable";
-	--fontFamilyLogo: "Josefin Sans Variable";
-	--fontFamilyMonospace: "Geist Mono", monospace;
+	--colorUnhappyStrong: #a8201a;
 	--fontSizeCaption: clamp(0.84rem, 1.1vw, 0.94rem);
 	--fontSizeSmaller: clamp(0.95rem, 1.5vw, 1.05rem);
 	--fontSizeSmall: clamp(1.125rem, 2.875vw, 1.25rem);
@@ -161,4 +158,13 @@ html.dark {
 			--themeDark var(--transitionTheme) ease-in-out,
 			--themeDarkStep var(--transitionTheme) steps(2, jump-none);
 	}
+}
+
+[data-offscreen],
+[data-offscreen]::before,
+[data-offscreen]::after,
+[data-offscreen] *,
+[data-offscreen] *::before,
+[data-offscreen] *::after {
+	animation-play-state: paused !important;
 }

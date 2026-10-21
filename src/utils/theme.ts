@@ -14,7 +14,11 @@ export function getTheme(): Theme {
 
 function setTheme(theme: Theme) {
 	document.documentElement.classList.toggle("dark", theme === "dark");
-	localStorage.setItem("theme", theme);
+	try {
+		localStorage.setItem("theme", theme);
+	} catch (error) {
+		console.warn("Could not save the theme preference.", error);
+	}
 	document.dispatchEvent(new CustomEvent(themeChangeEvent));
 }
 

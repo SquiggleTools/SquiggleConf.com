@@ -17,7 +17,12 @@ const { choice } = Astro.props;
 			<span class="explore-radio-dot"></span>
 		</span>
 	</div>
-	<div class="explore-card-body">
+	<div
+		class:list={[
+			"explore-card-body",
+			choice.badgeLabel && "explore-card-body-badged",
+		]}
+	>
 		<TimelineImage
 			alt={choice.alt}
 			class="explore-photo"
@@ -189,7 +194,7 @@ const { choice } = Astro.props;
 		color: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorCopy) var(--themeDarkness)
+			var(--colorWhite) var(--themeDarkness)
 		);
 		font-size: 0.8em;
 		font-variant: tabular-nums;
@@ -224,6 +229,12 @@ const { choice } = Astro.props;
 
 		.explore-title {
 			font-size: 1.15rem;
+		}
+	}
+
+	@media not (--widthXSmall) {
+		.explore-card-body-badged {
+			padding-top: 1.75rem;
 		}
 	}
 </style>

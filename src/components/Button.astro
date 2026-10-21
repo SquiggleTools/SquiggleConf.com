@@ -54,7 +54,7 @@ const {
 		user-select: none;
 	}
 
-	.button[disabled] {
+	.button:is([disabled], [aria-disabled="true"]) {
 		cursor: not-allowed;
 		opacity: 0.8;
 	}
@@ -95,7 +95,7 @@ const {
 		);
 		--colorButtonColor: color-mix(
 			in srgb,
-			var(--colorWhiteIsh),
+			var(--colorWhite),
 			var(--colorBlue5) var(--themeDarkness)
 		);
 
@@ -118,7 +118,7 @@ const {
 			ellipse 90% calc(80% - var(--themeDark) * 20%) at 50% 100%,
 			color-mix(
 				in srgb,
-				rgb(from var(--colorBlue2) r g b / 55%),
+				rgb(from var(--colorBlue2) r g b / 35%),
 				rgb(from var(--colorBlue3) r g b / 45%) var(--themeDarkness)
 			),
 			transparent 70%
@@ -164,8 +164,8 @@ const {
 		--colorButtonColor: inherit;
 	}
 
-	.button:focus:not(:active, [disabled]),
-	.button:hover:not(:active, [disabled]) {
+	.button:focus:not(:active, [disabled], [aria-disabled="true"]),
+	.button:hover:not(:active, [disabled], [aria-disabled="true"]) {
 		background: var(--colorButtonBackgroundHover);
 		color: var(--colorButtonColorHover);
 		border: 2px solid var(--colorButtonBorderHover);

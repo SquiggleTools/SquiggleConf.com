@@ -17,7 +17,12 @@ const clouds = [
 ];
 ---
 
-<div aria-hidden="true" class="hero-sky" style={`--orb-center: ${orbCenter}`}>
+<div
+	aria-hidden="true"
+	class="hero-sky"
+	data-pause-offscreen
+	style={`--orb-center: ${orbCenter}`}
+>
 	<div class="hero-sky-night">
 		<span class="hero-sky-stars hero-sky-stars-near"></span>
 		<span class="hero-sky-stars hero-sky-stars-far"></span>
@@ -66,8 +71,9 @@ const clouds = [
 	))}
 </div>
 <button
-	aria-label="Toggle light and dark mode"
+	aria-label="Dark mode (enable JavaScript to use)"
 	class="hero-sky-orb"
+	data-pause-offscreen
 	style={`--orb-center: ${orbCenter}`}
 	type="button"
 >
@@ -288,15 +294,27 @@ const clouds = [
 
 	@keyframes hero-sky-drift {
 		0% {
-			translate: -1.5rem 0;
+			transform: translateX(-1.5rem);
 		}
 
 		100% {
-			translate: 1.5rem 0;
+			transform: translateX(1.5rem);
 		}
 	}
 
 	.hero-sky-orb {
+		--hero-orb-crescent: color-mix(
+			in srgb,
+			transparent,
+			var(--colorWhiteIsh) var(--themeDarkness)
+		);
+		--hero-orb-glow: color-mix(
+			in srgb,
+			rgb(from var(--colorTerminalOrange) r g b / 55%),
+			rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
+		);
+		--hero-orb-glow-offset: 10rem;
+
 		background: none;
 		border: none;
 		border-radius: 50%;
@@ -317,19 +335,15 @@ const clouds = [
 		outline-offset: 0.5rem;
 	}
 
-	.hero-sky-orb-body {
-		--hero-orb-crescent: color-mix(
-			in srgb,
-			transparent,
-			var(--colorWhiteIsh) var(--themeDarkness)
-		);
-		--hero-orb-glow: color-mix(
-			in srgb,
-			rgb(from var(--colorTerminalOrange) r g b / 55%),
-			rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
-		);
+	@media (forced-colors: active) {
+		.hero-sky-orb {
+			border: 2px solid ButtonText;
+		}
+	}
 
-		animation: hero-sky-orb-glow 7s ease-in-out infinite alternate;
+	.hero-sky-orb::before,
+	.hero-sky-orb::after,
+	.hero-sky-orb-body {
 		background: color-mix(
 			in srgb,
 			color-mix(in srgb, var(--colorCream) 50%, var(--colorTerminalOrange)),
@@ -337,21 +351,57 @@ const clouds = [
 		);
 		border-radius: 50%;
 		box-shadow: inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
-		display: block;
-		filter: drop-shadow(0 0 0.75rem var(--hero-orb-glow));
-		height: 100%;
 		rotate: -20deg;
 		transition: scale var(--transitionNormal) var(--transitionEaseOut);
+	}
+
+	.hero-sky-orb-body {
+		display: block;
+		height: 100%;
 		width: 100%;
 	}
 
+	.hero-sky-orb::before,
+	.hero-sky-orb::after {
+		animation: hero-sky-orb-glow 7s ease-in-out infinite alternate;
+		clip-path: inset(
+			calc(var(--hero-orb-glow-offset) - 4rem) -4rem
+				calc(-4rem - var(--hero-orb-glow-offset))
+		);
+		content: "";
+		inset: 0;
+		position: absolute;
+		transform: translateY(calc(-1 * var(--hero-orb-glow-offset)));
+		z-index: -1;
+	}
+
+	.hero-sky-orb::before {
+		animation-direction: alternate-reverse;
+		filter: drop-shadow(
+			0 var(--hero-orb-glow-offset) 0.75rem var(--hero-orb-glow)
+		);
+	}
+
+	.hero-sky-orb::after {
+		filter: drop-shadow(
+			0 var(--hero-orb-glow-offset) 1.5rem var(--hero-orb-glow)
+		);
+		opacity: 0;
+	}
+
+	.hero-sky-orb:hover::before,
+	.hero-sky-orb:hover::after,
 	.hero-sky-orb:hover .hero-sky-orb-body {
 		scale: 1.08;
 	}
 
 	@keyframes hero-sky-orb-glow {
+		0% {
+			opacity: 0;
+		}
+
 		100% {
-			filter: drop-shadow(0 0 1.5rem var(--hero-orb-glow));
+			opacity: 1;
 		}
 	}
 
@@ -439,16 +489,30 @@ const clouds = [
 
 <script>
 	import { reducedMotionQuery } from "~/utils/motion";
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 	import {
 		changeTheme,
 		getOppositeTheme,
 		getTheme,
+		themeChangeEvent,
 		themeTransitionDuration,
 	} from "~/utils/theme";
+
+	pauseOffscreen();
 
 	const night = document.querySelector<HTMLElement>(".hero-sky-night");
 	const orb = document.querySelector<HTMLButtonElement>(".hero-sky-orb");
 	let traveling = false;
+
+	if (orb) {
+		const updatePressed = () => {
+			orb.setAttribute("aria-pressed", `${getTheme() === "dark"}`);
+		};
+
+		orb.setAttribute("aria-label", "Dark mode");
+		updatePressed();
+		document.addEventListener(themeChangeEvent, updatePressed);
+	}
 
 	const travelEasing = "cubic-bezier(0.37, 0, 0.63, 1)";
 
@@ -629,6 +693,7 @@ const clouds = [
 				if (
 					!reducedMotionQuery.matches &&
 					!document.hidden &&
+					!container.closest("[data-offscreen]") &&
 					getTheme() === "dark"
 				) {
 					launchShootingStar(container);

@@ -18,6 +18,7 @@ const { data: historicalData, year } = Astro.props;
 	title="Speakers"
 	year={year}
 >
+	<h1 class="historical-page-heading">{year} Speakers</h1>
 	<ul class="speakers-list">
 		{Object.values(historicalData.peopleBySlug)
 			.toSorted((a, b) => a.name.localeCompare(b.name))
@@ -38,6 +39,12 @@ const { data: historicalData, year } = Astro.props;
 </PageLayout>
 
 <style>
+	.historical-page-heading {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarge);
+		text-align: center;
+	}
+
 	.speakers-list {
 		display: flex;
 		flex-flow: column wrap;
@@ -55,7 +62,7 @@ const { data: historicalData, year } = Astro.props;
 
 	@media (--widthXLarge) {
 		.speakers-list {
-			width: var(--sizeContentAreaThin);
+			width: min(var(--sizeContentAreaThin), calc(100% - 4rem));
 		}
 	}
 </style>

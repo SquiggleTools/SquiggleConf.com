@@ -20,7 +20,9 @@ export const POST: APIRoute = async ({ request }) => {
 		Object.fromEntries(await request.formData().catch(() => [])),
 	);
 	if (body.error) {
-		return new Response("Invalid body", { status: 400 });
+		return new Response("Please enter a valid email address.", {
+			status: 400,
+		});
 	}
 
 	const { email } = body.data;
@@ -38,13 +40,24 @@ export const POST: APIRoute = async ({ request }) => {
 			method: "POST",
 		});
 
-		return response.ok || isBrevoDuplicateIdentifier(await response.json())
-			? new Response("Thanks for signing up!", { status: 200 })
-			: new Response("Error", { status: 400 });
+		if (response.ok) {
+			return new Response("Thanks for signing up!", { status: 200 });
+		}
+
+		const json: unknown = await response.json().catch(() => undefined);
+		if (isBrevoDuplicateIdentifier(json)) {
+			return new Response("Thanks for signing up!", { status: 200 });
+		}
+
+		console.error("Brevo signup failed", response.status, json);
 	} catch (error) {
 		console.error(error);
-		return new Response("Error", { status: 400 });
 	}
+
+	return new Response(
+		"We couldn't sign you up right now. Please try again later.",
+		{ status: 502 },
+	);
 };
 
 function isBrevoDuplicateIdentifier(json: unknown) {

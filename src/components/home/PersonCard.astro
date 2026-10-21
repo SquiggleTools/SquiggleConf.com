@@ -15,7 +15,8 @@ const title = "title" in person ? person.title : undefined;
 
 <article class:list={["person-card", title && "person-card-talk"]}>
 	<TimelineImage
-		alt={person.name}
+		alt=""
+		class="person-card-image"
 		effect="zoom"
 		placeholder={person.placeholder}
 		size={160}
@@ -46,8 +47,8 @@ const title = "title" in person ? person.title : undefined;
 		grid-template-columns: 5rem 1fr;
 	}
 
-	.person-card-talk {
-		align-items: stretch;
+	.person-card-image {
+		aspect-ratio: 1;
 	}
 
 	.person-card-copy {
@@ -57,13 +58,6 @@ const title = "title" in person ? person.title : undefined;
 		place-content: center start;
 	}
 
-	.person-card-talk .person-card-copy {
-		gap: normal;
-		grid-template-rows: 2fr 1fr 1fr;
-		min-height: 5.75rem;
-		place-content: normal;
-	}
-
 	.person-card-title {
 		font-size: var(--fontSizeSmaller);
 		line-height: 1.15;
@@ -71,7 +65,6 @@ const title = "title" in person ? person.title : undefined;
 	}
 
 	.person-card-talk .person-card-title {
-		align-self: center;
 		line-height: 1.25;
 	}
 

@@ -4,8 +4,9 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 ---
 
 <button
-	aria-label="Theme toggle (enable JavaScript to use)"
+	aria-label="Dark mode (enable JavaScript to use)"
 	class="theme-toggle"
+	type="button"
 >
 	<ThemeMoon aria-hidden="true" class="moon" />
 	<ThemeSun aria-hidden="true" class="sun" />
@@ -43,15 +44,13 @@ import ThemeSun from "~/assets/design/theme-sun.svg";
 	import { changeTheme, getTheme, themeChangeEvent } from "~/utils/theme";
 
 	for (const toggle of document.querySelectorAll(".theme-toggle")) {
-		const updateLabel = () => {
-			toggle.setAttribute(
-				"aria-label",
-				`Theme toggle (current: ${getTheme()})`,
-			);
+		const updatePressed = () => {
+			toggle.setAttribute("aria-pressed", `${getTheme() === "dark"}`);
 		};
 
-		updateLabel();
-		document.addEventListener(themeChangeEvent, updateLabel);
+		toggle.setAttribute("aria-label", "Dark mode");
+		updatePressed();
+		document.addEventListener(themeChangeEvent, updatePressed);
 
 		toggle.addEventListener("click", () => {
 			changeTheme();

@@ -20,7 +20,11 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 });
 ---
 
-<div aria-hidden="true" class:list={["bubbles", className]}>
+<div
+	aria-hidden="true"
+	class:list={["bubbles", className]}
+	data-pause-offscreen
+>
 	<div class="bubbles-layer">
 		{bubbles.map(({ delay, duration, left, size, sway }) => (
 			<span
@@ -57,7 +61,6 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 		container-type: size;
 		inset: calc(-0.25 * (100vh + 100%)) 0;
 		position: absolute;
-		transform: translateY(var(--bubbles-parallax, 0));
 	}
 
 	.bubble {
@@ -113,8 +116,17 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 
 <script>
 	import { reducedMotionQuery } from "~/utils/motion";
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
-	const fields = [...document.querySelectorAll<HTMLElement>(".bubbles")];
+	pauseOffscreen();
+
+	const fields = [
+		...document.querySelectorAll<HTMLElement>(".bubbles"),
+	].flatMap((field) => {
+		const layer = field.querySelector<HTMLElement>(".bubbles-layer");
+		const section = field.parentElement;
+		return layer && section ? [{ field, layer, section }] : [];
+	});
 
 	if (fields.length && !reducedMotionQuery.matches) {
 		let frame = 0;
@@ -122,16 +134,18 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 		const update = () => {
 			frame = 0;
 
-			for (const field of fields) {
-				const section = field.parentElement;
-				if (!section) {
-					continue;
-				}
+			const drifts = fields
+				.filter(({ field }) => {
+					const { bottom, top } = field.getBoundingClientRect();
+					return bottom > 0 && top < innerHeight;
+				})
+				.map(({ layer, section }) => {
+					const { height, top } = section.getBoundingClientRect();
+					return { drift: (innerHeight / 2 - (top + height / 2)) / 2, layer };
+				});
 
-				const { height, top } = section.getBoundingClientRect();
-				const drift = (window.innerHeight / 2 - (top + height / 2)) / 2;
-
-				field.style.setProperty("--bubbles-parallax", `${drift}px`);
+			for (const { drift, layer } of drifts) {
+				layer.style.transform = `translateY(${drift}px)`;
 			}
 		};
 

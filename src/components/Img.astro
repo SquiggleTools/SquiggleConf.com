@@ -6,6 +6,7 @@ import { Image, type LocalImageProps } from "astro:assets";
 type Props = LocalImageProps;
 
 const imageOnlyProps = new Set([
+	"alt",
 	"densities",
 	"fit",
 	"format",
@@ -19,9 +20,13 @@ const imageOnlyProps = new Set([
 
 const { alt } = Astro.props;
 const src = Astro.props.src as ImageMetadata;
-const svgProps = Object.fromEntries(
-	Object.entries(Astro.props).filter(([key]) => !imageOnlyProps.has(key)),
-);
+const svgProps = {
+	decoding: "async" as const,
+	loading: "lazy" as const,
+	...Object.fromEntries(
+		Object.entries(Astro.props).filter(([key]) => !imageOnlyProps.has(key)),
+	),
+};
 ---
 
 {src.format === "svg" ? (

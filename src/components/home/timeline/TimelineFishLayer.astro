@@ -11,7 +11,12 @@ interface Props {
 const { swimUntil } = Astro.props;
 ---
 
-<div aria-hidden="true" class="timeline-fish-layer" data-swim-until={swimUntil}>
+<div
+	aria-hidden="true"
+	class="timeline-fish-layer"
+	data-pause-offscreen
+	data-swim-until={swimUntil}
+>
 	{timelineFish.map((fish, index) => (
 		<div class={`timeline-fish-shell timeline-fish-shell-${index + 1}`}>
 			<div class="timeline-fish-body">
@@ -31,9 +36,6 @@ const { swimUntil } = Astro.props;
 
 	.timeline-fish-shell {
 		opacity: 0;
-		filter: drop-shadow(
-			0 0.7rem 1.3rem rgb(from var(--colorBlue5) r g b / 18%)
-		);
 		pointer-events: none;
 		position: absolute;
 		transform: translate3d(-3rem, 0, 0);
@@ -51,6 +53,9 @@ const { swimUntil } = Astro.props;
 
 	.timeline-fish-image {
 		display: block;
+		filter: drop-shadow(
+			0 0.7rem 1.3rem rgb(from var(--colorBlue5) r g b / 18%)
+		);
 		height: 100%;
 		max-width: none;
 		opacity: calc(0.78 + var(--themeDark) * 0.22);
@@ -210,10 +215,15 @@ const { swimUntil } = Astro.props;
 </style>
 
 <script>
+	import { timelineCollapsedQuery } from "~/utils/breakpoints";
 	import { reducedMotionQuery } from "~/utils/motion";
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
 	import { onScrollFrame } from "./onScrollFrame";
 
+	pauseOffscreen();
+
+	const collapsedQuery = matchMedia(timelineCollapsedQuery);
 	const layer = document.querySelector<HTMLElement>(".timeline-fish-layer");
 	const section = layer?.parentElement;
 	const talks = document.querySelector<HTMLElement>(
@@ -237,52 +247,67 @@ const { swimUntil } = Astro.props;
 	const pageTop = (element: HTMLElement) =>
 		element.getBoundingClientRect().top + scrollY;
 
-	if (section instanceof HTMLElement && talks) {
-		onScrollFrame(() => {
-			const start = pageTop(section) - innerHeight * 0.34;
-			const end = pageTop(talks) + talks.offsetHeight + innerHeight * 0.75;
-			const progress = clamp01(
-				(scrollY + innerHeight * 0.28 - start) / Math.max(end - start, 1),
-			);
-
-			for (const [index, fish] of fishes.entries()) {
-				const [
-					fishStart,
-					fishEnd,
-					scale,
-					baseRotate,
-					rotateAmplitude,
-					bobAmplitude,
-					bobFrequency,
-					finAmplitude,
-					driftY,
-					exitOffset,
-					phase,
-				] = fishConfigs[index];
-
-				fish.style.opacity = "1";
-
-				if (reducedMotionQuery.matches) {
-					fish.style.transform = `translate3d(${1.8 + index * 8.25}rem, 0, 0) rotate(${baseRotate}deg) scale(${scale})`;
-					continue;
+	if (layer && section instanceof HTMLElement && talks) {
+		onScrollFrame(
+			() => {
+				if (collapsedQuery.matches) {
+					return;
 				}
 
-				const local = clamp01((progress - fishStart) / (fishEnd - fishStart));
-				const eased = 0.5 - Math.cos(local * Math.PI) / 2;
-				const bodyWave = Math.sin(local * Math.PI * 2 * bobFrequency + phase);
-				const finWave = Math.sin(local * Math.PI * 4.2 + phase * 1.7);
-				const entryOffset = fish.offsetWidth + 10;
-				const x =
-					-entryOffset +
-					eased *
-						(section.offsetWidth + entryOffset + fish.offsetWidth + exitOffset);
-				const y =
-					bodyWave * bobAmplitude + finWave * finAmplitude + eased * driftY;
-				const rotate =
-					baseRotate + (bodyWave + finWave * 0.4) * rotateAmplitude;
+				const layerTop = layer.getBoundingClientRect().top;
+				if (Math.abs(layerTop - innerHeight / 2) > innerHeight) {
+					return;
+				}
 
-				fish.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
-			}
-		}, reducedMotionQuery);
+				const start = pageTop(section) - innerHeight * 0.34;
+				const end = pageTop(talks) + talks.offsetHeight + innerHeight * 0.75;
+				const progress = clamp01(
+					(scrollY + innerHeight * 0.28 - start) / Math.max(end - start, 1),
+				);
+				const sectionWidth = section.offsetWidth;
+				const fishWidths = fishes.map((fish) => fish.offsetWidth);
+
+				for (const [index, fish] of fishes.entries()) {
+					const [
+						fishStart,
+						fishEnd,
+						scale,
+						baseRotate,
+						rotateAmplitude,
+						bobAmplitude,
+						bobFrequency,
+						finAmplitude,
+						driftY,
+						exitOffset,
+						phase,
+					] = fishConfigs[index];
+
+					fish.style.opacity = "1";
+
+					if (reducedMotionQuery.matches) {
+						fish.style.transform = `translate3d(${1.8 + index * 8.25}rem, 0, 0) rotate(${baseRotate}deg) scale(${scale})`;
+						continue;
+					}
+
+					const fishWidth = fishWidths[index];
+					const local = clamp01((progress - fishStart) / (fishEnd - fishStart));
+					const eased = 0.5 - Math.cos(local * Math.PI) / 2;
+					const bodyWave = Math.sin(local * Math.PI * 2 * bobFrequency + phase);
+					const finWave = Math.sin(local * Math.PI * 4.2 + phase * 1.7);
+					const entryOffset = fishWidth + 10;
+					const x =
+						-entryOffset +
+						eased * (sectionWidth + entryOffset + fishWidth + exitOffset);
+					const y =
+						bodyWave * bobAmplitude + finWave * finAmplitude + eased * driftY;
+					const rotate =
+						baseRotate + (bodyWave + finWave * 0.4) * rotateAmplitude;
+
+					fish.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
+				}
+			},
+			collapsedQuery,
+			reducedMotionQuery,
+		);
 	}
 </script>

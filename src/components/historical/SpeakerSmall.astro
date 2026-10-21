@@ -23,12 +23,17 @@ const {
 ---
 
 <As class:list={["speaker-small", className]} {...rest}>
-	<Avatar alt={`${speaker.name} Avatar`} size={96} src={speaker.image} />
+	<Avatar alt="" size={96} src={speaker.image} />
 	<div class="speaker-text">
-		{href && (
-			<a aria-label={speaker.name} class="speaker-text-links" href={href} />
-		)}
-		<div class="name">{speaker.name}</div>
+		<div class="name">
+			{href ? (
+				<a class="speaker-text-links" href={href}>
+					{speaker.name}
+				</a>
+			) : (
+				speaker.name
+			)}
+		</div>
 		<div class="details">
 			<div>
 				<SafeMarkdown of={speaker.qualification} />
@@ -55,17 +60,26 @@ const {
 	}
 
 	.speaker-text-links {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		gap: 0.5rem;
+		color: inherit;
+		outline: none;
 		text-decoration: none;
 	}
 
 	.speaker-text-links::before {
+		border-radius: var(--radiusMedium);
 		inset: calc(-1.1 * var(--cardPadding));
 		content: "";
 		position: absolute;
+	}
+
+	.speaker-text-links:focus-visible::before {
+		outline: 2px solid currentcolor;
+		outline-offset: -2px;
+	}
+
+	.speaker-text :global(.icon-links) {
+		position: relative;
+		z-index: 1;
 	}
 
 	.name {

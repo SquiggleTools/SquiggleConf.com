@@ -13,15 +13,15 @@ const { heading, squiggly } = Astro.props;
 <div
 	class:list={["hero-contents-standard", `hero-contents-standard-${squiggly}`]}
 >
-	{squiggly === "none" ? (
-		<Heading level="h1">{heading}</Heading>
-	) : (
-		<TextSquiggly width={squiggly}>
-			<Heading level="h1" slot="inside">
-				{heading}
-			</Heading>
-		</TextSquiggly>
-	)}
+	<Heading level="h1">
+		{squiggly === "none" ? (
+			heading
+		) : (
+			<TextSquiggly width={squiggly}>
+				<Fragment slot="inside">{heading}</Fragment>
+			</TextSquiggly>
+		)}
+	</Heading>
 
 	<p class="hero-contents-standard-body">
 		<slot />
@@ -43,8 +43,16 @@ const { heading, squiggly } = Astro.props;
 		font-weight: var(--fontWeightLight);
 	}
 
-	.hero-contents-standard-wide h1 {
+	.hero-contents-standard-medium h1 :global(.text-squiggly .squiggly) {
+		bottom: -0.1rem;
+	}
+
+	.hero-contents-standard-wide :global(.text-squiggly) {
 		padding-bottom: 0.25rem;
+	}
+
+	.hero-contents-standard-wide h1 :global(.text-squiggly .squiggly) {
+		bottom: -0.2rem;
 	}
 
 	.hero-contents-standard-body {

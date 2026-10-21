@@ -17,6 +17,7 @@ const { data: historicalData, year } = Astro.props;
 	title="Sessions"
 	year={year}
 >
+	<h1 class="historical-page-heading">{year} Sessions</h1>
 	<ul class="talks-list">
 		{Object.values(historicalData.sessionsBySlug)
 			.toSorted((a, b) => a.title.localeCompare(b.title))
@@ -27,6 +28,13 @@ const { data: historicalData, year } = Astro.props;
 </PageLayout>
 
 <style>
+	.historical-page-heading {
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeLarge);
+		margin-bottom: 1.5rem;
+		text-align: center;
+	}
+
 	.talks-list {
 		display: flex;
 		flex-direction: column;

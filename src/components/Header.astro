@@ -15,12 +15,24 @@ interface Props {
 const { hideLogo, year } = Astro.props;
 const pathname = pagePathname(Astro.url);
 
+function getAriaCurrent(href: string) {
+	if (pathname === href) {
+		return "page" as const;
+	}
+
+	if (pathname.startsWith(`${href}/`)) {
+		return "true" as const;
+	}
+
+	return undefined;
+}
+
 const navLinks = [
 	{ href: "/articles", text: "Articles" },
 	{ href: "https://shop.squiggle.tools", text: "Shop" },
 	...(year === currentYear ? [] : [{ href: "/", text: currentYear }]),
 ].map(({ href, text }) => ({
-	"aria-current": pathname === href ? ("page" as const) : undefined,
+	"aria-current": getAriaCurrent(href),
 	href,
 	target: href.startsWith("https") ? "_blank" : undefined,
 	text,
@@ -58,7 +70,7 @@ const ticketsButton = {
 				popovertargetaction="hide"
 				type="button"
 			>
-				≡
+				×
 			</button>
 			{navLinks.map(({ text, ...props }) => (
 				<a {...props}>{text}</a>
@@ -131,14 +143,32 @@ const ticketsButton = {
 		top: calc(5vw - 2.1rem);
 	}
 
+	.header-menu-toggle:has(+ .header-links:popover-open) {
+		visibility: hidden;
+	}
+
+	.header-links .header-menu-toggle {
+		top: 0;
+	}
+
 	.header-links {
 		display: none;
 	}
 
 	.header-links:popover-open {
-		background: var(--header-background);
-		border: none;
-		box-shadow: 0 0 1rem var(--colorTextShadow);
+		background: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorBlue4) var(--themeDarkness)
+		);
+		border: 1px solid
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue4) r g b / 18%),
+				var(--colorBlue3) var(--themeDarkness)
+			);
+		border-radius: var(--radiusLarge);
+		box-shadow: 0 0.5rem 1.5rem var(--colorTextShadow);
 		color: inherit;
 		display: flex;
 		flex-direction: column;
@@ -150,12 +180,20 @@ const ticketsButton = {
 		inset: 1.5rem 5vw auto auto;
 		line-height: 1.5;
 		margin: 0;
-		min-width: 20rem;
+		min-width: min(20rem, 100vw - 2rem);
 		overflow: visible;
 		padding: 4.5rem 1rem 1.5rem;
 		position: absolute;
 		text-align: right;
 		width: 45vw;
+	}
+
+	.header-floating .header-links:popover-open {
+		top: calc(5vw - 0.6rem);
+	}
+
+	.header-links:popover-open .header-button {
+		align-self: flex-end;
 	}
 
 	.header-links a:not([aria-current]) {

@@ -1,9 +1,4 @@
 ---
-import "@fontsource/geist-mono/latin-ext-400.css";
-import "@fontsource/geist-mono/latin-400.css";
-import "@fontsource-variable/urbanist";
-import "@fontsource-variable/urbanist/wght-italic.css";
-
 import Head, { type Props as HeadProps } from "~/components/Head.astro";
 
 import "./base.css";
@@ -15,5 +10,7 @@ type Props = HeadProps;
 
 <html lang="en">
 	<Head {...Astro.props} />
-	<slot />
+	<body>
+		<slot />
+	</body>
 </html>

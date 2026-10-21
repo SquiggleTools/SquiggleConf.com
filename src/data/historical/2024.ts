@@ -301,7 +301,7 @@ export const peopleBySlug: Record<string, PersonInfo> = {
 		image: robbyRussell,
 		links: {
 			github: "https://github.com/robbyrussell",
-			linkedin: "http://www.linkedin.com/in/robbyrussell",
+			linkedin: "https://www.linkedin.com/in/robbyrussell",
 			mastodon: "https://ruby.social/@robbyrussell",
 			x: "https://x.com/robbyrussell",
 		},

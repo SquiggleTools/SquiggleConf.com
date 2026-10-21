@@ -33,14 +33,14 @@ const yearPairs =
 		</div>
 		<div class="right">
 			<div class="footer-links">
+				<a href="/about">About</a>
+				<a href="/cfp">CFP</a>
 				<a href="/code-of-conduct">Code of Conduct</a>
 				<a href="https://shop.squiggle.tools" target="_blank">
 					Shop
 				</a>
 				{yearPairs.map(([yearHref, yearText]) => (
-					<a href={yearHref} target="_blank">
-						{yearText}
-					</a>
+					<a href={yearHref}>{yearText}</a>
 				))}
 				<ThemeToggle />
 			</div>
