@@ -257,6 +257,29 @@ import Heading from "./Heading.astro";
 		animation-name: crab-claw-wave-right;
 	}
 
+	.ocean-floor :global(.crab-claw-finger) {
+		animation: crab-claw-pinch var(--claw-duration) ease-in-out
+			var(--claw-delay) infinite;
+		transform-box: view-box;
+		transform-origin: var(--crab-pinch-pivot);
+	}
+
+	@keyframes crab-claw-pinch {
+		0%,
+		10%,
+		18%,
+		64%,
+		72%,
+		100% {
+			transform: rotate(0deg);
+		}
+
+		14%,
+		68% {
+			transform: rotate(var(--crab-pinch-angle));
+		}
+	}
+
 	@keyframes crab-claw-wave-left {
 		0%,
 		100% {

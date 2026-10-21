@@ -540,29 +540,31 @@ const clouds = [
 			...set.map((point, index) => ({
 				offset: index / steps / 2,
 				point,
+				progress: easeInOut(index / steps),
 				rising: false,
 			})),
 			...rise.map((point, index) => ({
 				offset: 0.5 + index / steps / 2,
 				point,
+				progress: easeInOut(index / steps),
 				rising: true,
 			})),
 		];
+		const fade = (offset: number, start: number, end: number) =>
+			Math.min(1, Math.max(0, (offset - start) / (end - start)));
 		const shift = ([pointX, pointY]: Point) =>
 			`translate(${pointX - x}px, ${pointY - y}px)`;
 
 		return {
 			glow: frames.map(({ offset, point, rising }) => ({
 				offset,
-				opacity: rising
-					? Math.max(0, (offset - 0.55) / 0.45)
-					: Math.max(0, 1 - offset / 0.45),
+				opacity: rising ? fade(offset, 0.55, 0.7) : fade(offset, 0.45, 0.3),
 				transform: shift(point),
 			})),
-			orb: frames.map(({ offset, point, rising }) => ({
+			orb: frames.map(({ offset, point, progress, rising }) => ({
 				offset,
-				opacity: rising ? offset * 2 - 1 : 1 - offset * 2,
-				transform: `${shift(point)} rotate(${rising ? offset * 180 - 180 : offset * 180}deg)`,
+				opacity: rising ? fade(offset, 0.5, 0.65) : fade(offset, 0.5, 0.35),
+				transform: `${shift(point)} rotate(${(rising ? progress - 1 : progress) * 90}deg)`,
 			})),
 		};
 	}

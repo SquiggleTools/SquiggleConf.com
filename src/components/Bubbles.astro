@@ -6,16 +6,23 @@ interface Props {
 
 const { class: className, count = 24 } = Astro.props;
 
+const pairs = Math.ceil(count / 2);
+const spread = (index: number, step: number) => (index * step) % 1;
+
 const bubbles = Array.from({ length: count }, (_, index) => {
-	const seed = Math.sin(index * 9301 + 49297) * 233280;
-	const random = seed - Math.floor(seed);
-	const duration = 32 + random * 32;
+	const pair = Math.floor(index / 2);
+	const mirrored = index % 2 === 1;
+	const duration = 40 + spread(pair, 0.5698402909) * 20;
+	const offset = (pair + 0.2 + spread(pair, 0.6180339887) * 0.6) / pairs;
+	const phase = (spread(pair, 0.7548776662) + (mirrored ? 0.04 : 0)) % 1;
+	const size = 0.25 + spread(index, 0.4142135623) * 0.6;
+	const sway = (spread(index, 0.3819660113) - 0.5) * 3;
 	return {
-		delay: ((index * 0.37) % 1) * duration,
+		delay: phase * duration,
 		duration,
-		left: (index * 37 + random * 23) % 100,
-		size: 0.25 + random * 0.6,
-		sway: (random - 0.5) * 3,
+		left: mirrored ? 100 - offset * 50 : offset * 50,
+		size,
+		sway: mirrored ? -sway : sway,
 	};
 });
 ---
@@ -68,7 +75,9 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 	}
 
 	.bubble {
-		animation: bubble-rise var(--duration) ease-in infinite;
+		animation:
+			bubble-rise var(--duration) linear infinite,
+			bubble-sway var(--duration) ease-in-out infinite;
 		animation-delay: var(--delay);
 		background: color-mix(
 			in srgb,
@@ -96,15 +105,12 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 	@keyframes bubble-rise {
 		0% {
 			opacity: 0;
-			transform: translate3d(0, 0, 0) scale(0.6);
+			scale: 0.6;
+			translate: 0 0;
 		}
 
 		15% {
 			opacity: 0.8;
-		}
-
-		50% {
-			transform: translate3d(var(--sway), -50cqh, 0) scale(0.9);
 		}
 
 		90% {
@@ -113,7 +119,19 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 
 		100% {
 			opacity: 0;
-			transform: translate3d(0, -110cqh, 0) scale(1.15);
+			scale: 1.15;
+			translate: 0 -110cqh;
+		}
+	}
+
+	@keyframes bubble-sway {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+
+		50% {
+			transform: translateX(var(--sway));
 		}
 	}
 </style>
@@ -146,7 +164,7 @@ const bubbles = Array.from({ length: count }, (_, index) => {
 				})
 				.map(({ layer, section }) => {
 					const { height, top } = section.getBoundingClientRect();
-					return { drift: (innerHeight / 2 - (top + height / 2)) / 2, layer };
+					return { drift: (innerHeight / 2 - (top + height / 2)) / 4, layer };
 				});
 
 			for (const { drift, layer } of drifts) {
