@@ -14,9 +14,6 @@ import turtleSvg from "~/assets/design/turtle.svg?raw";
 
 <style>
 	.timeline-talks-turtle {
-		filter: drop-shadow(
-			0 0.7rem 1.3rem rgb(from var(--colorBlue5) r g b / 16%)
-		);
 		margin-left: auto;
 		pointer-events: none;
 		position: relative;
@@ -25,8 +22,23 @@ import turtleSvg from "~/assets/design/turtle.svg?raw";
 
 	.timeline-talks-turtle-art {
 		animation: timeline-talks-turtle-drift 6.8s ease-in-out infinite;
+		isolation: isolate;
+		position: relative;
 		transform-origin: center;
 		will-change: transform;
+	}
+
+	.timeline-talks-turtle-art::before {
+		background: radial-gradient(
+			closest-side,
+			rgb(from var(--colorBlue5) r g b / 22%),
+			transparent
+		);
+		content: "";
+		inset: 20% 5% -5%;
+		position: absolute;
+		transform: translateY(0.7rem);
+		z-index: -1;
 	}
 
 	.timeline-talks-turtle :global(svg) {
