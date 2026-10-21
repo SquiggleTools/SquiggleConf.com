@@ -237,6 +237,15 @@ const { spots } = Astro.props;
 		.lunch-carousel-dot:is(:hover, :focus-visible)::before {
 			border-color: Highlight;
 		}
+
+		.lunch-carousel-pause::before {
+			border-color: ButtonText;
+			forced-color-adjust: none;
+		}
+
+		.lunch-carousel-pause[data-paused]::before {
+			border-color: transparent transparent transparent ButtonText;
+		}
 	}
 
 	@media not (--widthLarge) {
@@ -377,8 +386,8 @@ const { spots } = Astro.props;
 			}
 		});
 
-		new IntersectionObserver(([entry]) => {
-			visible = !!entry?.isIntersecting;
+		new IntersectionObserver((entries) => {
+			visible = !!entries.at(-1)?.isIntersecting;
 			updateAutoAdvance();
 		}).observe(carousel);
 

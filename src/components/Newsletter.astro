@@ -51,13 +51,13 @@ import Heading from "./Heading.astro";
 	const submit = form?.querySelector("button");
 	let submitting = false;
 
-	function setMessage(text: string, unhappy: boolean) {
+	function setMessage(text: string, unhappy: boolean, invalid = false) {
 		if (message) {
 			message.textContent = text;
 			message.classList.toggle("unhappy", unhappy);
 		}
 
-		if (unhappy) {
+		if (invalid) {
 			email?.setAttribute("aria-invalid", "true");
 		} else {
 			email?.removeAttribute("aria-invalid");
@@ -82,11 +82,11 @@ import Heading from "./Heading.astro";
 			if (response.ok) {
 				setMessage("Thanks for signing up!", false);
 				form.reset();
+			} else if (response.status === 400) {
+				setMessage("Please enter a valid email address.", true, true);
 			} else {
 				setMessage(
-					response.status === 400
-						? "Please enter a valid email address."
-						: "We couldn't sign you up right now. Please try again later.",
+					"We couldn't sign you up right now. Please try again later.",
 					true,
 				);
 			}

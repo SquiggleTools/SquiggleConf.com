@@ -68,8 +68,9 @@ export default defineConfig({
 	fonts: [
 		{
 			cssVariable: "--fontFamilyBody",
-			fallbacks: ["Inter Variable Fallback"],
+			fallbacks: ["Inter Variable Fallback", "sans-serif"],
 			name: "Inter Variable",
+			optimizedFallbacks: false,
 			provider: fontsource,
 			styles: ["normal"],
 			subsets: ["latin", "latin-ext"],
@@ -77,8 +78,9 @@ export default defineConfig({
 		},
 		{
 			cssVariable: "--fontFamilyHeading",
-			fallbacks: ["Urbanist Variable Fallback"],
+			fallbacks: ["Urbanist Variable Fallback", "sans-serif"],
 			name: "Urbanist Variable",
+			optimizedFallbacks: false,
 			provider: fontsource,
 			styles: ["normal", "italic"],
 			subsets: ["latin", "latin-ext"],
@@ -86,8 +88,9 @@ export default defineConfig({
 		},
 		{
 			cssVariable: "--fontFamilyLogo",
-			fallbacks: ["Josefin Sans Variable Fallback"],
+			fallbacks: ["Josefin Sans Variable Fallback", "sans-serif"],
 			name: "Josefin Sans Variable",
+			optimizedFallbacks: false,
 			provider: fontsource,
 			styles: ["normal"],
 			subsets: ["latin", "latin-ext"],

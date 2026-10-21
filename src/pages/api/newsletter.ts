@@ -32,6 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 			body: JSON.stringify({
 				email,
 				listIds: [BREVO_LIST_ID],
+				updateEnabled: true,
 			}),
 			headers: {
 				"api-key": BREVO_API_KEY,
