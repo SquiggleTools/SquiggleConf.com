@@ -16,8 +16,14 @@
 	initial-value: 0;
 }
 
+@property --themeColorScheme {
+	syntax: "light | dark";
+	inherits: true;
+	initial-value: light;
+}
+
 :root {
-	color-scheme: light;
+	color-scheme: var(--themeColorScheme);
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
 	--themeDarknessText: calc(var(--themeDarkText) * 100%);
@@ -139,8 +145,7 @@ html {
 }
 
 html.dark {
-	color-scheme: dark;
-
+	--themeColorScheme: dark;
 	--themeDark: 1;
 	--themeDarkStep: 1;
 	--themeDarkText: 1;
@@ -166,7 +171,8 @@ html.dark {
 			--themeDark var(--transitionTheme) ease-in-out,
 			--themeDarkStep var(--transitionTheme) steps(2, jump-none),
 			--themeDarkText calc(var(--transitionTheme) / 3) ease-in-out
-				calc(var(--transitionTheme) / 3);
+				calc(var(--transitionTheme) / 3),
+			--themeColorScheme var(--transitionTheme) linear allow-discrete;
 	}
 }
 
