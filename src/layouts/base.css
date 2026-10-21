@@ -10,10 +10,17 @@
 	initial-value: 0;
 }
 
+@property --themeDarkText {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
 :root {
 	color-scheme: light;
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
+	--themeDarknessText: calc(var(--themeDarkText) * 100%);
 	--themeDip: clamp(
 		0,
 		calc(1 - 8 * min(var(--themeDark), 1 - var(--themeDark))),
@@ -62,28 +69,28 @@
 	--colorCopy: color-mix(
 		in srgb,
 		rgb(from var(--colorBlue5) r g b / 84%),
-		rgb(from var(--colorWhiteIsh) r g b / 84%) var(--themeDarkness)
+		rgb(from var(--colorWhiteIsh) r g b / 84%) var(--themeDarknessText)
 	);
 	--colorForegroundEmphasized: color-mix(
 		in srgb,
 		var(--colorBlue5),
-		var(--colorBlue1) var(--themeDarkness)
+		var(--colorBlue1) var(--themeDarknessText)
 	);
 	--colorHeading: color-mix(
 		in srgb,
 		var(--colorBlue5),
-		var(--colorWhiteIsh) var(--themeDarkness)
+		var(--colorWhiteIsh) var(--themeDarknessText)
 	);
 	--colorImageBorder: rgb(from var(--colorBlue5) r g b / 18%);
 	--colorLink: color-mix(
 		in srgb,
 		var(--colorBlue4),
-		var(--colorWhite) var(--themeDarkness)
+		var(--colorWhite) var(--themeDarknessText)
 	);
 	--colorMuted: color-mix(
 		in srgb,
 		rgb(from var(--colorBlue4) r g b / 76%),
-		rgb(from var(--colorBlue1) r g b / 82%) var(--themeDarkness)
+		rgb(from var(--colorBlue1) r g b / 82%) var(--themeDarknessText)
 	);
 	--colorTextShadow: color-mix(
 		in srgb,
@@ -105,7 +112,7 @@
 	--fontWeightMedium: 500;
 	--fontWeightSemibold: 600;
 	--fontWeightBold: 700;
-	--lineHeightBody: 1.4;
+	--lineHeightBody: calc(1.4 + var(--themeDarkStep) * 0.1);
 	--radiusSmall: 0.25rem;
 	--radiusMedium: 0.5rem;
 	--radiusLarge: 1rem;
@@ -121,11 +128,12 @@
 	--transitionFast: 140ms;
 	--transitionNormal: 220ms;
 	--transitionEaseOut: cubic-bezier(0.22, 1, 0.36, 1);
-	--transitionTheme: 2.5s;
+	--transitionTheme: 1.65s;
 }
 
 html {
 	background-color: var(--colorBackground);
+	color: color-mix(in srgb, black, var(--colorWhite) var(--themeDarknessText));
 	min-height: 100%;
 	font-family: var(--fontFamilyBody);
 }
@@ -133,9 +141,9 @@ html {
 html.dark {
 	color-scheme: dark;
 
-	--lineHeightBody: 1.5;
 	--themeDark: 1;
 	--themeDarkStep: 1;
+	--themeDarkText: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -156,7 +164,9 @@ html.dark {
 	html.theme-transition {
 		transition:
 			--themeDark var(--transitionTheme) ease-in-out,
-			--themeDarkStep var(--transitionTheme) steps(2, jump-none);
+			--themeDarkStep var(--transitionTheme) steps(2, jump-none),
+			--themeDarkText calc(var(--transitionTheme) / 3) ease-in-out
+				calc(var(--transitionTheme) / 3);
 	}
 }
 

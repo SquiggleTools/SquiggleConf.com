@@ -208,6 +208,15 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		transition: color var(--transitionNormal);
 	}
 
+	:global(html.theme-transition) .timeline-heading {
+		transition-property: text-shadow, transform;
+	}
+
+	:global(html.theme-transition)
+		:is(.timeline-subtitle, .timeline-mobile-location) {
+		transition: none;
+	}
+
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
 	@media (--widthLarge) {
 		.timeline-content:is(:hover, :focus-within) {

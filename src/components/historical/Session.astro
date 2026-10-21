@@ -79,14 +79,10 @@ const {
 
 	.talk-description {
 		color: var(--colorCopy);
-		line-height: 1.4;
+		line-height: calc(1.4 + var(--themeDarkStep) * 0.2);
 		overflow: hidden;
 		text-align: left;
 		transition: var(--transitionNormal) line-height;
-	}
-
-	html.dark .talk-description {
-		line-height: 1.6;
 	}
 
 	.talk-details {

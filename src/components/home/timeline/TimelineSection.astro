@@ -1,4 +1,4 @@
-<section aria-label="Timeline preview" class="timeline-section">
+<section aria-label="Timeline preview" class="timeline-section" data-theme-lazy>
 	<slot />
 </section>
 
@@ -22,12 +22,12 @@
 		--timeline-cap-color: color-mix(
 			in srgb,
 			var(--colorBlue5),
-			var(--colorWhiteIsh) var(--themeDarkness)
+			var(--colorWhiteIsh) var(--themeDarknessText)
 		);
 		--timeline-time-color: color-mix(
 			in srgb,
 			var(--colorBlue5),
-			var(--colorWhiteIsh) var(--themeDarkness)
+			var(--colorWhiteIsh) var(--themeDarknessText)
 		);
 		--timeline-time-shadow: 0 1px 0
 			color-mix(
@@ -38,12 +38,12 @@
 		--timeline-venue-color: color-mix(
 			in srgb,
 			rgb(from var(--colorBlue5) r g b / 90%),
-			var(--colorHeading) var(--themeDarkness)
+			var(--colorHeading) var(--themeDarknessText)
 		);
 		--timeline-venue-at-color: color-mix(
 			in srgb,
 			rgb(from var(--colorBlue3) r g b / 68%),
-			rgb(from var(--colorBlue2) r g b / 70%) var(--themeDarkness)
+			rgb(from var(--colorBlue2) r g b / 70%) var(--themeDarknessText)
 		);
 		--timeline-venue-stack-shadow: 0 0.65rem 1.2rem
 			color-mix(

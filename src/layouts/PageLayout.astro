@@ -30,6 +30,7 @@ const historical = year !== currentYear;
 	{historical && <NextYearNotice heading={historicalHeading} year={year} />}
 	<main
 		class:list={["body-area", { "page-layout-historical": historical }]}
+		data-theme-lazy
 		id="main"
 	>
 		<slot />

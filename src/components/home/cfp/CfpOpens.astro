@@ -1,5 +1,4 @@
 ---
-import Arrow from "~/components/Arrow.astro";
 import Bubbles from "~/components/Bubbles.astro";
 import { cfpCloseDate, cfpOpenDate } from "~/data/event";
 import { currentYear } from "~/data/years";
@@ -40,12 +39,6 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 			</TimelineHeading>
 			<p class="cfp-opens-close">
 				Submissions close {cfpCloseDate}, {currentYear}
-			</p>
-			<p class="cfp-opens-details">
-				<a href="/cfp">
-					Read the CFP details
-					<Arrow class="cfp-opens-arrow" />
-				</a>
 			</p>
 		</div>
 		<p class="cfp-opens-label">Launch Lineup</p>
@@ -143,7 +136,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		color: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorBlue1) var(--themeDarkness)
+			var(--colorBlue1) var(--themeDarknessText)
 		);
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeSmall);
@@ -171,7 +164,11 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	}
 
 	.cfp-opens-date {
-		color: var(--colorAccentMedium);
+		color: color-mix(
+			in srgb,
+			var(--colorBlue3),
+			var(--colorBlue2) var(--themeDarknessText)
+		);
 		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 15%);
 		white-space: nowrap;
 	}
@@ -181,23 +178,6 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		font-size: var(--fontSizeSmaller);
 		font-style: italic;
 		margin: 0.5rem 0 0;
-	}
-
-	.cfp-opens-details {
-		font-family: var(--fontFamilyHeading);
-		font-size: var(--fontSizeSmaller);
-		font-weight: var(--fontWeightSemibold);
-		margin: 0.25rem 0 0;
-	}
-
-	.cfp-opens-details a {
-		color: var(--colorLink);
-	}
-
-	.cfp-opens-arrow {
-		height: 0.75em;
-		vertical-align: -0.05em;
-		width: auto;
 	}
 
 	.cfp-opens-label {
