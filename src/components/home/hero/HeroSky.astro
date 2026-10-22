@@ -317,7 +317,11 @@ const clouds = [
 		--hero-orb-glow-offset: 10rem;
 		--hero-orb-rim: color-mix(
 			in srgb,
-			color-mix(in srgb, var(--colorTerminalOrange) 80%, var(--colorBlue5)),
+			color-mix(
+				in srgb,
+				color-mix(in srgb, var(--colorTerminalOrange) 80%, var(--colorBlue5)),
+				transparent 50%
+			),
 			transparent var(--themeDarkness)
 		);
 
