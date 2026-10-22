@@ -17,7 +17,7 @@ export interface Props {
 
 const { description, noIndex, year = currentYear } = Astro.props;
 
-const banner = new URL("banner.png", Astro.site).toString();
+const image = new URL("og-image.jpg", Astro.site).toString();
 const pageUrl = new URL(pagePathname(Astro.url), Astro.site).toString();
 
 const pageTitle =
@@ -27,7 +27,7 @@ const pageTitle =
 			`SquiggleConf ${year}`;
 
 const title = !pageTitle
-	? `SquiggleConf | ${eventDate} ${currentYear}: Your Boston devtools field trip.`
+	? `SquiggleConf | ${eventDate} ${currentYear}: Your Boston devtools field trip`
 	: pageTitle.includes("SquiggleConf")
 		? pageTitle
 		: `${pageTitle} | SquiggleConf`;
@@ -50,19 +50,19 @@ const metaPairs = [
 		property: `og:description`,
 	},
 	{
-		content: banner,
+		content: image,
 		property: `og:image`,
 	},
 	{
-		content: `1018`,
+		content: `1200`,
 		property: `og:image:width`,
 	},
 	{
-		content: `544`,
+		content: `630`,
 		property: `og:image:height`,
 	},
 	{
-		content: `SquiggleConf: the devtools conference in Boston`,
+		content: `SquiggleConf, the devtools conference: ${eventDate}, ${currentYear} in Boston, Massachusetts. Get tickets at squiggleconf.com.`,
 		property: `og:image:alt`,
 	},
 	{
@@ -86,7 +86,7 @@ const metaPairs = [
 		name: `twitter:title`,
 	},
 	{
-		content: banner,
+		content: image,
 		name: `twitter:image`,
 	},
 	{

@@ -1,25 +1,78 @@
 ---
 import { orbCenter } from "./orb";
 
-const birds = [
-	{ duration: 1.4, left: "53%", size: 5, top: 3.75 },
-	{ duration: 1.1, left: "6%", size: 1.6, top: 4 },
-	{ duration: 1.7, left: "45%", size: 1, top: 1.25 },
-	{ duration: 1.3, left: "93%", size: 1.3, top: 14 },
-	{ duration: 1.9, left: "3%", size: 0.9, top: 22 },
-];
+interface Props {
+	compact?: boolean;
+}
 
-const clouds = [
-	{ drift: 60, left: "33%", moonlight: 36, size: 4.5, top: 0.75 },
-	{ drift: 45, left: "55%", moonlight: 36, size: 3, top: 0.25 },
-	{ drift: 70, left: "88%", moonlight: 100, size: 5, top: 15 },
-	{ drift: 55, left: "1%", moonlight: 36, size: 4, top: 9 },
-];
+const { compact } = Astro.props;
+
+const birds = compact
+	? [
+			{ duration: 1.4, left: "57%", size: 3.5, top: 2.5 },
+			{ duration: 1.1, left: "4%", size: 1.4, top: 5.5 },
+			{ duration: 1.7, left: "41%", size: 0.9, top: 1.5 },
+			{
+				duration: 1.9,
+				left: "calc(var(--orb-center) - 4.5rem)",
+				size: 1.1,
+				top: 5,
+			},
+		]
+	: [
+			{ duration: 1.4, left: "53%", size: 5, top: 3.75 },
+			{ duration: 1.1, left: "6%", size: 1.6, top: 4 },
+			{ duration: 1.7, left: "45%", size: 1, top: 1.25 },
+			{ duration: 1.3, left: "93%", size: 1.3, top: 14 },
+			{ duration: 1.9, left: "3%", size: 0.9, top: 22 },
+		];
+
+const clouds: {
+	drift: number;
+	from?: "extra-large" | "large" | "small";
+	left: string;
+	moonlight: number;
+	size: number;
+	top: number;
+}[] = compact
+	? [
+			{ drift: 45, left: "56%", moonlight: 36, size: 3, top: 0.25 },
+			{
+				drift: 60,
+				from: "large",
+				left: "calc(50% - 11rem)",
+				moonlight: 36,
+				size: 3.5,
+				top: 0.1,
+			},
+			{
+				drift: 70,
+				from: "extra-large",
+				left: "calc(var(--orb-center) - 6rem)",
+				moonlight: 100,
+				size: 4,
+				top: 9.5,
+			},
+			{
+				drift: 55,
+				from: "small",
+				left: "1%",
+				moonlight: 36,
+				size: 3.5,
+				top: 7,
+			},
+		]
+	: [
+			{ drift: 60, left: "33%", moonlight: 36, size: 4.5, top: 0.75 },
+			{ drift: 45, left: "55%", moonlight: 36, size: 3, top: 0.25 },
+			{ drift: 70, left: "88%", moonlight: 100, size: 5, top: 15 },
+			{ drift: 55, left: "1%", moonlight: 36, size: 4, top: 9 },
+		];
 ---
 
 <div
 	aria-hidden="true"
-	class="hero-sky"
+	class:list={["hero-sky", compact && "hero-sky-compact"]}
 	data-pause-offscreen
 	style={`--orb-center: ${orbCenter}`}
 >
@@ -29,9 +82,9 @@ const clouds = [
 	</div>
 	<span class="hero-sky-glow"></span>
 	<span class="hero-sky-orb-glow"></span>
-	{clouds.map(({ drift, left, moonlight, size, top }, index) => (
+	{clouds.map(({ drift, from, left, moonlight, size, top }, index) => (
 		<svg
-			class="hero-sky-cloud"
+			class:list={["hero-sky-cloud", from && `hero-sky-cloud-${from}`]}
 			style={`--drift: ${drift}s; --left: ${left}; --moonlight: ${moonlight}%; --size: ${size}rem; --top: ${top}rem`}
 			viewBox="0 0 64 32"
 		>
@@ -223,6 +276,11 @@ const clouds = [
 		transform-origin: bottom center;
 	}
 
+	.hero-sky-compact .hero-sky-glow {
+		bottom: 1.5rem;
+		height: 12rem;
+	}
+
 	.hero-sky-orb-glow {
 		background: radial-gradient(
 			circle at 50% 50%,
@@ -233,11 +291,11 @@ const clouds = [
 			),
 			transparent calc(70% - var(--themeDarkness) * 0.14)
 		);
-		display: none;
+		display: var(--hero-orb-display);
 		height: 120rem;
 		left: var(--orb-center);
 		position: absolute;
-		top: 8.5rem;
+		top: calc(var(--hero-orb-top) + 2rem);
 		translate: -50% -50%;
 		width: 120rem;
 	}
@@ -293,6 +351,30 @@ const clouds = [
 		width: var(--size);
 	}
 
+	.hero-sky-cloud-small,
+	.hero-sky-cloud-large,
+	.hero-sky-cloud-extra-large {
+		display: none;
+	}
+
+	@media (--widthSmall) {
+		.hero-sky-cloud-small {
+			display: inline;
+		}
+	}
+
+	@media (--widthLarge) {
+		.hero-sky-cloud-large {
+			display: inline;
+		}
+	}
+
+	@media (--widthXLarge) {
+		.hero-sky-cloud-extra-large {
+			display: inline;
+		}
+	}
+
 	@keyframes hero-sky-drift {
 		0% {
 			transform: translateX(-1.5rem);
@@ -329,12 +411,12 @@ const clouds = [
 		border: none;
 		border-radius: 50%;
 		cursor: pointer;
-		display: none;
+		display: var(--hero-orb-display);
 		height: 4rem;
 		left: var(--orb-center);
 		padding: 0;
 		position: absolute;
-		top: 6.5rem;
+		top: var(--hero-orb-top);
 		translate: -50% 0;
 		width: 4rem;
 		z-index: 2;
@@ -464,27 +546,8 @@ const clouds = [
 		}
 	}
 
-	@media (--widthSmall) {
-		.hero-sky-orb,
-		.hero-sky-orb-glow {
-			display: block;
-		}
-	}
-
 	@media (--widthLarge) {
-		.hero-sky-orb,
-		.hero-sky-orb-glow {
-			display: none;
-		}
-
 		.hero-sky-birds {
-			display: block;
-		}
-	}
-
-	@media (--widthXLarge) {
-		.hero-sky-orb,
-		.hero-sky-orb-glow {
 			display: block;
 		}
 	}

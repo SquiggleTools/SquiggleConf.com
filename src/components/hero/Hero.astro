@@ -1,7 +1,8 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
 
-import HeroCityscape from "./HeroCityscape.astro";
+import HeroHarbor from "./HeroHarbor.astro";
+import HeroSky from "./HeroSky.astro";
 
 interface Props {
 	class?: string;
@@ -12,14 +13,13 @@ interface Props {
 const { class: className, tall, width, ...props } = Astro.props;
 ---
 
-<section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
-	<slot name="backdrop" />
+<section
+	class:list={["hero", className, tall ? "hero-tall" : "hero-compact"]}
+	{...props}
+>
+	<HeroSky compact={!tall} />
 	<div class="hero-decorations">
-		<slot name="decorations">
-			<div class="hero-decorations-inner">
-				<HeroCityscape />
-			</div>
-		</slot>
+		<HeroHarbor compact={!tall} />
 	</div>
 
 	<ContentArea class="hero-contents" width={width}>
@@ -29,6 +29,8 @@ const { class: className, tall, width, ...props } = Astro.props;
 
 <style>
 	.hero {
+		--hero-orb-display: none;
+
 		background: linear-gradient(
 			180deg,
 			var(--colorBlueBright2) 0%,
@@ -48,16 +50,47 @@ const { class: className, tall, width, ...props } = Astro.props;
 		z-index: 1;
 		color: var(--colorHeading);
 		overflow-x: clip;
-		padding-bottom: var(--cityscapeHeightArea);
 		position: relative;
 	}
 
-	.hero.common {
-		--cityscapeHeightArea: 10rem;
+	.hero-tall {
+		--hero-orb-top: 6.5rem;
+		--hero-scale: 1;
+
+		padding-bottom: 12rem;
 	}
 
-	.hero.tall {
-		--cityscapeHeightArea: 12rem;
+	.hero-compact {
+		--hero-orb-top: 6.25rem;
+		--hero-scale: 0.7;
+
+		padding: 5rem 0 7.75rem;
+	}
+
+	@media (--widthSmall) {
+		.hero-tall {
+			--hero-orb-display: block;
+		}
+	}
+
+	@media (--widthLarge) {
+		.hero-tall {
+			--hero-orb-display: none;
+		}
+
+		.hero-compact {
+			--hero-orb-display: block;
+		}
+
+		.hero-compact .hero-contents {
+			max-width: calc(100vw - 13rem);
+		}
+	}
+
+	@media (--widthXLarge) {
+		.hero-tall {
+			--hero-orb-display: block;
+		}
 	}
 
 	.hero-decorations {
@@ -67,14 +100,6 @@ const { class: className, tall, width, ...props } = Astro.props;
 		height: 100%;
 		overflow: hidden;
 		width: 100%;
-	}
-
-	.hero-decorations-inner {
-		bottom: 0;
-		left: 50%;
-		position: absolute;
-		text-align: center;
-		width: 0;
 	}
 
 	.hero-contents {

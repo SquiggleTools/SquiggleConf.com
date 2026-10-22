@@ -47,7 +47,7 @@ const ticketsButton = {
 } as const;
 ---
 
-<header class:list={[hideLogo && "header-floating"]}>
+<header class:list={[hideLogo && "header-no-logo"]}>
 	<ContentArea class="header-content-area" width="wide">
 		{!hideLogo && (
 			<a class="logo" href="/">
@@ -135,22 +135,14 @@ const ticketsButton = {
 
 <style>
 	header {
-		--header-background: var(--colorBlueBright2);
-		--header-foreground: color-mix(
+		color: color-mix(
 			in srgb,
 			var(--colorBlue5),
 			var(--colorWhiteIsh) var(--themeDarknessText)
 		);
-
-		color: var(--header-foreground);
-		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
-		padding: 1.5rem 0;
-	}
-
-	.header-floating {
-		background: transparent;
 		left: 0;
+		padding: 1.5rem 0;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -190,11 +182,11 @@ const ticketsButton = {
 		width: 2rem;
 	}
 
-	.header-floating .header-menu-toggle {
+	.header-no-logo .header-menu-toggle {
 		top: calc(5vw - 2.1rem);
 	}
 
-	.header-floating .header-menu-toggle svg {
+	.header-no-logo .header-menu-toggle svg {
 		height: 1.8rem;
 		width: 1.8rem;
 	}
@@ -251,7 +243,7 @@ const ticketsButton = {
 		width: 45vw;
 	}
 
-	.header-floating .header-links:popover-open {
+	.header-no-logo .header-links:popover-open {
 		top: calc(5vw - 0.6rem);
 	}
 
@@ -268,11 +260,11 @@ const ticketsButton = {
 	}
 
 	@media (--widthXLarge) {
-		.header-floating {
+		.header-no-logo {
 			padding-top: 4rem;
 		}
 
-		.header-floating .header-content-area {
+		.header-no-logo .header-content-area {
 			align-items: flex-start;
 			min-height: 0;
 		}
