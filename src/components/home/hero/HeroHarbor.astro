@@ -36,6 +36,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 <div
 	aria-hidden="true"
 	class="hero-harbor"
+	data-pause-offscreen
 	style={`--orb-center: ${orbCenter}; --orb-center-in-water: ${orbCenterInContainer}`}
 >
 	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
@@ -194,10 +195,14 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	.hero-harbor-rays {
+		display: none;
 		inset: 0;
 		opacity: var(--themeDip);
 		pointer-events: none;
 		position: absolute;
+	}
+
+	.hero-harbor:not([data-rays-aimed]) .hero-harbor-rays {
 		visibility: hidden;
 	}
 
@@ -295,13 +300,14 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		);
 		position: absolute;
 		top: var(--top);
-		translate: var(--rest) 0;
+		transform: translateX(var(--rest)) scaleX(var(--hero-harbor-boat-flip, 1));
 		width: var(--size);
 	}
 
 	.hero-harbor-boat-reverse {
+		--hero-harbor-boat-flip: -1;
+
 		animation-direction: reverse;
-		scale: -1 1;
 	}
 
 	.hero-harbor-boat-sail,
@@ -346,23 +352,25 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 
 	@keyframes hero-harbor-sail {
 		0% {
-			translate: -5vw 0;
+			transform: translate(-5vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
 		}
 
 		25% {
-			translate: 22.5vw 0.15rem;
+			transform: translate(22.5vw, 0.15rem)
+				scaleX(var(--hero-harbor-boat-flip, 1));
 		}
 
 		50% {
-			translate: 50vw 0;
+			transform: translate(50vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
 		}
 
 		75% {
-			translate: 77.5vw 0.15rem;
+			transform: translate(77.5vw, 0.15rem)
+				scaleX(var(--hero-harbor-boat-flip, 1));
 		}
 
 		100% {
-			translate: 105vw 0;
+			transform: translate(105vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
 		}
 	}
 
@@ -380,12 +388,9 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthSmall) {
-		.hero-harbor-rays {
-			visibility: visible;
-		}
-
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
+		.hero-harbor-rays,
 		.hero-harbor-glint-orb {
 			display: block;
 		}
@@ -398,24 +403,18 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	@media (--widthLarge) {
-		.hero-harbor-rays {
-			visibility: hidden;
-		}
-
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
+		.hero-harbor-rays,
 		.hero-harbor-glint-orb {
 			display: none;
 		}
 	}
 
 	@media (--widthXLarge) {
-		.hero-harbor-rays {
-			visibility: visible;
-		}
-
 		.hero-harbor-glow,
 		.hero-harbor-orb-path,
+		.hero-harbor-rays,
 		.hero-harbor-glint-orb {
 			display: block;
 		}
@@ -423,16 +422,23 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 </style>
 
 <script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+
 	const hero = document.querySelector(".hero");
 	const harbor = hero?.querySelector<HTMLElement>(".hero-harbor");
 	const water = harbor?.querySelector(".hero-harbor-water");
 
 	if (hero && harbor && water) {
-		new ResizeObserver(() => {
+		const observer = new ResizeObserver(() => {
 			harbor.style.setProperty(
 				"--hero-harbor-depth",
 				`${water.getBoundingClientRect().top - hero.getBoundingClientRect().top}px`,
 			);
-		}).observe(hero);
+			harbor.toggleAttribute("data-rays-aimed", true);
+		});
+		observer.observe(hero);
+		observer.observe(harbor);
 	}
 </script>

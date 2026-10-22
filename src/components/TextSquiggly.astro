@@ -19,7 +19,7 @@ const { width, ...props } = Astro.props;
 	<span class="text">
 		<slot name="inside" />
 	</span>
-	<Img alt="" class="squiggly" src={images[width]} />
+	<Img alt="" class="squiggly" loading="eager" src={images[width]} />
 </em>
 <slot name="after" />
 

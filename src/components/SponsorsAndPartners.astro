@@ -44,7 +44,7 @@ const tiers = [
 );
 ---
 
-<div class="past-sponsors">
+<div class="past-sponsors" data-theme-lazy>
 	<span aria-hidden="true" class="past-sponsors-seam"></span>
 	<section aria-labelledby="past-sponsors-heading" class="past-sponsors-shell">
 		<div class="past-sponsors-intro">
@@ -312,7 +312,7 @@ const tiers = [
 		color: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorWhite) var(--themeDarkness)
+			var(--colorWhite) var(--themeDarknessText)
 		);
 		font-family: var(--fontFamilyHeading);
 		font-size: clamp(2.4rem, 5.4vw, 4.7rem);
@@ -326,7 +326,7 @@ const tiers = [
 		color: color-mix(
 			in srgb,
 			rgb(from var(--colorBlue4) r g b / 78%),
-			rgb(from var(--colorWhiteIsh) r g b / 84%) var(--themeDarkness)
+			rgb(from var(--colorWhiteIsh) r g b / 84%) var(--themeDarknessText)
 		);
 		max-width: 42rem;
 	}

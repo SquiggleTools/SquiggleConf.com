@@ -80,6 +80,12 @@ import DecorativeImage from "./DecorativeImage.astro";
 		gap: 0.5rem;
 	}
 
+	@media not (--widthXSmall) {
+		section.registration-contents {
+			padding-inline: 0;
+		}
+	}
+
 	@media (--widthMedium) {
 		.manta-down {
 			right: -7.5%;

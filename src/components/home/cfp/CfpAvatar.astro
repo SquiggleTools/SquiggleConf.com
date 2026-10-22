@@ -16,7 +16,7 @@ const { class: className, person } = Astro.props;
 
 <div class:list={["cfp-avatar", className]}>
 	<Img
-		alt={person.placeholder ? "" : person.name}
+		alt=""
 		class:list={[person.placeholder && "cfp-avatar-placeholder"]}
 		src={person.image}
 		{...getCoverImageProps(person.image, 104, 1.06)}

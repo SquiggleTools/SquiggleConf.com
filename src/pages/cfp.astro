@@ -1,6 +1,11 @@
 ---
 import CommonContent from "~/components/CommonContent.astro";
+import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+import { currentYear } from "~/data/years";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+const opens = `${cfpOpenDate}, ${currentYear - 1}`;
+const closes = `${cfpCloseDate}, ${currentYear}`;
 ---
 
 <ArticleLayout
@@ -13,8 +18,12 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 >
 	<CommonContent heading="Coming Soon">
 		<p>
-			The SquiggleConf 2027 CFP will open later this year. We look forward to
-			seeing your submissions!
+			The SquiggleConf {currentYear} CFP opens {opens} and closes {closes}. We
+			look forward to seeing your submissions!
+		</p>
+		<p>
+			In the meantime, the <a href="/articles/speaker-guide">speaker guide</a>{" "}
+			covers what to expect as a SquiggleConf speaker.
 		</p>
 	</CommonContent>
 </ArticleLayout>

@@ -5,16 +5,18 @@ import { currentYear } from "~/data/years";
 import Hero from "../hero/Hero.astro";
 
 interface Props {
+	heading?: boolean;
 	year: number;
 }
 
-const { year } = Astro.props;
+const { heading, year } = Astro.props;
+const NoticeHeading = heading ? "h1" : "p";
 ---
 
-<Hero class="next-year-notice">
-	<h1 class="notice-heading">
+<Hero aria-label={`SquiggleConf ${year}`} class="next-year-notice">
+	<NoticeHeading class="notice-heading">
 		Thank you to everyone who made SquiggleConf {year} wonderful!
-	</h1>
+	</NoticeHeading>
 
 	<p class="byline">
 		<strong class="next-year">

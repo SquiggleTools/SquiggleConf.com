@@ -21,11 +21,14 @@ const { person } = Astro.props;
 
 <style>
 	.cfp-person {
+		align-content: start;
 		display: grid;
 		gap: 0.6rem;
 		justify-items: center;
 		list-style: none;
+		container-type: inline-size;
 		margin: 0;
+		min-width: 0;
 		padding: 0;
 		text-align: center;
 	}
@@ -58,5 +61,11 @@ const { person } = Astro.props;
 
 	.cfp-person :global(.cfp-avatar) {
 		transition: scale var(--transitionNormal) var(--transitionEaseOut);
+	}
+
+	@container (width < 4.5rem) {
+		.cfp-person-copy {
+			overflow-wrap: anywhere;
+		}
 	}
 </style>

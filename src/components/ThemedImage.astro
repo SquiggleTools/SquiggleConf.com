@@ -11,20 +11,54 @@ interface Props {
 	sources: Record<"dark" | "light", ImageMetadata>;
 }
 
-const { class: className, sources, ...rest } = Astro.props;
+const { alt, class: className, sources, ...rest } = Astro.props;
 ---
 
-{(["dark", "light"] as const).map((theme) => (
+<span aria-label={alt} class="themed-image" role="img">
 	<Img
-		class:list={[className, `themed-image-${theme}`]}
-		src={sources[theme]}
+		alt=""
+		class:list={[className, "themed-image-dark"]}
+		src={sources.dark}
 		{...rest}
 	/>
-))}
+	<Img
+		alt=""
+		class:list={[className, "themed-image-light"]}
+		src={sources.light}
+		{...rest}
+	/>
+</span>
 
 <style>
-	html.dark .themed-image-light,
-	html:not(.dark) .themed-image-dark {
+	.themed-image {
+		display: inline-grid;
+		position: relative;
+	}
+
+	.themed-image-dark,
+	.themed-image-light {
+		grid-area: 1 / 1;
+	}
+
+	html:not(.dark) .themed-image-dark,
+	html.dark .themed-image-light {
+		height: 100%;
+		inset: 0;
+		object-fit: contain;
+		position: absolute;
+		width: 100%;
+	}
+
+	html:not(.dark, .theme-transition) .themed-image-dark,
+	html.dark:not(.theme-transition) .themed-image-light {
 		display: none;
+	}
+
+	.themed-image-dark {
+		opacity: var(--themeDarkStep);
+	}
+
+	.themed-image-light {
+		opacity: calc(1 - var(--themeDarkStep));
 	}
 </style>

@@ -6,10 +6,10 @@ interface Props {
 	link?: boolean;
 }
 
-const { level: As, link, ...rest } = Astro.props;
+const { class: className, level: As, link, ...rest } = Astro.props;
 ---
 
-<As class:list={[Astro.props.class, "heading"]} {...rest}>
+<As class:list={[className, "heading"]} {...rest}>
 	{link ? (
 		<a href={`#${Astro.props.id}`}>
 			<slot />
