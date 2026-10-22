@@ -1,4 +1,6 @@
-const reducedMotionMediaQuery = matchMedia("(prefers-reduced-motion: reduce)");
+export const reducedMotionMediaQuery = matchMedia(
+	"(prefers-reduced-motion: reduce)",
+);
 
 export const motionChangeEvent = "motion-change";
 

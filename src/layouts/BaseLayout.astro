@@ -16,13 +16,26 @@ type Props = HeadProps;
 </html>
 
 <script>
+	import { reducedMotionQuery } from "~/utils/motion";
+
 	addEventListener(
 		"load",
 		() => {
 			setTimeout(() => {
 				void import("konami-emoji-blast").then(
 					({ initializeKonamiEmojiBlast }) => {
-						initializeKonamiEmojiBlast();
+						let stop: (() => void) | undefined;
+						const update = () => {
+							if (reducedMotionQuery.matches) {
+								stop?.();
+								stop = undefined;
+							} else {
+								stop ??= initializeKonamiEmojiBlast();
+							}
+						};
+
+						update();
+						reducedMotionQuery.addEventListener("change", update);
 					},
 				);
 			});
