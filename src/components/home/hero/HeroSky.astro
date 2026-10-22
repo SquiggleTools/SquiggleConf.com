@@ -311,10 +311,15 @@ const clouds = [
 		);
 		--hero-orb-glow: color-mix(
 			in srgb,
-			rgb(from var(--colorTerminalOrange) r g b / 55%),
+			rgb(from var(--colorTerminalOrange) r g b / 35%),
 			rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
 		);
 		--hero-orb-glow-offset: 10rem;
+		--hero-orb-rim: color-mix(
+			in srgb,
+			color-mix(in srgb, var(--colorTerminalOrange) 80%, var(--colorBlue5)),
+			transparent var(--themeDarkness)
+		);
 
 		background: none;
 		border: none;
@@ -356,7 +361,9 @@ const clouds = [
 			transparent var(--themeDarkness)
 		);
 		border-radius: 50%;
-		box-shadow: inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
+		box-shadow:
+			inset 0 0 0 0.125rem var(--hero-orb-rim),
+			inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
 		rotate: -20deg;
 		transition: scale var(--transitionNormal) var(--transitionEaseOut);
 	}

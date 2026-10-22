@@ -1,0 +1,33 @@
+<script is:inline>
+	{
+		const applyStoredMotion = () => {
+			let motion;
+			try {
+				motion = localStorage.getItem("motion");
+			} catch {
+				motion = null;
+			}
+			document.documentElement.classList.toggle(
+				"motion-paused",
+				motion === "paused",
+			);
+		};
+
+		const syncMotion = () => {
+			applyStoredMotion();
+			document.dispatchEvent(new CustomEvent("motion-change"));
+		};
+
+		applyStoredMotion();
+		addEventListener("pageshow", (event) => {
+			if (event.persisted) {
+				syncMotion();
+			}
+		});
+		addEventListener("storage", (event) => {
+			if (event.key === "motion") {
+				syncMotion();
+			}
+		});
+	}
+</script>

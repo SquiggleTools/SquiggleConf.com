@@ -5,6 +5,7 @@ import { eventDate } from "~/data/event";
 import { currentYear } from "~/data/years";
 import { pagePathname } from "~/utils/pathname";
 
+import MotionSetting from "./MotionSetting.astro";
 import ThemeSetting from "./ThemeSetting.astro";
 
 export interface Props {
@@ -106,6 +107,7 @@ const metaPairs = [
 	<Font cssVariable="--fontFamilyLogo" preload={[{ subset: "latin" }]} />
 	<Font cssVariable="--fontFamilyMonospace" />
 	<ThemeSetting />
+	<MotionSetting />
 	{noIndex ? (
 		<meta content="noindex" name="robots" />
 	) : (

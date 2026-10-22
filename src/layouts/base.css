@@ -22,8 +22,7 @@
 	initial-value: light;
 }
 
-:root,
-[data-theme-pinned] {
+:root {
 	color-scheme: var(--themeColorScheme);
 
 	--themeDarkness: calc(var(--themeDark) * 100%);
@@ -141,14 +140,10 @@ html {
 	--lineHeightBody: 1.4;
 
 	background-color: var(--colorBackground);
+	color: color-mix(in srgb, black, var(--colorWhite) var(--themeDarknessText));
 	min-height: 100%;
 	font-family: var(--fontFamilyBody);
 	overflow-wrap: break-word;
-}
-
-html,
-[data-theme-pinned] {
-	color: color-mix(in srgb, black, var(--colorWhite) var(--themeDarknessText));
 }
 
 html.dark {
@@ -156,16 +151,6 @@ html.dark {
 	--themeColorScheme: dark;
 	--themeDark: 1;
 	--themeDarkStep: 1;
-	--themeDarkText: 1;
-}
-
-[data-theme-pinned] {
-	--themeDark: 0;
-	--themeDarkText: 0;
-}
-
-html.dark [data-theme-pinned] {
-	--themeDark: 1;
 	--themeDarkText: 1;
 }
 
@@ -178,9 +163,17 @@ html.dark [data-theme-pinned] {
 	}
 }
 
+html.motion-paused,
+html.motion-paused *,
+html.motion-paused *::before,
+html.motion-paused *::after {
+	animation: none !important;
+	transition: none !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-	html,
-	body {
+	html:not(.motion-paused),
+	html:not(.motion-paused) body {
 		scroll-behavior: smooth;
 	}
 

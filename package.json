@@ -39,7 +39,6 @@
 		"@fontsource-variable/urbanist": "^5.2.7",
 		"@fontsource/geist-mono": "^5.2.8",
 		"@fontsource/shantell-sans": "^5.2.7",
-		"@konami-emoji-blast/astro": "^0.3.0",
 		"astro": "7.3.5",
 		"konami-emoji-blast": "^0.7.0",
 		"marked": "^18.0.7",

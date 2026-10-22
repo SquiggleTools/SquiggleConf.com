@@ -2,7 +2,6 @@ import type { FontProvider } from "astro";
 
 import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
-import { konamiEmojiBlast } from "@konami-emoji-blast/astro";
 import { defineConfig, envField } from "astro/config";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -111,10 +110,7 @@ export default defineConfig({
 		layout: "constrained",
 		responsiveStyles: true,
 	},
-	integrations: [
-		konamiEmojiBlast(),
-		sitemap({ filter: (page) => !page.endsWith("/404") }),
-	],
+	integrations: [sitemap({ filter: (page) => !page.endsWith("/404") })],
 	output: "static",
 	redirects: {
 		"/2024/about": "/",
@@ -136,7 +132,7 @@ export default defineConfig({
 	vite: {
 		build: {
 			assetsInlineLimit: (filePath, content) =>
-				filePath.endsWith(".css") ? content.length < 20_000 : undefined,
+				filePath.endsWith(".css") ? content.length < 32_000 : undefined,
 		},
 	},
 });

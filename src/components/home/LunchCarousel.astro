@@ -308,6 +308,7 @@ const { spots } = Astro.props;
 			carousel.querySelector<HTMLButtonElement>("[data-lunch-pause]");
 		const slides = [...carousel.querySelectorAll("[data-lunch-slide]")];
 		let activeIndex = 0;
+		let markedIndex: number | undefined;
 		let autoAdvanceTimer: number | undefined;
 		let hovered = false;
 		let paused = false;
@@ -335,6 +336,11 @@ const { spots } = Astro.props;
 				realign();
 			}
 
+			if (activeIndex === markedIndex) {
+				return;
+			}
+
+			markedIndex = activeIndex;
 			for (const [slideIndex, slide] of slides.entries()) {
 				slide.setAttribute("aria-hidden", `${slideIndex !== activeIndex}`);
 			}

@@ -18,8 +18,13 @@ const imageOnlyProps = new Set([
 	"widths",
 ]);
 
-const { alt } = Astro.props;
+const { alt, height, width } = Astro.props;
 const src = Astro.props.src as ImageMetadata;
+const svgWidth =
+	width ??
+	(height === undefined
+		? undefined
+		: Math.round((Number(height) * src.width) / src.height));
 const svgProps = {
 	decoding: "async" as const,
 	loading: "lazy" as const,
@@ -32,7 +37,7 @@ const svgProps = {
 ---
 
 {src.format === "svg" ? (
-	<img {...svgProps} alt={alt} src={src.src} />
+	<img {...svgProps} alt={alt} src={src.src} width={svgWidth} />
 ) : (
 	<Image {...(Astro.props as LocalImageProps)} />
 )}

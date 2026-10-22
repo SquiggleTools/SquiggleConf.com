@@ -4,7 +4,7 @@
  */
 export function onScrollFrame(
 	callback: () => void,
-	...queries: MediaQueryList[]
+	...queries: { addEventListener(type: "change", listener: () => void): void }[]
 ) {
 	let requested = false;
 

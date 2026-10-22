@@ -9,16 +9,8 @@ import Heading from "./Heading.astro";
 ---
 
 <div class="newsletter" data-pause-offscreen id="newsletter">
-	<OceanFloorLeft
-		aria-hidden="true"
-		class="ocean-floor ocean-floor-left"
-		data-theme-pinned
-	/>
-	<OceanFloorRight
-		aria-hidden="true"
-		class="ocean-floor ocean-floor-right"
-		data-theme-pinned
-	/>
+	<OceanFloorLeft aria-hidden="true" class="ocean-floor ocean-floor-left" />
+	<OceanFloorRight aria-hidden="true" class="ocean-floor ocean-floor-right" />
 	<Bubbles class="newsletter-bubbles" count={56} />
 	<ContentArea as="section" class="newsletter-contents">
 		<Heading level="h2">

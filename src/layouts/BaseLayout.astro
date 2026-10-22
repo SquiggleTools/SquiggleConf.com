@@ -14,3 +14,19 @@ type Props = HeadProps;
 		<slot />
 	</body>
 </html>
+
+<script>
+	addEventListener(
+		"load",
+		() => {
+			setTimeout(() => {
+				void import("konami-emoji-blast").then(
+					({ initializeKonamiEmojiBlast }) => {
+						initializeKonamiEmojiBlast();
+					},
+				);
+			});
+		},
+		{ once: true },
+	);
+</script>

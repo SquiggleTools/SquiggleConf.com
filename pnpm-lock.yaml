@@ -32,9 +32,6 @@ importers:
       '@fontsource/shantell-sans':
         specifier: ^5.2.7
         version: 5.2.7
-      '@konami-emoji-blast/astro':
-        specifier: ^0.3.0
-        version: 0.3.0(astro@7.3.5(@types/node@25.9.2)(@vercel/functions@2.2.13)(jiti@2.7.0)(yaml@2.9.0))(konami-emoji-blast@0.7.0)
       astro:
         specifier: 7.3.5
         version: 7.3.5(@types/node@25.9.2)(@vercel/functions@2.2.13)(jiti@2.7.0)(yaml@2.9.0)
@@ -1561,12 +1558,6 @@ packages:
 
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
-
-  '@konami-emoji-blast/astro@0.3.0':
-    resolution: {integrity: sha512-+sqgd/92Q3zgi7KDlpmxRS5+1H0k2zohxpVJT1ldsmsvkfcpGBScRGh/klK25K8WtTLpKkLNDKPg3MadSjYn7g==}
-    peerDependencies:
-      astro: ^2 || ^3 || ^4 || ^5.0.0 || ^6.0.0
-      konami-emoji-blast: 0.7.0
 
   '@napi-rs/wasm-runtime@1.2.4':
     resolution: {integrity: sha512-AJxoUD2/15ESHbvpcyjU274nsAPLuOtPHCk0vKJM5pj//Fg/B1FXNWjPnXTT9PymCYYiHo4zPj0ZomXBKhoy7g==}
@@ -5850,11 +5841,6 @@ snapshots:
       keyv: 5.6.0
 
   '@keyv/serialize@1.1.1': {}
-
-  '@konami-emoji-blast/astro@0.3.0(astro@7.3.5(@types/node@25.9.2)(@vercel/functions@2.2.13)(jiti@2.7.0)(yaml@2.9.0))(konami-emoji-blast@0.7.0)':
-    dependencies:
-      astro: 7.3.5(@types/node@25.9.2)(@vercel/functions@2.2.13)(jiti@2.7.0)(yaml@2.9.0)
-      konami-emoji-blast: 0.7.0
 
   '@napi-rs/wasm-runtime@1.2.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:

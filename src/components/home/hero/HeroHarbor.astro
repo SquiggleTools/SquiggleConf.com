@@ -202,6 +202,10 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		position: absolute;
 	}
 
+	.hero-harbor:not([data-rays-aimed]) .hero-harbor-rays {
+		visibility: hidden;
+	}
+
 	.hero-harbor-rays span {
 		animation: hero-harbor-ray-pulse 11s ease-in-out infinite alternate;
 		animation-delay: var(--delay);
@@ -427,11 +431,14 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	const water = harbor?.querySelector(".hero-harbor-water");
 
 	if (hero && harbor && water) {
-		new ResizeObserver(() => {
+		const observer = new ResizeObserver(() => {
 			harbor.style.setProperty(
 				"--hero-harbor-depth",
 				`${water.getBoundingClientRect().top - hero.getBoundingClientRect().top}px`,
 			);
-		}).observe(hero);
+			harbor.toggleAttribute("data-rays-aimed", true);
+		});
+		observer.observe(hero);
+		observer.observe(harbor);
 	}
 </script>
