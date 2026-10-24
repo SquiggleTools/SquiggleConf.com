@@ -1,41 +1,36 @@
 ---
+import { Font } from "astro:assets";
+
 import { eventDate } from "~/data/event";
 import { currentYear } from "~/data/years";
 import { pagePathname } from "~/utils/pathname";
 
+import MotionSetting from "./MotionSetting.astro";
 import ThemeSetting from "./ThemeSetting.astro";
 
 export interface Props {
 	description: string;
+	noIndex?: boolean;
 	title?: string;
 	year?: number;
 }
 
-const { description, year = currentYear } = Astro.props;
+const { description, noIndex, year = currentYear } = Astro.props;
 
-const banner = new URL("banner.png", Astro.site).toString();
+const image = new URL("og-image.jpg", Astro.site).toString();
 const pageUrl = new URL(pagePathname(Astro.url), Astro.site).toString();
-const favicon = new URL("favicon.png", Astro.site).toString();
 
-const keywords = [
-	"squiggleconf",
-	"conference",
-	"devtools",
-	"javascript",
-	"typescript",
-	"rust",
-	"static analysis",
-];
-
-const title = [
+const pageTitle =
 	year === currentYear
 		? Astro.props.title
-		: [year, Astro.props.title].filter(Boolean).join(" "),
-	`SquiggleConf`,
-	`${eventDate} ${currentYear}: Your Boston devtools field trip.`,
-]
-	.filter(Boolean)
-	.join(" | ");
+		: (Astro.props.title && `${year} ${Astro.props.title}`) ||
+			`SquiggleConf ${year}`;
+
+const title = !pageTitle
+	? `SquiggleConf | ${eventDate} ${currentYear}: Your Boston devtools field trip`
+	: pageTitle.includes("SquiggleConf")
+		? pageTitle
+		: `${pageTitle} | SquiggleConf`;
 
 const metaPairs = [
 	{
@@ -43,8 +38,8 @@ const metaPairs = [
 		name: `description`,
 	},
 	{
-		content: keywords.join(),
-		name: `keywords`,
+		content: `SquiggleConf`,
+		property: `og:site_name`,
 	},
 	{
 		content: title,
@@ -55,12 +50,20 @@ const metaPairs = [
 		property: `og:description`,
 	},
 	{
-		content: banner,
+		content: image,
 		property: `og:image`,
 	},
 	{
-		content: banner,
-		property: `og:image:secure_url`,
+		content: `1200`,
+		property: `og:image:width`,
+	},
+	{
+		content: `630`,
+		property: `og:image:height`,
+	},
+	{
+		content: `SquiggleConf, the devtools conference: ${eventDate}, ${currentYear} in Boston, Massachusetts. Get tickets at squiggleconf.com.`,
+		property: `og:image:alt`,
 	},
 	{
 		content: `website`,
@@ -71,20 +74,8 @@ const metaPairs = [
 		property: `og:url`,
 	},
 	{
-		content: favicon,
-		name: `thumbnail`,
-	},
-	{
-		content: `summary`,
+		content: `summary_large_image`,
 		name: `twitter:card`,
-	},
-	{
-		content: "Squiggle.Tools",
-		name: `twitter:creator`,
-	},
-	{
-		content: Astro.site,
-		name: `twitter:domain`,
 	},
 	{
 		content: description,
@@ -95,7 +86,7 @@ const metaPairs = [
 		name: `twitter:title`,
 	},
 	{
-		content: banner,
+		content: image,
 		name: `twitter:image`,
 	},
 	{
@@ -107,15 +98,27 @@ const metaPairs = [
 
 <head>
 	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<Font cssVariable="--fontFamilyBody" preload={[{ subset: "latin" }]} />
+	<Font
+		cssVariable="--fontFamilyHeading"
+		preload={[{ style: "normal", subset: "latin" }]}
+	/>
+	<Font cssVariable="--fontFamilyLogo" preload={[{ subset: "latin" }]} />
+	<Font cssVariable="--fontFamilyMonospace" />
 	<ThemeSetting />
-	<link href={pageUrl} rel="canonical" />
+	<MotionSetting />
+	{noIndex ? (
+		<meta content="noindex" name="robots" />
+	) : (
+		<link href={pageUrl} rel="canonical" />
+	)}
 	<link href="/favicon.png" rel="icon" type="image/png" />
 	<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 	{metaPairs.map((meta) => (
 		<meta {...meta} />
 	))}
 	<meta content={Astro.generator} name="generator" />
-	<meta content="width=device-width" name="viewport" />
 	<meta content=`SquiggleConf ${year}` name="apple-mobile-web-app-title" />
 	<title>{title}</title>
 </head>

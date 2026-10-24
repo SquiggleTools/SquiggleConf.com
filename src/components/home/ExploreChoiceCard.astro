@@ -17,12 +17,18 @@ const { choice } = Astro.props;
 			<span class="explore-radio-dot"></span>
 		</span>
 	</div>
-	<div class="explore-card-body">
+	<div
+		class:list={[
+			"explore-card-body",
+			choice.badgeLabel && "explore-card-body-badged",
+		]}
+	>
 		<TimelineImage
 			alt={choice.alt}
 			class="explore-photo"
 			effect="grow"
 			objectPosition={choice.objectPosition}
+			size={80}
 			src={choice.image}
 		/>
 		<div class="explore-copy">
@@ -43,6 +49,7 @@ const { choice } = Astro.props;
 		border: 1px solid var(--colorBlue3);
 		border-radius: var(--radiusMedium);
 		box-shadow: inset 0 0 0 0 rgb(from var(--colorWhite) r g b / 14%);
+		container-type: inline-size;
 		display: grid;
 		grid-template-columns: 3.5rem 1fr;
 		position: relative;
@@ -54,18 +61,21 @@ const { choice } = Astro.props;
 	}
 
 	.explore-card:hover {
-		background: light-dark(
+		background: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue5) r g b / 4%),
-			rgb(from var(--colorWhite) r g b / 14%)
+			rgb(from var(--colorWhite) r g b / 14%) var(--themeDarkness)
 		);
-		border-color: light-dark(
+		border-color: color-mix(
+			in srgb,
 			var(--colorBlue3),
-			rgb(from var(--colorWhite) r g b / 38%)
+			rgb(from var(--colorWhite) r g b / 38%) var(--themeDarkness)
 		);
 		box-shadow: inset 0 0 0 1px
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorBlue4) r g b / 6%),
-				rgb(from var(--colorWhite) r g b / 12%)
+				rgb(from var(--colorWhite) r g b / 12%) var(--themeDarkness)
 			);
 		transform: translateX(0.08rem);
 	}
@@ -80,14 +90,16 @@ const { choice } = Astro.props;
 
 	.explore-radio {
 		align-items: center;
-		background: light-dark(
+		background: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue5) r g b / 4%),
-			rgb(from var(--colorWhite) r g b / 8%)
+			rgb(from var(--colorWhite) r g b / 8%) var(--themeDarkness)
 		);
 		border: 2px solid
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorBlue4) r g b / 45%),
-				rgb(from var(--colorWhite) r g b / 74%)
+				rgb(from var(--colorWhite) r g b / 74%) var(--themeDarkness)
 			);
 		border-radius: var(--radiusPill);
 		display: inline-flex;
@@ -101,18 +113,21 @@ const { choice } = Astro.props;
 	}
 
 	.explore-card:hover .explore-radio {
-		background: light-dark(
+		background: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue5) r g b / 8%),
-			rgb(from var(--colorWhite) r g b / 12%)
+			rgb(from var(--colorWhite) r g b / 12%) var(--themeDarkness)
 		);
-		border-color: light-dark(
+		border-color: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue4) r g b / 85%),
-			rgb(from var(--colorWhite) r g b / 95%)
+			rgb(from var(--colorWhite) r g b / 95%) var(--themeDarkness)
 		);
 		box-shadow: 0 0 0 0.18rem
-			light-dark(
+			color-mix(
+				in srgb,
 				rgb(from var(--colorBlue5) r g b / 8%),
-				rgb(from var(--colorWhite) r g b / 12%)
+				rgb(from var(--colorWhite) r g b / 12%) var(--themeDarkness)
 			);
 	}
 
@@ -170,10 +185,18 @@ const { choice } = Astro.props;
 	}
 
 	.explore-spots-left {
-		background: light-dark(var(--colorBlueBright1), var(--colorBlue3));
+		background: color-mix(
+			in srgb,
+			var(--colorFrost1),
+			var(--colorBlue3) var(--themeDarkness)
+		);
 		border: 1px solid var(--colorImageBorder);
 		border-radius: var(--radiusMedium);
-		color: light-dark(var(--colorBlue4), var(--colorCopy));
+		color: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorWhite) var(--themeDarknessText)
+		);
 		font-size: 0.8em;
 		font-variant: tabular-nums;
 		padding: 8px 10px;
@@ -207,6 +230,20 @@ const { choice } = Astro.props;
 
 		.explore-title {
 			font-size: 1.15rem;
+		}
+	}
+
+	@media not (--widthXSmall) {
+		.explore-card-body-badged {
+			padding-top: 1.75rem;
+		}
+	}
+
+	@container (width < 14.5rem) {
+		.explore-card-body {
+			grid-template-columns: minmax(0, 1fr);
+			overflow-wrap: anywhere;
+			row-gap: 0.7rem;
 		}
 	}
 </style>

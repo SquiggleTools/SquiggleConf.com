@@ -1,5 +1,4 @@
 ---
-import "@fontsource/shantell-sans/latin-ext-400.css";
 import "@fontsource/shantell-sans/latin-400.css";
 
 import bigRav from "~/assets/2027/bigrav.webp";
@@ -24,6 +23,7 @@ import wesBos from "~/assets/avatars/wes-bos.webp";
 import syntax from "~/assets/logos/syntax.svg";
 import networking from "~/assets/stills/attendees-networking.webp";
 import harbor from "~/assets/stills/boston-harbor.webp";
+import Button from "~/components/Button.astro";
 import DeepSeaSurface from "~/components/DeepSeaSurface.astro";
 import Hero from "~/components/hero/Hero.astro";
 import CfpOpens from "~/components/home/cfp/CfpOpens.astro";
@@ -57,15 +57,62 @@ import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
-import { eventDate, eventDateEve, eventLocation } from "~/data/event";
+import {
+	eventDate,
+	eventDateEve,
+	eventDateIso,
+	eventLocation,
+} from "~/data/event";
+import { links } from "~/data/links";
+import { currentYear } from "~/data/years";
 import PageLayout from "~/layouts/PageLayout.astro";
+
+const description = `A conference for excellent devtools: AI tools, linters, editors, and more. ${eventDate}, ${currentYear} at Boston's New England Aquarium.`;
+
+const eventSchema = {
+	"@context": "https://schema.org",
+	"@type": "Event",
+	description,
+	endDate: eventDateIso,
+	eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+	eventStatus: "https://schema.org/EventScheduled",
+	image: new URL("og-image.jpg", Astro.site).toString(),
+	location: {
+		"@type": "Place",
+		address: {
+			"@type": "PostalAddress",
+			addressCountry: "US",
+			addressLocality: "Boston",
+			addressRegion: "MA",
+			postalCode: "02110",
+			streetAddress: "1 Central Wharf",
+		},
+		name: "New England Aquarium Simons Theatre",
+	},
+	name: `SquiggleConf ${currentYear}`,
+	offers: {
+		"@type": "Offer",
+		url: links.tickets,
+	},
+	organizer: {
+		"@type": "Organization",
+		name: "Squiggle.Tools",
+	},
+	startDate: eventDateIso,
+	url: Astro.site?.toString(),
+};
 ---
 
-<PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
-	<Hero tall>
-		<HomeHeroLockup />
-		<div class="top-side-by-side">
-			<div class="top-side-left">
+<PageLayout description={description} hideHeaderLogo>
+	<script
+		is:inline
+		set:html={JSON.stringify(eventSchema)}
+		type="application/ld+json"
+	/>
+	<Hero tall width="wide">
+		<div class="top">
+			<div class="top-main">
+				<HomeHeroLockup />
 				<TimelineHeading class="top-heading" level="h2">
 					the devtools conference
 				</TimelineHeading>
@@ -73,9 +120,23 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					SquiggleConf is a conference focused on software developer tools: AI
 					tools, linters, code editors, performance and security tools,
 					debuggers, and more. We mix heavy talks with fun events.
-					<br />
-					Think of it like your devtools fieldtrip.
+					<span class="top-intro-tagline">
+						Think of it like your devtools field trip.
+					</span>
 				</p>
+				<div class="top-actions">
+					<Button
+						as="a"
+						href={links.tickets}
+						target="_blank"
+						variant="emphasized"
+					>
+						Get {currentYear} tickets
+					</Button>
+					<Button as="a" href="#newsletter" variant="ghost">
+						Subscribe for updates
+					</Button>
+				</div>
 			</div>
 			<PostcardGallery />
 		</div>
@@ -196,6 +257,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							alt="Presenter on stage inside the Simons IMAX Theater"
 							class="event-image-wide"
 							effect="zoom"
+							size={224}
 							src={simonsTheater}
 							zoomOrigin="top right"
 						/>
@@ -227,6 +289,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-morning"
 					heading="Talks"
+					headingContext="at 9am"
 					time="9am"
 					venue="aquarium"
 				>
@@ -275,6 +338,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-late"
 					heading="Talks"
+					headingContext="at 11am"
 					time="11am"
 					venue="aquarium"
 				>
@@ -333,6 +397,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-afternoon"
 					heading="Talks"
+					headingContext="at 2pm"
 					time="2pm"
 					venue="aquarium"
 				>
@@ -373,6 +438,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							alt="Urban Wild Boston logo"
 							class="event-image-wide"
 							effect="zoom"
+							size={224}
 							src={urbanwildLogo}
 							zoomOrigin="top right"
 						/>
@@ -412,12 +478,14 @@ import PageLayout from "~/layouts/PageLayout.astro";
 									alt="Wes Bos portrait"
 									class="podcast-host-image"
 									radius="var(--radiusPill)"
+									size={44}
 									src={wesBos}
 								/>
 								<TimelineImage
 									alt="Scott Tolinski portrait"
 									class="podcast-host-image"
 									radius="var(--radiusPill)"
+									size={44}
 									src={scottTolinski}
 								/>
 								<p class="fireside-host">
@@ -460,7 +528,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</TimelineMedia>
 				</TimelineEntry>
 
-				<TimelineRail bottom span={2} time="7:30pm" />
+				<TimelineRail time="7:30pm" />
 
 				<TimelineEntry
 					entryId="after-party"
@@ -474,22 +542,39 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						class="afterparty-collage"
 						layout="feature-five"
 						photos={[
-							{ alt: "", src: urbanwild1 },
-							{ alt: "", src: urbanwild2 },
-							{ alt: "", src: urbanwild3 },
-							{ alt: "", src: urbanwild4 },
-							{ alt: "", src: urbanwild5 },
+							{
+								alt: "Urban Wild lounge with orange sofas under string lights",
+								src: urbanwild1,
+							},
+							{
+								alt: "Bowler mid-throw on a lane with a glowing score display",
+								src: urbanwild2,
+							},
+							{
+								alt: "Urban Wild bar and lounge seating under purple lights",
+								src: urbanwild3,
+							},
+							{
+								alt: "Mural-covered entrance tunnel at Urban Wild",
+								src: urbanwild4,
+							},
+							{
+								alt: "Friends bowling beneath overhead scoreboards",
+								src: urbanwild5,
+							},
 						]}
 					/>
 					<TimelineCopy>
 						<p>
 							After the podcast and fireside chat, we'll switch into party mode
 							at Urban Wild: video arcade bowling, lots of light bites and
-							refreshments, and most of all - a chance to hang with everyone you
+							refreshments, and most of all—a chance to hang with everyone you
 							just met at the conference!
 						</p>
 					</TimelineCopy>
 				</TimelineEntry>
+
+				<TimelineRail bottom time="9pm" />
 
 				<TimelineEntry
 					entryId="big-rav"
@@ -503,6 +588,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 							class="event-image-circle"
 							effect="grow"
 							radius="var(--radiusPill)"
+							size={128}
 							src={bigRav}
 						/>
 						<TimelineCopy>
@@ -528,46 +614,106 @@ import PageLayout from "~/layouts/PageLayout.astro";
 </PageLayout>
 
 <style>
+	.top {
+		padding-top: 5rem;
+		display: grid;
+		grid-template:
+			"main" auto
+			"postcard" auto / minmax(0, 1fr);
+	}
+
+	.top-main {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		grid-area: main;
+		text-align: center;
+	}
+
 	.top-heading {
-		font-size: var(--fontSizeDisplay);
+		font-size: calc(var(--fontSizeDisplay) * 0.9);
 		font-style: italic;
 		line-height: 1;
-		padding-top: 1rem;
+		padding-top: 1.5rem;
 		position: relative;
 		z-index: 1;
 	}
 
 	.top-intro {
 		color: var(--colorCopy);
-		font-size: clamp(1rem, 1.35vw, 1.12rem);
-		line-height: 1.6;
-		padding: 0 0 0 2rem;
-		margin: 1rem auto 0;
-		max-width: 39rem;
+		font-size: 0.95rem;
+		line-height: 1.55;
+		margin: 1rem 0 0;
+		max-width: 36rem;
 		text-wrap: pretty;
 	}
 
-	.top-side-by-side {
-		max-width: var(--sizeContentAreaNormal);
-		margin: auto;
-		gap: 5rem;
-		align-items: center;
-		display: flex;
-		flex-direction: row;
-		text-align: right;
+	.top-intro-tagline {
+		display: block;
+		margin-top: 0.5lh;
 	}
 
-	.top-side-by-side :global(.postcard-gallery) {
-		zoom: 0.83;
+	.top-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+		margin: 2.25rem 0 5rem;
 	}
 
-	.top-side-left {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		text-align: right;
-		width: 100%;
-		margin-bottom: 2.5rem;
+	.top :global(.postcard-gallery) {
+		grid-area: postcard;
+		margin: 0;
+		zoom: 0.75;
+	}
+
+	.top :global(.postcard-flip) {
+		margin: 0;
+		padding-bottom: 1.6rem;
+	}
+
+	@media (--widthSmall) {
+		.top-actions {
+			margin-bottom: 5.75rem;
+		}
+	}
+
+	@media (--widthLarge) {
+		.top {
+			padding-top: 4.5rem;
+			column-gap: 3.5rem;
+			grid-template: "main postcard" auto / minmax(0, 1.35fr) minmax(0, 1fr);
+		}
+
+		.top-main {
+			align-items: flex-start;
+			text-align: left;
+		}
+
+		.top-intro {
+			max-width: 41rem;
+		}
+
+		.top-heading {
+			font-size: clamp(1.45rem, 2.15vw, 1.9rem);
+			padding-top: 2.75rem;
+		}
+
+		.top-actions {
+			justify-content: flex-start;
+			margin-bottom: 0;
+		}
+
+		.top :global(.postcard-gallery) {
+			align-items: flex-end;
+			align-self: end;
+			margin-top: 4rem;
+			zoom: 0.8;
+		}
+
+		.top :global(.postcard-flip) {
+			margin-top: 0.5rem;
+		}
 	}
 
 	.timeline-grid-intro {
@@ -670,20 +816,6 @@ import PageLayout from "~/layouts/PageLayout.astro";
 	}
 
 	@media not (--widthLarge) {
-		.top-side-by-side {
-			flex-direction: column;
-			gap: 0;
-		}
-
-		.top-heading {
-			margin: auto;
-		}
-
-		.top-side-left {
-			margin-bottom: 0;
-			text-align: center;
-		}
-
 		.timeline-grid-intro {
 			margin-top: 0;
 			order: -1;

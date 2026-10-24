@@ -12,12 +12,6 @@ interface Props extends HTMLAttributes<"a"> {
 const { sponsor, ...rest } = Astro.props;
 ---
 
-<a
-	href={sponsor.href}
-	rel="noreferrer"
-	target="_blank"
-	title={sponsor.title}
-	{...rest}
->
+<a href={sponsor.href} rel="noreferrer" target="_blank" {...rest}>
 	<ThemedImage alt={sponsor.title} height={128} sources={sponsor.logos} />
 </a>

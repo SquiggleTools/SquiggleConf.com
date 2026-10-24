@@ -1,5 +1,30 @@
 <script is:inline>
-	if (localStorage.getItem("theme") !== "light") {
-		document.documentElement.classList.add("dark");
+	{
+		const applyStoredTheme = () => {
+			let theme;
+			try {
+				theme = localStorage.getItem("theme");
+			} catch {
+				theme = null;
+			}
+			document.documentElement.classList.toggle("dark", theme !== "light");
+		};
+
+		const syncTheme = () => {
+			applyStoredTheme();
+			document.dispatchEvent(new CustomEvent("theme-change"));
+		};
+
+		applyStoredTheme();
+		addEventListener("pageshow", (event) => {
+			if (event.persisted) {
+				syncTheme();
+			}
+		});
+		addEventListener("storage", (event) => {
+			if (event.key === "theme") {
+				syncTheme();
+			}
+		});
 	}
 </script>

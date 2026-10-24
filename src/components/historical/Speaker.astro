@@ -32,12 +32,14 @@ const {
 	<SubtleCard>
 		<div class="speaker-top">
 			<div class="speaker-top-content">
-				<Avatar alt={`${name} Avatar`} size={128} src={image} />
+				<Avatar alt="" size={128} src={image} />
 				<div class="speaker-headline">
 					<div class="speaker-headline-text">
-						<a class="title anchor-title" href={`#${slug}`}>
-							{name}
-						</a>
+						<h2 class="title">
+							<a class="anchor-title" href={`#${slug}`}>
+								{name}
+							</a>
+						</h2>
 						<div>
 							<SafeMarkdown of={qualification} />
 						</div>
@@ -72,11 +74,29 @@ const {
 	}
 
 	.speaker-top-content {
+		align-items: flex-start;
 		display: flex;
 		flex-direction: row;
 		gap: 1rem;
 		position: relative;
 		width: 100%;
+	}
+
+	.speaker-top-content :global(.avatar) {
+		aspect-ratio: 1;
+		flex: none;
+		height: auto;
+	}
+
+	.speaker-headline {
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	@media not (--widthXSmall) {
+		.speaker-top-content {
+			flex-direction: column;
+		}
 	}
 
 	.title {
@@ -85,6 +105,9 @@ const {
 		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightMedium);
 		margin-bottom: 0.25rem;
+	}
+
+	.title a {
 		text-decoration: none;
 	}
 
@@ -93,6 +116,8 @@ const {
 	}
 
 	.speaker-talks {
+		display: grid;
+		gap: 0.25rem;
 		list-style: none;
 		padding-top: 0.5rem;
 		padding-left: 0;

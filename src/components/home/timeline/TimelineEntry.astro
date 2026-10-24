@@ -13,6 +13,7 @@ import TimelineHeading from "./TimelineHeading.astro";
 interface Props {
 	entryId: TimelineEntryId;
 	heading: string;
+	headingContext?: string;
 	/** Plain-text location, for entries not at a venue. */
 	location?: string;
 	subtitle?: string;
@@ -25,6 +26,7 @@ interface Props {
 const {
 	entryId,
 	heading,
+	headingContext,
 	location,
 	subtitle,
 	time,
@@ -44,6 +46,9 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 	<div class="timeline-heading-line">
 		<TimelineHeading class="timeline-heading" id={entryId} level="h2" link>
 			{heading}
+			{headingContext && (
+				<span class="timeline-heading-context">{` ${headingContext}`}</span>
+			)}
 		</TimelineHeading>
 	</div>
 	<div
@@ -76,6 +81,15 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 </div>
 
 <style>
+	.timeline-heading-context {
+		clip-path: inset(50%);
+		height: 1px;
+		overflow: hidden;
+		position: absolute;
+		white-space: nowrap;
+		width: 1px;
+	}
+
 	/* Active-state variables that images and copy inside the entry read. */
 	.timeline-content {
 		--timeline-card-pointer-x: 50%;
@@ -84,7 +98,11 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		--timeline-collage-duo-2: translate3d(0, 0, 0);
 		--timeline-entry-copy-color: var(--colorCopy);
 		--timeline-heading-hover-shadow: 0 0.3rem 1rem
-			light-dark(transparent, rgb(from var(--colorBlue5) r g b / 24%));
+			color-mix(
+				in srgb,
+				transparent,
+				rgb(from var(--colorBlue5) r g b / 24%) var(--themeDarkness)
+			);
 		--timeline-image-grow-border-width: var(--sizeImageBorder);
 		--timeline-image-scale: 1;
 		--timeline-image-shadow: 0 0.25rem 0.7rem
@@ -204,6 +222,15 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		transition: color var(--transitionNormal);
 	}
 
+	:global(html.theme-transition) .timeline-heading {
+		transition-property: text-shadow, transform;
+	}
+
+	:global(html.theme-transition)
+		:is(.timeline-subtitle, .timeline-mobile-location) {
+		transition: none;
+	}
+
 	/* Active entries: hovered or focused on desktop, scrolled to on mobile */
 	@media (--widthLarge) {
 		.timeline-content:is(:hover, :focus-within) {
@@ -278,7 +305,7 @@ const mobileLocationHref = venue && venues[venue].mapUrl;
 		}
 
 		.timeline-inline-time > :first-child::after {
-			content: " • ";
+			content: " • " / "";
 			margin: 0 0.15rem;
 			display: inline-block;
 		}

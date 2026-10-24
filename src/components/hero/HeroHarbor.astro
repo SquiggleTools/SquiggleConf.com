@@ -1,0 +1,432 @@
+---
+import cityscapeWaves from "~/assets/design/cityscape-waves.svg";
+import cityscape from "~/assets/design/cityscape.svg";
+
+import { lightRays } from "../home/lightRays";
+import { orbCenter, orbCenterInContainer } from "./orb";
+
+interface Props {
+	compact?: boolean;
+}
+
+const { compact } = Astro.props;
+
+const background = `background-image: url(${cityscape.src})`;
+
+const boats = [
+	{ delay: 28, duration: 80, rest: 30, size: 2.4, top: 0.6 },
+	{ delay: 60, duration: 300, rest: 12, size: 1.1, top: 0.25 },
+	{ delay: 250, duration: 420, rest: 64, reverse: true, size: 0.85, top: 0.1 },
+	{ delay: 140, duration: 360, rest: 85, size: 0.7, top: 0 },
+];
+const orbPathCount = 18;
+
+const glints = Array.from({ length: 44 }, (_, index) => {
+	const seed = Math.sin(index * 7919 + 104729) * 43758.5453;
+	const random = seed - Math.floor(seed);
+	const onOrbPath = index < orbPathCount;
+	const depth = index / orbPathCount;
+	return {
+		delay: random * 5,
+		duration: 2.5 + random * 3.5,
+		left: onOrbPath
+			? `calc(var(--orb-center) + ${((random - 0.5) * (1.5 + depth * 5)).toFixed(2)}rem)`
+			: `${(index * 29 + random * 11) % 100}%`,
+		orb: onOrbPath,
+		top: onOrbPath ? 6 + depth * 80 : 12 + ((index * 17) % 70),
+		width: onOrbPath ? 0.8 + random * (1 + depth * 1.5) : 0.6 + random * 1.6,
+	};
+});
+---
+
+{compact && (
+	<link
+		as="image"
+		fetchpriority="high"
+		href={cityscape.src}
+		media="(width >= 819px)"
+		rel="preload"
+	/>
+)}
+<div
+	aria-hidden="true"
+	class="hero-harbor"
+	data-pause-offscreen
+	style={`--orb-center: ${orbCenter}; --orb-center-in-water: ${orbCenterInContainer}`}
+>
+	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
+	<div class="hero-harbor-water">
+		<span class="hero-harbor-glow"></span>
+		<div
+			class="hero-harbor-art hero-harbor-reflection"
+			style={background}
+		></div>
+		<span class="hero-harbor-orb-path"></span>
+		<div class="hero-harbor-rays">
+			{lightRays.map(({ delay, left, width }) => (
+				<span
+					style={`--delay: -${delay}s; --left: ${left}cqw; --width: ${width}rem`}
+				/>
+			))}
+		</div>
+		{glints.map(({ delay, duration, left, orb, top, width }) => (
+			<span
+				class:list={["hero-harbor-glint", orb && "hero-harbor-glint-orb"]}
+				style={`--delay: -${delay}s; --duration: ${duration}s; --left: ${left}; --top: ${top}%; --width: ${width}rem`}
+			/>
+		))}
+		{boats.map(({ delay, duration, rest, reverse, size, top }) => (
+			<svg
+				class:list={["hero-harbor-boat", reverse && "hero-harbor-boat-reverse"]}
+				style={`--delay: -${delay}s; --duration: ${duration}s; --rest: ${rest}vw; --size: ${size}rem; --top: ${top}rem`}
+				viewBox="0 0 60 50"
+			>
+				<path class="hero-harbor-boat-flag" d="M30 3 L38 6 L30 9 Z" />
+				<path class="hero-harbor-boat-sail" d="M30 6 L30 38 L10 38 Z" />
+				<path class="hero-harbor-boat-jib" d="M32 10 L32 38 L50 38 Z" />
+				<path class="hero-harbor-boat-hull" d="M4 40 L56 40 L48 48 L12 48 Z" />
+			</svg>
+		))}
+	</div>
+	<div
+		class="hero-harbor-art hero-harbor-waves"
+		style={`--hero-harbor-waves: url(${cityscapeWaves.src})`}
+	></div>
+</div>
+
+<style>
+	.hero-harbor {
+		--hero-harbor-art-height: calc(10rem * var(--hero-scale));
+		--hero-harbor-water-height: calc(4rem * var(--hero-scale));
+
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+
+	.hero-harbor-art {
+		background-repeat: repeat-x;
+		background-size: auto var(--hero-harbor-art-height);
+		margin-left: 50%;
+		min-width: 100vw;
+		translate: -48.5% 0;
+		width: 150rem;
+	}
+
+	.hero-harbor-skyline {
+		background-position: center top;
+		height: calc(var(--hero-harbor-art-height) * 427 / 536);
+	}
+
+	.hero-harbor-water {
+		background: linear-gradient(
+			to bottom,
+			color-mix(
+				in srgb,
+				color-mix(in srgb, var(--colorFrost1) 55%, var(--colorWhite)),
+				color-mix(in srgb, var(--colorSea) 70%, var(--colorBlue3))
+					var(--themeDarkness)
+			),
+			color-mix(
+				in srgb,
+				var(--colorFrost1),
+				var(--colorSea) var(--themeDarkness)
+			)
+		);
+		container-type: inline-size;
+		height: var(--hero-harbor-water-height);
+		overflow: hidden;
+		position: relative;
+	}
+
+	.hero-harbor-glow {
+		background: radial-gradient(
+			ellipse 50% 150% at 50% 0%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorSunrise) r g b / 16%),
+				rgb(from var(--colorViolet) r g b / 9%) var(--themeDarkness)
+			),
+			transparent
+		);
+		display: var(--hero-orb-display);
+		height: 100%;
+		left: var(--orb-center);
+		position: absolute;
+		top: 0;
+		translate: -50% 0;
+		width: 110rem;
+	}
+
+	.hero-harbor-reflection {
+		animation: hero-harbor-ripple 6s ease-in-out infinite alternate;
+		background-position: center
+			calc(
+				var(--hero-harbor-water-height) - var(--hero-harbor-art-height) * 427 /
+					536
+			);
+		filter: blur(0.6px);
+		height: 100%;
+		mask-composite: intersect;
+		mask-image:
+			repeating-linear-gradient(
+				to bottom,
+				var(--colorBlue5) 0 2px,
+				rgb(from var(--colorBlue5) r g b / 35%) 2px 4px
+			),
+			linear-gradient(to top, var(--colorBlue5), transparent);
+		opacity: 0.45;
+		scale: 1 -1;
+	}
+
+	@keyframes hero-harbor-ripple {
+		0% {
+			transform: skewX(-1.5deg) scaleY(1);
+		}
+
+		100% {
+			transform: skewX(1.5deg) scaleY(0.94);
+		}
+	}
+
+	.hero-harbor-orb-path {
+		background: radial-gradient(
+			ellipse 50% 100% at 50% 0%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorTerminalOrange) r g b / 30%),
+				rgb(from var(--colorCream) r g b / 22%) var(--themeDarkness)
+			),
+			transparent 80%
+		);
+		display: var(--hero-orb-display);
+		height: 100%;
+		left: var(--orb-center);
+		position: absolute;
+		top: 0;
+		translate: -50% 0;
+		width: 10rem;
+	}
+
+	.hero-harbor-rays {
+		display: var(--hero-orb-display);
+		inset: 0;
+		opacity: var(--themeDip);
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.hero-harbor:not([data-rays-aimed]) .hero-harbor-rays {
+		visibility: hidden;
+	}
+
+	.hero-harbor-rays span {
+		animation: hero-harbor-ray-pulse 11s ease-in-out infinite alternate;
+		animation-delay: var(--delay);
+		background: color-mix(
+			in srgb,
+			rgb(
+				from color-mix(in srgb, var(--colorSunrise) 45%, var(--colorWhite)) r g
+					b / 23%
+			),
+			rgb(from var(--colorBlue1) r g b / 10%) var(--themeDarkness)
+		);
+		bottom: -10rem;
+		filter: blur(10px);
+		height: 40rem;
+		left: calc(var(--left) - var(--width) / 2);
+		position: absolute;
+		transform: rotate(
+			atan2(
+				calc(
+					var(--orb-center-in-water) + var(--themeDarkStep) * 0.7rem -
+						var(--left)
+				),
+				calc(
+					var(--hero-harbor-depth, 29rem) + var(--hero-harbor-water-height) -
+						var(--hero-orb-top) - 2rem + var(--themeDarkStep) * 0.7rem
+				)
+			)
+		);
+		transform-origin: 50% calc(100% - 10rem);
+		width: var(--width);
+	}
+
+	@keyframes hero-harbor-ray-pulse {
+		0% {
+			opacity: 0.5;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.hero-harbor-glint {
+		animation: hero-harbor-glint var(--duration) ease-in-out infinite;
+		animation-delay: var(--delay);
+		background: color-mix(
+			in srgb,
+			var(--colorWhite),
+			rgb(from var(--colorCream) r g b / 90%) var(--themeDarkness)
+		);
+		border-radius: var(--radiusPill);
+		box-shadow: 0 0 0.4rem
+			color-mix(
+				in srgb,
+				rgb(from var(--colorTerminalOrange) r g b / 40%),
+				rgb(from var(--colorCream) r g b / 50%) var(--themeDarkness)
+			);
+		height: 2px;
+		left: var(--left);
+		opacity: 0;
+		position: absolute;
+		top: var(--top);
+		width: var(--width);
+	}
+
+	.hero-harbor-glint-orb {
+		display: var(--hero-orb-display);
+	}
+
+	@keyframes hero-harbor-glint {
+		0%,
+		100% {
+			opacity: 0;
+			transform: translateX(-0.4rem) scaleX(0.5);
+		}
+
+		50% {
+			opacity: 0.85;
+			transform: translateX(0.4rem) scaleX(1);
+		}
+	}
+
+	.hero-harbor-boat {
+		animation: hero-harbor-sail var(--duration) linear infinite;
+		animation-delay: var(--delay);
+		left: 0;
+		mask-image: linear-gradient(
+			to bottom,
+			var(--colorBlue5) 76%,
+			rgb(from var(--colorBlue5) r g b / 50%) 76%,
+			transparent 96%
+		);
+		position: absolute;
+		top: calc(var(--top) * var(--hero-scale));
+		transform: translateX(var(--rest)) scaleX(var(--hero-harbor-boat-flip, 1));
+		width: calc(var(--size) * var(--hero-scale));
+	}
+
+	.hero-harbor-boat-reverse {
+		--hero-harbor-boat-flip: -1;
+
+		animation-direction: reverse;
+	}
+
+	.hero-harbor-boat-sail,
+	.hero-harbor-boat-jib {
+		stroke: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue4) r g b / 75%),
+			rgb(from var(--colorBlue5) r g b / 70%) var(--themeDarkness)
+		);
+		stroke-linejoin: round;
+		stroke-width: 1.5;
+	}
+
+	.hero-harbor-boat-hull {
+		fill: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorBlue5) var(--themeDarkness)
+		);
+	}
+
+	.hero-harbor-boat-sail {
+		fill: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorCream) var(--themeDarkness)
+		);
+	}
+
+	.hero-harbor-boat-jib {
+		fill: color-mix(
+			in srgb,
+			var(--colorBlue1),
+			color-mix(in srgb, var(--colorBlue1) 80%, var(--colorBlue4))
+				var(--themeDarkness)
+		);
+	}
+
+	.hero-harbor-boat-flag {
+		fill: var(--colorTerminalOrange);
+	}
+
+	@keyframes hero-harbor-sail {
+		0% {
+			transform: translate(-5vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
+		}
+
+		25% {
+			transform: translate(22.5vw, 0.15rem)
+				scaleX(var(--hero-harbor-boat-flip, 1));
+		}
+
+		50% {
+			transform: translate(50vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
+		}
+
+		75% {
+			transform: translate(77.5vw, 0.15rem)
+				scaleX(var(--hero-harbor-boat-flip, 1));
+		}
+
+		100% {
+			transform: translate(105vw, 0) scaleX(var(--hero-harbor-boat-flip, 1));
+		}
+	}
+
+	.hero-harbor-waves {
+		background: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorWhiteIsh) var(--themeDarkness)
+		);
+		mask: var(--hero-harbor-waves) center top / auto
+			calc(var(--hero-harbor-art-height) * 40 / 536) repeat-x;
+		height: calc(var(--hero-harbor-art-height) * 40 / 536);
+		margin-top: calc(var(--hero-harbor-art-height) * -14 / 536);
+		position: relative;
+	}
+
+	@media (--widthMedium) {
+		.hero-harbor-art {
+			translate: -50% 0;
+		}
+	}
+</style>
+
+<script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+
+	const hero = document.querySelector(".hero");
+	const harbor = hero?.querySelector<HTMLElement>(".hero-harbor");
+	const water = harbor?.querySelector(".hero-harbor-water");
+
+	if (hero && harbor && water) {
+		const observer = new ResizeObserver(() => {
+			harbor.style.setProperty(
+				"--hero-harbor-depth",
+				`${water.getBoundingClientRect().top - hero.getBoundingClientRect().top}px`,
+			);
+			harbor.toggleAttribute("data-rays-aimed", true);
+		});
+		observer.observe(hero);
+		observer.observe(harbor);
+	}
+</script>

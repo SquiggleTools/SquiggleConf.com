@@ -5,12 +5,13 @@ import postcardBack from "~/assets/2027/postcard-back.webp";
 import postcardFront from "~/assets/2027/postcard-front.webp";
 ---
 
-<div class="postcard-gallery">
+<div class="postcard-gallery" data-pause-offscreen>
 	<div class="postcard-flip">
 		<button
 			aria-label="Flip the SquiggleConf postcard"
 			aria-pressed="false"
 			class="postcard-flip-toggle"
+			disabled
 			type="button"
 		></button>
 		<div class="postcard-flip-scene">
@@ -129,11 +130,15 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 		position: absolute;
 	}
 
+	.postcard-flip-toggle:disabled {
+		cursor: default;
+	}
+
 	.postcard-flip:is(
 		:hover,
 		:focus-within,
-		[data-mobile-flipped],
-		:has(> [aria-pressed="true"])
+		[data-flipped],
+		[data-mobile-flipped]
 	) {
 		animation: none;
 	}
@@ -160,25 +165,22 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 
 	/* data-mobile-flipped is only set on mobile, when scrolled past */
 	.postcard-flip[data-mobile-flipped],
-	[aria-pressed="true"] + .postcard-flip-scene {
+	.postcard-flip[data-flipped="true"]:not(:hover, :focus-within)
+		.postcard-flip-scene {
 		transform: translateY(-0.08rem);
 	}
 
 	.postcard-flip:is(
-			:hover,
-			:focus-within,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard-flip-inner {
 		transform: rotateY(180deg);
 	}
 
 	.postcard-flip:is(
-			:hover,
-			:focus-within,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard {
 		box-shadow:
@@ -211,8 +213,12 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	.postcard-back {
 		background: var(--colorCream);
 		color: rgb(from var(--colorBlue5) r g b / 75%);
-		font-family: "Shantell Sans", cursive;
+		font-family: cursive;
 		font-weight: var(--fontWeightSemiLight);
+	}
+
+	.postcard-gallery[data-handwriting-loaded] .postcard-back {
+		font-family: "Shantell Sans", cursive;
 	}
 
 	.postcard-back-message {
@@ -277,10 +283,8 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 	}
 
 	.postcard-flip:is(
-			:hover,
-			:focus-within,
-			[data-mobile-flipped],
-			:has(> [aria-pressed="true"])
+			[data-flipped="true"],
+			:not([data-flipped]):is(:hover, [data-mobile-flipped])
 		)
 		.postcard-note {
 		opacity: 1;
@@ -300,17 +304,65 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 <script>
 	import { observeAboveMiddle } from "~/utils/aboveMiddle";
 	import { timelineCollapsedQuery } from "~/utils/breakpoints";
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+
+	const gallery = document.querySelector<HTMLElement>(".postcard-gallery");
+
+	addEventListener("load", () => {
+		void document.fonts.load(`1em "Shantell Sans"`, "Hi Mom").then(() => {
+			gallery?.toggleAttribute("data-handwriting-loaded", true);
+		});
+	});
 
 	const postcard = document.querySelector<HTMLElement>(".postcard-flip");
-	const toggle = document.querySelector<HTMLElement>(".postcard-flip-toggle");
+	const toggle = document.querySelector<HTMLButtonElement>(
+		".postcard-flip-toggle",
+	);
 	const mobileQuery = matchMedia(timelineCollapsedQuery);
 
 	if (postcard && toggle) {
-		toggle.addEventListener("click", () => {
+		toggle.disabled = false;
+
+		const flippedWithoutHover =
+			'[data-flipped="true"], :not([data-flipped])[data-mobile-flipped]';
+		const flippedWithHover =
+			'[data-flipped="true"], :not([data-flipped]):is(:hover, [data-mobile-flipped])';
+		let lastPointerType = "mouse";
+
+		const syncPressed = () => {
 			toggle.setAttribute(
 				"aria-pressed",
-				`${toggle.getAttribute("aria-pressed") !== "true"}`,
+				`${postcard.matches(flippedWithoutHover)}`,
 			);
+		};
+
+		const setFlipped = (flipped: boolean | undefined) => {
+			if (flipped === undefined) {
+				delete postcard.dataset.flipped;
+			} else {
+				postcard.dataset.flipped = `${flipped}`;
+			}
+
+			syncPressed();
+		};
+
+		toggle.addEventListener("pointerdown", (event) => {
+			lastPointerType = event.pointerType;
+		});
+
+		toggle.addEventListener("click", () => {
+			const selector =
+				lastPointerType === "mouse" ? flippedWithHover : flippedWithoutHover;
+			lastPointerType = "mouse";
+			setFlipped(!postcard.matches(selector));
+		});
+
+		postcard.addEventListener("pointerleave", (event) => {
+			if (event.pointerType === "mouse") {
+				setFlipped(undefined);
+			}
 		});
 
 		let centerAboveMiddle = false;
@@ -320,6 +372,7 @@ import postcardFront from "~/assets/2027/postcard-front.webp";
 				"data-mobile-flipped",
 				mobileQuery.matches && centerAboveMiddle,
 			);
+			syncPressed();
 		};
 
 		observeAboveMiddle(

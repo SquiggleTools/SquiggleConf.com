@@ -1,33 +1,46 @@
 ---
+import Bubbles from "~/components/Bubbles.astro";
 import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+import { currentYear } from "~/data/years";
 
+import { lightRays } from "../lightRays";
 import TimelineHeading from "../timeline/TimelineHeading.astro";
-import CfpBubbles from "./CfpBubbles.astro";
 import CfpCountdown from "./CfpCountdown.astro";
 import CfpPerson from "./CfpPerson.astro";
 import { cfpHosts, cfpLaunchSpeakers } from "./data";
 ---
 
-<section aria-labelledby="cfp-opens-heading" class="cfp-opens">
+<section
+	aria-labelledby="cfp-opens-heading"
+	class="cfp-opens"
+	data-pause-offscreen
+>
 	<div aria-hidden="true" class="cfp-opens-rays">
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
+		{lightRays.map(({ angle, delay, left, width }) => (
+			<span
+				style={`--angle: ${angle}deg; --delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
+			/>
+		))}
 	</div>
-	<CfpBubbles class="cfp-opens-bubbles" count={18} />
+	<Bubbles class="cfp-opens-bubbles" count={42} />
 	<div class="cfp-opens-inner">
 		<div class="cfp-opens-headline">
-			<p class="cfp-opens-eyebrow">Call for proposals</p>
+			<p class="cfp-opens-eyebrow" id="call-for-proposals">
+				<a href="#call-for-proposals">Call for proposals</a>
+			</p>
 			<TimelineHeading
 				class="cfp-opens-heading"
 				id="cfp-opens-heading"
 				level="h2"
 			>
-				CFP Opens <span class="cfp-opens-date">{cfpOpenDate} 2026</span>
+				CFP Opens{" "}
+				<span class="cfp-opens-date">
+					{cfpOpenDate}, {currentYear - 1}
+				</span>
 			</TimelineHeading>
-			<p class="cfp-opens-close">Submissions close {cfpCloseDate}</p>
+			<p class="cfp-opens-close">
+				Submissions close {cfpCloseDate}, {currentYear}
+			</p>
 			<CfpCountdown />
 		</div>
 		<p class="cfp-opens-label">Launch Lineup</p>
@@ -53,72 +66,41 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 
 		border-top: 1px solid var(--timeline-rail-border-color);
 		isolation: isolate;
-		margin: -1.15rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
-		overflow: hidden;
-		padding: clamp(3.5rem, 7vw, 5.5rem) 1rem;
+		margin: -2rem calc(-1 * clamp(0.15rem, 0.5vw, 1rem)) 3rem;
+		overflow: clip;
+		padding: 6.5rem 1rem clamp(3.5rem, 7vw, 5.5rem);
 		position: relative;
 	}
 
 	.cfp-opens-rays {
 		inset: 0;
 		mix-blend-mode: screen;
+		opacity: var(--themeDip);
 		pointer-events: none;
 		position: absolute;
 	}
 
 	.cfp-opens-rays span {
 		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
+		animation-delay: var(--delay);
 		background: linear-gradient(
 			to bottom,
-			rgb(from var(--colorBlue2) r g b / 22%),
-			transparent 85%
+			color-mix(
+					in srgb,
+					rgb(from var(--colorWhite) r g b / 55%),
+					rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
+				)
+				8rem,
+			transparent calc(8rem + (100% - 8rem) * 0.85)
 		);
 		filter: blur(10px);
-		height: 130%;
-		left: var(--left);
+		height: calc(130% + 8rem);
+		left: calc(var(--left) - var(--width) / 2);
 		position: absolute;
-		top: -10%;
-		transform-origin: top center;
+		rotate: var(--angle);
+		top: -9rem;
+		transform-origin: 50% 10rem;
 		width: var(--width);
-	}
-
-	.cfp-opens-rays span:nth-child(1) {
-		--left: 12%;
-		--width: 4rem;
-
-		rotate: 18deg;
-	}
-
-	.cfp-opens-rays span:nth-child(2) {
-		--left: 30%;
-		--width: 2rem;
-
-		animation-delay: -3s;
-		rotate: 10deg;
-	}
-
-	.cfp-opens-rays span:nth-child(3) {
-		--left: 50%;
-		--width: 6rem;
-
-		animation-delay: -6s;
-		rotate: 0deg;
-	}
-
-	.cfp-opens-rays span:nth-child(4) {
-		--left: 68%;
-		--width: 2.5rem;
-
-		animation-delay: -2s;
-		rotate: -9deg;
-	}
-
-	.cfp-opens-rays span:nth-child(5) {
-		--left: 84%;
-		--width: 4.5rem;
-
-		animation-delay: -8s;
-		rotate: -16deg;
 	}
 
 	@keyframes cfp-opens-sway {
@@ -133,13 +115,14 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 	}
 
-	.cfp-opens-bubbles {
-		opacity: 0.3;
+	.cfp-opens :global(.cfp-opens-bubbles) {
+		--bubbles-fade: 12.5rem;
 	}
 
 	.cfp-opens-inner {
 		display: grid;
 		gap: clamp(2.5rem, 5vw, 4rem);
+		grid-template-columns: minmax(0, 1fr);
 		margin: 0 auto;
 		max-width: var(--sizeContentAreaWide);
 		position: relative;
@@ -149,28 +132,47 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	.cfp-opens-headline {
 		display: grid;
 		gap: 0.25rem;
+		margin-bottom: calc(-0.5 * clamp(2.5rem, 5vw, 4rem));
 	}
 
 	.cfp-opens-eyebrow {
-		color: var(--colorAccentMedium);
+		color: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorBlue1) var(--themeDarknessText)
+		);
 		font-family: var(--fontFamilyHeading);
 		font-size: var(--fontSizeSmall);
 		font-weight: var(--fontWeightSemibold);
 		letter-spacing: 0.08em;
 		margin: 0;
+		scroll-margin-top: 2rem;
 		text-transform: uppercase;
 	}
 
+	.cfp-opens-eyebrow a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.cfp-opens-eyebrow a:is(:hover, :focus-visible) {
+		text-decoration: underline;
+	}
+
 	.cfp-opens-heading {
-		font-size: clamp(2.24rem, 5.6vw, 4.2rem);
+		font-size: min(clamp(2rem, 5vw, 3.75rem), 11vw);
 		font-style: italic;
 		line-height: 1.05;
 		margin: 0;
 	}
 
 	.cfp-opens-date {
-		color: var(--colorAccentMedium);
-		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 22%);
+		color: color-mix(
+			in srgb,
+			var(--colorBlue3),
+			var(--colorBlue2) var(--themeDarknessText)
+		);
+		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 15%);
 		white-space: nowrap;
 	}
 
@@ -209,12 +211,15 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	}
 
 	.cfp-opens-people {
-		display: grid;
+		display: flex;
+		flex-wrap: wrap;
 		gap: 1rem;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: column;
 		margin: 0;
 		padding: 0;
+	}
+
+	.cfp-opens-people :global(.cfp-person) {
+		flex: 1 1 0;
 	}
 
 	.cfp-opens-people :global(.cfp-person):nth-child(odd) :global(.cfp-avatar) {
@@ -242,15 +247,15 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 
 		.cfp-opens {
-			--cfp-avatar-size: 5rem;
+			--cfp-avatar-size: min(5rem, 25vw);
 		}
 
 		.cfp-opens-lineup {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
 		}
 
 		.cfp-opens-people {
-			grid-auto-flow: row;
+			display: grid;
 			grid-template-columns: repeat(6, minmax(0, 1fr));
 		}
 
@@ -263,3 +268,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		}
 	}
 </style>
+
+<script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+</script>

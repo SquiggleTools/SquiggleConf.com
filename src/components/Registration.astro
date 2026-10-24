@@ -43,16 +43,12 @@ import DecorativeImage from "./DecorativeImage.astro";
 	}
 
 	.squiggle-thick-wide {
-		height: 100%;
+		height: calc(100% - 6rem);
 		left: 0;
-		opacity: 0.2;
+		opacity: calc(0.2 - var(--themeDark) * 0.165);
 		top: 0%;
 		width: 100%;
 		z-index: 0;
-	}
-
-	html.dark .squiggle-thick-wide {
-		opacity: 0.035;
 	}
 
 	.manta-down {
@@ -63,9 +59,9 @@ import DecorativeImage from "./DecorativeImage.astro";
 	}
 
 	.manta-up {
-		bottom: 2rem;
+		bottom: 5rem;
 		height: 7.25rem;
-		left: -7.5rem;
+		left: -2.5rem;
 	}
 
 	section.registration-contents {
@@ -74,7 +70,7 @@ import DecorativeImage from "./DecorativeImage.astro";
 		flex-direction: column;
 		justify-content: center;
 		min-height: 14rem;
-		padding: 3.5rem;
+		padding: 3.5rem 3.5rem 13.5rem;
 		position: relative;
 		z-index: 1;
 	}
@@ -84,13 +80,19 @@ import DecorativeImage from "./DecorativeImage.astro";
 		gap: 0.5rem;
 	}
 
+	@media not (--widthXSmall) {
+		section.registration-contents {
+			padding-inline: 0;
+		}
+	}
+
 	@media (--widthMedium) {
 		.manta-down {
 			right: -7.5%;
 		}
 
 		.manta-up {
-			left: -7.5%;
+			left: calc(-7.5% + 5rem);
 		}
 	}
 </style>
