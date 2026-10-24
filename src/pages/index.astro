@@ -35,8 +35,6 @@ import {
 	timelineMCs,
 } from "~/components/home/data";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
-import HeroHarbor from "~/components/home/hero/HeroHarbor.astro";
-import HeroSky from "~/components/home/hero/HeroSky.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
@@ -69,7 +67,7 @@ import { links } from "~/data/links";
 import { currentYear } from "~/data/years";
 import PageLayout from "~/layouts/PageLayout.astro";
 
-const description = `SquiggleConf is a conference for excellent web devtools: AI tools, linters, editors, debuggers, and more. ${eventDate}, ${currentYear} at the New England Aquarium, Boston.`;
+const description = `A conference for excellent devtools: AI tools, linters, editors, and more. ${eventDate}, ${currentYear} at Boston's New England Aquarium.`;
 
 const eventSchema = {
 	"@context": "https://schema.org",
@@ -78,7 +76,7 @@ const eventSchema = {
 	endDate: eventDateIso,
 	eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
 	eventStatus: "https://schema.org/EventScheduled",
-	image: new URL("banner.png", Astro.site).toString(),
+	image: new URL("og-image.jpg", Astro.site).toString(),
 	location: {
 		"@type": "Place",
 		address: {
@@ -112,8 +110,6 @@ const eventSchema = {
 		type="application/ld+json"
 	/>
 	<Hero tall width="wide">
-		<HeroSky slot="backdrop" />
-		<HeroHarbor slot="decorations" />
 		<div class="top">
 			<div class="top-main">
 				<HomeHeroLockup />

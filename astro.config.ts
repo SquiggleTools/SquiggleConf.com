@@ -132,7 +132,7 @@ export default defineConfig({
 	vite: {
 		build: {
 			assetsInlineLimit: (filePath, content) =>
-				filePath.endsWith(".css") ? content.length < 32_000 : undefined,
+				filePath.endsWith(".css") ? content.length < 40_000 : undefined,
 		},
 	},
 });
