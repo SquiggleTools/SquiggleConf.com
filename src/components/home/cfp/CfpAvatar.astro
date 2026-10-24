@@ -2,6 +2,7 @@
 import type { PersonCardData } from "~/components/home/types";
 
 import Img from "~/components/Img.astro";
+import { getCoverImageProps } from "~/utils/images";
 
 import PlaceholderMark from "../PlaceholderMark.astro";
 
@@ -15,10 +16,10 @@ const { class: className, person } = Astro.props;
 
 <div class:list={["cfp-avatar", className]}>
 	<Img
-		alt={person.placeholder ? "" : person.name}
+		alt=""
 		class:list={[person.placeholder && "cfp-avatar-placeholder"]}
 		src={person.image}
-		width={240}
+		{...getCoverImageProps(person.image, 104, 1.06)}
 	/>
 	{person.placeholder && <PlaceholderMark />}
 </div>

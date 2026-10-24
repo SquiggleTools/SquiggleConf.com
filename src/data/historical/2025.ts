@@ -425,7 +425,7 @@ After the presentation you'll have a top-level understanding of Rolldown. You kn
 		tags: ["Parsing", "Rust", "TypeScript"],
 		title: "Rolldown: How Vite Bundles at the Speed of Rust",
 	},
-	"snapshot-tests-in-gleam-smarter-testing-less work": {
+	"snapshot-tests-in-gleam-smarter-testing-less-work": {
 		description: `This talk will cover the ins and outs of snapshot testing: what it is, why is it useful, how it works and, most importantly, how to use it effectively. To be a bit more specific:
 
 - We'll start by having a look at a seemingly standard unit test (all the code examples will be in Gleam! But the code is as simple as it can be, even for the untrained eye), allowing us to highlight some pain points we all face when writing unit tests
@@ -436,7 +436,7 @@ After the presentation you'll have a top-level understanding of Rolldown. You kn
 
 I think snapshot testing is criminally underused and -hot take- should actually be the go-to testing technique when writing unit test assertions. I think it would be quite interesting for folks to see how it's used and get a feeling for it by looking at real world examples, some of those coming directly from the Gleam compiler!`,
 		people: [peopleBySlug["giacomo-cavalieri"]],
-		slug: "snapshot-tests-in-gleam-smarter-testing-less work",
+		slug: "snapshot-tests-in-gleam-smarter-testing-less-work",
 		tags: ["Debugging", "Testing"],
 		title: "Snapshot Tests in Gleam: Smarter Testing, Less Work",
 	},

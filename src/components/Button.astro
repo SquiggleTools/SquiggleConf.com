@@ -39,17 +39,22 @@ const {
 		color: var(--colorButtonColor);
 		align-items: center;
 		border: 2px solid transparent;
-		border-radius: var(--radiusPill);
+		border-radius: var(--radiusLarge);
 		cursor: pointer;
 		display: inline-flex;
 		font-family: var(--fontFamilyHeading);
 		font-weight: var(--fontWeightSemiLight);
 		text-align: center;
 		text-decoration: none;
+		transition:
+			background var(--transitionFast),
+			border-color var(--transitionFast),
+			box-shadow var(--transitionFast),
+			transform var(--transitionFast);
 		user-select: none;
 	}
 
-	.button[disabled] {
+	.button:is([disabled], [aria-disabled="true"]) {
 		cursor: not-allowed;
 		opacity: 0.8;
 	}
@@ -65,7 +70,76 @@ const {
 
 	.button-variant-emphasized {
 		--colorButtonBackground: var(--colorAccentMedium);
-		--colorButtonColor: light-dark(var(--colorWhiteIsh), var(--colorBlue5));
+		--colorButtonBorder: transparent;
+		--shadowButtonRing: 0 0 0.15rem 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 11%),
+				rgb(from var(--colorBlue1) r g b / 17%) var(--themeDarkness)
+			);
+		--shadowButtonRingHover: 0 0 0.15rem 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 15%),
+				rgb(from var(--colorBlue1) r g b / 23%) var(--themeDarkness)
+			);
+		--colorButtonInset: color-mix(
+			in srgb,
+			transparent,
+			rgb(from var(--colorWhite) r g b / 16%) var(--themeDarkness)
+		);
+		--colorButtonInsetHover: color-mix(
+			in srgb,
+			transparent,
+			rgb(from var(--colorWhite) r g b / 18%) var(--themeDarkness)
+		);
+		--colorButtonColor: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorBlue5) var(--themeDarknessText)
+		);
+
+		isolation: isolate;
+		overflow: clip;
+		position: relative;
+	}
+
+	.button-variant-emphasized::before,
+	.button-variant-emphasized::after {
+		content: "";
+		opacity: 0.67;
+		pointer-events: none;
+		position: absolute;
+		z-index: -1;
+	}
+
+	.button-variant-emphasized::before {
+		background: radial-gradient(
+			ellipse 90% calc(80% - var(--themeDark) * 20%) at 50% 100%,
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue2) r g b / 35%),
+				rgb(from var(--colorBlue3) r g b / 45%) var(--themeDarkness)
+			),
+			transparent 70%
+		);
+		border-radius: calc(var(--radiusLarge) - 2px);
+		inset: 0;
+	}
+
+	.button-variant-emphasized::after {
+		background: linear-gradient(
+			to bottom,
+			rgb(from var(--colorWhite) r g b / 25%),
+			rgb(from var(--colorWhite) r g b / 4%)
+		);
+		border-radius: calc(var(--radiusLarge) - 4px) calc(var(--radiusLarge) - 4px)
+			0.75rem 0.75rem;
+		filter: blur(0.35rem);
+		height: 48%;
+		left: 0.4rem;
+		right: 0.4rem;
+		top: 2px;
 	}
 
 	.button-variant-light {
@@ -78,7 +152,11 @@ const {
 	}
 
 	.button:active {
-		--colorButtonBackground: light-dark(var(--colorBlue2), var(--colorBlue4));
+		--colorButtonBackground: color-mix(
+			in srgb,
+			var(--colorBlue2),
+			var(--colorBlue4) var(--themeDarkness)
+		);
 		--colorButtonColor: var(--colorBlue4);
 	}
 
@@ -86,73 +164,85 @@ const {
 		--colorButtonColor: inherit;
 	}
 
-	.button:focus:not(:active, [disabled]),
-	.button:hover:not(:active, [disabled]) {
+	.button:focus:not(:active, [disabled], [aria-disabled="true"]),
+	.button:hover:not(:active, [disabled], [aria-disabled="true"]) {
 		background: var(--colorButtonBackgroundHover);
 		color: var(--colorButtonColorHover);
 		border: 2px solid var(--colorButtonBorderHover);
+		transform: translateY(-1px);
+	}
+
+	.button-variant-emphasized,
+	.button-variant-ghost {
+		--shadowButton:
+			inset 0 1px 0 var(--colorButtonInset),
+			0 0.1rem 0.1rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorBlue5) r g b / 12%),
+					transparent var(--themeDarkness)
+				),
+			0 0.25rem 1rem
+				color-mix(
+					in srgb,
+					transparent,
+					rgb(from var(--colorBlue2) r g b / 18%) var(--themeDarkness)
+				),
+			var(--shadowButtonRing);
+		--shadowButtonHover:
+			inset 0 1px 0 var(--colorButtonInsetHover),
+			0 0.25rem 0.5rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorBlue5) r g b / 16%),
+					rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
+				);
+
+		border-color: var(--colorButtonBorder);
+		box-shadow: var(--shadowButton);
 	}
 
 	/* A translucent outline that takes its text color from its surroundings. */
 	.button-variant-ghost {
-		--colorButtonBackground: light-dark(
-			rgb(from var(--colorWhite) r g b / 8%),
-			transparent
-		);
-		--colorButtonBackgroundHover: light-dark(
-			rgb(from var(--colorBlue5) r g b / 14%),
-			rgb(from var(--colorBlue2) r g b / 78%)
-		);
-		--colorButtonBorder: light-dark(
+		--colorButtonBorder: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue5) r g b / 22%),
-			rgb(from var(--colorBlue1) r g b / 34%)
+			rgb(from var(--colorBlue1) r g b / 34%) var(--themeDarkness)
 		);
-		--colorButtonBorderHover: light-dark(
+		--colorButtonBorderHover: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue5) r g b / 30%),
-			rgb(from var(--colorBlue1) r g b / 46%)
+			rgb(from var(--colorBlue1) r g b / 46%) var(--themeDarkness)
+		);
+		--shadowButtonRing: 0 0 0 1px
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue5) r g b / 8%),
+				rgb(from var(--colorBlue1) r g b / 18%) var(--themeDarkness)
+			);
+		--shadowButtonRingHover: 0 0 0 1px var(--colorButtonBorderHover);
+		--colorButtonInset: rgb(from var(--colorWhite) r g b / 16%);
+		--colorButtonInsetHover: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 22%),
+			rgb(from var(--colorWhite) r g b / 18%) var(--themeDarkness)
+		);
+		--colorButtonBackground: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 8%),
+			transparent var(--themeDarkness)
 		);
 		--colorButtonColor: currentcolor;
-		--colorButtonColorHover: currentcolor;
-		--shadowButton:
-			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
-			0 0.1rem 0.1rem rgb(from var(--colorBlue5) r g b / 12%),
-			0 0 0 1px rgb(from var(--colorBlue5) r g b / 8%);
-		--shadowButtonHover:
-			inset 0 1px 0
-				light-dark(
-					rgb(from var(--colorWhite) r g b / 22%),
-					rgb(from var(--colorWhite) r g b / 18%)
-				),
-			0 0.25rem 0.5rem
-				light-dark(
-					rgb(from var(--colorBlue5) r g b / 16%),
-					rgb(from var(--colorBlue2) r g b / 22%)
-				);
 
-		border-color: var(--colorButtonBorder);
-		border-radius: var(--radiusLarge);
-		box-shadow: var(--shadowButton);
 		font-weight: var(--fontWeightMedium);
-		text-wrap: nowrap;
-		transition:
-			background var(--transitionFast),
-			border-color var(--transitionFast),
-			box-shadow var(--transitionFast),
-			transform var(--transitionFast);
+		max-width: 100%;
+		text-wrap: balance;
 	}
 
-	html.dark .button-variant-ghost {
-		--shadowButton:
-			inset 0 1px 0 rgb(from var(--colorWhite) r g b / 16%),
-			0 0.25rem 1rem rgb(from var(--colorBlue2) r g b / 18%),
-			0 0 0 1px rgb(from var(--colorBlue1) r g b / 18%);
-	}
-
+	.button-variant-emphasized:hover,
+	.button-variant-emphasized:focus-visible,
 	.button-variant-ghost:hover,
 	.button-variant-ghost:focus-visible {
-		box-shadow:
-			var(--shadowButtonHover),
-			0 0 0 1px var(--colorButtonBorderHover);
-		transform: translateY(-1px);
+		box-shadow: var(--shadowButtonHover), var(--shadowButtonRingHover);
 	}
 </style>

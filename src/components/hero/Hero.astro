@@ -1,48 +1,96 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
 
-import HeroCityscape from "./HeroCityscape.astro";
+import HeroHarbor from "./HeroHarbor.astro";
+import HeroSky from "./HeroSky.astro";
 
 interface Props {
 	class?: string;
 	tall?: boolean;
+	width?: "normal" | "wide";
 }
 
-const { class: className, tall, ...props } = Astro.props;
+const { class: className, tall, width, ...props } = Astro.props;
 ---
 
-<section class:list={["hero", className, tall ? "tall" : "common"]} {...props}>
+<section
+	class:list={["hero", className, tall ? "hero-tall" : "hero-compact"]}
+	{...props}
+>
+	<HeroSky compact={!tall} />
 	<div class="hero-decorations">
-		<div class="hero-decorations-inner">
-			<HeroCityscape />
-		</div>
+		<HeroHarbor compact={!tall} />
 	</div>
 
-	<ContentArea class="hero-contents">
+	<ContentArea class="hero-contents" width={width}>
 		<slot />
 	</ContentArea>
 </section>
 
 <style>
 	.hero {
+		--hero-orb-display: none;
+
 		background: linear-gradient(
 			180deg,
 			var(--colorBlueBright2) 0%,
-			light-dark(var(--colorWhite), var(--colorBlue5)) 50%,
-			light-dark(var(--colorCream), var(--colorBlue5)) 100%
+			color-mix(
+					in srgb,
+					var(--colorWhite),
+					var(--colorBlue5) var(--themeDarkness)
+				)
+				50%,
+			color-mix(
+					in srgb,
+					var(--colorCream),
+					var(--colorBlue5) var(--themeDarkness)
+				)
+				100%
 		);
 		z-index: 1;
 		color: var(--colorHeading);
-		padding-bottom: var(--cityscapeHeightArea);
+		overflow-x: clip;
 		position: relative;
 	}
 
-	.hero.common {
-		--cityscapeHeightArea: 10rem;
+	.hero-tall {
+		--hero-orb-top: 6.5rem;
+		--hero-scale: 1;
+
+		padding-bottom: 12rem;
 	}
 
-	.hero.tall {
-		--cityscapeHeightArea: 8rem;
+	.hero-compact {
+		--hero-orb-top: 6.25rem;
+		--hero-scale: 0.7;
+
+		padding: 5rem 0 7.75rem;
+	}
+
+	@media (--widthSmall) {
+		.hero-tall {
+			--hero-orb-display: block;
+		}
+	}
+
+	@media (--widthLarge) {
+		.hero-tall {
+			--hero-orb-display: none;
+		}
+
+		.hero-compact {
+			--hero-orb-display: block;
+		}
+
+		.hero-compact .hero-contents {
+			max-width: calc(100vw - 13rem);
+		}
+	}
+
+	@media (--widthXLarge) {
+		.hero-tall {
+			--hero-orb-display: block;
+		}
 	}
 
 	.hero-decorations {
@@ -52,14 +100,6 @@ const { class: className, tall, ...props } = Astro.props;
 		height: 100%;
 		overflow: hidden;
 		width: 100%;
-	}
-
-	.hero-decorations-inner {
-		bottom: 0;
-		left: 50%;
-		position: absolute;
-		text-align: center;
-		width: 0;
 	}
 
 	.hero-contents {

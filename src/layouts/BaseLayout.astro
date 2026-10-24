@@ -1,9 +1,4 @@
 ---
-import "@fontsource/geist-mono/latin-ext-400.css";
-import "@fontsource/geist-mono/latin-400.css";
-import "@fontsource-variable/urbanist";
-import "@fontsource-variable/urbanist/wght-italic.css";
-
 import Head, { type Props as HeadProps } from "~/components/Head.astro";
 
 import "./base.css";
@@ -13,7 +8,38 @@ import "./normalize.css";
 type Props = HeadProps;
 ---
 
-<html lang="en">
+<html class="dark" lang="en">
 	<Head {...Astro.props} />
-	<slot />
+	<body data-theme-lazy>
+		<slot />
+	</body>
 </html>
+
+<script>
+	import { reducedMotionQuery } from "~/utils/motion";
+
+	addEventListener(
+		"load",
+		() => {
+			setTimeout(() => {
+				void import("konami-emoji-blast").then(
+					({ initializeKonamiEmojiBlast }) => {
+						let stop: (() => void) | undefined;
+						const update = () => {
+							if (reducedMotionQuery.matches) {
+								stop?.();
+								stop = undefined;
+							} else {
+								stop ??= initializeKonamiEmojiBlast();
+							}
+						};
+
+						update();
+						reducedMotionQuery.addEventListener("change", update);
+					},
+				);
+			});
+		},
+		{ once: true },
+	);
+</script>

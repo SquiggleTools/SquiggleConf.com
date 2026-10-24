@@ -25,9 +25,11 @@ const {
 <li class:list={["talk", "anchor-title-card", className]} id={slug} {...rest}>
 	<SubtleCard>
 		<div class="talk-top">
-			<a class="title anchor-title" href={`#${slug}`}>
-				{title}
-			</a>
+			<h2 class="title">
+				<a class="anchor-title" href={`#${slug}`}>
+					{title}
+				</a>
+			</h2>
 			<div class="talk-description">
 				<SafeMarkdown of={description} />
 			</div>
@@ -69,6 +71,9 @@ const {
 		font-weight: var(--fontWeightMedium);
 		text-align: left;
 		margin-bottom: 0.5rem;
+	}
+
+	.title a {
 		text-decoration: none;
 	}
 

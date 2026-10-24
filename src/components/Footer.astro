@@ -6,6 +6,7 @@ import { currentYear, years } from "~/data/years";
 import ContentArea from "./ContentArea.astro";
 import IconLinks from "./IconLinks.astro";
 import Logo from "./Logo.astro";
+import MotionToggle from "./MotionToggle.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
@@ -33,17 +34,17 @@ const yearPairs =
 		</div>
 		<div class="right">
 			<div class="footer-links">
-				<a href="/about">About</a>
 				<a href="/code-of-conduct">Code of Conduct</a>
 				<a href="https://shop.squiggle.tools" target="_blank">
 					Shop
 				</a>
 				{yearPairs.map(([yearHref, yearText]) => (
-					<a href={yearHref} target="_blank">
-						{yearText}
-					</a>
+					<a href={yearHref}>{yearText}</a>
 				))}
-				<ThemeToggle />
+				<span class="footer-toggles">
+					<MotionToggle />
+					<ThemeToggle />
+				</span>
 			</div>
 			<IconLinks class="footer-socials" links={socials} />
 		</div>
@@ -71,6 +72,10 @@ const yearPairs =
 		gap: 0.75rem;
 	}
 
+	.left :global(.logo) {
+		color: var(--colorHeading);
+	}
+
 	.footer-date-location {
 		line-height: 1.3;
 	}
@@ -96,6 +101,12 @@ const yearPairs =
 		text-decoration: none;
 	}
 
+	.footer-toggles {
+		align-items: center;
+		display: flex;
+		gap: 1rem;
+	}
+
 	.footer-socials {
 		--iconLinkPadding: 0rem;
 		--iconLinkSize: 2rem;
@@ -103,10 +114,7 @@ const yearPairs =
 
 		margin-top: 2rem;
 		max-width: 15rem;
-	}
-
-	html:not(.dark) .footer-socials {
-		opacity: 0.9;
+		opacity: calc(0.9 + var(--themeDark) * 0.1);
 	}
 
 	@media (--widthXSmall) {

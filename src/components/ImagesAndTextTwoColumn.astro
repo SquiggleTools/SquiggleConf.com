@@ -48,7 +48,11 @@ interface Props {
 
 <style>
 	.images-and-text-two-column {
-		background: light-dark(var(--colorBlue1), var(--colorBlue5));
+		background: color-mix(
+			in srgb,
+			var(--colorBlue1),
+			var(--colorBlue5) var(--themeDarkness)
+		);
 		color: var(--colorHeading);
 		padding: 2.5rem 1.5rem;
 	}

@@ -1,17 +1,16 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
-import Heading from "~/components/Heading.astro";
-import PageLayout from "~/layouts/PageLayout.astro";
-import "~/layouts/prose.css";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
 ---
 
-<PageLayout
-	description="SquiggleConf: The devtools conference."
-	title="Code of Conduct"
+<ArticleLayout
+	article={{
+		description:
+			"Our commitment to a respectful, harassment-free community at every SquiggleConf event, and how to ask for help.",
+		title: "Code of Conduct",
+	}}
 >
 	<ContentArea class="prose" width="thin">
-		<Heading level="h1">Code of Conduct</Heading>
-
 		<p>
 			SquiggleConf is dedicated to providing a respectful, harassment-free
 			community for everyone. We do not tolerate harassment or bullying of any
@@ -52,7 +51,7 @@ import "~/layouts/prose.css";
 		<hr />
 
 		<p>
-			This Code of Conduct adapted from
+			This Code of Conduct is adapted from
 			<a
 				href="https://plone.org/foundation/materials/foundation-resolutions/code-of-conduct"
 				rel="noreferrer"
@@ -68,15 +67,10 @@ import "~/layouts/prose.css";
 			Attribution-ShareAlike 4.0 International license.
 		</p>
 	</ContentArea>
-</PageLayout>
+</ArticleLayout>
 
 <style>
-	h1 {
-		font-size: var(--fontSizeLarge);
-		padding: 3rem 0 2rem;
-	}
-
 	.prose {
-		padding-bottom: 2rem;
+		padding: 4rem 0 2rem;
 	}
 </style>
