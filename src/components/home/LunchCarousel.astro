@@ -19,18 +19,55 @@ const { spots } = Astro.props;
 	data-lunch-carousel
 	role="group"
 >
+	<div class="lunch-carousel-controls" data-lunch-controls hidden>
+		<button
+			aria-label="Pause slideshow"
+			class="lunch-carousel-pause"
+			data-lunch-pause
+			type="button"
+		>
+			<svg aria-hidden="true" data-pause-icon viewBox="0 0 12 12">
+				<path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" fill="currentColor" />
+			</svg>
+			<svg aria-hidden="true" data-play-icon viewBox="0 0 12 12">
+				<path d="M3 1.5v9l7-4.5z" fill="currentColor" />
+			</svg>
+		</button>
+		<div
+			aria-label="Lunch image navigation"
+			class="lunch-carousel-dots"
+			role="group"
+		>
+			{spots.map((spot, index) => (
+				<button
+					aria-current={index === 0 ? "true" : "false"}
+					aria-label={`Show ${spot.name}`}
+					class="lunch-carousel-dot"
+					data-lunch-dot
+					type="button"
+				/>
+			))}
+		</div>
+	</div>
 	<TimelineImage radius="var(--radiusLarge)">
-		<div class="lunch-carousel-track" data-lunch-track>
+		<div
+			aria-label="Lunch spot photos"
+			aria-live="polite"
+			class="lunch-carousel-track"
+			data-lunch-track
+			role="group"
+		>
 			{spots.map((spot, index) => (
 				<div
-					aria-hidden={index === 0 ? "false" : "true"}
+					aria-label={`${index + 1} of ${spots.length}`}
+					aria-roledescription="slide"
 					class="lunch-slide"
 					data-lunch-slide
+					role="group"
 				>
 					<div class="lunch-slide-image">
 						<Image
 							alt={spot.alt}
-							loading={index === 0 ? "eager" : "lazy"}
 							sizes="(min-width: 900px) 15rem, 27.5rem"
 							src={spot.image}
 							widths={[240, 480]}
@@ -43,27 +80,13 @@ const { spots } = Astro.props;
 			))}
 		</div>
 	</TimelineImage>
-	<div
-		aria-label="Lunch image navigation"
-		class="lunch-carousel-dots"
-		role="group"
-	>
-		{spots.map((spot, index) => (
-			<button
-				aria-label={`Show ${spot.name}`}
-				aria-pressed={index === 0 ? "true" : "false"}
-				class="lunch-carousel-dot"
-				data-lunch-dot
-				type="button"
-			/>
-		))}
-	</div>
 </div>
 
 <style>
 	.lunch-carousel {
 		display: grid;
 		gap: 0.7rem;
+		grid-template-columns: minmax(0, 1fr);
 		margin: auto 0;
 		max-width: 10rem;
 		width: 100%;
@@ -72,8 +95,15 @@ const { spots } = Astro.props;
 	.lunch-carousel-track {
 		display: flex;
 		overflow-x: auto;
+		overscroll-behavior-x: contain;
 		scroll-snap-type: x mandatory;
 		scrollbar-width: none;
+	}
+
+	.lunch-carousel
+		:global(.timeline-image):has(.lunch-carousel-track:focus-visible) {
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: 2px;
 	}
 
 	.lunch-slide {
@@ -124,16 +154,27 @@ const { spots } = Astro.props;
 		line-height: 1.05;
 	}
 
-	.lunch-carousel-dots {
+	.lunch-carousel-controls {
 		--lunch-dot-gutter: calc((1.5rem - 0.65rem) / 2);
 
+		align-items: center;
 		display: flex;
 		justify-content: center;
 		margin: calc(var(--lunch-dot-gutter) * -1) 0;
+		order: 1;
 		padding-bottom: 0.15rem;
 	}
 
-	.lunch-carousel-dot {
+	.lunch-carousel-controls[hidden] {
+		display: none;
+	}
+
+	.lunch-carousel-dots {
+		display: flex;
+	}
+
+	.lunch-carousel-dot,
+	.lunch-carousel-pause {
 		appearance: none;
 		background: none;
 		border: none;
@@ -146,8 +187,17 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-dot::before {
-		background: rgb(from var(--colorWhite) r g b / 24%);
-		border: 1px solid rgb(from var(--colorBlue1) r g b / 45%);
+		background: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue4) r g b / 22%),
+			rgb(from var(--colorWhite) r g b / 24%) var(--themeDarkness)
+		);
+		border: 1px solid
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue4) r g b / 60%),
+				rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
+			);
 		border-radius: var(--radiusPill);
 		box-sizing: border-box;
 		content: "";
@@ -159,15 +209,23 @@ const { spots } = Astro.props;
 		width: 0.65rem;
 	}
 
-	.lunch-carousel-dot[aria-pressed="true"]::before {
-		background: rgb(from var(--colorWhite) r g b / 96%);
+	.lunch-carousel-dot[aria-current="true"]::before {
+		background: color-mix(
+			in srgb,
+			var(--colorBlue3),
+			rgb(from var(--colorWhite) r g b / 96%) var(--themeDarkness)
+		);
 		transform: scale(1.02);
 		width: 1.7rem;
 	}
 
 	.lunch-carousel-dot:hover::before,
 	.lunch-carousel-dot:focus-visible::before {
-		background: rgb(from var(--colorWhite) r g b / 72%);
+		background: color-mix(
+			in srgb,
+			rgb(from var(--colorBlue3) r g b / 72%),
+			rgb(from var(--colorWhite) r g b / 72%) var(--themeDarkness)
+		);
 	}
 
 	.lunch-carousel-dot:focus-visible {
@@ -175,7 +233,41 @@ const { spots } = Astro.props;
 	}
 
 	.lunch-carousel-dot:focus-visible::before {
-		box-shadow: 0 0 0 0.16rem rgb(from var(--colorWhite) r g b / 28%);
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: 2px;
+	}
+
+	.lunch-carousel-pause:focus-visible {
+		border-radius: var(--radiusSmall);
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: -2px;
+	}
+
+	.lunch-carousel-pause {
+		min-width: 1.5rem;
+		color: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorBlue1) var(--themeDarknessText)
+		);
+	}
+
+	.lunch-carousel-pause[hidden] {
+		display: none;
+	}
+
+	.lunch-carousel-pause svg {
+		height: 0.7rem;
+		width: 0.7rem;
+	}
+
+	.lunch-carousel-pause [data-play-icon],
+	.lunch-carousel-pause[data-paused] [data-pause-icon] {
+		display: none;
+	}
+
+	.lunch-carousel-pause[data-paused] [data-play-icon] {
+		display: block;
 	}
 
 	@media (forced-colors: active) {
@@ -202,24 +294,58 @@ const { spots } = Astro.props;
 		"[data-lunch-carousel]",
 	)) {
 		const track = carousel.querySelector<HTMLElement>("[data-lunch-track]");
-		if (!track) {
+		const controls = carousel.querySelector<HTMLElement>(
+			"[data-lunch-controls]",
+		);
+		if (!track || !controls) {
 			continue;
 		}
 
 		const dots = [
 			...carousel.querySelectorAll<HTMLButtonElement>("[data-lunch-dot]"),
 		];
+		const pause =
+			carousel.querySelector<HTMLButtonElement>("[data-lunch-pause]");
 		const slides = [...carousel.querySelectorAll("[data-lunch-slide]")];
 		let activeIndex = 0;
+		let markedIndex: number | undefined;
 		let autoAdvanceTimer: number | undefined;
+		let hovered = false;
+		let paused = false;
+		let trackWidth = track.clientWidth;
+		let visible = false;
+
+		const realign = () => {
+			trackWidth = track.clientWidth;
+			if (Math.round(track.scrollLeft / trackWidth) !== activeIndex) {
+				track.scrollTo({
+					behavior: "instant",
+					left: activeIndex * trackWidth,
+				});
+			}
+		};
 
 		const markActive = () => {
-			activeIndex = Math.round(track.scrollLeft / track.clientWidth);
+			if (!track.clientWidth) {
+				return;
+			}
+
+			if (track.clientWidth === trackWidth) {
+				activeIndex = Math.round(track.scrollLeft / trackWidth);
+			} else {
+				realign();
+			}
+
+			if (activeIndex === markedIndex) {
+				return;
+			}
+
+			markedIndex = activeIndex;
 			for (const [slideIndex, slide] of slides.entries()) {
 				slide.setAttribute("aria-hidden", `${slideIndex !== activeIndex}`);
 			}
 			for (const [dotIndex, dot] of dots.entries()) {
-				dot.setAttribute("aria-pressed", `${dotIndex === activeIndex}`);
+				dot.setAttribute("aria-current", `${dotIndex === activeIndex}`);
 			}
 		};
 
@@ -230,11 +356,21 @@ const { spots } = Astro.props;
 			});
 		};
 
-		const stopAutoAdvance = () => window.clearInterval(autoAdvanceTimer);
+		const canAutoAdvance = () =>
+			!reducedMotionQuery.matches && slides.length > 1;
 
-		const startAutoAdvance = () => {
-			stopAutoAdvance();
-			if (!reducedMotionQuery.matches && slides.length > 1) {
+		const updateAutoAdvance = () => {
+			window.clearInterval(autoAdvanceTimer);
+			if (pause) {
+				if (!canAutoAdvance() && document.activeElement === pause) {
+					track.focus();
+				}
+				pause.hidden = !canAutoAdvance();
+			}
+
+			const rotating = canAutoAdvance() && visible && !hovered && !paused;
+			track.setAttribute("aria-live", rotating ? "off" : "polite");
+			if (rotating) {
 				autoAdvanceTimer = window.setInterval(
 					() => setSlide(activeIndex + 1),
 					3400,
@@ -242,30 +378,67 @@ const { spots } = Astro.props;
 			}
 		};
 
+		controls.hidden = false;
+		track.tabIndex = 0;
+		markActive();
 		track.addEventListener("scroll", markActive, { passive: true });
+
+		new ResizeObserver(() => {
+			if (track.clientWidth && track.clientWidth !== trackWidth) {
+				realign();
+			}
+		}).observe(track);
 
 		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {
 				setSlide(index);
-				startAutoAdvance();
+				updateAutoAdvance();
 				if (!dot.matches(":focus-visible")) {
 					dot.blur();
 				}
 			});
 		}
 
-		carousel.addEventListener("pointerenter", stopAutoAdvance);
-		carousel.addEventListener("pointerleave", startAutoAdvance);
-		carousel.addEventListener("focusin", stopAutoAdvance);
-		carousel.addEventListener("focusout", (event) => {
+		const setPaused = (value: boolean) => {
+			paused = value;
+			pause?.toggleAttribute("data-paused", paused);
+			pause?.setAttribute(
+				"aria-label",
+				paused ? "Play slideshow" : "Pause slideshow",
+			);
+			updateAutoAdvance();
+		};
+
+		pause?.addEventListener("click", () => {
+			if (paused) {
+				hovered = false;
+			}
+			setPaused(!paused);
+		});
+
+		carousel.addEventListener("pointerenter", () => {
+			hovered = true;
+			updateAutoAdvance();
+		});
+		carousel.addEventListener("pointerleave", () => {
+			hovered = false;
+			updateAutoAdvance();
+		});
+		carousel.addEventListener("focusin", (event) => {
 			if (
-				!(event.relatedTarget instanceof Node) ||
-				!carousel.contains(event.relatedTarget)
+				!paused &&
+				event.target instanceof Element &&
+				event.target.matches(":focus-visible")
 			) {
-				startAutoAdvance();
+				setPaused(true);
 			}
 		});
 
-		startAutoAdvance();
+		new IntersectionObserver((entries) => {
+			visible = !!entries.at(-1)?.isIntersecting;
+			updateAutoAdvance();
+		}).observe(carousel);
+
+		reducedMotionQuery.addEventListener("change", updateAutoAdvance);
 	}
 </script>

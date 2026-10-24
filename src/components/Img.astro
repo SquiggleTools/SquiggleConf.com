@@ -6,6 +6,7 @@ import { Image, type LocalImageProps } from "astro:assets";
 type Props = LocalImageProps;
 
 const imageOnlyProps = new Set([
+	"alt",
 	"densities",
 	"fit",
 	"format",
@@ -17,15 +18,26 @@ const imageOnlyProps = new Set([
 	"widths",
 ]);
 
-const { alt } = Astro.props;
+const { alt, height, width } = Astro.props;
 const src = Astro.props.src as ImageMetadata;
-const svgProps = Object.fromEntries(
-	Object.entries(Astro.props).filter(([key]) => !imageOnlyProps.has(key)),
-);
+const svgWidth =
+	width ??
+	(height === undefined
+		? undefined
+		: Math.round((Number(height) * src.width) / src.height));
+const svgProps = {
+	decoding: "async" as const,
+	loading: "lazy" as const,
+	...Object.fromEntries(
+		Object.entries(Astro.props).filter(
+			([key, value]) => !imageOnlyProps.has(key) && value !== undefined,
+		),
+	),
+};
 ---
 
 {src.format === "svg" ? (
-	<img {...svgProps} alt={alt} src={src.src} />
+	<img {...svgProps} alt={alt} src={src.src} width={svgWidth} />
 ) : (
 	<Image {...(Astro.props as LocalImageProps)} />
 )}

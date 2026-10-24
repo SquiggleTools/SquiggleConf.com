@@ -15,10 +15,11 @@ const title = "title" in person ? person.title : undefined;
 
 <article class:list={["person-card", title && "person-card-talk"]}>
 	<TimelineImage
-		alt={person.name}
+		alt=""
+		class="person-card-image"
 		effect="zoom"
 		placeholder={person.placeholder}
-		size={160}
+		size={80}
 		src={person.image}
 	/>
 	<div class="person-card-copy">
@@ -43,25 +44,19 @@ const title = "title" in person ? person.title : undefined;
 		align-items: center;
 		display: grid;
 		gap: 0.8rem;
-		grid-template-columns: 5rem 1fr;
+		grid-template-columns: 5rem minmax(0, 1fr);
 	}
 
-	.person-card-talk {
-		align-items: stretch;
+	.person-card-image {
+		aspect-ratio: 1;
 	}
 
 	.person-card-copy {
 		display: grid;
 		gap: 0.28rem;
 		min-height: 5rem;
+		overflow-wrap: anywhere;
 		place-content: center start;
-	}
-
-	.person-card-talk .person-card-copy {
-		gap: normal;
-		grid-template-rows: 2fr 1fr 1fr;
-		min-height: 5.75rem;
-		place-content: normal;
 	}
 
 	.person-card-title {
@@ -71,7 +66,6 @@ const title = "title" in person ? person.title : undefined;
 	}
 
 	.person-card-talk .person-card-title {
-		align-self: center;
 		line-height: 1.25;
 	}
 

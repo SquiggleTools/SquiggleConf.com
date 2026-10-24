@@ -3,6 +3,8 @@
 	"ignoreDependencies": [
 		"@fontsource-variable/inter",
 		"@fontsource-variable/josefin-sans",
+		"@fontsource-variable/urbanist",
+		"@fontsource/geist-mono",
 		"sharp"
 	],
 	"ignoreExportsUsedInFile": {

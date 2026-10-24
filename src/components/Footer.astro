@@ -6,6 +6,7 @@ import { currentYear, years } from "~/data/years";
 import ContentArea from "./ContentArea.astro";
 import IconLinks from "./IconLinks.astro";
 import Logo from "./Logo.astro";
+import MotionToggle from "./MotionToggle.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
@@ -38,11 +39,12 @@ const yearPairs =
 					Shop
 				</a>
 				{yearPairs.map(([yearHref, yearText]) => (
-					<a href={yearHref} target="_blank">
-						{yearText}
-					</a>
+					<a href={yearHref}>{yearText}</a>
 				))}
-				<ThemeToggle />
+				<span class="footer-toggles">
+					<MotionToggle />
+					<ThemeToggle />
+				</span>
 			</div>
 			<IconLinks class="footer-socials" links={socials} />
 		</div>
@@ -97,6 +99,12 @@ const yearPairs =
 
 	.footer-links a {
 		text-decoration: none;
+	}
+
+	.footer-toggles {
+		align-items: center;
+		display: flex;
+		gap: 1rem;
 	}
 
 	.footer-socials {

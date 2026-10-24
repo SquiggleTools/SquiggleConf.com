@@ -1,6 +1,11 @@
 .prose > p {
 	font-size: var(--fontSizeSmall);
 	font-weight: var(--fontWeightLight);
+	line-height: var(--lineHeightBody);
+}
+
+.prose a {
+	overflow-wrap: anywhere;
 }
 
 .prose > p + p {
@@ -13,6 +18,7 @@
 	font-size: var(--fontSizeSmall);
 	font-weight: var(--fontWeightLight);
 	gap: 0.75rem;
+	line-height: var(--lineHeightBody);
 	margin: 1.5rem;
 }
 

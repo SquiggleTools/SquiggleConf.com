@@ -15,12 +15,24 @@ interface Props {
 const { hideLogo, year } = Astro.props;
 const pathname = pagePathname(Astro.url);
 
+function getAriaCurrent(href: string) {
+	if (pathname === href) {
+		return "page" as const;
+	}
+
+	if (pathname.startsWith(`${href}/`)) {
+		return "true" as const;
+	}
+
+	return undefined;
+}
+
 const navLinks = [
 	{ href: "/articles", text: "Articles" },
 	{ href: "https://shop.squiggle.tools", text: "Shop" },
 	...(year === currentYear ? [] : [{ href: "/", text: currentYear }]),
 ].map(({ href, text }) => ({
-	"aria-current": pathname === href ? ("page" as const) : undefined,
+	"aria-current": getAriaCurrent(href),
 	href,
 	target: href.startsWith("https") ? "_blank" : undefined,
 	text,
@@ -35,7 +47,7 @@ const ticketsButton = {
 } as const;
 ---
 
-<header class:list={[hideLogo && "header-floating"]}>
+<header class:list={[hideLogo && "header-no-logo"]}>
 	<ContentArea class="header-content-area" width="wide">
 		{!hideLogo && (
 			<a class="logo" href="/">
@@ -48,7 +60,15 @@ const ticketsButton = {
 			popovertarget="header-links"
 			type="button"
 		>
-			≡
+			<svg
+				aria-hidden="true"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2.25"
+				viewBox="0 0 24 24"
+			>
+				<path d="M2.5 6.5h19M2.5 12h19M2.5 17.5h19" />
+			</svg>
 		</button>
 		<nav class="header-links" id="header-links" popover>
 			<button
@@ -58,7 +78,15 @@ const ticketsButton = {
 				popovertargetaction="hide"
 				type="button"
 			>
-				≡
+				<svg
+					aria-hidden="true"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2.25"
+					viewBox="0 0 24 24"
+				>
+					<path d="M5 5l14 14M19 5L5 19" />
+				</svg>
 			</button>
 			{navLinks.map(({ text, ...props }) => (
 				<a {...props}>{text}</a>
@@ -69,32 +97,52 @@ const ticketsButton = {
 </header>
 
 <script>
+	import { headerExpandedQuery } from "~/utils/breakpoints";
+
 	const menu = document.getElementById("header-links");
 	menu?.addEventListener("click", (event) => {
 		if (event.target instanceof HTMLAnchorElement) {
 			menu.hidePopover();
 		}
 	});
+	menu?.addEventListener("focusout", (event) => {
+		if (
+			event.relatedTarget instanceof Node &&
+			!menu.contains(event.relatedTarget) &&
+			menu.matches(":popover-open")
+		) {
+			menu.hidePopover();
+		}
+	});
+	menu?.addEventListener("toggle", (event) => {
+		if (event instanceof ToggleEvent && event.newState === "open") {
+			menu.querySelector("button")?.focus();
+		}
+	});
+	matchMedia(headerExpandedQuery).addEventListener("change", (event) => {
+		if (event.matches && menu?.matches(":popover-open")) {
+			const focused = document.activeElement;
+			menu.hidePopover();
+			if (focused instanceof HTMLElement && menu.contains(focused)) {
+				(focused.checkVisibility()
+					? focused
+					: menu.querySelector("a")
+				)?.focus();
+			}
+		}
+	});
 </script>
 
 <style>
 	header {
-		--header-background: var(--colorBlueBright2);
-		--header-foreground: color-mix(
+		color: color-mix(
 			in srgb,
 			var(--colorBlue5),
-			var(--colorWhiteIsh) var(--themeDarkness)
+			var(--colorWhiteIsh) var(--themeDarknessText)
 		);
-
-		color: var(--header-foreground);
-		background: var(--header-background);
 		font-size: var(--fontSizeSmaller);
-		padding: 1.5rem 0;
-	}
-
-	.header-floating {
-		background: transparent;
 		left: 0;
+		padding: 1.5rem 0;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -118,17 +166,44 @@ const ticketsButton = {
 		border: none;
 		color: inherit;
 		cursor: pointer;
-		font: 4rem/0 var(--fontFamilyBody);
-		padding: 1rem 0;
+		display: grid;
+		height: 2rem;
+		padding: 0;
+		place-items: center;
 		position: absolute;
 		right: 0;
 		top: 0;
+		width: 2.5rem;
 		z-index: 2;
 	}
 
-	.header-floating .header-menu-toggle {
-		font-size: 3.6rem;
+	.header-menu-toggle svg {
+		height: 2rem;
+		width: 2rem;
+	}
+
+	.header-no-logo .header-menu-toggle {
 		top: calc(5vw - 2.1rem);
+	}
+
+	.header-no-logo .header-menu-toggle svg {
+		height: 1.8rem;
+		width: 1.8rem;
+	}
+
+	.header-menu-toggle:focus-visible {
+		border-radius: var(--radiusSmall);
+		outline: 2px solid currentcolor;
+		outline-offset: 2px;
+	}
+
+	.header-menu-toggle:has(+ .header-links:popover-open) {
+		visibility: hidden;
+	}
+
+	.header-links .header-menu-toggle {
+		right: 0.5rem;
+		top: 0.5rem;
 	}
 
 	.header-links {
@@ -136,9 +211,19 @@ const ticketsButton = {
 	}
 
 	.header-links:popover-open {
-		background: var(--header-background);
-		border: none;
-		box-shadow: 0 0 1rem var(--colorTextShadow);
+		background: color-mix(
+			in srgb,
+			var(--colorWhite),
+			var(--colorBlue4) var(--themeDarkness)
+		);
+		border: 1px solid
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue4) r g b / 18%),
+				var(--colorBlue3) var(--themeDarkness)
+			);
+		border-radius: var(--radiusLarge);
+		box-shadow: 0 0.5rem 1.5rem var(--colorTextShadow);
 		color: inherit;
 		display: flex;
 		flex-direction: column;
@@ -150,12 +235,20 @@ const ticketsButton = {
 		inset: 1.5rem 5vw auto auto;
 		line-height: 1.5;
 		margin: 0;
-		min-width: 20rem;
+		min-width: min(20rem, 100vw - 2rem);
 		overflow: visible;
 		padding: 4.5rem 1rem 1.5rem;
 		position: absolute;
 		text-align: right;
 		width: 45vw;
+	}
+
+	.header-no-logo .header-links:popover-open {
+		top: calc(5vw - 0.6rem);
+	}
+
+	.header-links:popover-open .header-button {
+		align-self: flex-end;
 	}
 
 	.header-links a:not([aria-current]) {
@@ -167,11 +260,11 @@ const ticketsButton = {
 	}
 
 	@media (--widthXLarge) {
-		.header-floating {
+		.header-no-logo {
 			padding-top: 4rem;
 		}
 
-		.header-floating .header-content-area {
+		.header-no-logo .header-content-area {
 			align-items: flex-start;
 			min-height: 0;
 		}

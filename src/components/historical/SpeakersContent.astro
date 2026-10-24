@@ -66,13 +66,17 @@ const seen = new Set<PersonInfo>();
 
 	@media (--widthSmall) {
 		.speakers-list {
-			align-items: center;
+			align-items: stretch;
 			flex-flow: row wrap;
 			max-width: calc(var(--sizeContentAreaThin) + 4rem);
 		}
 
 		.speaker-card {
 			width: 47%;
+		}
+
+		.speaker-card > :global(.speaker-small) {
+			height: 100%;
 		}
 	}
 

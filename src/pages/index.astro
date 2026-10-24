@@ -1,5 +1,4 @@
 ---
-import "@fontsource/shantell-sans/latin-ext-400.css";
 import "@fontsource/shantell-sans/latin-400.css";
 
 import bigRav from "~/assets/2027/bigrav.webp";
@@ -36,8 +35,6 @@ import {
 	timelineMCs,
 } from "~/components/home/data";
 import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
-import HeroHarbor from "~/components/home/hero/HeroHarbor.astro";
-import HeroSky from "~/components/home/hero/HeroSky.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
@@ -60,16 +57,59 @@ import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
-import { eventDate, eventDateEve, eventLocation } from "~/data/event";
+import {
+	eventDate,
+	eventDateEve,
+	eventDateIso,
+	eventLocation,
+} from "~/data/event";
 import { links } from "~/data/links";
 import { currentYear } from "~/data/years";
 import PageLayout from "~/layouts/PageLayout.astro";
+
+const description = `A conference for excellent devtools: AI tools, linters, editors, and more. ${eventDate}, ${currentYear} at Boston's New England Aquarium.`;
+
+const eventSchema = {
+	"@context": "https://schema.org",
+	"@type": "Event",
+	description,
+	endDate: eventDateIso,
+	eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+	eventStatus: "https://schema.org/EventScheduled",
+	image: new URL("og-image.jpg", Astro.site).toString(),
+	location: {
+		"@type": "Place",
+		address: {
+			"@type": "PostalAddress",
+			addressCountry: "US",
+			addressLocality: "Boston",
+			addressRegion: "MA",
+			postalCode: "02110",
+			streetAddress: "1 Central Wharf",
+		},
+		name: "New England Aquarium Simons Theatre",
+	},
+	name: `SquiggleConf ${currentYear}`,
+	offers: {
+		"@type": "Offer",
+		url: links.tickets,
+	},
+	organizer: {
+		"@type": "Organization",
+		name: "Squiggle.Tools",
+	},
+	startDate: eventDateIso,
+	url: Astro.site?.toString(),
+};
 ---
 
-<PageLayout description="SquiggleConf: The devtools conference." hideHeaderLogo>
+<PageLayout description={description} hideHeaderLogo>
+	<script
+		is:inline
+		set:html={JSON.stringify(eventSchema)}
+		type="application/ld+json"
+	/>
 	<Hero tall width="wide">
-		<HeroSky slot="backdrop" />
-		<HeroHarbor slot="decorations" />
 		<div class="top">
 			<div class="top-main">
 				<HomeHeroLockup />
@@ -81,7 +121,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					tools, linters, code editors, performance and security tools,
 					debuggers, and more. We mix heavy talks with fun events.
 					<span class="top-intro-tagline">
-						Think of it like your devtools fieldtrip.
+						Think of it like your devtools field trip.
 					</span>
 				</p>
 				<div class="top-actions">
@@ -249,6 +289,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-morning"
 					heading="Talks"
+					headingContext="at 9am"
 					time="9am"
 					venue="aquarium"
 				>
@@ -297,6 +338,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-late"
 					heading="Talks"
+					headingContext="at 11am"
 					time="11am"
 					venue="aquarium"
 				>
@@ -355,6 +397,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 				<TimelineEntry
 					entryId="talks-afternoon"
 					heading="Talks"
+					headingContext="at 2pm"
 					time="2pm"
 					venue="aquarium"
 				>
@@ -485,7 +528,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 					</TimelineMedia>
 				</TimelineEntry>
 
-				<TimelineRail bottom span={2} time="7:30pm" />
+				<TimelineRail time="7:30pm" />
 
 				<TimelineEntry
 					entryId="after-party"
@@ -499,22 +542,39 @@ import PageLayout from "~/layouts/PageLayout.astro";
 						class="afterparty-collage"
 						layout="feature-five"
 						photos={[
-							{ alt: "", src: urbanwild1 },
-							{ alt: "", src: urbanwild2 },
-							{ alt: "", src: urbanwild3 },
-							{ alt: "", src: urbanwild4 },
-							{ alt: "", src: urbanwild5 },
+							{
+								alt: "Urban Wild lounge with orange sofas under string lights",
+								src: urbanwild1,
+							},
+							{
+								alt: "Bowler mid-throw on a lane with a glowing score display",
+								src: urbanwild2,
+							},
+							{
+								alt: "Urban Wild bar and lounge seating under purple lights",
+								src: urbanwild3,
+							},
+							{
+								alt: "Mural-covered entrance tunnel at Urban Wild",
+								src: urbanwild4,
+							},
+							{
+								alt: "Friends bowling beneath overhead scoreboards",
+								src: urbanwild5,
+							},
 						]}
 					/>
 					<TimelineCopy>
 						<p>
 							After the podcast and fireside chat, we'll switch into party mode
 							at Urban Wild: video arcade bowling, lots of light bites and
-							refreshments, and most of all - a chance to hang with everyone you
+							refreshments, and most of all—a chance to hang with everyone you
 							just met at the conference!
 						</p>
 					</TimelineCopy>
 				</TimelineEntry>
+
+				<TimelineRail bottom time="9pm" />
 
 				<TimelineEntry
 					entryId="big-rav"
@@ -581,7 +641,7 @@ import PageLayout from "~/layouts/PageLayout.astro";
 
 	.top-intro {
 		color: var(--colorCopy);
-		font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+		font-size: 0.95rem;
 		line-height: 1.55;
 		margin: 1rem 0 0;
 		max-width: 36rem;

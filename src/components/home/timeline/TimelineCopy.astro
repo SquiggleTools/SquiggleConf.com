@@ -23,6 +23,7 @@ const { class: className, heading, ...attributes } = Astro.props;
 	.timeline-copy {
 		display: grid;
 		gap: 0.45rem;
+		grid-template-columns: minmax(0, 1fr);
 		max-width: 46rem;
 	}
 
@@ -33,6 +34,10 @@ const { class: className, heading, ...attributes } = Astro.props;
 		margin: 0;
 		max-width: 62ch;
 		transition: color var(--transitionNormal);
+	}
+
+	:global(html.theme-transition) .timeline-copy :global(p) {
+		transition: none;
 	}
 
 	.timeline-copy-heading {

@@ -1,0 +1,99 @@
+<button
+	aria-label="Pause animations"
+	class="motion-toggle"
+	disabled
+	type="button"
+>
+	<svg
+		aria-hidden="true"
+		class="motion-toggle-pause"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="1.5"
+		viewBox="0 0 24 24"
+	>
+		<path
+			d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+	<svg
+		aria-hidden="true"
+		class="motion-toggle-play"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="1.5"
+		viewBox="0 0 24 24"
+	>
+		<path
+			d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+</button>
+
+<style>
+	.motion-toggle {
+		background: none;
+		border: transparent;
+		color: inherit;
+		cursor: pointer;
+		display: grid;
+		opacity: 0.8;
+		padding: 0.125rem;
+		transition: var(--transitionFast) opacity;
+	}
+
+	.motion-toggle[hidden] {
+		display: none;
+	}
+
+	.motion-toggle:disabled {
+		visibility: hidden;
+	}
+
+	.motion-toggle:focus-within,
+	.motion-toggle:hover {
+		opacity: 1;
+	}
+
+	svg {
+		grid-area: 1 / 1;
+		height: 1.25rem;
+		width: 1.25rem;
+	}
+
+	:global(html.motion-paused) .motion-toggle-pause,
+	:global(html:not(.motion-paused)) .motion-toggle-play {
+		visibility: hidden;
+	}
+</style>
+
+<script>
+	import {
+		getMotionPaused,
+		motionChangeEvent,
+		reducedMotionMediaQuery,
+		setMotionPaused,
+	} from "~/utils/motion";
+
+	for (const toggle of document.querySelectorAll<HTMLButtonElement>(
+		".motion-toggle",
+	)) {
+		const updatePressed = () => {
+			toggle.hidden = reducedMotionMediaQuery.matches;
+			toggle.setAttribute("aria-pressed", `${getMotionPaused()}`);
+		};
+
+		toggle.disabled = false;
+		updatePressed();
+		document.addEventListener(motionChangeEvent, updatePressed);
+		reducedMotionMediaQuery.addEventListener("change", updatePressed);
+
+		toggle.addEventListener("click", () => {
+			setMotionPaused(!getMotionPaused());
+		});
+	}
+</script>

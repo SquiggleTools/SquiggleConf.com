@@ -16,6 +16,7 @@ type Props = TimelineImageProps &
 
 interface TimelineImageProps extends HTMLAttributes<"div"> {
 	alt?: string;
+	columnWidth?: number;
 	/** How the image responds while its timeline entry is active. */
 	effect?: "grow" | "zoom";
 	loading?: "eager" | "lazy";
@@ -29,6 +30,7 @@ interface TimelineImageProps extends HTMLAttributes<"div"> {
 const {
 	alt = "",
 	class: className,
+	columnWidth,
 	effect,
 	loading,
 	objectPosition,
@@ -72,6 +74,7 @@ const effectScale = { grow: 1.25, zoom: 1.1 } as const;
 				src,
 				size,
 				scale * (effect ? effectScale[effect] : 1),
+				columnWidth,
 			)}
 		/>
 	) : (

@@ -17,7 +17,12 @@ const { choice } = Astro.props;
 			<span class="explore-radio-dot"></span>
 		</span>
 	</div>
-	<div class="explore-card-body">
+	<div
+		class:list={[
+			"explore-card-body",
+			choice.badgeLabel && "explore-card-body-badged",
+		]}
+	>
 		<TimelineImage
 			alt={choice.alt}
 			class="explore-photo"
@@ -44,6 +49,7 @@ const { choice } = Astro.props;
 		border: 1px solid var(--colorBlue3);
 		border-radius: var(--radiusMedium);
 		box-shadow: inset 0 0 0 0 rgb(from var(--colorWhite) r g b / 14%);
+		container-type: inline-size;
 		display: grid;
 		grid-template-columns: 3.5rem 1fr;
 		position: relative;
@@ -189,7 +195,7 @@ const { choice } = Astro.props;
 		color: color-mix(
 			in srgb,
 			var(--colorBlue4),
-			var(--colorCopy) var(--themeDarkness)
+			var(--colorWhite) var(--themeDarknessText)
 		);
 		font-size: 0.8em;
 		font-variant: tabular-nums;
@@ -224,6 +230,20 @@ const { choice } = Astro.props;
 
 		.explore-title {
 			font-size: 1.15rem;
+		}
+	}
+
+	@media not (--widthXSmall) {
+		.explore-card-body-badged {
+			padding-top: 1.75rem;
+		}
+	}
+
+	@container (width < 14.5rem) {
+		.explore-card-body {
+			grid-template-columns: minmax(0, 1fr);
+			overflow-wrap: anywhere;
+			row-gap: 0.7rem;
 		}
 	}
 </style>
