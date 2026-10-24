@@ -9,6 +9,7 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURI
 <a
 	aria-label={`Walking directions from the ${origin} to ${destination}, about 6 minutes away`}
 	class="lunch-map"
+	data-pause-offscreen
 	href={directionsUrl}
 	rel="noreferrer"
 	target="_blank"
@@ -79,6 +80,12 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURI
 	</svg>
 </a>
 
+<script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+</script>
+
 <style>
 	.lunch-map {
 		backdrop-filter: var(--backdropFrosted);
@@ -108,16 +115,18 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURI
 	}
 
 	.lunch-map-pier {
-		fill: light-dark(
+		fill: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue4) r g b / 18%),
-			rgb(from var(--colorWhiteIsh) r g b / 20%)
+			rgb(from var(--colorWhiteIsh) r g b / 20%) var(--themeDarkness)
 		);
 	}
 
 	.lunch-map-road {
-		fill: light-dark(
+		fill: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue4) r g b / 10%),
-			rgb(from var(--colorWhiteIsh) r g b / 10%)
+			rgb(from var(--colorWhiteIsh) r g b / 10%) var(--themeDarkness)
 		);
 	}
 
@@ -126,9 +135,10 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURI
 	}
 
 	.lunch-map-building {
-		fill: light-dark(
+		fill: color-mix(
+			in srgb,
 			rgb(from var(--colorBlue4) r g b / 22%),
-			rgb(from var(--colorBlue1) r g b / 26%)
+			rgb(from var(--colorBlue1) r g b / 26%) var(--themeDarkness)
 		);
 	}
 
