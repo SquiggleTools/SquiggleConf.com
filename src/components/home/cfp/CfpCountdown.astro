@@ -35,17 +35,17 @@ const units = ["days", "hours", "minutes", "seconds"] as const;
 
 	.cfp-countdown-unit {
 		align-items: center;
-		background: rgb(from var(--colorBlue5) r g b / 35%);
+		background: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 45%),
+			rgb(from var(--colorBlue5) r g b / 35%) var(--themeDarkness)
+		);
 		border: 1px solid var(--timeline-rail-border-color);
 		border-radius: var(--radiusMedium);
 		display: grid;
 		gap: 0.15rem;
 		padding: 0.6rem 0.75rem;
 		text-align: center;
-	}
-
-	html:not(.dark) .cfp-countdown-unit {
-		background: rgb(from var(--colorWhite) r g b / 45%);
 	}
 
 	.cfp-countdown-value {
