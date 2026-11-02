@@ -6,6 +6,6 @@ export const eventDateIso = "2027-05-07";
 
 export const eventLocation = "Boston, Massachusetts";
 
-export const cfpOpenDate = "Nov 14th";
+export const cfpOpenDate = "Nov 16th";
 
 export const cfpCloseDate = "Jan 15th";
