@@ -10,4 +10,4 @@ export const cfpOpenDate = "Nov 14th";
 
 export const cfpCloseDate = "Jan 15th";
 
-export const cfpOpenDateIso = "2026-11-14T00:00:00-05:00";
+export const cfpOpenDateIso = "2026-11-16T00:00:00-05:00";
