@@ -185,7 +185,7 @@ export const timelineMCs = [
 	{
 		image: maddyMontaquila,
 		name: "Maddy Montaquila",
-		qualification: "product lead for Aspire at Microsoft",
+		qualification: "Aspire product lead at Microsoft",
 	},
 	{
 		image: tjDevries,
