@@ -1,0 +1,82 @@
+---
+import Button from "~/components/Button.astro";
+import Hero from "~/components/hero/Hero.astro";
+import Logo from "~/components/Logo.astro";
+import { cfpCloseDate, eventDate, eventLocation } from "~/data/event";
+import { currentYear } from "~/data/years";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	description="The SquiggleConf CFP is open: social media image."
+	noIndex
+	title="CFP Open Social Image"
+>
+	<Hero class="social-hero" tall width="wide">
+		<div class="social">
+			<Logo as="h1" bold />
+			<p class="social-subtitle">
+				{eventDate}, {currentYear} · {eventLocation}
+			</p>
+			<p class="social-heading">The CFP is open!</p>
+			<p class="social-close">
+				Submit your talk by {cfpCloseDate}, {currentYear}
+			</p>
+			<Button as="a" href="/cfp" size="large" variant="emphasized">
+				Apply at squiggleconf.com/cfp
+			</Button>
+		</div>
+	</Hero>
+</BaseLayout>
+
+<style>
+	:global(body) {
+		height: 630px;
+		overflow: hidden;
+		width: 1200px;
+	}
+
+	.social-hero {
+		height: 630px;
+		padding: 3.25rem 0 0;
+	}
+
+	.social {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.social :global(.logo-bold) {
+		font-size: 6.25rem;
+		letter-spacing: -3px;
+	}
+
+	.social-subtitle {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.75rem;
+		font-style: italic;
+		font-weight: var(--fontWeightLight);
+		letter-spacing: 0.05em;
+		margin: 1rem 0 1.25rem;
+	}
+
+	.social-heading {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 3rem;
+		font-style: italic;
+		font-weight: var(--fontWeightBold);
+		margin: 0;
+	}
+
+	.social-close {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: 1.5rem;
+		font-weight: var(--fontWeightLight);
+		margin: 0.25rem 0 1.5rem;
+	}
+</style>
