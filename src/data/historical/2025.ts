@@ -176,7 +176,7 @@ Now I'm a member of Gleam’s core team and an active contributor to its compile
 			x: "https://x.com/maddymontaquila",
 		},
 		name: "Maddy Montaquila",
-		qualification: "product lead for Aspire at Microsoft",
+		qualification: "Aspire product lead at Microsoft",
 		slug: "maddy-montaquila",
 	},
 	"mattia-manzati": {
