@@ -2,50 +2,58 @@
 import Arrow from "~/components/Arrow.astro";
 import Button from "~/components/Button.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import { cfpCloseDate, cfpOpenDate, eventDate } from "~/data/event";
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	cfpResponseDate,
+	eventDate,
+} from "~/data/event";
 import { links } from "~/data/links";
 import { currentYear } from "~/data/years";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 const opens = `${cfpOpenDate}, ${currentYear - 1}`;
 const closes = `${cfpCloseDate}, ${currentYear}`;
+const responds = `${cfpResponseDate}, ${currentYear}`;
 
 const topicAreas = [
 	[`Accessibility`, `the accessibility tree, WCAG, web accessibility`],
+	[`AI`, `agentic software, tools made for AI agents`],
 	[`Building`, `CLI tools, deployments, monorepo management`],
 	[
 		`Documentation`,
-		`Writing docs, tools to manage and/or share them, explaining code`,
+		`writing docs, tools to manage and/or share them, explaining code`,
 	],
 	[
 		`Editors`,
-		`Tools such as IDEs along with integrations and plugins built on them`,
-	],
-	[
-		`Go and/or Zig`,
-		`Using the popular low-level languages for web development and/or tooling`,
+		`tools such as IDEs along with integrations and plugins built on them`,
 	],
 	[
 		`Open Source`,
-		`The making, maintenance, release, and socialization of shared software`,
+		`the making, maintenance, release, and socialization of shared software`,
 	],
-	[`Performance`, `Enhancing performance of apps, sites, or any web dev tools`],
-	[`Runtimes`, `Execution environments such as Bun, Deno, and Node.js`],
-	[`Rust`, `Working in Rust for the purposes of web dev apps and/or tooling`],
+	[`Performance`, `enhancing performance of apps, sites, or any web dev tools`],
+	[`Runtimes`, `execution environments such as Bun, Deno, and Node.js`],
 	[
 		`Testing`,
-		`The art of verifying code, or building tools to help developers test`,
+		`the art of verifying code, or building tools to help developers test`,
 	],
-	[`Tooling`, `Debuggers, integrations, and general dev tools themselves`],
-	[
-		`TypeScript`,
-		`Integrating, working with, or even contributing to our favorite JS superset`,
-	],
-	[`WebAssembly`, `Tooling or usage of WebAssembly/WASI/WASM`],
+	[`Tooling`, `debuggers, integrations, and general dev tools themselves`],
 	[
 		`Other`,
-		`Something fun or incredible. We love off-the-beaten-trail fun things.`,
+		`something fun or incredible - we love off-the-beaten-trail fun things`,
 	],
+];
+
+const languageAreas = [
+	[`Rust`, `working in Rust for the purposes of web dev apps and/or tooling`],
+	[
+		`TypeScript`,
+		`integrating, working with, or even contributing to our favorite JS superset`,
+	],
+	[`WebAssembly`, `tooling or usage of WebAssembly/WASI/WASM`],
+	[`Native Languages`, `we've accepted talks on Go, Zig, C++, and more`],
+	[`New Languages`, `SquiggleConf is a home for new tech - show us!`],
 ];
 ---
 
@@ -82,20 +90,22 @@ const topicAreas = [
 	<CommonContent heading="CFP Highlights">
 		<ul>
 			<li>
-				<strong>📆 Deadline:</strong> We're accepting submissions through{" "}
-				{closes}.
+				<strong>📆 Deadline:</strong> Submit your proposal by {closes}. You'll
+				hear from us by {responds}.
 			</li>
 			<li>
 				<strong>🤝 Acceptance:</strong> If we accept your talk, we'll ask you to
 				confirm within 7 days of hearing from us.
 			</li>
 			<li>
-				<strong>❤️ Experience:</strong> Speakers of all experience levels,
-				including first-timers, are encouraged to apply.
+				<strong>🧠 Experience:</strong> Speakers of all experience levels,
+				including first-timers, are encouraged to apply. We prioritize substance
+				above all else.
 			</li>
 			<li>
-				<strong>👍 Expectations:</strong> Giving us a private remote dry run of
-				your talk ahead of the conference.
+				<strong>👍 Expectations:</strong> Leading up to the conference, helping
+				us promote your talk. Giving us a remote dry run of a rough draft of
+				your talk two weeks before the conference.
 			</li>
 		</ul>
 
@@ -130,6 +140,10 @@ const topicAreas = [
 			<li>
 				<strong>{closes}:</strong> CFP closes
 			</li>
+			<li>
+				<strong>{responds}:</strong> All CFP submitters will have heard back
+				from us
+			</li>
 		</ul>
 		<p>
 			If we accept your submission, we will expect you to accept or reject our
@@ -151,7 +165,8 @@ const topicAreas = [
 		</p>
 		<p>
 			<strong>
-				We require a private dry run of your presentation before the conference.
+				We require a remote dry run of your presentation two weeks before the
+				conference.
 			</strong>{" "}
 			This will help us check talks for accessibility best practices.
 		</p>
@@ -177,8 +192,17 @@ const topicAreas = [
 		</p>
 		<p>
 			Please don't hesitate to reach out to{" "}
-			<a href={links.cfpQuestionsEmail}>cfp@squiggleconf.com</a> or in the{" "}
-			<a href={links.discord}>SquiggleConf Discord</a>.
+			<a href={links.cfpQuestionsEmail}>cfp@squiggleconf.com</a> or in the
+			#cfp-questions channel of the{" "}
+			<a href={links.discord}>SquiggleConf Discord</a>. That includes asking us
+			about a few ideas before spending the time to write up a full proposal.
+		</p>
+
+		<h3>Multiple Proposals</h3>
+
+		<p>
+			Feel free to submit multiple proposals, but please limit it to your top
+			three.
 		</p>
 
 		<h3>Timing</h3>
@@ -191,8 +215,9 @@ const topicAreas = [
 		<h3>Topic Suggestions</h3>
 
 		<p>
-			We plan on including at least one talk in each of the following
-			categories:
+			Most of all, we're looking for interesting talks on interesting topics in
+			the developer tooling space. Our suggested categories with example focuses
+			are:
 		</p>
 		<ul>
 			{topicAreas.map(([topic, description]) => (
@@ -201,12 +226,18 @@ const topicAreas = [
 				</li>
 			))}
 		</ul>
-		<p>We don't plan to emphasize the following subjects:</p>
+		<p>We're also interested in talks on languages:</p>
+		<ul>
+			{languageAreas.map(([topic, description]) => (
+				<li>
+					<strong>{topic}:</strong> {description}
+				</li>
+			))}
+		</ul>
+		<p>We are not looking for talks whose primary focus is:</p>
 		<ul>
 			<li>
-				<strong>AI:</strong> We absolutely welcome AI being in your talk, but
-				the primary topic(s) should be centered on a dev tooling category such
-				as one of our suggested ones.
+				<strong>Shilling:</strong> Shilling can be good, but it usually isn't.
 			</li>
 			<li>
 				<strong>Blockchain/Crypto/NFTs:</strong> We doubt these will be
