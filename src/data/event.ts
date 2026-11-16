@@ -9,3 +9,5 @@ export const eventLocation = "Boston, Massachusetts";
 export const cfpOpenDate = "Nov 16th";
 
 export const cfpCloseDate = "Jan 15th";
+
+export const cfpResponseDate = "Jan 29th";

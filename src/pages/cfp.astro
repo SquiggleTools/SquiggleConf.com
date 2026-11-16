@@ -1,11 +1,62 @@
 ---
+import Arrow from "~/components/Arrow.astro";
+import Button from "~/components/Button.astro";
 import CommonContent from "~/components/CommonContent.astro";
-import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+import {
+	cfpCloseDate,
+	cfpOpenDate,
+	cfpResponseDate,
+	eventDate,
+} from "~/data/event";
+import { links } from "~/data/links";
 import { currentYear } from "~/data/years";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 const opens = `${cfpOpenDate}, ${currentYear - 1}`;
 const closes = `${cfpCloseDate}, ${currentYear}`;
+const cfpHelpGuide =
+	"https://www.joshuakgoldberg.com/blog/how-i-apply-to-conferences/?utm-source=squiggleconfcfp";
+const responds = `${cfpResponseDate}, ${currentYear}`;
+
+const topicAreas = [
+	[`Accessibility`, `the accessibility tree, WCAG, web accessibility`],
+	[`AI`, `agentic software, tools made for AI agents`],
+	[`Building`, `CLI tools, deployments, monorepo management`],
+	[
+		`Documentation`,
+		`writing docs, tools to manage and/or share them, explaining code`,
+	],
+	[
+		`Editors`,
+		`tools such as IDEs along with integrations and plugins built on them`,
+	],
+	[
+		`Open Source`,
+		`the making, maintenance, release, and socialization of shared software`,
+	],
+	[`Performance`, `enhancing performance of apps, sites, or any web dev tools`],
+	[`Runtimes`, `execution environments such as Bun, Deno, and Node.js`],
+	[
+		`Testing`,
+		`the art of verifying code, or building tools to help developers test`,
+	],
+	[`Tooling`, `debuggers, integrations, and general dev tools themselves`],
+	[
+		`Other`,
+		`something fun or incredible - we love off-the-beaten-trail fun things`,
+	],
+];
+
+const languageAreas = [
+	[`Rust`, `working in Rust for the purposes of web dev apps and/or tooling`],
+	[
+		`TypeScript`,
+		`integrating, working with, or even contributing to our favorite JS superset`,
+	],
+	[`WebAssembly`, `tooling or usage of WebAssembly/WASI/WASM`],
+	[`Native Languages`, `we've accepted talks on Go, Zig, C++, and more`],
+	[`New Languages`, `SquiggleConf is a home for new tech - show us!`],
+];
 ---
 
 <ArticleLayout
@@ -16,14 +67,208 @@ const closes = `${cfpCloseDate}, ${currentYear}`;
 	}}
 	squiggly="wide"
 >
-	<CommonContent heading="Coming Soon">
+	<Fragment slot="lead">
+		Thank you so much for your interest in speaking at SquiggleConf{" "}
+		{currentYear}! This page is a general guide for what you can expect in
+		submitting, including tips for what we're looking for.
+	</Fragment>
+
+	<Fragment slot="intro">
+		<div class="apply-actions">
+			<Button
+				as="a"
+				class="apply-button"
+				href={links.cfp}
+				size="large"
+				target="_blank"
+				variant="emphasized"
+			>
+				Apply to the CFP here!
+				<Arrow />
+			</Button>
+		</div>
+	</Fragment>
+
+	<CommonContent heading="CFP Highlights">
+		<ul>
+			<li>
+				<strong>📆 Deadline:</strong> Submit your proposal by {closes}. You'll
+				hear from us by {responds}.
+			</li>
+			<li>
+				<strong>🤝 Acceptance:</strong> If we accept your talk, we'll ask you to
+				confirm within 7 days of hearing from us.
+			</li>
+			<li>
+				<strong>🧠 Experience:</strong> Speakers of all experience levels,
+				including first-timers, are encouraged to apply. We prioritize substance
+				above all else.
+			</li>
+			<li>
+				<strong>👍 Expectations:</strong> Leading up to the conference, helping
+				us promote your talk. Giving us a remote dry run of a rough draft of
+				your talk two weeks before the conference.
+			</li>
+		</ul>
+
+		<h3>Conference Details</h3>
+
+		<ul>
+			<li>
+				<strong>🗺️ Time & Place:</strong>
+				{eventDate}
+				{currentYear} in Boston, Massachusetts. The Simons Theater at the New
+				England Aquarium, right on the ocean coastline in the very center of
+				downtown Boston.
+			</li>
+			<li>
+				<strong>🗣️ Format:</strong> In-person ~25 minute talks followed by ~5
+				minutes of Q&A.
+			</li>
+			<li>
+				<strong>✈️ Travel:</strong> We are able to help some speakers with
+				travel coverage. See the FAQs in our
+				<a href="/articles/speaker-guide#faqs">speaker guide</a> for what we
+				cover.
+			</li>
+		</ul>
+	</CommonContent>
+
+	<CommonContent heading="CFP Timeline">
+		<p>We will respond to every talk proposal submitted.</p>
+		<ul>
+			<li>
+				<strong>{opens}:</strong> CFP opens
+			</li>
+			<li>
+				<strong>{closes}:</strong> CFP closes
+			</li>
+			<li>
+				<strong>{responds}:</strong> All CFP submitters will have heard back
+				from us
+			</li>
+		</ul>
 		<p>
-			The SquiggleConf {currentYear} CFP opens {opens} and closes {closes}. We
-			look forward to seeing your submissions!
+			If we accept your submission, we will expect you to accept or reject our
+			invitation within a week of hearing from us.
 		</p>
 		<p>
-			In the meantime, the <a href="/articles/speaker-guide">speaker guide</a>{" "}
-			covers what to expect as a SquiggleConf speaker.
+			We will create a "marketing title" for your talk with you that will be
+			used to advertise your talk. There may be a completely different title
+			used for the YouTube video.
 		</p>
 	</CommonContent>
+
+	<CommonContent heading="Speaker Expectations">
+		<p>
+			The <a href="/articles/speaker-guide">speaker guide</a> covers what to
+			expect as a SquiggleConf speaker, including the information we'll need
+			from you, your schedule around the conference, and travel and
+			accommodations.
+		</p>
+		<p>
+			<strong>
+				We require a remote dry run of your presentation two weeks before the
+				conference.
+			</strong>{" "}
+			This will help us check talks for accessibility best practices.
+		</p>
+	</CommonContent>
+
+	<CommonContent heading="Tips and Tricks">
+		<p>
+			For an overview of how to submit to a CFP, we suggest reading
+			<a href={cfpHelpGuide}>this CFP help guide</a>.
+		</p>
+
+		<h3>Asking for Help</h3>
+
+		<p>
+			We're always happy to give advice and generally help in submitting to the
+			CFP! There are no "dumb" questions.
+		</p>
+		<p>
+			Please don't hesitate to reach out to{" "}
+			<a href={links.cfpQuestionsEmail}>cfp@squiggleconf.com</a> or in the
+			#cfp-questions channel of the{" "}
+			<a href={links.discord}>SquiggleConf Discord</a>. That includes asking us
+			about a few ideas before spending the time to write up a full proposal.
+		</p>
+
+		<h3>Multiple Proposals</h3>
+
+		<p>
+			Feel free to submit multiple proposals, but please limit it to your top
+			three.
+		</p>
+
+		<h3>Timing</h3>
+
+		<p>
+			We don't factor in how early or late a CFP is submitted. We recommend not
+			procrastinating until the last minute, so you don't forget to submit.
+		</p>
+
+		<h3>Topic Suggestions</h3>
+
+		<p>
+			Most of all, we're looking for interesting talks on interesting topics in
+			the developer tooling space. Our suggested categories with example focuses
+			are:
+		</p>
+		<ul>
+			{topicAreas.map(([topic, description]) => (
+				<li>
+					<strong>{topic}:</strong> {description}
+				</li>
+			))}
+		</ul>
+		<p>We're also interested in talks on languages:</p>
+		<ul>
+			{languageAreas.map(([topic, description]) => (
+				<li>
+					<strong>{topic}:</strong> {description}
+				</li>
+			))}
+		</ul>
+		<p>We are not looking for talks whose primary focus is:</p>
+		<ul>
+			<li>
+				<strong>Shilling:</strong> Shilling can be good, but it usually isn't.
+				See how we think about it in the{" "}
+				<a href="/articles/speaker-guide#shilling">speaker guide</a>.
+			</li>
+			<li>
+				<strong>Blockchain/Crypto/NFTs:</strong> We doubt these will be
+				applicable and useful, but we are open minded and welcome you to make
+				your case.
+			</li>
+		</ul>
+
+		<div class="apply-actions">
+			<Button
+				as="a"
+				class="apply-button"
+				href={links.cfp}
+				size="large"
+				target="_blank"
+				variant="emphasized"
+			>
+				Apply to the CFP here!
+				<Arrow />
+			</Button>
+		</div>
+	</CommonContent>
 </ArticleLayout>
+
+<style>
+	.apply-actions {
+		display: flex;
+		justify-content: center;
+		margin: 2rem 0 1rem;
+	}
+
+	.apply-button {
+		gap: 0.5rem;
+	}
+</style>
