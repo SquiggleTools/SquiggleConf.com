@@ -54,6 +54,6 @@ export const cfpHosts = [
 		detail: "MC",
 		image: maddyMontaquila,
 		name: "Maddy Montaquila",
-		qualification: "product lead for Aspire",
+		qualification: "Aspire product lead",
 	},
 ] satisfies readonly CfpPersonData[];
