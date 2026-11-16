@@ -14,6 +14,8 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 const opens = `${cfpOpenDate}, ${currentYear - 1}`;
 const closes = `${cfpCloseDate}, ${currentYear}`;
+const cfpHelpGuide =
+	"https://www.joshuakgoldberg.com/blog/how-i-apply-to-conferences/?utm-source=squiggleconfcfp";
 const responds = `${cfpResponseDate}, ${currentYear}`;
 
 const topicAreas = [
@@ -174,14 +176,8 @@ const languageAreas = [
 
 	<CommonContent heading="Tips and Tricks">
 		<p>
-			We suggest reading{" "}
-			<a
-				href="https://www.joshuakgoldberg.com/blog/how-i-apply-to-conferences/?utm-source=squiggleconfcfp"
-				target="_blank"
-			>
-				this CFP help guide
-			</a>{" "}
-			for an overview of how to submit to a CFP.
+			For an overview of how to submit to a CFP, we suggest reading
+			<a href={cfpHelpGuide}>this CFP help guide</a>.
 		</p>
 
 		<h3>Asking for Help</h3>
