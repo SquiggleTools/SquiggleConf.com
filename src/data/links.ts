@@ -1,7 +1,7 @@
 import { eventDateIso } from "./event";
 
 export const links = {
-	cfp: "https://forms.gle/ikRZLvoxqBb52Qgs8",
+	cfp: "https://forms.gle/ZhpZBRXpA4mNjeZq7",
 	cfpQuestionsEmail: "mailto:cfp@squiggleconf.com",
 	discord: "https://discord.squiggleconf.com",
 	donate: "https://www.paypal.com/US/fundraiser/charity/5334863",
