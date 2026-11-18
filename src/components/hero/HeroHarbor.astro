@@ -3,7 +3,7 @@ import cityscapeWaves from "~/assets/design/cityscape-waves.svg";
 import cityscape from "~/assets/design/cityscape.svg";
 
 import { lightRays } from "../home/lightRays";
-import { orbCenter, orbCenterInContainer } from "./orb";
+import { orbCenter } from "./orb";
 
 interface Props {
 	compact?: boolean;
@@ -52,7 +52,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	aria-hidden="true"
 	class="hero-harbor"
 	data-pause-offscreen
-	style={`--orb-center: ${orbCenter}; --orb-center-in-water: ${orbCenterInContainer}`}
+	style={`--orb-center: ${orbCenter}`}
 >
 	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
 	<div class="hero-harbor-water">
@@ -217,7 +217,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		position: absolute;
 	}
 
-	.hero-harbor:not([data-rays-aimed]) .hero-harbor-rays {
+	.hero-harbor-rays:not([data-aimed]) {
 		visibility: hidden;
 	}
 
@@ -237,18 +237,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		height: 40rem;
 		left: calc(var(--left) - var(--width) / 2);
 		position: absolute;
-		transform: rotate(
-			atan2(
-				calc(
-					var(--orb-center-in-water) + var(--themeDarkStep) * 0.7rem -
-						var(--left)
-				),
-				calc(
-					var(--hero-harbor-depth, 29rem) + var(--hero-harbor-water-height) -
-						var(--hero-orb-top) - 2rem + var(--themeDarkStep) * 0.7rem
-				)
-			)
-		);
+		rotate: var(--aim);
 		transform-origin: 50% calc(100% - 10rem);
 		width: var(--width);
 	}
@@ -412,21 +401,12 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 <script>
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
+	import { aimLightRays } from "./aimLightRays";
+
 	pauseOffscreen();
 
-	const hero = document.querySelector(".hero");
-	const harbor = hero?.querySelector<HTMLElement>(".hero-harbor");
-	const water = harbor?.querySelector(".hero-harbor-water");
-
-	if (hero && harbor && water) {
-		const observer = new ResizeObserver(() => {
-			harbor.style.setProperty(
-				"--hero-harbor-depth",
-				`${water.getBoundingClientRect().top - hero.getBoundingClientRect().top}px`,
-			);
-			harbor.toggleAttribute("data-rays-aimed", true);
-		});
-		observer.observe(hero);
-		observer.observe(harbor);
+	const rays = document.querySelector<HTMLElement>(".hero-harbor-rays");
+	if (rays) {
+		aimLightRays(rays);
 	}
 </script>

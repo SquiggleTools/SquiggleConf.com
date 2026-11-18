@@ -78,8 +78,12 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		position: absolute;
 	}
 
+	.cfp-opens-rays:not([data-aimed]) {
+		visibility: hidden;
+	}
+
 	.cfp-opens-rays span {
-		animation: cfp-opens-sway 11s ease-in-out infinite alternate;
+		animation: cfp-opens-ray-pulse 11s ease-in-out infinite alternate;
 		animation-delay: var(--delay);
 		background: linear-gradient(
 			to bottom,
@@ -95,21 +99,21 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		height: calc(130% + 8rem);
 		left: calc(var(--left) - var(--width) / 2);
 		position: absolute;
-		rotate: var(--angle);
+		rotate: var(--aim, var(--angle));
 		top: -9rem;
 		transform-origin: 50% 10rem;
 		width: var(--width);
 	}
 
-	@keyframes cfp-opens-sway {
+	@keyframes cfp-opens-ray-pulse {
 		0% {
 			opacity: 0.5;
-			transform: skewX(-6deg);
+			transform: scaleX(0.8);
 		}
 
 		100% {
 			opacity: 1;
-			transform: skewX(6deg);
+			transform: scaleX(1.15);
 		}
 	}
 
@@ -268,7 +272,13 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 </style>
 
 <script>
+	import { aimLightRays } from "~/components/hero/aimLightRays";
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
 	pauseOffscreen();
+
+	const rays = document.querySelector<HTMLElement>(".cfp-opens-rays");
+	if (rays) {
+		aimLightRays(rays);
+	}
 </script>
