@@ -1,0 +1,41 @@
+---
+import Bubbles from "./Bubbles.astro";
+import DeepSeaSurface from "./DeepSeaSurface.astro";
+import LightRays from "./LightRays.astro";
+import Newsletter from "./Newsletter.astro";
+---
+
+<DeepSeaSurface seam={false}>
+	<div aria-hidden="true" class="sea-body-decorations" data-pause-offscreen>
+		<LightRays />
+		<Bubbles count={32} />
+	</div>
+	<div class="sea-body-contents">
+		<slot />
+	</div>
+	<Newsletter />
+</DeepSeaSurface>
+
+<style>
+	.sea-body-decorations {
+		--light-rays-strength: 0.8;
+
+		height: min(100%, 60rem);
+		inset: 0 0 auto;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.sea-body-contents {
+		display: flow-root;
+		padding-bottom: 2rem;
+		position: relative;
+		z-index: 1;
+	}
+</style>
+
+<script>
+	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	pauseOffscreen();
+</script>

@@ -2,6 +2,7 @@
 import Button from "~/components/Button.astro";
 import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard from "~/components/hero/HeroContentsStandard.astro";
+import SeaBody from "~/components/SeaBody.astro";
 import PageLayout from "~/layouts/PageLayout.astro";
 ---
 
@@ -16,11 +17,13 @@ import PageLayout from "~/layouts/PageLayout.astro";
 			surface.
 		</HeroContentsStandard>
 	</Hero>
-	<div class="not-found-actions">
-		<Button as="a" href="/" size="large" variant="emphasized">
-			Back to the homepage
-		</Button>
-	</div>
+	<SeaBody>
+		<div class="not-found-actions">
+			<Button as="a" href="/" size="large" variant="emphasized">
+				Back to the homepage
+			</Button>
+		</div>
+	</SeaBody>
 </PageLayout>
 
 <style>

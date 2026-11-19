@@ -1,0 +1,74 @@
+---
+import { lightRays } from "./home/lightRays";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div aria-hidden="true" class:list={["light-rays", className]}>
+	{lightRays.map(({ delay, left, width }) => (
+		<span
+			style={`--delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
+		/>
+	))}
+</div>
+
+<style>
+	.light-rays {
+		inset: 0;
+		mix-blend-mode: screen;
+		opacity: calc(var(--themeDip) * var(--light-rays-strength, 1));
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.light-rays:not([data-aimed]) {
+		visibility: hidden;
+	}
+
+	.light-rays span {
+		animation: light-rays-pulse 11s ease-in-out infinite alternate;
+		animation-delay: var(--delay);
+		background: linear-gradient(
+			to bottom,
+			color-mix(
+					in srgb,
+					rgb(from var(--colorWhite) r g b / 55%),
+					rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
+				)
+				8rem,
+			transparent calc(8rem + (100% - 8rem) * 0.85)
+		);
+		filter: blur(10px);
+		height: calc(130% + 8rem);
+		left: calc(var(--left) - var(--width) / 2);
+		position: absolute;
+		rotate: var(--aim);
+		top: -9rem;
+		transform-origin: 50% 10rem;
+		width: var(--width);
+	}
+
+	@keyframes light-rays-pulse {
+		0% {
+			opacity: 0.5;
+			transform: scaleX(0.8);
+		}
+
+		100% {
+			opacity: 1;
+			transform: scaleX(1.15);
+		}
+	}
+</style>
+
+<script>
+	import { aimLightRays } from "./hero/aimLightRays";
+
+	for (const rays of document.querySelectorAll<HTMLElement>(".light-rays")) {
+		aimLightRays(rays);
+	}
+</script>
