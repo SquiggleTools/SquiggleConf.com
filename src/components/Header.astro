@@ -6,6 +6,8 @@ import { pagePathname } from "~/utils/pathname";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Logo from "./Logo.astro";
+import MotionToggle from "./MotionToggle.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
 	hideLogo?: boolean;
@@ -92,6 +94,10 @@ const ticketsButton = {
 				<a {...props}>{text}</a>
 			))}
 			{!hideLogo && <Button {...ticketsButton}>{currentYear} Tickets</Button>}
+			<span class="header-toggles">
+				<MotionToggle />
+				<ThemeToggle />
+			</span>
 		</nav>
 	</ContentArea>
 </header>
@@ -259,6 +265,13 @@ const ticketsButton = {
 		margin-left: 0.35rem;
 	}
 
+	.header-toggles {
+		align-self: flex-end;
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
 	@media (--widthXLarge) {
 		.header-no-logo {
 			padding-top: 4rem;
@@ -269,7 +282,8 @@ const ticketsButton = {
 			min-height: 0;
 		}
 
-		.header-menu-toggle {
+		.header-menu-toggle,
+		.header-toggles {
 			display: none;
 		}
 
