@@ -4,6 +4,8 @@ import type { Props as HeadProps } from "~/components/Head.astro";
 import Footer from "~/components/Footer.astro";
 import Header from "~/components/Header.astro";
 import NextYearNotice from "~/components/historical/NextYearNotice.astro";
+import Newsletter from "~/components/Newsletter.astro";
+import SeaBody from "~/components/SeaBody.astro";
 import { currentYear } from "~/data/years";
 
 import BaseLayout from "./BaseLayout.astro";
@@ -11,11 +13,14 @@ import BaseLayout from "./BaseLayout.astro";
 type Props = HeadProps & {
 	hideHeaderLogo?: boolean;
 	historicalHeading?: boolean;
+	/** Whether the page draws its own body and newsletter, as the homepage does. */
+	ownBody?: boolean;
 };
 
 const {
 	hideHeaderLogo,
 	historicalHeading,
+	ownBody,
 	year = currentYear,
 	...props
 } = Astro.props;
@@ -27,18 +32,26 @@ const historical = year !== currentYear;
 		Skip to content
 	</a>
 	<Header hideLogo={hideHeaderLogo} year={year} />
-	{historical ? (
-		<main id="main">
-			<NextYearNotice heading={historicalHeading} year={year} />
-			<div class="body-area page-layout-historical" data-theme-lazy>
-				<slot />
-			</div>
-		</main>
-	) : (
-		<main class="body-area" data-theme-lazy id="main">
+	<main class="body-area" data-theme-lazy id="main">
+		{historical && <NextYearNotice heading={historicalHeading} year={year} />}
+		{ownBody ? (
 			<slot />
-		</main>
-	)}
+		) : (
+			<>
+				<slot name="hero" />
+				<SeaBody>
+					{historical ? (
+						<div class="page-layout-historical">
+							<slot />
+						</div>
+					) : (
+						<slot />
+					)}
+					<Newsletter />
+				</SeaBody>
+			</>
+		)}
+	</main>
 	<Footer year={year} />
 </BaseLayout>
 
@@ -79,7 +92,7 @@ const historical = year !== currentYear;
 		flex-direction: column;
 		align-items: safe center;
 		overflow-wrap: anywhere;
-		padding: 1.5rem 0 3.5rem;
+		padding: 2.5rem 0 3.5rem;
 	}
 
 	.page-layout-historical > :global(*) {

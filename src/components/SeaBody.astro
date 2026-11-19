@@ -2,7 +2,6 @@
 import Bubbles from "./Bubbles.astro";
 import DeepSeaSurface from "./DeepSeaSurface.astro";
 import LightRays from "./LightRays.astro";
-import Newsletter from "./Newsletter.astro";
 ---
 
 <DeepSeaSurface seam={false}>
@@ -13,7 +12,6 @@ import Newsletter from "./Newsletter.astro";
 	<div class="sea-body-contents">
 		<slot />
 	</div>
-	<Newsletter />
 </DeepSeaSurface>
 
 <style>
@@ -28,7 +26,6 @@ import Newsletter from "./Newsletter.astro";
 
 	.sea-body-contents {
 		display: flow-root;
-		padding-bottom: 2rem;
 		position: relative;
 		z-index: 1;
 	}

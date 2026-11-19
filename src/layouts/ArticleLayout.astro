@@ -6,7 +6,6 @@ import Hero from "~/components/hero/Hero.astro";
 import HeroContentsStandard, {
 	type Props as HeroContentsStandardProps,
 } from "~/components/hero/HeroContentsStandard.astro";
-import SeaBody from "~/components/SeaBody.astro";
 
 import PageLayout from "./PageLayout.astro";
 import "./prose.css";
@@ -25,24 +24,22 @@ const {
 ---
 
 <PageLayout description={description} title={title}>
-	<Hero>
+	<Hero slot="hero">
 		<HeroContentsStandard heading={title} squiggly={squiggly}>
 			{description}
 		</HeroContentsStandard>
 	</Hero>
 
-	<SeaBody>
-		{Astro.slots.has("lead") && (
-			<ContentArea class="prose" width={introWidth}>
-				<p class="article-lead">
-					<slot name="lead" />
-				</p>
-				<slot name="intro" />
-			</ContentArea>
-		)}
+	{Astro.slots.has("lead") && (
+		<ContentArea class="prose" width={introWidth}>
+			<p class="article-lead">
+				<slot name="lead" />
+			</p>
+			<slot name="intro" />
+		</ContentArea>
+	)}
 
-		<slot />
-	</SeaBody>
+	<slot />
 </PageLayout>
 
 <style>
