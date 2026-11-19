@@ -1,7 +1,7 @@
 import { themeChangeEvent } from "~/utils/theme";
 
 const containers = new Set<HTMLElement>();
-const crescentOffset = 1;
+const crescentShare = 0.25;
 
 let resizeObserver: ResizeObserver | undefined;
 let tracking = false;
@@ -19,15 +19,15 @@ export function aimLightRays(container: HTMLElement) {
 
 function aim() {
 	const target = findTarget();
-	const rays = [...containers].flatMap((container) => {
-		if (!container.getClientRects().length) {
-			return [];
-		}
+	if (!target) {
+		return;
+	}
 
+	const rays = [...containers].flatMap((container) => {
 		const box = container.getBoundingClientRect();
-		return [...container.children].map((ray) => {
-			if (!(ray instanceof HTMLElement) || !target) {
-				return { ray };
+		return [...container.children].flatMap((ray) => {
+			if (!(ray instanceof HTMLElement)) {
+				return [];
 			}
 
 			const [originX = 0, originY = 0] = getComputedStyle(ray)
@@ -36,20 +36,12 @@ function aim() {
 			const x = box.left + ray.offsetLeft + originX;
 			const y = box.top + ray.offsetTop + originY;
 
-			return { angle: Math.atan2(target.x - x, y - target.y), ray };
+			return [{ angle: Math.atan2(target.x - x, y - target.y), ray }];
 		});
 	});
 
 	for (const { angle, ray } of rays) {
-		if (!(ray instanceof HTMLElement)) {
-			continue;
-		}
-
-		if (angle === undefined) {
-			ray.style.removeProperty("--aim");
-		} else {
-			ray.style.setProperty("--aim", `${angle.toString()}rad`);
-		}
+		ray.style.setProperty("--aim", `${angle.toString()}rad`);
 	}
 
 	for (const container of containers) {
@@ -62,7 +54,7 @@ function findTarget() {
 
 	for (const orb of document.querySelectorAll<HTMLElement>(".hero-sky-orb")) {
 		const opacity = Number(getComputedStyle(orb).opacity);
-		if (orb.getClientRects().length && opacity > (brightest?.opacity ?? -1)) {
+		if (opacity > (brightest?.opacity ?? -1)) {
 			brightest = { opacity, orb };
 		}
 	}
@@ -73,15 +65,10 @@ function findTarget() {
 
 	const { orb } = brightest;
 	const box = orb.getBoundingClientRect();
-	const darkness = orb.classList.contains("theme-pin-dark")
-		? 1
-		: orb.classList.contains("theme-pin-light")
-			? 0
-			: Number(getComputedStyle(orb).getPropertyValue("--themeDark"));
-	const offset =
-		darkness *
-		crescentOffset *
-		parseFloat(getComputedStyle(document.documentElement).fontSize);
+	const darkness = Number(
+		getComputedStyle(orb).getPropertyValue("--themeDark"),
+	);
+	const offset = darkness * crescentShare * orb.offsetWidth;
 
 	return {
 		x: box.left + box.width / 2 + offset,

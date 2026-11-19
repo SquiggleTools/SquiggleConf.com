@@ -29,7 +29,8 @@ const { class: className, tall, width, ...props } = Astro.props;
 
 <style>
 	.hero {
-		--hero-orb-display: none;
+		--hero-orb-center: calc(100% - max(3.5rem, 50% - 42rem));
+		--hero-orb-size: 4rem;
 
 		background: linear-gradient(
 			180deg,
@@ -67,29 +68,20 @@ const { class: className, tall, width, ...props } = Astro.props;
 		padding: 5rem 0 7.75rem;
 	}
 
-	@media (--widthSmall) {
-		.hero-tall {
-			--hero-orb-display: block;
+	@media not (--widthLarge) {
+		.hero {
+			--hero-orb-size: 2.5rem;
+			--hero-orb-top: 5.75rem;
+		}
+
+		.hero-contents {
+			padding-top: 4rem;
 		}
 	}
 
 	@media (--widthLarge) {
-		.hero-tall {
-			--hero-orb-display: none;
-		}
-
-		.hero-compact {
-			--hero-orb-display: block;
-		}
-
 		.hero-compact .hero-contents {
 			max-width: calc(100vw - 13rem);
-		}
-	}
-
-	@media (--widthXLarge) {
-		.hero-tall {
-			--hero-orb-display: block;
 		}
 	}
 

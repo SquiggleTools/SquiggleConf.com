@@ -3,7 +3,6 @@ import cityscapeWaves from "~/assets/design/cityscape-waves.svg";
 import cityscape from "~/assets/design/cityscape.svg";
 
 import { lightRays } from "../home/lightRays";
-import { orbCenter } from "./orb";
 
 interface Props {
 	compact?: boolean;
@@ -30,9 +29,8 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		delay: random * 5,
 		duration: 2.5 + random * 3.5,
 		left: onOrbPath
-			? `calc(var(--orb-center) + ${((random - 0.5) * (1.5 + depth * 5)).toFixed(2)}rem)`
+			? `calc(var(--hero-orb-center) + ${((random - 0.5) * (1.5 + depth * 5)).toFixed(2)}rem)`
 			: `${(index * 29 + random * 11) % 100}%`,
-		orb: onOrbPath,
 		top: onOrbPath ? 6 + depth * 80 : 12 + ((index * 17) % 70),
 		width: onOrbPath ? 0.8 + random * (1 + depth * 1.5) : 0.6 + random * 1.6,
 	};
@@ -48,12 +46,7 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		rel="preload"
 	/>
 )}
-<div
-	aria-hidden="true"
-	class="hero-harbor"
-	data-pause-offscreen
-	style={`--orb-center: ${orbCenter}`}
->
+<div aria-hidden="true" class="hero-harbor" data-pause-offscreen>
 	<div class="hero-harbor-art hero-harbor-skyline" style={background}></div>
 	<div class="hero-harbor-water">
 		<span class="hero-harbor-glow"></span>
@@ -69,9 +62,9 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 				/>
 			))}
 		</div>
-		{glints.map(({ delay, duration, left, orb, top, width }) => (
+		{glints.map(({ delay, duration, left, top, width }) => (
 			<span
-				class:list={["hero-harbor-glint", orb && "hero-harbor-glint-orb"]}
+				class="hero-harbor-glint"
 				style={`--delay: -${delay}s; --duration: ${duration}s; --left: ${left}; --top: ${top}%; --width: ${width}rem`}
 			/>
 		))}
@@ -150,9 +143,8 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 			),
 			transparent
 		);
-		display: var(--hero-orb-display);
 		height: 100%;
-		left: var(--orb-center);
+		left: var(--hero-orb-center);
 		position: absolute;
 		top: 0;
 		translate: -50% 0;
@@ -200,9 +192,8 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 			),
 			transparent 80%
 		);
-		display: var(--hero-orb-display);
 		height: 100%;
-		left: var(--orb-center);
+		left: var(--hero-orb-center);
 		position: absolute;
 		top: 0;
 		translate: -50% 0;
@@ -210,7 +201,6 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 	}
 
 	.hero-harbor-rays {
-		display: var(--hero-orb-display);
 		inset: 0;
 		opacity: var(--themeDip);
 		pointer-events: none;
@@ -273,10 +263,6 @@ const glints = Array.from({ length: 44 }, (_, index) => {
 		position: absolute;
 		top: var(--top);
 		width: var(--width);
-	}
-
-	.hero-harbor-glint-orb {
-		display: var(--hero-orb-display);
 	}
 
 	@keyframes hero-harbor-glint {
