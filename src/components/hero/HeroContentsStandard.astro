@@ -17,7 +17,7 @@ const { heading, squiggly } = Astro.props;
 		{squiggly === "none" ? (
 			heading
 		) : (
-			<TextSquiggly width={squiggly}>
+			<TextSquiggly color="blue" width={squiggly}>
 				<Fragment slot="inside">{heading}</Fragment>
 			</TextSquiggly>
 		)}

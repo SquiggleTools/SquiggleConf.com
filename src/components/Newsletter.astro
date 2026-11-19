@@ -6,9 +6,19 @@ import Bubbles from "./Bubbles.astro";
 import Button from "./Button.astro";
 import ContentArea from "./ContentArea.astro";
 import Heading from "./Heading.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
-<div class="newsletter" data-pause-offscreen id="newsletter">
+<div
+	class:list={["newsletter", className]}
+	data-pause-offscreen
+	id="newsletter"
+>
 	<OceanFloorLeft aria-hidden="true" class="ocean-floor ocean-floor-left" />
 	<OceanFloorRight aria-hidden="true" class="ocean-floor ocean-floor-right" />
 	<Bubbles class="newsletter-bubbles" count={56} />

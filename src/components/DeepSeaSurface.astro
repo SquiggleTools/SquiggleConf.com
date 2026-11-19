@@ -1,4 +1,16 @@
-<div class="deep-sea-surface" data-theme-lazy>
+---
+interface Props {
+	/** Whether to cast a wave seam onto the section below. */
+	seam?: boolean;
+}
+
+const { seam = true } = Astro.props;
+---
+
+<div
+	class:list={["deep-sea-surface", seam && "deep-sea-surface-seam"]}
+	data-theme-lazy
+>
 	<slot />
 </div>
 
@@ -42,7 +54,7 @@
 		position: relative;
 	}
 
-	.deep-sea-surface::before {
+	.deep-sea-surface-seam::before {
 		background:
 			url("../assets/design/seam-wave-below.svg") 0 calc(1rem + 2px) /
 				var(--sizeSeamWidth) var(--sizeSeamHeight) repeat-x,

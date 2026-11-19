@@ -1,9 +1,9 @@
 ---
 import Bubbles from "~/components/Bubbles.astro";
+import LightRays from "~/components/LightRays.astro";
 import { cfpCloseDate, cfpOpenDate } from "~/data/event";
 import { currentYear } from "~/data/years";
 
-import { lightRays } from "../lightRays";
 import TimelineHeading from "../timeline/TimelineHeading.astro";
 import CfpPerson from "./CfpPerson.astro";
 import { cfpHosts, cfpLaunchSpeakers } from "./data";
@@ -14,13 +14,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	class="cfp-opens"
 	data-pause-offscreen
 >
-	<div aria-hidden="true" class="cfp-opens-rays">
-		{lightRays.map(({ delay, left, width }) => (
-			<span
-				style={`--delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
-			/>
-		))}
-	</div>
+	<LightRays />
 	<Bubbles class="cfp-opens-bubbles" count={42} />
 	<div class="cfp-opens-inner">
 		<div class="cfp-opens-headline">
@@ -68,53 +62,6 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		overflow: clip;
 		padding: 6.5rem 1rem clamp(3.5rem, 7vw, 5.5rem);
 		position: relative;
-	}
-
-	.cfp-opens-rays {
-		inset: 0;
-		mix-blend-mode: screen;
-		opacity: var(--themeDip);
-		pointer-events: none;
-		position: absolute;
-	}
-
-	.cfp-opens-rays:not([data-aimed]) {
-		visibility: hidden;
-	}
-
-	.cfp-opens-rays span {
-		animation: cfp-opens-ray-pulse 11s ease-in-out infinite alternate;
-		animation-delay: var(--delay);
-		background: linear-gradient(
-			to bottom,
-			color-mix(
-					in srgb,
-					rgb(from var(--colorWhite) r g b / 55%),
-					rgb(from var(--colorBlue2) r g b / 22%) var(--themeDarkness)
-				)
-				8rem,
-			transparent calc(8rem + (100% - 8rem) * 0.85)
-		);
-		filter: blur(10px);
-		height: calc(130% + 8rem);
-		left: calc(var(--left) - var(--width) / 2);
-		position: absolute;
-		rotate: var(--aim);
-		top: -9rem;
-		transform-origin: 50% 10rem;
-		width: var(--width);
-	}
-
-	@keyframes cfp-opens-ray-pulse {
-		0% {
-			opacity: 0.5;
-			transform: scaleX(0.8);
-		}
-
-		100% {
-			opacity: 1;
-			transform: scaleX(1.15);
-		}
 	}
 
 	.cfp-opens :global(.cfp-opens-bubbles) {
@@ -272,13 +219,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 </style>
 
 <script>
-	import { aimLightRays } from "~/components/hero/aimLightRays";
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
 	pauseOffscreen();
-
-	const rays = document.querySelector<HTMLElement>(".cfp-opens-rays");
-	if (rays) {
-		aimLightRays(rays);
-	}
 </script>
