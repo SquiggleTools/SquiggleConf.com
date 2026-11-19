@@ -4,6 +4,7 @@ import squigglyWide from "~/assets/design/squiggly-wide.svg";
 import Img from "~/components/Img.astro";
 
 interface Props {
+	color?: "blue" | "red";
 	width: "medium" | "wide";
 }
 
@@ -12,14 +13,22 @@ const images = {
 	wide: squigglyWide,
 };
 
-const { width, ...props } = Astro.props;
+const { color = "red", width, ...props } = Astro.props;
+const image = images[width];
 ---
 
 <em class:list={["text-squiggly", `text-squiggly-${width}`]} {...props}>
 	<span class="text">
 		<slot name="inside" />
 	</span>
-	<Img alt="" class="squiggly" loading="eager" src={images[width]} />
+	{color === "red" ? (
+		<Img alt="" class="squiggly" loading="eager" src={image} />
+	) : (
+		<span
+			class="squiggly squiggly-blue"
+			style={`aspect-ratio: ${image.width} / ${image.height}; mask-image: url(${image.src})`}
+		/>
+	)}
 </em>
 <slot name="after" />
 
@@ -40,6 +49,15 @@ const { width, ...props } = Astro.props;
 		left: 0;
 		user-select: none;
 		width: 100%;
+	}
+
+	.squiggly-blue {
+		background: color-mix(
+			in srgb,
+			var(--colorBlue3),
+			var(--colorBlue2) var(--themeDarkness)
+		);
+		mask-size: 100% 100%;
 	}
 
 	.text-squiggly-medium .squiggly {
