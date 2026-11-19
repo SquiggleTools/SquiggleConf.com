@@ -47,7 +47,7 @@ const historical = year !== currentYear;
 					) : (
 						<slot />
 					)}
-					<Newsletter />
+					<Newsletter class="page-layout-newsletter" />
 				</SeaBody>
 			</>
 		)}
@@ -82,6 +82,10 @@ const historical = year !== currentYear;
 		);
 		height: 100%;
 		position: relative;
+	}
+
+	.body-area :global(.page-layout-newsletter) {
+		margin-top: 3.5rem;
 	}
 
 	.page-layout-historical {

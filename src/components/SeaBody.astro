@@ -1,5 +1,4 @@
 ---
-import Bubbles from "./Bubbles.astro";
 import DeepSeaSurface from "./DeepSeaSurface.astro";
 import LightRays from "./LightRays.astro";
 ---
@@ -7,7 +6,6 @@ import LightRays from "./LightRays.astro";
 <DeepSeaSurface seam={false}>
 	<div aria-hidden="true" class="sea-body-decorations" data-pause-offscreen>
 		<LightRays />
-		<Bubbles count={32} />
 	</div>
 	<div class="sea-body-contents">
 		<slot />
@@ -16,7 +14,7 @@ import LightRays from "./LightRays.astro";
 
 <style>
 	.sea-body-decorations {
-		--light-rays-strength: 0.8;
+		--light-rays-strength: 0.4;
 
 		height: min(100%, 60rem);
 		inset: 0 0 auto;
