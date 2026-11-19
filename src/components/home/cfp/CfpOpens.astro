@@ -15,9 +15,9 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 	data-pause-offscreen
 >
 	<div aria-hidden="true" class="cfp-opens-rays">
-		{lightRays.map(({ angle, delay, left, width }) => (
+		{lightRays.map(({ delay, left, width }) => (
 			<span
-				style={`--angle: ${angle}deg; --delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
+				style={`--delay: -${delay}s; --left: ${left}%; --width: ${width}rem`}
 			/>
 		))}
 	</div>
@@ -99,7 +99,7 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		height: calc(130% + 8rem);
 		left: calc(var(--left) - var(--width) / 2);
 		position: absolute;
-		rotate: var(--aim, var(--angle));
+		rotate: var(--aim);
 		top: -9rem;
 		transform-origin: 50% 10rem;
 		width: var(--width);

@@ -1,6 +1,4 @@
 ---
-import { orbCenter } from "./orb";
-
 interface Props {
 	compact?: boolean;
 }
@@ -14,7 +12,7 @@ const birds = compact
 			{ duration: 1.7, left: "41%", size: 0.9, top: 1.5 },
 			{
 				duration: 1.9,
-				left: "calc(var(--orb-center) - 4.5rem)",
+				left: "calc(var(--hero-orb-center) - 4.5rem)",
 				size: 1.1,
 				top: 5,
 			},
@@ -48,7 +46,7 @@ const clouds: {
 			{
 				drift: 70,
 				from: "extra-large",
-				left: "calc(var(--orb-center) - 6rem)",
+				left: "calc(var(--hero-orb-center) - 6rem)",
 				moonlight: 100,
 				size: 4,
 				top: 9.5,
@@ -74,7 +72,6 @@ const clouds: {
 	aria-hidden="true"
 	class:list={["hero-sky", compact && "hero-sky-compact"]}
 	data-pause-offscreen
-	style={`--orb-center: ${orbCenter}`}
 >
 	<div class="hero-sky-night">
 		<span class="hero-sky-stars hero-sky-stars-near"></span>
@@ -128,7 +125,6 @@ const clouds: {
 	class="hero-sky-orb"
 	data-pause-offscreen
 	disabled
-	style={`--orb-center: ${orbCenter}`}
 	type="button"
 >
 	<span aria-hidden="true" class="hero-sky-orb-body"></span>
@@ -291,11 +287,10 @@ const clouds: {
 			),
 			transparent calc(70% - var(--themeDarkness) * 0.14)
 		);
-		display: var(--hero-orb-display);
 		height: 120rem;
-		left: var(--orb-center);
+		left: var(--hero-orb-center);
 		position: absolute;
-		top: calc(var(--hero-orb-top) + 2rem);
+		top: calc(var(--hero-orb-top) + var(--hero-orb-size) / 2);
 		translate: -50% -50%;
 		width: 120rem;
 	}
@@ -396,7 +391,7 @@ const clouds: {
 			rgb(from var(--colorTerminalOrange) r g b / 35%),
 			rgb(from var(--colorBlue1) r g b / 45%) var(--themeDarkness)
 		);
-		--hero-orb-glow-offset: 10rem;
+		--hero-orb-glow-offset: 10em;
 		--hero-orb-rim: color-mix(
 			in srgb,
 			color-mix(
@@ -411,14 +406,14 @@ const clouds: {
 		border: none;
 		border-radius: 50%;
 		cursor: pointer;
-		display: var(--hero-orb-display);
-		height: 4rem;
-		left: var(--orb-center);
+		font-size: calc(var(--hero-orb-size) / 4);
+		height: 4em;
+		left: var(--hero-orb-center);
 		padding: 0;
 		position: absolute;
 		top: var(--hero-orb-top);
 		translate: -50% 0;
-		width: 4rem;
+		width: 4em;
 		z-index: 2;
 	}
 
@@ -448,8 +443,8 @@ const clouds: {
 		);
 		border-radius: 50%;
 		box-shadow:
-			inset 0 0 0 0.125rem var(--hero-orb-rim),
-			inset -1.1rem 0.5rem 0 0 var(--hero-orb-crescent);
+			inset 0 0 0 0.125em var(--hero-orb-rim),
+			inset -1.1em 0.5em 0 0 var(--hero-orb-crescent);
 		rotate: -20deg;
 		transition: scale var(--transitionNormal) var(--transitionEaseOut);
 	}
@@ -464,8 +459,8 @@ const clouds: {
 	.hero-sky-orb::after {
 		animation: hero-sky-orb-glow 7s ease-in-out infinite alternate;
 		clip-path: inset(
-			calc(var(--hero-orb-glow-offset) - 4rem) -4rem
-				calc(-4rem - var(--hero-orb-glow-offset))
+			calc(var(--hero-orb-glow-offset) - 4em) -4em
+				calc(-4em - var(--hero-orb-glow-offset))
 		);
 		content: "";
 		inset: 0;
@@ -477,13 +472,13 @@ const clouds: {
 	.hero-sky-orb::before {
 		animation-direction: alternate-reverse;
 		filter: drop-shadow(
-			0 var(--hero-orb-glow-offset) 0.75rem var(--hero-orb-glow)
+			0 var(--hero-orb-glow-offset) 0.75em var(--hero-orb-glow)
 		);
 	}
 
 	.hero-sky-orb::after {
 		filter: drop-shadow(
-			0 var(--hero-orb-glow-offset) 1.5rem var(--hero-orb-glow)
+			0 var(--hero-orb-glow-offset) 1.5em var(--hero-orb-glow)
 		);
 		opacity: 0;
 	}
@@ -559,10 +554,12 @@ const clouds: {
 	}
 
 	.theme-pin-light {
+		--themeDark: 0;
 		--themeDarkness: 0%;
 	}
 
 	.theme-pin-dark {
+		--themeDark: 1;
 		--themeDarkness: 100%;
 	}
 </style>
