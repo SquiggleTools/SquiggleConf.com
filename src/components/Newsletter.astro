@@ -56,7 +56,9 @@ const { class: className } = Astro.props;
 		</form>
 
 		<noscript>
-			<p class="unhappy">Signing up requires JavaScript.</p>
+			<p class="unhappy" id="newsletter-noscript">
+				Signing up requires JavaScript.
+			</p>
 		</noscript>
 		<p id="newsletter-message" role="status"></p>
 		<p class="newsletter-outcome" id="newsletter-subscribed">
@@ -88,19 +90,26 @@ const { class: className } = Astro.props;
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
 
 	interface TurnstileOptions {
+		"after-interactive-callback": () => void;
 		appearance: "interaction-only";
+		"before-interactive-callback": () => void;
 		callback: (token: string) => void;
-		"error-callback": () => void;
+		"error-callback": () => boolean;
 		"response-field": false;
+		retry: "never";
 		sitekey: string;
 		"timeout-callback": () => void;
+		"unsupported-callback": () => void;
 	}
 
 	declare global {
 		interface Window {
 			turnstile?: {
 				remove: (widgetId: string) => void;
-				render: (container: HTMLElement, options: TurnstileOptions) => string;
+				render: (
+					container: HTMLElement,
+					options: TurnstileOptions,
+				) => string | undefined;
 			};
 		}
 	}
@@ -151,16 +160,32 @@ const { class: className } = Astro.props;
 			return await new Promise<string>((resolve, reject) => {
 				const fail = () => {
 					reject(new Error("Turnstile verification failed"));
+					return true;
 				};
 
 				widgetId = turnstile.render(turnstileContainer, {
+					"after-interactive-callback": () => {
+						setMessage("", false);
+					},
 					appearance: "interaction-only",
+					"before-interactive-callback": () => {
+						setMessage(
+							"Please complete the verification check above the Subscribe button.",
+							false,
+						);
+					},
 					callback: resolve,
 					"error-callback": fail,
 					"response-field": false,
+					retry: "never",
 					sitekey,
 					"timeout-callback": fail,
+					"unsupported-callback": fail,
 				});
+
+				if (!widgetId) {
+					fail();
+				}
 			});
 		} finally {
 			if (widgetId) {
@@ -226,7 +251,7 @@ const { class: className } = Astro.props;
 			} else if (response.status === 400) {
 				setMessage("Please enter a valid email address.", true, true);
 			} else if (response.status === 403) {
-				setMessage(await response.text(), true);
+				setMessage("We couldn't verify your signup. Please try again.", true);
 			} else {
 				setMessage(
 					"We couldn't sign you up right now. Please try again later.",
@@ -309,6 +334,7 @@ const { class: className } = Astro.props;
 	}
 
 	#newsletter-message,
+	#newsletter-noscript,
 	.newsletter-outcome {
 		margin: auto;
 		max-width: min(16rem, 80vw);
@@ -323,7 +349,7 @@ const { class: className } = Astro.props;
 		display: block;
 	}
 
-	:is(#newsletter-message, .newsletter-outcome).unhappy {
+	:is(#newsletter-message, #newsletter-noscript, .newsletter-outcome).unhappy {
 		color: color-mix(
 			in srgb,
 			var(--colorUnhappyStrong),
