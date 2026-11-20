@@ -57,6 +57,11 @@ export default defineConfig({
 				context: "server",
 				optional: true,
 			}),
+			BREVO_DOI_TEMPLATE_ID: envField.number({
+				access: "public",
+				context: "server",
+				default: 1,
+			}),
 			BREVO_LIST_ID: envField.number({
 				access: "public",
 				context: "server",

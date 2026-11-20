@@ -1,6 +1,10 @@
 import type { APIRoute } from "astro";
 
-import { BREVO_API_KEY, BREVO_LIST_ID } from "astro:env/server";
+import {
+	BREVO_API_KEY,
+	BREVO_DOI_TEMPLATE_ID,
+	BREVO_LIST_ID,
+} from "astro:env/server";
 import { z } from "zod";
 
 export const prerender = false;
@@ -10,7 +14,7 @@ const bodySchema = z.object({
 	website: z.string().optional(),
 });
 
-type Outcome = "error" | "invalid" | "subscribed" | "unavailable";
+type Outcome = "error" | "invalid" | "pending" | "unavailable";
 
 const responses: Record<Outcome, { message: string; status: number }> = {
 	error: {
@@ -18,7 +22,10 @@ const responses: Record<Outcome, { message: string; status: number }> = {
 		status: 502,
 	},
 	invalid: { message: "Please enter a valid email address.", status: 400 },
-	subscribed: { message: "Thanks for signing up!", status: 200 },
+	pending: {
+		message: "Almost there! Check your email to confirm your subscription.",
+		status: 200,
+	},
 	unavailable: { message: "Newsletter signup is unavailable", status: 503 },
 };
 
@@ -39,15 +46,6 @@ export const POST: APIRoute = async ({ request }) => {
 	return new Response(message, { status });
 };
 
-function isBrevoDuplicateIdentifier(json: unknown) {
-	return (
-		typeof json === "object" &&
-		!!json &&
-		"code" in json &&
-		json.code === "duplicate_parameter"
-	);
-}
-
 async function subscribe(request: Request): Promise<Outcome> {
 	if (!BREVO_API_KEY) {
 		return "unavailable";
@@ -61,32 +59,32 @@ async function subscribe(request: Request): Promise<Outcome> {
 	}
 
 	if (body.data.website) {
-		return "subscribed";
+		return "pending";
 	}
 
 	try {
-		const response = await fetch("https://api.brevo.com/v3/contacts", {
-			body: JSON.stringify({
-				email: body.data.email,
-				listIds: [BREVO_LIST_ID],
-				updateEnabled: true,
-			}),
-			headers: {
-				"api-key": BREVO_API_KEY,
-				"Content-Type": "application/json",
+		const response = await fetch(
+			"https://api.brevo.com/v3/contacts/doubleOptinConfirmation",
+			{
+				body: JSON.stringify({
+					email: body.data.email,
+					includeListIds: [BREVO_LIST_ID],
+					redirectionUrl: new URL("/#newsletter-confirmed", request.url).href,
+					templateId: BREVO_DOI_TEMPLATE_ID,
+				}),
+				headers: {
+					"api-key": BREVO_API_KEY,
+					"Content-Type": "application/json",
+				},
+				method: "POST",
 			},
-			method: "POST",
-		});
+		);
 
 		if (response.ok) {
-			return "subscribed";
+			return "pending";
 		}
 
 		const json: unknown = await response.json().catch(() => undefined);
-		if (isBrevoDuplicateIdentifier(json)) {
-			return "subscribed";
-		}
-
 		console.error("Brevo signup failed", response.status, json);
 	} catch (error) {
 		console.error(error);

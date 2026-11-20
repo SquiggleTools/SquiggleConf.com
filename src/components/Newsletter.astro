@@ -53,8 +53,11 @@ const { class: className } = Astro.props;
 		</form>
 
 		<p id="newsletter-message" role="status"></p>
-		<p class="newsletter-outcome" id="newsletter-subscribed">
-			Thanks for signing up!
+		<p class="newsletter-outcome" id="newsletter-pending">
+			Almost there! Check your email to confirm your subscription.
+		</p>
+		<p class="newsletter-outcome" id="newsletter-confirmed">
+			You're subscribed. Thanks for confirming!
 		</p>
 		<p class="newsletter-outcome unhappy" id="newsletter-invalid">
 			Please enter a valid email address.
@@ -114,7 +117,10 @@ const { class: className } = Astro.props;
 			});
 
 			if (response.ok) {
-				setMessage("Thanks for signing up!", false);
+				setMessage(
+					"Almost there! Check your email to confirm your subscription.",
+					false,
+				);
 				form.reset();
 			} else if (response.status === 400) {
 				setMessage("Please enter a valid email address.", true, true);
