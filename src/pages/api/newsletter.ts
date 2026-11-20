@@ -16,7 +16,16 @@ const bodySchema = z.object({
 	website: z.string().optional(),
 });
 
-const turnstileSchema = z.object({ success: z.boolean() });
+const turnstileSchema = z.object({
+	"error-codes": z.array(z.string()).optional(),
+	success: z.boolean(),
+});
+
+const turnstileUserErrors = new Set([
+	"invalid-input-response",
+	"missing-input-response",
+	"timeout-or-duplicate",
+]);
 
 type Outcome =
 	| "error"
@@ -76,6 +85,15 @@ export const POST: APIRoute = async ({ request }) => {
 	const { message, status } = responses[outcome];
 	return new Response(message, { status });
 };
+
+function isBrevoDuplicateIdentifier(json: unknown) {
+	return (
+		typeof json === "object" &&
+		!!json &&
+		"code" in json &&
+		json.code === "duplicate_parameter"
+	);
+}
 
 function looksSuspicious(email: string) {
 	const at = email.lastIndexOf("@");
@@ -142,6 +160,10 @@ async function subscribe(request: Request): Promise<Outcome> {
 		}
 
 		const json: unknown = await response.json().catch(() => undefined);
+		if (isBrevoDuplicateIdentifier(json)) {
+			return pending ? "pending" : "subscribed";
+		}
+
 		console.error("Brevo signup failed", response.status, json);
 	} catch (error) {
 		console.error(error);
@@ -168,9 +190,21 @@ async function verifyTurnstile(token: string | undefined, request: Request) {
 		},
 	);
 
-	const result = turnstileSchema.safeParse(
-		await response.json().catch(() => undefined),
-	);
+	const json: unknown = await response.json().catch(() => undefined);
+	const result = turnstileSchema.safeParse(json);
+	if (!result.success) {
+		throw new Error(
+			`Turnstile verification failed: ${String(response.status)}`,
+			{
+				cause: json,
+			},
+		);
+	}
 
-	return result.success && result.data.success;
+	const errorCodes = result.data["error-codes"] ?? [];
+	if (errorCodes.some((code) => !turnstileUserErrors.has(code))) {
+		throw new Error(`Turnstile verification errored: ${errorCodes.join(", ")}`);
+	}
+
+	return result.data.success;
 }
