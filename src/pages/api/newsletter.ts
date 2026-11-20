@@ -206,5 +206,9 @@ async function verifyTurnstile(token: string | undefined, request: Request) {
 		throw new Error(`Turnstile verification errored: ${errorCodes.join(", ")}`);
 	}
 
+	if (!result.data.success) {
+		console.warn("Turnstile rejected a signup", errorCodes);
+	}
+
 	return result.data.success;
 }
