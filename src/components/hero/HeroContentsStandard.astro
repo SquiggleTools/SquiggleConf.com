@@ -3,16 +3,24 @@ import Heading from "~/components/Heading.astro";
 import TextSquiggly from "~/components/TextSquiggly.astro";
 
 export interface Props {
+	eyebrow?: string;
+	eyebrowHref?: string;
 	heading: string;
 	squiggly: "medium" | "none" | "wide";
 }
 
-const { heading, squiggly } = Astro.props;
+const { eyebrow, eyebrowHref, heading, squiggly } = Astro.props;
 ---
 
 <div
 	class:list={["hero-contents-standard", `hero-contents-standard-${squiggly}`]}
 >
+	{eyebrow && (
+		<p class="hero-contents-standard-eyebrow">
+			{eyebrowHref ? <a href={eyebrowHref}>{eyebrow}</a> : eyebrow}
+		</p>
+	)}
+
 	<Heading level="h1">
 		{squiggly === "none" ? (
 			heading
@@ -30,19 +38,46 @@ const { heading, squiggly } = Astro.props;
 
 <style>
 	.hero-contents-standard {
-		align-items: safe center;
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
-		text-align: center;
+		padding-top: 1.5rem;
+		text-align: start;
+	}
+
+	.hero-contents-standard-eyebrow {
+		color: color-mix(
+			in srgb,
+			var(--colorBlue3),
+			var(--colorBlue2) var(--themeDarknessText)
+		);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeSmaller);
+		font-weight: var(--fontWeightSemibold);
+		letter-spacing: 0.12em;
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+	}
+
+	.hero-contents-standard-eyebrow a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.hero-contents-standard-eyebrow a::before {
+		content: "← ";
+	}
+
+	.hero-contents-standard-eyebrow a:is(:hover, :focus-visible) {
+		text-decoration: underline;
 	}
 
 	h1 {
 		font-family: var(--fontFamilyHeading);
-		font-size: clamp(2.25rem, 5vw, 3.25rem);
+		font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+		font-style: italic;
 		font-weight: var(--fontWeightBold);
-		letter-spacing: -0.01em;
-		line-height: 1.1;
+		letter-spacing: -0.02em;
+		line-height: 1;
 		max-width: 100%;
 		text-wrap: balance;
 	}
@@ -56,15 +91,16 @@ const { heading, squiggly } = Astro.props;
 	}
 
 	.hero-contents-standard-wide h1 :global(.text-squiggly .squiggly) {
-		bottom: -0.2rem;
+		bottom: -0.45rem;
 	}
 
 	.hero-contents-standard-body {
-		color: var(--colorMuted);
-		font-size: var(--fontSizeSmall);
+		color: var(--colorForegroundEmphasized);
+		font-size: var(--fontSizeMedium);
 		font-weight: var(--fontWeightLight);
 		line-height: 1.4;
-		max-width: 40rem;
+		margin-top: 1.25rem;
+		max-width: 38rem;
 		text-wrap: balance;
 	}
 </style>

@@ -12,20 +12,29 @@ import "./prose.css";
 
 interface Props {
 	article: Article;
+	eyebrow?: string;
 	introWidth?: "normal" | "thin";
 	squiggly?: HeroContentsStandardProps["squiggly"];
 }
 
+const inArticles = Astro.url.pathname.startsWith("/articles/");
+
 const {
 	article: { description, title },
+	eyebrow = inArticles ? "Articles" : undefined,
 	introWidth = "thin",
 	squiggly = "none",
 } = Astro.props;
 ---
 
 <PageLayout description={description} title={title}>
-	<Hero slot="hero">
-		<HeroContentsStandard heading={title} squiggly={squiggly}>
+	<Hero slot="hero" width={introWidth}>
+		<HeroContentsStandard
+			eyebrow={eyebrow}
+			eyebrowHref={inArticles ? "/articles" : undefined}
+			heading={title}
+			squiggly={squiggly}
+		>
 			{description}
 		</HeroContentsStandard>
 	</Hero>

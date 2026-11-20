@@ -7,7 +7,7 @@ import HeroSky from "./HeroSky.astro";
 interface Props {
 	class?: string;
 	tall?: boolean;
-	width?: "normal" | "wide";
+	width?: "normal" | "thin" | "wide";
 }
 
 const { class: className, tall, width, ...props } = Astro.props;
