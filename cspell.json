@@ -9,6 +9,7 @@
 		"src/assets",
 		"src/data"
 	],
+	"ignoreRegExpList": ["0x4AAAAAA[\\w-]+"],
 	"words": [
 		"afterparty",
 		"assetsignore",
