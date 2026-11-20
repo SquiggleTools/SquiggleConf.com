@@ -8,6 +8,10 @@ import Registration from "~/components/Registration.astro";
 import { articles } from "~/data/articles";
 import { links } from "~/data/links";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+const aquariumParking = "https://www.neaq.org/visit/directions-and-parking";
+const loganTransit =
+	"https://www.massport.com/logan-airport/getting-to-logan/public-transportation";
 ---
 
 <ArticleLayout article={articles.travel}>
@@ -58,13 +62,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 		</p>
 		<p>
 			To reach downtown, you can take a ~15 minute Lyft/Uber or use
-			<a
-				href="https://www.massport.com/logan-airport/getting-to-logan/public-transportation"
-				target="_blank"
-			>
-				Boston Logan Public Transportation
-			</a>
-			.
+			<a href={loganTransit}>Boston Logan Public Transportation</a>.
 		</p>
 	</CommonContent>
 
@@ -102,21 +100,11 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 		</p>
 		<p>
 			Additional parking garages are within walking distance. For locations and
-			pricing details on aquarium parking, visit the{" "}
-			<a
-				href="https://www.neaq.org/visit/directions-and-parking"
-				target="_blank"
-			>
-				New England Aquarium’s parking information page
-			</a>
-			.
+			pricing details on aquarium parking, visit the
+			<a href={aquariumParking}>New England Aquarium’s parking page</a>.
 		</p>
 		<p>
-			For general Boston parking, see{" "}
-			<a href={links.parking} target="_blank">
-				SpotHero
-			</a>
-			.
+			For general Boston parking, see <a href={links.parking}>SpotHero</a>.
 		</p>
 	</CommonContent>
 
@@ -167,10 +155,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 		<BodyText>
 			For more recommendations, visit
-			<a href="https://meetboston.com" target="_blank">
-				Boston’s official visitor guide
-			</a>
-			.
+			<a href="https://meetboston.com">Boston’s official visitor guide</a>.
 		</BodyText>
 	</ImagesAndTextTwoColumn>
 	<Registration />

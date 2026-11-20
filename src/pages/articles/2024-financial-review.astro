@@ -3,6 +3,8 @@ import CommonContent from "~/components/CommonContent.astro";
 import ContentArea from "~/components/ContentArea.astro";
 import { articles } from "~/data/articles";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+const volunteering = "https://volunteer.squiggleconf.com";
 ---
 
 <ArticleLayout article={articles["2024-financial-review"]}>
@@ -128,10 +130,7 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 		<aside>
 			Want to help with SquiggleConf? Yes please! Apply on
-			<a href="https://volunteer.squiggleconf.com" target="_blank">
-				SquiggleConf Volunteering
-			</a>
-			.
+			<a href={volunteering}>SquiggleConf Volunteering</a>.
 		</aside>
 	</CommonContent>
 </ArticleLayout>
