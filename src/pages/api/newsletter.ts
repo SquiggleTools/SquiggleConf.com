@@ -120,6 +120,7 @@ async function sendToBrevo(path: string, body: object) {
 
 async function subscribe(request: Request): Promise<Outcome> {
 	if (!BREVO_API_KEY || !TURNSTILE_SECRET_KEY) {
+		console.error("Newsletter signup is missing its Brevo or Turnstile secret");
 		return "unavailable";
 	}
 
