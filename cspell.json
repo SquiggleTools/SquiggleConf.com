@@ -12,6 +12,7 @@
 	"words": [
 		"afterparty",
 		"assetsignore",
+		"bellsouth",
 		"bigrav",
 		"brevo",
 		"checkin",
@@ -59,14 +60,18 @@
 		"oklab",
 		"oklch",
 		"openjs",
+		"optin",
 		"Placeholderface",
 		"plone",
 		"Primeagen",
+		"remoteip",
 		"Rolldown",
 		"rushstack",
+		"sbcglobal",
 		"schott",
 		"shantell",
 		"Simons",
+		"sitekey",
 		"squiggleconf",
 		"theprimeagen",
 		"tolinski",
@@ -77,6 +82,7 @@
 		"wght",
 		"wordmark",
 		"workerd",
-		"worktrees"
+		"worktrees",
+		"ymail"
 	]
 }

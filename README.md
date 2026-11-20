@@ -35,7 +35,7 @@ Day-to-day development stays the same: `pnpm dev`.
 1. Connect this GitHub repository to a Cloudflare Worker in the Cloudflare dashboard.
 2. Use the `main` branch as production.
 3. Let Cloudflare create the preview deployment flow for other branches.
-4. Set `BREVO_API_KEY` as a secret in the Cloudflare dashboard.
+4. Set `BREVO_API_KEY` and `TURNSTILE_SECRET_KEY` as secrets in the Cloudflare dashboard.
 
 ### Immediate Manual Deploy
 

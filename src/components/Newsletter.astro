@@ -1,4 +1,6 @@
 ---
+import { TURNSTILE_SITE_KEY } from "astro:env/client";
+
 import OceanFloorLeft from "~/assets/design/ocean-floor-left.svg";
 import OceanFloorRight from "~/assets/design/ocean-floor-right.svg";
 
@@ -47,12 +49,20 @@ const { class: className } = Astro.props;
 					<input autocomplete="off" name="website" tabindex="-1" type="text" />
 				</label>
 			</div>
+			<div
+				class="cf-turnstile"
+				data-appearance="interaction-only"
+				data-sitekey={TURNSTILE_SITE_KEY}
+			></div>
 			<Button as="button" size="large" type="submit" variant="light">
 				Subscribe
 			</Button>
 		</form>
 
 		<p id="newsletter-message" role="status"></p>
+		<p class="newsletter-outcome" id="newsletter-subscribed">
+			Thanks for signing up!
+		</p>
 		<p class="newsletter-outcome" id="newsletter-pending">
 			Almost there! Check your email to confirm your subscription.
 		</p>
@@ -61,6 +71,9 @@ const { class: className } = Astro.props;
 		</p>
 		<p class="newsletter-outcome unhappy" id="newsletter-invalid">
 			Please enter a valid email address.
+		</p>
+		<p class="newsletter-outcome unhappy" id="newsletter-unverified">
+			We couldn't verify your signup. Please try again.
 		</p>
 		<p class="newsletter-outcome unhappy" id="newsletter-error">
 			We couldn't sign you up right now. Please try again later.
@@ -71,8 +84,21 @@ const { class: className } = Astro.props;
 	</ContentArea>
 </div>
 
+<script
+	async
+	defer
+	is:inline
+	src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+></script>
+
 <script>
 	import { pauseOffscreen } from "~/utils/pauseOffscreen";
+
+	declare global {
+		interface Window {
+			turnstile?: { reset: () => void };
+		}
+	}
 
 	pauseOffscreen();
 
@@ -117,13 +143,12 @@ const { class: className } = Astro.props;
 			});
 
 			if (response.ok) {
-				setMessage(
-					"Almost there! Check your email to confirm your subscription.",
-					false,
-				);
+				setMessage(await response.text(), false);
 				form.reset();
 			} else if (response.status === 400) {
 				setMessage("Please enter a valid email address.", true, true);
+			} else if (response.status === 403) {
+				setMessage(await response.text(), true);
 			} else {
 				setMessage(
 					"We couldn't sign you up right now. Please try again later.",
@@ -136,6 +161,7 @@ const { class: className } = Astro.props;
 				true,
 			);
 		} finally {
+			window.turnstile?.reset();
 			submitting = false;
 			submit?.removeAttribute("aria-disabled");
 		}

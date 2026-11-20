@@ -4,17 +4,27 @@ import {
 	BREVO_API_KEY,
 	BREVO_DOI_TEMPLATE_ID,
 	BREVO_LIST_ID,
+	TURNSTILE_SECRET_KEY,
 } from "astro:env/server";
 import { z } from "zod";
 
 export const prerender = false;
 
 const bodySchema = z.object({
+	"cf-turnstile-response": z.string().optional(),
 	email: z.email(),
 	website: z.string().optional(),
 });
 
-type Outcome = "error" | "invalid" | "pending" | "unavailable";
+const turnstileSchema = z.object({ success: z.boolean() });
+
+type Outcome =
+	| "error"
+	| "invalid"
+	| "pending"
+	| "subscribed"
+	| "unavailable"
+	| "unverified";
 
 const responses: Record<Outcome, { message: string; status: number }> = {
 	error: {
@@ -26,8 +36,29 @@ const responses: Record<Outcome, { message: string; status: number }> = {
 		message: "Almost there! Check your email to confirm your subscription.",
 		status: 200,
 	},
+	subscribed: { message: "Thanks for signing up!", status: 200 },
 	unavailable: { message: "Newsletter signup is unavailable", status: 503 },
+	unverified: {
+		message: "We couldn't verify your signup. Please try again.",
+		status: 403,
+	},
 };
+
+const suspiciousDomains = new Set([
+	"aol.com",
+	"att.net",
+	"bellsouth.net",
+	"charter.net",
+	"comcast.net",
+	"cox.net",
+	"hotmail.com",
+	"live.com",
+	"msn.com",
+	"sbcglobal.net",
+	"verizon.net",
+	"yahoo.com",
+	"ymail.com",
+]);
 
 export const POST: APIRoute = async ({ request }) => {
 	const outcome = await subscribe(request);
@@ -46,8 +77,31 @@ export const POST: APIRoute = async ({ request }) => {
 	return new Response(message, { status });
 };
 
+function looksSuspicious(email: string) {
+	const at = email.lastIndexOf("@");
+	const local = email.slice(0, at).toLowerCase();
+	const domain = email.slice(at + 1).toLowerCase();
+
+	return (
+		suspiciousDomains.has(domain) ||
+		(domain === "gmail.com" && local.split(".").length > 3) ||
+		/^[a-z]{16,}\d*$/.test(local)
+	);
+}
+
+async function sendToBrevo(path: string, body: object) {
+	return await fetch(`https://api.brevo.com/v3/contacts${path}`, {
+		body: JSON.stringify(body),
+		headers: {
+			"api-key": BREVO_API_KEY ?? "",
+			"Content-Type": "application/json",
+		},
+		method: "POST",
+	});
+}
+
 async function subscribe(request: Request): Promise<Outcome> {
-	if (!BREVO_API_KEY) {
+	if (!BREVO_API_KEY || !TURNSTILE_SECRET_KEY) {
 		return "unavailable";
 	}
 
@@ -59,29 +113,32 @@ async function subscribe(request: Request): Promise<Outcome> {
 	}
 
 	if (body.data.website) {
-		return "pending";
+		return "subscribed";
 	}
 
+	const { email } = body.data;
+
 	try {
-		const response = await fetch(
-			"https://api.brevo.com/v3/contacts/doubleOptinConfirmation",
-			{
-				body: JSON.stringify({
-					email: body.data.email,
+		if (!(await verifyTurnstile(body.data["cf-turnstile-response"], request))) {
+			return "unverified";
+		}
+
+		const pending = looksSuspicious(email);
+		const response = pending
+			? await sendToBrevo("/doubleOptinConfirmation", {
+					email,
 					includeListIds: [BREVO_LIST_ID],
 					redirectionUrl: new URL("/#newsletter-confirmed", request.url).href,
 					templateId: BREVO_DOI_TEMPLATE_ID,
-				}),
-				headers: {
-					"api-key": BREVO_API_KEY,
-					"Content-Type": "application/json",
-				},
-				method: "POST",
-			},
-		);
+				})
+			: await sendToBrevo("", {
+					email,
+					listIds: [BREVO_LIST_ID],
+					updateEnabled: true,
+				});
 
 		if (response.ok) {
-			return "pending";
+			return pending ? "pending" : "subscribed";
 		}
 
 		const json: unknown = await response.json().catch(() => undefined);
@@ -91,4 +148,29 @@ async function subscribe(request: Request): Promise<Outcome> {
 	}
 
 	return "error";
+}
+
+async function verifyTurnstile(token: string | undefined, request: Request) {
+	if (!token) {
+		return false;
+	}
+
+	const response = await fetch(
+		"https://challenges.cloudflare.com/turnstile/v0/siteverify",
+		{
+			body: JSON.stringify({
+				remoteip: request.headers.get("cf-connecting-ip") ?? undefined,
+				response: token,
+				secret: TURNSTILE_SECRET_KEY,
+			}),
+			headers: { "Content-Type": "application/json" },
+			method: "POST",
+		},
+	);
+
+	const result = turnstileSchema.safeParse(
+		await response.json().catch(() => undefined),
+	);
+
+	return result.success && result.data.success;
 }
