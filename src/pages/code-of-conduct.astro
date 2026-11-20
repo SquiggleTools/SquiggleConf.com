@@ -1,5 +1,6 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
+import Heading from "~/components/Heading.astro";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 const ploneCodeOfConduct =
@@ -13,8 +14,8 @@ const ploneCodeOfConduct =
 		title: "Code of Conduct",
 	}}
 >
-	<ContentArea class="prose" width="thin">
-		<p>
+	<ContentArea class="code-of-conduct" width="thin">
+		<p class="code-of-conduct-lead">
 			SquiggleConf is dedicated to providing a respectful, harassment-free
 			community for everyone. We do not tolerate harassment or bullying of any
 			community member in any form. This does not only extend to members of the
@@ -23,50 +24,144 @@ const ploneCodeOfConduct =
 			or interactions.
 		</p>
 
-		<p>
-			Harassment includes offensive verbal/electronic comments related to
-			personal characteristics or choices, sexual images or comments in public
-			or online spaces, deliberate intimidation, bullying, stalking, following,
-			harassing photography or recording, sustained disruption of talks, Discord
-			messages, electronic meetings, physical meetings or other events,
-			inappropriate physical contact, or unwelcome sexual attention.
-			Participants asked to stop any harassing or bullying behavior are expected
-			to comply immediately.
-		</p>
+		<section aria-labelledby="harassment" class="code-of-conduct-card">
+			<Heading id="harassment" level="h2" link>
+				What counts as harassment
+			</Heading>
+			<p>
+				Harassment includes offensive verbal/electronic comments related to
+				personal characteristics or choices, sexual images or comments in public
+				or online spaces, deliberate intimidation, bullying, stalking,
+				following, harassing photography or recording, sustained disruption of
+				talks, Discord messages, electronic meetings, physical meetings or other
+				events, inappropriate physical contact, or unwelcome sexual attention.
+				Participants asked to stop any harassing or bullying behavior are
+				expected to comply immediately.
+			</p>
+		</section>
 
-		<p>
-			If a participant engages in harassing behavior, representatives of the
-			community may take reasonable action they deem appropriate, including
-			warning the offender, expulsion from any SquiggleConf event, or expulsion
-			from mailing lists, Discord groups, discussion boards, and other
-			electronic communications channels to resolve the issue. This may include
-			expulsion from SquiggleConf membership.
-		</p>
+		<section aria-labelledby="enforcement" class="code-of-conduct-card">
+			<Heading id="enforcement" level="h2" link>
+				How we respond
+			</Heading>
+			<p>
+				If a participant engages in harassing behavior, representatives of the
+				community may take reasonable action they deem appropriate, including
+				warning the offender, expulsion from any SquiggleConf event, or
+				expulsion from mailing lists, Discord groups, discussion boards, and
+				other electronic communications channels to resolve the issue. This may
+				include expulsion from SquiggleConf membership.
+			</p>
+		</section>
 
-		<p>
-			If you are being harassed, notice that someone else is being harassed, or
-			have any other concerns, please act to intercede or ask for help from any
-			member of SquiggleConf, Discord group admins, website admins, or
-			organizers/representatives of any physical events put on under the
-			auspices of SquiggleConf.
-		</p>
+		<section
+			aria-labelledby="getting-help"
+			class="code-of-conduct-card code-of-conduct-help"
+		>
+			<Heading id="getting-help" level="h2" link>
+				Getting help
+			</Heading>
+			<p>
+				If you are being harassed, notice that someone else is being harassed,
+				or have any other concerns, please act to intercede or ask for help from
+				any member of SquiggleConf, Discord group admins, website admins, or
+				organizers/representatives of any physical events put on under the
+				auspices of SquiggleConf.
+			</p>
+		</section>
 
-		<hr />
-
-		<p>
-			This Code of Conduct is adapted from the
-			<a href={ploneCodeOfConduct}>Plone Foundation's Code of Conduct</a>.
-		</p>
-
-		<p>
-			The content of this Code of Conduct is licensed under a Creative Commons
-			Attribution-ShareAlike 4.0 International license.
-		</p>
+		<footer class="code-of-conduct-credits">
+			<p>
+				This Code of Conduct is adapted from the
+				<a href={ploneCodeOfConduct}>Plone Foundation's Code of Conduct</a>.
+			</p>
+			<p>
+				The content of this Code of Conduct is licensed under a Creative Commons
+				Attribution-ShareAlike 4.0 International license.
+			</p>
+		</footer>
 	</ContentArea>
 </ArticleLayout>
 
 <style>
-	.prose {
+	.code-of-conduct {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 		padding-block: 5rem 2rem;
+	}
+
+	.code-of-conduct-lead {
+		color: var(--colorHeading);
+		font-size: var(--fontSizeMedium);
+		font-weight: var(--fontWeightLight);
+		line-height: 1.45;
+		margin-bottom: 1.5rem;
+		text-wrap: pretty;
+	}
+
+	.code-of-conduct-card {
+		backdrop-filter: var(--backdropFrosted);
+		background: color-mix(
+			in srgb,
+			rgb(from var(--colorWhite) r g b / 45%),
+			rgb(from var(--colorBlue5) r g b / 45%) var(--themeDarkness)
+		);
+		border: 1px solid
+			color-mix(
+				in srgb,
+				rgb(from var(--colorWhite) r g b / 70%),
+				rgb(from var(--colorBlue1) r g b / 14%) var(--themeDarkness)
+			);
+		border-radius: var(--radiusLarge);
+		box-shadow: 0 0.5rem 2rem
+			color-mix(
+				in srgb,
+				rgb(from var(--colorBlue4) r g b / 8%),
+				rgb(from var(--colorBlue5) r g b / 35%) var(--themeDarkness)
+			);
+		padding: clamp(1.25rem, 3vw, 2rem);
+	}
+
+	.code-of-conduct-card :global(h2) {
+		color: var(--colorHeading);
+		font-family: var(--fontFamilyHeading);
+		font-size: var(--fontSizeMedium);
+		font-weight: var(--fontWeightBold);
+		margin-bottom: 0.5rem;
+	}
+
+	.code-of-conduct-card :global(h2 a) {
+		color: inherit;
+	}
+
+	.code-of-conduct-card p {
+		font-size: var(--fontSizeSmall);
+		font-weight: var(--fontWeightLight);
+		line-height: var(--lineHeightBody);
+	}
+
+	.code-of-conduct-help {
+		border-color: var(--colorAccentMedium);
+		box-shadow:
+			inset 0.25rem 0 0 var(--colorAccentMedium),
+			0 0.5rem 2rem
+				color-mix(
+					in srgb,
+					rgb(from var(--colorBlue3) r g b / 15%),
+					rgb(from var(--colorBlue2) r g b / 15%) var(--themeDarkness)
+				);
+	}
+
+	.code-of-conduct-credits {
+		color: var(--colorMuted);
+		display: flex;
+		flex-direction: column;
+		font-size: var(--fontSizeSmaller);
+		font-weight: var(--fontWeightLight);
+		gap: 0.25rem;
+		margin-top: 1.5rem;
+		text-align: center;
+		text-wrap: balance;
 	}
 </style>

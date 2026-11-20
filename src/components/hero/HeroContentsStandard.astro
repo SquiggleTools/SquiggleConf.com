@@ -33,14 +33,18 @@ const { heading, squiggly } = Astro.props;
 		align-items: safe center;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.75rem;
 		text-align: center;
 	}
 
 	h1 {
-		font-size: clamp(2rem, 4vw, 2.6rem);
-		font-weight: var(--fontWeightLight);
+		font-family: var(--fontFamilyHeading);
+		font-size: clamp(2.25rem, 5vw, 3.25rem);
+		font-weight: var(--fontWeightBold);
+		letter-spacing: -0.01em;
+		line-height: 1.1;
 		max-width: 100%;
+		text-wrap: balance;
 	}
 
 	.hero-contents-standard-medium h1 :global(.text-squiggly .squiggly) {
@@ -56,9 +60,11 @@ const { heading, squiggly } = Astro.props;
 	}
 
 	.hero-contents-standard-body {
+		color: var(--colorMuted);
 		font-size: var(--fontSizeSmall);
-		font-weight: var(--fontWeightExtraLight);
-		max-width: 52rem;
+		font-weight: var(--fontWeightLight);
+		line-height: 1.4;
+		max-width: 40rem;
 		text-wrap: balance;
 	}
 </style>
