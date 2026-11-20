@@ -16,6 +16,8 @@ const bodySchema = z.object({
 	website: z.string().optional(),
 });
 
+const brevoContactSchema = z.object({ emailBlacklisted: z.boolean() });
+
 const turnstileSchema = z.object({
 	"error-codes": z.array(z.string()).optional(),
 	success: z.boolean(),
@@ -86,6 +88,26 @@ export const POST: APIRoute = async ({ request }) => {
 	return new Response(message, { status });
 };
 
+async function isBlacklisted(email: string) {
+	const response = await fetch(
+		`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
+		{ headers: { "api-key": BREVO_API_KEY ?? "" } },
+	);
+	if (response.status === 404) {
+		return false;
+	}
+
+	const json: unknown = await response.json().catch(() => undefined);
+	const contact = brevoContactSchema.safeParse(json);
+	if (!response.ok || !contact.success) {
+		throw new Error(`Brevo contact lookup failed: ${String(response.status)}`, {
+			cause: json,
+		});
+	}
+
+	return contact.data.emailBlacklisted;
+}
+
 function isBrevoDuplicateIdentifier(json: unknown) {
 	return (
 		typeof json === "object" &&
@@ -142,7 +164,7 @@ async function subscribe(request: Request): Promise<Outcome> {
 			return "unverified";
 		}
 
-		const pending = looksSuspicious(email);
+		const pending = looksSuspicious(email) || (await isBlacklisted(email));
 		const response = pending
 			? await sendToBrevo("/doubleOptinConfirmation", {
 					email,
