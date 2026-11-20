@@ -156,7 +156,7 @@ async function subscribe(request: Request): Promise<Outcome> {
 				});
 
 		if (response.ok) {
-			return pending ? "pending" : "subscribed";
+			return pending && response.status !== 204 ? "pending" : "subscribed";
 		}
 
 		const json: unknown = await response.json().catch(() => undefined);
