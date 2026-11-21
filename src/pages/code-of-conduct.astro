@@ -1,6 +1,9 @@
 ---
 import ContentArea from "~/components/ContentArea.astro";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+const ploneCodeOfConduct =
+	"https://plone.org/foundation/materials/foundation-resolutions/code-of-conduct";
 ---
 
 <ArticleLayout
@@ -51,15 +54,8 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 		<hr />
 
 		<p>
-			This Code of Conduct is adapted from
-			<a
-				href="https://plone.org/foundation/materials/foundation-resolutions/code-of-conduct"
-				rel="noreferrer"
-				target="_blank"
-			>
-				plone.org/foundation/materials/foundation-resolutions/code-of-conduct
-			</a>
-			.
+			This Code of Conduct is adapted from the
+			<a href={ploneCodeOfConduct}>Plone Foundation's Code of Conduct</a>.
 		</p>
 
 		<p>
@@ -71,6 +67,6 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 
 <style>
 	.prose {
-		padding: 4rem 0 2rem;
+		padding-block: 5rem 2rem;
 	}
 </style>
