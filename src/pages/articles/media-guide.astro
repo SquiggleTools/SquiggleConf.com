@@ -3,6 +3,30 @@ import CommonContent from "~/components/CommonContent.astro";
 import { articles } from "~/data/articles";
 import { eventDate } from "~/data/event";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+const linkedInAltText =
+	"https://www.linkedin.com/help/linkedin/answer/a519856/adding-alternative-text-to-images-for-accessibility?lang=en";
+
+const talks = [
+	{
+		description:
+			"covers a lot of the architectural patterns we've been trying to utilize in our TypeScript code.",
+		href: "/2025/sessions#effect-type-safe-errors-and-dependency-injection",
+		title: "Effect: Type-Safe Errors and Dependency Injection",
+	},
+	{
+		description:
+			"which should really help us improve our customer-facing and internal docs references -- some of them could really use a refresh.",
+		href: "/2025/sessions#quality-code-samples-make-everything-better",
+		title: "Quality Code Samples Make Everything Better",
+	},
+	{
+		description:
+			"given how much time our builds take, I think looking at the next generation faster build tools would absolutely be worth it.",
+		href: "/2025/sessions#rolldown-how-vite-bundles-at-the-speed-of-rust",
+		title: "Rolldown: How Vite Bundles at the Speed of Rust",
+	},
+];
 ---
 
 <ArticleLayout article={articles["media-guide"]}>
@@ -15,12 +39,10 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 			<em>"SquiggleCon"</em>.
 		</p>
 		<p>
-			Please include alt text with any images [
-			<a href="https://www.linkedin.com/help/linkedin/answer/a519856/adding-alternative-text-to-images-for-accessibility?lang=en">
-				LinkedIn alt text help
-			</a>
-			] and follow platform accessibility guidelines. We can only share posts
-			that are inclusive to all potential recipients.
+			Please include alt text with any images and follow platform accessibility
+			guidelines. <a href={linkedInAltText}>LinkedIn's alt text help</a> has
+			tips for writing it. We can only share posts that are inclusive to all
+			potential recipients.
 		</p>
 	</CommonContent>
 
@@ -77,33 +99,11 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 				A few talks that look particularly useful for us are:
 				<br />
 				<ul class="talks-list">
-					<li>
-						<em>
-							<a href="/2025/sessions#effect-type-safe-errors-and-dependency-injection">
-								Effect: Type-Safe Errors and Dependency Injection
-							</a>
-						</em>
-						: covers a lot of the architectural patterns we've been trying to
-						utilize in our TypeScript code.
-					</li>
-					<li>
-						<em>
-							<a href="/2025/sessions#quality-code-samples-make-everything-better">
-								Quality Code Samples Make Everything Better
-							</a>
-						</em>
-						: which should really help us improve our customer-facing and
-						internal docs references -- some of them could really use a refresh.
-					</li>
-					<li>
-						<em>
-							<a href="/2025/sessions#rolldown-how-vite-bundles-at-the-speed-of-rust">
-								Rolldown: How Vite Bundles at the Speed of Rust
-							</a>
-						</em>
-						: given how much time our builds take, I think looking at the next
-						generation faster build tools would absolutely be worth it.
-					</li>
+					{talks.map(({ description, href, title }) => (
+						<li>
+							<a href={href}>{title}</a>: {description}
+						</li>
+					))}
 				</ul>
 				We have 3 tickets to distribute - let me know if you're interested!
 			</li>
@@ -114,5 +114,9 @@ import ArticleLayout from "~/layouts/ArticleLayout.astro";
 <style>
 	.talks-list {
 		margin-left: 1rem;
+	}
+
+	.talks-list a {
+		font-style: italic;
 	}
 </style>
