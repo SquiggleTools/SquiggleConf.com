@@ -88,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
 	return new Response(message, { status });
 };
 
-async function isBlacklisted(email: string) {
+async function isBlocklisted(email: string) {
 	const response = await fetch(
 		`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
 		{ headers: { "api-key": BREVO_API_KEY ?? "" } },
@@ -164,7 +164,7 @@ async function subscribe(request: Request): Promise<Outcome> {
 			return "unverified";
 		}
 
-		const pending = looksSuspicious(email) || (await isBlacklisted(email));
+		const pending = looksSuspicious(email) || (await isBlocklisted(email));
 		const response = pending
 			? await sendToBrevo("/doubleOptinConfirmation", {
 					email,
