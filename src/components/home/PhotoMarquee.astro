@@ -1,0 +1,298 @@
+---
+import { Image } from "astro:assets";
+
+import type { PhotoData } from "~/components/home/types";
+
+import CarouselPause from "./CarouselPause.astro";
+import TimelineImage from "./timeline/TimelineImage.astro";
+
+interface Props {
+	ariaLabel: string;
+	photos: readonly PhotoData[];
+}
+
+const { ariaLabel, photos } = Astro.props;
+
+const loopedPhotos = photos.slice(0, 2);
+const imageProps = {
+	sizes: "(min-width: 48rem) 24rem, 80vw",
+	widths: [320, 640, 960, 1280],
+};
+---
+
+<div
+	aria-label={ariaLabel}
+	aria-roledescription="carousel"
+	class="photo-marquee"
+	data-photo-marquee
+	role="group"
+>
+	<div
+		aria-label={ariaLabel}
+		aria-live="polite"
+		class="photo-marquee-track"
+		data-photo-marquee-track
+		role="group"
+	>
+		{photos.map((photo, index) => (
+			<div
+				aria-label={`${index + 1} of ${photos.length}`}
+				aria-roledescription="slide"
+				class="photo-marquee-slide"
+				data-photo-marquee-slide
+				role="group"
+			>
+				<TimelineImage class="photo-marquee-image" radius="var(--radiusLarge)">
+					<Image alt={photo.alt} src={photo.image} {...imageProps} />
+				</TimelineImage>
+			</div>
+		))}
+		{loopedPhotos.map((photo) => (
+			<div
+				aria-hidden="true"
+				class="photo-marquee-slide"
+				data-photo-marquee-loop
+				hidden
+			>
+				<TimelineImage class="photo-marquee-image" radius="var(--radiusLarge)">
+					<Image alt="" src={photo.image} {...imageProps} />
+				</TimelineImage>
+			</div>
+		))}
+	</div>
+	<div class="photo-marquee-controls" data-photo-marquee-controls hidden>
+		<button
+			aria-label="Previous photo"
+			class="photo-marquee-step"
+			data-photo-marquee-step="-1"
+			type="button"
+		>
+			<svg aria-hidden="true" viewBox="0 0 12 12">
+				<path d="M8 1.5 3.5 6 8 10.5"></path>
+			</svg>
+		</button>
+		<CarouselPause />
+		<button
+			aria-label="Next photo"
+			class="photo-marquee-step"
+			data-photo-marquee-step="1"
+			type="button"
+		>
+			<svg aria-hidden="true" viewBox="0 0 12 12">
+				<path d="M4 1.5 8.5 6 4 10.5"></path>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<style>
+	.photo-marquee {
+		display: grid;
+		gap: 0.5rem;
+		grid-template-columns: minmax(0, 1fr);
+		margin: 0.85rem 0;
+		max-width: 48rem;
+	}
+
+	.photo-marquee-track {
+		--photo-marquee-gap: 0.75rem;
+
+		border-radius: var(--radiusLarge);
+		display: flex;
+		gap: var(--photo-marquee-gap);
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.photo-marquee-track:focus-visible {
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: 2px;
+	}
+
+	.photo-marquee-slide {
+		flex: 0 0 calc((100% - var(--photo-marquee-gap)) / 2);
+		scroll-snap-align: start;
+	}
+
+	.photo-marquee-slide[hidden] {
+		display: none;
+	}
+
+	.photo-marquee-image {
+		aspect-ratio: 3 / 2;
+	}
+
+	.photo-marquee-image img {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		user-select: none;
+		width: 100%;
+	}
+
+	.photo-marquee-controls {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	.photo-marquee-controls[hidden] {
+		display: none;
+	}
+
+	.photo-marquee-step {
+		appearance: none;
+		background: none;
+		border: none;
+		color: color-mix(
+			in srgb,
+			var(--colorBlue4),
+			var(--colorBlue1) var(--themeDarknessText)
+		);
+		cursor: pointer;
+		display: grid;
+		height: 1.5rem;
+		margin: 0;
+		padding: 0;
+		place-items: center;
+		width: 1.5rem;
+	}
+
+	.photo-marquee-step:focus-visible {
+		border-radius: var(--radiusSmall);
+		outline: 2px solid var(--colorAccentMedium);
+		outline-offset: -2px;
+	}
+
+	.photo-marquee-step svg {
+		fill: none;
+		height: 0.85rem;
+		stroke: currentcolor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.75;
+		width: 0.85rem;
+	}
+
+	@container timeline-entry (width < 30rem) {
+		.photo-marquee-slide {
+			flex-basis: 78%;
+		}
+	}
+</style>
+
+<script>
+	import { startAutoAdvance } from "~/utils/autoAdvance";
+	import { reducedMotionQuery } from "~/utils/motion";
+
+	for (const marquee of document.querySelectorAll<HTMLElement>(
+		"[data-photo-marquee]",
+	)) {
+		const track = marquee.querySelector<HTMLElement>(
+			"[data-photo-marquee-track]",
+		);
+		const controls = marquee.querySelector<HTMLElement>(
+			"[data-photo-marquee-controls]",
+		);
+		const slides = [
+			...marquee.querySelectorAll<HTMLElement>("[data-photo-marquee-slide]"),
+		];
+		const firstSlide = slides.at(0);
+		const lastSlide = slides.at(-1);
+		if (!track || !controls || !firstSlide || !lastSlide || slides.length < 3) {
+			continue;
+		}
+
+		for (const slide of marquee.querySelectorAll<HTMLElement>(
+			"[data-photo-marquee-loop]",
+		)) {
+			slide.hidden = false;
+		}
+
+		let activeIndex = 0;
+		let rewinding = false;
+		let trackWidth = track.clientWidth;
+
+		const getStep = () =>
+			(lastSlide.offsetLeft - firstSlide.offsetLeft) / (slides.length - 1);
+
+		const scrollToIndex = (index: number, behavior: ScrollBehavior) => {
+			track.scrollTo({ behavior, left: index * getStep() });
+		};
+
+		const markVisible = () => {
+			for (const [index, slide] of slides.entries()) {
+				const offset = (index - activeIndex + slides.length) % slides.length;
+				slide.setAttribute("aria-hidden", `${offset > 1}`);
+			}
+		};
+
+		const updateActive = () => {
+			const step = getStep();
+			if (!step || track.clientWidth !== trackWidth) {
+				return;
+			}
+
+			if (rewinding) {
+				if (track.scrollLeft > (slides.length - 0.5) * step) {
+					return;
+				}
+				rewinding = false;
+			}
+
+			if (track.scrollLeft >= slides.length * step - 1) {
+				scrollToIndex(0, "instant");
+			}
+
+			const index = Math.round(track.scrollLeft / step) % slides.length;
+			if (index !== activeIndex) {
+				activeIndex = index;
+				markVisible();
+			}
+		};
+
+		const advance = (direction: number) => {
+			const behavior = reducedMotionQuery.matches ? "instant" : "smooth";
+			if (direction < 0 && activeIndex === 0) {
+				rewinding = true;
+				scrollToIndex(slides.length, "instant");
+				scrollToIndex(slides.length - 1, behavior);
+				return;
+			}
+
+			scrollToIndex(activeIndex + direction, behavior);
+		};
+
+		controls.hidden = false;
+		track.tabIndex = 0;
+		markVisible();
+		track.addEventListener("scroll", updateActive, { passive: true });
+
+		new ResizeObserver(() => {
+			if (track.clientWidth && track.clientWidth !== trackWidth) {
+				trackWidth = track.clientWidth;
+				scrollToIndex(activeIndex, "instant");
+			}
+		}).observe(track);
+
+		const restartAutoAdvance = startAutoAdvance({
+			advance: () => {
+				advance(1);
+			},
+			carousel: marquee,
+			slideCount: slides.length,
+			track,
+		});
+
+		for (const button of marquee.querySelectorAll<HTMLButtonElement>(
+			"[data-photo-marquee-step]",
+		)) {
+			button.addEventListener("click", () => {
+				advance(Number(button.dataset.photoMarqueeStep));
+				restartAutoAdvance();
+			});
+		}
+	}
+</script>

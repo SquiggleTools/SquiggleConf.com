@@ -41,6 +41,11 @@ export interface PersonCardData {
 	qualification: string;
 }
 
+export interface PhotoData {
+	alt: string;
+	image: ImageMetadata;
+}
+
 export interface TalkCardData extends PersonCardData {
 	title: string;
 }
