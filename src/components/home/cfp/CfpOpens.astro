@@ -1,7 +1,7 @@
 ---
 import Bubbles from "~/components/Bubbles.astro";
 import LightRays from "~/components/LightRays.astro";
-import { cfpCloseDate, cfpOpenDate } from "~/data/event";
+import { cfpCloseDate } from "~/data/event";
 import { currentYear } from "~/data/years";
 
 import TimelineHeading from "../timeline/TimelineHeading.astro";
@@ -26,14 +26,11 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 				id="cfp-opens-heading"
 				level="h2"
 			>
-				CFP Opens{" "}
+				CFP Open Until{" "}
 				<span class="cfp-opens-date">
-					{cfpOpenDate}, {currentYear - 1}
+					{cfpCloseDate}, {currentYear}
 				</span>
 			</TimelineHeading>
-			<p class="cfp-opens-close">
-				Submissions close {cfpCloseDate}, {currentYear}
-			</p>
 		</div>
 		<p class="cfp-opens-label">Launch Lineup</p>
 		<div class="cfp-opens-lineup">
@@ -123,13 +120,6 @@ import { cfpHosts, cfpLaunchSpeakers } from "./data";
 		);
 		text-shadow: 0 0 2rem rgb(from var(--colorBlue2) r g b / 15%);
 		white-space: nowrap;
-	}
-
-	.cfp-opens-close {
-		color: var(--colorMuted);
-		font-size: var(--fontSizeSmaller);
-		font-style: italic;
-		margin: 0.5rem 0 0;
 	}
 
 	.cfp-opens-label {
