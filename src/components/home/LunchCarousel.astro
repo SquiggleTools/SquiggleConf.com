@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 
 import type { LunchSpotData } from "~/components/home/types";
 
+import CarouselPause from "./CarouselPause.astro";
 import TimelineImage from "./timeline/TimelineImage.astro";
 
 interface Props {
@@ -20,19 +21,7 @@ const { spots } = Astro.props;
 	role="group"
 >
 	<div class="lunch-carousel-controls" data-lunch-controls hidden>
-		<button
-			aria-label="Pause slideshow"
-			class="lunch-carousel-pause"
-			data-lunch-pause
-			type="button"
-		>
-			<svg aria-hidden="true" data-pause-icon viewBox="0 0 12 12">
-				<path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" fill="currentColor" />
-			</svg>
-			<svg aria-hidden="true" data-play-icon viewBox="0 0 12 12">
-				<path d="M3 1.5v9l7-4.5z" fill="currentColor" />
-			</svg>
-		</button>
+		<CarouselPause />
 		<div
 			aria-label="Lunch image navigation"
 			class="lunch-carousel-dots"
@@ -173,8 +162,7 @@ const { spots } = Astro.props;
 		display: flex;
 	}
 
-	.lunch-carousel-dot,
-	.lunch-carousel-pause {
+	.lunch-carousel-dot {
 		appearance: none;
 		background: none;
 		border: none;
@@ -237,39 +225,6 @@ const { spots } = Astro.props;
 		outline-offset: 2px;
 	}
 
-	.lunch-carousel-pause:focus-visible {
-		border-radius: var(--radiusSmall);
-		outline: 2px solid var(--colorAccentMedium);
-		outline-offset: -2px;
-	}
-
-	.lunch-carousel-pause {
-		min-width: 1.5rem;
-		color: color-mix(
-			in srgb,
-			var(--colorBlue4),
-			var(--colorBlue1) var(--themeDarknessText)
-		);
-	}
-
-	.lunch-carousel-pause[hidden] {
-		display: none;
-	}
-
-	.lunch-carousel-pause svg {
-		height: 0.7rem;
-		width: 0.7rem;
-	}
-
-	.lunch-carousel-pause [data-play-icon],
-	.lunch-carousel-pause[data-paused] [data-pause-icon] {
-		display: none;
-	}
-
-	.lunch-carousel-pause[data-paused] [data-play-icon] {
-		display: block;
-	}
-
 	@media (forced-colors: active) {
 		.lunch-carousel-dot:is(:hover, :focus-visible)::before {
 			border-color: Highlight;
@@ -288,6 +243,7 @@ const { spots } = Astro.props;
 </style>
 
 <script>
+	import { startAutoAdvance } from "~/utils/autoAdvance";
 	import { reducedMotionQuery } from "~/utils/motion";
 
 	for (const carousel of document.querySelectorAll<HTMLElement>(
@@ -304,16 +260,10 @@ const { spots } = Astro.props;
 		const dots = [
 			...carousel.querySelectorAll<HTMLButtonElement>("[data-lunch-dot]"),
 		];
-		const pause =
-			carousel.querySelector<HTMLButtonElement>("[data-lunch-pause]");
 		const slides = [...carousel.querySelectorAll("[data-lunch-slide]")];
 		let activeIndex = 0;
 		let markedIndex: number | undefined;
-		let autoAdvanceTimer: number | undefined;
-		let hovered = false;
-		let paused = false;
 		let trackWidth = track.clientWidth;
-		let visible = false;
 
 		const realign = () => {
 			trackWidth = track.clientWidth;
@@ -356,28 +306,6 @@ const { spots } = Astro.props;
 			});
 		};
 
-		const canAutoAdvance = () =>
-			!reducedMotionQuery.matches && slides.length > 1;
-
-		const updateAutoAdvance = () => {
-			window.clearInterval(autoAdvanceTimer);
-			if (pause) {
-				if (!canAutoAdvance() && document.activeElement === pause) {
-					track.focus();
-				}
-				pause.hidden = !canAutoAdvance();
-			}
-
-			const rotating = canAutoAdvance() && visible && !hovered && !paused;
-			track.setAttribute("aria-live", rotating ? "off" : "polite");
-			if (rotating) {
-				autoAdvanceTimer = window.setInterval(
-					() => setSlide(activeIndex + 1),
-					3400,
-				);
-			}
-		};
-
 		controls.hidden = false;
 		track.tabIndex = 0;
 		markActive();
@@ -389,56 +317,23 @@ const { spots } = Astro.props;
 			}
 		}).observe(track);
 
+		const restartAutoAdvance = startAutoAdvance({
+			advance: () => {
+				setSlide(activeIndex + 1);
+			},
+			carousel,
+			slideCount: slides.length,
+			track,
+		});
+
 		for (const [index, dot] of dots.entries()) {
 			dot.addEventListener("click", () => {
 				setSlide(index);
-				updateAutoAdvance();
+				restartAutoAdvance();
 				if (!dot.matches(":focus-visible")) {
 					dot.blur();
 				}
 			});
 		}
-
-		const setPaused = (value: boolean) => {
-			paused = value;
-			pause?.toggleAttribute("data-paused", paused);
-			pause?.setAttribute(
-				"aria-label",
-				paused ? "Play slideshow" : "Pause slideshow",
-			);
-			updateAutoAdvance();
-		};
-
-		pause?.addEventListener("click", () => {
-			if (paused) {
-				hovered = false;
-			}
-			setPaused(!paused);
-		});
-
-		carousel.addEventListener("pointerenter", () => {
-			hovered = true;
-			updateAutoAdvance();
-		});
-		carousel.addEventListener("pointerleave", () => {
-			hovered = false;
-			updateAutoAdvance();
-		});
-		carousel.addEventListener("focusin", (event) => {
-			if (
-				!paused &&
-				event.target instanceof Element &&
-				event.target.matches(":focus-visible")
-			) {
-				setPaused(true);
-			}
-		});
-
-		new IntersectionObserver((entries) => {
-			visible = !!entries.at(-1)?.isIntersecting;
-			updateAutoAdvance();
-		}).observe(carousel);
-
-		reducedMotionQuery.addEventListener("change", updateAutoAdvance);
 	}
 </script>

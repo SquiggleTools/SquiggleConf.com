@@ -14,7 +14,6 @@ import urbanwild2 from "~/assets/2027/urbanwild-2.webp";
 import urbanwild3 from "~/assets/2027/urbanwild-3.webp";
 import urbanwild4 from "~/assets/2027/urbanwild-4.webp";
 import urbanwild5 from "~/assets/2027/urbanwild-5.webp";
-import urbanwildLogo from "~/assets/2027/urbanwild-logo.webp";
 import dillonMulroy from "~/assets/avatars/dillon-mulroy.webp";
 import ryanDahl from "~/assets/avatars/ryan-dahl.webp";
 import scottTolinski from "~/assets/avatars/scott-tolinski.webp";
@@ -38,6 +37,7 @@ import ExploreChoiceCard from "~/components/home/ExploreChoiceCard.astro";
 import HomeHeroLockup from "~/components/home/HomeHeroLockup.astro";
 import LunchCarousel from "~/components/home/LunchCarousel.astro";
 import PersonCard from "~/components/home/PersonCard.astro";
+import PhotoMarquee from "~/components/home/PhotoMarquee.astro";
 import PostcardGallery from "~/components/home/PostcardGallery.astro";
 import TerminalShopButton from "~/components/home/TerminalShopButton.astro";
 import TimelineCopy from "~/components/home/timeline/TimelineCopy.astro";
@@ -55,6 +55,7 @@ import TimelineRail from "~/components/home/timeline/TimelineRail.astro";
 import TimelineSection from "~/components/home/timeline/TimelineSection.astro";
 import TimelineTalksTurtle from "~/components/home/timeline/TimelineTalksTurtle.astro";
 import TimelineVenue from "~/components/home/timeline/TimelineVenue.astro";
+import { urbanWildPhotos } from "~/components/home/urbanWildPhotos";
 import Registration from "~/components/Registration.astro";
 import SponsorsAndPartners from "~/components/SponsorsAndPartners.astro";
 import {
@@ -436,22 +437,16 @@ const eventSchema = {
 					time="6pm"
 					venue="urbanWild"
 				>
-					<TimelineMedia>
-						<TimelineImage
-							alt="Urban Wild Boston logo"
-							class="event-image-wide"
-							effect="zoom"
-							size={224}
-							src={urbanwildLogo}
-							zoomOrigin="top right"
-						/>
-						<TimelineCopy>
-							<p>
-								The rest of the night takes place at Urban Wild Boston. Also the
-								last clue of the Scavenger Hunt may or may not be here.......
-							</p>
-						</TimelineCopy>
-					</TimelineMedia>
+					<PhotoMarquee
+						ariaLabel="Urban Wild photos"
+						photos={urbanWildPhotos}
+					/>
+					<TimelineCopy>
+						<p>
+							The rest of the night takes place at Urban Wild Boston. Also the
+							last clue of the Scavenger Hunt may or may not be here.......
+						</p>
+					</TimelineCopy>
 				</TimelineEntry>
 
 				<TimelineEntry
